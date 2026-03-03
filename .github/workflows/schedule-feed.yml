@@ -1,17 +1,25 @@
-# Generate RSS feed every 5 minutes and publish to GitHub Pages
 name: Build and publish RSS feed
 
 on:
   schedule:
-    # Every 5 minutes
-    - cron: '*/5 * * * *'
-  workflow_dispatch:  # Allow manual run
+    # Changed to 10 minutes to avoid GitHub's "5-minute" throttling/delay
+    - cron: '*/10 * * * *'
+  workflow_dispatch: 
 
 jobs:
+  debug-trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Check
+        run: |
+          echo "Workflow triggered at: $(date)"
+          echo "Trigger event: ${{ github.event_name }}"
+
   build-and-deploy:
+    needs: debug-trigger
     runs-on: ubuntu-latest
     permissions:
-      contents: write   # required to push to gh-pages branch
+      contents: write
       pages: write
       id-token: write
 
@@ -33,7 +41,13 @@ jobs:
       - name: Prepare deployment directory
         run: |
           mkdir -p public
-          mv rss.xml public/
+          # Added a check to see if the file actually exists
+          if [ -f rss.xml ]; then
+            mv rss.xml public/
+          else
+            echo "Error: rss.xml was not generated!"
+            exit 1
+          fi
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
@@ -41,4 +55,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
           publish_branch: gh-pages
-          commit_message: 'Generate RSS feed from workflow'
+          commit_message: 'Automated RSS Update [skip ci]'
