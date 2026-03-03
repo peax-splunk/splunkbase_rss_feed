@@ -5,7 +5,6 @@ Splunkbase RSS Feed Generator
 Fetches latest apps from Splunkbase API and generates RSS 2.0 feed.
 """
 
-import os
 import requests
 import math
 from datetime import datetime, timezone
@@ -13,21 +12,17 @@ from pathlib import Path
 from xml.etree.ElementTree import Element, SubElement, tostring, register_namespace
 from xml.dom import minidom
 from html import escape
-from dotenv import load_dotenv
 
 # Register XML namespaces
 register_namespace('atom', 'http://www.w3.org/2005/Atom')
 register_namespace('dc', 'http://purl.org/dc/elements/1.1/')
 
-# Load environment variables from .env file
-load_dotenv()
-
-# Configuration from .env
-REQUEST_TIMEOUT = int(os.getenv("REQUEST_TIMEOUT", "10"))
-PAGES_TO_FETCH = int(os.getenv("PAGES_TO_FETCH", "0"))  # 0 = all pages
-RSS_MAX_ITEMS = int(os.getenv("RSS_MAX_ITEMS", "50"))
-OUTPUT_FILE = Path(os.getenv("RSS_OUTPUT_FILE", "splunkbase_rss_feed.xml"))
-RSS_FEED_URL = os.getenv("RSS_FEED_URL", "https://splunkbase.splunk.com/apps/rss/")
+# Configuration (edit these to change behavior)
+REQUEST_TIMEOUT = 10  # API request timeout (seconds)
+PAGES_TO_FETCH = 1    # Pages to fetch (100 apps per page). 0 = all pages.
+RSS_MAX_ITEMS = 100
+OUTPUT_FILE = Path("splunkbase_feed.xml")
+RSS_FEED_URL = "https://splunkbase.splunk.com/apps/rss/"
 
 SPLUNKBASE_API_URL = "https://api.splunkbase.splunk.com/api/v2/apps/"
 REQUEST_PARAMS = {

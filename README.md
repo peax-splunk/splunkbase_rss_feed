@@ -1,6 +1,6 @@
 # Splunkbase RSS Feed
 
-Generate an RSS 2.0 feed from the Splunkbase API. One Python script, one config file. No HTTP server—output is a static XML file you can host anywhere (e.g. GitHub Pages).
+Generate an RSS 2.0 feed from the Splunkbase API. One Python script. No HTTP server—output is a static XML file you can host anywhere (e.g. GitHub Pages).
 
 ## Features
 
@@ -26,29 +26,19 @@ Generates the RSS XML file only. Host the file yourself (e.g. static site, GitHu
 
 ## Configuration
 
-Edit `.env`:
+Edit the globals at the top of `splunkbase_rss.py`:
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `PAGES_TO_FETCH` | `0` | Pages to fetch (100 apps per page). `0` = all pages. `1` = first 100 apps (enough for a typical feed). |
+| `PAGES_TO_FETCH` | `1` | Pages to fetch (100 apps per page). `0` = all pages. |
 | `REQUEST_TIMEOUT` | `10` | API request timeout (seconds). |
-| `RSS_MAX_ITEMS` | `50` | Max items in the feed. |
-| `RSS_OUTPUT_FILE` | `splunkbase_rss_feed.xml` | Output file path. |
+| `RSS_MAX_ITEMS` | `100` | Max items in the feed. |
+| `OUTPUT_FILE` | `splunkbase_feed.xml` | Output file path. |
 | `RSS_FEED_URL` | `https://splunkbase.splunk.com/apps/rss/` | URL used in the feed’s `<atom:link rel="self">`. Set to your public feed URL when hosting. |
-
-### Example `.env`
-
-```env
-PAGES_TO_FETCH=1
-REQUEST_TIMEOUT=10
-RSS_MAX_ITEMS=100
-RSS_OUTPUT_FILE=splunkbase_rss_feed.xml
-RSS_FEED_URL=https://your-username.github.io/your-repo/apps/rss/
-```
 
 ## Output
 
-- **File**: `splunkbase_rss_feed.xml` (or path set by `RSS_OUTPUT_FILE`)
+- **File**: `splunkbase_feed.xml` (or path set by `OUTPUT_FILE`)
 - **Feed URL**: Whatever you set in `RSS_FEED_URL` once the file is hosted (e.g. GitHub Pages, Vercel, S3).
 
 ## Subscribe
@@ -63,4 +53,4 @@ https://splunkbase.splunk.com/apps/rss/ — official feed is **new apps only**. 
 
 ---
 
-One script. One config. Pure RSS.
+One script. Pure RSS.
