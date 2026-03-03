@@ -1,0 +1,43 @@
+# Generate RSS feed every hour and publish to GitHub Pages
+name: Build and publish RSS feed
+
+on:
+  schedule:
+    # Every hour at minute 0
+    - cron: '0 * * * *'
+  workflow_dispatch:  # Allow manual run
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Generate RSS feed
+        run: python splunkbase_rss.py
+
+      - name: Prepare deployment directory
+        run: |
+          mkdir -p public
+          mv rss public/
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          publish_branch: gh-pages
