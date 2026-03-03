@@ -40,7 +40,7 @@ The repo includes a workflow that **builds the feed every hour** and publishes i
 ### How it works
 
 1. **Schedule:** The workflow runs on a [cron schedule](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule) every hour (`0 * * * *`).
-2. **Build:** It installs dependencies, runs `python splunkbase_rss.py`, and produces the feed file (`rss`).
+2. **Build:** It installs dependencies, runs `python splunkbase_rss.py`, and produces `rss.xml` (correct Content-Type when served).
 3. **Deploy:** It pushes the feed to the `gh-pages` branch, which GitHub Pages serves.
 
 ### Enable the public feed
@@ -52,9 +52,9 @@ The repo includes a workflow that **builds the feed every hour** and publishes i
 
 After the first successful run, the feed is available at:
 
-**https://peax-splunk.github.io/splunkbase_rss_feed/rss**
+**https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml**
 
-No `.xml` in the URL—the feed is served at `/rss`. Point your RSS reader at that URL to subscribe.
+The `.xml` extension ensures the correct Content-Type so browsers and RSS readers open the feed instead of downloading it.
 
 ## Configuration
 
@@ -65,19 +65,19 @@ Edit the globals at the top of `splunkbase_rss.py`:
 | `PAGES_TO_FETCH` | `1` | Pages to fetch (100 apps per page). `0` = all pages. |
 | `REQUEST_TIMEOUT` | `10` | API request timeout (seconds). |
 | `RSS_MAX_ITEMS` | `100` | Max items in the feed. |
-| `OUTPUT_FILE` | `rss` | Output file path. For GitHub Pages this is served at `/rss`. |
-| `RSS_FEED_URL` | `https://peax-splunk.github.io/splunkbase_rss_feed/rss` | URL used in the feed’s `<atom:link rel="self">`. Must match where you host the file. |
+| `OUTPUT_FILE` | `rss.xml` | Output file path. |
+| `RSS_FEED_URL` | `https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml` | URL used in the feed’s `<atom:link rel="self">`. Must match where you host the file. |
 
 ## Output
 
-- **File**: `rss` (or path set by `OUTPUT_FILE`)
-- **Feed URL**: [https://peax-splunk.github.io/splunkbase_rss_feed/rss](https://peax-splunk.github.io/splunkbase_rss_feed/rss) once GitHub Pages is enabled and the workflow has run.
+- **File**: `rss.xml` (or path set by `OUTPUT_FILE`)
+- **Feed URL**: [https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml](https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml) once GitHub Pages is enabled and the workflow has run.
 
 ## Subscribe
 
 Point your RSS reader at:
 
-**https://peax-splunk.github.io/splunkbase_rss_feed/rss**
+**https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml**
 
 Examples: Feedly, Inoreader, RSS Guard, NetNewsWire.
 
