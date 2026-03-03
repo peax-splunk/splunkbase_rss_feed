@@ -28,7 +28,7 @@ pip install -r requirements.txt
 ## Usage
 
 ```bash
-python splunkbase_rss.py
+python splunkbase_rss_feed.py
 ```
 
 Generates the RSS XML file. Host the file yourself (e.g. static site, GitHub Pages, CDN).
@@ -40,7 +40,7 @@ The repo includes a workflow that **builds the feed every hour** and publishes i
 ### How it works
 
 1. **Schedule:** The workflow runs on a [cron schedule](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule) every hour (`0 * * * *`).
-2. **Build:** It installs dependencies, runs `python splunkbase_rss.py`, and produces `rss.xml` (correct Content-Type when served).
+2. **Build:** It installs dependencies, runs `python splunkbase_rss_feed.py`, and produces `rss.xml` (correct Content-Type when served).
 3. **Deploy:** It pushes the feed to the `gh-pages` branch, which GitHub Pages serves.
 
 ### Enable the public feed
@@ -58,7 +58,7 @@ The `.xml` extension ensures the correct Content-Type so browsers and RSS reader
 
 ## Configuration
 
-Edit the globals at the top of `splunkbase_rss.py`:
+Edit the globals at the top of `splunkbase_rss_feed.py`:
 
 | Variable | Default | Description |
 |----------|---------|-------------|
