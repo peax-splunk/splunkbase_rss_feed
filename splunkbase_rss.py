@@ -111,6 +111,8 @@ def create_rss_feed(apps, max_items=50):
     """
     # Limit items
     apps = apps[:max_items]
+    # Sort by pubDate (updated_time / published_time) latest to oldest
+    apps = sorted(apps, key=lambda a: a.get('updated_time', a.get('published_time', '')), reverse=True)
     
     # Create RSS root (namespaces will be auto-declared when elements use them)
     rss = Element('rss')
