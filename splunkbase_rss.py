@@ -21,7 +21,7 @@ register_namespace('dc', 'http://purl.org/dc/elements/1.1/')
 REQUEST_TIMEOUT = 10  # API request timeout (seconds)
 PAGES_TO_FETCH = 1    # Pages to fetch (100 apps per page). 0 = all pages.
 RSS_MAX_ITEMS = 100
-OUTPUT_FILE = Path("splunkbase_feed.xml")
+OUTPUT_FILE = Path("splunkbase_rss_feed.xml")
 RSS_FEED_URL = "https://splunkbase.splunk.com/apps/rss/"
 
 SPLUNKBASE_API_URL = "https://api.splunkbase.splunk.com/api/v2/apps/"
