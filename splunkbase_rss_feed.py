@@ -138,20 +138,20 @@ def create_rss_feed(apps, max_items=50):
         item = SubElement(channel, 'item')
         
         # Latest version: prefer "release.release_name", then first entry in "releases", else "null"
+        releases = app.get("releases", [])
         if app.get("release"):
             latest_version = app["release"].get("release_name", "null")
+        elif releases:
+            latest_version = releases[0].get("release_name", "null")
         else:
-            releases = app.get("releases", [])
-            if releases:
-                latest_version = releases[0].get("release_name", "null")
-            else:
-                latest_version = "null"
+            latest_version = "null"
         
-        # Title: "<app name> - v<version>" and append " (Archived)" when is_archived is true
+        # Title: "<app name> - v<version> [New App Release|Version Update]" with optional "(Archived)"
         app_name = app.get('app_name', 'Unknown App')
-        title = f"{app_name} - v{latest_version}"
+        title_suffix = " [New App Release]" if len(releases) == 1 else " [Version Update]"
+        title = f"{app_name} - v{latest_version}{title_suffix}"
         if app.get('is_archived'):
-            title = f"{title} (Archived)"
+            title += " (Archived)"
         SubElement(item, 'title').text = title
         
         # Link (use app_url from API; fallback to built URL if missing)
