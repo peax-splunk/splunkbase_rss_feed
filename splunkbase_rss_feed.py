@@ -164,7 +164,7 @@ def create_rss_feed(apps, max_items=50):
 
         description_html = ''
         if short_desc.strip():
-            description_html += f'<p><strong>Short Description:</strong><br>{escape(short_desc)}</p>'
+            description_html += f'<p><strong>Short Description:</strong><br>{escape(short_desc)}</p><br>'
 
         if long_desc.strip():
             description_html += f'<p><strong>Description:</strong><br>{escape(long_desc)}</p>'
