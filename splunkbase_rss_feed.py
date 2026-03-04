@@ -159,10 +159,19 @@ def create_rss_feed(apps, max_items=50):
         SubElement(item, 'link').text = app_url
         
         # Description (HTML formatted and escaped)
+        product_compatibility = (app.get('product_compatibility') or '').strip()
+        if not product_compatibility:
+            platform_label = 'unknown'
+        elif product_compatibility.lower() == 'soar':
+            platform_label = 'SOAR'
+        elif product_compatibility.lower() == 'splunk':
+            platform_label = 'Splunk'
+        else:
+            platform_label = product_compatibility
+        description_html = f'<p><strong>Platform:</strong> {platform_label}</p><br>'
+
         short_desc = app.get('short_description', '') or ''
         long_desc = app.get('description', '') or ''
-
-        description_html = ''
         if short_desc.strip():
             description_html += f'<p><strong>Short Description:</strong><br>{escape(short_desc)}</p><br>'
 
