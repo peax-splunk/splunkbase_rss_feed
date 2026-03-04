@@ -46,13 +46,13 @@ The repo includes a workflow that **builds the feed every hour** and publishes i
 
 1. **Schedule:** The workflow runs on a [cron schedule](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule) every hour at minute 14 (`14 * * * *`), and it can also be triggered manually.
 2. **Build:** It installs dependencies, runs `python splunkbase_rss_feed.py`, and produces `rss.xml` in the repository root (with the correct Content-Type when served).
-3. **Deploy:** It moves `rss.xml` into a `public/` directory and publishes that directory to the `gh-pages` branch, which GitHub Pages serves.
+3. **Deploy:** It moves `rss.xml` into a `public/` directory and publishes that directory to the `rss_feed` branch, which GitHub Pages serves.
 
 ### Enable the public feed
 
 1. In the repo, go to **Settings → Pages**.
 2. Under **Build and deployment**, set **Source** to **Deploy from a branch**.
-3. Choose branch **`gh-pages`** and folder **`/ (root)`**. Save.
+3. Choose branch **`rss_feed`** and folder **`/ (root)`**. Save.
 4. The workflow will run within the next hour (or run it manually: **Actions → Update and publish RSS feed → Run workflow**).
 
 After the first successful run, the feed is available at:
@@ -64,12 +64,12 @@ The `.xml` extension ensures the correct Content-Type so browsers and RSS reader
 ### Branches & workflow architecture
 
 - **`main`**: Holds the source code (`splunkbase_rss_feed.py`), workflow file (`.github/workflows/update_rss_feed.yml`), and documentation. This is the branch you normally work on.
-- **`gh-pages`**: An auto-generated branch that contains the published static files (including `rss.xml`). The GitHub Actions workflow overwrites this branch on each run; you generally should not edit it manually.
+- **`rss_feed`**: An auto-generated branch that contains the published static files (including `rss.xml`). The GitHub Actions workflow overwrites this branch on each run; you generally should not edit it manually.
 
 The workflow has two jobs:
 
 - **`debug-trigger`**: Logs when and how the workflow was triggered (scheduled vs. manual).
-- **`build-and-deploy`**: Checks out `main`, sets up Python 3.11, installs `requirements.txt`, runs `splunkbase_rss_feed.py` to create `rss.xml`, moves it into `public/`, and deploys `public/` to the `gh-pages` branch using `peaceiris/actions-gh-pages`.
+- **`build-and-deploy`**: Checks out `main`, sets up Python 3.11, installs `requirements.txt`, runs `splunkbase_rss_feed.py` to create `rss.xml`, moves it into `public/`, and deploys `public/` to the `rss_feed` branch using `peaceiris/actions-rss_feed`.
 
 ### About `.nojekyll`
 
