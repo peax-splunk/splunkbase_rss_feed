@@ -1,6 +1,6 @@
 # Splunkbase RSS Feed
 
-Generate an RSS 2.0 feed from the [Splunkbase](https://splunkbase.splunk.com/) API for new and updated Splunk apps. One Python script—no HTTP server. Output is a static XML file you can host anywhere (e.g. GitHub Pages, Vercel, S3).
+Build a static RSS 2.0 feed from the [Splunkbase](https://splunkbase.splunk.com/) API for new and updated Splunk apps. A single Python script produces an XML file you can host anywhere—no server required (e.g. GitHub Pages, Vercel, S3).
 
 **Repository:** [github.com/peax-splunk/splunkbase_rss_feed](https://github.com/peax-splunk/splunkbase_rss_feed)
 
