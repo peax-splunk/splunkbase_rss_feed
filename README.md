@@ -6,7 +6,7 @@ Build a static RSS 2.0 feed from the [Splunkbase](https://splunkbase.splunk.com/
 
 ## Disclaimer
 
-This is **not** the official Splunkbase RSS feed. It is a **Peax project** that consumes the Splunkbase API and produces a separate feed. Benefits over the [official Splunkbase RSS](https://splunkbase.splunk.com/apps/rss/):
+This is **not** the official Splunkbase RSS feed. It is a **peax project** that consumes the Splunkbase API and produces a separate feed. Benefits over the [official Splunkbase RSS](https://splunkbase.splunk.com/apps/rss/):
 
 - **New and updated apps** — Official feed is new apps only; this feed includes both new releases and version updates, sorted by latest.
 - **Richer item content** — Version in the title, release-type indicator (`[New App Release]` / `[Version Update]`), platform label, archived flag, author name, and structured descriptions.
