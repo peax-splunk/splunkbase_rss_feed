@@ -121,7 +121,7 @@ def create_rss_feed(apps, max_items=50):
     channel = SubElement(rss, 'channel')
     
     # Channel metadata
-    SubElement(channel, 'title').text = 'Splunkbase Apps Releases'
+    SubElement(channel, 'title').text = 'peax - Splunkbase Apps Releases'
     SubElement(channel, 'link').text = 'https://splunkbase.splunk.com/apps/'
     SubElement(channel, 'description').text = 'a list of Newly/updated Splunk apps'
     
