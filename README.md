@@ -69,7 +69,7 @@ The `.xml` extension ensures the correct Content-Type so browsers and RSS reader
 The workflow has two jobs:
 
 - **`debug-trigger`**: Logs when and how the workflow was triggered (scheduled vs. manual).
-- **`build-and-deploy`**: Checks out `main`, sets up Python 3.11, installs `requirements.txt`, runs `splunkbase_rss_feed.py` to create `rss.xml`, moves it into `public/`, and deploys `public/` to the `rss_feed` branch using `peaceiris/actions-rss_feed`.
+- **`build-and-deploy`**: Checks out `main`, sets up Python 3.11, installs `requirements.txt`, runs `splunkbase_rss_feed.py` to create `rss.xml`, moves it into `public/`, and deploys `public/` to the `rss_feed` branch using `peaceiris/actions-gh-pages`.
 
 ### About `.nojekyll`
 
