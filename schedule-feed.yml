@@ -1,8 +1,7 @@
-name: Build and publish RSS feed
+name: Update and publish RSS feed
 
 on:
   schedule:
-    # Changed to 10 minutes to avoid GitHub's "5-minute" throttling/delay
     - cron: '*/10 * * * *'
   workflow_dispatch: 
 
@@ -55,4 +54,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
           publish_branch: gh-pages
-          commit_message: 'Automated RSS Update [skip ci]'
+          commit_message: 'Update Splunkbase Apps RSS feed [Automated Update from workflow]'
