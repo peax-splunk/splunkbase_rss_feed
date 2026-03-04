@@ -159,18 +159,22 @@ def create_rss_feed(apps, max_items=50):
         SubElement(item, 'link').text = app_url
         
         # Description (HTML formatted and escaped)
-        description = app.get('description', '')
-        if description:
-            # Escape HTML entities in description
-            description = escape(description)
-            description = f"<p>{description}</p>"
+        short_desc = app.get('short_description', '') or ''
+        long_desc = app.get('description', '') or ''
+
+        description_html = ''
+        if short_desc.strip():
+            description_html += f'<p><strong>Short Description:</strong><br>{escape(short_desc)}</p>'
+
+        if long_desc.strip():
+            description_html += f'<p><strong>Description:</strong><br>{escape(long_desc)}</p>'
         else:
-            description = "<p>No description</p>"
-        
+            description_html += '<p><strong>Description:</strong><br>No description</p>'
+
         # Add icon if available (icon from include param; fallback to app_icon or default)
         app_icon = app.get('icon') or 'https://cdn.splunkbase.splunk.com/static/image/default_icon.png'
         app_icon = escape(app_icon, quote=True)
-        description += f'<img height="36px" width="36px" src="{app_icon}">'
+        description = description_html + f'<img height="36px" width="36px" src="{app_icon}">'
         
         SubElement(item, 'description').text = description
         
