@@ -6,17 +6,10 @@ on:
   workflow_dispatch: 
 
 jobs:
-  debug-trigger:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Trigger Check
-        run: |
-          echo "Workflow triggered at: $(date)"
-          echo "Trigger event: ${{ github.event_name }}"
-
   build-and-deploy:
-    needs: debug-trigger
     runs-on: ubuntu-latest
+    # Added a timeout to prevent the job from hanging for hours if a network request fails
+    timeout-minutes: 10
     permissions:
       contents: write
       pages: write
@@ -30,6 +23,8 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+          # Automatically caches pip dependencies to speed up the "Install dependencies" step
+          cache: 'pip'
 
       - name: Install dependencies
         run: pip install -r requirements.txt
