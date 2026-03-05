@@ -170,6 +170,15 @@ def create_rss_feed(apps, max_items=50):
             platform_label = product_compatibility
         description_html = f'<p><strong>Platform:</strong> {platform_label}</p><br>'
 
+        if app.get("release"):
+            release_notes = app["release"].get("notes", "") or ""
+        elif releases:
+            release_notes = releases[0].get("notes", "") or ""
+        else:
+            release_notes = ""
+        if release_notes.strip():
+            description_html += f'<p><strong>Release Notes:</strong><br>{release_notes}</p><br>'
+
         short_desc = app.get('short_description', '') or ''
         long_desc = app.get('description', '') or ''
         if short_desc.strip():
