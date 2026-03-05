@@ -9,7 +9,7 @@ Build a static RSS 2.0 feed from the [Splunkbase](https://splunkbase.splunk.com/
 This is **not** the official Splunkbase RSS feed. It is a **peax community project** that consumes the Splunkbase API and produces a separate feed. Benefits over the [official Splunkbase RSS](https://splunkbase.splunk.com/apps/rss/):
 
 - **New and updated apps** — Official feed is new apps only; this feed includes both new releases and version updates, sorted by latest.
-- **Richer item content** — Version in the title, release-type indicator (`[New App Release]` / `[Version Update]`), platform label, archived flag, author name, and structured descriptions.
+- **Richer item content** — Version in the title, release-type indicator (`[New App Release]` / `[Version Update]`), platform label, archived flag, author name, release notes (when available), and structured descriptions.
 
 ## Features
 
@@ -17,7 +17,8 @@ This is **not** the official Splunkbase RSS feed. It is a **peax community proje
 - **Per-item title** – `App Name - v1.2.3 [Version Update]` or `App Name - v1.0.0 [New App Release]`, with `(Archived)` appended when applicable
 - **Release type indicator** – `[New App Release]` when the app has a single release, `[Version Update]` when it has multiple releases
 - **Platform label** – Each item description starts with the platform (`Splunk`, `SOAR`, or the raw `product_compatibility` value)
-- **Structured description** – Optional "Short Description" section (shown only when present), followed by the full "Description" section
+- **Release notes** – When available, the latest Splunkbase release notes for the current version are included in the item description.
+- **Structured description** – "Release Notes" (if present), then optional "Short Description", then the full "Description" section
 - **Author** – Display name from API (`display_author`)
 - **Icon** – App icon in each item description
 - **Unique GUID per version** – Each app version is a distinct feed item so RSS readers can notify on updates
@@ -44,7 +45,7 @@ The repo includes a workflow that **builds the feed every hour** and publishes i
 
 ### How it works
 
-1. **Schedule:** The workflow runs on a [cron schedule](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule) every hour at minute 14 (`14 * * * *`), and it can also be triggered manually.
+1. **Schedule:** The workflow runs on a [cron schedule](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule) every hour at minute 0 (`0 * * * *`), and it can also be triggered manually.
 2. **Build:** It installs dependencies, runs `python splunkbase_rss_feed.py`, and produces `rss.xml` in the repository root (with the correct Content-Type when served).
 3. **Deploy:** It moves `rss.xml` into a `public/` directory and publishes that directory to the `rss_feed` branch, which GitHub Pages serves.
 
