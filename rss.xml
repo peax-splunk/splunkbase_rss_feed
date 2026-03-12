@@ -6,7 +6,26 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Thu, 12 Mar 2026 20:25:43 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 12 Mar 2026 21:24:54 +0000</lastBuildDate>
+    <item>
+      <title>Maps+ for Splunk - v4.1.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/3124/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Maps+ for Splunk — Version 4.1.0&lt;br&gt;
+Compatibility: Splunk 10.x&lt;/p&gt;
+&lt;p&gt;What's New&lt;br&gt;
+This release adds two major capabilities: NATO-standard tactical symbol rendering for defense and public safety use cases, and Antarctic polar projection support with NASA GIBS satellite imagery integration for scientific and environmental monitoring use cases.&lt;br&gt;
+Military Symbol (Milsymbol) Marker Type&lt;br&gt;
+A new markerType value of milsymbol renders NATO APP-6 / MIL-STD-2525D compliant tactical symbols directly on the map. Symbols are driven entirely through SPL — set msSidc to a 15-character Symbol Identification Code and the correct symbol is rendered automatically for the given affiliation, battle dimension, and function. Over 30 additional ms-prefixed fields are available to control text modifiers (unit designation, higher formation, equipment type, speed, direction, quantity, and more), rendering options (frame, fill, outline, color mode, stroke width, padding), and color overrides at the sub-element level. Symbols scale automatically with map zoom level and text modifier labels are suppressed at low zoom to prevent crowding, both of which can be overridden on a per-marker basis.&lt;br&gt;
+Milsymbol markers participate fully in the existing layer control system — use layerGroup and layerDescription alongside any ms-prefixed fields to group symbols by affiliation, echelon, or unit type and allow operators to toggle layer visibility from the map widget.&lt;br&gt;
+Antarctic Polar Projection (EPSG:3031)&lt;br&gt;
+Maps+ now supports polar stereographic projection for Antarctic mapping use cases via the proj4leaflet library. Enabling the Antarctic projection mode in the format menu switches the map's coordinate reference system to EPSG:3031, which renders the Antarctic continent without the distortion introduced by standard Web Mercator (EPSG:3857). This makes Maps+ suitable for scientific, environmental, and logistics use cases centered on the south polar region.&lt;br&gt;
+The Antarctic mode includes integrated support for NASA Global Imagery Browse Services (GIBS), which provides date/time-driven satellite imagery layers sourced from NASA Earth observation data. The GIBS tile layer, layer ID, image format, and tile matrix bounds are all configurable through the format menu's Antarctic section, allowing users to select specific Earth observation products (e.g. corrected reflectance, sea ice, snow cover) and step through imagery by date directly from the dashboard.&lt;br&gt;
+Bug Fixes&lt;br&gt;
+Fixed a ReferenceError in the layer control rendering function that would silently prevent milsymbol layer groups from appearing in the layer control widget. Fixed an antarcticProj config parsing issue where opening the format menu on an existing dashboard panel that had no Antarctic setting stored would incorrectly activate the polar projection mode.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The mapping equivalent of a Swiss Army knife for Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/5cbc4450-1e55-11f1-96b8-72ad9c86e5aa.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
+      <pubDate>Thu, 12 Mar 2026 20:58:18 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/3124/#v4.1.0</guid>
+    </item>
     <item>
       <title>CopyCat - v0.1.0 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/8540/</link>
@@ -21,7 +40,7 @@ Features:
 
 To learn more visit https://docs.trylynx.ai/copycat.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e84e6108-1af7-11f1-bda8-8ad3e657bb39.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Lynx AI</dc:creator>
-      <pubDate>Thu, 12 Mar 2026 15:51:11 +0000</pubDate>
+      <pubDate>Thu, 12 Mar 2026 20:57:25 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8540/#v0.1.0</guid>
     </item>
     <item>
@@ -1654,17 +1673,6 @@ or visit our page : https://www.valantic.com/en/cx/services/cx-monitoring/&lt;/p
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">alphaMountain DevOps</dc:creator>
       <pubDate>Tue, 24 Feb 2026 23:07:17 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5650/#v2.0.1</guid>
-    </item>
-    <item>
-      <title>Webex Add-on for Splunk - v1.3.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8365/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
-&lt;li&gt;Refactored input file logic to use helper functions for token validation and time handling.&lt;/li&gt;
-&lt;li&gt;Standardized all date formats across all the inputs.&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This Add-on allows users to pull data from the Webex REST API to Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f460b8ce-11b5-11f1-9098-2a465a88eb40.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Yuan Ling</dc:creator>
-      <pubDate>Tue, 24 Feb 2026 19:33:29 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8365/#v1.3.2</guid>
     </item>
     <item>
       <title>Cisco Splunk Add-on for AppDynamics - v3.1.9 [Version Update]</title>
