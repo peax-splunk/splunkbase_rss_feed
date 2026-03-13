@@ -6,7 +6,58 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Fri, 13 Mar 2026 21:25:14 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 13 Mar 2026 22:20:44 +0000</lastBuildDate>
+    <item>
+      <title>Maps+ for Splunk - v4.1.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/3124/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h1&gt;Maps+ for Splunk 4.1.1 — Release Notes&lt;/h1&gt;
+&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;4.1.1 is a bug fix release targeting stability issues introduced or uncovered in 4.1.0. No new features are included. All existing dashboards and SPL queries are fully compatible — no changes required.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Bug Fixes&lt;/h2&gt;
+&lt;h3&gt;Multi-visualization dashboards could produce incorrect behavior&lt;/h3&gt;
+&lt;p&gt;In dashboards containing two or more Maps+ visualizations on the same page, configuration values from one viz could silently bleed into another. The most impactful scenario: if one viz had canvas rendering or path splitting enabled, a second viz on the same page could inherit those settings even if it did not request them — causing unexpected rendering behavior or broken path lines on the second map.&lt;/p&gt;
+&lt;h3&gt;Layer visibility not respected in multi-layer datasets&lt;/h3&gt;
+&lt;p&gt;When a search returned rows with mixed &lt;code&gt;layerVisibility&lt;/code&gt; values (some layers set to hidden, others visible), all layers could end up sharing the visibility state of the last row processed. Layers intended to be hidden on load would appear visible, and vice versa. This affected any dashboard using &lt;code&gt;layerVisibility=false&lt;/code&gt; to pre-hide layers in the layer control.&lt;/p&gt;
+&lt;h3&gt;Feature and style fields could render incorrectly in multi-layer datasets&lt;/h3&gt;
+&lt;p&gt;Related to the above: &lt;code&gt;featureColor&lt;/code&gt;, &lt;code&gt;featureFillColor&lt;/code&gt;, &lt;code&gt;featureOpacity&lt;/code&gt;, &lt;code&gt;featureStroke&lt;/code&gt;, and several other per-row style fields were subject to the same cross-row contamination. Rows earlier in the result set could render with the style values of the last row rather than their own.&lt;/p&gt;
+&lt;h3&gt;Layer control legend entries could silently disappear for custom icon markers&lt;/h3&gt;
+&lt;p&gt;For visualizations using custom image icons (&lt;code&gt;markerType=custom&lt;/code&gt;) with multiple layer groups, some layer control legend entries could fail to render due to a variable scoping error inside the legend-building logic. The layer group would still appear on the map but its entry in the layer control overlay list would be missing.&lt;/p&gt;
+&lt;h3&gt;Repeated cluster color changes accumulated hidden style tags&lt;/h3&gt;
+&lt;p&gt;Changing cluster range colors in the Format panel multiple times would append a new &lt;code&gt;&amp;lt;style&amp;gt;&lt;/code&gt; block to the page on each change, with no cleanup of the previous one. Over many changes this would accumulate stale CSS rules in the document, and could cause color inconsistencies if the browser resolved conflicting rules unexpectedly.&lt;/p&gt;
+&lt;h3&gt;Google Places search failures were silent&lt;/h3&gt;
+&lt;p&gt;When the Google Places search control failed to initialize (for example, due to an invalid or expired API key), the error was swallowed entirely due to a typo in the error handler (&lt;code&gt;console.err&lt;/code&gt; instead of &lt;code&gt;console.error&lt;/code&gt;). Failures are now logged correctly, making API key issues easier to diagnose in the browser console.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Upgrade Notes&lt;/h2&gt;
+&lt;p&gt;Drop-in replacement for 4.1.0. No SPL changes, no formatter changes, no dashboard migrations required.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Compatibility&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Component&lt;/th&gt;
+&lt;th&gt;Version&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Splunk Enterprise&lt;/td&gt;
+&lt;td&gt;9.x, 10.x&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Splunk Cloud&lt;/td&gt;
+&lt;td&gt;Supported&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Browser&lt;/td&gt;
+&lt;td&gt;Chrome, Firefox, Safari, Edge (current releases)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The mapping equivalent of a Swiss Army knife for Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e10577b8-1f27-11f1-9910-025e1d55f870.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
+      <pubDate>Fri, 13 Mar 2026 22:02:16 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/3124/#v4.1.1</guid>
+    </item>
     <item>
       <title>Oodrive - v1.7.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7261/</link>
@@ -186,25 +237,6 @@ To learn more visit https://docs.trylynx.ai/copycat.&lt;/p&gt;&lt;img height=&qu
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Lynx AI</dc:creator>
       <pubDate>Thu, 12 Mar 2026 22:37:00 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8540/#v0.2.0</guid>
-    </item>
-    <item>
-      <title>Maps+ for Splunk - v4.1.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/3124/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Maps+ for Splunk — Version 4.1.0&lt;br&gt;
-Compatibility: Splunk 10.x&lt;/p&gt;
-&lt;p&gt;What's New&lt;br&gt;
-This release adds two major capabilities: NATO-standard tactical symbol rendering for defense and public safety use cases, and Antarctic polar projection support with NASA GIBS satellite imagery integration for scientific and environmental monitoring use cases.&lt;br&gt;
-Military Symbol (Milsymbol) Marker Type&lt;br&gt;
-A new markerType value of milsymbol renders NATO APP-6 / MIL-STD-2525D compliant tactical symbols directly on the map. Symbols are driven entirely through SPL — set msSidc to a 15-character Symbol Identification Code and the correct symbol is rendered automatically for the given affiliation, battle dimension, and function. Over 30 additional ms-prefixed fields are available to control text modifiers (unit designation, higher formation, equipment type, speed, direction, quantity, and more), rendering options (frame, fill, outline, color mode, stroke width, padding), and color overrides at the sub-element level. Symbols scale automatically with map zoom level and text modifier labels are suppressed at low zoom to prevent crowding, both of which can be overridden on a per-marker basis.&lt;br&gt;
-Milsymbol markers participate fully in the existing layer control system — use layerGroup and layerDescription alongside any ms-prefixed fields to group symbols by affiliation, echelon, or unit type and allow operators to toggle layer visibility from the map widget.&lt;br&gt;
-Antarctic Polar Projection (EPSG:3031)&lt;br&gt;
-Maps+ now supports polar stereographic projection for Antarctic mapping use cases via the proj4leaflet library. Enabling the Antarctic projection mode in the format menu switches the map's coordinate reference system to EPSG:3031, which renders the Antarctic continent without the distortion introduced by standard Web Mercator (EPSG:3857). This makes Maps+ suitable for scientific, environmental, and logistics use cases centered on the south polar region.&lt;br&gt;
-The Antarctic mode includes integrated support for NASA Global Imagery Browse Services (GIBS), which provides date/time-driven satellite imagery layers sourced from NASA Earth observation data. The GIBS tile layer, layer ID, image format, and tile matrix bounds are all configurable through the format menu's Antarctic section, allowing users to select specific Earth observation products (e.g. corrected reflectance, sea ice, snow cover) and step through imagery by date directly from the dashboard.&lt;br&gt;
-Bug Fixes&lt;br&gt;
-Fixed a ReferenceError in the layer control rendering function that would silently prevent milsymbol layer groups from appearing in the layer control widget. Fixed an antarcticProj config parsing issue where opening the format menu on an existing dashboard panel that had no Antarctic setting stored would incorrectly activate the polar projection mode.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The mapping equivalent of a Swiss Army knife for Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/5cbc4450-1e55-11f1-96b8-72ad9c86e5aa.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
-      <pubDate>Thu, 12 Mar 2026 20:58:18 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/3124/#v4.1.0</guid>
     </item>
     <item>
       <title>Splunk Assessment Tool - Content Pack - Enterprise Core - v2.1.3 [Version Update]</title>
