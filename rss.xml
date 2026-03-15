@@ -6,7 +6,26 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sat, 14 Mar 2026 23:19:45 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 15 Mar 2026 01:28:10 +0000</lastBuildDate>
+    <item>
+      <title>Amazon S3 Uploader for Splunk - v2.1.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6958/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Improvements:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Add support for AWS China and GovCloud regions.&lt;/li&gt;
+&lt;li&gt;Allow impersonating a role with EC2 and container roles.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Bug fixes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Avoid crashing when uploading empty CSV files.&lt;/li&gt;
+&lt;li&gt;Fix the creation of proxy URLs.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;This Splunk add-on delivers an alert action that uploads search results to an Amazon (AWS) S3 bucket.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This Splunk add-on delivers an alert action that uploads search results to an Amazon (AWS) S3 bucket.
+
+See the Details and Installation tabs for more information.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9636b3e6-2008-11f1-82d6-fe62cdfb2094.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Alessandro Serpi</dc:creator>
+      <pubDate>Sun, 15 Mar 2026 00:58:55 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6958/#v2.1.0</guid>
+    </item>
     <item>
       <title>Cisco Catalyst Add-on for Splunk - v3.1.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7538/</link>
@@ -1674,42 +1693,6 @@ Starting from a dashboard template, the alert action generates a new dashboard f
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Thu, 26 Feb 2026 20:55:46 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5865/#v3.0.0</guid>
-    </item>
-    <item>
-      <title>LCS Plug-In - v1.0.12 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8363/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;New Features&lt;/p&gt;
-&lt;p&gt;Region Selection&lt;br&gt;
- - Added a new region input parameter that allows users to select their Cisco BCS data region.&lt;br&gt;
- - Supported values: us (United States) and emea (Europe, Middle East &amp;amp; Africa).&lt;br&gt;
- - All API requests are now routed to the correct regional endpoint based on this selection.&lt;br&gt;
- - Previously the region was hardcoded to us.&lt;/p&gt;
-&lt;p&gt;Security Vulnerable Only Filter&lt;br&gt;
- - Added a new &lt;code&gt;security_vulnerable_only&lt;/code&gt; input parameter (checkbox).&lt;br&gt;
- - When enabled, only devices with a matchConfidence of &quot;Vulnerable&quot; or &quot;Potentially Vulnerable&quot; are ingested for the following sourcetypes:&lt;br&gt;
- - cisco:bcs:securityadvisory&lt;br&gt;
- - cisco:bcs:fieldnotice&lt;br&gt;
- - Filtering is applied server-side via the Cisco BCS API, reducing unnecessary data transfer.&lt;br&gt;
- - Defaults to enabled.&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;Bug Fixes&lt;/p&gt;
-&lt;p&gt;Python Version Compatibility Fix&lt;br&gt;
- - Fixed a crash that prevented the add-on from loading on Python 3.7 and 3.8 environments.&lt;br&gt;
- - The get_jwt function was using a return type hint syntax (tuple[str, int]) introduced in Python 3.9, causing an immediate script failure on older Python versions before any data collection could begin.&lt;br&gt;
- - Updated to use Tuple[str, int] from the typing library, which is compatible with Python 3.7 through 3.12.&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;Notes&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The &lt;code&gt;security_vulnerable_only&lt;/code&gt; filter only applies to cisco:bcs:securityadvisory and cisco:bcs:fieldnotice. All other 29 data sources are unaffected by this setting.&lt;/li&gt;
-&lt;li&gt;No changes to existing sourcetypes, field names, or index behavior.&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;This app integrates Cisco Business Critical Services (BCS) operational data into Splunk, automating the collection of device inventory, configuration best practices, security advisories, and lifecycle alerts. It simplifies API authentication and rate limiting, enabling Cisco Advanced Services customers to monitor and analyze their network operations efficiently.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This Splunk add-on is designed to collect and ingest operational insights data from Cisco’s Business Critical Services (BCS) API into Splunk. It enables users to automatically fetch a wide range of detailed device, inventory, configuration, risk mitigation, and product alert information from Cisco’s API endpoints and index this data within Splunk for analysis and monitoring.
-
-The app addresses the challenge of integrating Cisco BCS operational data into Splunk by providing a modular input that handles authentication, API rate limiting, pagination, and event creation for multiple data sources. This allows customers—particularly those with Cisco Advanced Services—to gain centralized visibility into their Cisco device inventory, configuration best practices, security advisories, hardware and software lifecycle alerts, and other critical operational metrics without manual data collection.
-
-By automating the retrieval and indexing of this comprehensive Cisco operational data, the app helps organizations improve their network management, risk assessment, and compliance monitoring capabilities within the Splunk platform.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/53174cc0-12ba-11f1-bc3b-9293b7fdaf2e.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Israel Fernandez</dc:creator>
-      <pubDate>Thu, 26 Feb 2026 17:21:33 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8363/#v1.0.12</guid>
     </item>
     <item>
       <title>TA-Alerts for SplunkAdmins - v1.0.8 [Version Update]</title>
