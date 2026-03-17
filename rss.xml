@@ -6,7 +6,83 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Tue, 17 Mar 2026 12:49:56 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 17 Mar 2026 14:19:59 +0000</lastBuildDate>
+    <item>
+      <title>Infigo SIEM Content - v4.2.120260310114621 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7175/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;h1. Release Notes – infigo_sa_siem_content&lt;/p&gt;
+&lt;p&gt;Version: 4.2.120260310114621&lt;/p&gt;
+&lt;p&gt;h2. Changes by Configuration Type&lt;/p&gt;
+&lt;p&gt;h3. Lookups
+* soc_windows_notable_services.csv: The Windows notable services lookup has been updated. The file contents differ from the prior snapshot, reflecting updated mappings or entries.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This application is a part of the Infigo SIEM package: https://splunkbase.splunk.com/app/7147 
+Application provides default security rules with Infigo SIEM. There are 135 rules available out of the box. Visit the official Infigo SIEM site for additional information about the product.
+Official site: www.infigosiem.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e9321812-2209-11f1-9a79-c60272c73271.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Infigo  IS</dc:creator>
+      <pubDate>Tue, 17 Mar 2026 14:16:54 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7175/#v4.2.120260310114621</guid>
+    </item>
+    <item>
+      <title>Infigo SOC Content - v4.2.120260310115009 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8057/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;h1. Release Notes — Infigo SOC Content (4.2.120260310115009)&lt;/p&gt;
+&lt;p&gt;These notes describe changes introduced in this release for the Infigo SOC Content add-on for Splunk. Changes are grouped by configuration type and focus on saved searches and macro usage.&lt;/p&gt;
+&lt;p&gt;h2. Summary of changes
+* Updated saved searches to refine alerting behavior and introduce a new rule for tracking expirations in connector TAs.
+* Modified macro usage for a malware detection rule to improve drilldown behavior across tenants.
+* Replaced an existing connector TA errors rule with a new expirations-focused rule, updating cadence and scope.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;h2. Saved Searches (default/savedsearches.conf)
+* Rule ID: MAL011&lt;br&gt;
+&lt;strong&gt; Name: Malware - Sophos EDR - Malware Detections By Index Time&lt;br&gt;
+&lt;/strong&gt; Changes:&lt;br&gt;
+&lt;strong&gt;&lt;em&gt; Drilldown federated search workflow updated to use a new federated search macro (soc_federated_search) instead of the previous edr_sophos_index-based path.&lt;br&gt;
+&lt;/em&gt;&lt;/strong&gt; Rule version updated from 1.0.0 to 1.0.1.&lt;br&gt;
+&lt;strong&gt; Impact:&lt;br&gt;
+&lt;/strong&gt;&lt;em&gt; Federated drilldown across tenants now routes through the updated soc_federated_search macro, aligning with the new multi-tenant search framework.
+* Rule ID: OPS053&lt;br&gt;
+&lt;/em&gt;&lt;em&gt; Name: Ops - All - Detected An Issue With Ldapsearch Command&lt;br&gt;
+&lt;/em&gt;&lt;em&gt; Changes:&lt;br&gt;
+&lt;/em&gt;&lt;strong&gt; Search logic updated to more precisely identify relevant issues by applying a condition that treats multiple events with non-CRITICAL levels as potential issues, while preserving detection of CRITICAL events.&lt;br&gt;
+&lt;/strong&gt;&lt;em&gt; Rule version updated from 1.0.0 to 1.0.2.&lt;br&gt;
+&lt;/em&gt;&lt;em&gt; Impact:&lt;br&gt;
+&lt;/em&gt;&lt;strong&gt; Alerts are triggered under a refined set of conditions, reducing noise from non-pertinent LDAP search errors while preserving visibility for critical events.
+* Rule ID: OPS030&lt;br&gt;
+&lt;/strong&gt; Name: Ops - Splunk - Tracking Expirations In Connector TAs&lt;br&gt;
+&lt;strong&gt; Changes:&lt;br&gt;
+&lt;/strong&gt;&lt;em&gt; New saved search introduced (new rule) to track expirations in common security-relevant Splunk TAs that act as (cloud) connectors to other systems.&lt;br&gt;
+&lt;/em&gt;&lt;strong&gt; Cadence set to 30 minutes past the hour (cron_schedule updated to 30 * &lt;em&gt; * *).&lt;br&gt;
+&lt;/em&gt;&lt;/strong&gt; Uses a federated/internal search approach to aggregate expirations across relevant TA data inputs and hosts.&lt;br&gt;
+&lt;strong&gt;&lt;em&gt; Rule version set to 1.0.5.&lt;br&gt;
+&lt;/em&gt;* Details:&lt;br&gt;
+&lt;/strong&gt;* This is a new rule added to specifically monitor expirations in connector TAs, reflecting an expanded scope beyond error tracking to include expiration events.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;h2. Macro Usage Changes
+* Malware Rule Drilldown&lt;br&gt;
+&lt;strong&gt; The drilldown_federated path for the Malware rule (MAL011) has changed from using edr_sophos_index(&quot;$source_tenant$&quot;,&quot;edr_sophos&quot;) to soc_federated_search(&quot;$source_tenant$&quot;,&quot;edr_sophos&quot;).&lt;br&gt;
+&lt;/strong&gt; Impact:&lt;br&gt;
+*** Aligns the drilldown path with the shared federated search macro, enabling consistent cross-tenant drilldowns and potentially improved performance and maintainability.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This application is part of the Infigo SIEM package: https://splunkbase.splunk.com/app/7147
+It provides an additional set of Infigo security rules, developed by the Infigo SOC team to enhance the capabilities of Infigo SIEM.
+For more details, visit the official Infigo SIEM website: www.infigosiem.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/12e41304-220a-11f1-949e-f25dfd12c41b.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Infigo  IS</dc:creator>
+      <pubDate>Tue, 17 Mar 2026 14:16:50 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8057/#v4.2.120260310115009</guid>
+    </item>
+    <item>
+      <title>Splunk Add-on for Salesforce - v6.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/3549/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;fix: Enhanced debug logging for the event log data collector input to provide more detailed and actionable diagnostic information&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;*** Important: Read upgrade instructions and test your add-on update before deploying to production ***
+Version 2.0.0 of the Splunk Add-on for Salesforce introduces breaking changes. To avoid data loss or data duplication, follow the documented upgrade instructions in detail. If your are upgrading an earlier version of the Splunk Add-on for Salesforce, a best practice is to test your update in a non-production environment before deploying to production.
+
+The Splunk Add-on for Salesforce allows a Splunk software administrator to collect different types of data from Salesforce using REST APIs. The data includes:
+
+* Event log file data, https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/using_resources_event_log_files.htm.
+* Output of Salesforce object queries (SOQL). 
+
+This add-on provides the inputs and CIM-compatible knowledge to use with other Splunk apps, such as Splunk Enterprise Security, the Splunk App for PCI Compliance, and Splunk IT Service Intelligence.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/6b1c9202-21d4-11f1-8956-1e3caf734f44.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Tue, 17 Mar 2026 12:59:33 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/3549/#v6.0.1</guid>
+    </item>
     <item>
       <title>Threat Hunting Essentials - v1.1.313 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7633/</link>
@@ -473,18 +549,6 @@ It also provides two supporting lookups to convert names between Italian and Eng
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
       <pubDate>Fri, 13 Mar 2026 22:02:16 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/3124/#v4.1.1</guid>
-    </item>
-    <item>
-      <title>Oodrive - v1.7.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7261/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Fixed an issue where the OAuth refresh token could be unintentionally overwritten by outdated user input.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Dear Oodrive Clients,
-
-This app allows you to fetch Oodrive application logs, specifically tracking events, directly through Splunk.
-
-By connecting to your Oodrive workspace, you&amp;#x27;ll be able to ingest functional logs into Splunk for real-time monitoring, security auditing, and deeper insights into your collaboration activities.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/53cd13d4-13be-11f1-8d1a-36c038d795c3.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Oodrive Product</dc:creator>
-      <pubDate>Fri, 13 Mar 2026 16:37:02 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7261/#v1.7.0</guid>
     </item>
     <item>
       <title>MAC OUI lookup add-on for Splunk - v1.2.4 [Version Update]</title>
@@ -963,26 +1027,6 @@ SPL search generation from natural language, search optimization, search explana
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Tue, 10 Mar 2026 17:31:43 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7931/#v1.0.3</guid>
-    </item>
-    <item>
-      <title>Infigo SOC Content - v4.2.120260303130040 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8057/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This application is part of the Infigo SIEM package: https://splunkbase.splunk.com/app/7147
-It provides an additional set of Infigo security rules, developed by the Infigo SOC team to enhance the capabilities of Infigo SIEM.
-For more details, visit the official Infigo SIEM website: www.infigosiem.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a144c930-1c7a-11f1-b20f-3e7bc7ef97d5.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Infigo  IS</dc:creator>
-      <pubDate>Tue, 10 Mar 2026 12:17:49 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8057/#v4.2.120260303130040</guid>
-    </item>
-    <item>
-      <title>Infigo SIEM Content - v4.2.120260303125648 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7175/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This application is a part of the Infigo SIEM package: https://splunkbase.splunk.com/app/7147 
-Application provides default security rules with Infigo SIEM. There are 135 rules available out of the box. Visit the official Infigo SIEM site for additional information about the product.
-Official site: www.infigosiem.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/eb89f7d4-1c77-11f1-83d3-22fccef8a917.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Infigo  IS</dc:creator>
-      <pubDate>Tue, 10 Mar 2026 12:17:04 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7175/#v4.2.120260303125648</guid>
     </item>
     <item>
       <title>Sideview UI - v0.8.5 [Version Update]</title>
