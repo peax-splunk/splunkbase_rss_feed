@@ -6,57 +6,60 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Tue, 17 Mar 2026 22:24:35 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 17 Mar 2026 23:24:26 +0000</lastBuildDate>
     <item>
-      <title>Maps+ for Splunk - v4.1.1 [Version Update]</title>
+      <title>Maps+ for Splunk - v4.2.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/3124/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h1&gt;Maps+ for Splunk 4.1.1 — Release Notes&lt;/h1&gt;
-&lt;h2&gt;Overview&lt;/h2&gt;
-&lt;p&gt;4.1.1 is a bug fix release targeting stability issues introduced or uncovered in 4.1.0. No new features are included. All existing dashboards and SPL queries are fully compatible — no changes required.&lt;/p&gt;
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;What's New in 4.2.0&lt;/h2&gt;
+&lt;p&gt;This release changes the default map tile provider to fix active tile blocking issues, adds automatic dark theme map support, polyline rendering for GeoJSON feature layers, removes a misleading refresh option, and fixes two quality-of-life issues.&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2&gt;Bug Fixes&lt;/h2&gt;
-&lt;h3&gt;Multi-visualization dashboards could produce incorrect behavior&lt;/h3&gt;
-&lt;p&gt;In dashboards containing two or more Maps+ visualizations on the same page, configuration values from one viz could silently bleed into another. The most impactful scenario: if one viz had canvas rendering or path splitting enabled, a second viz on the same page could inherit those settings even if it did not request them — causing unexpected rendering behavior or broken path lines on the second map.&lt;/p&gt;
-&lt;h3&gt;Layer visibility not respected in multi-layer datasets&lt;/h3&gt;
-&lt;p&gt;When a search returned rows with mixed &lt;code&gt;layerVisibility&lt;/code&gt; values (some layers set to hidden, others visible), all layers could end up sharing the visibility state of the last row processed. Layers intended to be hidden on load would appear visible, and vice versa. This affected any dashboard using &lt;code&gt;layerVisibility=false&lt;/code&gt; to pre-hide layers in the layer control.&lt;/p&gt;
-&lt;h3&gt;Feature and style fields could render incorrectly in multi-layer datasets&lt;/h3&gt;
-&lt;p&gt;Related to the above: &lt;code&gt;featureColor&lt;/code&gt;, &lt;code&gt;featureFillColor&lt;/code&gt;, &lt;code&gt;featureOpacity&lt;/code&gt;, &lt;code&gt;featureStroke&lt;/code&gt;, and several other per-row style fields were subject to the same cross-row contamination. Rows earlier in the result set could render with the style values of the last row rather than their own.&lt;/p&gt;
-&lt;h3&gt;Layer control legend entries could silently disappear for custom icon markers&lt;/h3&gt;
-&lt;p&gt;For visualizations using custom image icons (&lt;code&gt;markerType=custom&lt;/code&gt;) with multiple layer groups, some layer control legend entries could fail to render due to a variable scoping error inside the legend-building logic. The layer group would still appear on the map but its entry in the layer control overlay list would be missing.&lt;/p&gt;
-&lt;h3&gt;Repeated cluster color changes accumulated hidden style tags&lt;/h3&gt;
-&lt;p&gt;Changing cluster range colors in the Format panel multiple times would append a new &lt;code&gt;&amp;lt;style&amp;gt;&lt;/code&gt; block to the page on each change, with no cleanup of the previous one. Over many changes this would accumulate stale CSS rules in the document, and could cause color inconsistencies if the browser resolved conflicting rules unexpectedly.&lt;/p&gt;
-&lt;h3&gt;Google Places search failures were silent&lt;/h3&gt;
-&lt;p&gt;When the Google Places search control failed to initialize (for example, due to an invalid or expired API key), the error was swallowed entirely due to a typo in the error handler (&lt;code&gt;console.err&lt;/code&gt; instead of &lt;code&gt;console.error&lt;/code&gt;). Failures are now logged correctly, making API key issues easier to diagnose in the browser console.&lt;/p&gt;
+&lt;h3&gt;Default Map Tile Provider Updated&lt;/h3&gt;
+&lt;p&gt;Maps+ now defaults to &lt;strong&gt;CartoDB Light&lt;/strong&gt; instead of OpenStreetMap for new installations and unconfigured dashboards.&lt;/p&gt;
+&lt;p&gt;OpenStreetMap's tile servers are a community-funded resource with a usage policy that requires tile requests to identify the calling application. Splunk's dashboard rendering environment does not send the identification headers OSM requires, which can result in tiles being blocked without warning — which is likely what brought you to this release.&lt;/p&gt;
+&lt;p&gt;CartoDB Light is a clean, visually neutral base map with no API key required and terms of service compatible with embedded Splunk dashboard use. It covers the same zoom levels and geographic extent as OpenStreetMap.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;If you use OpenStreetMap tiles today, no action is required&lt;/strong&gt; — your dashboards have an explicit tile selection saved and will continue to load OSM tiles as configured. OpenStreetMap remains available in the Map Tile dropdown.&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2&gt;Upgrade Notes&lt;/h2&gt;
-&lt;p&gt;Drop-in replacement for 4.1.0. No SPL changes, no formatter changes, no dashboard migrations required.&lt;/p&gt;
+&lt;h3&gt;Dark Theme Map Auto-Selection&lt;/h3&gt;
+&lt;p&gt;Maps+ now automatically uses a dark base map when Splunk's dark theme is active. Previously, the light CartoDB base map was always used regardless of theme, producing a jarring light map on a dark dashboard.&lt;/p&gt;
+&lt;p&gt;If you have already selected a specific map tile in the Format panel, your selection is always respected — the auto-selection only applies when the Map Tile option is still at its default value.&lt;/p&gt;
+&lt;p&gt;No configuration required. Switch to Splunk's dark theme and the map follows.&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2&gt;Compatibility&lt;/h2&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Component&lt;/th&gt;
-&lt;th&gt;Version&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Splunk Enterprise&lt;/td&gt;
-&lt;td&gt;9.x, 10.x&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Splunk Cloud&lt;/td&gt;
-&lt;td&gt;Supported&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Browser&lt;/td&gt;
-&lt;td&gt;Chrome, Firefox, Safari, Edge (current releases)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The mapping equivalent of a Swiss Army knife for Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f5b90e9c-224f-11f1-97fe-5293144166cf.png&quot;&gt;</description>
+&lt;h3&gt;GeoJSON Feature Polylines&lt;/h3&gt;
+&lt;p&gt;The &lt;code&gt;feature&lt;/code&gt; field now supports open polyline rendering for multi-point geometries. Set &lt;code&gt;featureFill=false&lt;/code&gt; on your SPL rows to render a line instead of a closed polygon:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;| eval feature=&amp;quot;lat1,lon1;lat2,lon2;lat3,lon3&amp;quot;, featureFill=&amp;quot;false&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Previously, all multi-point features always rendered as filled polygons. Single-point features (circle markers) and polygon features are unaffected.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;Dashboard Refresh Interval Removed&lt;/h3&gt;
+&lt;p&gt;The &lt;strong&gt;Dashboard Refresh Interval&lt;/strong&gt; option has been removed from the Format panel.&lt;/p&gt;
+&lt;p&gt;This feature forced a full browser window reload rather than refreshing the individual map panel, which disrupted every other panel on the dashboard simultaneously. It was a workaround for a limitation that no longer applies in Splunk 10.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Replacement&lt;/strong&gt;: use Splunk's native panel refresh instead. Add a &lt;code&gt;&amp;lt;refresh&amp;gt;&lt;/code&gt; tag directly to your panel's search element in the dashboard XML:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;search&amp;gt;
+  &amp;lt;query&amp;gt;| your SPL here&amp;lt;/query&amp;gt;
+  &amp;lt;refresh&amp;gt;30s&amp;lt;/refresh&amp;gt;
+  &amp;lt;refreshType&amp;gt;delay&amp;lt;/refreshType&amp;gt;
+&amp;lt;/search&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This refreshes only the map panel on the specified interval without affecting anything else on the dashboard.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Migration&lt;/strong&gt;: if you currently have a Dashboard Refresh Interval value set, the stored value will be silently ignored after upgrading. Add the &lt;code&gt;&amp;lt;refresh&amp;gt;&lt;/code&gt; tag above to your panel XML to restore the behavior correctly.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;Bug Fixes&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Path layer control labels&lt;/strong&gt;: Path layers without a &lt;code&gt;layerDescription&lt;/code&gt; field now show a readable &lt;code&gt;Path: &amp;lt;identifier&amp;gt;&lt;/code&gt; label in the layer control instead of the raw field value (IP address, hostname, or similar).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Dark theme coordinate dialog&lt;/strong&gt;: The coordinate dialog (opened from the right-click context menu) now correctly styles its input fields for the dark theme. Previously, input text was invisible against the black dialog background.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;Upgrade Notes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fresh installs will default to CartoDB Light&lt;/li&gt;
+&lt;li&gt;Existing dashboards with a saved Map Tile selection are unaffected&lt;/li&gt;
+&lt;li&gt;The Dashboard Refresh Interval option is removed — see migration note above if you use it&lt;/li&gt;
+&lt;li&gt;No other SPL changes required&lt;/li&gt;
+&lt;li&gt;No other Format panel changes required&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The mapping equivalent of a Swiss Army knife for Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f5b90e9c-224f-11f1-97fe-5293144166cf.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
-      <pubDate>Tue, 17 Mar 2026 22:24:18 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/3124/#v4.1.1</guid>
+      <pubDate>Tue, 17 Mar 2026 22:25:06 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/3124/#v4.2.0</guid>
     </item>
     <item>
       <title>Hydrolix Search - v1.3.0 [Version Update]</title>
