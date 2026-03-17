@@ -6,7 +6,58 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Tue, 17 Mar 2026 21:29:54 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 17 Mar 2026 22:24:35 +0000</lastBuildDate>
+    <item>
+      <title>Maps+ for Splunk - v4.1.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/3124/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h1&gt;Maps+ for Splunk 4.1.1 — Release Notes&lt;/h1&gt;
+&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;4.1.1 is a bug fix release targeting stability issues introduced or uncovered in 4.1.0. No new features are included. All existing dashboards and SPL queries are fully compatible — no changes required.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Bug Fixes&lt;/h2&gt;
+&lt;h3&gt;Multi-visualization dashboards could produce incorrect behavior&lt;/h3&gt;
+&lt;p&gt;In dashboards containing two or more Maps+ visualizations on the same page, configuration values from one viz could silently bleed into another. The most impactful scenario: if one viz had canvas rendering or path splitting enabled, a second viz on the same page could inherit those settings even if it did not request them — causing unexpected rendering behavior or broken path lines on the second map.&lt;/p&gt;
+&lt;h3&gt;Layer visibility not respected in multi-layer datasets&lt;/h3&gt;
+&lt;p&gt;When a search returned rows with mixed &lt;code&gt;layerVisibility&lt;/code&gt; values (some layers set to hidden, others visible), all layers could end up sharing the visibility state of the last row processed. Layers intended to be hidden on load would appear visible, and vice versa. This affected any dashboard using &lt;code&gt;layerVisibility=false&lt;/code&gt; to pre-hide layers in the layer control.&lt;/p&gt;
+&lt;h3&gt;Feature and style fields could render incorrectly in multi-layer datasets&lt;/h3&gt;
+&lt;p&gt;Related to the above: &lt;code&gt;featureColor&lt;/code&gt;, &lt;code&gt;featureFillColor&lt;/code&gt;, &lt;code&gt;featureOpacity&lt;/code&gt;, &lt;code&gt;featureStroke&lt;/code&gt;, and several other per-row style fields were subject to the same cross-row contamination. Rows earlier in the result set could render with the style values of the last row rather than their own.&lt;/p&gt;
+&lt;h3&gt;Layer control legend entries could silently disappear for custom icon markers&lt;/h3&gt;
+&lt;p&gt;For visualizations using custom image icons (&lt;code&gt;markerType=custom&lt;/code&gt;) with multiple layer groups, some layer control legend entries could fail to render due to a variable scoping error inside the legend-building logic. The layer group would still appear on the map but its entry in the layer control overlay list would be missing.&lt;/p&gt;
+&lt;h3&gt;Repeated cluster color changes accumulated hidden style tags&lt;/h3&gt;
+&lt;p&gt;Changing cluster range colors in the Format panel multiple times would append a new &lt;code&gt;&amp;lt;style&amp;gt;&lt;/code&gt; block to the page on each change, with no cleanup of the previous one. Over many changes this would accumulate stale CSS rules in the document, and could cause color inconsistencies if the browser resolved conflicting rules unexpectedly.&lt;/p&gt;
+&lt;h3&gt;Google Places search failures were silent&lt;/h3&gt;
+&lt;p&gt;When the Google Places search control failed to initialize (for example, due to an invalid or expired API key), the error was swallowed entirely due to a typo in the error handler (&lt;code&gt;console.err&lt;/code&gt; instead of &lt;code&gt;console.error&lt;/code&gt;). Failures are now logged correctly, making API key issues easier to diagnose in the browser console.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Upgrade Notes&lt;/h2&gt;
+&lt;p&gt;Drop-in replacement for 4.1.0. No SPL changes, no formatter changes, no dashboard migrations required.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Compatibility&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Component&lt;/th&gt;
+&lt;th&gt;Version&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Splunk Enterprise&lt;/td&gt;
+&lt;td&gt;9.x, 10.x&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Splunk Cloud&lt;/td&gt;
+&lt;td&gt;Supported&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Browser&lt;/td&gt;
+&lt;td&gt;Chrome, Firefox, Safari, Edge (current releases)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The mapping equivalent of a Swiss Army knife for Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f5b90e9c-224f-11f1-97fe-5293144166cf.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
+      <pubDate>Tue, 17 Mar 2026 22:24:18 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/3124/#v4.1.1</guid>
+    </item>
     <item>
       <title>Hydrolix Search - v1.3.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7540/</link>
@@ -688,57 +739,6 @@ It also provides two supporting lookups to convert names between Italian and Eng
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Alessandro Serpi</dc:creator>
       <pubDate>Fri, 13 Mar 2026 23:08:32 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6642/#v2.2.0</guid>
-    </item>
-    <item>
-      <title>Maps+ for Splunk - v4.1.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/3124/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h1&gt;Maps+ for Splunk 4.1.1 — Release Notes&lt;/h1&gt;
-&lt;h2&gt;Overview&lt;/h2&gt;
-&lt;p&gt;4.1.1 is a bug fix release targeting stability issues introduced or uncovered in 4.1.0. No new features are included. All existing dashboards and SPL queries are fully compatible — no changes required.&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2&gt;Bug Fixes&lt;/h2&gt;
-&lt;h3&gt;Multi-visualization dashboards could produce incorrect behavior&lt;/h3&gt;
-&lt;p&gt;In dashboards containing two or more Maps+ visualizations on the same page, configuration values from one viz could silently bleed into another. The most impactful scenario: if one viz had canvas rendering or path splitting enabled, a second viz on the same page could inherit those settings even if it did not request them — causing unexpected rendering behavior or broken path lines on the second map.&lt;/p&gt;
-&lt;h3&gt;Layer visibility not respected in multi-layer datasets&lt;/h3&gt;
-&lt;p&gt;When a search returned rows with mixed &lt;code&gt;layerVisibility&lt;/code&gt; values (some layers set to hidden, others visible), all layers could end up sharing the visibility state of the last row processed. Layers intended to be hidden on load would appear visible, and vice versa. This affected any dashboard using &lt;code&gt;layerVisibility=false&lt;/code&gt; to pre-hide layers in the layer control.&lt;/p&gt;
-&lt;h3&gt;Feature and style fields could render incorrectly in multi-layer datasets&lt;/h3&gt;
-&lt;p&gt;Related to the above: &lt;code&gt;featureColor&lt;/code&gt;, &lt;code&gt;featureFillColor&lt;/code&gt;, &lt;code&gt;featureOpacity&lt;/code&gt;, &lt;code&gt;featureStroke&lt;/code&gt;, and several other per-row style fields were subject to the same cross-row contamination. Rows earlier in the result set could render with the style values of the last row rather than their own.&lt;/p&gt;
-&lt;h3&gt;Layer control legend entries could silently disappear for custom icon markers&lt;/h3&gt;
-&lt;p&gt;For visualizations using custom image icons (&lt;code&gt;markerType=custom&lt;/code&gt;) with multiple layer groups, some layer control legend entries could fail to render due to a variable scoping error inside the legend-building logic. The layer group would still appear on the map but its entry in the layer control overlay list would be missing.&lt;/p&gt;
-&lt;h3&gt;Repeated cluster color changes accumulated hidden style tags&lt;/h3&gt;
-&lt;p&gt;Changing cluster range colors in the Format panel multiple times would append a new &lt;code&gt;&amp;lt;style&amp;gt;&lt;/code&gt; block to the page on each change, with no cleanup of the previous one. Over many changes this would accumulate stale CSS rules in the document, and could cause color inconsistencies if the browser resolved conflicting rules unexpectedly.&lt;/p&gt;
-&lt;h3&gt;Google Places search failures were silent&lt;/h3&gt;
-&lt;p&gt;When the Google Places search control failed to initialize (for example, due to an invalid or expired API key), the error was swallowed entirely due to a typo in the error handler (&lt;code&gt;console.err&lt;/code&gt; instead of &lt;code&gt;console.error&lt;/code&gt;). Failures are now logged correctly, making API key issues easier to diagnose in the browser console.&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2&gt;Upgrade Notes&lt;/h2&gt;
-&lt;p&gt;Drop-in replacement for 4.1.0. No SPL changes, no formatter changes, no dashboard migrations required.&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2&gt;Compatibility&lt;/h2&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Component&lt;/th&gt;
-&lt;th&gt;Version&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Splunk Enterprise&lt;/td&gt;
-&lt;td&gt;9.x, 10.x&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Splunk Cloud&lt;/td&gt;
-&lt;td&gt;Supported&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Browser&lt;/td&gt;
-&lt;td&gt;Chrome, Firefox, Safari, Edge (current releases)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The mapping equivalent of a Swiss Army knife for Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e10577b8-1f27-11f1-9910-025e1d55f870.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
-      <pubDate>Fri, 13 Mar 2026 22:02:16 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/3124/#v4.1.1</guid>
     </item>
     <item>
       <title>MAC OUI lookup add-on for Splunk - v1.2.4 [Version Update]</title>
