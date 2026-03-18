@@ -6,7 +6,129 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Wed, 18 Mar 2026 12:50:55 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 18 Mar 2026 14:17:37 +0000</lastBuildDate>
+    <item>
+      <title>Add-on for sending email utilizing S.MIME - signatures and encryption - v1.1.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8516/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Initial public release&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Splunk Technology Add-on for sending **S/MIME signed and/or encrypted email** from:
+
+- a custom SPL command (`smimemail`)
+- a custom alert action (**Send S/MIME Email**) compatible with Splunk ES workflows&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk Technology Add-on for sending **S/MIME signed and/or encrypted email** from:
+
+- a custom SPL command (`smimemail`)
+- a custom alert action (**Send S/MIME Email**) compatible with Splunk ES workflows
+
+It includes UI pages for SMTP/OAuth2 setup and certificate management.
+
+## Current Capabilities
+
+| Capability | Status |
+|---|---|
+| S/MIME signing | PKCS#7 SignedData (detached), SHA-256 with RSA |
+| S/MIME encryption | PKCS#7 EnvelopedData, AES-256-CBC content encryption |
+| Recipient cert validation | Blocks send when recipient certs are missing/disabled (unless explicitly skipped in `smimemail`) |
+| SMTP transport | `none`, `starttls`, `ssl` |
+| OAuth2 mode | Uses client-credentials token and sends via **Microsoft Graph** raw MIME upload || Heavy Forwarder proxy | Route email delivery through an HF running **TA-smime-mailer-hf** || Alert action include options | Links, inline results, trigger metadata, CSV attachment |
+| Certificate monitoring endpoint | `| rest /servicesNS/nobody/ta-smime-mailer/smime_cert_monitor` |&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/394a6a1a-217f-11f1-bdf6-3663d8050395.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Kamil Dolezel</dc:creator>
+      <pubDate>Wed, 18 Mar 2026 14:14:05 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8516/#v1.1.0</guid>
+    </item>
+    <item>
+      <title>CSmon Add-on - v1.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8550/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Initial Release (v1.0.1)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;SAP Monitoring&lt;/strong&gt;: Full support for SAP HANA and application server performance data.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Modern Dashboards&lt;/strong&gt;: High-performance Splunk UI visualizations with full Dark and Light mode support.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Performance Optimized&lt;/strong&gt;: Optimized JS bundles for fast loading and responsive design.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Demo Mode&lt;/strong&gt;: Built-in mock data mode for instant exploration without a live server connection.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;UCC Powered&lt;/strong&gt;: easy-to-use configuration pages for global settings and system scopes.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Advanced technical Add-on (TA) for SAP Monitoring. Bridges the gap between CSmon Server and Splunk with high-performance dashboards, optimized bundle sizes, and seamless UCC-based configuration.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;CSmon Add-on for Splunk provides advanced technical monitoring and high-end visualizations for SAP environments. It connects Splunk to the CSmon Monitoring Server to deliver real-time insights into SAP HANA databases and application servers.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/09e3fde8-1d9e-11f1-a1de-ea32a9e960f6.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Victor Hasler</dc:creator>
+      <pubDate>Wed, 18 Mar 2026 13:49:41 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8550/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>Cylana Security Platform - v0.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8552/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Initial release of the Cylana Security Platform Splunk Add-on.&lt;/p&gt;
+&lt;p&gt;This add-on provides field extraction and parsing for Cylana security events ingested via HTTP Event Collector (HEC).&lt;/p&gt;
+&lt;p&gt;Supported sourcetypes:&lt;br&gt;
+- cylana:alert&lt;br&gt;
+- cylana:indicator&lt;br&gt;
+- cylana:asset&lt;br&gt;
+- cylana:exposure&lt;/p&gt;
+&lt;p&gt;Features:&lt;br&gt;
+- JSON field extraction&lt;br&gt;
+- Compatibility with Splunk Enterprise and Splunk Cloud&lt;br&gt;
+- Lightweight technology add-on with no executable code&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Add-on for ingesting Cylana security events into Splunk via HTTP Event Collector (HEC) with automatic JSON field extraction.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Cylana Security Add-on enables ingestion and parsing of Cylana security events in Splunk. Cylana events are delivered to Splunk using the HTTP Event Collector (HEC) and indexed with Cylana-specific sourcetypes such as cylana:alert, cylana:indicator, cylana:asset, and cylana:exposure. The add-on provides automatic JSON field extraction to make Cylana security telemetry searchable and usable within Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/bcfdc18c-1f30-11f1-b499-1a19b9d12566.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Onur Çabik</dc:creator>
+      <pubDate>Wed, 18 Mar 2026 13:48:40 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8552/#v0.0.1</guid>
+    </item>
+    <item>
+      <title>EclecticIQ Intelligence Center TA - v1.3.6 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6568/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Added support for retrieving custom entities and attributes during EclecticIQ data polling.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;EclecticIQ Intelligence Center is an analyst-centric threat intelligence platform (TIP) that acquires structured and unstructured cyber threat data from multiple sources (e.g., open sources, commercial sources, NCSCs, and ISACs). The TIP automatically de-duplicates, normalizes, and enriches the source data to facilitate quick analysis and development of unique insights.
+
+The EclecticIQ Intelligence Center TA is built to power the EclecticIQ Intelligence Center App (also available on Splunkbase).&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a6cc6398-1c59-11f1-9f91-1efdf2ca5c4e.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">EclecticIQ BV</dc:creator>
+      <pubDate>Wed, 18 Mar 2026 13:46:50 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6568/#v1.3.6</guid>
+    </item>
+    <item>
+      <title>App For Kubernetes - v1.0.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8560/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Simple Dashboard Visualizations providing insights to your Kubernetes clusters&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;A search-head-only Splunk application that provides live visibility into Kubernetes clusters directly inside Splunk. It ships a collection of Dashboard Studio dashboards covering cluster health, node status, workload monitoring, cost efficiency, and distributed trace analysis — all powered by telemetry collected through the Splunk OpenTelemetry Collector.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Instantly visualize your Kubernetes platforms on Splunk enterprise when you use Splunk OpenTelemetry Collector&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/99940a32-2096-11f1-b57c-aebbd0cfd8a8.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Venkata Hareesh Sanagavarapu</dc:creator>
+      <pubDate>Wed, 18 Mar 2026 13:43:24 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8560/#v1.0.0</guid>
+    </item>
+    <item>
+      <title>Event builder For Splunk - v2.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8561/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;Event Builder For Splunk v2.0.1&lt;/h2&gt;
+&lt;p&gt;Initial public release.&lt;/p&gt;
+&lt;p&gt;This release introduces the &lt;strong&gt;Event Builder For Splunk&lt;/strong&gt; companion app for Splunkbase, designed to work alongside the &lt;strong&gt;Event Builder For Splunk desktop application (v2.0.1)&lt;/strong&gt; for security data simulation and SOC lab environments.&lt;/p&gt;
+&lt;h3&gt;What's included&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;21 purpose-built security indexes&lt;/strong&gt; with 90-day data retention:&lt;br&gt;
+&lt;code&gt;web&lt;/code&gt;, &lt;code&gt;network&lt;/code&gt;, &lt;code&gt;linux&lt;/code&gt;, &lt;code&gt;windows&lt;/code&gt;, &lt;code&gt;dns&lt;/code&gt;, &lt;code&gt;vpn&lt;/code&gt;, &lt;code&gt;aws&lt;/code&gt;, &lt;code&gt;gcp&lt;/code&gt;, &lt;code&gt;ids&lt;/code&gt;, &lt;code&gt;email&lt;/code&gt;, &lt;code&gt;o365&lt;/code&gt;, &lt;code&gt;database&lt;/code&gt;, &lt;code&gt;proxy&lt;/code&gt;, &lt;code&gt;kubernetes&lt;/code&gt;, &lt;code&gt;edr&lt;/code&gt;, &lt;code&gt;identity&lt;/code&gt;, &lt;code&gt;virtualization&lt;/code&gt;, &lt;code&gt;saas&lt;/code&gt;, &lt;code&gt;monitoring&lt;/code&gt;, &lt;code&gt;itsm&lt;/code&gt;, &lt;code&gt;pam&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Field extraction rules for 42 sourcetypes&lt;/strong&gt; covering endpoint, network, cloud, identity, EDR, PAM, and infrastructure log formats&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;8 dashboards&lt;/strong&gt;:&lt;/li&gt;
+&lt;li&gt;Landing&lt;/li&gt;
+&lt;li&gt;Overview &lt;em&gt;(30s auto-refresh)&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Live Monitor &lt;em&gt;(real-time rt search, 10s refresh)&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Identity &amp;amp; Access&lt;/li&gt;
+&lt;li&gt;Network &amp;amp; Infrastructure&lt;/li&gt;
+&lt;li&gt;Endpoint &amp;amp; Cloud&lt;/li&gt;
+&lt;li&gt;Threat Detections&lt;/li&gt;
+&lt;li&gt;Setup Guide&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;10 pre-built correlation detection rules&lt;/strong&gt; &lt;em&gt;(all disabled by default)&lt;/em&gt;:&lt;/li&gt;
+&lt;li&gt;Brute Force&lt;/li&gt;
+&lt;li&gt;Impossible Travel&lt;/li&gt;
+&lt;li&gt;MFA Bypass&lt;/li&gt;
+&lt;li&gt;Kubernetes Privileged Container&lt;/li&gt;
+&lt;li&gt;AWS IAM Escalation&lt;/li&gt;
+&lt;li&gt;Pass-the-Hash&lt;/li&gt;
+&lt;li&gt;C2 Beaconing&lt;/li&gt;
+&lt;li&gt;Data Exfiltration&lt;/li&gt;
+&lt;li&gt;Credential Dumping&lt;/li&gt;
+&lt;li&gt;PAM Outside Hours&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;4 SPL macros for cross-domain search&lt;/strong&gt;:&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;eb_all_indexes&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;eb_security_indexes&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;eb_network_indexes&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;eb_cloud_indexes&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;3 lookup tables&lt;/strong&gt; for severity mapping, index domain classification, and sourcetype labeling&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Compatible with Splunk Enterprise 9.x&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;AppInspect compliant&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Generate realistic synthetic security log events across 42 sourcetypes  and 21 indexes. Ideal for SOC training, detection engineering, and dashboard testing without production data.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Event Builder For Splunk is a security data simulation platform that generates realistic synthetic log events across  42 sourcetypes and  21 security data domains. It enables SOC analysts, detection engineers, and security trainers to populate Splunk indexes with realistic data for dashboard testing, detection rule validation, and threat hunting exercises — without requiring access to a live production environment. The companion desktop application delivers events directly to Splunk via HTTP Event Collector (HEC) in real time.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">sevion xia</dc:creator>
+      <pubDate>Wed, 18 Mar 2026 13:42:04 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8561/#v2.0.1</guid>
+    </item>
     <item>
       <title>Qualys Technology Add-on (TA) for Splunk - v1.11.21 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/2964/</link>
@@ -1749,71 +1871,6 @@ This is the app component which contains some example dashboards which you can u
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Chris Younger</dc:creator>
       <pubDate>Sun, 01 Mar 2026 10:50:07 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/4467/#v1.0.5</guid>
-    </item>
-    <item>
-      <title>SPL Syntax Highlighter - v1.1.9 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4382/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;no changes, just a version bump to stop splunkbase from archiving app&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app allows you to syntax highlight SPL queries, .conf files, dashboards other files.  When you &amp;quot;copy&amp;quot; the highlighted text and paste it in word documents or emails and the colors will be preserved. Perfect for sharing queries that users can understand more easily!
-
-Use the online version here: https://git.io/splhighlighter&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/84ab4456-155a-11f1-93a2-da69f78ab0a7.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Chris Younger</dc:creator>
-      <pubDate>Sun, 01 Mar 2026 10:37:53 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4382/#v1.1.9</guid>
-    </item>
-    <item>
-      <title>Semicircle Donut Chart Viz - v1.2.7 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4378/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;no changes, just a version bump to stop splunkbase from archiving app&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;A simple donut/pie chart that can be displayed as a semicircle and supports multiple series on a single chart. You can also use it as a gauge.
-
-It is built with the chart.js library. Colours can be explicitly set in the search query. Supports dark mode.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/74f7b4a2-1557-11f1-8c1d-d64b287f97fc.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Chris Younger</dc:creator>
-      <pubDate>Sun, 01 Mar 2026 10:15:16 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4378/#v1.2.7</guid>
-    </item>
-    <item>
-      <title>Clock Viz - v1.0.7 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4407/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;no changes, just a version bump to stop splunkbase from archiving app&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;A simple digital or analog Clock visualization for your dashboards. Useful when your Splunk dashboards are on a big TV. 
-
-Supports dark mode.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/369ea2ce-1557-11f1-93a2-da69f78ab0a7.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Chris Younger</dc:creator>
-      <pubDate>Sun, 01 Mar 2026 10:13:28 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4407/#v1.0.7</guid>
-    </item>
-    <item>
-      <title>Day Night Map Viz - v1.0.6 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4425/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;no changes, just a version bump to stop splunkbase from archiving app&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;A world-map visualization showing where it is day and night in the world. This viz is ideal for companies that have follow the sun operations. Text, icons and clocks can be overlaid on the map.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f1b75502-1556-11f1-b64a-7aae03a12883.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Chris Younger</dc:creator>
-      <pubDate>Sun, 01 Mar 2026 10:11:52 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4425/#v1.0.6</guid>
-    </item>
-    <item>
-      <title>Region Chart Viz - v1.1.12 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4911/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;no changes. just a version bump to stop Splunkbase from archiving app&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;A line chart visualization that supports data-driven, colored regions.
-
-Can be used to show:
-- configured thresholds
-- the spread of data (for example using standard deviation/interquartile range)
-- where data might be incomplete (because it is still arriving)
-- maintenance periods
-- business hours
-
-Provide valuable context to your line charts. Built with D3.
-
-See also &amp;quot;Get ITSI Thresholds&amp;quot; ( https://splunkbase.splunk.com/app/4910/ ) - a custom command to retrieve ITSI time-based thresholds.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/99ccb3a0-1556-11f1-93a2-da69f78ab0a7.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Chris Younger</dc:creator>
-      <pubDate>Sun, 01 Mar 2026 10:09:33 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4911/#v1.1.12</guid>
-    </item>
-    <item>
-      <title>Heat Grid Viz - v1.0.5 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5541/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;no changes. just a version bump so that the app wont be archived.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Configurable Heat Grid / Heatmap visualization that can be used to show the quick status or health of many items at once. Support for grouping, and can display as hexagons, squares, diamonds or circles. Fully customisable tooltips, drilldown support, and numerous color schemes. Works in dark-mode.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f768196a-1555-11f1-a864-e2468366aa7a.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Chris Younger</dc:creator>
-      <pubDate>Sun, 01 Mar 2026 10:04:37 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5541/#v1.0.5</guid>
     </item>
   </channel>
 </rss>
