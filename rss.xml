@@ -6,7 +6,25 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Fri, 20 Mar 2026 21:22:58 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 20 Mar 2026 22:19:40 +0000</lastBuildDate>
+    <item>
+      <title>Maps+ for Splunk - v4.4.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/3124/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;Maps+ for Splunk — v4.4.0 Release Notes&lt;/h2&gt;
+&lt;h3&gt;What's new in 4.4.0&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Click-to-coordinate tokens&lt;/strong&gt;&lt;br&gt;
+Click anywhere on the map to instantly populate three Splunk dashboard tokens: &lt;code&gt;$clickedLat$&lt;/code&gt;, &lt;code&gt;$clickedLng$&lt;/code&gt;, and &lt;code&gt;$clickedLatLng$&lt;/code&gt;. Use those tokens to drive other panels on the same dashboard — run a proximity search, filter a table to a geographic region, or open the clicked location in Google Maps with a single click. No custom JavaScript or drilldown configuration required. Coordinate precision is configurable, and an optional crosshair marker shows exactly where you last clicked. A demo dashboard is included to get you started quickly.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Improved marker selection drawing tools&lt;/strong&gt;&lt;br&gt;
+The drawing tools used for lasso-selecting markers (&lt;code&gt;$mapmarkers$&lt;/code&gt; token) have been upgraded from the abandoned leaflet-draw library to Leaflet-Geoman, its actively maintained successor. You'll see improved polygon and rectangle drawing behavior with the same familiar workflow.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Faster, leaner bundle&lt;/strong&gt;&lt;br&gt;
+The JavaScript bundle has been rebuilt targeting modern browsers only. IE11 is no longer supported — if your Splunk environment runs exclusively on current Chrome, Firefox, Safari, or Edge, you'll benefit from a smaller, faster-loading visualization.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;Upgrading&lt;/h3&gt;
+&lt;p&gt;Drop-in replacement for 4.3.0. No dashboard changes required. Existing saved searches and configurations are fully compatible.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The mapping equivalent of a Swiss Army knife for Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/238c3e5c-24a3-11f1-a30f-9e96f29436ab.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
+      <pubDate>Fri, 20 Mar 2026 21:32:28 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/3124/#v4.4.0</guid>
+    </item>
     <item>
       <title>Sideview Supporting App for Webex - v0.6.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8429/</link>
@@ -877,35 +895,6 @@ Supported Cisco Meraki Devices:
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Wed, 18 Mar 2026 05:56:46 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5806/#v4.1.0</guid>
-    </item>
-    <item>
-      <title>Maps+ for Splunk - v4.3.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/3124/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;What's New in 4.3.0&lt;/h2&gt;
-&lt;p&gt;This release adds geographic marker selection via a lasso drawing tool, enabling a new class of map-driven dashboard workflows in Splunk.&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3&gt;Lasso Marker Selection&lt;/h3&gt;
-&lt;p&gt;Maps+ now supports freehand polygon drawing on the map to select a group of markers and write them to a Splunk dashboard token.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;How it works&lt;/strong&gt;: enable &lt;strong&gt;Allow Selecting Markers&lt;/strong&gt; in the Format panel under the Markers section. A drawing toolbar appears in the top-left corner of the map. Draw a polygon around the markers you want to select — when you close the shape, the token &lt;code&gt;$mapmarkers$&lt;/code&gt; is set automatically with the full row data for every marker inside the polygon. Drawing a new shape, editing an existing one, or deleting it all update the token in real time.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Using the token&lt;/strong&gt;: &lt;code&gt;$mapmarkers$&lt;/code&gt; is a JSON array where each element is the complete SPL row for a selected marker — all fields from your search result are included. Use it to drive a downstream search, table, or drilldown panel on the same dashboard:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;| makeresults | eval data='$mapmarkers$' | spath input=data output=markers path={}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;All marker types work with lasso selection — PNG, SVG, icon, circle, milsymbol, and custom image icons all participate.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Token payload size note&lt;/strong&gt;: because the token includes full row data, dashboards with large HTML &lt;code&gt;description&lt;/code&gt; or &lt;code&gt;tooltip&lt;/code&gt; fields may produce a large token value when many markers are selected. If you experience token truncation, consider omitting those fields from your &lt;code&gt;table&lt;/code&gt; command and enriching after filtering using a lightweight unique identifier field instead.&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3&gt;Upgrade Notes&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;No SPL field changes required&lt;/li&gt;
-&lt;li&gt;Allow Selecting Markers is disabled by default — existing dashboards are unaffected&lt;/li&gt;
-&lt;li&gt;Bundle rebuild included — &lt;code&gt;leaflet-draw&lt;/code&gt; and &lt;code&gt;@turf/turf&lt;/code&gt; are new bundle dependencies&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h3&gt;Credits&lt;/h3&gt;
-&lt;p&gt;Lasso marker selection contributed by &lt;a href=&quot;https://github.com/ChrisYounger&quot;&gt;ChrisYounger&lt;/a&gt; via &lt;a href=&quot;https://github.com/sghaskell/maps-plus/pull/24&quot;&gt;PR #24&lt;/a&gt;. Thank you for the contribution.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The mapping equivalent of a Swiss Army knife for Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0e86dcb2-2271-11f1-8c48-428ab5bd0908.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
-      <pubDate>Wed, 18 Mar 2026 02:21:43 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/3124/#v4.3.0</guid>
     </item>
     <item>
       <title>Hydrolix Search - v1.3.0 [Version Update]</title>
