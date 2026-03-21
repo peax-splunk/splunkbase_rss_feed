@@ -6,7 +6,26 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sat, 21 Mar 2026 15:18:13 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 21 Mar 2026 16:19:26 +0000</lastBuildDate>
+    <item>
+      <title>REST storage/passwords Manager for Splunk - v2.1.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4013/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;What's New in 2.1.1&lt;/h2&gt;
+&lt;h3&gt;Improved CSV Import Experience&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Drag-and-drop file upload&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Clicking &lt;strong&gt;Import → Upload CSV&lt;/strong&gt; now opens a modal with a drag-and-drop zone. Drag a CSV file directly from Finder or Explorer onto the zone, or click &lt;strong&gt;Browse…&lt;/strong&gt; to use the OS file picker. Either path feeds into the same preview and validation flow.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Early file validation&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Uploads are now validated before any parsing occurs:&lt;br&gt;
+- Files larger than 512 KB are rejected immediately with a clear error — no row-by-row processing&lt;br&gt;
+- CSVs missing the required &lt;code&gt;username&lt;/code&gt; or &lt;code&gt;password&lt;/code&gt; header columns are rejected with a single actionable message rather than generating a &quot;username is required&quot; error for every row in the file&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Scrollable import results&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The Import Complete modal now displays results in a scrollable container, so the outcome of every credential is visible regardless of how many rows were imported.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Capped preview errors&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;When a file has many invalid rows, the preview shows the first 10 validation errors followed by &quot;…and N more rows skipped&quot; rather than listing every skipped row.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;An intuitive, full-featured, Javascript CRUD interface to the storage/passwords REST endpoint. If you&amp;#x27;re an app developer looking to securely store passwords for API&amp;#x27;s, Custom Alert Actions, Modular Inputs or to access any resource that requires a password, this is your tool! Create, update, delete, view passwords, change permissions, sharing and app scope. Ditch your curl commands and upgrade to this simple to use interface.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0055dd00-2541-11f1-9ec4-1efe565b8515.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
+      <pubDate>Sat, 21 Mar 2026 16:15:35 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4013/#v2.1.1</guid>
+    </item>
     <item>
       <title>TheHive/Cortex - v4.1.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5329/</link>
@@ -115,82 +134,6 @@ Information Use: Your email address is used to improve detection logic based on 
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
       <pubDate>Sat, 21 Mar 2026 11:31:22 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7633/#v1.1.316</guid>
-    </item>
-    <item>
-      <title>REST storage/passwords Manager for Splunk - v2.1.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4013/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;What's New in 2.1.0&lt;/h2&gt;
-&lt;h3&gt;Bulk CSV Import&lt;/h3&gt;
-&lt;p&gt;You can now create multiple credentials in a single operation by uploading a CSV file.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;How it works:&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Click the &lt;strong&gt;Import&lt;/strong&gt; button in the toolbar and choose &lt;strong&gt;Upload CSV&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;A preview modal shows all rows to be imported — passwords are masked, validation errors are highlighted in red&lt;/li&gt;
-&lt;li&gt;Click &lt;strong&gt;Import&lt;/strong&gt; to create all valid credentials in parallel&lt;/li&gt;
-&lt;li&gt;A per-row results summary shows which credentials succeeded and which failed (including 409 conflicts for duplicates)&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;strong&gt;CSV format:&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;The file must include a header row. Only &lt;code&gt;username&lt;/code&gt; and &lt;code&gt;password&lt;/code&gt; are required — all other columns are optional and fall back to safe defaults.&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Column&lt;/th&gt;
-&lt;th&gt;Required&lt;/th&gt;
-&lt;th&gt;Default&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;username&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;—&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;password&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Yes&lt;/td&gt;
-&lt;td&gt;—&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;realm&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;&lt;em&gt;(empty)&lt;/em&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;app&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;current app&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;owner&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;current user&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;sharing&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;app&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;read&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;admin,power&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;write&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;No&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;admin,power&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;Click &lt;strong&gt;Import → Download Template&lt;/strong&gt; to get a pre-documented CSV template with inline comments explaining each column and quoting rules.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Notes:&lt;/strong&gt;&lt;br&gt;
-- Multi-value &lt;code&gt;read&lt;/code&gt; and &lt;code&gt;write&lt;/code&gt; fields must be quoted if they contain commas (e.g., &lt;code&gt;&quot;admin,power&quot;&lt;/code&gt;)&lt;br&gt;
-- &lt;code&gt;owner&lt;/code&gt; cannot be &lt;code&gt;*&lt;/code&gt; — rows with &lt;code&gt;*&lt;/code&gt; in the owner column fall back to the current user&lt;br&gt;
-- &lt;code&gt;sharing&lt;/code&gt; must be &lt;code&gt;global&lt;/code&gt;, &lt;code&gt;app&lt;/code&gt;, or &lt;code&gt;user&lt;/code&gt; — invalid values fall back to &lt;code&gt;app&lt;/code&gt;&lt;br&gt;
-- Lines beginning with &lt;code&gt;#&lt;/code&gt; are treated as comments and skipped&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;An intuitive, full-featured, Javascript CRUD interface to the storage/passwords REST endpoint. If you&amp;#x27;re an app developer looking to securely store passwords for API&amp;#x27;s, Custom Alert Actions, Modular Inputs or to access any resource that requires a password, this is your tool! Create, update, delete, view passwords, change permissions, sharing and app scope. Ditch your curl commands and upgrade to this simple to use interface.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/be385364-2502-11f1-8ab2-8e1c694f89e1.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
-      <pubDate>Sat, 21 Mar 2026 08:49:24 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4013/#v2.1.0</guid>
     </item>
     <item>
       <title>LCS Insights - v1.1.0 [Version Update]</title>
