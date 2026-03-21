@@ -6,34 +6,22 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sat, 21 Mar 2026 07:28:02 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 21 Mar 2026 08:22:05 +0000</lastBuildDate>
     <item>
-      <title>REST storage/passwords Manager for Splunk - v2.0.0 [Version Update]</title>
+      <title>REST storage/passwords Manager for Splunk - v2.0.2 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/4013/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;Version 2.0.0 — Major Update&lt;/h2&gt;
-&lt;p&gt;This release is a complete modernization of the app. The underlying JavaScript has been rewritten from scratch to remove all third-party dependencies and deprecated Splunk components, making the app fully compatible with Splunk Cloud and Splunk Enterprise 9.x/10.x.&lt;/p&gt;
-&lt;h3&gt;What's New&lt;/h3&gt;
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h3&gt;Bug Fixes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Live search&lt;/strong&gt; — Filter your credentials table instantly by username, realm, or app as you type&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Inline editing&lt;/strong&gt; — Click any row to expand an update form directly in the table; no page reload required&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Improved ACL controls&lt;/strong&gt; — Role pickers for Read/Write permissions now correctly show only roles; Owner picker shows only users, matching what Splunk's API actually accepts&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Safer defaults&lt;/strong&gt; — New credentials default to &lt;code&gt;admin&lt;/code&gt; and &lt;code&gt;power&lt;/code&gt; role access instead of granting access to all users&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;App scope warning&lt;/strong&gt; — A clear warning when storing credentials in the current app explains that they will be lost if the app is uninstalled&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Loading indicator&lt;/strong&gt; — Animated spinner shown while credentials load&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Empty state&lt;/strong&gt; — Helpful prompt when no credentials exist yet&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Show password now works for AOB-style credentials&lt;/strong&gt; — credentials created by the Splunk Add-on Builder (e.g. &lt;code&gt;__REST_CREDENTIAL__#APP#...&lt;/code&gt;) previously returned a 404 error when attempting to reveal the password. Fixed by using the URL provided directly by Splunk's API rather than reconstructing it from the realm and username fields.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Update and delete now work for credentials with special characters&lt;/strong&gt; — all REST operations now use the exact stanza name returned by the API, correctly handling backticks, colons, and slashes in realm or username fields.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3&gt;Improvements&lt;/h3&gt;
+&lt;h3&gt;Added&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Passes Splunk AppInspect &lt;code&gt;--included-tags cloud&lt;/code&gt; vetting&lt;/li&gt;
-&lt;li&gt;No third-party JavaScript dependencies — Bootstrap 3 table plugin, dropdown, and context menu removed entirely&lt;/li&gt;
-&lt;li&gt;Deprecated &lt;code&gt;splunkjs/mvc&lt;/code&gt; components replaced with modern native browser APIs&lt;/li&gt;
-&lt;li&gt;Removed XSS-prone &lt;code&gt;innerHTML&lt;/code&gt; string injection throughout&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Upgrading from 1.x&lt;/h3&gt;
-&lt;p&gt;Existing credentials are stored in Splunk's &lt;code&gt;storage/passwords&lt;/code&gt; backend and are unaffected by the upgrade. No migration steps are required.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;An intuitive, full-featured, Javascript CRUD interface to the storage/passwords REST endpoint. If you&amp;#x27;re an app developer looking to securely store passwords for API&amp;#x27;s, Custom Alert Actions, Modular Inputs or to access any resource that requires a password, this is your tool! Create, update, delete, view passwords, change permissions, sharing and app scope. Ditch your curl commands and upgrade to this simple to use interface.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/4884cece-24f1-11f1-86aa-ae6fa7344470.png&quot;&gt;</description>
+&lt;li&gt;&lt;strong&gt;Select-all checkbox in table header&lt;/strong&gt; — click to select or deselect all visible rows at once. Shows an indeterminate state when only some rows are selected.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;An intuitive, full-featured, Javascript CRUD interface to the storage/passwords REST endpoint. If you&amp;#x27;re an app developer looking to securely store passwords for API&amp;#x27;s, Custom Alert Actions, Modular Inputs or to access any resource that requires a password, this is your tool! Create, update, delete, view passwords, change permissions, sharing and app scope. Ditch your curl commands and upgrade to this simple to use interface.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/5fa95ac0-24fb-11f1-88bc-720e1668221f.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
-      <pubDate>Sat, 21 Mar 2026 07:03:23 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4013/#v2.0.0</guid>
+      <pubDate>Sat, 21 Mar 2026 07:56:37 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4013/#v2.0.2</guid>
     </item>
     <item>
       <title>LCS Insights - v1.1.0 [Version Update]</title>
