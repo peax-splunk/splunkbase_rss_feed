@@ -6,7 +6,36 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Tue, 24 Mar 2026 04:10:41 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 24 Mar 2026 05:54:24 +0000</lastBuildDate>
+    <item>
+      <title>Maps+ for Splunk - v4.5.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/3124/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h1&gt;Maps+ v4.5.0 — Splunkbase Release Notes&lt;/h1&gt;
+&lt;h2&gt;What's New&lt;/h2&gt;
+&lt;h3&gt;OpenFreeMap Vector Tiles&lt;/h3&gt;
+&lt;p&gt;Maps+ now supports vector tile rendering powered by MapLibre GL JS. Enable via &lt;strong&gt;Format → Map → OpenFreeMap Vector Tiles → Enabled&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Vector tiles are sharper than raster tiles at all zoom levels, with richer cartography and smoother text rendering. Four built-in styles are included: &lt;strong&gt;Liberty&lt;/strong&gt; (default), &lt;strong&gt;Bright&lt;/strong&gt;, &lt;strong&gt;Positron&lt;/strong&gt;, and &lt;strong&gt;Fiord&lt;/strong&gt; (dark).&lt;/p&gt;
+&lt;p&gt;No API key required — tiles are served free by &lt;a href=&quot;https://openfreemap.org/&quot;&gt;OpenFreeMap&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;MapLibre Style URL Override&lt;/h3&gt;
+&lt;p&gt;The new &lt;strong&gt;MapLibre Style URL&lt;/strong&gt; field accepts any MapLibre-compatible style JSON URL, giving you access to styles from Stadia Maps, MapTiler, Protomaps, or any self-hosted MapLibre style server. Embed your API key directly in the URL.&lt;/p&gt;
+&lt;p&gt;Stadia Maps styles work without an API key for development and local Splunk instances:&lt;br&gt;
+- &lt;code&gt;https://tiles.stadiamaps.com/styles/alidade_smooth.json&lt;/code&gt;&lt;br&gt;
+- &lt;code&gt;https://tiles.stadiamaps.com/styles/alidade_smooth_dark.json&lt;/code&gt;&lt;br&gt;
+- &lt;code&gt;https://tiles.stadiamaps.com/styles/outdoors.json&lt;/code&gt;&lt;br&gt;
+- &lt;code&gt;https://tiles.stadiamaps.com/styles/osm_bright.json&lt;/code&gt;&lt;/p&gt;
+&lt;h3&gt;Performance: Viewport Culling for Large Datasets&lt;/h3&gt;
+&lt;p&gt;Markers outside the visible map viewport are now automatically removed from the DOM and re-added as they scroll into view. This dramatically improves pan and zoom performance at high zoom levels with large datasets (tested with 25k+ markers). Both raster and vector tile backends benefit from this improvement.&lt;/p&gt;
+&lt;h3&gt;Build Modernization&lt;/h3&gt;
+&lt;p&gt;The build pipeline has been upgraded to Webpack 5 and Babel 7 with TerserPlugin, targeting modern evergreen browsers (Chrome, Firefox, Safari, Edge). IE11 is no longer a supported target.&lt;/p&gt;
+&lt;h2&gt;Upgrade Notes&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Existing dashboards are fully compatible — no SPL field changes, no formatter option removals.&lt;/li&gt;
+&lt;li&gt;The deploy script (&lt;code&gt;scripts/deploy.sh&lt;/code&gt;) now syncs additional assets to the Splunk container. If you use a custom deploy workflow, ensure &lt;code&gt;formatter.html&lt;/code&gt;, &lt;code&gt;visualization.css&lt;/code&gt;, and &lt;code&gt;contrib/css/maplibre-gl.css&lt;/code&gt; are included.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The mapping equivalent of a Swiss Army knife for Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9c8f656e-2745-11f1-9ec4-1efe565b8515.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
+      <pubDate>Tue, 24 Mar 2026 05:53:43 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/3124/#v4.5.0</guid>
+    </item>
     <item>
       <title>Threat Hunting Essentials - v1.1.320 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7633/</link>
@@ -253,24 +282,6 @@ We offer trial (on-prem) and demo (Splunk Cloud) licenses for everybody who want
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Venkata Hareesh Sanagavarapu</dc:creator>
       <pubDate>Sat, 21 Mar 2026 16:36:59 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8560/#v1.0.0</guid>
-    </item>
-    <item>
-      <title>Maps+ for Splunk - v4.4.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/3124/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;Maps+ for Splunk — v4.4.0 Release Notes&lt;/h2&gt;
-&lt;h3&gt;What's new in 4.4.0&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;Click-to-coordinate tokens&lt;/strong&gt;&lt;br&gt;
-Click anywhere on the map to instantly populate three Splunk dashboard tokens: &lt;code&gt;$clickedLat$&lt;/code&gt;, &lt;code&gt;$clickedLng$&lt;/code&gt;, and &lt;code&gt;$clickedLatLng$&lt;/code&gt;. Use those tokens to drive other panels on the same dashboard — run a proximity search, filter a table to a geographic region, or open the clicked location in Google Maps with a single click. No custom JavaScript or drilldown configuration required. Coordinate precision is configurable, and an optional crosshair marker shows exactly where you last clicked. A demo dashboard is included to get you started quickly.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Improved marker selection drawing tools&lt;/strong&gt;&lt;br&gt;
-The drawing tools used for lasso-selecting markers (&lt;code&gt;$mapmarkers$&lt;/code&gt; token) have been upgraded from the abandoned leaflet-draw library to Leaflet-Geoman, its actively maintained successor. You'll see improved polygon and rectangle drawing behavior with the same familiar workflow.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Faster, leaner bundle&lt;/strong&gt;&lt;br&gt;
-The JavaScript bundle has been rebuilt targeting modern browsers only. IE11 is no longer supported — if your Splunk environment runs exclusively on current Chrome, Firefox, Safari, or Edge, you'll benefit from a smaller, faster-loading visualization.&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3&gt;Upgrading&lt;/h3&gt;
-&lt;p&gt;Drop-in replacement for 4.3.0. No dashboard changes required. Existing saved searches and configurations are fully compatible.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The mapping equivalent of a Swiss Army knife for Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/238c3e5c-24a3-11f1-a30f-9e96f29436ab.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
-      <pubDate>Sat, 21 Mar 2026 16:26:32 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/3124/#v4.4.0</guid>
     </item>
     <item>
       <title>REST storage/passwords Manager for Splunk - v2.1.1 [Version Update]</title>
