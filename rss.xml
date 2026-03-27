@@ -6,7 +6,41 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Fri, 27 Mar 2026 11:36:19 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 27 Mar 2026 12:43:32 +0000</lastBuildDate>
+    <item>
+      <title>Request Builder - v1.0.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8587/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;1.0.0 - Initial Release&lt;/p&gt;
+&lt;p&gt;Features&lt;br&gt;
+- Custom &lt;code&gt;| req&lt;/code&gt; streaming search command for outbound HTTP/HTTPS requests directly from SPL&lt;br&gt;
+- Supports all HTTP methods: GET, POST, PUT, DELETE&lt;br&gt;
+- Custom headers, request body, cookies, and timeout control&lt;br&gt;
+- Secure credential management via Splunk Storage Passwords (Basic Auth, Bearer Token, API Key)&lt;br&gt;
+- SSL/TLS verification with configurable toggle per request&lt;br&gt;
+- Events enriched with response status code, body, and headers&lt;br&gt;
+- Comprehensive search assistant with full syntax documentation and examples&lt;/p&gt;
+&lt;p&gt;Authentication&lt;br&gt;
+- &lt;code&gt;basic&lt;/code&gt; — HTTP Basic Auth&lt;br&gt;
+- &lt;code&gt;bearer&lt;/code&gt; — Bearer token via Authorization header&lt;br&gt;
+- &lt;code&gt;apikey&lt;/code&gt; — API key via custom header (default: x-api-key)&lt;/p&gt;
+&lt;p&gt;Included&lt;br&gt;
+- Interactive home dashboard with quick start examples&lt;br&gt;
+- Full README with installation, configuration, and troubleshooting guide&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Make outbound HTTP/HTTPS API calls directly from SPL. The | req command enriches events with API responses, triggers webhooks, and integrates Splunk with any REST endpoint — supporting Basic, Bearer, and API key auth via Splunk Storage Passwords.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Request Builder adds the | req custom SPL command, letting you make outbound HTTP and HTTPS requests directly from the Splunk search pipeline without any extra middleware.
+
+The problem it solves: Splunk has no built-in way to call external REST APIs or webhooks during a search. Request Builder fills that gap by turning every event into a potential HTTP request — you can enrich events with live API responses, trigger SOAR or CI/CD workflows from alert actions, post data to ticketing or notification systems, or pull inventory and configuration from any REST endpoint, all with standard SPL syntax.
+
+Key capabilities:
+- Supports GET, POST methods
+- Custom request headers and JSON or plain-text request bodies
+- Cookie injection and configurable SSL verification (with certifi CA bundle)
+- Per-request timeout control
+- Authentication via HTTP Basic Auth, ****** or API key header — credentials stored securely in Splunk Storage Passwords, never in plain text in searches
+- Adds status_code, response, response_headers, and ssl_verify fields to each enriched event
+- Works across Splunk Enterprise 8.x+ and Splunk Cloud&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0d470588-27c2-11f1-9c9a-3673a2518cfb.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">elif kaplans</dc:creator>
+      <pubDate>Fri, 27 Mar 2026 12:05:18 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8587/#v1.0.0</guid>
+    </item>
     <item>
       <title>Threat Hunting Essentials - v1.1.323 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7633/</link>
@@ -2010,22 +2044,6 @@ It also provides two supporting lookups to convert names between Italian and Eng
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Frank Wayne</dc:creator>
       <pubDate>Fri, 13 Mar 2026 14:10:03 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7476/#v1.2.4</guid>
-    </item>
-    <item>
-      <title>TA-user-agents - v1.7.11 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/1843/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;==== Version 1.7.11&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Additions&lt;br&gt;
-&lt;strong&gt; TA is now visible&lt;br&gt;
-&lt;/strong&gt; Included an Overview dashboard with basic usage instructions.&lt;/li&gt;
-&lt;li&gt;Improvement&lt;br&gt;
-&lt;strong&gt; Updated &lt;code&gt;uap-parser&lt;/code&gt; and &lt;code&gt;uap-core&lt;/code&gt; packages&lt;br&gt;
-&lt;/strong&gt; Validated works on &lt;code&gt;Splunk 10.2&lt;/code&gt; and &lt;code&gt;Splunk Cloud 10.2.2510.9&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This Add-on provides a dynamic lookup for parsing User Agent strings. This version was built to be faster, and does not require internet access from your Splunk systems.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9be79eb6-1ee3-11f1-b57c-aebbd0cfd8a8.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aplura LLC</dc:creator>
-      <pubDate>Fri, 13 Mar 2026 13:52:24 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/1843/#v1.7.11</guid>
     </item>
     <item>
       <title>TA-user-agents - v1.7.11 [Version Update]</title>
