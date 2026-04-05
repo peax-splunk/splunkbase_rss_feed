@@ -6,7 +6,38 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sun, 05 Apr 2026 06:10:27 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 05 Apr 2026 07:50:44 +0000</lastBuildDate>
+    <item>
+      <title>Microsoft O365 Email Add-on for Splunk - v2.4.4 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5365/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h1&gt;Version 2.4.4&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Improved reliability of Microsoft Graph email and groups collection&lt;/li&gt;
+&lt;li&gt;Added retry and backoff handling for throttling and transient API failures&lt;/li&gt;
+&lt;li&gt;Fixed paging issues that could affect message and group/member collection&lt;/li&gt;
+&lt;li&gt;Improved token refresh handling for long-running modular inputs&lt;/li&gt;
+&lt;li&gt;Fixed attachment enrichment so it no longer depends on Internet Headers being enabled&lt;/li&gt;
+&lt;li&gt;Hardened message parsing for common Graph response variations&lt;/li&gt;
+&lt;li&gt;Updated mailbox purge behavior to use Microsoft Graph &lt;code&gt;permanentDelete&lt;/code&gt; on the Worldwide endpoint&lt;/li&gt;
+&lt;li&gt;Improved troubleshooting support with better structured logging and optional debug controls&lt;/li&gt;
+&lt;li&gt;Updated package/release validation workflow and cleaned bundled content for release packaging&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Microsoft O365 Email Add-on for Splunk ingests Microsoft 365 email from a dedicated compliance mailbox through Microsoft Graph and writes the results to Splunk as JSON events.
+
+The add-on is designed for security and operational visibility. It can enrich messages with:
+
+- attachment metadata and file hashes
+- attachment analysis, including ZIP inspection and Office macro detection
+- body IOC extraction for URLs, domains, IPv4, and IPv6 values
+- Internet header parsing
+- mail relay and message path reporting
+- S/MIME certificate extraction
+- Microsoft 365 group membership snapshots through a separate input
+
+The add-on is built around disposable compliance mailboxes that receive BCC copies of mail through Exchange mail flow rules. It processes the copied messages and purges them from the compliance mailbox so production user mailboxes are not touched.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/46bbe084-30bb-11f1-ad5e-56c15eb0d18d.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
+      <pubDate>Sun, 05 Apr 2026 06:56:16 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5365/#v2.4.4</guid>
+    </item>
     <item>
       <title>LCS Insights - v1.5.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8461/</link>
@@ -1413,48 +1444,6 @@ Key capabilities:
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
       <pubDate>Fri, 27 Mar 2026 09:42:32 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6288/#v1.1.0</guid>
-    </item>
-    <item>
-      <title>Hitachi VSP One Block App for Splunk - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8579/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;Version 1.0.0&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Release Date:&lt;/strong&gt; March 20, 2026&lt;/p&gt;
-&lt;h3&gt;Initial Release&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;Dashboards&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Fleet Operations &amp;amp; Performance&lt;/strong&gt; — fleet-level KPIs, pool capacity trends, array IOPS/transfer rate, cache utilization, write pending by CLPR, MPB processor utilization, port performance&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;LDEV, Pool &amp;amp; PG Performance Analytics&lt;/strong&gt; — Top 10 LDEV analysis (IOPS, response time, transfer rate, random/sequential breakdowns), pool performance, parity group utilization and performance&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Features&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Built with Splunk Dashboard Studio (JSON-based)&lt;/li&gt;
-&lt;li&gt;Three global dropdown filters: VSP 360 Host, Storage Serial Number, Time Range&lt;/li&gt;
-&lt;li&gt;45 visualizations across both dashboards&lt;/li&gt;
-&lt;li&gt;Optimized SPL queries with &lt;code&gt;timechart&lt;/code&gt;, &lt;code&gt;eventstats&lt;/code&gt;, and &lt;code&gt;fillnull&lt;/code&gt; for smooth trend lines&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Compatibility&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Splunk Enterprise 10.x&lt;/li&gt;
-&lt;li&gt;Splunk Cloud&lt;/li&gt;
-&lt;li&gt;Requires &lt;strong&gt;VSP One Block Add-on via VSP 360&lt;/strong&gt; for data collection&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Known Limitations&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Dashboards use &lt;code&gt;hitachicsad&lt;/code&gt; as the default index; manual edit required if using a different index name&lt;/li&gt;
-&lt;li&gt;Some panels may appear empty if the corresponding resource types are not collected by the add-on&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Provides two Dashboard Studio dashboards for monitoring Hitachi VSP One Block storage arrays using data collected by the companion VSP One Block Add-on via VSP 360.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This Splunk app provides two prebuilt Dashboard Studio dashboards for monitoring and analyzing Hitachi VSP One Block storage arrays. It visualizes configuration and performance data collected by the companion VSP One Block Add-on via the VSP 360 REST API.
-
-It helps administrators monitor fleet-level storage KPIs at a glance, track pool capacity trends and subscription rates over time, analyze array-level IOPS, transfer rates, and cache utilization, identify top LDEV performers by IOPS, response time, and transfer rate, monitor pool and parity group performance trends, and correlate port throughput and processor utilization across arrays.
-
-Dashboards included:
-Fleet Operations &amp;amp; Performance: Storage system KPI tiles (capacity, used, free, allocated TiB, data reduction ratio, volume and port counts), pool capacity trend lines (Used vs Subscribed TiB, Used% vs Subscription Rate%), array-level IOPS and transfer rate, cache utilization and write pending by CLPR, MPB processor utilization, and port performance (IOPS, response time, utilization, transfer rate).
-
-LDEV, Pool &amp;amp; PG Performance Analytics: Top 10 LDEV IOPS (total, read, write), Top 10 LDEV response time (total, read, write), Top 10 LDEV transfer rate (total, read, write), Top 10 LDEV random IOPS and transfer rate (read, write), Top 10 LDEV sequential IOPS and transfer rate (read, write), pool IOPS, response time, and transfer rate, and parity group utilization, IOPS, transfer rate, and response time.
-
-Data source: This app requires the VSP One Block Add-on via VSP 360 to collect data. The add-on indexes events into Splunk using three sourcetypes: hitachi:vspblock:config (configuration attributes), hitachi:vspblock:perf (performance timeseries), and hitachi:vspblock:synth (synthetic roll-up metrics). All dashboards query the hitachicsad index by default.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f098635a-2488-11f1-a30f-9e96f29436ab.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Karthik Raja Balasubramanian</dc:creator>
-      <pubDate>Fri, 27 Mar 2026 09:34:55 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8579/#v1.0.0</guid>
     </item>
     <item>
       <title>AI Query Assistant for Splunk - v2.2.7 [New App Release]</title>
