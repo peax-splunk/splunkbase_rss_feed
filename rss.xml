@@ -6,7 +6,53 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Mon, 06 Apr 2026 01:45:38 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 06 Apr 2026 04:38:06 +0000</lastBuildDate>
+    <item>
+      <title>Microsoft O365 Email Add-on for Splunk - v2.4.7 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5365/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h1&gt;Version 2.4.5&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Added HTML link mismatch analysis to identify cases where displayed URLs do not match the actual destination&lt;/li&gt;
+&lt;li&gt;Added normalized SPF, DKIM, DMARC, and ARC result summaries&lt;/li&gt;
+&lt;li&gt;Added sender impersonation analysis for reply-to, sender, and display-name mismatch scenarios&lt;/li&gt;
+&lt;li&gt;Added URL risk analysis for shorteners, redirectors, IP-literal hosts, punycode domains, credential-harvest patterns, and brand/domain mismatches&lt;/li&gt;
+&lt;li&gt;Added HTML abuse detection for forms, hidden text, suspicious CSS hiding, remote images, and tracking-style indicators&lt;/li&gt;
+&lt;li&gt;Added attachment risk classification for suspicious file types, double extensions, embedded messages, nested archives, and macro-bearing attachments&lt;/li&gt;
+&lt;li&gt;Added transparent overall message risk scoring with supporting reasons and breakdown fields&lt;/li&gt;
+&lt;li&gt;Added optional raw ARC header collection&lt;/li&gt;
+&lt;li&gt;Refined input field visibility so body and attachment helper settings appear only when the related parent features are enabled&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Version 2.4.6&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Refreshed the package version after the &lt;code&gt;2.4.5&lt;/code&gt; input UI updates so upgraded Splunk Web instances pick up the latest static assets more reliably&lt;/li&gt;
+&lt;li&gt;No functional changes beyond the versioned refresh of the updated input configuration experience&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Version 2.4.7&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Tuned URL brand-keyword mismatch analysis to better recognize trusted vendor redirectors and vendor-owned domain families&lt;/li&gt;
+&lt;li&gt;Reduced false positives for legitimate Microsoft redirect links such as &lt;code&gt;aka.ms&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Lowered the standalone weight of brand-keyword mismatch in overall message risk scoring&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Microsoft O365 Email Add-on for Splunk ingests Microsoft 365 email from a dedicated compliance mailbox through Microsoft Graph and writes the results to Splunk as JSON events.
+
+The add-on is designed for security and operational visibility. It can enrich messages with:
+
+- attachment metadata and file hashes
+- attachment analysis, including ZIP inspection and Office macro detection
+- body IOC extraction for URLs, domains, IPv4, and IPv6 values
+- phishing-focused link, sender, URL, HTML, and attachment risk analysis
+- vendor-aware URL analysis that reduces false positives for trusted redirectors such as Microsoft `aka.ms`
+- normalized SPF, DKIM, DMARC, and ARC result summaries
+- transparent message risk scoring with supporting reasons
+- Internet header parsing
+- mail relay and message path reporting
+- S/MIME certificate extraction
+- Microsoft 365 group membership snapshots through a separate input
+
+The add-on is built around disposable compliance mailboxes that receive BCC copies of mail through Exchange mail flow rules. It processes the copied messages and purges them from the compliance mailbox so production user mailboxes are not touched.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/79b9fdd8-316d-11f1-97c1-6638f4eb3635.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
+      <pubDate>Mon, 06 Apr 2026 04:37:58 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5365/#v2.4.7</guid>
+    </item>
     <item>
       <title>CVE.ICU CVE Dashboard - v1.0.2 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8395/</link>
@@ -44,37 +90,6 @@ Comprehensive Dashboards: Features multiple visualization options, ranging from 
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jerry Gamblin</dc:creator>
       <pubDate>Sun, 05 Apr 2026 20:18:19 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8395/#v1.0.2</guid>
-    </item>
-    <item>
-      <title>Microsoft O365 Email Add-on for Splunk - v2.4.4 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5365/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h1&gt;Version 2.4.4&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;Improved reliability of Microsoft Graph email and groups collection&lt;/li&gt;
-&lt;li&gt;Added retry and backoff handling for throttling and transient API failures&lt;/li&gt;
-&lt;li&gt;Fixed paging issues that could affect message and group/member collection&lt;/li&gt;
-&lt;li&gt;Improved token refresh handling for long-running modular inputs&lt;/li&gt;
-&lt;li&gt;Fixed attachment enrichment so it no longer depends on Internet Headers being enabled&lt;/li&gt;
-&lt;li&gt;Hardened message parsing for common Graph response variations&lt;/li&gt;
-&lt;li&gt;Updated mailbox purge behavior to use Microsoft Graph &lt;code&gt;permanentDelete&lt;/code&gt; on the Worldwide endpoint&lt;/li&gt;
-&lt;li&gt;Improved troubleshooting support with better structured logging and optional debug controls&lt;/li&gt;
-&lt;li&gt;Updated package/release validation workflow and cleaned bundled content for release packaging&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Microsoft O365 Email Add-on for Splunk ingests Microsoft 365 email from a dedicated compliance mailbox through Microsoft Graph and writes the results to Splunk as JSON events.
-
-The add-on is designed for security and operational visibility. It can enrich messages with:
-
-- attachment metadata and file hashes
-- attachment analysis, including ZIP inspection and Office macro detection
-- body IOC extraction for URLs, domains, IPv4, and IPv6 values
-- Internet header parsing
-- mail relay and message path reporting
-- S/MIME certificate extraction
-- Microsoft 365 group membership snapshots through a separate input
-
-The add-on is built around disposable compliance mailboxes that receive BCC copies of mail through Exchange mail flow rules. It processes the copied messages and purges them from the compliance mailbox so production user mailboxes are not touched.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/46bbe084-30bb-11f1-ad5e-56c15eb0d18d.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
-      <pubDate>Sun, 05 Apr 2026 06:56:16 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5365/#v2.4.4</guid>
     </item>
     <item>
       <title>LCS Insights - v1.5.0 [Version Update]</title>
