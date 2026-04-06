@@ -6,7 +6,38 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Mon, 06 Apr 2026 14:06:46 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 06 Apr 2026 15:38:40 +0000</lastBuildDate>
+    <item>
+      <title>CVE.ICU CVE Dashboard - v1.0.3 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8395/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;Release Notes — TA-cveicu v1.0.3&lt;/h2&gt;
+&lt;h3&gt;Fix: Temp ZIP File Cleanup Preventing /tmp Disk Exhaustion&lt;/h3&gt;
+&lt;p&gt;Temporary ZIP files downloaded during CVE processing were not being cleaned up, causing &lt;code&gt;/tmp&lt;/code&gt; to fill up on Splunk Cloud Search Heads over time.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;What was broken:&lt;/strong&gt; The &lt;code&gt;download_release_asset()&lt;/code&gt; method creates temp files via &lt;code&gt;tempfile.mkstemp(suffix='.zip')&lt;/code&gt; for both baseline and delta ZIP downloads. Neither &lt;code&gt;_process_baseline&lt;/code&gt; nor &lt;code&gt;_process_deltas&lt;/code&gt; deleted these files after processing. On Splunk Cloud with hourly delta runs, thousands of ZIPs accumulated in &lt;code&gt;/tmp&lt;/code&gt;, eventually causing critical disk utilization.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;What changed:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Added &lt;code&gt;try/finally&lt;/code&gt; cleanup blocks in &lt;code&gt;_process_baseline&lt;/code&gt; to delete the temp ZIP after baseline processing&lt;/li&gt;
+&lt;li&gt;Added &lt;code&gt;try/finally&lt;/code&gt; cleanup blocks in &lt;code&gt;_process_deltas&lt;/code&gt; to delete each temp ZIP after delta processing&lt;/li&gt;
+&lt;li&gt;Cleanup occurs on both success and error paths, matching the existing pattern used for nested ZIP cleanup in &lt;code&gt;github_client.py&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Reported via:&lt;/strong&gt; Splunk Support Case #4012420&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Upgrade notes:&lt;/strong&gt; No manual steps required. After installing 1.0.3, temp files will be automatically cleaned up after each processing run. Any existing accumulated ZIP files in &lt;code&gt;/tmp&lt;/code&gt; from prior versions should be manually removed or will be cleared on the next system restart.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;A high-performance Splunk Technology Add-on for ingesting and analyzing the complete CVE List V5 database from the official CVE Program repository. It features efficient bulk downloads, hourly delta updates, and advanced risk scoring using CISA KEV and EPSS intelligence.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The CVE.icu add-on provides a robust framework for bringing real-time vulnerability intelligence directly into Splunk. Unlike traditional collectors that rely on slow API crawling, this package utilizes an architecture that streams data from official GitHub release ZIP files, enabling the initial ingestion of over 300,000 records in minutes.
+
+Key Technical Features:
+
+Vulnerability Intelligence V5 Support: Fully supports the modern CVE JSON 5.x schema, including cveMetadata, CNA containers, and ADP enrichment data.
+
+Advanced Risk Prioritization: Goes beyond basic CVSS scores by integrating the Exploit Prediction Scoring System (EPSS) and CISA&amp;#x27;s Known Exploited Vulnerabilities (KEV) catalog to help security teams identify &amp;quot;patch-now&amp;quot; threats.
+
+Operational Excellence: Includes a resource-aware modular input with built-in memory management, execution timeouts, and smart checkpointing to ensure stable performance in Splunk Cloud environments.
+
+Secure Configuration: Implements a Splunk-native REST setup handler that utilizes encrypted storage for API tokens and includes automated cache-clearing to ensure a seamless user experience.
+
+Comprehensive Dashboards: Features multiple visualization options, ranging from real-time KPI panels and severity distribution charts to accelerated tstats-based views for instant analysis of historical trends.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/6130a4ce-31c7-11f1-b5d9-72170e4042f6.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jerry Gamblin</dc:creator>
+      <pubDate>Mon, 06 Apr 2026 14:51:37 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8395/#v1.0.3</guid>
+    </item>
     <item>
       <title>Threat Hunting Essentials - v1.1.334 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7633/</link>
@@ -90,44 +121,6 @@ The add-on is built around disposable compliance mailboxes that receive BCC copi
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
       <pubDate>Mon, 06 Apr 2026 04:39:24 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5365/#v2.4.7</guid>
-    </item>
-    <item>
-      <title>CVE.ICU CVE Dashboard - v1.0.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8395/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;Release Notes — TA-cveicu v1.0.2&lt;/h2&gt;
-&lt;h3&gt;Fix: EPSS/KEV Lookup Refresh on Splunk Cloud&lt;/h3&gt;
-&lt;p&gt;The EPSS and KEV enrichment lookup refresh saved searches failed silently on Splunk Cloud deployments. This release resolves the issue so lookups update correctly on both Splunk Cloud and Splunk Enterprise.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;What was broken:&lt;/strong&gt; The saved searches used &lt;code&gt;| script&lt;/code&gt; to invoke a Python script that wrote lookup CSVs directly to the filesystem. Both &lt;code&gt;| script&lt;/code&gt; and direct filesystem writes are restricted on Splunk Cloud, causing the KEV and EPSS lookups to never refresh.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;What changed:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Replaced &lt;code&gt;| script&lt;/code&gt; with a custom generating search command (&lt;code&gt;| cveicuepsskev&lt;/code&gt;) that yields rows through Splunk's standard pipeline&lt;/li&gt;
-&lt;li&gt;Lookups are now written via &lt;code&gt;| outputlookup&lt;/code&gt;, which is the Cloud-safe pattern&lt;/li&gt;
-&lt;li&gt;Fixed Python import path that prevented the command from loading&lt;/li&gt;
-&lt;li&gt;Fixed command name to comply with Splunk's search parser (no underscores)&lt;/li&gt;
-&lt;li&gt;Switched to chunked protocol v2 as required by the Splunk SDK&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Affected saved searches:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;EPSS Lookup Refresh&lt;/code&gt; — daily FIRST EPSS score updates&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;KEV Lookup Refresh&lt;/code&gt; — CISA Known Exploited Vulnerabilities catalog updates&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Upgrade notes:&lt;/strong&gt; No manual steps required. After installing 1.0.2, the saved searches will run on their existing schedules and populate the lookups automatically. Existing lookup data will be refreshed on the next scheduled run.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Tested against:&lt;/strong&gt; Splunk Enterprise 10.2.2 (Docker) with live CISA KEV and FIRST EPSS API data.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;A high-performance Splunk Technology Add-on for ingesting and analyzing the complete CVE List V5 database from the official CVE Program repository. It features efficient bulk downloads, hourly delta updates, and advanced risk scoring using CISA KEV and EPSS intelligence.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The CVE.icu add-on provides a robust framework for bringing real-time vulnerability intelligence directly into Splunk. Unlike traditional collectors that rely on slow API crawling, this package utilizes an architecture that streams data from official GitHub release ZIP files, enabling the initial ingestion of over 300,000 records in minutes.
-
-Key Technical Features:
-
-Vulnerability Intelligence V5 Support: Fully supports the modern CVE JSON 5.x schema, including cveMetadata, CNA containers, and ADP enrichment data.
-
-Advanced Risk Prioritization: Goes beyond basic CVSS scores by integrating the Exploit Prediction Scoring System (EPSS) and CISA&amp;#x27;s Known Exploited Vulnerabilities (KEV) catalog to help security teams identify &amp;quot;patch-now&amp;quot; threats.
-
-Operational Excellence: Includes a resource-aware modular input with built-in memory management, execution timeouts, and smart checkpointing to ensure stable performance in Splunk Cloud environments.
-
-Secure Configuration: Implements a Splunk-native REST setup handler that utilizes encrypted storage for API tokens and includes automated cache-clearing to ensure a seamless user experience.
-
-Comprehensive Dashboards: Features multiple visualization options, ranging from real-time KPI panels and severity distribution charts to accelerated tstats-based views for instant analysis of historical trends.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a68ecd90-312a-11f1-a768-6aa60682c0bf.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jerry Gamblin</dc:creator>
-      <pubDate>Sun, 05 Apr 2026 20:18:19 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8395/#v1.0.2</guid>
     </item>
     <item>
       <title>LCS Insights - v1.5.0 [Version Update]</title>
