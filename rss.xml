@@ -6,7 +6,17 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Mon, 06 Apr 2026 17:38:09 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 06 Apr 2026 18:44:40 +0000</lastBuildDate>
+    <item>
+      <title>WHOIS - v2.2.12 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5867/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
+&lt;li&gt;Patch the URL for KRNIC, fixing lookups for Korean IPs. Works around an &lt;a href=&quot;https://github.com/secynic/ipwhois/issues/342&quot;&gt;existing issue&lt;/a&gt; in &lt;code&gt;ipwhois&lt;/code&gt; [PAPP-37759]&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app implements investigative actions that query the whois database&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/38139658-31e7-11f1-b5d9-72170e4042f6.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Mon, 06 Apr 2026 18:34:18 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5867/#v2.2.12</guid>
+    </item>
     <item>
       <title>CVE.ICU CVE Dashboard - v1.0.3 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/8395/</link>
@@ -1986,77 +1996,6 @@ This application provides advanced maintenance management capabilities while ens
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Allan Carey</dc:creator>
       <pubDate>Sun, 22 Mar 2026 22:17:20 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5253/#v2.1.7</guid>
-    </item>
-    <item>
-      <title>TheHive/Cortex - v4.1.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5329/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h1&gt;Release Notes&lt;/h1&gt;
-&lt;h2&gt;Summary&lt;/h2&gt;
-&lt;p&gt;Version 4.1.0 introduces significant enhancements to user interaction and data enrichment capabilities between Splunk and TheHive/Cortex. This release focuses on investigation workflows, periodic data collection, visual identity, and operational robustness.&lt;/p&gt;
-&lt;h2&gt;Deployment Notes&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Prerequisite&lt;/strong&gt;: Python 3.9+ (as per UCC standard).&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Migration Path&lt;/strong&gt;:&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;From v4.0.0&lt;/strong&gt;: This is a non-breaking update. Existing configuration is preserved.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;From v3.9.0 (Direct Upgrade)&lt;/strong&gt;: You can upgrade directly from v3.9.0 to v4.1.0 without installing v4.0.0 first.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;⚠️ CRITICAL&lt;/strong&gt;: If upgrading from v3.x, the &lt;strong&gt;&lt;a href=&quot;https://github.com/LetMeR00t/TA-thehive-cortex/releases/tag/v4.0.0&quot;&gt;v4.0.0 migration instructions&lt;/a&gt; are mandatory&lt;/strong&gt; and remain valid for this version (UCC architecture migration, breaking configuration changes, and new credential storage). Please read them carefully before proceeding.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;New Features&lt;/h2&gt;
-&lt;h3&gt;📅 New Modular Inputs: Tasks, Timeline &amp;amp; Status&lt;/h3&gt;
-&lt;p&gt;Three new data collection mechanisms have been added to track your cases and platform health:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;TheHive Tasks Collection&lt;/strong&gt;: Periodically retrieve all tasks associated with cases for better operational monitoring.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;TheHive Timeline Collection&lt;/strong&gt;: Automatically fetch case timeline events to build a complete history of investigations in Splunk.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;TheHive Instance Status&lt;/strong&gt;: Monitor your TheHive instances' health, version, and license status directly from Splunk.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Backfill Support&lt;/strong&gt;: Dedicated backfill scripts are available for Tasks and Timeline to recover historical data.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;🛡️ Add Timeline Event Alert Action&lt;/h3&gt;
-&lt;p&gt;A new Custom Alert Action (and Adaptive Response) &lt;strong&gt;&quot;TheHive - Add timeline event&quot;&lt;/strong&gt; is now available.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Analysts can now automatically or manually push findings directly to a case's timeline.&lt;/li&gt;
-&lt;li&gt;Supports custom titles (with &lt;code&gt;&amp;lt;inheritance&amp;gt;&lt;/code&gt; from search name), descriptions, and specific start/end dates.&lt;/li&gt;
-&lt;li&gt;Fully integrated into the &lt;strong&gt;Audit Logs&lt;/strong&gt; dashboard for tracking.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;🔢 Automatic Case Number Resolution&lt;/h3&gt;
-&lt;p&gt;The Add-on now handles both internal IDs (&lt;code&gt;~12345&lt;/code&gt;) and human-readable case numbers (&lt;code&gt;2392&lt;/code&gt;).&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;If a case number is provided in any alert action (Add Observables, Add Timeline Event), the app automatically resolves it to the correct internal ID via the API.&lt;/li&gt;
-&lt;li&gt;This simplifies workflows for analysts who primarily work with case numbers in the UI.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;🎨 High-Quality Visual Identity&lt;/h3&gt;
-&lt;p&gt;All Custom Alert Actions have been updated with &lt;strong&gt;unique, high-resolution hexagonal icons&lt;/strong&gt;.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;TheHive Actions&lt;/strong&gt;: Official Yellow (&lt;code&gt;#FFC107&lt;/code&gt;) branding.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Cortex Actions&lt;/strong&gt;: Official Light Blue (&lt;code&gt;#87CEFA&lt;/code&gt;) branding.&lt;/li&gt;
-&lt;li&gt;Optimized with transparent backgrounds for seamless integration into Splunk's Dark and Light themes.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Improvements &amp;amp; Bug Fixes&lt;/h2&gt;
-&lt;h3&gt;⏱️ Standardized Polling Intervals&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Implemented &lt;strong&gt;dynamic interval flooring&lt;/strong&gt; across all modular inputs (&lt;code&gt;thehive_tasks&lt;/code&gt;, &lt;code&gt;thehive_timeline&lt;/code&gt;, &lt;code&gt;thehive_alerts_cases&lt;/code&gt;, etc.).&lt;/li&gt;
-&lt;li&gt;All collection time ranges are now aligned to clean boundaries (e.g., &lt;code&gt;12:51:00&lt;/code&gt; to &lt;code&gt;12:52:00&lt;/code&gt;), eliminating &quot;seconds drift&quot; in logs and search results.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;📊 Enhanced Audit Logs Dashboard&lt;/h3&gt;
-&lt;p&gt;The &lt;strong&gt;Audit Logs&lt;/strong&gt; dashboard has been significantly updated to provide better operational visibility:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Comprehensive Action Tracking: Now includes dedicated filters and metrics for all Custom Alert Actions, including the new Timeline Event action.&lt;/li&gt;
-&lt;li&gt;Data Collection Monitoring: The dashboard now tracks the execution and results of the new modular inputs (Tasks, Timeline, and Status), ensuring full traceability of your data ingestion.&lt;/li&gt;
-&lt;li&gt;Improved Success Monitoring: Logic updated to track specific event codes (e.g., &lt;code&gt;TH201&lt;/code&gt; for successful timeline events, &lt;code&gt;CAA-THCA-125&lt;/code&gt; for cases), allowing for clear distinction between successful creations and operational issues.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;🔧 Indexing &amp;amp; Props&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Fixed &lt;code&gt;thehive:timeline&lt;/code&gt; sourcetype to ensure Splunk prioritizes normalized &lt;code&gt;_time&lt;/code&gt; from JSON payloads.&lt;/li&gt;
-&lt;li&gt;Cleaned up build process to automatically remove Windows binaries (&lt;code&gt;.exe&lt;/code&gt;, &lt;code&gt;.pyd&lt;/code&gt;), Python compiled files (&lt;code&gt;.pyc&lt;/code&gt;), and caches for Splunk Cloud compatibility.&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This TA allows to add interaction features between TheHive or Cortex (https://www.strangebee.com/) and Splunk. It allows to retrieve all kind of information from TheHive/Cortex and to perform actions on these instances using Splunk, from a search or from a predefined dashboard.
-
-This TA is supporting only TheHive 5. For having an app supporting TheHive 3 or 4, please check the oldest releases. It&amp;#x27;s also supporting the Cortex 3 version.
-
-More information here: https://github.com/LetMeR00t/TA-thehive-cortex&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/7565a178-252a-11f1-8ab2-8e1c694f89e1.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Alexandre Demeyer</dc:creator>
-      <pubDate>Sat, 21 Mar 2026 13:47:34 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5329/#v4.1.0</guid>
     </item>
   </channel>
 </rss>
