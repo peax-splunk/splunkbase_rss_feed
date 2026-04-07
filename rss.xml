@@ -6,7 +6,29 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Mon, 06 Apr 2026 23:27:52 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 07 Apr 2026 01:28:43 +0000</lastBuildDate>
+    <item>
+      <title>CrowdStrike Scheduled Search Technical Add-on - v3.1.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/6902/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h1&gt;TA-crowdstrike-scheduled-search v3.1.0 Release Notes&lt;/h1&gt;
+&lt;h2&gt;Bug Fix&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Resolved an issue with how CSV-format report data was processed and delivered to Splunk, ensuring reliable timestamp extraction regardless of payload size&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Improvements&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Strengthened authentication handling with network failure detection, OAuth2 error diagnostics, and mid-collection token expiry recovery&lt;/li&gt;
+&lt;li&gt;Improved API resilience with exponential backoff, jitter-based retry desynchronization, and expanded retry coverage for server errors&lt;/li&gt;
+&lt;li&gt;Hardened checkpoint integrity so the TA halts on delivery or parsing failures to prevent producing duplicates&lt;/li&gt;
+&lt;li&gt;Added batched event delivery to prevent pipe buffer overflows when ingesting large scheduled search results&lt;/li&gt;
+&lt;li&gt;Enhanced logging with TA version, SDK version, API trace IDs, rate limit headers, and checkpoint state transitions for faster troubleshooting&lt;/li&gt;
+&lt;li&gt;Removed unsupported SOCKS proxy types, tightened input validation, and centralized configuration constants&lt;/li&gt;
+&lt;li&gt;Updated dashboard queries and props.conf timestamp settings to align with current platform standards&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The CrowdStrike Falcon Platform provides customers with extensive visibility into the configuration of and events taking place on endpoints and workloads. While triggered detections are an important part of endpoint security, CrowdStrike also provides the ability to search the raw event data. Scheduled searches can be used to automate the recurrence of those searches. This technical add-on allows CrowdStrike Falcon customers to retrieve successful scheduled searched from the Falcon platform via public APIs and have the events indexed into Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/108f5c2c-3217-11f1-ba90-bae7fd19d53c.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">CrowdStrike</dc:creator>
+      <pubDate>Tue, 07 Apr 2026 00:25:02 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6902/#v3.1.0</guid>
+    </item>
     <item>
       <title>WHOIS - v2.2.12 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5867/</link>
@@ -1322,25 +1344,6 @@ For more information: Please refer to the User Guide: https://intersight.com/hel
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
       <pubDate>Fri, 27 Mar 2026 16:08:59 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/3124/#v4.6.2</guid>
-    </item>
-    <item>
-      <title>REST storage/passwords Manager for Splunk - v2.1.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4013/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;What's New in 2.1.1&lt;/h2&gt;
-&lt;h3&gt;Improved CSV Import Experience&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;Drag-and-drop file upload&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Clicking &lt;strong&gt;Import → Upload CSV&lt;/strong&gt; now opens a modal with a drag-and-drop zone. Drag a CSV file directly from Finder or Explorer onto the zone, or click &lt;strong&gt;Browse…&lt;/strong&gt; to use the OS file picker. Either path feeds into the same preview and validation flow.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Early file validation&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Uploads are now validated before any parsing occurs:&lt;br&gt;
-- Files larger than 512 KB are rejected immediately with a clear error — no row-by-row processing&lt;br&gt;
-- CSVs missing the required &lt;code&gt;username&lt;/code&gt; or &lt;code&gt;password&lt;/code&gt; header columns are rejected with a single actionable message rather than generating a &quot;username is required&quot; error for every row in the file&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Scrollable import results&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;The Import Complete modal now displays results in a scrollable container, so the outcome of every credential is visible regardless of how many rows were imported.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Capped preview errors&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;When a file has many invalid rows, the preview shows the first 10 validation errors followed by &quot;…and N more rows skipped&quot; rather than listing every skipped row.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;An intuitive, full-featured, Javascript CRUD interface to the storage/passwords REST endpoint. If you&amp;#x27;re an app developer looking to securely store passwords for API&amp;#x27;s, Custom Alert Actions, Modular Inputs or to access any resource that requires a password, this is your tool! Create, update, delete, view passwords, change permissions, sharing and app scope. Ditch your curl commands and upgrade to this simple to use interface.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0055dd00-2541-11f1-9ec4-1efe565b8515.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
-      <pubDate>Fri, 27 Mar 2026 15:40:39 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4013/#v2.1.1</guid>
     </item>
     <item>
       <title>Cyber Watch - v1.0.3 [Version Update]</title>
