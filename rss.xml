@@ -6,24 +6,31 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Tue, 14 Apr 2026 15:07:05 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 14 Apr 2026 16:56:29 +0000</lastBuildDate>
     <item>
-      <title>CVE.ICU CVE Dashboard - v1.0.4 [New App Release]</title>
+      <title>CVE.ICU CVE Dashboard - v1.0.6 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/8395/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;## 1.0.4 — April 14, 2026&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;### Data Input Renamed to &quot;cve.icu&quot;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;The modular input now appears as &lt;strong&gt;**cve.icu**&lt;/strong&gt; in Settings &amp;gt; Data Inputs, matching the app's branding and documentation.&lt;/p&gt;
-&lt;p&gt;Previously, the data input was registered as &quot;CVE List V5&quot;, which caused confusion for users who couldn't find it after installation. This was reported by users following the setup documentation that referenced &quot;cve.icu&quot; by name.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;### What Changed&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;- Renamed modular input scheme title from &quot;CVE List V5&quot; to &quot;cve.icu&quot;&lt;/p&gt;
-&lt;p&gt;- Updated README documentation to match&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;### Upgrade Notes&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;- No configuration changes required — existing inputs will continue to work&lt;/p&gt;
-&lt;p&gt;- After upgrading, the input type will appear as &quot;cve.icu&quot; instead of &quot;CVE List V5&quot; in Settings &amp;gt; Data Inputs&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;### Testing&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;- Added integration test suite for add-on installation validation (`tests/integration/test_addon_install.py`)&lt;/p&gt;
-&lt;p&gt;- Added `test.sh` convenience script for running unit, integration, and package tests&lt;/p&gt;
-&lt;p&gt;- Passes Splunk AppInspect precert with 0 errors, 0 failures&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;A high-performance Splunk Technology Add-on for ingesting and analyzing the complete CVE List V5 database from the official CVE Program repository. It features efficient bulk downloads, hourly delta updates, and advanced risk scoring using CISA KEV and EPSS intelligence.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The CVE.icu add-on provides a robust framework for bringing real-time vulnerability intelligence directly into Splunk. Unlike traditional collectors that rely on slow API crawling, this package utilizes an architecture that streams data from official GitHub release ZIP files, enabling the initial ingestion of over 300,000 records in minutes.
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h1&gt;TA-cveicu v1.0.6 Release Notes&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Release Date:&lt;/strong&gt; April 14, 2026&lt;/p&gt;
+&lt;h2&gt;Bug Fixes&lt;/h2&gt;
+&lt;h3&gt;Fixed: Modular input still fails to register on some systems (exit code 1)&lt;/h3&gt;
+&lt;p&gt;Version 1.0.5 added a fallback for &lt;code&gt;--scheme&lt;/code&gt; introspection when &lt;code&gt;splunklib&lt;/code&gt; could not be imported. However, the fallback was placed at the bottom of the script in &lt;code&gt;__main__&lt;/code&gt;, which was never reached because the script crashed during module-level imports before getting there. Specifically, &lt;code&gt;github_client.py&lt;/code&gt; imports &lt;code&gt;requests&lt;/code&gt;, which imports &lt;code&gt;urllib3&lt;/code&gt;, which requires SSL shared libraries (e.g., &lt;code&gt;libssl.so.3&lt;/code&gt;). On systems where those libraries are missing from the Python environment Splunk uses for introspection, the entire script would fail at import time.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;--scheme&lt;/code&gt; handler is now the very first thing that runs after &lt;code&gt;sys.path&lt;/code&gt; setup, before any imports that could fail. This guarantees the modular input registers correctly regardless of the Python environment's SSL library availability.&lt;/p&gt;
+&lt;h2&gt;Upgrade Instructions&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Download &lt;a href=&quot;https://splunkbase.splunk.com/app/8395&quot;&gt;TA-cveicu 1.0.6 from Splunkbase&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Go to &lt;strong&gt;Apps &amp;gt; Manage Apps &amp;gt; Install app from file&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Upload the package and check &lt;strong&gt;Upgrade app&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Restart Splunk&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;Verification&lt;/h2&gt;
+&lt;p&gt;After upgrading, confirm the data input appears:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Settings &amp;gt; Data Inputs &amp;gt; cve.icu&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;To verify in the logs:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;index=_internal sourcetype=splunkd component=ModularInputs &amp;quot;cveicu&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You should see successful scheme registration instead of the exit code 1 error.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;A high-performance Splunk Technology Add-on for ingesting and analyzing the complete CVE List V5 database from the official CVE Program repository. It features efficient bulk downloads, hourly delta updates, and advanced risk scoring using CISA KEV and EPSS intelligence.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The CVE.icu add-on provides a robust framework for bringing real-time vulnerability intelligence directly into Splunk. Unlike traditional collectors that rely on slow API crawling, this package utilizes an architecture that streams data from official GitHub release ZIP files, enabling the initial ingestion of over 300,000 records in minutes.
 
 Key Technical Features:
 
@@ -35,10 +42,54 @@ Operational Excellence: Includes a resource-aware modular input with built-in me
 
 Secure Configuration: Implements a Splunk-native REST setup handler that utilizes encrypted storage for API tokens and includes automated cache-clearing to ensure a seamless user experience.
 
-Comprehensive Dashboards: Features multiple visualization options, ranging from real-time KPI panels and severity distribution charts to accelerated tstats-based views for instant analysis of historical trends.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0196319e-3809-11f1-bfe4-7eec6d210fba.png&quot;&gt;</description>
+Comprehensive Dashboards: Features multiple visualization options, ranging from real-time KPI panels and severity distribution charts to accelerated tstats-based views for instant analysis of historical trends.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/42b5736c-3820-11f1-bfe4-7eec6d210fba.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jerry Gamblin</dc:creator>
-      <pubDate>Tue, 14 Apr 2026 14:00:45 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8395/#v1.0.4</guid>
+      <pubDate>Tue, 14 Apr 2026 16:41:11 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8395/#v1.0.6</guid>
+    </item>
+    <item>
+      <title>EAT - Environment Assessment Tool - v1.0.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8606/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;v1.0.0 — Initial Release&lt;/h2&gt;
+&lt;p&gt;First public release of EAT (Environment Assessment Tool).&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;55+ checks across 14 assessment domains including cluster health, forwarder fleet, config files, ingestion pipeline, data quality, search workload, authentication, TLS, operations, Splunk ES/SIEM, CIM compliance, MITRE ATT&amp;amp;CK, and classified environment controls&lt;/li&gt;
+&lt;li&gt;Environment-aware — select Commercial, NIPR, SIPR, or JWICS to filter checks and apply appropriate Required/Recommended tags&lt;/li&gt;
+&lt;li&gt;Weighted A–F health scoring with per-section breakdowns&lt;/li&gt;
+&lt;li&gt;MITRE ATT&amp;amp;CK tactic coverage view&lt;/li&gt;
+&lt;li&gt;Baseline comparison mode to track improvements between assessments&lt;/li&gt;
+&lt;li&gt;Evidence capture and analyst notes per check&lt;/li&gt;
+&lt;li&gt;Export to plain-text findings report or print to PDF&lt;/li&gt;
+&lt;li&gt;Fully offline — no external dependencies, air-gap safe&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;A structured health and security assessment framework for Splunk architects and administrators. Covers 55+ checks across infrastructure, ES/SIEM, CIM compliance, and MITRE ATT&amp;amp;CK coverage. Environment-aware for Commercial, NIPR, SIPR, and JWICS deployments. Fully offline, no dependencies, no network calls, air-gap safe.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;EAT (Environment Assessment Tool) is a comprehensive, offline-capable Splunk health and security assessment framework built for Splunk architects, administrators, and security engineers.
+The tool walks you through 55+ checks covering every layer of a Splunk environment. cluster health, forwarder coverage, index and storage configuration, ingestion pipeline integrity, data quality, search workload, authentication controls, TLS and certificate posture, Splunk ES and SIEM effectiveness, CIM data model compliance, and MITRE ATT&amp;amp;CK detection coverage.
+
+Each check provides the exact SPL query or CLI command to run, specific pass/fail criteria, remediation steps, and a field to record your findings inline.
+Select your network environment at launch: Commercial, NIPR, SIPR, or JWICS, and the tool filters to only the checks that apply. DoD and classified environments get additional controls around FIPS 140-2, CAC/PKI authentication, offline licensing, telemetry enforcement, and index classification. Each check is tagged Required or Recommended based on the selected environment.
+Assessments are scored on a weighted A through F scale with per-section breakdowns. A MITRE ATT&amp;amp;CK view shows tactic-level detection coverage across your visible checks. Load a previously saved assessment to compare against a current run and track what improved or regressed between assessments.
+Results export as a plain-text findings report or print directly to PDF. Progress saves as a JSON file at any point and reloads seamlessly, useful for multi-day assessments or handing off between team members.
+The tool runs entirely in the browser with no external dependencies, no network calls, and no installation required. It works on air-gapped and classified networks out of the box.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/acdf06ee-2a6b-11f1-9ac8-5aa48af84e0f.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Segun Bolufemi</dc:creator>
+      <pubDate>Tue, 14 Apr 2026 16:24:42 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8606/#v1.0.0</guid>
+    </item>
+    <item>
+      <title>InSitzes App for Splunk Cloud - v2.0.19 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8097/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Bug fix on health check&lt;br&gt;
+Combined ingestion monitoring and indexing performance&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The InSitzes App for Splunk Cloud Monitoring provides administrators with actionable insights into ingestion, performance, workload, and search behavior across their Splunk Cloud environment. By consolidating system, data, and workload visibility into one app, it enables teams to proactively detect issues, optimize resource usage, and improve the overall Splunk Cloud experience.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0a3d7d62-360f-11f1-85b1-26966fcc9299.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">David Sitzes</dc:creator>
+      <pubDate>Tue, 14 Apr 2026 15:15:59 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8097/#v2.0.19</guid>
+    </item>
+    <item>
+      <title>InSitzes App for Splunk Enterprise Monitoring - v2.0.19 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8438/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Bug fix on health check&lt;br&gt;
+Combined ingestion monitoring and indexing performance&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The InSitzes App for Splunk Enterprise Monitoring provides administrators with actionable insights into ingestion, performance, workload, and search behavior across their Splunk Enterprise environment. By consolidating system, data, and workload visibility into one app, it enables teams to proactively detect issues, optimize resource usage, and improve the overall Splunk Enterprise experience.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/208303a8-360f-11f1-9af7-de223a9ad6ae.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">David Sitzes</dc:creator>
+      <pubDate>Tue, 14 Apr 2026 15:15:31 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8438/#v2.0.19</guid>
     </item>
     <item>
       <title>Splunk DB Connect - v4.2.3 [Version Update]</title>
@@ -437,22 +488,6 @@ The SpyCloud Investigations App enables Splunk users to uncover the the true ide
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">XM Cyber</dc:creator>
       <pubDate>Sun, 12 Apr 2026 06:49:58 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6632/#v3.0.2</guid>
-    </item>
-    <item>
-      <title>InSitzes App for Splunk Enterprise Monitoring - v3.0.6 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8438/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The InSitzes App for Splunk Enterprise Monitoring provides administrators with actionable insights into ingestion, performance, workload, and search behavior across their Splunk Enterprise environment. By consolidating system, data, and workload visibility into one app, it enables teams to proactively detect issues, optimize resource usage, and improve the overall Splunk Enterprise experience.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/208303a8-360f-11f1-9af7-de223a9ad6ae.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">David Sitzes</dc:creator>
-      <pubDate>Sun, 12 Apr 2026 01:31:01 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8438/#v3.0.6</guid>
-    </item>
-    <item>
-      <title>InSitzes App for Splunk Cloud - v3.0.6 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8097/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The InSitzes App for Splunk Cloud Monitoring provides administrators with actionable insights into ingestion, performance, workload, and search behavior across their Splunk Cloud environment. By consolidating system, data, and workload visibility into one app, it enables teams to proactively detect issues, optimize resource usage, and improve the overall Splunk Cloud experience.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0a3d7d62-360f-11f1-85b1-26966fcc9299.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">David Sitzes</dc:creator>
-      <pubDate>Sun, 12 Apr 2026 01:30:47 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8097/#v3.0.6</guid>
     </item>
     <item>
       <title>Splunk AI Assistant - v2.0.0 [Version Update]</title>
@@ -1204,32 +1239,6 @@ www.dataplus-al.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&qu
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Altin Karaulli</dc:creator>
       <pubDate>Thu, 02 Apr 2026 17:53:36 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/4307/#v1.8.5</guid>
-    </item>
-    <item>
-      <title>EAT - Environment Assessment Tool - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8606/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;v1.0.0 — Initial Release&lt;/h2&gt;
-&lt;p&gt;First public release of EAT (Environment Assessment Tool).&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;55+ checks across 14 assessment domains including cluster health, forwarder fleet, config files, ingestion pipeline, data quality, search workload, authentication, TLS, operations, Splunk ES/SIEM, CIM compliance, MITRE ATT&amp;amp;CK, and classified environment controls&lt;/li&gt;
-&lt;li&gt;Environment-aware — select Commercial, NIPR, SIPR, or JWICS to filter checks and apply appropriate Required/Recommended tags&lt;/li&gt;
-&lt;li&gt;Weighted A–F health scoring with per-section breakdowns&lt;/li&gt;
-&lt;li&gt;MITRE ATT&amp;amp;CK tactic coverage view&lt;/li&gt;
-&lt;li&gt;Baseline comparison mode to track improvements between assessments&lt;/li&gt;
-&lt;li&gt;Evidence capture and analyst notes per check&lt;/li&gt;
-&lt;li&gt;Export to plain-text findings report or print to PDF&lt;/li&gt;
-&lt;li&gt;Fully offline — no external dependencies, air-gap safe&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;A structured health and security assessment framework for Splunk architects and administrators. Covers 55+ checks across infrastructure, ES/SIEM, CIM compliance, and MITRE ATT&amp;amp;CK coverage. Environment-aware for Commercial, NIPR, SIPR, and JWICS deployments. Fully offline, no dependencies, no network calls, air-gap safe.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;EAT (Environment Assessment Tool) is a comprehensive, offline-capable Splunk health and security assessment framework built for Splunk architects, administrators, and security engineers.
-The tool walks you through 55+ checks covering every layer of a Splunk environment. cluster health, forwarder coverage, index and storage configuration, ingestion pipeline integrity, data quality, search workload, authentication controls, TLS and certificate posture, Splunk ES and SIEM effectiveness, CIM data model compliance, and MITRE ATT&amp;amp;CK detection coverage.
-
-Each check provides the exact SPL query or CLI command to run, specific pass/fail criteria, remediation steps, and a field to record your findings inline.
-Select your network environment at launch: Commercial, NIPR, SIPR, or JWICS, and the tool filters to only the checks that apply. DoD and classified environments get additional controls around FIPS 140-2, CAC/PKI authentication, offline licensing, telemetry enforcement, and index classification. Each check is tagged Required or Recommended based on the selected environment.
-Assessments are scored on a weighted A through F scale with per-section breakdowns. A MITRE ATT&amp;amp;CK view shows tactic-level detection coverage across your visible checks. Load a previously saved assessment to compare against a current run and track what improved or regressed between assessments.
-Results export as a plain-text findings report or print directly to PDF. Progress saves as a JSON file at any point and reloads seamlessly, useful for multi-day assessments or handing off between team members.
-The tool runs entirely in the browser with no external dependencies, no network calls, and no installation required. It works on air-gapped and classified networks out of the box.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/acdf06ee-2a6b-11f1-9ac8-5aa48af84e0f.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Segun Bolufemi</dc:creator>
-      <pubDate>Thu, 02 Apr 2026 17:50:59 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8606/#v1.0.0</guid>
     </item>
     <item>
       <title>Oracle Unified Audit - v1.2.0 [Version Update]</title>
