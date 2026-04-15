@@ -6,7 +6,323 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Wed, 15 Apr 2026 11:50:38 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 15 Apr 2026 13:03:49 +0000</lastBuildDate>
+    <item>
+      <title>Whisper Security App for Splunk - v1.0.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8638/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h1&gt;Whisper Security App for Splunk — v1.0.0&lt;/h1&gt;
+&lt;p&gt;First stable release of &lt;strong&gt;TA-whisper-security&lt;/strong&gt;, the Splunk Technology Add-on for &lt;a href=&quot;https://whisper.security&quot;&gt;Whisper Security's&lt;/a&gt; Knowledge Graph API —  multi-billion internet infrastructure nodes, tens of billions of relationships, and millions of threat intelligence data.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Highlights&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Real-time IOC enrichment&lt;/strong&gt; via custom search commands and an adaptive response action&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Enterprise Security integration&lt;/strong&gt; with threat intel feeds, risk scoring, CIM field mappings&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Attack surface monitoring&lt;/strong&gt; with DNS baseline tracking, change detection, and multi-tenant support&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;12 pre-built dashboards&lt;/strong&gt; covering risk, compliance, geographic threats, and executive reporting&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;33 correlation searches&lt;/strong&gt; for infrastructure threat detection (all disabled by default)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2&gt;Features&lt;/h2&gt;
+&lt;h3&gt;Search Commands (5)&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Command&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;whisperlookup&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Streaming&lt;/td&gt;
+&lt;td&gt;Enrich events with DNS, hosting, threat intel, and CNAME data from the Knowledge Graph&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;whisperquery&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Generating&lt;/td&gt;
+&lt;td&gt;Run ad-hoc Cypher queries against the Knowledge Graph API&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;whisperschema&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Generating&lt;/td&gt;
+&lt;td&gt;Retrieve graph schema metadata (node types, relationships, properties)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;whisperflush&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Generating&lt;/td&gt;
+&lt;td&gt;Clear cached enrichment data from KV Store collections&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;whisperevict&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Generating&lt;/td&gt;
+&lt;td&gt;Remove expired cache entries based on TTL&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;Modular Inputs (5)&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Input&lt;/th&gt;
+&lt;th&gt;Default Interval&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Threat Intelligence Feed&lt;/td&gt;
+&lt;td&gt;6 hours&lt;/td&gt;
+&lt;td&gt;Collects threat indicators for ES threat intel framework (up to 100K indicators)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Attack Surface Baseline&lt;/td&gt;
+&lt;td&gt;24 hours&lt;/td&gt;
+&lt;td&gt;DNS baseline collection for monitored domains&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Watchlist Enrichment&lt;/td&gt;
+&lt;td&gt;4 hours&lt;/td&gt;
+&lt;td&gt;Enriches watchlist indicators with graph context&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Multi-Tenant Monitoring&lt;/td&gt;
+&lt;td&gt;24 hours&lt;/td&gt;
+&lt;td&gt;Multi-tenant domain monitoring (up to 10K domains)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;API Health Check&lt;/td&gt;
+&lt;td&gt;5 minutes&lt;/td&gt;
+&lt;td&gt;API connectivity and quota monitoring&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;Dashboards (12)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Risk Overview&lt;/strong&gt; — Aggregated risk scores and trending&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Executive Risk Summary&lt;/strong&gt; — High-level risk posture for leadership&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Attack Surface Timeline&lt;/strong&gt; — Infrastructure change tracking over time&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Geographic Threats&lt;/strong&gt; — Threat visualization by geography&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MITRE ATT&amp;amp;CK Coverage&lt;/strong&gt; — Technique mapping and detection coverage&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;WHOIS Intelligence&lt;/strong&gt; — Registrar and ownership analysis&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Web Link Trust&lt;/strong&gt; — Link reputation and trust scoring&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;SPF Compliance&lt;/strong&gt; — Email authentication monitoring&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DNSSEC Compliance&lt;/strong&gt; — DNS security validation&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Compliance Summary&lt;/strong&gt; — Consolidated compliance posture&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Health &amp;amp; Operations&lt;/strong&gt; — API health, quota usage, and connectivity status&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Enterprise Security Integration&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;2 threat intelligence collections&lt;/strong&gt; (IP and domain) compatible with ES threat intel framework&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;20+ CIM field aliases&lt;/strong&gt; mapping Whisper fields to Splunk Common Information Model&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Risk framework integration&lt;/strong&gt; across all 33 correlation searches&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MITRE ATT&amp;amp;CK annotations&lt;/strong&gt; on every correlation search (T1583, T1584, T1568, T1599, T1071.004, and more)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;1 adaptive response action&lt;/strong&gt; — &quot;Enrich with Whisper&quot; for automated enrichment in alert workflows&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Correlation Searches (33)&lt;/h3&gt;
+&lt;p&gt;All disabled by default. Categories:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;DNS &amp;amp; Domain Monitoring (10)&lt;/strong&gt; — Infrastructure changes, shadow IT, typosquatting, fast flux, CNAME chain analysis&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Infrastructure &amp;amp; Hosting (7)&lt;/strong&gt; — Bulletproof ASN detection, shared hosting with threats, infrastructure pivoting&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;BGP &amp;amp; Network (3)&lt;/strong&gt; — Prefix conflicts, BGP hijack detection, ASN migration&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Registrar &amp;amp; WHOIS (3)&lt;/strong&gt; — Registrar changes, contact correlation, privacy proxy alerts&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Risk Assessment (3)&lt;/strong&gt; — Newly registered domain risk, TOR exit node communication, impossible travel&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;KV Store Population (3)&lt;/strong&gt; — Automated threat intel collection population&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Direct Intelligence (2)&lt;/strong&gt; — HOSTNAME threat properties, suspicious web link profiles&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Cache Management (1)&lt;/strong&gt; — Automated cache eviction&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Data Model&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;9 source types&lt;/strong&gt; — &lt;code&gt;whisper:health&lt;/code&gt;, &lt;code&gt;whisper:attack_surface&lt;/code&gt;, &lt;code&gt;whisper:threat_intel&lt;/code&gt;, &lt;code&gt;whisper:watchlist&lt;/code&gt;, &lt;code&gt;whisper:change&lt;/code&gt;, &lt;code&gt;whisper:enrichment&lt;/code&gt;, &lt;code&gt;whisper:spf_compliance&lt;/code&gt;, &lt;code&gt;whisper:dnssec_compliance&lt;/code&gt;, &lt;code&gt;ta_whisper_security&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;8 KV Store collections&lt;/strong&gt; — Enrichment cache, precomputed enrichment, IP/domain threat intel, watchlist, DNS baseline&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Real-time IOC enrichment, threat intelligence, and attack surface monitoring powered by a multi-billion-node internet infrastructure knowledge graph. Adds ASN, geo, WHOIS, threat scores, and risk levels to any IP or domain in your Splunk environment.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Enrich Splunk events with real-time internet infrastructure intelligence from Whisper Security&amp;#x27;s Knowledge Graph — billions of nodes and tens of billions of edges mapping domains, IPs, ASNs, BGP routes, certificates, and WHOIS data across all countries.
+
+What it solves: Security teams lack infrastructure context when triaging alerts. An IP fires an alert — but who owns it? What ASN? Is it on threat feeds? What else is hosted there? Answering these questions requires pivoting across 5+ tools. This add-on brings that context directly into Splunk.
+
+Core capabilities:
+
+Live enrichment — Pipe any IP or domain through | whisperlookup to instantly add ASN ownership, geolocation, threat scores, risk levels, WHOIS data, CNAME chains, and name server details
+Graph queries — Run Cypher queries against the full knowledge graph from the Splunk search bar with | whisperquery
+Threat intelligence — Automated feeds from 40+ sources populate ES-compatible KV Store collections with scored IP and domain indicators
+Attack surface monitoring — Scheduled inputs track DNS, MX, NS, and WHOIS changes across your domain portfolio with risk-scored change detection
+29 correlation searches — Pre-built detections for bulletproof ASN communication, fast-flux DNS, BGP hijacks, typo-squatting, TOR exit traffic, and more — all generating ES risk events
+12 dashboards — Executive risk grades (A–F), compliance posture (SPF, DNSSEC, NIS2, NIST), geographic threat maps,, WHOIS intelligence, and attack surface timelines
+
+Built by internet infrastructure veterans from RIPE NCC and ICANN. Powered by 46 billion data points from 60+ sources with millisecond-level query response times.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/859a599e-33a3-11f1-9aa1-9aaa231c919c.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ehsan Aslani</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 12:52:08 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8638/#v1.0.0</guid>
+    </item>
+    <item>
+      <title>SpoofSentry Add-on for Splunk - v1.0.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8640/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Initial release of SpoofSentry Add-on for Splunk.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;3 sourcetypes: spoofsentry:alert, spoofsentry:cef, riskreply:event&lt;/li&gt;
+&lt;li&gt;JSON field extraction with normalized field aliases&lt;/li&gt;
+&lt;li&gt;CEF (Common Event Format) parsing&lt;/li&gt;
+&lt;li&gt;CIM data model tagging (Alerts, Email, Intrusion Detection, Change, Web)&lt;/li&gt;
+&lt;li&gt;8 pre-built saved searches (threats, DMARC pass rates, spoofing campaigns, lookalikes, takedowns, enforcement)&lt;/li&gt;
+&lt;li&gt;1 pre-built alert for critical threat detection&lt;/li&gt;
+&lt;li&gt;Severity and event type lookup tables&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Ingest DMARC monitoring, spoofing detection, lookalike domain threats, and takedown events from SpoofSentry with CIM-mapped sourcetypes, pre-built searches, and alerting.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;SpoofSentry Add-on for Splunk ingests and normalizes domain security events from the SpoofSentry DMARC monitoring and domain protection platform. Events are delivered via Splunk HEC and include DMARC authentication failures, spoofing campaign detections, lookalike domain threats, DNS enforcement changes, and automated takedown orchestration lifecycle events.
+
+This add-on provides:
+- Sourcetype definitions for spoofsentry:alert, spoofsentry:cef, and riskreply:event
+- Automatic JSON field extraction with normalized field aliases (severity, event_type, domain, tenant_id)
+- CEF (Common Event Format) parsing for legacy SIEM workflows
+- CIM data model compatibility (Alerts, Email, Intrusion Detection, Change, Web)
+- 8 pre-built saved searches covering critical threats, DMARC pass rates, spoofing campaigns, lookalike domains, takedown activity, and enforcement changes
+- 1 pre-built alert for critical threat detection (disabled by default, configurable suppression)
+- Lookup tables for severity mapping and event type categorization
+
+SpoofSentry detects email spoofing, monitors DMARC enforcement, identifies lookalike domains, and orchestrates automated takedowns across Google Web Risk, Netcraft, URLhaus, and registrar abuse channels. This add-on brings those security events into Splunk for centralized analysis, correlation with other security data, and SOC workflow integration.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Team Netallion</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 12:50:58 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8640/#v1.0.0</guid>
+    </item>
+    <item>
+      <title>DASH Lite - Styled App Builder - v1.0.4 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8654/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;(Free preview of DASH) Design CSS themes for Splunk dashboards with live preview. Includes Cybersecurity use case with 2 dashboards. Upgrade at mb2analytics.com for 3 use cases, 15 dashboards, app export, and Gallery.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/7f2c1f52-3817-11f1-9c5d-d2742ccea48c.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Matheus Silva</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 12:47:12 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8654/#v1.0.4</guid>
+    </item>
+    <item>
+      <title>Ensign Akamai Web Security Add-on - v1.0.9 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8652/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;v1.0.9 - Bug Fixes and Security Hardening&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Fixed: Server-side REST handler input name validator now allows hyphens (-) in input names, matching the client-side UI validation&lt;/li&gt;
+&lt;li&gt;Improved: Added detailed error logging for non-200 HTTP responses from Akamai API, including response body for troubleshooting 401/403 errors&lt;/li&gt;
+&lt;li&gt;Updated: Source format changed to ensign_akamaisiem://{inputName}_{configId} for better identification&lt;/li&gt;
+&lt;li&gt;Fixed: CHANGELOG.md encoding cleaned to pure ASCII (removed mojibake characters)&lt;/li&gt;
+&lt;li&gt;Removed: Edgegrid test files from production package&lt;/li&gt;
+&lt;li&gt;Security: Full sanitization audit completed, all client-specific references removed&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Captures Akamai security events via SIEM Integration API v1. Built on Splunk UCC with multi-account, multi-proxy, and encrypted credential support.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Ensign Akamai Web Security Add-on for Splunk
+
+An enterprise-grade alternative to the official Akamai SIEM app, rebuilt on the Splunk UCC framework v6.3.0.
+
+WHY THIS ADD-ON?
+The official Akamai app (refer to : https://splunkbase.splunk.com/app/4310) uses legacy way for enabled the input (via Settings =&amp;gt; Data Input) and several parsing is not key-value-pair based after coming ingested in Splunk, rather than using spath and makes easier for analyst to choose the fields, this add-ons are one to solve that. This add-on provides:
+- Full UI-driven configuration based on your usual for inputs based on Add-ons (just directly configured under the add-ons like the other Splunk Supported Add-ons).
+- Multi-account management with encrypted credential storage via Splunk&amp;#x27;s native password vault
+- Multi-proxy support (HTTP, HTTPS, SOCKS4, SOCKS5) with per-input proxy assignment
+- Offset-based checkpointing for reliable data continuity across restarts.
+- Custom sourcetype override per input for seamless migration.
+- Deployment Server compatible.
+
+DATA SOURCE:
+Captures security events from Akamai SIEM Integration API v1, supporting:
+- App &amp;amp; API Protector
+- Kona Site Defender
+- Web Application Protector
+- Client Reputation
+- Bot Manager
+- Account Protector
+
+EVENT PROCESSING:
+- URL-decodes all fields recursively
+- Parses HTTP headers into structured key-value pairs
+- Decodes base64-encoded attackData rule fields into structured objects
+- Drops summary/offset metadata events (nullQueue)
+
+Ref: https://techdocs.akamai.com/siem-integration/docs
+
+Built by Ensign Infosecurity Indonesia.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/98a864f0-37da-11f1-b9af-06e116ea42fd.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Muhammad Rafdi Aufar Ahmad</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 12:45:19 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8652/#v1.0.9</guid>
+    </item>
+    <item>
+      <title>CrowdStrike Falcon Spotlight Vulnerability Data - v3.5.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6167/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;New Features&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Added Splunk CIM Vulnerabilities data model mapping with field aliases, calculated fields, eventtypes, and tags&lt;/li&gt;
+&lt;li&gt;Added option to remove the pagination metadata field from events to reduce storage costs&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Bug Fixes&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Fixed props.conf timestamp extraction for events with fractional seconds, resolving incorrect event time assignment&lt;/li&gt;
+&lt;li&gt;Fixed saved search date format that displayed day-month instead of month-day&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Improvements&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Strengthened authentication handling with network failure detection, OAuth2 error diagnostics, and mid-collection token expiry recovery&lt;/li&gt;
+&lt;li&gt;Improved API resilience with exponential backoff, jitter-based retry desynchronization, and expanded retry coverage for transient server and network errors&lt;/li&gt;
+&lt;li&gt;Hardened checkpoint integrity with save retries, microsecond precision, and fail-stop behavior to prevent duplicate ingestion&lt;/li&gt;
+&lt;li&gt;Added API request timeouts to prevent indefinite hangs during network interruptions or unresponsive API endpoints&lt;/li&gt;
+&lt;li&gt;Added pagination safety cap to prevent runaway collection loops&lt;/li&gt;
+&lt;li&gt;Enhanced logging with SDK version, redacted proxy URLs, rate limit headers, FQL filters, and checkpoint state transitions for faster troubleshooting&lt;/li&gt;
+&lt;li&gt;Updated FalconPy SDK to v1.6.0&lt;/li&gt;
+&lt;li&gt;Updated dashboard queries and props.conf settings to align with current platform standards&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This add-on enables CrowdStrike customers to retrieve vulnerability data from their Falcon Spotlight module. In addition to the the basic vulnerability data the inputs can be configured to also retrieve additional details about the CVE&amp;#x27;s, remediations and hosts with the observed vulnerability.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/6b86d312-32da-11f1-b1cb-2227b8778c14.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">CrowdStrike</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 12:41:30 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6167/#v3.5.0</guid>
+    </item>
+    <item>
+      <title>aitriage - v1.2.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8651/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Version 1.2.1&lt;/p&gt;
+&lt;p&gt;Initial public release of TA_triage for Splunk.&lt;/p&gt;
+&lt;p&gt;What’s included:&lt;br&gt;
+- Custom search command: | triage&lt;br&gt;
+- Support for model=claude&lt;br&gt;
+- Support for model=ollama with configurable ollama_url and ollama_model&lt;br&gt;
+- File-based caching with cache, cache_ttl, and cache_key_fields&lt;br&gt;
+- Context-aware triage using context_fields&lt;br&gt;
+- MITRE mapping, severity scoring, IOC extraction, action recommendations, and false-positive assessment&lt;br&gt;
+- Basic dashboard and navigation files&lt;br&gt;
+- Clean packaging for Splunkbase upload&lt;/p&gt;
+&lt;p&gt;Example searches:&lt;br&gt;
+index=edr sourcetype=crowdstrike:&lt;em&gt;Detection&lt;/em&gt; | triage model=claude context_fields=&quot;UserName,CommandLine,Technique&quot;&lt;br&gt;
+index=edr sourcetype=crowdstrike:&lt;em&gt;Detection&lt;/em&gt; | triage model=ollama ollama_url=&quot;&lt;a href=&quot;http://localhost:11434&quot;&gt;http://localhost:11434&lt;/a&gt;&quot; ollama_model=&quot;mistral&quot;&lt;br&gt;
+index=edr sourcetype=crowdstrike:&lt;em&gt;Detection&lt;/em&gt; | triage model=claude cache=true cache_ttl=3600 cache_key_fields=&quot;alert_name,src_ip&quot;&lt;/p&gt;
+&lt;p&gt;Notes:&lt;br&gt;
+- Claude usage requires valid API connectivity and credentials in the Splunk environment.&lt;br&gt;
+- Ollama usage requires a reachable local or remote Ollama endpoint.&lt;br&gt;
+- If an external model is unavailable, the command falls back to local heuristic triage output.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;You send each Splunk event to the LLM and receive the following in return:
+
+→ MITRE ATT&amp;amp;CK technical mapping (like T1059.001)
+→ 1-10 severity score + label
+→ 2-3 sentence AI analysis
+→ Specific action recommendation to the SOC analyst
+→ False positive probability + justification
+→ Kill chain phase
+→ Automatic IOC inference&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Kadri Kocaer</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 12:41:14 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8651/#v1.2.0</guid>
+    </item>
+    <item>
+      <title>Red Hat Event Driven Ansible Add-on For Splunk - v1.0.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7868/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
+&lt;li&gt;Add Splunk Enterprise 10.2 compatibility&lt;/li&gt;
+&lt;li&gt;Add Python 3.13 compatability&lt;/li&gt;
+&lt;li&gt;Work with Python 3.13 or System's Python3&lt;/li&gt;
+&lt;li&gt;splunkenv.get_splunkd_access_info() call in newer versions of solnlib requires a session_key parameter&lt;/li&gt;
+&lt;li&gt;set anyio to a version that still supports Python 3.9. The last such version is anyio\&amp;lt;4.7 (anyio 4.6.x was the last to support 3.9).&lt;/li&gt;
+&lt;li&gt;set app.conf and globalConfig.json with python.version and supportedPythonVersion&quot;: [&quot;python3&quot;, &quot;python3.13&quot;]&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Enhance your Splunk instance by connecting it to the power of Ansible automation. 
+This add-on provides a custom alert action that sends critical events from Splunk directly to the Red Hat Ansible Automation Platform.
+
+With this integration, you can automatically trigger Ansible rulebooks and playbooks in response to security threats or operational issues.
+
+Requirements:
+- The Red Hat Event-Driven Ansible Add-on for Splunk (this app)
+- Ansible Automation Platform with an active Event-Driven Ansible Controller to receive events and launch automations.
+
+Use Cases:
+1. Custom Alert Action triggered by a saved search in Splunk Core and Splunk Enterprise Security (ES).
+2. Episode Action called in the Episode Review page of Splunk IT Service Intelligence (ITSI)&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/440a2b30-38c1-11f1-b4ec-ae2581bdd3fa.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Red Hat</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 12:07:01 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7868/#v1.0.2</guid>
+    </item>
     <item>
       <title>Threat Hunting Essentials - v1.2.8 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7633/</link>
@@ -1495,23 +1811,6 @@ For demo, PoV, or integration support:
       <guid>https://splunkbase.splunk.com/app/8600/#vnull</guid>
     </item>
     <item>
-      <title>TA-cisco-jira-service-desk-simple-addon - v2.1.2 [New App Release] (Archived)</title>
-      <link>https://splunkbase.splunk.com/app/8602/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Corrected version 2.1.2&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Fixed version of https://splunkbase.splunk.com/app/4958&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app is a fixed version of the existing Jira-service-desk-simple-addon. The creator has not updated their version in over a year. It has an existing issue with PAT authentication. I corrected that issue. All versioning, notes, etc are found in that official release. https://splunkbase.splunk.com/app/4958&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/99481638-2990-11f1-af1e-827f134154c3.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Patrick Wolff</dc:creator>
-      <pubDate>Wed, 01 Apr 2026 13:09:41 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8602/#v2.1.2</guid>
-    </item>
-    <item>
-      <title>PhishIQ Plus - v1.1.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8603/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;URL phishing enrichment for Splunk with API-based risk scoring, caching, reliability controls, and SOC dashboards; built for enterprise workflows including Microsoft Sentinel and Microsoft security services.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;PhishIQPlus Technical for Splunk enriches URL telemetry in Splunk with phishing risk intelligence from the PhishIQPlus API. The app helps SOC teams prioritize investigations by adding prediction, confidence, risk level, source, cache status, and analysis metadata to URL-related events. It supports both dynamic enrichment from live Splunk searches and controlled batch processing, with built-in retry logic, circuit breaker protection, caching, and internal telemetry dashboards for operational visibility.
-This app is designed for enterprise security operations, including environments that integrate with Microsoft Sentinel and Microsoft security services, to provide consistent URL risk context across detection and response workflows.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/83298fb8-2a84-11f1-869a-5af41fee9f08.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">NTrigo LTD</dc:creator>
-      <pubDate>Wed, 01 Apr 2026 12:51:17 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8603/#v1.1.1</guid>
-    </item>
-    <item>
       <title>IMAP v2 - v1.0.0 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/8610/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
@@ -1968,60 +2267,6 @@ This add-on has two main functions:
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
       <pubDate>Mon, 30 Mar 2026 05:07:17 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6837/#v2.1.0</guid>
-    </item>
-    <item>
-      <title>PSTree for Splunk - v2.1.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5721/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Updated splunk-sdk-python to 2.1.1 version&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This apps main function is to enable a custom Splunk search command to reconstruct a pstree from Sysmon process creation events (EventCode 1). Information from memory forensics, such as Volatility&amp;#x27;s pstree, can be very helpful to detect malicious processes. By ingesting Sysmon events in Splunk and using this command you can quickly get similar information without performing memory forensics.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/55de5876-2abc-11f1-9ac8-5aa48af84e0f.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Donald Murchison</dc:creator>
-      <pubDate>Sun, 29 Mar 2026 03:02:55 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5721/#v2.1.0</guid>
-    </item>
-    <item>
-      <title>Cisco Intersight Add-on for Splunk - v3.1.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7828/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h4&gt;VERSION 3.1.1&lt;/h4&gt;
-&lt;ol&gt;
-&lt;li&gt;Corrected and improved the wording of the help text for the &lt;strong&gt;Intersight Hostname&lt;/strong&gt; field in account configuration to reduce user confusion.&lt;/li&gt;
-&lt;li&gt;Added backend handling to automatically remove the **“&lt;a href=&quot;https://”**&quot;&gt;https://”**&lt;/a&gt; prefix (if provided) and store only the required domain value, preventing misconfiguration.&lt;/li&gt;
-&lt;/ol&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Cisco Intersight Add-on for Splunk is a Cisco supported extension to Splunk platform designed to integrate Cisco Intersight&amp;#x27;s powerful infrastructure management capabilities with Splunk&amp;#x27;s robust data analysis platform. This add-on enables IT administrators and engineers to collect, monitor, and analyze data from Cisco Intersight, providing deep insights into their data center operations and enhancing their ability to manage infrastructure efficiently.
-
-The Cisco Intersight Add-on for Splunk enables data collection from key sources including Alarms, Audit Logs, Inventory, and Metrics within the Cisco Intersight platform. It also includes pre-built dashboards that provide high-level insights into the collected data, allowing for faster analysis and streamlined monitoring.
-
-For more information: Please refer to the User Guide: https://intersight.com/help/saas/resources#intersight_add-on_for_splunk&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/99061ae0-29d0-11f1-b265-76fac627aa09.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco Systems, Inc.</dc:creator>
-      <pubDate>Sat, 28 Mar 2026 11:15:27 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7828/#v3.1.1</guid>
-    </item>
-    <item>
-      <title>Flashpoint - v3.0.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6019/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
-&lt;li&gt;Added support for python 3.13&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app implements the investigative actions for the Flashpoint on the Phantom Platform&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f79a1b3c-29c7-11f1-bfb3-6eca8c148852.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
-      <pubDate>Fri, 27 Mar 2026 10:30:26 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6019/#v3.0.1</guid>
-    </item>
-    <item>
-      <title>Netskope - v4.1.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6042/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
-&lt;li&gt;Added support for Python 3.13&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with the Netskope to execute various investigative and polling actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/cbff3918-29c1-11f1-9f63-d2c1482e77ad.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
-      <pubDate>Fri, 27 Mar 2026 09:46:16 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6042/#v4.1.0</guid>
-    </item>
-    <item>
-      <title>Lansweeper - v1.1.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6288/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
-&lt;li&gt;Added support for Python 3.13&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with Lansweeper to perform investigative actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/467e7100-29c1-11f1-bfff-c22e0e881aba.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
-      <pubDate>Fri, 27 Mar 2026 09:42:32 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6288/#v1.1.0</guid>
     </item>
   </channel>
 </rss>
