@@ -6,7 +6,107 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Wed, 15 Apr 2026 13:03:49 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 15 Apr 2026 15:00:12 +0000</lastBuildDate>
+    <item>
+      <title>Sophos Central - v1.1.8 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/6186/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;# Sophos Central Data Ingestor
+The official Sophos developed and supported application for Sophos Central
+
+##Functionality
+This app will allow you to select and ingest multiple Sophos Central data sources without the need of an accompanying script.  Includes Data from the below endpoints. and conforms to the CIM 4.x data model.
+* Central Endpoints API
+* Central Alerts API
+* Central SIEM Events API
+
+## Requirements
+Requires a Sophos API Service Principal account for authentication see our getting started guide for details on API credential creation.
+* Getting Started for Enterprise Customers: https://developer.sophos.com/getting-started-organization
+* Getting Started for Partners: https://developer.sophos.com/getting-started
+* Getting Started for Tenants: https://developer.sophos.com/getting-started-tenant
+* Add-on Installation Guide: https://community.sophos.com/sophos-integrations/w/integrations/109/splunk-add-on-for-sophos-central
+* Feedback and Support Forum: https://community.sophos.com/sophos-integrations/f/splunk-apps-for-central-and-sophos-firewall
+
+Use the accompanying Sophos Dashboard App to get insightful dashboards across Central Data, XG data, or both if using both date sources: https://splunkbase.splunk.com/app/6188/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/6f876e9c-38a0-11f1-bfe4-7eec6d210fba.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sophos Integrations</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 14:18:54 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6186/#v1.1.8</guid>
+    </item>
+    <item>
+      <title>TrackMe - v2.3.19 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4621/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;TrackMe 2.3.19 — Entity Labels, CMDB Integration, Variable Delay, Splunk Cloud AI &amp;amp; Support Diagnostics&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Entity Labels — lifecycle visibility at a glance&lt;/strong&gt;: Introducing a lightweight, color-coded labeling system for entities. Labels give teams instant visibility into the lifecycle stage and operational context of every tracked entity — directly in the entity tables, in stateful and notable alert events, and through Virtual Groups that can aggregate entities by label across tenants.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CMDB integration improvements&lt;/strong&gt;: Stateful and notable alert actions now automatically enrich events with CMDB data at alert time. A new simplified configuration screen replaces the complex UCC-based setup, and CMDB icons now appear correctly in Virtual Groups tables.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Entity Notes enhancements&lt;/strong&gt;: Notes are now visible as a first-class column in entity tables with a new clone-to-entities action for bulk operations.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Variable delay management improvements&lt;/strong&gt;: Timezone notice banners in all variable delay and threshold editors, plus fully customizable per-tenant slot templates.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Policy tracker scheduling&lt;/strong&gt;: SLA, Tags, and Priority policy trackers now default to a 12-hour cadence instead of every 15 minutes, cutting scheduled-search load for these jobs while policy content remains applied; cron remains adjustable per tenant if you need a faster refresh.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Support — generate diagnostics&lt;/strong&gt;: A self-service &lt;strong&gt;Support - generate diags&lt;/strong&gt; experience (nav under API &amp;amp; tooling and Audit &amp;amp; troubleshoot) lets admins produce a timestamped &lt;code&gt;.tgz&lt;/code&gt; for TrackMe support — entity-scoped or global, async job + polling + secure download, optional tenant anonymisation with a separate mapping for support, and RBAC via &lt;code&gt;trackmepoweroperations&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;AI Assistant — realtime entity context&lt;/strong&gt;: Entity-level AI chat now loads the same decision-maker view as &lt;code&gt;/trackme/v2/describe/entity&lt;/code&gt; (via &lt;code&gt;load_component_data&lt;/code&gt;), so labels, scores, smart status, and other joined fields match the UI instead of a raw KV snapshot.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Splunk Cloud — splunk_hosted LLM (SLIM)&lt;/strong&gt;: The Splunk-hosted AI provider now sends the &lt;code&gt;request_id&lt;/code&gt; header required by the SLIM gateway on Splunk Cloud, resolving HTTP 400 &lt;code&gt;Request ID not present in header&lt;/code&gt; failures so model discovery, in-app AI Assistant chat, and AI status content in stateful alerts work again for customers using &lt;code&gt;splunk_hosted&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Various bug fixes and improvements&lt;/strong&gt;: SLA ranking corrections, REST handler hardening, Cribl use case updates, multiple Virtual Groups fixes, quieter routine logging from the &lt;code&gt;trackmestateful&lt;/code&gt; command, KV index transforms for unquoted keys, consistent status messaging when impact score is raised manually without anomalies, and ML outliers simulation with auto-correction disabled when training volume is below the native fit minimum.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;See: &lt;a href=&quot;https://docs.trackme-solutions.com/latest/releasenotes.html#version-2-3-19-build-1776258970-15-04-2026&quot;&gt;&lt;/a&gt;&lt;a href=&quot;https://docs.trackme-solutions.com/latest/releasenotes.html#version-2-3-19-build-1776258970-15-04-2026&quot;&gt;https://docs.trackme-solutions.com/latest/releasenotes.html#version-2-3-19-build-1776258970-15-04-2026&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TrackMe for Splunk provides visibility and operational excellence to monitor at scale your Splunk data sources availability and quality, and many more. 
+
+With a rich set of features and a powerful workflow, TrackMe empowers you day after day to get the most from your Splunk investments and deliver the five stars quality of service your users deserve.
+
+Discover TrackMe: https://trackme-solutions.com/discover
+
+Documentation: https://docs.trackme-solutions.com
+
+You can subscribe to our newsletter, and receive important communications from us.
+We will send notifications for instance when publishing new releases, so we can you let you know the cool and powerful things we&amp;#x27;ve been working on!
+
+https://trackme-solutions.com/subscribe/
+
+TrackMe has transitioned to a new licensing model.
+The Free Community Edition has been discontinued.
+
+What this means for you:
+
+- Existing licensed customers are not impacted. Your current license continues unchanged.
+- Community users are automatically upgraded to a Foundation Edition trial for 90 days, with full functionality enabled.
+
+After the trial period:
+
+- TrackMe remains active and fully usable for monitoring
+- The platform enters read-only mode
+
+You can continue to view data, dashboards, alerts, and history
+Creation of new tenants, trackers, or entities will be disabled
+
+To continue using TrackMe with full capabilities after the trial, a Foundation license is required.
+
+Buy Foundation Edition: https://trackme-solutions.com/get-foundation/
+
+See all plans: https://trackme-solutions.com/pricing/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/214a4d04-38d1-11f1-b304-0a40337cd8dc.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Trackme Limited</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 14:17:14 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4621/#v2.3.19</guid>
+    </item>
+    <item>
+      <title>CTM360 App for Splunk - v1.2.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6577/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
+&lt;li&gt;UI enhancement to be compatible with the timestamp selection feature.&lt;/li&gt;
+&lt;li&gt;Bug fixes.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The CTM360 App for Splunk allows subscribed users to import their asset inventory, issues, and incidents into Splunk®, and utilize this data to build reports, trigger alerts and identify vulnerabilities, exposures and misconfigurations against your assets. The CTM360 Splunk App and Add-on are designed to work together.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b69fa70e-38d2-11f1-b3bf-be84cb4aad1f.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">CTM360 Ltd</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 13:57:31 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6577/#v1.2.0</guid>
+    </item>
+    <item>
+      <title>CTM360 Add-on for Splunk - v1.3.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6576/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
+&lt;li&gt;Added support for selecting preferred timestamp formats in CBS Feeds, HackerView Feeds, and ThreatCover Feeds inputs.&lt;/li&gt;
+&lt;li&gt;Bug fixes&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The CTM360 Add-on for Splunk allows subscribed users to import their asset inventory, issues, and incidents into Splunk®, and utilize this data to build reports, trigger alerts and identify vulnerabilities, exposures and misconfigurations against your assets. The CTM360 Splunk App and Add-on are designed to work together.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/df739934-38d1-11f1-9ab5-66a571ea5a24.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">CTM360 Ltd</dc:creator>
+      <pubDate>Wed, 15 Apr 2026 13:54:17 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6576/#v1.3.0</guid>
+    </item>
     <item>
       <title>Whisper Security App for Splunk - v1.0.0 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/8638/</link>
@@ -1857,53 +1957,6 @@ These two apps are furthermore designed to work with Sideview&amp;#x27;s commerc
       <guid>https://splunkbase.splunk.com/app/8614/#v0.5.1</guid>
     </item>
     <item>
-      <title>TrackMe - v2.3.18 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4621/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;TrackMe 2.3.18 — Virtual Groups, Policy Enhancements &amp;amp; Performance Optimizations&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Virtual Groups — cross-tenant aggregation views&lt;/strong&gt;: This release introduces Virtual Groups, a powerful new feature for the Virtual Tenants UI. Virtual Groups are read-only cards that aggregate entities from multiple tenants and components into a single unified view, displayed alongside regular tenant cards. Combined with the recently introduced priority and tags policies — both lookup-based and search-based — and a new lightweight entity filter DSL, Virtual Groups enable a high level of flexibility in representing and monitoring key entities across tenants. A full creation wizard, RBAC-controlled visibility, and simulation mode make it easy to define, preview, and manage groups.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Key performance optimizations&lt;/strong&gt;: The FLX converging tracker has been re-engineered with direct REST calls and parallel execution, delivering up to 6-10x faster execution and eliminating excessive skip rates. The WLK metadata tracker received connection caching and batch KV loading optimizations for similar ~6-10x performance gains at large scale.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Various bug fixes and improvements&lt;/strong&gt;: Multiple fixes across DHM policies, table rendering, input sanitization, and policy simulation improve reliability and usability across the platform.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;See: &lt;a href=&quot;https://docs.trackme-solutions.com/latest/releasenotes.html#version-2-3-18-build-1774997466-01-04-2026&quot;&gt;https://docs.trackme-solutions.com/latest/releasenotes.html#version-2-3-18-build-1774997466-01-04-2026&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TrackMe for Splunk provides visibility and operational excellence to monitor at scale your Splunk data sources availability and quality, and many more. 
-
-With a rich set of features and a powerful workflow, TrackMe empowers you day after day to get the most from your Splunk investments and deliver the five stars quality of service your users deserve.
-
-Discover TrackMe: https://trackme-solutions.com/discover
-
-Documentation: https://docs.trackme-solutions.com
-
-You can subscribe to our newsletter, and receive important communications from us.
-We will send notifications for instance when publishing new releases, so we can you let you know the cool and powerful things we&amp;#x27;ve been working on!
-
-https://trackme-solutions.com/subscribe/
-
-TrackMe has transitioned to a new licensing model.
-The Free Community Edition has been discontinued.
-
-What this means for you:
-
-- Existing licensed customers are not impacted. Your current license continues unchanged.
-- Community users are automatically upgraded to a Foundation Edition trial for 90 days, with full functionality enabled.
-
-After the trial period:
-
-- TrackMe remains active and fully usable for monitoring
-- The platform enters read-only mode
-
-You can continue to view data, dashboards, alerts, and history
-Creation of new tenants, trackers, or entities will be disabled
-
-To continue using TrackMe with full capabilities after the trial, a Foundation license is required.
-
-Buy Foundation Edition: https://trackme-solutions.com/get-foundation/
-
-See all plans: https://trackme-solutions.com/pricing/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/77f2e64a-2d8f-11f1-8cb8-028ab204c748.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Trackme Limited</dc:creator>
-      <pubDate>Wed, 01 Apr 2026 06:16:24 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4621/#v2.3.18</guid>
-    </item>
-    <item>
       <title>PAVO Getwatchlist Add-on - v1.4.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/635/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;Version 1.4.0&lt;/h2&gt;
@@ -1936,35 +1989,6 @@ See all plans: https://trackme-solutions.com/pricing/&lt;/p&gt;&lt;img height=&q
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aplura LLC</dc:creator>
       <pubDate>Tue, 31 Mar 2026 21:47:33 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/635/#v1.4.0</guid>
-    </item>
-    <item>
-      <title>Content Pack for SNMP and NetFlow - v1.0.17 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7712/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;New Features&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;- Automated Network Device Discovery:  ITSI now automatically discovers and categorizes network devices based on the device_type Info field, streamlining asset integration and reducing manual configuration.
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Enhancements&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;- Enriched Device Metadata:  The device_type attribute has been added as a standard Info field across the content pack, providing consistent classification and improved granularity for service health scores and entity filtering.
-&lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Pre-built network monitoring for Splunk ITSI and ITEW — automatic device discovery, interface health, and SNMP trap alerting powered by NetFlow Optimizer.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Built by NetFlow Logic, an official Splunk Partner — this Content Pack brings pre-built network monitoring directly into Splunk IT Service Intelligence (ITSI) and IT Essentials Work (ITEW). Powered by NetFlow Optimizer (NFO), it automatically discovers network devices and interfaces, monitors their health in real time, and delivers proactive alerting via SNMP traps — all out of the box, with no manual entity configuration required.
-
-What this Content Pack gives you:
-
-- Automatic device and interface discovery — network devices and interfaces are imported as ITSI/ITEW entities without manual configuration
-- Real-time health monitoring — track CPU utilisation, memory usage, interface load, and errors/discards per device and interface
-- Proactive SNMP trap alerting — receive and correlate real-time network event alerts for faster incident response
-- Service-based visibility — five pre-built ITSI services for Network Firewall, Router, Switch, Load Balancer, and Interface Health — each with dedicated KPIs
-- Pre-built dashboards — covering interface errors and discards, network conversations (by traffic, application, user, country, protocol, and autonomous system), cyber threats and top violators, and SNMP device CPU and memory health
-
-Requirements:
-
-- NetFlow Optimizer (NFO) with SNMP monitoring enabled.
-- Requires Splunk ITSI or IT Essentials Work (ITEW).
-- The Technology Add-on for NetFlow (TA-netflow)(https://splunkbase.splunk.com/app/1838/) must also be installed.
-
-Start a free 60-day trial of NetFlow Optimizer at netflowlogic.com/free-trial — or request a demo at netflowlogic.com/request-a-demo.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8bb48536-2bcc-11f1-99fa-a229193dfe9d.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">NetFlow Logic</dc:creator>
-      <pubDate>Tue, 31 Mar 2026 19:23:40 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7712/#v1.0.17</guid>
     </item>
     <item>
       <title>Dark Web Scan by Bechtle App - v1.1.0 [Version Update]</title>
@@ -2121,28 +2145,6 @@ Let&amp;#x27;s compare the beautiful waves per category, this chart may possibly
       <guid>https://splunkbase.splunk.com/app/7496/#v1.1.1</guid>
     </item>
     <item>
-      <title>Splunk Add-on for Linux - v2.1.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/3412/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Fixed an issue where some Linux audit events did not keep their exact time down to the millisecond. Timestamps are now recorded with full precision, improving the accuracy of event timelines and correlation.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Add-on for Linux allows a Splunk software administrator to collect Linux performance metrics using HTTP Event Collector (HEC) or TCP. The Splunk Add-on for Linux collects data includes:
-
-* CPU metrics.
-* Memory metrics.
-* Swap metrics.
-* Mountpoint usage/FS usage.
-* Network interface traffic.
-* Disk utilization.
-* System load.
-* Process information.
-* Network protocols information.
-* IRQ metrics.
-* TCP connections information.
-* Thermal information.
-* System uptime statistics.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d240298a-2c1f-11f1-bc78-024715c62156.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 31 Mar 2026 03:02:01 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/3412/#v2.1.1</guid>
-    </item>
-    <item>
       <title>Cribl Decrypt Add-On for Splunk - v2.1.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8285/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
@@ -2257,16 +2259,6 @@ This add-on has two main functions:
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Analyst1 Team</dc:creator>
       <pubDate>Mon, 30 Mar 2026 13:53:58 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6816/#v1.5.8</guid>
-    </item>
-    <item>
-      <title>Dataminr Pulse for Splunk SOAR - v2.1.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6837/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
-&lt;li&gt;Added support for python 3.13&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Pulse&amp;#x27;s AI-powered real-time intelligence integrates into Splunk SOAR workflows for faster detection and response&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/52639a04-2bf6-11f1-acea-6a469f1ef8f5.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
-      <pubDate>Mon, 30 Mar 2026 05:07:17 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6837/#v2.1.0</guid>
     </item>
   </channel>
 </rss>
