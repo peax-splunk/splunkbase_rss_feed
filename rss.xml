@@ -6,14 +6,19 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sat, 18 Apr 2026 18:35:30 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 18 Apr 2026 19:35:04 +0000</lastBuildDate>
     <item>
-      <title>cve.icu - CVE Intelligence for Splunk - v2.0.1 [Version Update]</title>
+      <title>cve.icu - CVE Intelligence for Splunk - v2.0.2 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8395/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;v2.0.1 — Fix: Dashboard Data on Fresh Install&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Fix:&lt;/strong&gt; All six saved searches now run on Splunk startup so enrichment lookups populate immediately after install. In v2.0.0, dashboards showed empty panels until the first cron cycle fired (up to 24 hours for some lookups).&lt;/p&gt;
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;v2.0.2 — Fix: Reliable Lookup Population on Fresh Install&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Fix:&lt;/strong&gt; Removed &lt;code&gt;run_on_startup&lt;/code&gt; from index-dependent saved searches and switched to tighter cron schedules (every 5-10 minutes). In v2.0.1, the &lt;code&gt;run_on_startup&lt;/code&gt; flag caused saved searches to fire before the modular input finished ingesting baseline data (~2 minutes), producing empty lookup tables. Dashboards now fully populate within 10 minutes of install.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CVE Total: refreshes every 5 minutes&lt;/li&gt;
+&lt;li&gt;Daily Summary, Vendors, Risk Priority: refresh every 10 minutes&lt;/li&gt;
+&lt;li&gt;EPSS and KEV: unchanged (external API fetches, not index-dependent)&lt;/li&gt;
+&lt;/ul&gt;
 &lt;hr&gt;
-&lt;h2&gt;What's New in v2.0 (included in v2.0.1)&lt;/h2&gt;
+&lt;h2&gt;What's New in v2.0 (included in v2.0.2)&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Requires Splunk 10.0+ or Splunk Cloud.&lt;/strong&gt; Users on Splunk 9 should remain on v1.0.6.&lt;/p&gt;
 &lt;h3&gt;New Features&lt;/h3&gt;
 &lt;ul&gt;
@@ -44,7 +49,7 @@
 &lt;h3&gt;Migration from v1.x&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;Upgrade Splunk to 10.0+ first&lt;/li&gt;
-&lt;li&gt;Install v2.0.1 via Manage Apps&lt;/li&gt;
+&lt;li&gt;Install v2.0.2 via Manage Apps&lt;/li&gt;
 &lt;li&gt;No data migration needed -- same sourcetypes and field extractions&lt;/li&gt;
 &lt;li&gt;If using a custom index, create local/macros.conf with your cveicu_index definition&lt;/li&gt;
 &lt;/ol&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Ingest the complete CVE V5 database (327,000+ vulnerabilities) into Splunk in minutes. Features bulk ZIP downloads, hourly delta updates, CVSS/EPSS/KEV/SSVC risk enrichment, and four Dashboard Studio dashboards. Works out of the box with no API keys or setup required.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The cve.icu add-on ingests the complete CVE V5 database directly into Splunk. Unlike traditional collectors that rely on slow per-CVE API crawling, this add-on streams data from official GitHub release ZIP files, enabling initial ingestion of over 327,000 CVE records in minutes. Hourly delta updates keep the data current with only a few API calls per run -- no GitHub token required.
@@ -59,10 +64,10 @@ Four Dashboard Studio Dashboards: CVE Explorer for searching and filtering the f
 
 Production-Ready Architecture: Resource-aware modular input with memory monitoring (512MB limit), cooperative timeout management, and KV Store checkpointing with file fallback. Pre-computed lookup CSVs power dashboard KPIs so panels load instantly without running expensive searches. Splunk Cloud compatible and AppInspect validated.
 
-Zero-Configuration Start: Works out of the box -- install and data starts flowing. No API keys, no setup pages, no index creation required. Customize the target index via the cveicu_index macro when ready.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/062ba9f0-3b4c-11f1-b6b7-caeb896af8b6.png&quot;&gt;</description>
+Zero-Configuration Start: Works out of the box -- install and data starts flowing. No API keys, no setup pages, no index creation required. Customize the target index via the cveicu_index macro when ready.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c39f905a-3b56-11f1-b6b7-caeb896af8b6.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jerry Gamblin</dc:creator>
-      <pubDate>Sat, 18 Apr 2026 17:30:40 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8395/#v2.0.1</guid>
+      <pubDate>Sat, 18 Apr 2026 18:49:05 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8395/#v2.0.2</guid>
     </item>
     <item>
       <title>Spur Enrichment for Splunk - v1.1.1 [Version Update]</title>
