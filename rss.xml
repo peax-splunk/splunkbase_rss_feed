@@ -6,7 +6,47 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sat, 18 Apr 2026 15:30:29 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 18 Apr 2026 16:29:35 +0000</lastBuildDate>
+    <item>
+      <title>CVE.ICU CVE Dashboard - v1.0.6 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8395/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h1&gt;TA-cveicu v1.0.6 Release Notes&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Release Date:&lt;/strong&gt; April 14, 2026&lt;/p&gt;
+&lt;h2&gt;Bug Fixes&lt;/h2&gt;
+&lt;h3&gt;Fixed: Modular input still fails to register on some systems (exit code 1)&lt;/h3&gt;
+&lt;p&gt;Version 1.0.5 added a fallback for &lt;code&gt;--scheme&lt;/code&gt; introspection when &lt;code&gt;splunklib&lt;/code&gt; could not be imported. However, the fallback was placed at the bottom of the script in &lt;code&gt;__main__&lt;/code&gt;, which was never reached because the script crashed during module-level imports before getting there. Specifically, &lt;code&gt;github_client.py&lt;/code&gt; imports &lt;code&gt;requests&lt;/code&gt;, which imports &lt;code&gt;urllib3&lt;/code&gt;, which requires SSL shared libraries (e.g., &lt;code&gt;libssl.so.3&lt;/code&gt;). On systems where those libraries are missing from the Python environment Splunk uses for introspection, the entire script would fail at import time.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;--scheme&lt;/code&gt; handler is now the very first thing that runs after &lt;code&gt;sys.path&lt;/code&gt; setup, before any imports that could fail. This guarantees the modular input registers correctly regardless of the Python environment's SSL library availability.&lt;/p&gt;
+&lt;h2&gt;Upgrade Instructions&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Download &lt;a href=&quot;https://splunkbase.splunk.com/app/8395&quot;&gt;TA-cveicu 1.0.6 from Splunkbase&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Go to &lt;strong&gt;Apps &amp;gt; Manage Apps &amp;gt; Install app from file&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Upload the package and check &lt;strong&gt;Upgrade app&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Restart Splunk&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;Verification&lt;/h2&gt;
+&lt;p&gt;After upgrading, confirm the data input appears:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Settings &amp;gt; Data Inputs &amp;gt; cve.icu&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;To verify in the logs:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;index=_internal sourcetype=splunkd component=ModularInputs &amp;quot;cveicu&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You should see successful scheme registration instead of the exit code 1 error.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;A high-performance Splunk Technology Add-on for ingesting and analyzing the complete CVE List V5 database from the official CVE Program repository. It features efficient bulk downloads, hourly delta updates, and advanced risk scoring using CISA KEV and EPSS intelligence.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The CVE.icu add-on provides a robust framework for bringing real-time vulnerability intelligence directly into Splunk. Unlike traditional collectors that rely on slow API crawling, this package utilizes an architecture that streams data from official GitHub release ZIP files, enabling the initial ingestion of over 300,000 records in minutes.
+
+Key Technical Features:
+
+Vulnerability Intelligence V5 Support: Fully supports the modern CVE JSON 5.x schema, including cveMetadata, CNA containers, and ADP enrichment data.
+
+Advanced Risk Prioritization: Goes beyond basic CVSS scores by integrating the Exploit Prediction Scoring System (EPSS) and CISA&amp;#x27;s Known Exploited Vulnerabilities (KEV) catalog to help security teams identify &amp;quot;patch-now&amp;quot; threats.
+
+Operational Excellence: Includes a resource-aware modular input with built-in memory management, execution timeouts, and smart checkpointing to ensure stable performance in Splunk Cloud environments.
+
+Secure Configuration: Implements a Splunk-native REST setup handler that utilizes encrypted storage for API tokens and includes automated cache-clearing to ensure a seamless user experience.
+
+Comprehensive Dashboards: Features multiple visualization options, ranging from real-time KPI panels and severity distribution charts to accelerated tstats-based views for instant analysis of historical trends.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jerry Gamblin</dc:creator>
+      <pubDate>Sat, 18 Apr 2026 16:22:06 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8395/#v1.0.6</guid>
+    </item>
     <item>
       <title>Spur Enrichment for Splunk - v1.1.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7126/</link>
@@ -214,46 +254,6 @@ Splunk ES is a premium security solution requiring a paid license.&lt;/p&gt;&lt;
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Fri, 17 Apr 2026 14:58:29 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/263/#v8.4.1</guid>
-    </item>
-    <item>
-      <title>CVE.ICU CVE Dashboard - v1.0.6 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8395/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h1&gt;TA-cveicu v1.0.6 Release Notes&lt;/h1&gt;
-&lt;p&gt;&lt;strong&gt;Release Date:&lt;/strong&gt; April 14, 2026&lt;/p&gt;
-&lt;h2&gt;Bug Fixes&lt;/h2&gt;
-&lt;h3&gt;Fixed: Modular input still fails to register on some systems (exit code 1)&lt;/h3&gt;
-&lt;p&gt;Version 1.0.5 added a fallback for &lt;code&gt;--scheme&lt;/code&gt; introspection when &lt;code&gt;splunklib&lt;/code&gt; could not be imported. However, the fallback was placed at the bottom of the script in &lt;code&gt;__main__&lt;/code&gt;, which was never reached because the script crashed during module-level imports before getting there. Specifically, &lt;code&gt;github_client.py&lt;/code&gt; imports &lt;code&gt;requests&lt;/code&gt;, which imports &lt;code&gt;urllib3&lt;/code&gt;, which requires SSL shared libraries (e.g., &lt;code&gt;libssl.so.3&lt;/code&gt;). On systems where those libraries are missing from the Python environment Splunk uses for introspection, the entire script would fail at import time.&lt;/p&gt;
-&lt;p&gt;The &lt;code&gt;--scheme&lt;/code&gt; handler is now the very first thing that runs after &lt;code&gt;sys.path&lt;/code&gt; setup, before any imports that could fail. This guarantees the modular input registers correctly regardless of the Python environment's SSL library availability.&lt;/p&gt;
-&lt;h2&gt;Upgrade Instructions&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;Download &lt;a href=&quot;https://splunkbase.splunk.com/app/8395&quot;&gt;TA-cveicu 1.0.6 from Splunkbase&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Go to &lt;strong&gt;Apps &amp;gt; Manage Apps &amp;gt; Install app from file&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;Upload the package and check &lt;strong&gt;Upgrade app&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;Restart Splunk&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2&gt;Verification&lt;/h2&gt;
-&lt;p&gt;After upgrading, confirm the data input appears:&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Settings &amp;gt; Data Inputs &amp;gt; cve.icu&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;To verify in the logs:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;index=_internal sourcetype=splunkd component=ModularInputs &amp;quot;cveicu&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;You should see successful scheme registration instead of the exit code 1 error.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;A high-performance Splunk Technology Add-on for ingesting and analyzing the complete CVE List V5 database from the official CVE Program repository. It features efficient bulk downloads, hourly delta updates, and advanced risk scoring using CISA KEV and EPSS intelligence.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The CVE.icu add-on provides a robust framework for bringing real-time vulnerability intelligence directly into Splunk. Unlike traditional collectors that rely on slow API crawling, this package utilizes an architecture that streams data from official GitHub release ZIP files, enabling the initial ingestion of over 300,000 records in minutes.
-
-Key Technical Features:
-
-Vulnerability Intelligence V5 Support: Fully supports the modern CVE JSON 5.x schema, including cveMetadata, CNA containers, and ADP enrichment data.
-
-Advanced Risk Prioritization: Goes beyond basic CVSS scores by integrating the Exploit Prediction Scoring System (EPSS) and CISA&amp;#x27;s Known Exploited Vulnerabilities (KEV) catalog to help security teams identify &amp;quot;patch-now&amp;quot; threats.
-
-Operational Excellence: Includes a resource-aware modular input with built-in memory management, execution timeouts, and smart checkpointing to ensure stable performance in Splunk Cloud environments.
-
-Secure Configuration: Implements a Splunk-native REST setup handler that utilizes encrypted storage for API tokens and includes automated cache-clearing to ensure a seamless user experience.
-
-Comprehensive Dashboards: Features multiple visualization options, ranging from real-time KPI panels and severity distribution charts to accelerated tstats-based views for instant analysis of historical trends.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/42b5736c-3820-11f1-bfe4-7eec6d210fba.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jerry Gamblin</dc:creator>
-      <pubDate>Thu, 16 Apr 2026 23:44:31 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8395/#v1.0.6</guid>
     </item>
     <item>
       <title>PingFederate App for Splunk - v2.1.2 [New App Release]</title>
