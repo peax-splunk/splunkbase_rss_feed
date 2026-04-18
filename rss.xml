@@ -6,7 +6,32 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sat, 18 Apr 2026 19:35:04 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 18 Apr 2026 20:27:23 +0000</lastBuildDate>
+    <item>
+      <title>Nucleus User Logs Technology Add-on - v1.0.7 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8621/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Fixed bug in parameter naming convention.&lt;/p&gt;
+&lt;p&gt;Enabled modular input so users can configure the TA via UI.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Ingest Nucleus Security audit logs into Splunk for security monitoring, compliance auditing, and user activity analysis. This Technology Add-on provides automated REST API polling with intelligent deduplication and pre-built field extractions for login events, logouts, and role modifications.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Nucleus User Logs Technology Add-on (TA-nucleus-logs) enables seamless ingestion of audit logs from the Nucleus Security platform into Splunk Enterprise.
+
+Problem Addressed:
+Organizations using Nucleus Security need to aggregate and analyze user activity, authentication events, and role modifications for security monitoring, compliance auditing, and incident response. Without this integration, security teams must manually access the Nucleus platform to review audit logs, making it difficult to correlate Nucleus user activity with other security events across their environment.
+
+Solution Provided:
++ Automated Data Collection: Continuously polls the Nucleus Security REST API (/nucleus/api/logs endpoint) to retrieve audit logs at configurable intervals
++ Intelligent Deduplication: Uses checkpoint-based tracking with SHA1 hashing to prevent duplicate events while ensuring no data loss
++ Pre-configured Field Extractions: Automatically extracts key fields from audit logs including usernames, actions (login, logout, role modifications), outcomes, browser information, and organizational IDs
++ CIM Compatibility: Normalizes data with consistent field naming (nucleus.user, nucleus.action, nucleus.outcome) to facilitate integration with Splunk Enterprise Security and other analytics apps
++ Flexible Deployment: Supports multiple Nucleus instances through separate input configurations
+
+Use Cases:
++ Security monitoring and threat detection (failed logins, unusual access patterns)
++ Compliance reporting (user access auditing, privileged user tracking)
++ Incident investigation (correlating Nucleus user activity with security events)
++ User behavior analytics across hybrid environments&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2212099a-3b63-11f1-9775-bee9464af44e.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">David Page</dc:creator>
+      <pubDate>Sat, 18 Apr 2026 20:20:40 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8621/#v1.0.7</guid>
+    </item>
     <item>
       <title>cve.icu - CVE Intelligence for Splunk - v2.0.2 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8395/</link>
@@ -1511,134 +1536,6 @@ Learn more: http://kollective.com | LinkedIn: linkedin.com/company/kollective-te
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Kollective Technology</dc:creator>
       <pubDate>Wed, 08 Apr 2026 12:40:59 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8618/#v1.0.0</guid>
-    </item>
-    <item>
-      <title>Nucleus User Logs Technology Add-on - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8621/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h1&gt;Release Notes - TA-nucleus-logs v1.0.0&lt;/h1&gt;
-&lt;h2&gt;Initial Release&lt;/h2&gt;
-&lt;p&gt;The &lt;strong&gt;Nucleus User Logs Technology Add-on&lt;/strong&gt; for Splunk enables seamless integration between Nucleus Security and Splunk Enterprise, providing automated ingestion and analysis of Nucleus audit logs.&lt;/p&gt;
-&lt;h3&gt;Core Functionality&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;REST API Integration&lt;/strong&gt;: Automated polling of Nucleus Security audit logs via &lt;code&gt;/nucleus/api/logs&lt;/code&gt; endpoint&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Modular Input&lt;/strong&gt;: Python 3-based modular input for reliable, scheduled data collection&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Intelligent Checkpointing&lt;/strong&gt;: Maintains state between polling intervals to prevent data loss and minimize duplicate events&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;SHA1-based Deduplication&lt;/strong&gt;: Prevents duplicate events at timestamp boundaries using content hashing&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Automatic Pagination&lt;/strong&gt;: Retrieves all available logs using configurable page sizes (default: 500 records per call)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Rate Limit Handling&lt;/strong&gt;: Automatically respects API rate limits with intelligent retry logic and exponential backoff&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Field Extractions&lt;/h3&gt;
-&lt;p&gt;Pre-built field extractions for common Nucleus audit events:&lt;br&gt;
-- &lt;strong&gt;Login Events&lt;/strong&gt;: Automatically extracts user login success events with username and browser information&lt;br&gt;
-- &lt;strong&gt;Logout Events&lt;/strong&gt;: Captures user logout activities&lt;br&gt;
-- &lt;strong&gt;Role Modifications&lt;/strong&gt;: Extracts actor, target user, organization ID, and change details for role modification events&lt;br&gt;
-- &lt;strong&gt;User Normalization&lt;/strong&gt;: Consolidated &lt;code&gt;user&lt;/code&gt; field for CIM compatibility, combining data from multiple sources&lt;/p&gt;
-&lt;h3&gt;Extracted Fields&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Field&lt;/th&gt;
-&lt;th&gt;Description&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;nucleus.user&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Username involved in the event&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;nucleus.actor&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;User who performed the action&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;nucleus.target_user&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;User affected by the action&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;nucleus.email&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Email address from log details&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;nucleus.action&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Action type (login, logout, role_modified)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;nucleus.outcome&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Result of the action (success)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;nucleus.browser&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Browser user agent string&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;nucleus.org_id&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Organization identifier&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;nucleus.changes&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Details of changes made&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;user&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;CIM-normalized user field&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3&gt;Configuration Options&lt;/h3&gt;
-&lt;p&gt;Flexible input configuration supporting:&lt;br&gt;
-- Custom Nucleus instance URLs (HTTPS required)&lt;br&gt;
-- Encrypted API key storage via Splunk's credential management&lt;br&gt;
-- Configurable polling intervals (default: 300 seconds / 5 minutes)&lt;br&gt;
-- Adjustable page sizes for API pagination&lt;br&gt;
-- Initial lookback window for first-time data collection (default: 60 minutes)&lt;br&gt;
-- SSL certificate verification toggle&lt;br&gt;
-- Custom sourcetype and index assignment&lt;br&gt;
-- Multiple instance support (configure separate inputs for different Nucleus environments)&lt;/p&gt;
-&lt;h3&gt;Data Handling&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;JSON Event Format&lt;/strong&gt;: Events indexed in JSON format for easy parsing&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Automatic Timestamping&lt;/strong&gt;: Uses Nucleus &lt;code&gt;datetime&lt;/code&gt; field for accurate event timestamps&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;UTC Timezone Handling&lt;/strong&gt;: All timestamps normalized to UTC&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Zero Line Merging&lt;/strong&gt;: Each log entry treated as a single event&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Unlimited Event Size&lt;/strong&gt;: No truncation of event data&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Technical Specifications&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Splunk Version&lt;/strong&gt;: Compatible with Splunk Enterprise 8.0+ and Splunk Cloud Platform&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Python Version&lt;/strong&gt;: Python 3 (automatically configured)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;API Compatibility&lt;/strong&gt;: Nucleus Security REST API v1&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Default Sourcetype&lt;/strong&gt;: &lt;code&gt;nucleus:logs&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Recommended Index&lt;/strong&gt;: &lt;code&gt;nucleus&lt;/code&gt; (or any custom index)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Checkpoint Storage&lt;/strong&gt;: &lt;code&gt;$SPLUNK_HOME/var/lib/splunk/modinputs/nucleus_logs/&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Included Dependencies (Vendored)&lt;/h3&gt;
-&lt;p&gt;All required Python libraries are bundled with the add-on:&lt;br&gt;
-- &lt;code&gt;requests&lt;/code&gt; - HTTP library for API communication&lt;br&gt;
-- &lt;code&gt;urllib3&lt;/code&gt; - HTTP client library&lt;br&gt;
-- &lt;code&gt;certifi&lt;/code&gt; - SSL certificate bundle&lt;br&gt;
-- &lt;code&gt;charset_normalizer&lt;/code&gt; - Character encoding detection&lt;br&gt;
-- &lt;code&gt;idna&lt;/code&gt; - Internationalized domain name support&lt;br&gt;
-- &lt;code&gt;packaging&lt;/code&gt; - Version parsing utilities&lt;br&gt;
-- &lt;code&gt;splunklib&lt;/code&gt; - Splunk SDK for Python&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Ingest Nucleus Security audit logs into Splunk for security monitoring, compliance auditing, and user activity analysis. This Technology Add-on provides automated REST API polling with intelligent deduplication and pre-built field extractions for login events, logouts, and role modifications.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Nucleus User Logs Technology Add-on (TA-nucleus-logs) enables seamless ingestion of audit logs from the Nucleus Security platform into Splunk Enterprise.
-
-Problem Addressed:
-Organizations using Nucleus Security need to aggregate and analyze user activity, authentication events, and role modifications for security monitoring, compliance auditing, and incident response. Without this integration, security teams must manually access the Nucleus platform to review audit logs, making it difficult to correlate Nucleus user activity with other security events across their environment.
-
-Solution Provided:
-+ Automated Data Collection: Continuously polls the Nucleus Security REST API (/nucleus/api/logs endpoint) to retrieve audit logs at configurable intervals
-+ Intelligent Deduplication: Uses checkpoint-based tracking with SHA1 hashing to prevent duplicate events while ensuring no data loss
-+ Pre-configured Field Extractions: Automatically extracts key fields from audit logs including usernames, actions (login, logout, role modifications), outcomes, browser information, and organizational IDs
-+ CIM Compatibility: Normalizes data with consistent field naming (nucleus.user, nucleus.action, nucleus.outcome) to facilitate integration with Splunk Enterprise Security and other analytics apps
-+ Flexible Deployment: Supports multiple Nucleus instances through separate input configurations
-
-Use Cases:
-+ Security monitoring and threat detection (failed logins, unusual access patterns)
-+ Compliance reporting (user access auditing, privileged user tracking)
-+ Incident investigation (correlating Nucleus user activity with security events)
-+ User behavior analytics across hybrid environments&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/edc3471a-2edf-11f1-ba90-bae7fd19d53c.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">David Page</dc:creator>
-      <pubDate>Wed, 08 Apr 2026 12:38:42 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8621/#v1.0.0</guid>
     </item>
     <item>
       <title>AWS-DFD-Visualizer - v2.5.6 [New App Release]</title>
