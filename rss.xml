@@ -6,22 +6,42 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Tue, 21 Apr 2026 04:42:48 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 21 Apr 2026 06:53:22 +0000</lastBuildDate>
     <item>
-      <title>Ensign ElasticSearch Data Integrator - v1.1.1 [New App Release]</title>
+      <title>Ensign ElasticSearch Data Integrator - v1.2.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8645/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;v1.1.1 - Initial Release&lt;/h2&gt;
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Here is the summary of the key upgrades and new features:&lt;/p&gt;
+&lt;h3&gt;1. Elasticsearch Cluster Topology Support (New)&lt;/h3&gt;
+&lt;p&gt;The most significant enhancement is the flexibility to connect to an Elasticsearch Cluster architecture rather than just a standalone node:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Modular input for Elasticsearch 8.x REST API data ingestion&lt;/li&gt;
-&lt;li&gt;Multi-cluster configuration support via es_clusters.conf&lt;/li&gt;
-&lt;li&gt;DSL query-based filtering with custom term filters&lt;/li&gt;
-&lt;li&gt;SSL/TLS certificate verification support&lt;/li&gt;
-&lt;li&gt;Scroll-based pagination with automatic crash recovery&lt;/li&gt;
-&lt;li&gt;Document-level deduplication guard (rolling 50k ID cache)&lt;/li&gt;
-&lt;li&gt;Persistent checkpoint management for Heavy Forwarder deployments&lt;/li&gt;
-&lt;li&gt;Optional proxy configuration&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Note:&lt;/strong&gt; Compatible with Elasticsearch 8.x API only&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Splunk modular input for ingesting data from Elasticsearch 8.x clusters by leveraging call the ElasticSearch v8.x REST API. Features multi-cluster profiles, DSL query filters, scroll-based pagination with crash recovery, document-level deduplication, SSL/TLS support, and a full GUI configuration experience. Compatible with Elasticsearch 8.x only and DSL based only,&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Ensign ElasticSearch Data Integrator is a Splunk modular input add-on for ingesting data from Elasticsearch 8.x clusters into Splunk via the Elasticsearch 8 REST API.
+&lt;li&gt;&lt;strong&gt;Multi-Node Connection&lt;/strong&gt;: The &lt;code&gt;es_host&lt;/code&gt; parameter now accepts comma-separated hostnames (e.g., &lt;code&gt;node1.es.local, node2.es.local&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Round-robin Load Balancing&lt;/strong&gt;: The add-on performs round-robin load balancing across all configured nodes.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Node Sniffing (Auto-Discovery)&lt;/strong&gt;: A new &lt;code&gt;enable_sniffing&lt;/code&gt; toggle allowing the client to automatically discover and connect to all available nodes in the cluster via the ES &lt;code&gt;_nodes&lt;/code&gt; API.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Reliability &amp;amp; Timeout Controls&lt;/strong&gt;: Automatic connection failure retries, supported by configurable parameters (&lt;code&gt;max_retries&lt;/code&gt;, &lt;code&gt;retry_on_timeout&lt;/code&gt;, and &lt;code&gt;connection_timeout&lt;/code&gt;).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;2. Cluster Health Monitoring (Preflight Health Check)&lt;/h3&gt;
+&lt;p&gt;Before fetching data, the add-on now performs a preflight health check against the Elasticsearch cluster (&lt;code&gt;_cluster/health&lt;/code&gt; API):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;It automatically logs the cluster's health status (Green, Yellow, or Red).&lt;/li&gt;
+&lt;li&gt;Handled as a non-blocking check: Even if a &lt;em&gt;Red&lt;/em&gt; cluster status triggers a Warning log, data collection will still proceed on a best-effort basis.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;3. Core Library Upgrades&lt;/h3&gt;
+&lt;p&gt;The bundled Python libraries have been bumped significantly to patch legacy bugs, avoid vulnerabilities, and officially support the Elasticsearch 8.x ecosystem:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;elasticsearch-py&lt;/code&gt; upgraded from &lt;code&gt;8.8.0&lt;/code&gt; to &lt;strong&gt;&lt;code&gt;8.19.3&lt;/code&gt;&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;elastic-transport&lt;/code&gt; upgraded from &lt;code&gt;8.4.0&lt;/code&gt; to &lt;strong&gt;&lt;code&gt;8.17.1&lt;/code&gt;&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;4. Security Hardening &amp;amp; Remediations&lt;/h3&gt;
+&lt;p&gt;Multiple layers of security (defense-in-depth) have been added across the v1.2.0 and v1.2.1 releases:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Restricted Web Endpoints (v1.2.1)&lt;/strong&gt;: Modified &lt;code&gt;web.conf&lt;/code&gt; to narrow an overly broad &lt;code&gt;data/*&lt;/code&gt; REST endpoint exposure down to &lt;code&gt;data/indexes&lt;/code&gt; securely, preventing unnecessary internal Splunk data from being exposed to the browser UI.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Secured Internal Splunk REST calls (v1.2.1)&lt;/strong&gt;: Internal communication to the Splunk Daemon now strictly requires SSL verification (&lt;code&gt;verify=True&lt;/code&gt;) and enforces an explicit 30s timeout, protecting the &lt;code&gt;session_key&lt;/code&gt; authentication token on the loopback interface.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Strict SSL/TLS Validation&lt;/strong&gt;: Certificate verification now defaults to &lt;strong&gt;ENABLED&lt;/strong&gt;. If left disabled, an active security warning is generated in the &lt;code&gt;_internal&lt;/code&gt; logs.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Proxy Credentials Protection&lt;/strong&gt;: Proxy configurations are scrubbed and removed from the system environment variables (&lt;code&gt;os.environ&lt;/code&gt;) in memory immediately after the Elasticsearch client instantiates, limiting exposure.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;SSRF (Server-Side Request Forgery) Protection&lt;/strong&gt;: Strict validation is added to block potentially dangerous &lt;code&gt;es_host&lt;/code&gt; inputs such as localhost, 0.0.0.0, 169.254.169.254, and loopback/link-local bounds.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Log Injection Prevention&lt;/strong&gt;: Sanitization filters were added on stanza names (stripping newlines, tabs, and escape chars) before they are rendered into the event logs.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Let us knows if the features or ideas that need to enhance for future release.&amp;#x20;&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Splunk modular input for ingesting data from Elasticsearch 8.x clusters by leveraging call the ElasticSearch v8.x REST API. Features multi-cluster profiles, DSL query filters, scroll-based pagination with crash recovery, document-level deduplication, SSL/TLS support, and a full GUI configuration experience. Compatible with Elasticsearch 8.x only and DSL based only,&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Ensign ElasticSearch Data Integrator is a Splunk modular input add-on for ingesting data from Elasticsearch 8.x clusters into Splunk via the Elasticsearch 8 REST API.
 
 Built on the Splunk UCC Framework, it provides a full GUI-driven configuration experience through Splunk Web — no manual file editing required.
 
@@ -43,8 +63,47 @@ Compatibility:
 • Splunk Enterprise: 8.2+ and 9.x (You can try for 10.x, let me know the updates)
 • Python: 3.x (bundled with Splunk)&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/44e89a62-3d3c-11f1-8530-46c2835d04d1.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Muhammad Rafdi Aufar Ahmad</dc:creator>
-      <pubDate>Tue, 21 Apr 2026 04:40:49 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8645/#v1.1.1</guid>
+      <pubDate>Tue, 21 Apr 2026 06:33:21 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8645/#v1.2.1</guid>
+    </item>
+    <item>
+      <title>Supporting App for Cisco Meeting Server - v0.6.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8413/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
+&lt;li&gt;Fixed a critical problem where our notion of &quot;call id&quot; and how the cisco_cdr app tied this together, was failing to merge sets of events from different servers into the overall call.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This is a Supporting App designed to be deployed alongside Sideview&amp;#x27;s commercial &amp;quot;Cisco CDR Reporting and Analytics&amp;quot; app.  It provides the Splunk configuration to ingest the CDR data from Cisco Meeting Server. Additionally it contains various pieces of Splunk configuration and logic that are used by Cisco CDR Reporting and Analytics, to make the CMS CDR work within its user interfaces.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/4cd4de08-3d45-11f1-8404-065af4c86201.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
+      <pubDate>Tue, 21 Apr 2026 05:46:13 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8413/#v0.6.0</guid>
+    </item>
+    <item>
+      <title>Supporting App for Oracle SBC CDR - v0.8.3 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7051/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
+&lt;li&gt;Fixed a bug that prevented the new homepage from working properly if the cisco_cdr app was not installed. (It would say only &quot;Action Forbidden&quot;.)&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app provides the Splunk configuration to ingest the CDR data from Oracle SBC.     It is intended to work for both Oracle Session Router CDR and Oracle SBC CDR, although some unknowns remain as of this writing. 
+
+It is also designed to work as a Supporting App alongside Sideview&amp;#x27;s commercial &amp;quot;Cisco CDR Reporting and Analytics&amp;quot; app.  
+When used in conjunction with the Cisco CDR app, the Oracle SBC data can be used in that app alongside the CUCM data.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d3e0cd16-3d3c-11f1-a206-9ed06fa27c31.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview LLC</dc:creator>
+      <pubDate>Tue, 21 Apr 2026 04:45:35 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7051/#v0.8.3</guid>
+    </item>
+    <item>
+      <title>Supporting App for Expressway CDR - v0.5.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8593/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
+&lt;li&gt;Fixed a bug that prevented the new homepage from working properly if the cisco_cdr app was not installed. (It would say only &quot;Action Forbidden&quot;.)&lt;/li&gt;
+&lt;li&gt;Fixed a problem in the app's health check that crosschecks indexes specified in the Cisco CDR app (if it's present) with the indexes specified in the SA's own &quot;custom_index&quot; macro.&lt;/li&gt;
+&lt;li&gt;Fixed a bug in the drilldown for the &quot;Top 20 Calling Parties&quot; chart. Previously the drilldown clicks would take you to all calls to OR from the given number, not just the calls from it.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;This app implements various field extraction configuration and Sideview conventions so as to allow syslog-formatted Expressway CDR data to be not only searched in Splunk effectively, but also to be pulled into Sideview&amp;#x27;s commercial &amp;quot;Cisco CDR Reporting and Analytics&amp;quot; solution on Splunk and investigated and analyzed there.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app implements various field extraction configuration and Sideview conventions so as to allow syslog-formatted Expressway CDR data to be not only searched in Splunk effectively, but also to be pulled into Sideview&amp;#x27;s commercial &amp;quot;Cisco CDR Reporting and Analytics&amp;quot; solution on Splunk and investigated and analyzed there.
+
+NOTE that this Supporting App is designed to be always deployed with Sideview&amp;#x27;s &amp;quot;Supporting Add-on for Expressway CDR&amp;quot; ALSO deployed on the Indexing tier. That &amp;quot;Add-on&amp;quot; component contains crucial index-time configuration to index the CDR into Splunk correctly, and that index-time configuration is NOT duplicated in this app here.  Therefore if you intend to set up a standalone deployment you will need both the TA and the SA.
+
+These two apps are furthermore designed to work with Sideview&amp;#x27;s commercial &amp;quot;Cisco CDR Reporting and Analytics&amp;quot; app. When all three components are present and deployed to the right tiers, users can navigate, troubleshoot and build ad-hoc charts and reports around the Expressway data, within the the Cisco CDR app&amp;#x27;s complex user interfaces.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/af0d59aa-3d3c-11f1-b797-5abed683dd81.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
+      <pubDate>Tue, 21 Apr 2026 04:44:38 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8593/#v0.5.2</guid>
     </item>
     <item>
       <title>Supporting App for CUBE - v0.5.2 [Version Update]</title>
@@ -1802,16 +1861,6 @@ The add-on is built around disposable compliance mailboxes that receive BCC copi
       <guid>https://splunkbase.splunk.com/app/5365/#v2.4.7</guid>
     </item>
     <item>
-      <title>ObserveIT (Proofpoint) On-Prem Technology Add-On for Splunk - v3.3.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4062/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The ObserveIT (Proofpoint) On-Prem Technology Add-On for Splunk provides security analysts and investigation teams with powerful user activity meta-data and smart user behavior alerts. By correlating this powerful user context with other data sources in Splunk, a complete picture of users’ activity will emerge, allowing for creation of smarter alerts and quicker threat elimination.
-
-Data collected by ObserveIT On-Prem TA can be searched using the Search App or ObserveIT (Proofpoint) On-Prem App for Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/7b9a6eb2-2d71-11f1-8e7a-8eb15e5594fd.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">ObserveIT Ltd</dc:creator>
-      <pubDate>Wed, 08 Apr 2026 01:15:46 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4062/#v3.3.1</guid>
-    </item>
-    <item>
       <title>Egnyte Secure and Govern Add-on For Splunk - v1.1.10 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/4526/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Improved reliability and stability of the add-on during intermittent Egnyte API connectivity issues.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Egnyte Secure &amp;amp; Govern Add-on For Splunk integrates with Egnyte Secure &amp;amp; Govern platform and ingest events from Egnyte Secure &amp;amp; Govern into Splunk. The Egnyte Secure &amp;amp; Govern Application provides insights into security incidents identified by Egnyte Secure &amp;amp; Govern. Splunk administrators can track enterprise-wide incidents identified by Egnyte Secure &amp;amp; Govern directly through the Splunk App.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ab96ac60-3272-11f1-ad5e-56c15eb0d18d.png&quot;&gt;</description>
@@ -2108,99 +2157,6 @@ Learn more: http://kollective.com | LinkedIn: linkedin.com/company/kollective-te
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Kollective Technology</dc:creator>
       <pubDate>Wed, 01 Apr 2026 20:06:00 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7997/#v1.1.0</guid>
-    </item>
-    <item>
-      <title>Smart Endpoint Observer - vnull [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8600/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Cost-efficient Windows endpoint observability for Splunk.
-Lightweight, low-volume, and optionally agentless — delivering real EUXM insights without the enterprise cost or complexity.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Real Windows endpoint visibility for Splunk — lightweight, affordable, and easy to deploy
-Server and datacenter monitoring are standard — but what about the endpoints your users actually work on?
-
-Smart Endpoint Observer brings true client-side observability into Splunk without the cost and data overhead of traditional EUXM/DEX platforms.
-
-🚀 Why Endpoint Observer?
- &amp;gt;Cost-efficient
- &amp;gt;Get endpoint visibility at a fraction of typical EUXM solutions
- &amp;gt;Low data footprint
- &amp;gt;Threshold-based collection sends only relevant data
- &amp;gt;Fast deployment
- &amp;gt;Up and running in minutes with minimal setup
- &amp;gt;Flexible architecture
- &amp;gt;Agentless via Task Scheduler and HEC or with Splunk Universal Forwarder
-
-Performance Monitoring
-&amp;gt;CPU, memory, GPU, disk latency, network usage
-&amp;gt;Ping latency , packet loss - with automatic ping target detection (gateway or nearest domain controller)
-&amp;gt;Wi-Fi signal quality
-
-Process Insights
-&amp;gt;Top N resource-consuming processes
-&amp;gt;Configurable watchlists
-
-Endpoint Inventory -  full hardware &amp;amp; OS visibility
-&amp;gt;Network configuration (IP, MAC, DNS, SSID)
-&amp;gt;AD / Entra ID / Intune / MDM status
-&amp;gt;Security posture (BitLocker, Defender, Firewall)
-&amp;gt;Windows health metrics (updates, boot time, GPO)
-
-Event Tracking
-&amp;gt;Application crashes &amp;amp; hangs
-&amp;gt;Blue Screens (BSOD)
-
-Endpoint Health Scoring Framework
-&amp;gt;Turn raw metrics into actionable insights
-&amp;gt;Unified Health Score (0–10) per endpoint
-Subscores for:
-&amp;gt;Performance
-&amp;gt;System state
-&amp;gt;Network
-&amp;gt;Boot experience
-&amp;gt;Quickly identify degraded endpoints at a glance
-&amp;gt;Drill down into detailed metrics root cause analysis (CPU, memory, latency, packet loss, etc.)
-
-⚙️ Deployment Options
-&amp;gt;Agentless via Scheduled Task + HEC
-&amp;gt;or Splunk Universal Forwarder (scripted Input)
-
-For demo, PoV, or integration support:
-📩 splunkbase@itdesign.at&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/51c0eb64-2918-11f1-b136-8ef1f7ba074e.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">ITdesign Software Projects &amp;amp; Consulting GmbH</dc:creator>
-      <pubDate>Wed, 01 Apr 2026 13:13:55 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8600/#vnull</guid>
-    </item>
-    <item>
-      <title>PAVO Getwatchlist Add-on - v1.4.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/635/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;Version 1.4.0&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Enhanced Error handling for more graceful and information error messages&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Added Credential Management for Profiles.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Graphical Interface for profiles&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Reviewed default profiles for the correct operation of settings&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Various bug fixes&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Validated for Splunk Python 3.13&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Added a &lt;code&gt;file://&lt;/code&gt; support.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;JAILED&lt;/strong&gt;: This input is jailed to the &lt;code&gt;$SPLUNK_HOME/etc/apps/getwatchlist/watchlists&lt;/code&gt; directory.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Getwatchlist is a custom search command for Splunk which will return a CSV formatted list from a URL. This is useful for creating lookup tables and keeping them up to date from external or internal sources. These watchlists can contain virtually anything such as domain names, IP addresses, host names, email addresses, filenames, etc. and can then be used in searches against your events. These watchlists can be in any delimited format (tab, comma, space, etc.).&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/dfd800be-2d4a-11f1-a90f-1ae8fed2aa0e.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aplura LLC</dc:creator>
-      <pubDate>Tue, 31 Mar 2026 21:47:33 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/635/#v1.4.0</guid>
     </item>
   </channel>
 </rss>
