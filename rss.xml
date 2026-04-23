@@ -6,7 +6,70 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 Apr 2026 22:36:11 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 23 Apr 2026 23:37:16 +0000</lastBuildDate>
+    <item>
+      <title>STIG Compliance App for Splunk - v1.2.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8486/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;v1.2.0 — 2026-04-23&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Security hardening, AppInspect compliance, and Splunk Cloud compatibility.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Added upload file size limit (10 MB) to prevent memory exhaustion on search heads&lt;/li&gt;
+&lt;li&gt;Added duplicate upload detection via KV store — prevents re-ingestion of previously uploaded checklists&lt;/li&gt;
+&lt;li&gt;Added structured logging for all upload activity (username, filename, batch ID, result) to splunkd.log&lt;/li&gt;
+&lt;li&gt;Added in-code role verification for upload endpoint (admin, power, sc_admin)&lt;/li&gt;
+&lt;li&gt;Added capability enforcement (admin_all_objects) and passPayload declaration in restmap.conf&lt;/li&gt;
+&lt;li&gt;Added python.version and python.required \= 3.13 declarations for Splunk Cloud and future Python compatibility&lt;/li&gt;
+&lt;li&gt;Added sc_admin role to all metadata permissions for Splunk Cloud environments&lt;/li&gt;
+&lt;li&gt;Fixed package ID mismatch between app.conf and directory name&lt;/li&gt;
+&lt;li&gt;Fixed EVAL-is_finding field renamed to EVAL-is_compliant to match actual semantics (NotAFinding \= compliant)&lt;/li&gt;
+&lt;li&gt;Set TRUNCATE \= 50000 to protect against oversized events while supporting all realistic CKL/CKLB data&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free STIG compliance tracking and reporting. Drag-and-drop CKL/CKLB upload, instant dashboards, zero infrastructure required.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Managing STIG compliance shouldn&amp;#x27;t require expensive vendor platforms, complex infrastructure, or weeks of deployment. I built this app because I believe every organization — regardless of size or budget — deserves access to effective compliance tools. My goal is to help as many people and organizations as possible by providing a free, production-ready resource that solves a real problem.
+
+STIG Compliance App for Splunk imports DISA STIG checklists and transforms them into searchable, reportable compliance data — with zero external dependencies and zero infrastructure beyond your existing Splunk deployment.
+
+Upload .ckl and .cklb checklist files directly through your browser. The app parses, indexes, and visualizes your compliance posture in minutes — not days.
+
+KEY FEATURES
+
+- Browser-based drag-and-drop upload for .ckl and .cklb files — no forwarders, no file shares, no scripted inputs
+- Custom CKL/CKLB parser converts DISA STIG XML checklists into searchable Splunk events
+- Four compliance dashboards: Compliance Overview, Executive Summary, POA&amp;amp;M Report, and Upload History
+- Risk scoring by severity: (CAT I x 10) + (CAT II x 5) + (CAT III x 1)
+- Deduplication logic displays only the latest checklist per host/STIG combination
+- Historical upload tracking with timestamps for audit trail
+- Pre-built saved searches and alert templates for CAT I findings and compliance thresholds
+- Works on a single search head or in a clustered environment — fully self-contained
+
+WHY THIS APP EXISTS
+
+Most STIG compliance workflows today involve Excel spreadsheets, manual tracking, or paid platforms that require additional licensing and infrastructure. This app eliminates those barriers. Install one app, upload through your browser, and get compliance dashboards immediately.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Marcus House</dc:creator>
+      <pubDate>Thu, 23 Apr 2026 22:40:54 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8486/#v1.2.0</guid>
+    </item>
+    <item>
+      <title>Compliance Posture for Splunk - v1.0.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8501/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;v1.0.2 — Splunk Cloud Compatibility &amp;amp; Operations Patch&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Resolves AppInspect findings that would have revoked Splunk Cloud Platform compatibility for v1.0.0 within 90 days, plus operational improvements.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Added &lt;code&gt;python.required = 3.13&lt;/code&gt; to REST handler configuration for Splunk Cloud vetting compliance (AppInspect check: &lt;code&gt;check_admin_external_restmap_conf_python_required&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Added explicit &lt;code&gt;capability = admin_all_objects&lt;/code&gt; to REST handler for defense-in-depth access control&lt;/li&gt;
+&lt;li&gt;Added structured logging to upload handler (writes to splunkd.log at INFO/WARNING/ERROR levels for operational troubleshooting)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;No functional changes. All dashboards, upload pipeline, and parser behavior are unchanged from v1.0.0.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free CIS Benchmark compliance tracking for Splunk. Upload scan results from your browser. See your compliance posture in minutes. No forwarders. No TAs. No infrastructure required.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;CIS Benchmark compliance reporting shouldn&amp;#x27;t require a paid dashboard platform, a dedicated ingestion pipeline, or weeks of integration work.
+
+I built this app because I believe compliance visibility shouldn&amp;#x27;t be gated behind expensive platforms or complex integrations. Whether you&amp;#x27;re a small team without budget for commercial tooling or a large organization looking for a lightweight alternative, you deserve a solution that works out of the box. My goal is to help as many teams as possible by providing a free, production-ready app that solves a real gap in the Splunk ecosystem.
+
+Compliance Posture for Splunk is a free, self-contained Splunk application that gives you consolidated CIS Benchmark compliance visibility across your entire infrastructure — from install to dashboards in minutes.
+
+Upload your CIS-CAT Pro Assessor ARF XML scan results directly through the browser using drag-and-drop. No file shares. No scripted inputs. No forwarder configuration. Just install the app, upload your scan files, and see where you stand.
+
+Built by a Splunk Enterprise Architect with 10+ years of hands-on experience implementing compliance reporting solutions across commercial and federal environments.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Marcus House</dc:creator>
+      <pubDate>Thu, 23 Apr 2026 22:40:22 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8501/#v1.0.2</guid>
+    </item>
     <item>
       <title>Authentic8 Silo Add-on for Splunk - v1.1.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5249/</link>
@@ -504,17 +567,6 @@ After the Splunk platform indexes the events, you can analyze the data using the
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Thu, 23 Apr 2026 16:01:07 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/3088/#v5.0.2</guid>
-    </item>
-    <item>
-      <title>Splunk Add-on for Apache Web Server - v3.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/3186/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Depreciated the support for python3.7 version&lt;br&gt;
-Security fixes&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Add-on for Apache Web Server allows a Splunk software administrator to collect and analyze data from Apache Web Server using file monitoring. After the Splunk platform indexes the events, you can analyze the data using the prebuilt panels included with the add-on. 
-
-This add-on provides the inputs and CIM-compatible knowledge to use with other Splunk apps, such as Web.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c349dc2a-3401-11f1-9b1f-5ab5123230fd.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Thu, 23 Apr 2026 15:58:59 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/3186/#v3.0.0</guid>
     </item>
     <item>
       <title>AI Query Assistant for Splunk - v2.2.10 [Version Update]</title>
@@ -1953,30 +2005,6 @@ The SpyCloud Investigations App enables Splunk users to uncover the the true ide
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Russell Byrne</dc:creator>
       <pubDate>Fri, 10 Apr 2026 00:08:51 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8461/#v1.5.1</guid>
-    </item>
-    <item>
-      <title>Sandfly Security Add-on for Splunk - v5.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5015/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;New Features&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Refactored the Sandfly Alarms input for ingesting Sandfly results data&lt;ul&gt;
-&lt;li&gt;Option to ingest smaller size Summary results for all Alert, Passed, Error result types&lt;/li&gt;
-&lt;li&gt;Option to ingest duplicate Alerts when the last seen timestamp is updated&lt;/li&gt;
-&lt;li&gt;Option to ingest smaller size Summary results for duplicate Alerts&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Other Updates&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Modified response processing for Sandfly REST API changes&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Sandfly is an agentless intrusion detection and incident response platform for Linux. Sandfly automatically analyzes Linux hosts for intruders 24 hours a day without loading any software on your endpoints. Additionally, Sandfly can retrieve hardware, operating system and related data for analysis in Splunk. Sandfly works across virtually all Linux distributions immediately without risk to stability or performance.
-
-The Sandfly Security Add-on for Splunk is a technology add-on that ingests events from a Sandfly Security server using the Sandfly Security REST API. This add-on (TA-sandfly-security) ingests data into your specified index and sets the correct sourcetype for each event. Events are ingested as JSON formatted events. Review the Details tab for a list of all supported sourcetypes.
-
-The Sandfly Agentless Security for Linux App includes dashboards, reports and logic for analyzing data ingested from a Sandfly server such as security alerts, suspicious activity and general software and hardware metrics. Data retrieved by Sandfly can also be used by Splunk users to build anomaly detection models, incident response and insights into software and hardware versions of your Linux fleet.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/6f4f6b28-342c-11f1-8f5b-c2d7cd6d796a.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sandfly Security</dc:creator>
-      <pubDate>Thu, 09 Apr 2026 16:11:24 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5015/#v5.0.0</guid>
     </item>
   </channel>
 </rss>
