@@ -6,7 +6,181 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 Apr 2026 11:55:06 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 23 Apr 2026 13:04:47 +0000</lastBuildDate>
+    <item>
+      <title>cve.icu - CVE Intelligence for Splunk - v2.0.3 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8395/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;v2.0.3 — Fix: Risk Priority Dashboard Error&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Fix:&lt;/strong&gt; Removed an invalid lookup join from the Risk Priority dashboard's &quot;High-EPSS CVEs&quot; panel. The query was joining on a &lt;code&gt;cve_id&lt;/code&gt; field that doesn't exist in &lt;code&gt;cve_daily_summary.csv&lt;/code&gt;, causing the panel to display a lookup error instead of the count.&lt;/p&gt;
+&lt;p&gt;Also includes the v2.0.2 fix: replaced &lt;code&gt;run_on_startup&lt;/code&gt; with tighter cron schedules (every 5-10 minutes) for index-dependent saved searches, so dashboard lookups reliably populate within 10 minutes of a fresh install.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;What's New in v2.0 (included in v2.0.3)&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Requires Splunk 10.0+ or Splunk Cloud.&lt;/strong&gt; Users on Splunk 9 should remain on v1.0.6.&lt;/p&gt;
+&lt;h3&gt;New Features&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Four Dashboard Studio v2 dashboards: CVE Explorer, Risk Priority, Vulnerability Landscape, and Operational Health&lt;/li&gt;
+&lt;li&gt;EPSS enrichment: Daily FIRST EPSS scores joined at search time for exploit probability ranking&lt;/li&gt;
+&lt;li&gt;CISA KEV integration: Known Exploited Vulnerabilities catalog refreshed every 6 hours&lt;/li&gt;
+&lt;li&gt;SSVC decision data: CISA Stakeholder-Specific Vulnerability Categorization from ADP containers&lt;/li&gt;
+&lt;li&gt;Risk Priority lookup: Pre-computed table combining CVSS, EPSS, KEV, and SSVC data for fast triage&lt;/li&gt;
+&lt;li&gt;Zero-configuration start: Input enabled by default, data starts flowing immediately after install&lt;/li&gt;
+&lt;li&gt;Configurable index macro: All dashboards and saved searches use the cveicu_index macro&lt;/li&gt;
+&lt;li&gt;CIM Vulnerabilities data model mapping&lt;/li&gt;
+&lt;li&gt;CI/CD pipeline: GitHub Actions with unit tests, AppInspect validation, and Docker integration tests&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Improvements&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;CVSS v4.0 support in addition to v3.1, v3.0, and v2.0&lt;/li&gt;
+&lt;li&gt;Multi-value field extractions for CWE IDs, vendors, products, and references&lt;/li&gt;
+&lt;li&gt;Pre-computed dashboard lookups for instant panel loading&lt;/li&gt;
+&lt;li&gt;Expanded CWE lookup: 298 unique entries covering CWE Top 25, OWASP Top 10, and more&lt;/li&gt;
+&lt;li&gt;Cooperative timeout management and memory monitoring (512MB limit)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Breaking Changes from v1.x&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Splunk 10+ required for dashboards (Dashboard Studio v2)&lt;/li&gt;
+&lt;li&gt;Setup page removed: GitHub token configured via REST API&lt;/li&gt;
+&lt;li&gt;Python 3.11+ required (3.9 dropped)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Migration from v1.x&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Upgrade Splunk to 10.0+ first&lt;/li&gt;
+&lt;li&gt;Install v2.0.3 via Manage Apps&lt;/li&gt;
+&lt;li&gt;No data migration needed -- same sourcetypes and field extractions&lt;/li&gt;
+&lt;li&gt;If using a custom index, create local/macros.conf with your cveicu_index definition&lt;/li&gt;
+&lt;/ol&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Ingest the complete CVE V5 database (327,000+ vulnerabilities) into Splunk in minutes. Features bulk ZIP downloads, hourly delta updates, CVSS/EPSS/KEV/SSVC risk enrichment, and four Dashboard Studio dashboards. Works out of the box with no API keys or setup required.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The cve.icu add-on ingests the complete CVE V5 database directly into Splunk. Unlike traditional collectors that rely on slow per-CVE API crawling, this add-on streams data from official GitHub release ZIP files, enabling initial ingestion of over 327,000 CVE records in minutes. Hourly delta updates keep the data current with only a few API calls per run -- no GitHub token required.
+
+Key Features:
+
+Full CVE V5 Schema Support: Parses the modern CVE JSON 5.x schema including cveMetadata, CNA containers, and CISA-ADP enrichment. Extracts CVSS scores across all versions (v2.0, v3.0, v3.1, v4.0), CWE classifications, and affected product/vendor data.
+
+Risk Prioritization Beyond CVSS: Integrates three enrichment sources to help security teams identify &amp;quot;patch now&amp;quot; threats: FIRST Exploit Prediction Scoring System (EPSS) scores updated daily, CISA Known Exploited Vulnerabilities (KEV) catalog refreshed every 6 hours, and CISA SSVC (Stakeholder-Specific Vulnerability Categorization) decision data from ADP containers.
+
+Four Dashboard Studio Dashboards: CVE Explorer for searching and filtering the full database, Risk Priority for EPSS/KEV/SSVC-ranked threat triage, Vulnerability Landscape for executive-level trend analysis, and Operational Health for monitoring ingestion status and errors.
+
+Production-Ready Architecture: Resource-aware modular input with memory monitoring (512MB limit), cooperative timeout management, and KV Store checkpointing with file fallback. Pre-computed lookup CSVs power dashboard KPIs so panels load instantly without running expensive searches. Splunk Cloud compatible and AppInspect validated.
+
+Zero-Configuration Start: Works out of the box -- install and data starts flowing. No API keys, no setup pages, no index creation required. Customize the target index via the cveicu_index macro when ready.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/cf1e8780-3f14-11f1-ac1b-c2bd3a38b944.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jerry Gamblin</dc:creator>
+      <pubDate>Thu, 23 Apr 2026 13:04:37 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8395/#v2.0.3</guid>
+    </item>
+    <item>
+      <title>Tessian Cloud Email Security Platform - v1.0.9 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6814/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;- Improves error handling for API calls.&lt;/p&gt;
+&lt;p&gt;- Fixes a unicode handling bug in configuration data.&lt;/p&gt;
+&lt;p&gt;- Improves error handling on the configuration page.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app connects the Tessian API to your Splunk instance so that you can easily ingest Tessian data into your workflows. This app allows users to ingest Security Events, Email Groups, Security Risk Scores and User Monitoring data from Tessian, which can be explored by search or the in-built Email Security dashboard.
+
+About Tessian
+Tessian Cloud Email Security Platform intelligently stops advanced threats and protects against data loss on email while coaching humans in-the-moment to build smarter security cultures in the modern enterprise. Tessian is fully automated and is designed to optimise Security Team workflows. It is deployed in your environments in minutes, and learns people’s email behaviors within hours.
+
+Learn more: https://www.tessian.com/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2b4840c6-38be-11f1-8700-66a708e05915.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Matt Smith</dc:creator>
+      <pubDate>Thu, 23 Apr 2026 13:02:36 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6814/#v1.0.9</guid>
+    </item>
+    <item>
+      <title>Menlo Security Technology Add-on - v2.5.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6182/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Fixed a bug where multiple client events were getting merged into a single event.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This Technology Add-on enables customers to import logs from the Menlo Cloud Security Platform into the Splunk platform, thereby providing real-time visibility into security events.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/3d7c9f2a-3964-11f1-8745-b214f80aa9b5.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Menlo Security</dc:creator>
+      <pubDate>Thu, 23 Apr 2026 12:52:18 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6182/#v2.5.2</guid>
+    </item>
+    <item>
+      <title>Sophos Central - v1.1.8 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/6186/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;# Sophos Central Data Ingestor
+The official Sophos developed and supported application for Sophos Central
+
+##Functionality
+This app will allow you to select and ingest multiple Sophos Central data sources without the need of an accompanying script.  Includes Data from the below endpoints. and conforms to the CIM 4.x data model.
+* Central Endpoints API
+* Central Alerts API
+* Central SIEM Events API
+
+## Requirements
+Requires a Sophos API Service Principal account for authentication see our getting started guide for details on API credential creation.
+* Getting Started for Enterprise Customers: https://developer.sophos.com/getting-started-organization
+* Getting Started for Partners: https://developer.sophos.com/getting-started
+* Getting Started for Tenants: https://developer.sophos.com/getting-started-tenant
+* Add-on Installation Guide: https://community.sophos.com/sophos-integrations/w/integrations/109/splunk-add-on-for-sophos-central
+* Feedback and Support Forum: https://community.sophos.com/sophos-integrations/f/splunk-apps-for-central-and-sophos-firewall
+
+Use the accompanying Sophos Dashboard App to get insightful dashboards across Central Data, XG data, or both if using both date sources: https://splunkbase.splunk.com/app/6188/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/6f876e9c-38a0-11f1-bfe4-7eec6d210fba.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sophos Integrations</dc:creator>
+      <pubDate>Thu, 23 Apr 2026 12:51:19 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6186/#v1.1.8</guid>
+    </item>
+    <item>
+      <title>Splunk Add-on for Okta Identity Cloud - v5.0.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6553/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Add-on for Okta Identity Cloud:
+
+- Handles System Log event ingestion using Okta&amp;#x27;s REST API endpoints and simplifies data correlation.
+- Can periodically ingest Okta Universal Directory (UD) data, including users, groups, and apps. This data is not treated as time-series events.
+- Provides the inputs and CIM-compatible knowledge to use with other Splunk apps.
+
+The Splunk Add-on for Okta Identity Cloud provides complete data collection parity with the Okta Identity Cloud Add-on for Splunk, and corresponding features except the following two adaptive response actions: 1) Updating user&amp;#x27;s lifecycle/status, 2) Add or Remove a user from a group. In addition to this, Splunk built TA provides comprehensive CIM coverage, high reliability and multiple features and enhancements. Please see the Reference section of the documentation for more details.
+
+The Splunk Add-on for Okta Identity Cloud provides support of the below-mentioned sourcetypes:
+
+OktaIM2:log
+OktaIM2:user
+OktaIM2:group
+OktaIM2:app
+OktaIM2:groupUser
+OktaIM2:appUser&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/62f702d6-3d83-11f1-b4fb-96b2d205c7d6.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Thu, 23 Apr 2026 12:36:16 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6553/#v5.0.2</guid>
+    </item>
+    <item>
+      <title>CyCognito External Attack Surface and Risk Management App - v1.1.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6599/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
+&lt;li&gt;Bumped the version to maintain compatibility with Splunk.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Together, CyCognito and Splunk empower companies to take control of external risk and attack surface management by identifying critical security risks and correlating them with events seen within the Splunk platform. With CyCognito’s attacker’s perspective combined with features like Splunk’s Risk-Based Alerting, security teams can detect and react to more threats while drastically reducing the number of false positives they experience.
+
+Integrating asset and vulnerability data from CyCognito into Splunk automatically sends the highest risk issues to the Splunk SIEM. Dashboards provide security teams across the organization visibility into external risks they may not have otherwise known existed. Security Operations teams can easily be alerted to these new threats – complete with step-by-step exploitation instructions to validate risk, safe sandbox to simulate attacks, and indicators of compromise (IOCs) – and use integrated features to decrease your MTTR, ensuring your enterprise is protected from future attacks.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2005392c-398a-11f1-a38c-9e0722112b50.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">CyCognito Integrations Team</dc:creator>
+      <pubDate>Thu, 23 Apr 2026 12:28:22 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6599/#v1.1.1</guid>
+    </item>
+    <item>
+      <title>Splunk AI Assistant - v2.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7245/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;See what the Splunk AI Assistant can do for you https://youtu.be/ynRBiepXVw4?si=eua38GwP0nwuvk3m&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk AI Assistant is your AI-powered companion for getting answers from your data in Splunk. Whether you&amp;#x27;re a seasoned Splunk expert or just getting started, the assistant helps you discover, analyze, and act on your data through natural conversation — going far beyond just writing and explaining SPL. https://youtu.be/ynRBiepXVw4?si=eua38GwP0nwuvk3m
+
+What Splunk AI Assistant can do for you:
+
+With Agent Mode, the assistant can now reason through your requests, take actions on your behalf, and leverage a rich set of tools and skills — all from a single chat window. The assistant decomposes complex questions into parallel steps, exposes its reasoning to build trust, and asks clarifying questions for ambiguous prompts.
+
+🚀 Intelligent SPL Generation, Editing &amp;amp; Optimization: Describe what you want to search in plain English, and the assistant translates it into accurate SPL — or modifies existing queries based on your instructions without rewriting from scratch, while making them faster – leading to quicker insights!
+
+📖SPL Explanation: Understand any SPL search in plain English, complete with a detailed breakdown of its logic and purpose.
+
+🔍Data Discovery: Don&amp;#x27;t know where your data lives? The assistant scans your environment and identifies the right data sources for your question.
+⚡Search Execution &amp;amp; Analysis: The assistant executes searches on your behalf (with your explicit permission) and summarizes results directly in chat — so you get answers, not just queries.
+
+📊Knowledge Object Discovery: Find and reuse existing dashboards, saved searches, reports, and lookups through natural language. The assistant retrieves the best-matching content so you can build on what your team has already created.
+
+📚Knowledge Retrieval: Get answers to questions about Splunk documentation, platform terms, or products.
+
+Teach AI (Beta) Administrators can provide custom instructions via a markdown file to teach Splunk AI Assistant about their organization&amp;#x27;s best practices, data catalog, and custom guardrails. This makes the assistant smarter and more relevant to your environment — and gives admins greater control over how AI operates in their deployment.
+
+Context Settings Formerly known as Personalization, Context Settings generate more accurate and contextual results by considering your unique data and environment, while only using non-personal contextual metadata and honoring role-based access controls. Administrators have full visibility into the data collected from their deployment.
+
+Model Runtime Choices Splunk AI Assistant leverages models in Azure OpenAI in addition to Splunk-hosted LLMs for the best available response quality.
+
+Availability Splunk AI Assistant is available to Splunk Cloud customers in AWS and Azure commercial regions, FedRAMP IL2, and Enterprise customers through Cloud Connected. Agent Mode is available to AWS commercial Splunk Cloud customers with this release.
+
+(c) Splunk 2026. All rights reserved.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/6aaa075e-33b4-11f1-a133-e246e7eb4d2d.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Thu, 23 Apr 2026 12:22:12 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7245/#v2.0.0</guid>
+    </item>
     <item>
       <title>Threat Hunting Essentials - v1.2.17 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7633/</link>
@@ -279,29 +453,6 @@ Key capabilities include natural language to SPL conversion, AI provider managem
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Wed, 22 Apr 2026 18:14:55 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/2680/#v6.5.1</guid>
-    </item>
-    <item>
-      <title>Splunk Add-on for Okta Identity Cloud - v5.0.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6553/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Add-on for Okta Identity Cloud:
-
-- Handles System Log event ingestion using Okta&amp;#x27;s REST API endpoints and simplifies data correlation.
-- Can periodically ingest Okta Universal Directory (UD) data, including users, groups, and apps. This data is not treated as time-series events.
-- Provides the inputs and CIM-compatible knowledge to use with other Splunk apps.
-
-The Splunk Add-on for Okta Identity Cloud provides complete data collection parity with the Okta Identity Cloud Add-on for Splunk, and corresponding features except the following two adaptive response actions: 1) Updating user&amp;#x27;s lifecycle/status, 2) Add or Remove a user from a group. In addition to this, Splunk built TA provides comprehensive CIM coverage, high reliability and multiple features and enhancements. Please see the Reference section of the documentation for more details.
-
-The Splunk Add-on for Okta Identity Cloud provides support of the below-mentioned sourcetypes:
-
-OktaIM2:log
-OktaIM2:user
-OktaIM2:group
-OktaIM2:app
-OktaIM2:groupUser
-OktaIM2:appUser&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/62f702d6-3d83-11f1-b4fb-96b2d205c7d6.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Wed, 22 Apr 2026 18:14:40 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6553/#v5.0.2</guid>
     </item>
     <item>
       <title>Splunk Add-on for Google Cloud Platform - v5.0.2 [Version Update]</title>
@@ -1050,39 +1201,6 @@ Alpha Level integrates seamlessly with your existing Splunk ES workflow, adding 
       <guid>https://splunkbase.splunk.com/app/8416/#v2.2.2</guid>
     </item>
     <item>
-      <title>Splunk AI Assistant - v2.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7245/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;See what the Splunk AI Assistant can do for you https://youtu.be/ynRBiepXVw4?si=eua38GwP0nwuvk3m&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk AI Assistant is your AI-powered companion for getting answers from your data in Splunk. Whether you&amp;#x27;re a seasoned Splunk expert or just getting started, the assistant helps you discover, analyze, and act on your data through natural conversation — going far beyond just writing and explaining SPL. https://youtu.be/ynRBiepXVw4?si=eua38GwP0nwuvk3m
-
-What Splunk AI Assistant can do for you:
-
-With Agent Mode, the assistant can now reason through your requests, take actions on your behalf, and leverage a rich set of tools and skills — all from a single chat window. The assistant decomposes complex questions into parallel steps, exposes its reasoning to build trust, and asks clarifying questions for ambiguous prompts.
-
-🚀 Intelligent SPL Generation, Editing &amp;amp; Optimization: Describe what you want to search in plain English, and the assistant translates it into accurate SPL — or modifies existing queries based on your instructions without rewriting from scratch, while making them faster – leading to quicker insights!
-
-📖SPL Explanation: Understand any SPL search in plain English, complete with a detailed breakdown of its logic and purpose.
-
-🔍Data Discovery: Don&amp;#x27;t know where your data lives? The assistant scans your environment and identifies the right data sources for your question.
-⚡Search Execution &amp;amp; Analysis: The assistant executes searches on your behalf (with your explicit permission) and summarizes results directly in chat — so you get answers, not just queries.
-
-📊Knowledge Object Discovery: Find and reuse existing dashboards, saved searches, reports, and lookups through natural language. The assistant retrieves the best-matching content so you can build on what your team has already created.
-
-📚Knowledge Retrieval: Get answers to questions about Splunk documentation, platform terms, or products.
-
-Teach AI (Beta) Administrators can provide custom instructions via a markdown file to teach Splunk AI Assistant about their organization&amp;#x27;s best practices, data catalog, and custom guardrails. This makes the assistant smarter and more relevant to your environment — and gives admins greater control over how AI operates in their deployment.
-
-Context Settings Formerly known as Personalization, Context Settings generate more accurate and contextual results by considering your unique data and environment, while only using non-personal contextual metadata and honoring role-based access controls. Administrators have full visibility into the data collected from their deployment.
-
-Model Runtime Choices Splunk AI Assistant leverages models in Azure OpenAI in addition to Splunk-hosted LLMs for the best available response quality.
-
-Availability Splunk AI Assistant is available to Splunk Cloud customers in AWS and Azure commercial regions, FedRAMP IL2, and Enterprise customers through Cloud Connected. Agent Mode is available to AWS commercial Splunk Cloud customers with this release.
-
-(c) Splunk 2026. All rights reserved.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/6aaa075e-33b4-11f1-a133-e246e7eb4d2d.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Mon, 20 Apr 2026 18:20:11 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7245/#v2.0.0</guid>
-    </item>
-    <item>
       <title>Tenable.sc - v2.5.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5938/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
@@ -1130,64 +1248,6 @@ Features:
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Henrique Linsmeyer</dc:creator>
       <pubDate>Mon, 20 Apr 2026 01:49:48 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7420/#v1.0.4</guid>
-    </item>
-    <item>
-      <title>cve.icu - CVE Intelligence for Splunk - v2.0.3 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8395/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;v2.0.3 — Fix: Risk Priority Dashboard Error&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Fix:&lt;/strong&gt; Removed an invalid lookup join from the Risk Priority dashboard's &quot;High-EPSS CVEs&quot; panel. The query was joining on a &lt;code&gt;cve_id&lt;/code&gt; field that doesn't exist in &lt;code&gt;cve_daily_summary.csv&lt;/code&gt;, causing the panel to display a lookup error instead of the count.&lt;/p&gt;
-&lt;p&gt;Also includes the v2.0.2 fix: replaced &lt;code&gt;run_on_startup&lt;/code&gt; with tighter cron schedules (every 5-10 minutes) for index-dependent saved searches, so dashboard lookups reliably populate within 10 minutes of a fresh install.&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2&gt;What's New in v2.0 (included in v2.0.3)&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Requires Splunk 10.0+ or Splunk Cloud.&lt;/strong&gt; Users on Splunk 9 should remain on v1.0.6.&lt;/p&gt;
-&lt;h3&gt;New Features&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Four Dashboard Studio v2 dashboards: CVE Explorer, Risk Priority, Vulnerability Landscape, and Operational Health&lt;/li&gt;
-&lt;li&gt;EPSS enrichment: Daily FIRST EPSS scores joined at search time for exploit probability ranking&lt;/li&gt;
-&lt;li&gt;CISA KEV integration: Known Exploited Vulnerabilities catalog refreshed every 6 hours&lt;/li&gt;
-&lt;li&gt;SSVC decision data: CISA Stakeholder-Specific Vulnerability Categorization from ADP containers&lt;/li&gt;
-&lt;li&gt;Risk Priority lookup: Pre-computed table combining CVSS, EPSS, KEV, and SSVC data for fast triage&lt;/li&gt;
-&lt;li&gt;Zero-configuration start: Input enabled by default, data starts flowing immediately after install&lt;/li&gt;
-&lt;li&gt;Configurable index macro: All dashboards and saved searches use the cveicu_index macro&lt;/li&gt;
-&lt;li&gt;CIM Vulnerabilities data model mapping&lt;/li&gt;
-&lt;li&gt;CI/CD pipeline: GitHub Actions with unit tests, AppInspect validation, and Docker integration tests&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Improvements&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;CVSS v4.0 support in addition to v3.1, v3.0, and v2.0&lt;/li&gt;
-&lt;li&gt;Multi-value field extractions for CWE IDs, vendors, products, and references&lt;/li&gt;
-&lt;li&gt;Pre-computed dashboard lookups for instant panel loading&lt;/li&gt;
-&lt;li&gt;Expanded CWE lookup: 298 unique entries covering CWE Top 25, OWASP Top 10, and more&lt;/li&gt;
-&lt;li&gt;Cooperative timeout management and memory monitoring (512MB limit)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Breaking Changes from v1.x&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Splunk 10+ required for dashboards (Dashboard Studio v2)&lt;/li&gt;
-&lt;li&gt;Setup page removed: GitHub token configured via REST API&lt;/li&gt;
-&lt;li&gt;Python 3.11+ required (3.9 dropped)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Migration from v1.x&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;Upgrade Splunk to 10.0+ first&lt;/li&gt;
-&lt;li&gt;Install v2.0.3 via Manage Apps&lt;/li&gt;
-&lt;li&gt;No data migration needed -- same sourcetypes and field extractions&lt;/li&gt;
-&lt;li&gt;If using a custom index, create local/macros.conf with your cveicu_index definition&lt;/li&gt;
-&lt;/ol&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Ingest the complete CVE V5 database (327,000+ vulnerabilities) into Splunk in minutes. Features bulk ZIP downloads, hourly delta updates, CVSS/EPSS/KEV/SSVC risk enrichment, and four Dashboard Studio dashboards. Works out of the box with no API keys or setup required.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The cve.icu add-on ingests the complete CVE V5 database directly into Splunk. Unlike traditional collectors that rely on slow per-CVE API crawling, this add-on streams data from official GitHub release ZIP files, enabling initial ingestion of over 327,000 CVE records in minutes. Hourly delta updates keep the data current with only a few API calls per run -- no GitHub token required.
-
-Key Features:
-
-Full CVE V5 Schema Support: Parses the modern CVE JSON 5.x schema including cveMetadata, CNA containers, and CISA-ADP enrichment. Extracts CVSS scores across all versions (v2.0, v3.0, v3.1, v4.0), CWE classifications, and affected product/vendor data.
-
-Risk Prioritization Beyond CVSS: Integrates three enrichment sources to help security teams identify &amp;quot;patch now&amp;quot; threats: FIRST Exploit Prediction Scoring System (EPSS) scores updated daily, CISA Known Exploited Vulnerabilities (KEV) catalog refreshed every 6 hours, and CISA SSVC (Stakeholder-Specific Vulnerability Categorization) decision data from ADP containers.
-
-Four Dashboard Studio Dashboards: CVE Explorer for searching and filtering the full database, Risk Priority for EPSS/KEV/SSVC-ranked threat triage, Vulnerability Landscape for executive-level trend analysis, and Operational Health for monitoring ingestion status and errors.
-
-Production-Ready Architecture: Resource-aware modular input with memory monitoring (512MB limit), cooperative timeout management, and KV Store checkpointing with file fallback. Pre-computed lookup CSVs power dashboard KPIs so panels load instantly without running expensive searches. Splunk Cloud compatible and AppInspect validated.
-
-Zero-Configuration Start: Works out of the box -- install and data starts flowing. No API keys, no setup pages, no index creation required. Customize the target index via the cveicu_index macro when ready.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/1e06e8c0-3c3a-11f1-90bf-ee5fde511842.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jerry Gamblin</dc:creator>
-      <pubDate>Sun, 19 Apr 2026 21:57:43 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8395/#v2.0.3</guid>
     </item>
     <item>
       <title>Alpha Level Alert Refinery - v2.0.0 [New App Release]</title>
@@ -1338,14 +1398,6 @@ With Rootly and Splunk working together, your organization can achieve faster, s
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ping Identity</dc:creator>
       <pubDate>Thu, 16 Apr 2026 20:18:50 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/976/#v2.1.2</guid>
-    </item>
-    <item>
-      <title>Menlo Security Technology Add-on - v2.5.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6182/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Fixed a bug where multiple client events were getting merged into a single event.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This Technology Add-on enables customers to import logs from the Menlo Cloud Security Platform into the Splunk platform, thereby providing real-time visibility into security events.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/3d7c9f2a-3964-11f1-8745-b214f80aa9b5.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Menlo Security</dc:creator>
-      <pubDate>Thu, 16 Apr 2026 07:41:06 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6182/#v2.5.2</guid>
     </item>
     <item>
       <title>Conceal Splunk App - v0.12.0 [Version Update]</title>
@@ -1535,31 +1587,6 @@ After the Splunk platform indexes the events, you can then directly analyze the 
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Wed, 15 Apr 2026 15:20:10 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/4055/#v6.0.1</guid>
-    </item>
-    <item>
-      <title>Sophos Central - v1.1.8 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/6186/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;# Sophos Central Data Ingestor
-The official Sophos developed and supported application for Sophos Central
-
-##Functionality
-This app will allow you to select and ingest multiple Sophos Central data sources without the need of an accompanying script.  Includes Data from the below endpoints. and conforms to the CIM 4.x data model.
-* Central Endpoints API
-* Central Alerts API
-* Central SIEM Events API
-
-## Requirements
-Requires a Sophos API Service Principal account for authentication see our getting started guide for details on API credential creation.
-* Getting Started for Enterprise Customers: https://developer.sophos.com/getting-started-organization
-* Getting Started for Partners: https://developer.sophos.com/getting-started
-* Getting Started for Tenants: https://developer.sophos.com/getting-started-tenant
-* Add-on Installation Guide: https://community.sophos.com/sophos-integrations/w/integrations/109/splunk-add-on-for-sophos-central
-* Feedback and Support Forum: https://community.sophos.com/sophos-integrations/f/splunk-apps-for-central-and-sophos-firewall
-
-Use the accompanying Sophos Dashboard App to get insightful dashboards across Central Data, XG data, or both if using both date sources: https://splunkbase.splunk.com/app/6188/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/6f876e9c-38a0-11f1-bfe4-7eec6d210fba.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sophos Integrations</dc:creator>
-      <pubDate>Wed, 15 Apr 2026 14:18:54 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6186/#v1.1.8</guid>
     </item>
     <item>
       <title>TrackMe - v2.3.19 [Version Update]</title>
@@ -2060,16 +2087,6 @@ This add-on provides the inputs and CIM-compatible knowledge to use with other S
       <guid>https://splunkbase.splunk.com/app/7585/#v1.0.4</guid>
     </item>
     <item>
-      <title>Splunk Add-on for Microsoft Cloud Services - v6.1.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/3110/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Add-on for Microsoft Cloud Services allows a Splunk software administrator to pull activity logs, service status, operational messages, Azure audit, Azure resource data and Azure Storage Table and Blob data from a variety of Microsoft cloud services using Event Hubs,  Azure Service Management APIs and Azure Storage API.
-
-This add-on provides the inputs and CIM-compatible knowledge to use with other Splunk apps, such as Splunk Enterprise Security and the Splunk App for PCI Compliance and Splunk IT Service Intelligence.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/463abc38-334b-11f1-8f5b-c2d7cd6d796a.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Thu, 09 Apr 2026 09:39:35 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/3110/#v6.1.1</guid>
-    </item>
-    <item>
       <title>USTA Account Takeover Prevention for Splunk - v1.0.6 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7558/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;USTA is a market-leading threat intelligence solution provided by PRODAFT specifically designed to combat ransomware, online fraud, and account takeover attempts. By collecting compromised credentials from stealer malware, USTA provides real-time insights and actionable intelligence to help organizations detect and mitigate threats, protecting their sensitive accounts and digital assets from malicious activity.
@@ -2212,24 +2229,6 @@ By automating the retrieval and indexing of this comprehensive Cisco operational
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Wed, 08 Apr 2026 15:37:57 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5865/#v3.0.2</guid>
-    </item>
-    <item>
-      <title>Splunk Add-on for Salesforce - v6.0.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/3549/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
-&lt;li&gt;fixed requests CVE-2026-25645&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;*** Important: Read upgrade instructions and test your add-on update before deploying to production ***
-Version 2.0.0 of the Splunk Add-on for Salesforce introduces breaking changes. To avoid data loss or data duplication, follow the documented upgrade instructions in detail. If your are upgrading an earlier version of the Splunk Add-on for Salesforce, a best practice is to test your update in a non-production environment before deploying to production.
-
-The Splunk Add-on for Salesforce allows a Splunk software administrator to collect different types of data from Salesforce using REST APIs. The data includes:
-
-* Event log file data, https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/using_resources_event_log_files.htm.
-* Output of Salesforce object queries (SOQL). 
-
-This add-on provides the inputs and CIM-compatible knowledge to use with other Splunk apps, such as Splunk Enterprise Security, the Splunk App for PCI Compliance, and Splunk IT Service Intelligence.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/55ff4eca-332f-11f1-a133-e246e7eb4d2d.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Wed, 08 Apr 2026 12:06:18 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/3549/#v6.0.2</guid>
     </item>
   </channel>
 </rss>
