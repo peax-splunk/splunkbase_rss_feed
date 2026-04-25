@@ -6,7 +6,66 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sat, 25 Apr 2026 13:58:43 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 25 Apr 2026 14:42:14 +0000</lastBuildDate>
+    <item>
+      <title>Ensign ElasticSearch Data Integrator - v1.2.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8645/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Here is the summary of the key upgrades and new features:&lt;/p&gt;
+&lt;h3&gt;1. Elasticsearch Cluster Topology Support (New)&lt;/h3&gt;
+&lt;p&gt;The most significant enhancement is the flexibility to connect to an Elasticsearch Cluster architecture rather than just a standalone node:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Multi-Node Connection&lt;/strong&gt;: The &lt;code&gt;es_host&lt;/code&gt; parameter now accepts comma-separated hostnames (e.g., &lt;code&gt;node1.es.local, node2.es.local&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Round-robin Load Balancing&lt;/strong&gt;: The add-on performs round-robin load balancing across all configured nodes.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Node Sniffing (Auto-Discovery)&lt;/strong&gt;: A new &lt;code&gt;enable_sniffing&lt;/code&gt; toggle allowing the client to automatically discover and connect to all available nodes in the cluster via the ES &lt;code&gt;_nodes&lt;/code&gt; API.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Reliability &amp;amp; Timeout Controls&lt;/strong&gt;: Automatic connection failure retries, supported by configurable parameters (&lt;code&gt;max_retries&lt;/code&gt;, &lt;code&gt;retry_on_timeout&lt;/code&gt;, and &lt;code&gt;connection_timeout&lt;/code&gt;).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;2. Cluster Health Monitoring (Preflight Health Check)&lt;/h3&gt;
+&lt;p&gt;Before fetching data, the add-on now performs a preflight health check against the Elasticsearch cluster (&lt;code&gt;_cluster/health&lt;/code&gt; API):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;It automatically logs the cluster's health status (Green, Yellow, or Red).&lt;/li&gt;
+&lt;li&gt;Handled as a non-blocking check: Even if a &lt;em&gt;Red&lt;/em&gt; cluster status triggers a Warning log, data collection will still proceed on a best-effort basis.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;3. Core Library Upgrades&lt;/h3&gt;
+&lt;p&gt;The bundled Python libraries have been bumped significantly to patch legacy bugs, avoid vulnerabilities, and officially support the Elasticsearch 8.x ecosystem:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;elasticsearch-py&lt;/code&gt; upgraded from &lt;code&gt;8.8.0&lt;/code&gt; to &lt;strong&gt;&lt;code&gt;8.19.3&lt;/code&gt;&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;elastic-transport&lt;/code&gt; upgraded from &lt;code&gt;8.4.0&lt;/code&gt; to &lt;strong&gt;&lt;code&gt;8.17.1&lt;/code&gt;&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;4. Security Hardening &amp;amp; Remediations&lt;/h3&gt;
+&lt;p&gt;Multiple layers of security (defense-in-depth) have been added across the v1.2.0 and v1.2.1 releases:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Restricted Web Endpoints (v1.2.1)&lt;/strong&gt;: Modified &lt;code&gt;web.conf&lt;/code&gt; to narrow an overly broad &lt;code&gt;data/*&lt;/code&gt; REST endpoint exposure down to &lt;code&gt;data/indexes&lt;/code&gt; securely, preventing unnecessary internal Splunk data from being exposed to the browser UI.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Secured Internal Splunk REST calls (v1.2.1)&lt;/strong&gt;: Internal communication to the Splunk Daemon now strictly requires SSL verification (&lt;code&gt;verify=True&lt;/code&gt;) and enforces an explicit 30s timeout, protecting the &lt;code&gt;session_key&lt;/code&gt; authentication token on the loopback interface.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Strict SSL/TLS Validation&lt;/strong&gt;: Certificate verification now defaults to &lt;strong&gt;ENABLED&lt;/strong&gt;. If left disabled, an active security warning is generated in the &lt;code&gt;_internal&lt;/code&gt; logs.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Proxy Credentials Protection&lt;/strong&gt;: Proxy configurations are scrubbed and removed from the system environment variables (&lt;code&gt;os.environ&lt;/code&gt;) in memory immediately after the Elasticsearch client instantiates, limiting exposure.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;SSRF (Server-Side Request Forgery) Protection&lt;/strong&gt;: Strict validation is added to block potentially dangerous &lt;code&gt;es_host&lt;/code&gt; inputs such as localhost, 0.0.0.0, 169.254.169.254, and loopback/link-local bounds.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Log Injection Prevention&lt;/strong&gt;: Sanitization filters were added on stanza names (stripping newlines, tabs, and escape chars) before they are rendered into the event logs.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Let us knows if the features or ideas that need to enhance for future release.&amp;#x20;&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Splunk modular input for ingesting data from Elasticsearch 8.x clusters by leveraging call the ElasticSearch v8.x REST API. Features multi-cluster profiles, DSL query filters, scroll-based pagination with crash recovery, document-level deduplication, SSL/TLS support, and a full GUI configuration experience. Compatible with Elasticsearch 8.x only and DSL based only,&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Ensign ElasticSearch Data Integrator is a Splunk modular input add-on for ingesting data from Elasticsearch 8.x clusters into Splunk via the Elasticsearch 8 REST API.
+
+Built on the Splunk UCC Framework, it provides a full GUI-driven configuration experience through Splunk Web — no manual file editing required.
+
+Key Features:
+• Multi-cluster Elasticsearch profile management via Splunk UI
+• DSL Query-focused data retrieval with configurable time-based fetching
+• ES Scroll API pagination for efficient large-volume data collection
+• Crash-resilient scroll recovery with a dedicated checkpoint directory
+• Document-level deduplication guard (rolling 50,000 IDs per stanza)
+• SSL/TLS certificate verification support
+• Custom term filters per data source
+• Global proxy support with Splunk-native credential encryption
+• Custom sourcetype override per input stanza
+
+IMPORTANT: This add-on is designed exclusively for Elasticsearch 8.x API. It is NOT compatible with Elasticsearch 7.x or earlier versions.
+
+Compatibility:
+• Elasticsearch: 8.x only
+• Splunk Enterprise: 8.2+ and 9.x (You can try for 10.x, let me know the updates)
+• Python: 3.x (bundled with Splunk)&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ad1af9ba-40b4-11f1-8a56-1e2b044fc53f.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Muhammad Rafdi Aufar Ahmad</dc:creator>
+      <pubDate>Sat, 25 Apr 2026 14:40:17 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8645/#v1.2.1</guid>
+    </item>
     <item>
       <title>Threat Hunting Essentials - v1.2.19 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7633/</link>
@@ -1485,65 +1544,6 @@ All charts render client-side as SVG so dashboards export cleanly to PDF for exe
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">David Sitzes</dc:creator>
       <pubDate>Tue, 21 Apr 2026 18:06:46 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8097/#v3.0.12</guid>
-    </item>
-    <item>
-      <title>Ensign ElasticSearch Data Integrator - v1.2.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8645/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Here is the summary of the key upgrades and new features:&lt;/p&gt;
-&lt;h3&gt;1. Elasticsearch Cluster Topology Support (New)&lt;/h3&gt;
-&lt;p&gt;The most significant enhancement is the flexibility to connect to an Elasticsearch Cluster architecture rather than just a standalone node:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Multi-Node Connection&lt;/strong&gt;: The &lt;code&gt;es_host&lt;/code&gt; parameter now accepts comma-separated hostnames (e.g., &lt;code&gt;node1.es.local, node2.es.local&lt;/code&gt;).&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Round-robin Load Balancing&lt;/strong&gt;: The add-on performs round-robin load balancing across all configured nodes.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Node Sniffing (Auto-Discovery)&lt;/strong&gt;: A new &lt;code&gt;enable_sniffing&lt;/code&gt; toggle allowing the client to automatically discover and connect to all available nodes in the cluster via the ES &lt;code&gt;_nodes&lt;/code&gt; API.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Reliability &amp;amp; Timeout Controls&lt;/strong&gt;: Automatic connection failure retries, supported by configurable parameters (&lt;code&gt;max_retries&lt;/code&gt;, &lt;code&gt;retry_on_timeout&lt;/code&gt;, and &lt;code&gt;connection_timeout&lt;/code&gt;).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;2. Cluster Health Monitoring (Preflight Health Check)&lt;/h3&gt;
-&lt;p&gt;Before fetching data, the add-on now performs a preflight health check against the Elasticsearch cluster (&lt;code&gt;_cluster/health&lt;/code&gt; API):&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;It automatically logs the cluster's health status (Green, Yellow, or Red).&lt;/li&gt;
-&lt;li&gt;Handled as a non-blocking check: Even if a &lt;em&gt;Red&lt;/em&gt; cluster status triggers a Warning log, data collection will still proceed on a best-effort basis.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;3. Core Library Upgrades&lt;/h3&gt;
-&lt;p&gt;The bundled Python libraries have been bumped significantly to patch legacy bugs, avoid vulnerabilities, and officially support the Elasticsearch 8.x ecosystem:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;elasticsearch-py&lt;/code&gt; upgraded from &lt;code&gt;8.8.0&lt;/code&gt; to &lt;strong&gt;&lt;code&gt;8.19.3&lt;/code&gt;&lt;/strong&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;elastic-transport&lt;/code&gt; upgraded from &lt;code&gt;8.4.0&lt;/code&gt; to &lt;strong&gt;&lt;code&gt;8.17.1&lt;/code&gt;&lt;/strong&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;4. Security Hardening &amp;amp; Remediations&lt;/h3&gt;
-&lt;p&gt;Multiple layers of security (defense-in-depth) have been added across the v1.2.0 and v1.2.1 releases:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Restricted Web Endpoints (v1.2.1)&lt;/strong&gt;: Modified &lt;code&gt;web.conf&lt;/code&gt; to narrow an overly broad &lt;code&gt;data/*&lt;/code&gt; REST endpoint exposure down to &lt;code&gt;data/indexes&lt;/code&gt; securely, preventing unnecessary internal Splunk data from being exposed to the browser UI.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Secured Internal Splunk REST calls (v1.2.1)&lt;/strong&gt;: Internal communication to the Splunk Daemon now strictly requires SSL verification (&lt;code&gt;verify=True&lt;/code&gt;) and enforces an explicit 30s timeout, protecting the &lt;code&gt;session_key&lt;/code&gt; authentication token on the loopback interface.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Strict SSL/TLS Validation&lt;/strong&gt;: Certificate verification now defaults to &lt;strong&gt;ENABLED&lt;/strong&gt;. If left disabled, an active security warning is generated in the &lt;code&gt;_internal&lt;/code&gt; logs.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Proxy Credentials Protection&lt;/strong&gt;: Proxy configurations are scrubbed and removed from the system environment variables (&lt;code&gt;os.environ&lt;/code&gt;) in memory immediately after the Elasticsearch client instantiates, limiting exposure.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;SSRF (Server-Side Request Forgery) Protection&lt;/strong&gt;: Strict validation is added to block potentially dangerous &lt;code&gt;es_host&lt;/code&gt; inputs such as localhost, 0.0.0.0, 169.254.169.254, and loopback/link-local bounds.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Log Injection Prevention&lt;/strong&gt;: Sanitization filters were added on stanza names (stripping newlines, tabs, and escape chars) before they are rendered into the event logs.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Let us knows if the features or ideas that need to enhance for future release.&amp;#x20;&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Splunk modular input for ingesting data from Elasticsearch 8.x clusters by leveraging call the ElasticSearch v8.x REST API. Features multi-cluster profiles, DSL query filters, scroll-based pagination with crash recovery, document-level deduplication, SSL/TLS support, and a full GUI configuration experience. Compatible with Elasticsearch 8.x only and DSL based only,&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Ensign ElasticSearch Data Integrator is a Splunk modular input add-on for ingesting data from Elasticsearch 8.x clusters into Splunk via the Elasticsearch 8 REST API.
-
-Built on the Splunk UCC Framework, it provides a full GUI-driven configuration experience through Splunk Web — no manual file editing required.
-
-Key Features:
-• Multi-cluster Elasticsearch profile management via Splunk UI
-• DSL Query-focused data retrieval with configurable time-based fetching
-• ES Scroll API pagination for efficient large-volume data collection
-• Crash-resilient scroll recovery with a dedicated checkpoint directory
-• Document-level deduplication guard (rolling 50,000 IDs per stanza)
-• SSL/TLS certificate verification support
-• Custom term filters per data source
-• Global proxy support with Splunk-native credential encryption
-• Custom sourcetype override per input stanza
-
-IMPORTANT: This add-on is designed exclusively for Elasticsearch 8.x API. It is NOT compatible with Elasticsearch 7.x or earlier versions.
-
-Compatibility:
-• Elasticsearch: 8.x only
-• Splunk Enterprise: 8.2+ and 9.x (You can try for 10.x, let me know the updates)
-• Python: 3.x (bundled with Splunk)&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/44e89a62-3d3c-11f1-8530-46c2835d04d1.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Muhammad Rafdi Aufar Ahmad</dc:creator>
-      <pubDate>Tue, 21 Apr 2026 10:14:14 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8645/#v1.2.1</guid>
     </item>
     <item>
       <title>Supporting App for Cisco Meeting Server - v0.6.0 [Version Update]</title>
