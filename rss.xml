@@ -6,7 +6,52 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Mon, 27 Apr 2026 22:41:02 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 27 Apr 2026 23:43:39 +0000</lastBuildDate>
+    <item>
+      <title>Splunk Alerts for Microsoft Teams - v1.1.11 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4855/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h3&gt;Bug Fixes&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Adaptive Card payload format&lt;/strong&gt; — Power Automate (new webhook) now receives a pure root-level AdaptiveCard payload. The previous hybrid MessageCard/AdaptiveCard format caused `InvalidBotAdaptiveCard` rejections when using the new webhook path.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Action buttons&lt;/strong&gt; — OpenURI action buttons now correctly appear in Teams cards when using the new webhook. Actions are injected as `Action.OpenUrl` into the AdaptiveCard `actions` array.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Button validation&lt;/strong&gt; — Configuring a button URL without a title (or title without a URL) now logs a warning and skips that button gracefully, rather than silently dropping it or blocking the other button from rendering.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Button independence&lt;/strong&gt; — A misconfigured or missing button 1 no longer suppresses button 2. Each button is evaluated and appended independently.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Button title length&lt;/strong&gt; — Button titles exceeding 100 characters are now truncated with a warning logged, preventing HTTP 413 payload errors on delivery.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Field validation&lt;/strong&gt; — Individually missing fields from the configured fields list now log a per-field warning and are skipped. Valid fields in the same list are unaffected.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Special character escaping&lt;/strong&gt; — Special characters (quotes, backslashes) were being double-escaped in AdaptiveCard payloads due to `checkstr()` being applied before `json.dumps()`. This has been corrected.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;HttpPOST actions&lt;/strong&gt; — HttpPOST is not supported by Power Automate webhooks. A warning is now logged and the action is gracefully skipped instead of being silently dropped.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Features&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Card style&lt;/strong&gt; — A new &quot;Card style&quot; dropdown has been added to the alert action configuration UI, allowing the Adaptive Card container color to be set (`Default`, `Good`, `Warning`, `Attention`, `Emphasis`, `Accent`).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Image link support&lt;/strong&gt; — Image link is now supported on the new webhook path. When configured, an `Image` element is prepended to the AdaptiveCard body.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Removals&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Legacy MessageCard path removed&lt;/strong&gt; — The Office 365 connector (MessageCard) webhook format has been removed. Microsoft has retired Office 365 connectors. The Adaptive Card / Power Automate webhook is now the only supported path.&lt;/li&gt;
+  &lt;li&gt;Removed UI fields no longer applicable to the new webhook: `Theme color`, `HttpPOST` action fields, and the new webhook toggle.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This application provides alert actions for Microsoft Teams messages publication to allow formatted messages publication from Splunk, including:
+
+- Actionable message card support
+- Defining options globally or on a per alert basis (per alert override)
+- Defining comma separated list of fields which will be dynamically used to generated publication
+- Choosing icon link for message publication
+- Activating potential link action and defining its link (Up to 2 OpenURI actions per alert)
+- Activating and configuring an HttpPOST potential action that allows additional interactions between Splunk or a third party application from Microsoft Teams
+- Resilient messages publication management, temporary publication failures are automatically stored in a KVstore, and re-tried following a resilient policy
+
+The application provides as well an easy logging access, a basic overview dashboard that exposes successful and failed publications, if any, and finally a builtin alert that can be activated to detect and warn in case of a failure to publish a message in a channel.
+
+The Add-on is compatible with Python 2 / Python 3 modes.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/aa13cee2-4288-11f1-89c9-1e9a20bc84b3.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Mon, 27 Apr 2026 23:22:51 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4855/#v1.1.11</guid>
+    </item>
     <item>
       <title>Microsoft Exchange On-Premise EWS - v4.0.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5788/</link>
@@ -1742,23 +1787,6 @@ Use Cases:
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">David Page</dc:creator>
       <pubDate>Sat, 18 Apr 2026 20:20:40 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8621/#v1.0.7</guid>
-    </item>
-    <item>
-      <title>Atlas Splunk Assessment - v4.9.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6276/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;## Atlas Splunk Assessment v4.9.0&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;- Preflight checks added to inform users that they may lack complete permissions and capabilities for a manual assessment run.&amp;#x20;&lt;/p&gt;
-&lt;p&gt;- Updated Atlas Assessment dark mode with a gradient.&lt;/p&gt;
-&lt;p&gt;- When installed in an environment with Atlas, the Side Navigation bar will allow direct links to Atlas.&amp;#x20;&lt;/p&gt;
-&lt;p&gt;- Reorganized searches to reduce errors in large environments.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Atlas Splunk Assessment (v4) helps Splunk users proactively manage and optimize their environments. This automated tool evaluates your Splunk deployment, identifying potential issues and providing prioritized, actionable recommendations. It demonstrates how the Atlas platform can address areas highlighted in the assessment. Track your progress over time as you implement improvements using the recurring assessment feature.
-
-The tool is regularly updated on both Splunkbase and the Atlas platform—check back frequently for the latest version. For suggestions or feedback, contact us at support@kinneygroup.com.
-
-To learn more, please check out the full Atlas Splunk Assessment documentation site:
-https://docs.atlas.kinneygroup.com/docs/using-atlas/assessment&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/82992bae-3a9b-11f1-9791-3efbe26b2662.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Presidio - Key Partner Acct</dc:creator>
-      <pubDate>Fri, 17 Apr 2026 20:37:12 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6276/#v4.9.0</guid>
     </item>
   </channel>
 </rss>
