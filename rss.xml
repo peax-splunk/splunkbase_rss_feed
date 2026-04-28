@@ -6,7 +6,15 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Tue, 28 Apr 2026 02:04:53 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 28 Apr 2026 05:50:50 +0000</lastBuildDate>
+    <item>
+      <title>Apprise Alert Action - v2.0.4 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7104/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Adds an alert action to Splunk that allows sending a notification using any of the notification services supported by Apprise (Slack, Office 365, syslog, Telegram, Signal, webhook, email + many, many more). For a full list of supported services see https://github.com/caronc/apprise/wiki&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ee4a9fe2-42be-11f1-92e7-9ea4dc0c73c9.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Clayfield</dc:creator>
+      <pubDate>Tue, 28 Apr 2026 05:42:28 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7104/#v2.0.4</guid>
+    </item>
     <item>
       <title>Splunk Alerts for Microsoft Teams - v1.1.11 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/4855/</link>
@@ -1031,60 +1039,6 @@ Alpha Level integrates seamlessly with your existing Splunk ES workflow, adding 
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aidan McLaughlin</dc:creator>
       <pubDate>Thu, 23 Apr 2026 16:28:56 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8416/#v2.2.2</guid>
-    </item>
-    <item>
-      <title>Spur Enrichment for Splunk - v1.1.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7126/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;This release focuses on making the app a more integrated experience rather&lt;/p&gt;
-&lt;p&gt;than a collection of search commands.&lt;/p&gt;
-&lt;p&gt;Opening the app now lands on a new Overview page with copy and paste&lt;/p&gt;
-&lt;p&gt;examples for every search command, a panel showing which feeds are&lt;/p&gt;
-&lt;p&gt;currently ingesting, and a breakdown of infrastructure types and anonymous&lt;/p&gt;
-&lt;p&gt;tunnel operators appearing in your data. It provides a fast way to confirm&lt;/p&gt;
-&lt;p&gt;the installation is working end to end.&lt;/p&gt;
-&lt;p&gt;Analysts can right click any IP field in a search result (src_ip,&lt;/p&gt;
-&lt;p&gt;clientip, dest_ip, and the usual variants) to run &quot;Enrich with Spur&lt;/p&gt;
-&lt;p&gt;Context API&quot; or &quot;Locate with Spur IP Geo&quot; directly from the field menu,&lt;/p&gt;
-&lt;p&gt;without writing SPL.&lt;/p&gt;
-&lt;p&gt;Feed queries are significantly faster. Feed events are now parsed as JSON&lt;/p&gt;
-&lt;p&gt;at ingest time, and ip, feed_type, infrastructure, and tunnel operators&lt;/p&gt;
-&lt;p&gt;are promoted to indexed fields. Queries using tstats read these values&lt;/p&gt;
-&lt;p&gt;directly from the TSIDX, so dashboards that previously scanned millions of&lt;/p&gt;
-&lt;p&gt;events complete in milliseconds.&lt;/p&gt;
-&lt;p&gt;Event timestamps are now accurate. Feed events previously carried the&lt;/p&gt;
-&lt;p&gt;wall clock time from when Splunk ingested them, which made time series&lt;/p&gt;
-&lt;p&gt;analysis and historical replays unreliable. The _time field now derives&lt;/p&gt;
-&lt;p&gt;from the feed's own feed_date, so events are placed on the day the feed&lt;/p&gt;
-&lt;p&gt;actually covers.&lt;/p&gt;
-&lt;p&gt;Each feed event is stamped with its feed_type, allowing you to filter or&lt;/p&gt;
-&lt;p&gt;break down events by feed type across all inputs regardless of how those&lt;/p&gt;
-&lt;p&gt;inputs were named.&lt;/p&gt;
-&lt;p&gt;The spurfeedingest modular input previously failed silently when the API&lt;/p&gt;
-&lt;p&gt;token was not configured on the indexer. It now logs a clear error&lt;/p&gt;
-&lt;p&gt;message, including a reminder that SHC password replication does not&lt;/p&gt;
-&lt;p&gt;reach indexers. This is a common source of confusion when setup appears&lt;/p&gt;
-&lt;p&gt;to succeed on a search head but no events are ingested. The modular input&lt;/p&gt;
-&lt;p&gt;also now logs the active feed type at INFO level so a healthy ingest is&lt;/p&gt;
-&lt;p&gt;visible in spur.log.&lt;/p&gt;
-&lt;p&gt;Search Head Cluster configuration is more robust. Completing setup on one&lt;/p&gt;
-&lt;p&gt;SH member now replicates the configured state to other members&lt;/p&gt;
-&lt;p&gt;automatically. Brief delays may occur while Splunk Web refreshes its&lt;/p&gt;
-&lt;p&gt;in memory manifest, and the README documents the remediation options if&lt;/p&gt;
-&lt;p&gt;that happens.&lt;/p&gt;
-&lt;p&gt;You can retarget every shipped dashboard and search to a different index&lt;/p&gt;
-&lt;p&gt;by editing one macro (spur_index, default index\=spur) rather than&lt;/p&gt;
-&lt;p&gt;modifying dashboards individually. Two helper macros are also included:&lt;/p&gt;
-&lt;p&gt;spur_enrich(field) for streaming enrichment, and spur_anonymous for&lt;/p&gt;
-&lt;p&gt;filtering to events with at least one anonymous tunnel.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Official Spur Splunk Application. Enhance your Splunk experience with the Spur Enrichment for Splunk App. This application integrates with Spur products, providing you with enriched data and insights right in your Splunk environment. Generate events based on IP inputs, enrich existing events with data from the Spur Context API, and insert feed data into a Splunk index with our modular input feature.
-
-The Spur Splunk App requires an active Spur subscription and specific user privileges for installation. 
-
-Once installed, you can utilize our search commands and modular input features to generate and enrich your data. 
-
-Get the most out of your data with the Spur Splunk App. Download today and start exploring your data in new ways.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/4f967ef2-3b2f-11f1-9775-bee9464af44e.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Spur Intelligence Corporation</dc:creator>
-      <pubDate>Thu, 23 Apr 2026 16:22:01 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7126/#v1.1.1</guid>
     </item>
     <item>
       <title>Splunk Add-on for Microsoft Windows - v10.0.1 [Version Update]</title>
