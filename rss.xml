@@ -6,7 +6,59 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Tue, 28 Apr 2026 21:00:14 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 28 Apr 2026 22:03:04 +0000</lastBuildDate>
+    <item>
+      <title>TrackMe - v2.3.20 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4621/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&amp;#x20; - **Configuration Guardian — six P0 checks, severity tiers, audit trail &amp;amp; AI Assistant integration**: A new framework surfaces silent misconfigurations directly in the Virtual Tenants UI. This release ships the full P0 wave of six checks covering the most common &quot;silently degrades TrackMe&quot; conditions: insufficient tenant-owner capabilities, declared tenant indexes that don't exist, remote-account tokens approaching expiry, the per-tenant health tracker not executing, remote-account connectivity failures, AI provider unreachable, and stale backup archives. Alerts come with two severity tiers (warning and critical), structured remediation guidance, and a full audit trail in the ``trackme_audit`` index. The AI Assistant on Virtual Tenants and Tenant Home is now Guardian-aware: it sees every active alert with parsed metadata and recommended actions, and is steered by a built-in playbook to act as an active guide rather than a passive reporter.&lt;/p&gt;
+&lt;p&gt;&amp;#x20; - **AI Assistant — non-disruptive side panel everywhere**: Building on the hybrid tracker wizard integration, the compact AI Assistant side panel is now available across every Tenant Home configuration screen — policies (priority, tags, SLA, metric, monitoring time), lagging classes, blocklists, logical groups, CMDB integration, data sampling, default and variable delay, replica trackers, FLX utilities, outliers, FQM dictionary, ops queues, parsing issues, and more. Users get ambient AI assistance without ever leaving the screen they are working on.&lt;/p&gt;
+&lt;p&gt;&amp;#x20; - **Tenant Home — adaptive auto-refresh and preserved navigation state**: The Tenant Home page used to auto-refresh on a hardcoded 5-minute interval, which was either too frequent for small tenants or actively harmful for large ones (a refresh would fire while the user was still reading the previous result). The cadence now scales automatically with the observed table load duration, between a 5-minute floor and a 30-minute ceiling, with a visible *&quot;Next refresh in MM:SS&quot;* countdown. Manual refresh resets the countdown so consecutive refreshes don't double-load. As a separate quality-of-life fix, the group-by dropdown, quick filter dropdown, and group expand/collapse state now survive tab switches within the same tenant page session, matching how the search box already worked.&lt;/p&gt;
+&lt;p&gt;&amp;#x20; - **AI providers — enable/disable without deletion**: Administrators can now disable a configured AI provider (Configuration → AI Provider) instead of having to delete it. Disabled providers disappear from the AI Assistant chat selector, are skipped by stateful alert AI status reports, and are excluded from the Guardian ``ai_provider_unreachable`` probe (the prior alert is also self-cleared). The admin connectivity test endpoint still works against disabled providers so admins can troubleshoot before re-enabling.&lt;/p&gt;
+&lt;p&gt;&amp;#x20; - **Stateful alert performance — significant speedups on high-throughput deployments**: Several performance improvements to the stateful alert helper and ``trackmestateful`` command, with substantial runtime gains on production deployments: ``tenant_idx_resolution`` is now cached per tenant within a single invocation (saves \~3s per event); chart storage uses ``batch_save`` instead of one REST call per chart (was \~14-16s per event with \~10 charts, now near-instant); object-state validation can run in-process instead of via a per-entity REST call to ``load_component_data`` (opt-in, safe fallback); and the ``trackmestateful`` SPL pre-resolves the active-incident key list in Python instead of running a per-cycle subsearch.&lt;/p&gt;
+&lt;p&gt;&amp;#x20; - **Splunk Hosted LLM — auto-resolve model_name to model_id**: The ``splunk_hosted`` provider transparently accepts both the human-friendly ``model_name`` (e.g. ``gpt-oss-20b``) and the ``model_id`` expected by the SLIM API. Customers unfamiliar with Splunk's internal model ID convention no longer hit opaque 404s. The mapping is cached.&lt;/p&gt;
+&lt;p&gt;&amp;#x20; - **Backup &amp;amp; Restore — gateway-timeout-proof Create backup**: The **Create backup** action now dispatches a Splunk search job instead of keeping a long-lived browser REST connection. Large backup runs on production deployments no longer hit reverse-proxy or load-balancer 502/504s even when the backup itself completes successfully backend-side. The UI also gains copy-to-clipboard buttons for every SPL and cURL snippet in the Documentation &amp;amp; examples modal.&lt;/p&gt;
+&lt;p&gt;&amp;#x20; - **Scheduler skip detection — alert-aware**: Scheduler completeness and &quot;skipping searches&quot; detection now captures alert firings in addition to regular tracker searches. The Scheduler Review modal routes its row actions appropriately per row type.&lt;/p&gt;
+&lt;p&gt;&amp;#x20; - **UI polish &amp;amp; consistency**: Slider for *Min green %* in the converging tracker wizard, translated Splunk query in the CMDB lookup modal, near-full-width AI Assistant responses, other group members listed directly in the Logical Groups association panel, accurate **HIGH PRIORITY ENTITIES IN ALERT** header counter (no longer counts disabled tenants/components), and Virtual Tenant wizard index/role dropdowns no longer truncated at 30 entries.&lt;/p&gt;
+&lt;p&gt;&amp;#x20; - **Support Diagnostic — robustness for large environments**: The *Generate diag* feature shipped in 2.3.19 is hardened for busy customer environments where a *Global* run could time out before completing. The backend timeout is raised to 60 minutes, the worker emits a heartbeat so long steps don't get misclassified as dead, and the UI poll matches the new ceiling. When something does fail mid-collection, a new *Partial failures* card lists the failed steps and the user still receives a partial archive instead of losing the entire run. The page also now correctly follows the user's Splunk light/dark theme.&lt;/p&gt;
+&lt;p&gt;&amp;#x20; - **Various bug fixes**: Notes and labels audit events are now correctly surfaced in the entity **Audit changes** tab; disabled tenant overview no longer loops requests; the Ops Status modal's *Run: Clear Tenant Status* button works again; SLA tracker scheduling follows SLA policies (copy-paste bug); clipboard fallback surfaces real copy failures; variable delay auto-compute works again; MHM lagging class overrides are applied (and the *Manage: lagging classes* menu entry is renamed back); leftover stanza keys no longer pollute splunkd.log on Splunk 9.x.&lt;/p&gt;
+&lt;p&gt;See: &lt;a href=&quot;https://docs.trackme-solutions.com/latest/releasenotes.html#version-2-3-20-build-1777282739-27-04-2026&quot;&gt;&lt;/a&gt;&lt;a href=&quot;https://docs.trackme-solutions.com/latest/releasenotes.html#version-2-3-20-build-1777282739-27-04-2026&quot;&gt;https://docs.trackme-solutions.com/latest/releasenotes.html#version-2-3-20-build-1777282739-27-04-2026&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TrackMe for Splunk provides visibility and operational excellence to monitor at scale your Splunk data sources availability and quality, and many more. 
+
+With a rich set of features and a powerful workflow, TrackMe empowers you day after day to get the most from your Splunk investments and deliver the five stars quality of service your users deserve.
+
+Discover TrackMe: https://trackme-solutions.com/discover
+
+Documentation: https://docs.trackme-solutions.com
+
+You can subscribe to our newsletter, and receive important communications from us.
+We will send notifications for instance when publishing new releases, so we can you let you know the cool and powerful things we&amp;#x27;ve been working on!
+
+https://trackme-solutions.com/subscribe/
+
+TrackMe has transitioned to a new licensing model.
+The Free Community Edition has been discontinued.
+
+What this means for you:
+
+- Existing licensed customers are not impacted. Your current license continues unchanged.
+- Community users are automatically upgraded to a Foundation Edition trial for 90 days, with full functionality enabled.
+
+After the trial period:
+
+- TrackMe remains active and fully usable for monitoring
+- The platform enters read-only mode
+
+You can continue to view data, dashboards, alerts, and history
+Creation of new tenants, trackers, or entities will be disabled
+
+To continue using TrackMe with full capabilities after the trial, a Foundation license is required.
+
+Buy Foundation Edition: https://trackme-solutions.com/get-foundation/
+
+See all plans: https://trackme-solutions.com/pricing/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/11684ef6-434c-11f1-8978-e2820d20aaac.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Trackme Limited</dc:creator>
+      <pubDate>Tue, 28 Apr 2026 21:49:07 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4621/#v2.3.20</guid>
+    </item>
     <item>
       <title>Proficio Threat and Compliance Library - v2.2.100 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/6799/</link>
@@ -457,58 +509,6 @@ Try uberAgent yourself. Setting up a PoC is quick and easy: https://docs.citrix.
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Kaled Aljebur</dc:creator>
       <pubDate>Mon, 27 Apr 2026 12:53:52 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8559/#v1.1.1</guid>
-    </item>
-    <item>
-      <title>TrackMe - v2.3.20 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4621/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&amp;#x20; - **Configuration Guardian — six P0 checks, severity tiers, audit trail &amp;amp; AI Assistant integration**: A new framework surfaces silent misconfigurations directly in the Virtual Tenants UI. This release ships the full P0 wave of six checks covering the most common &quot;silently degrades TrackMe&quot; conditions: insufficient tenant-owner capabilities, declared tenant indexes that don't exist, remote-account tokens approaching expiry, the per-tenant health tracker not executing, remote-account connectivity failures, AI provider unreachable, and stale backup archives. Alerts come with two severity tiers (warning and critical), structured remediation guidance, and a full audit trail in the ``trackme_audit`` index. The AI Assistant on Virtual Tenants and Tenant Home is now Guardian-aware: it sees every active alert with parsed metadata and recommended actions, and is steered by a built-in playbook to act as an active guide rather than a passive reporter.&lt;/p&gt;
-&lt;p&gt;&amp;#x20; - **AI Assistant — non-disruptive side panel everywhere**: Building on the hybrid tracker wizard integration, the compact AI Assistant side panel is now available across every Tenant Home configuration screen — policies (priority, tags, SLA, metric, monitoring time), lagging classes, blocklists, logical groups, CMDB integration, data sampling, default and variable delay, replica trackers, FLX utilities, outliers, FQM dictionary, ops queues, parsing issues, and more. Users get ambient AI assistance without ever leaving the screen they are working on.&lt;/p&gt;
-&lt;p&gt;&amp;#x20; - **Tenant Home — adaptive auto-refresh and preserved navigation state**: The Tenant Home page used to auto-refresh on a hardcoded 5-minute interval, which was either too frequent for small tenants or actively harmful for large ones (a refresh would fire while the user was still reading the previous result). The cadence now scales automatically with the observed table load duration, between a 5-minute floor and a 30-minute ceiling, with a visible *&quot;Next refresh in MM:SS&quot;* countdown. Manual refresh resets the countdown so consecutive refreshes don't double-load. As a separate quality-of-life fix, the group-by dropdown, quick filter dropdown, and group expand/collapse state now survive tab switches within the same tenant page session, matching how the search box already worked.&lt;/p&gt;
-&lt;p&gt;&amp;#x20; - **AI providers — enable/disable without deletion**: Administrators can now disable a configured AI provider (Configuration → AI Provider) instead of having to delete it. Disabled providers disappear from the AI Assistant chat selector, are skipped by stateful alert AI status reports, and are excluded from the Guardian ``ai_provider_unreachable`` probe (the prior alert is also self-cleared). The admin connectivity test endpoint still works against disabled providers so admins can troubleshoot before re-enabling.&lt;/p&gt;
-&lt;p&gt;&amp;#x20; - **Stateful alert performance — significant speedups on high-throughput deployments**: Several performance improvements to the stateful alert helper and ``trackmestateful`` command, with substantial runtime gains on production deployments: ``tenant_idx_resolution`` is now cached per tenant within a single invocation (saves \~3s per event); chart storage uses ``batch_save`` instead of one REST call per chart (was \~14-16s per event with \~10 charts, now near-instant); object-state validation can run in-process instead of via a per-entity REST call to ``load_component_data`` (opt-in, safe fallback); and the ``trackmestateful`` SPL pre-resolves the active-incident key list in Python instead of running a per-cycle subsearch.&lt;/p&gt;
-&lt;p&gt;&amp;#x20; - **Splunk Hosted LLM — auto-resolve model_name to model_id**: The ``splunk_hosted`` provider transparently accepts both the human-friendly ``model_name`` (e.g. ``gpt-oss-20b``) and the ``model_id`` expected by the SLIM API. Customers unfamiliar with Splunk's internal model ID convention no longer hit opaque 404s. The mapping is cached.&lt;/p&gt;
-&lt;p&gt;&amp;#x20; - **Backup &amp;amp; Restore — gateway-timeout-proof Create backup**: The **Create backup** action now dispatches a Splunk search job instead of keeping a long-lived browser REST connection. Large backup runs on production deployments no longer hit reverse-proxy or load-balancer 502/504s even when the backup itself completes successfully backend-side. The UI also gains copy-to-clipboard buttons for every SPL and cURL snippet in the Documentation &amp;amp; examples modal.&lt;/p&gt;
-&lt;p&gt;&amp;#x20; - **Scheduler skip detection — alert-aware**: Scheduler completeness and &quot;skipping searches&quot; detection now captures alert firings in addition to regular tracker searches. The Scheduler Review modal routes its row actions appropriately per row type.&lt;/p&gt;
-&lt;p&gt;&amp;#x20; - **UI polish &amp;amp; consistency**: Slider for *Min green %* in the converging tracker wizard, translated Splunk query in the CMDB lookup modal, near-full-width AI Assistant responses, other group members listed directly in the Logical Groups association panel, accurate **HIGH PRIORITY ENTITIES IN ALERT** header counter (no longer counts disabled tenants/components), and Virtual Tenant wizard index/role dropdowns no longer truncated at 30 entries.&lt;/p&gt;
-&lt;p&gt;&amp;#x20; - **Support Diagnostic — robustness for large environments**: The *Generate diag* feature shipped in 2.3.19 is hardened for busy customer environments where a *Global* run could time out before completing. The backend timeout is raised to 60 minutes, the worker emits a heartbeat so long steps don't get misclassified as dead, and the UI poll matches the new ceiling. When something does fail mid-collection, a new *Partial failures* card lists the failed steps and the user still receives a partial archive instead of losing the entire run. The page also now correctly follows the user's Splunk light/dark theme.&lt;/p&gt;
-&lt;p&gt;&amp;#x20; - **Various bug fixes**: Notes and labels audit events are now correctly surfaced in the entity **Audit changes** tab; disabled tenant overview no longer loops requests; the Ops Status modal's *Run: Clear Tenant Status* button works again; SLA tracker scheduling follows SLA policies (copy-paste bug); clipboard fallback surfaces real copy failures; variable delay auto-compute works again; MHM lagging class overrides are applied (and the *Manage: lagging classes* menu entry is renamed back); leftover stanza keys no longer pollute splunkd.log on Splunk 9.x.&lt;/p&gt;
-&lt;p&gt;See: &lt;a href=&quot;https://docs.trackme-solutions.com/latest/releasenotes.html#version-2-3-20-build-1777282739-27-04-2026&quot;&gt;&lt;/a&gt;&lt;a href=&quot;https://docs.trackme-solutions.com/latest/releasenotes.html#version-2-3-20-build-1777282739-27-04-2026&quot;&gt;https://docs.trackme-solutions.com/latest/releasenotes.html#version-2-3-20-build-1777282739-27-04-2026&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TrackMe for Splunk provides visibility and operational excellence to monitor at scale your Splunk data sources availability and quality, and many more. 
-
-With a rich set of features and a powerful workflow, TrackMe empowers you day after day to get the most from your Splunk investments and deliver the five stars quality of service your users deserve.
-
-Discover TrackMe: https://trackme-solutions.com/discover
-
-Documentation: https://docs.trackme-solutions.com
-
-You can subscribe to our newsletter, and receive important communications from us.
-We will send notifications for instance when publishing new releases, so we can you let you know the cool and powerful things we&amp;#x27;ve been working on!
-
-https://trackme-solutions.com/subscribe/
-
-TrackMe has transitioned to a new licensing model.
-The Free Community Edition has been discontinued.
-
-What this means for you:
-
-- Existing licensed customers are not impacted. Your current license continues unchanged.
-- Community users are automatically upgraded to a Foundation Edition trial for 90 days, with full functionality enabled.
-
-After the trial period:
-
-- TrackMe remains active and fully usable for monitoring
-- The platform enters read-only mode
-
-You can continue to view data, dashboards, alerts, and history
-Creation of new tenants, trackers, or entities will be disabled
-
-To continue using TrackMe with full capabilities after the trial, a Foundation license is required.
-
-Buy Foundation Edition: https://trackme-solutions.com/get-foundation/
-
-See all plans: https://trackme-solutions.com/pricing/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/3a621e1a-4223-11f1-8a56-1e2b044fc53f.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Trackme Limited</dc:creator>
-      <pubDate>Mon, 27 Apr 2026 11:08:15 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4621/#v2.3.20</guid>
     </item>
     <item>
       <title>Axonius Add-On for Splunk - v1.3.18 [Version Update]</title>
