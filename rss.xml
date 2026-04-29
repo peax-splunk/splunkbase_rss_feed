@@ -6,25 +6,157 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Wed, 29 Apr 2026 17:18:45 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 29 Apr 2026 19:10:45 +0000</lastBuildDate>
     <item>
-      <title>AI Query Assistant for Splunk - v2.2.10 [Version Update]</title>
+      <title>AI Query Assistant for Splunk - v3.0.2 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/8538/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
-&lt;li&gt;Declared &lt;code&gt;python.version = python3&lt;/code&gt; and &lt;code&gt;python.required = 3.9, 3.13&lt;/code&gt; for all &lt;code&gt;admin_external&lt;/code&gt; REST handlers in &lt;code&gt;default/restmap.conf&lt;/code&gt;. This resolves all AppInspect warnings, including the future failure for Python 3.13 compatibility reported for 2.2.9.&lt;/li&gt;
-&lt;li&gt;No behavioral changes. The handlers already ran on Python 3.9 and are now explicitly declared as compatible with Python 3.13.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Compatibility change:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The minimum supported Splunk version is now 10.0 (previously 9.0). Splunk 9.x ships with Python 3.7 only and is no longer declared as supported by the app’s REST handlers. Users still on Splunk 9.x should remain on 2.2.9.&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Use natural language to generate SPL queries in Splunk with support for multiple AI providers, query history, templates, and enterprise security guardrails.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;AI Query Assistant for Splunk is an AI-powered app that enables users to query and analyze Splunk data using natural language. It helps convert plain-language questions into structured SPL searches, reducing the learning curve for SPL and improving analyst efficiency.
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;## Version 3.0.2 Release Notes&lt;/p&gt;
+&lt;p&gt;This is a hotfix release for a dashboard loading issue that could occur when Splunk Web is behind an SSL-offloading reverse proxy or load balancer, where users access Splunk over HTTPS but the proxy connects to Splunk Web over HTTP.&lt;/p&gt;
+&lt;p&gt;This release also includes deployment compatibility improvements for Splunk Cloud and Search Head Cluster environments. There are no backend, license, or query-handling behavior changes.&lt;/p&gt;
+&lt;p&gt;### Bug Fixes&lt;/p&gt;
+&lt;p&gt;- Fixed dashboards failing to load with:&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;&lt;p&gt; Script error for &quot;/static/app/AI\_Query\_Assistant\_for\_Splunk/mcp\_utils.js&quot;&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Use natural language to generate SPL queries in Splunk with support for multiple AI providers, query history, templates, and enterprise security guardrails.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;AI Query Assistant for Splunk is an AI-powered app that enables users to query and analyze Splunk data using natural language. It helps convert plain-language questions into structured SPL searches, reducing the learning curve for SPL and improving analyst efficiency.
 
 The app is designed for security operations, IT operations, and data exploration scenarios where users need faster and more intuitive access to Splunk data. It supports multiple AI providers, including OpenAI-compatible APIs and Anthropic Claude, and provides configurable safeguards to help reduce the risk of unsafe or invalid query generation.
 
-Key capabilities include natural language to SPL conversion, AI provider management, query history, reusable query templates, and controlled enterprise usage with license-based activation. This app is intended for organizations that want to improve Splunk usability while maintaining operational control and security.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/1ed1b47e-419e-11f1-a3e5-22276323602a.png&quot;&gt;</description>
+Key capabilities include natural language to SPL conversion, AI provider management, query history, reusable query templates, and controlled enterprise usage with license-based activation. This app is intended for organizations that want to improve Splunk usability while maintaining operational control and security.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/42a32aa2-43f3-11f1-939b-3efe2e481b15.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">sevion xia</dc:creator>
-      <pubDate>Wed, 29 Apr 2026 17:16:23 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8538/#v2.2.10</guid>
+      <pubDate>Wed, 29 Apr 2026 18:03:57 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8538/#v3.0.2</guid>
+    </item>
+    <item>
+      <title>Splunk Add-on for Amazon Web Services (AWS) - v8.1.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/1876/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;- Library upgrades to address common vulnerabilities.&lt;/p&gt;
+&lt;p&gt;- Improved SQS-based S3 input performance and STS token handling.&lt;/p&gt;
+&lt;p&gt;- Improved Inspector v2 checkpoint cleanup handling.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Add-on for AWS, from version 7.0.0 and above, includes a merge of all the capabilities of the Splunk Add-on for Amazon Security Lake. This allows you to configure the Splunk Add-on for AWS to ingest data across all AWS data sources, facilitating the integration of AWS data into your Splunk platform deployment.
+
+If you use both the Splunk Add-on for Amazon Security Lake as well as the Splunk Add-on for AWS on the same Splunk instance, then you must uninstall the Splunk Add-on for Amazon Security Lake before upgrading the Splunk Add-on for AWS to version 7.0.0 or later in order to avoid any data duplication and discrepancy issues.
+__________________________________________________________________________________________________________
+
+Ingesting data from AWS to Splunk Cloud? Have you tried the new Splunk Data Manager yet? Data Manager makes AWS data ingestion simpler, more automated and centrally managed for you, while co-existing with AWS and/or Kinesis TAs. Read our blog post to learn more about Data Manager and it’s availability on your Splunk Cloud instance: https://splk.it/3e9F863
+__________________________________________________________________________________________________________
+
+The Splunk Add-on for Amazon Web Services allows a Splunk software administrator to collect:
+* Configuration snapshots, configuration changes, and historical configuration data from the AWS Config service.
+* Metadata for your AWS EC2 instances, reserved instances, and EBS snapshots.
+* Compliance details, compliance summary, and evaluation status of your AWS Config Rules.
+* Assessment Runs and Findings data from the Amazon Inspector service.
+* Management and change events from the AWS CloudTrail service.
+* VPC flow logs and other logs from the CloudWatch Logs service.
+* Performance and billing metrics from the AWS CloudWatch service.
+* Billing reports that you have configured in AWS.
+* S3, CloudFront, and ELB access logs.
+* Generic data from your S3 buckets.
+* Generic data from your Kinesis streams.
+* Generic data from SQS.
+* Security events from Amazon Security Lake
+
+This add-on provides modular inputs and CIM-compatible knowledge to use with other apps, such as the Splunk App for AWS, Splunk Enterprise Security and Splunk IT Service Intelligence.
+
+Versions 5.0.0 and later of the Splunk Add-on for AWS is compatible only with Splunk Enterprise version 8.0.0 and above.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/20dc3d92-3e61-11f1-a0e9-72f461206048.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Wed, 29 Apr 2026 18:03:21 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/1876/#v8.1.1</guid>
+    </item>
+    <item>
+      <title>Splunk Alerts for Microsoft Teams - v1.1.11 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4855/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h3&gt;Bug Fixes&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Adaptive Card payload format&lt;/strong&gt; — Power Automate (new webhook) now receives a pure root-level AdaptiveCard payload. The previous hybrid MessageCard/AdaptiveCard format caused `InvalidBotAdaptiveCard` rejections when using the new webhook path.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Action buttons&lt;/strong&gt; — OpenURI action buttons now correctly appear in Teams cards when using the new webhook. Actions are injected as `Action.OpenUrl` into the AdaptiveCard `actions` array.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Button validation&lt;/strong&gt; — Configuring a button URL without a title (or title without a URL) now logs a warning and skips that button gracefully, rather than silently dropping it or blocking the other button from rendering.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Button independence&lt;/strong&gt; — A misconfigured or missing button 1 no longer suppresses button 2. Each button is evaluated and appended independently.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Button title length&lt;/strong&gt; — Button titles exceeding 100 characters are now truncated with a warning logged, preventing HTTP 413 payload errors on delivery.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Field validation&lt;/strong&gt; — Individually missing fields from the configured fields list now log a per-field warning and are skipped. Valid fields in the same list are unaffected.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Special character escaping&lt;/strong&gt; — Special characters (quotes, backslashes) were being double-escaped in AdaptiveCard payloads due to `checkstr()` being applied before `json.dumps()`. This has been corrected.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;HttpPOST actions&lt;/strong&gt; — HttpPOST is not supported by Power Automate webhooks. A warning is now logged and the action is gracefully skipped instead of being silently dropped.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Features&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Card style&lt;/strong&gt; — A new &quot;Card style&quot; dropdown has been added to the alert action configuration UI, allowing the Adaptive Card container color to be set (`Default`, `Good`, `Warning`, `Attention`, `Emphasis`, `Accent`).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Image link support&lt;/strong&gt; — Image link is now supported on the new webhook path. When configured, an `Image` element is prepended to the AdaptiveCard body.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Removals&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Legacy MessageCard path removed&lt;/strong&gt; — The Office 365 connector (MessageCard) webhook format has been removed. Microsoft has retired Office 365 connectors. The Adaptive Card / Power Automate webhook is now the only supported path.&lt;/li&gt;
+  &lt;li&gt;Removed UI fields no longer applicable to the new webhook: `Theme color`, `HttpPOST` action fields, and the new webhook toggle.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This application provides alert actions for Microsoft Teams messages publication to allow formatted messages publication from Splunk, including:
+
+- Actionable message card support
+- Defining options globally or on a per alert basis (per alert override)
+- Defining comma separated list of fields which will be dynamically used to generated publication
+- Choosing icon link for message publication
+- Activating potential link action and defining its link (Up to 2 OpenURI actions per alert)
+- Activating and configuring an HttpPOST potential action that allows additional interactions between Splunk or a third party application from Microsoft Teams
+- Resilient messages publication management, temporary publication failures are automatically stored in a KVstore, and re-tried following a resilient policy
+
+The application provides as well an easy logging access, a basic overview dashboard that exposes successful and failed publications, if any, and finally a builtin alert that can be activated to detect and warn in case of a failure to publish a message in a channel.
+
+The Add-on is compatible with Python 2 / Python 3 modes.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/aa13cee2-4288-11f1-89c9-1e9a20bc84b3.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Wed, 29 Apr 2026 17:33:29 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4855/#v1.1.11</guid>
+    </item>
+    <item>
+      <title>InSitzes App for Splunk Enterprise Monitoring - v3.0.14 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8438/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
+  &lt;li&gt;Fix IndexingTab cache panels to query a 7-day window&lt;/li&gt;
+  &lt;li&gt;Constrain forwarder searches to metrics.log and split splunk\_server scope&lt;/li&gt;
+  &lt;li&gt;Replace `index=*` with explicit indexes subsearch&lt;/li&gt;
+  &lt;li&gt;Extend Compute/Cost toggle to Search, Workload, Dashboards, Capacity&lt;/li&gt;
+  &lt;li&gt;Attribute p99/hr SVC to Wasteful and Redundant search tables&lt;/li&gt;
+  &lt;li&gt;Switch search dispatch to async + cancel-on-hidden, surface % progress&lt;/li&gt;
+  &lt;li&gt;Restore 100% line coverage for the async-search refactor&lt;/li&gt;
+  &lt;li&gt;Dispatch search jobs through `service.jobs.create` with explicit params&lt;/li&gt;
+  &lt;li&gt;Make Alert Email Distribution optional in enterprise setup&lt;/li&gt;
+  &lt;li&gt;`buildSearchUrl`: default earliest/latest to `runSearch`'s defaults&lt;/li&gt;
+  &lt;li&gt;Fix Sourcetypes by Overall Issue opening with default 30m timeframe&lt;/li&gt;
+  &lt;li&gt;Default earliest/latest in `buildSearchUrl` to match `runSearch`&lt;/li&gt;
+  &lt;li&gt;Keep visited tabs mounted so switching doesn't re-dispatch searches&lt;/li&gt;
+  &lt;li&gt;Scope smoke-test selectors to the active tab pane&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Unified Splunk Enterprise monitoring in one React dashboard: 31 automated health checks, hourly SVC estimation for Splunk Cloud cost modeling, license tracking, ingestion anomaly detection, full-stack CPU/memory/disk visibility, and scheduled-search and workload analysis.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The InSitzes App for Splunk Enterprise is a unified monitoring suite that gives administrators actionable insight into ingestion, system performance, workload management, search efficiency, and compute consumption across their Splunk Enterprise deployment. Rather than stitching together the Monitoring Console, license pages, introspection data, and ad-hoc searches, admins get one React-powered dashboard with purpose-built tabs to answer the questions that matter most: Is my environment healthy? Is data flowing reliably? Are searches running efficiently? Am I approaching my license quota? And what would my workload cost under Splunk Cloud compute-based licensing?
+
+The Health tab runs 31 automated checks across 8 categories — System, Ingestion, Data Quality, Search, Compute, Workload, Forwarding, and Capacity — with weighted severity scoring and a rolled-up environment health score so you know immediately where to focus. Individual tabs drill into CPU, memory, and disk utilization across every server role (search heads, indexers, cluster manager, deployment server, SHC deployer); live license usage with 7-day trend against daily quota; forwarder throughput, HEC health, SSL and deployment-client issues; sourcetype parsing, timestamp, and debug-event quality; scheduled search execution, skip reasons, and wasteful-search detection; WLM filtered, reclassified, and aborted search rates; and dashboard refresh frequency with base vs. chained search analysis.
+
+The Compute tab delivers an hourly-computed SVC estimate — via the bundled insitzes_svc_estimation saved search and dynamic role discovery on _introspection data — so Enterprise admins can see exactly what their workload would cost under Splunk Cloud compute-based licensing, broken down by search head, app, search type, user, and provenance, with an optional Cost Mode. Install on your Monitoring Console search head; ingestion data is read live from _internal license_usage events, eliminating scheduled-lookup maintenance. Pre-built alert saved searches (disabled by default) cover ingestion anomalies, app updates, large lookup files, and redundant scheduled searches.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9c26b41c-43ef-11f1-b1ed-e641e466ac52.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">David Sitzes</dc:creator>
+      <pubDate>Wed, 29 Apr 2026 17:24:12 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8438/#v3.0.14</guid>
+    </item>
+    <item>
+      <title>InSitzes App for Splunk Cloud - v3.0.14 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8097/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
+&lt;li&gt;Fix IndexingTab cache panels to query a 7-day window&lt;/li&gt;
+&lt;li&gt;Constrain forwarder searches to metrics.log and split splunk_server scope&lt;/li&gt;
+&lt;li&gt;Replace &lt;code&gt;index=*&lt;/code&gt; with explicit indexes subsearch&lt;/li&gt;
+&lt;li&gt;Extend Compute/Cost toggle to Search, Workload, Dashboards, Capacity&lt;/li&gt;
+&lt;li&gt;Attribute p99/hr SVC to Wasteful and Redundant search tables&lt;/li&gt;
+&lt;li&gt;Switch search dispatch to async + cancel-on-hidden, surface % progress&lt;/li&gt;
+&lt;li&gt;Restore 100% line coverage for the async-search refactor&lt;/li&gt;
+&lt;li&gt;Dispatch search jobs through &lt;code&gt;service.jobs.create&lt;/code&gt; with explicit params&lt;/li&gt;
+&lt;li&gt;Make Alert Email Distribution optional in enterprise setup&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;buildSearchUrl&lt;/code&gt;: default earliest/latest to &lt;code&gt;runSearch&lt;/code&gt;'s defaults&lt;/li&gt;
+&lt;li&gt;Fix Sourcetypes by Overall Issue opening with default 30m timeframe&lt;/li&gt;
+&lt;li&gt;Default earliest/latest in &lt;code&gt;buildSearchUrl&lt;/code&gt; to match &lt;code&gt;runSearch&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Keep visited tabs mounted so switching doesn't re-dispatch searches&lt;/li&gt;
+&lt;li&gt;Scope smoke-test selectors to the active tab pane&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Unified Splunk Cloud monitoring with 31 automated health checks, SVC compute attribution (by user, app, search head, and provenance), DDAS &amp;amp; DDAA storage forecasting with optional cost modeling, ingestion anomaly detection, scheduled-search and workload analysis, dashboard refresh tracking, and a guided remediation tab — all in a single React dashboard with PDF export.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The InSitzes App for Splunk Cloud is a unified monitoring suite that gives administrators actionable insight into ingestion, system performance, workload management, search efficiency, storage, and compute consumption across their Splunk Cloud environment. Rather than hopping between the Cloud Monitoring Console, license pages, and ad-hoc searches, admins get one React-powered dashboard with 12 purpose-built tabs to answer the questions that matter most: Is my environment healthy? Is data flowing reliably? Are searches running efficiently? Where are my SVCs being consumed? How fast is storage growing, and do I have enough capacity to meet demand?
+
+The Health tab runs 31 automated checks across 8 categories — System, Ingestion, Data Quality, Search, Compute, Storage, Workload, Forwarding, and Capacity — with weighted severity scoring and a rolled-up environment health score so you know at a glance where to focus. Individual tabs drill into SVC attribution by user, app, search head, provenance and search type; DDAS and DDAA storage utilization and forecasting with an optional Cost Mode; scheduled search skip reasons and wasteful-search detection; WLM filtered, reclassified, and aborted search rates; HEC throughput and SSL connectivity issues; dashboard refresh frequency and chain-search analysis; indexer cache churn and queue health; and license headroom trends. A guided Remediation tab translates every health finding into concrete next steps.
+
+All charts render client-side as SVG so dashboards export cleanly to PDF for executive reporting. Ingestion data is read live from _internal license_usage events, eliminating scheduled-lookup maintenance. Pre-built alert saved searches (disabled by default) are included for ingestion anomalies, storage utilization, app updates, large lookup files, and redundant scheduled searches. The app helps teams proactively detect issues, optimize resource usage, and align capacity to real business demand.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9a47b448-43ef-11f1-b176-be3d6f88282f.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">David Sitzes</dc:creator>
+      <pubDate>Wed, 29 Apr 2026 17:22:31 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8097/#v3.0.14</guid>
     </item>
     <item>
       <title>Splunk Exposure Analytics Add-on for Linux - v1.0.0 [New App Release]</title>
@@ -61,30 +193,6 @@ You can deploy the Splunk Add-on for Exposure Analytics to your Splunk forwarder
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Wed, 29 Apr 2026 16:57:51 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8691/#v1.0.0</guid>
-    </item>
-    <item>
-      <title>InSitzes App for Splunk Cloud - v3.0.12 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8097/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Unified Splunk Cloud monitoring with 31 automated health checks, SVC compute attribution (by user, app, search head, and provenance), DDAS &amp;amp; DDAA storage forecasting with optional cost modeling, ingestion anomaly detection, scheduled-search and workload analysis, dashboard refresh tracking, and a guided remediation tab — all in a single React dashboard with PDF export.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The InSitzes App for Splunk Cloud is a unified monitoring suite that gives administrators actionable insight into ingestion, system performance, workload management, search efficiency, storage, and compute consumption across their Splunk Cloud environment. Rather than hopping between the Cloud Monitoring Console, license pages, and ad-hoc searches, admins get one React-powered dashboard with 12 purpose-built tabs to answer the questions that matter most: Is my environment healthy? Is data flowing reliably? Are searches running efficiently? Where are my SVCs being consumed? How fast is storage growing, and do I have enough capacity to meet demand?
-
-The Health tab runs 31 automated checks across 8 categories — System, Ingestion, Data Quality, Search, Compute, Storage, Workload, Forwarding, and Capacity — with weighted severity scoring and a rolled-up environment health score so you know at a glance where to focus. Individual tabs drill into SVC attribution by user, app, search head, provenance and search type; DDAS and DDAA storage utilization and forecasting with an optional Cost Mode; scheduled search skip reasons and wasteful-search detection; WLM filtered, reclassified, and aborted search rates; HEC throughput and SSL connectivity issues; dashboard refresh frequency and chain-search analysis; indexer cache churn and queue health; and license headroom trends. A guided Remediation tab translates every health finding into concrete next steps.
-
-All charts render client-side as SVG so dashboards export cleanly to PDF for executive reporting. Ingestion data is read live from _internal license_usage events, eliminating scheduled-lookup maintenance. Pre-built alert saved searches (disabled by default) are included for ingestion anomalies, storage utilization, app updates, large lookup files, and redundant scheduled searches. The app helps teams proactively detect issues, optimize resource usage, and align capacity to real business demand.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/cde5f02a-43dc-11f1-8c3c-62a502903e95.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">David Sitzes</dc:creator>
-      <pubDate>Wed, 29 Apr 2026 15:14:10 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8097/#v3.0.12</guid>
-    </item>
-    <item>
-      <title>InSitzes App for Splunk Enterprise Monitoring - v3.0.12 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8438/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Unified Splunk Enterprise monitoring in one React dashboard: 31 automated health checks, hourly SVC estimation for Splunk Cloud cost modeling, license tracking, ingestion anomaly detection, full-stack CPU/memory/disk visibility, and scheduled-search and workload analysis.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The InSitzes App for Splunk Enterprise is a unified monitoring suite that gives administrators actionable insight into ingestion, system performance, workload management, search efficiency, and compute consumption across their Splunk Enterprise deployment. Rather than stitching together the Monitoring Console, license pages, introspection data, and ad-hoc searches, admins get one React-powered dashboard with purpose-built tabs to answer the questions that matter most: Is my environment healthy? Is data flowing reliably? Are searches running efficiently? Am I approaching my license quota? And what would my workload cost under Splunk Cloud compute-based licensing?
-
-The Health tab runs 31 automated checks across 8 categories — System, Ingestion, Data Quality, Search, Compute, Workload, Forwarding, and Capacity — with weighted severity scoring and a rolled-up environment health score so you know immediately where to focus. Individual tabs drill into CPU, memory, and disk utilization across every server role (search heads, indexers, cluster manager, deployment server, SHC deployer); live license usage with 7-day trend against daily quota; forwarder throughput, HEC health, SSL and deployment-client issues; sourcetype parsing, timestamp, and debug-event quality; scheduled search execution, skip reasons, and wasteful-search detection; WLM filtered, reclassified, and aborted search rates; and dashboard refresh frequency with base vs. chained search analysis.
-
-The Compute tab delivers an hourly-computed SVC estimate — via the bundled insitzes_svc_estimation saved search and dynamic role discovery on _introspection data — so Enterprise admins can see exactly what their workload would cost under Splunk Cloud compute-based licensing, broken down by search head, app, search type, user, and provenance, with an optional Cost Mode. Install on your Monitoring Console search head; ingestion data is read live from _internal license_usage events, eliminating scheduled-lookup maintenance. Pre-built alert saved searches (disabled by default) cover ingestion anomalies, app updates, large lookup files, and redundant scheduled searches.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c9ff0078-43dc-11f1-93c9-8af2403cb762.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">David Sitzes</dc:creator>
-      <pubDate>Wed, 29 Apr 2026 15:14:07 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8438/#v3.0.12</guid>
     </item>
     <item>
       <title>Mural - v1.3.0 [Version Update]</title>
@@ -431,51 +539,6 @@ gws:reports:chrome&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quo
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Clayfield</dc:creator>
       <pubDate>Tue, 28 Apr 2026 05:42:28 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7104/#v2.0.4</guid>
-    </item>
-    <item>
-      <title>Splunk Alerts for Microsoft Teams - v1.1.11 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4855/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h3&gt;Bug Fixes&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Adaptive Card payload format&lt;/strong&gt; — Power Automate (new webhook) now receives a pure root-level AdaptiveCard payload. The previous hybrid MessageCard/AdaptiveCard format caused `InvalidBotAdaptiveCard` rejections when using the new webhook path.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Action buttons&lt;/strong&gt; — OpenURI action buttons now correctly appear in Teams cards when using the new webhook. Actions are injected as `Action.OpenUrl` into the AdaptiveCard `actions` array.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Button validation&lt;/strong&gt; — Configuring a button URL without a title (or title without a URL) now logs a warning and skips that button gracefully, rather than silently dropping it or blocking the other button from rendering.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Button independence&lt;/strong&gt; — A misconfigured or missing button 1 no longer suppresses button 2. Each button is evaluated and appended independently.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Button title length&lt;/strong&gt; — Button titles exceeding 100 characters are now truncated with a warning logged, preventing HTTP 413 payload errors on delivery.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Field validation&lt;/strong&gt; — Individually missing fields from the configured fields list now log a per-field warning and are skipped. Valid fields in the same list are unaffected.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Special character escaping&lt;/strong&gt; — Special characters (quotes, backslashes) were being double-escaped in AdaptiveCard payloads due to `checkstr()` being applied before `json.dumps()`. This has been corrected.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;HttpPOST actions&lt;/strong&gt; — HttpPOST is not supported by Power Automate webhooks. A warning is now logged and the action is gracefully skipped instead of being silently dropped.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Features&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Card style&lt;/strong&gt; — A new &quot;Card style&quot; dropdown has been added to the alert action configuration UI, allowing the Adaptive Card container color to be set (`Default`, `Good`, `Warning`, `Attention`, `Emphasis`, `Accent`).&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Image link support&lt;/strong&gt; — Image link is now supported on the new webhook path. When configured, an `Image` element is prepended to the AdaptiveCard body.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Removals&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Legacy MessageCard path removed&lt;/strong&gt; — The Office 365 connector (MessageCard) webhook format has been removed. Microsoft has retired Office 365 connectors. The Adaptive Card / Power Automate webhook is now the only supported path.&lt;/li&gt;
-  &lt;li&gt;Removed UI fields no longer applicable to the new webhook: `Theme color`, `HttpPOST` action fields, and the new webhook toggle.&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This application provides alert actions for Microsoft Teams messages publication to allow formatted messages publication from Splunk, including:
-
-- Actionable message card support
-- Defining options globally or on a per alert basis (per alert override)
-- Defining comma separated list of fields which will be dynamically used to generated publication
-- Choosing icon link for message publication
-- Activating potential link action and defining its link (Up to 2 OpenURI actions per alert)
-- Activating and configuring an HttpPOST potential action that allows additional interactions between Splunk or a third party application from Microsoft Teams
-- Resilient messages publication management, temporary publication failures are automatically stored in a KVstore, and re-tried following a resilient policy
-
-The application provides as well an easy logging access, a basic overview dashboard that exposes successful and failed publications, if any, and finally a builtin alert that can be activated to detect and warn in case of a failure to publish a message in a channel.
-
-The Add-on is compatible with Python 2 / Python 3 modes.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/aa13cee2-4288-11f1-89c9-1e9a20bc84b3.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Mon, 27 Apr 2026 23:22:51 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4855/#v1.1.11</guid>
     </item>
     <item>
       <title>Microsoft Exchange On-Premise EWS - v4.0.1 [Version Update]</title>
@@ -1281,41 +1344,6 @@ Usually with Splunk alerts, you create an alert when there is an issue with the 
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Vatsal Jagani</dc:creator>
       <pubDate>Thu, 23 Apr 2026 18:16:42 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7016/#v1.2.1</guid>
-    </item>
-    <item>
-      <title>Splunk Add-on for Amazon Web Services (AWS) - v8.1.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/1876/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;- Library upgrades to address common vulnerabilities.&lt;/p&gt;
-&lt;p&gt;- Improved SQS-based S3 input performance and STS token handling.&lt;/p&gt;
-&lt;p&gt;- Improved Inspector v2 checkpoint cleanup handling.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Add-on for AWS, from version 7.0.0 and above, includes a merge of all the capabilities of the Splunk Add-on for Amazon Security Lake. This allows you to configure the Splunk Add-on for AWS to ingest data across all AWS data sources, facilitating the integration of AWS data into your Splunk platform deployment.
-
-If you use both the Splunk Add-on for Amazon Security Lake as well as the Splunk Add-on for AWS on the same Splunk instance, then you must uninstall the Splunk Add-on for Amazon Security Lake before upgrading the Splunk Add-on for AWS to version 7.0.0 or later in order to avoid any data duplication and discrepancy issues.
-__________________________________________________________________________________________________________
-
-Ingesting data from AWS to Splunk Cloud? Have you tried the new Splunk Data Manager yet? Data Manager makes AWS data ingestion simpler, more automated and centrally managed for you, while co-existing with AWS and/or Kinesis TAs. Read our blog post to learn more about Data Manager and it’s availability on your Splunk Cloud instance: https://splk.it/3e9F863
-__________________________________________________________________________________________________________
-
-The Splunk Add-on for Amazon Web Services allows a Splunk software administrator to collect:
-* Configuration snapshots, configuration changes, and historical configuration data from the AWS Config service.
-* Metadata for your AWS EC2 instances, reserved instances, and EBS snapshots.
-* Compliance details, compliance summary, and evaluation status of your AWS Config Rules.
-* Assessment Runs and Findings data from the Amazon Inspector service.
-* Management and change events from the AWS CloudTrail service.
-* VPC flow logs and other logs from the CloudWatch Logs service.
-* Performance and billing metrics from the AWS CloudWatch service.
-* Billing reports that you have configured in AWS.
-* S3, CloudFront, and ELB access logs.
-* Generic data from your S3 buckets.
-* Generic data from your Kinesis streams.
-* Generic data from SQS.
-* Security events from Amazon Security Lake
-
-This add-on provides modular inputs and CIM-compatible knowledge to use with other apps, such as the Splunk App for AWS, Splunk Enterprise Security and Splunk IT Service Intelligence.
-
-Versions 5.0.0 and later of the Splunk Add-on for AWS is compatible only with Splunk Enterprise version 8.0.0 and above.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/20dc3d92-3e61-11f1-a0e9-72f461206048.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Thu, 23 Apr 2026 16:10:12 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/1876/#v8.1.1</guid>
     </item>
     <item>
       <title>Splunk Add-on for Google Cloud Platform - v5.0.2 [Version Update]</title>
