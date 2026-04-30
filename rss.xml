@@ -6,7 +6,22 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Thu, 30 Apr 2026 22:43:02 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 30 Apr 2026 23:43:18 +0000</lastBuildDate>
+    <item>
+      <title>Maps+ for Splunk - v4.6.4 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/3124/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;# Maps+ for Splunk — Release Notes v4.6.4&lt;/p&gt;
+&lt;p&gt;## Bug Fixes&lt;/p&gt;
+&lt;p&gt;**Fixed: Format Visualization panel fails to open when Splunk panel ID contains parentheses**&lt;/p&gt;
+&lt;p&gt;On dashboards where a Splunk panel's element ID contains a `(` character, clicking the Format Visualization button for a Maps+ panel produced an error and the panel never opened. No map content was affected — only the formatter UI was broken.&lt;/p&gt;
+&lt;p&gt;The root cause was a jQuery selector that inserted the panel ID directly into an unquoted CSS attribute selector, for example `div[data-cid\=foo(bar)]`. jQuery's Sizzle engine treats `(` as the start of a pseudo-class argument and throws a parse error. The fix quotes the attribute value so Sizzle treats the entire string as a literal: `div[data-cid\='foo(bar)']`.&lt;/p&gt;
+&lt;p&gt;## Upgrade Notes&lt;/p&gt;
+&lt;p&gt;- Drop-in upgrade — no dashboard changes, no SPL field changes, no formatter option changes.&lt;/p&gt;
+&lt;p&gt;- Affects all versions of Maps+. If your panel IDs are plain alphanumeric strings this bug would not have been visible, but upgrading is still recommended.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The mapping equivalent of a Swiss Army knife for Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/25d67c78-44eb-11f1-9377-3e154bce02d5.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
+      <pubDate>Thu, 30 Apr 2026 23:22:22 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/3124/#v4.6.4</guid>
+    </item>
     <item>
       <title>SpyCloud Add-On for Splunk - v3.2.1 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/6374/</link>
@@ -512,21 +527,6 @@ Known issues:
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Recorded Future</dc:creator>
       <pubDate>Thu, 30 Apr 2026 13:19:24 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/4920/#v3.2.1</guid>
-    </item>
-    <item>
-      <title>Maps+ for Splunk - v4.6.3 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/3124/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;# Maps+ for Splunk — Release Notes v4.6.3&lt;/p&gt;
-&lt;p&gt;## Bug Fixes&lt;/p&gt;
-&lt;p&gt;**Fixed: Per-row marker colors ignored when using layer groups**&lt;/p&gt;
-&lt;p&gt;When markers were assigned to a layer group via the `layerGroup` field, all markers in that group rendered with the color of the first row — ignoring per-row `markerColor`, `iconColor`, and `icon` values set on subsequent rows. This affected `png`, `svg`, `icon`, and `custom` marker types.&lt;/p&gt;
-&lt;p&gt;The root cause was an icon caching optimization (introduced in v4.1.1) that stored the first-built marker icon for each layer group and reused it for every subsequent row. That cache has been removed entirely. Each row now builds a fresh icon, so per-row marker styling works correctly regardless of whether `layerGroup` is set.&lt;/p&gt;
-&lt;p&gt;## Upgrade Notes&lt;/p&gt;
-&lt;p&gt;- Drop-in upgrade — no dashboard changes, no SPL field changes, no formatter option changes.&lt;/p&gt;
-&lt;p&gt;- If you are upgrading from v4.5.x, see the [v4.6.0 release notes](release-notes-4.6.0.md) for the full feature changelog.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The mapping equivalent of a Swiss Army knife for Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a014628e-3e15-11f1-9940-864c3eb2d7cd.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
-      <pubDate>Thu, 30 Apr 2026 13:04:12 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/3124/#v4.6.3</guid>
     </item>
     <item>
       <title>DDoS Detector for Splunk - v1.1.46 [Version Update]</title>
