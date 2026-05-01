@@ -6,7 +6,7 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Fri, 01 May 2026 20:05:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 01 May 2026 21:43:55 +0000</lastBuildDate>
     <item>
       <title>Cloud Migration Assessment App for Splunk (SCMA) - v5.4.11 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/4974/</link>
@@ -85,8 +85,65 @@ SCMA is self-guiding—follow in-app prompts. Results are directional and educat
 Upgrade note:
 When upgrading SCMA, remove the previous app installation folder completely before installing the new version, then restart Splunk (see Installation on this listing or the hosted documentation).&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/7efbd9aa-457d-11f1-aa65-b2bfd0f346de.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Fri, 01 May 2026 19:17:07 +0000</pubDate>
+      <pubDate>Fri, 01 May 2026 20:35:30 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/4974/#v5.4.11</guid>
+    </item>
+    <item>
+      <title>cve.icu - CVE Intelligence for Splunk - v2.0.5 [Version Update] (Archived)</title>
+      <link>https://splunkbase.splunk.com/app/8395/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;v2.0.5 — Fix: Splunk Cloud Compatibility&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Fix:&lt;/strong&gt; Added &lt;code&gt;python.required = 3.13&lt;/code&gt; to the modular input and custom search command configurations. Splunk's updated Cloud vetting process now requires this setting in addition to &lt;code&gt;python.version = python3&lt;/code&gt;. Without it, the app loses Splunk Cloud Platform compatibility. No functional changes — data pipeline, enrichment, and dashboards are identical to v2.0.3.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;What's New in v2.0 (included in v2.0.5)&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Requires Splunk 10.0+ or Splunk Cloud.&lt;/strong&gt; Users on Splunk 9 should remain on v1.1.2.&lt;/p&gt;
+&lt;h3&gt;New Features&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Four Dashboard Studio v2 dashboards: CVE Explorer, Risk Priority, Vulnerability Landscape, and Operational Health&lt;/li&gt;
+&lt;li&gt;EPSS enrichment: Daily FIRST EPSS scores joined at search time for exploit probability ranking&lt;/li&gt;
+&lt;li&gt;CISA KEV integration: Known Exploited Vulnerabilities catalog refreshed every 6 hours&lt;/li&gt;
+&lt;li&gt;SSVC decision data: CISA Stakeholder-Specific Vulnerability Categorization from ADP containers&lt;/li&gt;
+&lt;li&gt;Risk Priority lookup: Pre-computed table combining CVSS, EPSS, KEV, and SSVC data for fast triage&lt;/li&gt;
+&lt;li&gt;Zero-configuration start: Input enabled by default, data starts flowing immediately after install&lt;/li&gt;
+&lt;li&gt;Configurable index macro: All dashboards and saved searches use the cveicu_index macro&lt;/li&gt;
+&lt;li&gt;CIM Vulnerabilities data model mapping&lt;/li&gt;
+&lt;li&gt;CI/CD pipeline: GitHub Actions with unit tests, AppInspect validation, and Docker integration tests&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Improvements&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;CVSS v4.0 support in addition to v3.1, v3.0, and v2.0&lt;/li&gt;
+&lt;li&gt;Multi-value field extractions for CWE IDs, vendors, products, and references&lt;/li&gt;
+&lt;li&gt;Pre-computed dashboard lookups for instant panel loading&lt;/li&gt;
+&lt;li&gt;Expanded CWE lookup: 298 unique entries covering CWE Top 25, OWASP Top 10, and more&lt;/li&gt;
+&lt;li&gt;Cooperative timeout management and memory monitoring (512MB limit)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Breaking Changes from v1.x&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Splunk 10+ required for dashboards (Dashboard Studio v2)&lt;/li&gt;
+&lt;li&gt;Setup page removed: GitHub token configured via REST API&lt;/li&gt;
+&lt;li&gt;Python 3.11+ required (3.9 dropped)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Migration from v1.x&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Upgrade Splunk to 10.0+ first&lt;/li&gt;
+&lt;li&gt;Install v2.0.5 via Manage Apps&lt;/li&gt;
+&lt;li&gt;No data migration needed -- same sourcetypes and field extractions&lt;/li&gt;
+&lt;li&gt;If using a custom index, create local/macros.conf with your cveicu_index definition&lt;/li&gt;
+&lt;/ol&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Ingest the complete CVE V5 database (327,000+ vulnerabilities) into Splunk in minutes. Features bulk ZIP downloads, hourly delta updates, CVSS/EPSS/KEV/SSVC risk enrichment, and four Dashboard Studio dashboards. Works out of the box with no API keys or setup required.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The cve.icu add-on ingests the complete CVE V5 database directly into Splunk. Unlike traditional collectors that rely on slow per-CVE API crawling, this add-on streams data from official GitHub release ZIP files, enabling initial ingestion of over 327,000 CVE records in minutes. Hourly delta updates keep the data current with only a few API calls per run -- no GitHub token required.
+
+Key Features:
+
+Full CVE V5 Schema Support: Parses the modern CVE JSON 5.x schema including cveMetadata, CNA containers, and CISA-ADP enrichment. Extracts CVSS scores across all versions (v2.0, v3.0, v3.1, v4.0), CWE classifications, and affected product/vendor data.
+
+Risk Prioritization Beyond CVSS: Integrates three enrichment sources to help security teams identify &amp;quot;patch now&amp;quot; threats: FIRST Exploit Prediction Scoring System (EPSS) scores updated daily, CISA Known Exploited Vulnerabilities (KEV) catalog refreshed every 6 hours, and CISA SSVC (Stakeholder-Specific Vulnerability Categorization) decision data from ADP containers.
+
+Four Dashboard Studio Dashboards: CVE Explorer for searching and filtering the full database, Risk Priority for EPSS/KEV/SSVC-ranked threat triage, Vulnerability Landscape for executive-level trend analysis, and Operational Health for monitoring ingestion status and errors.
+
+Production-Ready Architecture: Resource-aware modular input with memory monitoring (512MB limit), cooperative timeout management, and KV Store checkpointing with file fallback. Pre-computed lookup CSVs power dashboard KPIs so panels load instantly without running expensive searches. Splunk Cloud compatible and AppInspect validated.
+
+Zero-Configuration Start: Works out of the box -- install and data starts flowing. No API keys, no setup pages, no index creation required. Customize the target index via the cveicu_index macro when ready.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0d9f5dde-3f17-11f1-ac1b-c2bd3a38b944.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jerry Gamblin</dc:creator>
+      <pubDate>Fri, 01 May 2026 20:13:34 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8395/#v2.0.5</guid>
     </item>
     <item>
       <title>EventLab - v1.0.0 [New App Release]</title>
@@ -1596,63 +1653,6 @@ The analytic stories and their searches are also available at - https://github.c
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Apto Solutions</dc:creator>
       <pubDate>Thu, 23 Apr 2026 13:33:10 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7262/#v1.9.0</guid>
-    </item>
-    <item>
-      <title>cve.icu - CVE Intelligence for Splunk - v2.0.5 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8395/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;v2.0.5 — Fix: Splunk Cloud Compatibility&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Fix:&lt;/strong&gt; Added &lt;code&gt;python.required = 3.13&lt;/code&gt; to the modular input and custom search command configurations. Splunk's updated Cloud vetting process now requires this setting in addition to &lt;code&gt;python.version = python3&lt;/code&gt;. Without it, the app loses Splunk Cloud Platform compatibility. No functional changes — data pipeline, enrichment, and dashboards are identical to v2.0.3.&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2&gt;What's New in v2.0 (included in v2.0.5)&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Requires Splunk 10.0+ or Splunk Cloud.&lt;/strong&gt; Users on Splunk 9 should remain on v1.1.2.&lt;/p&gt;
-&lt;h3&gt;New Features&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Four Dashboard Studio v2 dashboards: CVE Explorer, Risk Priority, Vulnerability Landscape, and Operational Health&lt;/li&gt;
-&lt;li&gt;EPSS enrichment: Daily FIRST EPSS scores joined at search time for exploit probability ranking&lt;/li&gt;
-&lt;li&gt;CISA KEV integration: Known Exploited Vulnerabilities catalog refreshed every 6 hours&lt;/li&gt;
-&lt;li&gt;SSVC decision data: CISA Stakeholder-Specific Vulnerability Categorization from ADP containers&lt;/li&gt;
-&lt;li&gt;Risk Priority lookup: Pre-computed table combining CVSS, EPSS, KEV, and SSVC data for fast triage&lt;/li&gt;
-&lt;li&gt;Zero-configuration start: Input enabled by default, data starts flowing immediately after install&lt;/li&gt;
-&lt;li&gt;Configurable index macro: All dashboards and saved searches use the cveicu_index macro&lt;/li&gt;
-&lt;li&gt;CIM Vulnerabilities data model mapping&lt;/li&gt;
-&lt;li&gt;CI/CD pipeline: GitHub Actions with unit tests, AppInspect validation, and Docker integration tests&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Improvements&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;CVSS v4.0 support in addition to v3.1, v3.0, and v2.0&lt;/li&gt;
-&lt;li&gt;Multi-value field extractions for CWE IDs, vendors, products, and references&lt;/li&gt;
-&lt;li&gt;Pre-computed dashboard lookups for instant panel loading&lt;/li&gt;
-&lt;li&gt;Expanded CWE lookup: 298 unique entries covering CWE Top 25, OWASP Top 10, and more&lt;/li&gt;
-&lt;li&gt;Cooperative timeout management and memory monitoring (512MB limit)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Breaking Changes from v1.x&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Splunk 10+ required for dashboards (Dashboard Studio v2)&lt;/li&gt;
-&lt;li&gt;Setup page removed: GitHub token configured via REST API&lt;/li&gt;
-&lt;li&gt;Python 3.11+ required (3.9 dropped)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Migration from v1.x&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;Upgrade Splunk to 10.0+ first&lt;/li&gt;
-&lt;li&gt;Install v2.0.5 via Manage Apps&lt;/li&gt;
-&lt;li&gt;No data migration needed -- same sourcetypes and field extractions&lt;/li&gt;
-&lt;li&gt;If using a custom index, create local/macros.conf with your cveicu_index definition&lt;/li&gt;
-&lt;/ol&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Ingest the complete CVE V5 database (327,000+ vulnerabilities) into Splunk in minutes. Features bulk ZIP downloads, hourly delta updates, CVSS/EPSS/KEV/SSVC risk enrichment, and four Dashboard Studio dashboards. Works out of the box with no API keys or setup required.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The cve.icu add-on ingests the complete CVE V5 database directly into Splunk. Unlike traditional collectors that rely on slow per-CVE API crawling, this add-on streams data from official GitHub release ZIP files, enabling initial ingestion of over 327,000 CVE records in minutes. Hourly delta updates keep the data current with only a few API calls per run -- no GitHub token required.
-
-Key Features:
-
-Full CVE V5 Schema Support: Parses the modern CVE JSON 5.x schema including cveMetadata, CNA containers, and CISA-ADP enrichment. Extracts CVSS scores across all versions (v2.0, v3.0, v3.1, v4.0), CWE classifications, and affected product/vendor data.
-
-Risk Prioritization Beyond CVSS: Integrates three enrichment sources to help security teams identify &amp;quot;patch now&amp;quot; threats: FIRST Exploit Prediction Scoring System (EPSS) scores updated daily, CISA Known Exploited Vulnerabilities (KEV) catalog refreshed every 6 hours, and CISA SSVC (Stakeholder-Specific Vulnerability Categorization) decision data from ADP containers.
-
-Four Dashboard Studio Dashboards: CVE Explorer for searching and filtering the full database, Risk Priority for EPSS/KEV/SSVC-ranked threat triage, Vulnerability Landscape for executive-level trend analysis, and Operational Health for monitoring ingestion status and errors.
-
-Production-Ready Architecture: Resource-aware modular input with memory monitoring (512MB limit), cooperative timeout management, and KV Store checkpointing with file fallback. Pre-computed lookup CSVs power dashboard KPIs so panels load instantly without running expensive searches. Splunk Cloud compatible and AppInspect validated.
-
-Zero-Configuration Start: Works out of the box -- install and data starts flowing. No API keys, no setup pages, no index creation required. Customize the target index via the cveicu_index macro when ready.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0d9f5dde-3f17-11f1-ac1b-c2bd3a38b944.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jerry Gamblin</dc:creator>
-      <pubDate>Thu, 23 Apr 2026 13:23:04 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8395/#v2.0.5</guid>
     </item>
     <item>
       <title>Dropzone AI App - v1.0.1 [Version Update]</title>
