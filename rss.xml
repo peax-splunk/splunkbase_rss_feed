@@ -6,7 +6,87 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Tue, 05 May 2026 07:55:48 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 05 May 2026 09:55:43 +0000</lastBuildDate>
+    <item>
+      <title>SSL Certificate expiry collection - v1.0.7 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6475/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
+  &lt;li&gt;Converted TA to UCC.&lt;/li&gt;
+  &lt;li&gt;Added some basic dashboards -  please set macro `certificate_expiry_indexes` to target your index containing ssl_cert sourcetype . Deploy TA to SHC for dashboards set the macro .&lt;/li&gt;
+  &lt;li&gt;Added new fields - see the README/README.md&lt;/li&gt;
+  &lt;li&gt;This TA remains a single instance TA - meaning it is light on resources and iterates your inputs. It runs every 12 hours as per default/inputs.conf - you can of course override this to be faster or slower depending on your requirements, there are new timing fields available for troubleshooting endpoint as an example.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Proactively manage SSL certificate renewals with this TA for Splunk, which provides monitoring of thousands of SSL certificates. Stay alert on expiration dates and issuer details, ensuring your IT support teams are always ahead of renewals and maintain uninterrupted secure services.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/07584880-4860-11f1-bf7b-1ae7db061604.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Gary Croker</dc:creator>
+      <pubDate>Tue, 05 May 2026 09:32:51 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6475/#v1.0.7</guid>
+    </item>
+    <item>
+      <title>VT4Splunk - v1.8.6 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6654/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
+&lt;li&gt;Add compatibility with Splunk 10.2&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Unearth malware, adversaries and other breaches hiding in your environment with crowdsourced threat reputation and context coming from hundreds of security vendors and millions of monthly users on VirusTotal.com.
+
+If you would like to unleash the full potential of VirusTotal applied to your security telemetry please do not hesitate to contact us at: https://www.virustotal.com/gui/contact-us/premium-services. 
+
+VT4Splunk automatically enriches your Splunk logs with threat intelligence coming from VirusTotal. It allows you to contextualize IoCs (files/hashes, domains, IP addresses, URLs) and confirm malicious intent/discard false positives. The context added includes: security industry reputation, threat categories and labels, associated campaigns and threat actors, etc. 
+
+Feature highlights:
+- Command-line driven threat intelligence enrichment of subsets of events when conducting investigations.
+- Automatic scheduled enrichment of all events to continuously identify breaches in your environment.
+- Single pane of glass IoC contextualization via embedded VT Augment widget.
+- Dashboards and reporting including:
+     * Threat Intelligence view summarizing malware activity in your environment.
+     * Vulnerability Intelligence view shedding light into malicious files trying to exploit specific vulnerabilities (identified by CVE) in your environment.
+     * Adversary Intelligence view identifying threat {campaigns, toolkits, actors} observed in your environment.
+     * MITRE ATT&amp;amp;CK matrix identifying tactics and techniques observed in your environment.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/44ef8f36-4861-11f1-8894-1e16d19fa311.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">VirusTotal Team</dc:creator>
+      <pubDate>Tue, 05 May 2026 09:12:19 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6654/#v1.8.6</guid>
+    </item>
+    <item>
+      <title>Illumio Technology Add-On for Splunk - v4.1.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/3657/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;KV Store Replication Enhancements&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;p&gt;Added support for token-based authentication when replicating KV Store to remote Search Heads.&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;p&gt;New &quot;Auth Token&quot; checkbox per Search Head credential allows using Splunk auth tokens instead of username/password login.&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;p&gt; Tokens bypass session-based authentication, improving reliability for Splunk Cloud deployments.&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;p&gt; JWT token validation with expiry checking and detailed logging.&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;p&gt; Proxy support for KV Store replication&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;p&gt; Replication can now be routed through the configured basic-auth proxy.&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;p&gt;Added auth probe to verify session validity before starting replication.&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;p&gt;Enhanced logging throughout the KV Store replication flow&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;p&gt;All logs now use `[KV Replication]` prefix for easier filtering.&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;p&gt; Proxy usage indicated with `(via proxy)` in log messages.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Search Head Credential UI Fixes&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;p&gt;Fixed credential loading when editing existing data inputs.&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;p&gt;Fixed credential deletion not persisting on save.&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;p&gt;Improved layout and styling of Search Head configuration section.&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;p&gt;Editing is no more allowed for existing SH credentials. To change credentials, it must be deleted, saved and re-entered.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Illumio Technology Add-On for Splunk enriches Illumio Policy Compute Engine (PCE) data with Common Information Model (CIM) field names, event types, and tags. This TA enables Illumio data to be easily used with Splunk Enterprise Security, Splunk App for PCI Compliance, etc. 
+
+IMPORTANT:  In v4.0.0 and onwards, Syslog prefixes are stripped at index-time for JSON-formatted events.  Due to this change, the search-time extractions and transforms for version 4.0.0 and onwards are incompatible with data indexed by previous versions of the TA. See the Upgrade section in the README (or Installation Instructions pane) for more detailed instructions for converting data and custom searches from previous versions of the TA.
+
+
+TA-Illumio compatibility:
+v4.1.0 - Splunk 10.1, 10.0, 9.3, 9.2, 9.1, 9.0 + PCE SaaS, 25.2, 24.2, 23.5, 23.2 and 22.5
+v4.0.3 - Splunk 9.3, 9.2, 9.1, 9.0, 8.2, 8.1 + PCE 21.5, 22.2, 22.5, 23.2, 23.5, 24.2.x and SaaS 
+v4.0.2 - Splunk 9.3, 9.2, 9.1, 9.0, 8.2, 8.1 + PCE 21.5, 22.2, 22.5, 23.2, 23.5 and SaaS 
+v4.0.1 - Splunk 9.1, 9.0, 8.2, 8.1 + PCE 21.5, 22.2, 22.5, 23.2 and SaaS
+v3.2.3 - Splunk 9.1, 9.0, 8.2, 8.1 + PCE 21.2, 21.5, 22.2, 22.5 and SaaS
+v3.2.0 - Splunk 9.1, 9.0, 8.2, 8.1, 8.0, 7.3 + PCE  18.3, 19.1, 19.3, 20.1, 21.2, 21.5
+
+For dashboards with Illumio data, please install the Illumio App for Splunk available at https://splunkbase.splunk.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/73a9af3e-485a-11f1-bf7b-1ae7db061604.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Illumio Inc</dc:creator>
+      <pubDate>Tue, 05 May 2026 08:37:53 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/3657/#v4.1.2</guid>
+    </item>
     <item>
       <title>Splunk - v3.0.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5848/</link>
@@ -332,47 +412,6 @@ Zero-Configuration Start: Works out of the box -- install and data starts flowin
       <guid>https://splunkbase.splunk.com/app/8395/#v2.0.5</guid>
     </item>
     <item>
-      <title>EventLab - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8672/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;EventLab 1.0.0 — Initial Release&lt;/h2&gt;
-&lt;p&gt;First public release of EventLab on Splunkbase.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Core features:&lt;/strong&gt;&lt;br&gt;
-- AI Assistant with 22 tools for natural-language synthetic data generation&lt;br&gt;
-- 54 preconfigured MITRE ATT&amp;amp;CK scenarios across all 14 tactics&lt;br&gt;
-- 5 prebuilt models: Palo Alto firewall, Windows Security, DNS, web access, Linux syslog&lt;br&gt;
-- Custom model building from real Splunk data via AI-driven profiling&lt;br&gt;
-- Statistical quality scoring (Kolmogorov–Smirnov, chi-squared, temporal cosine similarity)&lt;br&gt;
-- Real-time streaming with configurable EPS and rate patterns&lt;br&gt;
-- Scheduled generation via cron expressions&lt;br&gt;
-- Multi-LLM support: Anthropic Claude, Azure OpenAI, AWS Bedrock, OpenAI-compatible, Ollama&lt;br&gt;
-- Multi-tenancy with 4 RBAC roles and owner-scoped data isolation&lt;br&gt;
-- Full REST API and 5 custom SPL commands&lt;br&gt;
-- Audit logging compatible with SOX and ISO 27001&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;AI-powered synthetic data generator for Splunk. Create realistic security events, simulate 54 MITRE ATT&amp;amp;CK techniques, build custom models from real logs, and validate output quality with statistical tests — all through natural-language commands. Supports multiple LLM providers, including a fully air-gapped option.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;EventLab is an AI-powered synthetic data generator built as a native Splunk application. It enables SOC analysts, detection engineers, and Splunk administrators to produce realistic synthetic security events on demand — for testing detections, populating training environments, validating SPL queries, and running live demonstrations — without exposing real production data.
-
-The built-in AI assistant accepts plain-English commands: generate a fixed batch, start a continuous real-time stream, simulate a MITRE ATT&amp;amp;CK technique, or schedule recurring jobs. Every generated batch is statistically validated against real production data, giving teams a measurable quality score that proves synthetic events match production patterns.
-
-EventLab ships with prebuilt models for common log sources — Palo Alto firewall, Windows Security, DNS, web access, and Linux syslog — and can build new models directly from your Splunk indexes. The AI profiles real events, extracts field types and token patterns, and produces a generation-ready model in minutes.
-
-Key capabilities:
-- 22 AI-driven tools for generation, streaming, scenario simulation, quality assessment, and model authoring.
-- 54 preconfigured MITRE ATT&amp;amp;CK techniques spanning all 14 tactics.
-- Statistical quality scoring: Kolmogorov–Smirnov, chi-squared, and temporal cosine similarity tests.
-- Real-time streaming with configurable EPS and rate patterns (flat, spike, ramp, burst).
-- Scheduled generation via cron expressions for continuous data feeds.
-- Multi-LLM provider support: Anthropic Claude, Azure OpenAI, AWS Bedrock, OpenAI-compatible endpoints, and Ollama for fully air-gapped deployments.
-- Multi-tenancy with four RBAC roles, owner-scoped data isolation, and six granular capabilities.
-- Full audit trail logged to KV Store and Splunk indexes.
-
-Who it is for:
-- SOC teams running detection engineering, content development, and analyst training.
-- Splunk administrators needing realistic data for performance testing and demos.
-- Security architects validating SIEM pipelines without exposing customer data.
-- Educators and trainers building hands-on Splunk labs.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/414ddb02-3e99-11f1-bf5d-3a9071a9ebd2.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SoftServe Inc.</dc:creator>
-      <pubDate>Fri, 01 May 2026 15:32:47 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8672/#v1.0.0</guid>
-    </item>
-    <item>
       <title>Innovators ToolKit - v2.0.2 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/8659/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;v2.0.2 — Packaging and Cloud compatibility fixes:&lt;/p&gt;
@@ -524,17 +563,6 @@ Try uberAgent yourself. Setting up a PoC is quick and easy: https://docs.citrix.
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Allan Edwards</dc:creator>
       <pubDate>Thu, 30 Apr 2026 16:43:00 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/3906/#v1.8.5</guid>
-    </item>
-    <item>
-      <title>Red River Zero Trust Gap Analysis App - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8670/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Initial release of the Red River Zero Trust Gap Analysis app.&lt;/p&gt;
-&lt;p&gt;This version introduces executive and architectural dashboards aligned to the Department of Defense (DoD) Zero Trust framework, designed to support organizations participating in the Red River Zero Trust Accelerator.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Visualize Zero Trust maturity and gaps aligned to the DoD Zero Trust framework using existing Splunk data. Designed as a companion to the Red River Zero Trust Accelerator, this app provides insight into current coverage, partial controls, and priority areas for improvement.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Red River Zero Trust Gap Analysis helps organizations understand how their current security capabilities align to the Department of Defense (DoD) Zero Trust framework by visualizing gaps, partial coverage, and maturity across all Zero Trust pillars.
-The app translates Zero Trust workshop discussions and assessment inputs into a data-driven view within Splunk, enabling security leaders and architects to see where controls exist, where coverage is incomplete, and where additional tooling or integration may be required. Rather than introducing new collection mechanisms, the app leverages existing Splunk data and curated lookup mappings to correlate vendors, products, and activities to DoD Zero Trust capabilities.
-This application is designed as a companion to the Red River Zero Trust Accelerator and supports organizations participating in that engagement by extending assessment results into repeatable, point-in-time dashboards. The app provides an executive summary for leadership as well as deeper views by Zero Trust pillar and capability, helping teams validate assumptions, reduce blind spots, and prioritize roadmap decisions using their existing Splunk investment.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Casey Turner</dc:creator>
-      <pubDate>Thu, 30 Apr 2026 15:39:15 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8670/#v1.0.0</guid>
     </item>
     <item>
       <title>Sysdig VM Splunk TA - v2.3.2 [Version Update]</title>
@@ -1678,19 +1706,6 @@ You can extract fields with simple search command as this in your query.
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Vatsal Jagani</dc:creator>
       <pubDate>Thu, 23 Apr 2026 18:33:10 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7701/#v1.0.1</guid>
-    </item>
-    <item>
-      <title>Splunk ES Content Update - v5.26.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/3449/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;GitHub - &lt;a href=&quot;https://github.com/splunk/security_content/releases/tag/v5.26.0&quot;&gt;&lt;/a&gt;&lt;a href=&quot;https://github.com/splunk/security_content/releases/tag/v5.26.0&quot;&gt;&lt;/a&gt;&lt;a href=&quot;https://github.com/splunk/security_content/releases/tag/v5.26.0&quot;&gt;https://github.com/splunk/security_content/releases/tag/v5.26.0&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Splunk Docs - &lt;a href=&quot;https://help.splunk.com/en/splunk-enterprise-security-8/security-content-update/release-notes/5.26/splunk-security-content-release-notes/whats-new&quot;&gt;&lt;/a&gt;&lt;a href=&quot;https://help.splunk.com/en/splunk-enterprise-security-8/security-content-update/release-notes/5.26/splunk-security-content-release-notes/whats-new&quot;&gt;https://help.splunk.com/en/splunk-enterprise-security-8/security-content-update/release-notes/5.26/splunk-security-content-release-notes/whats-new&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk ES Content Update (ESCU) app delivers pre-packaged Security Content. ESCU provides regular Security Content updates to help security practitioners address ongoing time-sensitive threats, attack methods, and other security issues.
-
-Security Content consists of tactics, techniques, and methodologies that help with detection, investigation, and response. Security Content enables security teams to directly operationalize detection searches, investigative searches, and other supporting details. ESCU can generate Notable/Risk Events in Splunk Enterprise Security. Security Content also contains easy-to-read background information and guidance, for key context on motivations and risks associated with attack techniques, as well as pragmatic advice on how to combat those techniques.
-
-The analytic stories and their searches are also available at - https://github.com/splunk/security_content.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/1c245bf4-3e89-11f1-bcd8-16034b6abd91.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Thu, 23 Apr 2026 14:48:13 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/3449/#v5.26.0</guid>
     </item>
     <item>
       <title>Apto Solutions Telemetry Technical Add-on - v1.9.0 [Version Update]</title>
