@@ -6,7 +6,105 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Wed, 06 May 2026 17:23:05 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 06 May 2026 19:23:45 +0000</lastBuildDate>
+    <item>
+      <title>Splunk Connect for OTLP - v0.4.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8704/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk Connect for OTLP is a technical addon that exposes a OTLP endpoint for consumption of logs, traces and metrics. OTLP stands for OpenTelemetry Protocol, a standard communication protocol to transmit signals using Protobuf over gRPC or HTTP.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Antoine Toulme</dc:creator>
+      <pubDate>Wed, 06 May 2026 19:04:58 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8704/#v0.4.1</guid>
+    </item>
+    <item>
+      <title>Whisper Security Graph App for Splunk - v1.0.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8695/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;The first GA release of the Whisper Security App for Splunk. TA-whisper-security delivers Knowledge Graph enrichment, threat intelligence, attack surface monitoring, and Splunk Enterprise Security integration backed by the Whisper Security Knowledge Graph (7.3B nodes, 38B edges, millions of threat intelligence edges).&lt;/p&gt;
+&lt;h3&gt;Search commands&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;`whisperlookup` — streaming enrichment of hostnames, IPs, and ASNs against the Whisper Knowledge Graph with KV Store-backed caching.&lt;/li&gt;
+  &lt;li&gt;`whisperquery` — execute parameterized read-only Cypher queries against the Whisper Graph API directly from SPL.&lt;/li&gt;
+  &lt;li&gt;`whisperschema` — discover available node labels, relationship types, and properties from the Whisper Graph.&lt;/li&gt;
+  &lt;li&gt;`whisperflush` and `whisperevict` — manage the local enrichment cache (full flush or TTL-based eviction).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Modular inputs&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Threat intelligence collector&lt;/strong&gt; — populates IP and domain threat-intelligence KV Store collections from the Whisper Graph.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;DNS baseline collector&lt;/strong&gt; — captures DNS resolution baselines for change detection.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Watchlist collector&lt;/strong&gt; — synchronizes user-defined watchlists into the KV Store.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;KV Store collections&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;`whisper_enrichment_cache` — TTL-based enrichment cache with accelerated fields.&lt;/li&gt;
+  &lt;li&gt;`whisper_precomputed_enrichment` — pre-resolved enrichment for high-volume entities.&lt;/li&gt;
+  &lt;li&gt;`whisper_ip_intel` and `whisper_domain_intel` — threat intelligence collections for IPs and domains.&lt;/li&gt;
+  &lt;li&gt;`whisper_watchlist` — user-curated entity watchlist.&lt;/li&gt;
+  &lt;li&gt;`whisper_dns_baseline` — DNS resolution baseline for drift detection.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Splunk Enterprise Security integration&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;CIM compliance for Network Traffic, DNS, and Threat Intelligence data models via FIELDALIAS, event types, and tags.&lt;/li&gt;
+  &lt;li&gt;Threat intelligence framework integration through the IP and domain intel collections.&lt;/li&gt;
+  &lt;li&gt;Adaptive response action for ES correlation searches and notable events.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Dashboards&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Investigation&lt;/strong&gt; — interactive entity drill-down across hostnames, IPs, and ASNs.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Attack Surface Timeline&lt;/strong&gt; — historical view of exposed assets and changes.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Compliance Summary&lt;/strong&gt; and &lt;strong&gt;SPF Compliance&lt;/strong&gt; — email and DNS posture reporting.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Mail Config&lt;/strong&gt; — DMARC, SPF, and DKIM configuration insight.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Saved searches&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Scheduled cache eviction for expired enrichment entries.&lt;/li&gt;
+  &lt;li&gt;Threat intelligence KV Store population (IP, domain, precomputed enrichment).&lt;/li&gt;
+  &lt;li&gt;Example searches for enriching DNS domains, destination IPs, and proxy hostnames.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Configuration &amp;amp; operations&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;UCC Framework-based setup UI with encrypted credential storage in `storage/passwords`.&lt;/li&gt;
+  &lt;li&gt;Per-tier query depth controls (Anonymous, Free, Professional) honored by all search commands.&lt;/li&gt;
+  &lt;li&gt;Structured key\=value logging via `whisper_logging` for SIEM-friendly diagnostics.&lt;/li&gt;
+  &lt;li&gt;`[diag]` stanza with `whisper_diag.py` for Splunk supportability bundles.&lt;/li&gt;
+  &lt;li&gt;`whisper_user` role defined in `authorize.conf` with least-privilege permissions.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Compatibility&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Splunk Enterprise 10.2+ and Splunk Cloud (Victoria, Classic).&lt;/li&gt;
+  &lt;li&gt;Splunk Enterprise Security 7.x.&lt;/li&gt;
+  &lt;li&gt;Python 3.13 runtime.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Enriches Splunk events with DNS, BGP, WHOIS, GeoIP, SPF, and threat intelligence context from the Whisper Security Knowledge Graph, provides Cypher query capabilities, and monitors attack surface changes for owned domains.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Whisper Security Add-on for Splunk connects Splunk to the Whisper Security Knowledge Graph, a repository of over 7.3 billion infrastructure nodes and 38 billion edges. The add-on enables enrichment of security events with DNS, BGP, WHOIS, GeoIP, SPF, and threat intelligence context. It provides custom search commands for executing Cypher graph queries, modular inputs for attack surface monitoring and threat intelligence collection, and dashboards for compliance posture tracking and infrastructure change detection. The add-on maps events to the CIM Network Resolution and Threat Intelligence data models. Supported data sources include whisper_threat_intel, whisper_baseline, and whisper_watchlist. Source types include whisper:attack_surface, whisper:threat_intel, whisper:watchlist, whisper:change, whisper:enrichment, ta_whisper_graph, and whisper:spf_compliance. The add-on serves organizations requiring infrastructure context enrichment for security analytics, compliance monitoring, and threat intelligence workflows.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/cd711a54-441b-11f1-939b-3efe2e481b15.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Whisper Security</dc:creator>
+      <pubDate>Wed, 06 May 2026 18:05:39 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8695/#v1.0.0</guid>
+    </item>
+    <item>
+      <title>Splunk ES Content Update - v5.27.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/3449/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;GitHub - &lt;a href=&quot;https://github.com/splunk/security_content/releases/tag/v5.27.0&quot;&gt;https://github.com/splunk/security_content/releases/tag/v5.27.0&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Splunk Docs - &lt;a href=&quot;https://help.splunk.com/en/splunk-enterprise-security-8/security-content-update/release-notes/5.27/splunk-security-content-release-notes/whats-new&quot;&gt;https://help.splunk.com/en/splunk-enterprise-security-8/security-content-update/release-notes/5.27/splunk-security-content-release-notes/whats-new&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk ES Content Update (ESCU) app delivers pre-packaged Security Content. ESCU provides regular Security Content updates to help security practitioners address ongoing time-sensitive threats, attack methods, and other security issues.
+
+Security Content consists of tactics, techniques, and methodologies that help with detection, investigation, and response. Security Content enables security teams to directly operationalize detection searches, investigative searches, and other supporting details. ESCU can generate Notable/Risk Events in Splunk Enterprise Security. Security Content also contains easy-to-read background information and guidance, for key context on motivations and risks associated with attack techniques, as well as pragmatic advice on how to combat those techniques.
+
+The analytic stories and their searches are also available at - https://github.com/splunk/security_content.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f4150152-4966-11f1-a70c-ba8048a1aea8.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Wed, 06 May 2026 17:35:27 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/3449/#v5.27.0</guid>
+    </item>
     <item>
       <title>Add-on for Atlassian JIRA Service Desk alert action - v2.1.2 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/4958/</link>
@@ -114,101 +212,6 @@ An application requires Collectord built by Outcold Solutions, see https://www.o
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Outcold Solutions LLC</dc:creator>
       <pubDate>Wed, 06 May 2026 14:53:33 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/3723/#v26.4.1</guid>
-    </item>
-    <item>
-      <title>Whisper Security Graph App for Splunk - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8695/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;The first GA release of the Whisper Security App for Splunk. TA-whisper-security delivers Knowledge Graph enrichment, threat intelligence, attack surface monitoring, and Splunk Enterprise Security integration backed by the Whisper Security Knowledge Graph (7.3B nodes, 38B edges, millions of threat intelligence edges).&lt;/p&gt;
-&lt;h3&gt;Search commands&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;`whisperlookup` — streaming enrichment of hostnames, IPs, and ASNs against the Whisper Knowledge Graph with KV Store-backed caching.&lt;/li&gt;
-  &lt;li&gt;`whisperquery` — execute parameterized read-only Cypher queries against the Whisper Graph API directly from SPL.&lt;/li&gt;
-  &lt;li&gt;`whisperschema` — discover available node labels, relationship types, and properties from the Whisper Graph.&lt;/li&gt;
-  &lt;li&gt;`whisperflush` and `whisperevict` — manage the local enrichment cache (full flush or TTL-based eviction).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Modular inputs&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Threat intelligence collector&lt;/strong&gt; — populates IP and domain threat-intelligence KV Store collections from the Whisper Graph.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;DNS baseline collector&lt;/strong&gt; — captures DNS resolution baselines for change detection.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Watchlist collector&lt;/strong&gt; — synchronizes user-defined watchlists into the KV Store.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;KV Store collections&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;`whisper_enrichment_cache` — TTL-based enrichment cache with accelerated fields.&lt;/li&gt;
-  &lt;li&gt;`whisper_precomputed_enrichment` — pre-resolved enrichment for high-volume entities.&lt;/li&gt;
-  &lt;li&gt;`whisper_ip_intel` and `whisper_domain_intel` — threat intelligence collections for IPs and domains.&lt;/li&gt;
-  &lt;li&gt;`whisper_watchlist` — user-curated entity watchlist.&lt;/li&gt;
-  &lt;li&gt;`whisper_dns_baseline` — DNS resolution baseline for drift detection.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Splunk Enterprise Security integration&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;CIM compliance for Network Traffic, DNS, and Threat Intelligence data models via FIELDALIAS, event types, and tags.&lt;/li&gt;
-  &lt;li&gt;Threat intelligence framework integration through the IP and domain intel collections.&lt;/li&gt;
-  &lt;li&gt;Adaptive response action for ES correlation searches and notable events.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Dashboards&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Investigation&lt;/strong&gt; — interactive entity drill-down across hostnames, IPs, and ASNs.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Attack Surface Timeline&lt;/strong&gt; — historical view of exposed assets and changes.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Compliance Summary&lt;/strong&gt; and &lt;strong&gt;SPF Compliance&lt;/strong&gt; — email and DNS posture reporting.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Mail Config&lt;/strong&gt; — DMARC, SPF, and DKIM configuration insight.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Saved searches&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Scheduled cache eviction for expired enrichment entries.&lt;/li&gt;
-  &lt;li&gt;Threat intelligence KV Store population (IP, domain, precomputed enrichment).&lt;/li&gt;
-  &lt;li&gt;Example searches for enriching DNS domains, destination IPs, and proxy hostnames.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Configuration &amp;amp; operations&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;UCC Framework-based setup UI with encrypted credential storage in `storage/passwords`.&lt;/li&gt;
-  &lt;li&gt;Per-tier query depth controls (Anonymous, Free, Professional) honored by all search commands.&lt;/li&gt;
-  &lt;li&gt;Structured key\=value logging via `whisper_logging` for SIEM-friendly diagnostics.&lt;/li&gt;
-  &lt;li&gt;`[diag]` stanza with `whisper_diag.py` for Splunk supportability bundles.&lt;/li&gt;
-  &lt;li&gt;`whisper_user` role defined in `authorize.conf` with least-privilege permissions.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Compatibility&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Splunk Enterprise 10.2+ and Splunk Cloud (Victoria, Classic).&lt;/li&gt;
-  &lt;li&gt;Splunk Enterprise Security 7.x.&lt;/li&gt;
-  &lt;li&gt;Python 3.13 runtime.&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Connect Splunk to the Whisper Knowledge Graph: 7.3B nodes and 38B edges covering DNS, BGP, WHOIS, GeoIP, web links, and 5M+ threat-intel edges from 40+ feeds. Enrich events inline with `whisperlookup`, pivot infrastructure with `whisperquery` Cypher, investigate any indicator with one-click graph pivots, monitor owned domains for attack-surface change.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Whisper Security Add-on for Splunk connects your Splunk environment to the Whisper Knowledge Graph: 7.3 billion nodes and 38 billion edges that map how the internet is wired. Hostnames, A/AAAA, CNAME, NS and MX records, SPF mechanism chains, BGP announcements, RIR allocations, ASN peering, WHOIS registrants, GeoIP, web-crawl link graph, and 5+ million threat-intel edges sourced from 40+ feeds across 18 categories — all queryable inline from the Splunk search bar over Cypher.
-
-The add-on is built around three workflows:
-
-1. Enrich customer logs. Pipe events through the `whisperlookup` streaming command to add ~60 enrichment fields per indicator: ASN, prefix, country, registrar, organization, threat score, risk score, threat level, and 13 boolean flags such as `whisper_is_c2`, `whisper_is_phishing`, `whisper_is_tor`, `whisper_is_malware`. Output is CIM-aliased so it drops straight into Network Resolution, DNS, and Threat Intelligence data models without custom field extractions.
-
-2. Investigate one indicator. Open the Lookup / Investigation dashboard, type a domain or IP, and the dashboard fans out a dozen read-only graph pivots in parallel: shared nameservers, co-hosted domains, WHOIS-attribute pivots (registrar, organization, email, phone), CNAME and SPF chains up to 5 hops, BGP path through ANNOUNCED_PREFIX to ASN_NAME, web inbound/outbound link graph, and a `CALL explain()` threat assessment with score, level, factors, and contributing feeds.
-
-3. Monitor owned domains. Point the DNS Baseline modular input at your domain list and the add-on captures DNS infrastructure snapshots on a schedule. The Attack Surface Change Timeline dashboard surfaces the diffs with risk scoring; the SPF Compliance and Mail Configuration dashboards cover the email side.
-
-Two more things make this useful in practice:
-
-- Direct Cypher access from Splunk. `whisperquery` runs ad-hoc parameterized Cypher against the graph from the search bar. Want to find every domain co-hosted with a phishing site, then check which of them share a registrant email? That is one query, not a tool-switching exercise. Procedures like `CALL explain(indicator)` and `CALL whisper.history(domain)` give scored threat assessments and historical WHOIS/BGP snapshots.
-
-- Splunk ES integration without the lock-in. The add-on ships ES-compatible KV Store collections (`whisper_ip_intel`, `whisper_domain_intel`), an &amp;quot;Enrich with Whisper&amp;quot; adaptive response action, CIM aliases, and nine `whisper_*` graph macros (`whisper_shared_nameservers`, `whisper_asn_infrastructure`, `whisper_cname_chain`, `whisper_spf_chain`, `whisper_bgp_peers`, `whisper_cohosted_domains`, `whisper_full_investigation`, `whisper_explain`, `whisper_index`).
-
-The add-on runs identically on Splunk Enterprise, Splunk Cloud Classic (with IDM event-based pipeline), and Splunk Cloud Victoria.
-
-Get a free API key at https://console.whisper.security to start.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/cd711a54-441b-11f1-939b-3efe2e481b15.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Whisper Security</dc:creator>
-      <pubDate>Wed, 06 May 2026 14:35:43 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8695/#v1.0.0</guid>
     </item>
     <item>
       <title>Fleak OCSF Mapper - v0.1.0 [New App Release]</title>
@@ -1844,43 +1847,6 @@ Features:
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Natkin</dc:creator>
       <pubDate>Fri, 24 Apr 2026 21:17:26 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8016/#v2.0.0</guid>
-    </item>
-    <item>
-      <title>Resecurity Threat Intelligence - v1.0.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8067/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
-&lt;li&gt;Updated compatibility for the latest Splunk versions.&lt;/li&gt;
-&lt;li&gt;General improvements and metadata updates.&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The app enables streamlined ingestion of Indicators of Compromise (IOCs) from TAXII 2.x feeds directly into Splunk. It solves the common challenge of operationalizing external threat intelligence: pulling structured threat data on a schedule, normalizing it, and making it instantly searchable for detection, investigation, and reporting.
-
-With a simple setup page for global settings and a lightweight modular input per collection, the app continuously collects new IOCs using incremental checkpoints, so you only ingest what’s changed. Built‑in pagination, retry/backoff, and time handling ensure reliable operation, while you control where data lands (index/sourcetype) and how far back to fetch on first run.
-
-Highlights
-- Direct TAXII 2.x ingestion into Splunk
-- Incremental updates with durable checkpoints (no duplicate floods)
-- Configurable initial lookback window and collection‑level inputs
-- Works with customer‑defined index, sourcetype, and interval
-- Ready‑to‑search IOC fields (indicator, indicator_type, STIX metadata)
-- Robust handling for pagination and transient HTTP errors (429/5xx)
-
-Use cases
-- Enrich detections with current domain/IP/hash IOCs
-- Power investigations and threat hunting with up‑to‑date intel
-- Feed dashboards and alerts with high‑fidelity threat indicators&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8fcf5732-3fc1-11f1-a95f-e6e59c8651e1.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Hunter Hunter</dc:creator>
-      <pubDate>Fri, 24 Apr 2026 09:47:00 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8067/#v1.0.1</guid>
-    </item>
-    <item>
-      <title>Trend Vision One for Splunk SOAR - v3.2.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6569/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
-&lt;li&gt;Added &quot;get endpoint list&quot; action to retrieve a detailed list of endpoints from Vision One.&lt;/li&gt;
-&lt;li&gt;Added &quot;get endpoint details&quot; action to display the detailed profile of a specified endpoint.&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TrendAI Vision One™ is a purpose-built threat defense platform that provides added value and new benefits beyond XDR solutions, allowing you to see more and respond faster. Providing deep and broad extended detection and response (XDR) capabilities that collect and automatically correlate data across multiple security layers—email, endpoints, servers, cloud workloads, and networks—TrendAI Vision One™ prevents the majority of attacks with automated protection&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/67599c72-3fc1-11f1-a3cd-729ae58b5a05.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
-      <pubDate>Fri, 24 Apr 2026 09:38:52 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6569/#v3.2.0</guid>
     </item>
   </channel>
 </rss>
