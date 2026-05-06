@@ -6,7 +6,55 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Wed, 06 May 2026 15:23:39 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 06 May 2026 17:23:05 +0000</lastBuildDate>
+    <item>
+      <title>Add-on for Atlassian JIRA Service Desk alert action - v2.1.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4958/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;- bug - Fix PAT authentication for on-premise JIRA: ``jirafill`` was reading the wrong configuration key (``auth_mode`` instead of ``jira_auth_mode``) and silently fell back to Basic auth even when PAT was selected, leading to ``403 Client Error`` on ``/rest/api/latest/project`` while ``Test connectivity`` reported success #223&lt;/p&gt;
+&lt;p&gt;- bug - Splunk Cloud / Splunk Enterprise 10.2+ pre-check readiness: declare ``python.required \= 3.9,3.13`` alongside the legacy ``python.version \= python3`` directive in ``alert_actions.conf``, ``commands.conf`` and ``restmap.conf`` so the add-on continues to load on Splunk 9.x / 10.x (Python 3.9) and is accepted by Splunk Cloud Pre-Check on Splunk Enterprise 10.2+ (Python 3.13) #227&lt;/p&gt;
+&lt;p&gt;- bug - Fix ``SyntaxWarning: invalid escape sequence '\{'`` raised on Python 3.12+ from the bearer-token regex in ``jira_service_rest_handler.py`` (would become ``SyntaxError`` on Python 3.14); converted the pattern to a raw string literal #227&lt;/p&gt;
+&lt;p&gt;- bug - Alert action UI: the JIRA Account dropdown rendered a phantom empty pre-selected entry next to the actual account, because the REST search filter (``where isnotnull(title)``) accepted an empty title (in SPL, ``isnotnull(&quot;&quot;)`` is true). Tightened the filter to ``where isnotnull(title) AND len(title)&amp;gt;0`` on both the ``Open/Update/Close`` and ``Replay`` alert actions, mirrored in ``globalConfig.json``.&lt;/p&gt;
+&lt;p&gt;- bug - Alert action UI: the Project, Issue Type and Priority dropdowns in ``globalConfig.json`` referenced ``get_jira_projects`` / ``get_jira_issue_types`` / ``get_jira_priorities`` without arguments, but these macros are defined as 1-arg macros in ``macros.conf``; if anyone regenerated the alert HTML from ``globalConfig.json`` (e.g. by removing the manual ``alerts/*.html`` files before ``ucc-gen build``) the dropdowns would not resolve. Aligned ``globalConfig.json`` to call them with ``_all`` so it stays in sync with the macros and the manually authored alert HTML.&lt;/p&gt;
+&lt;p&gt;- change - Refresh build toolchain and bundled runtime libraries:&lt;/p&gt;
+&lt;p&gt;&amp;#x20; - ``splunk-add-on-ucc-framework`` 5.44.0 → 6.4.0&lt;/p&gt;
+&lt;p&gt;&amp;#x20; - ``splunktaucclib`` 6.2.0 → 8.1.0&lt;/p&gt;
+&lt;p&gt;&amp;#x20; - ``solnlib`` pinned to ``&amp;gt;\=7.0.0,\&amp;lt;8.0.0`` to avoid the heavy OpenTelemetry/grpc transitive stack pulled by ``solnlib`` 8.x&lt;/p&gt;
+&lt;p&gt;&amp;#x20; - ``requests`` is now declared explicitly in ``package/lib/requirements.txt`` (no longer a transitive dependency of ``splunktaucclib`` since 7.0.0) and bumped to 2.33.1&lt;/p&gt;
+&lt;p&gt;&amp;#x20; - ``openpyxl`` 3.1.2 → 3.1.5&lt;/p&gt;
+&lt;p&gt;&amp;#x20; - documentation toolchain: ``sphinx`` 7.2.6 → 8.1.3, ``sphinx-rtd-theme`` 2.0.0 → 3.0.2, ``jinja2`` 3.1.4 → 3.1.6&lt;/p&gt;
+&lt;p&gt;&amp;#x20; - GitHub Actions build matrix moved to Python 3.13; Read the Docs builder moved to Ubuntu 24.04 / Python 3.13&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Add-on for JIRA Atlassian Service Desk provides alerts action for JIRA issues creation:
+
+- Trigger JIRA issue creation from Splunk core alerts and Enterprise Security correlation searches
+- Dynamic retrieval per JIRA project for types of issues and priority
+- Dynamic assignment of priority (optional)
+- Dynamic and/or static assignment of summary, description, assignee and labels
+- Custom fields full capabilities via the embedded custom field structure in alerts (optional)
+- Deduplication feature workflow with bi-directional integration, allows detecting a duplication issue creation request, and adding new comments automatically instead of creating duplicated issues
+- Attaching Splunk alert results to the JIRA issue in CSV or JSON format
+- Resilient store JIRA issue creation, shall a JIRA issue fails to be created, the resilient workflow handles automatic retries with a resilient policy
+- Monitoring of JIRA issue workflow via the embedded Overview dashboard and out of the box alerts
+- Get any information from JIRA via the REST API custom command wrapper, generate and index to summary events or the metric store issues statistics per projects
+
+See: https://ta-jira-service-desk-simple-addon.readthedocs.io
+
+The Add-on for Atlassian JIRA Service Desk alert action provides an high quality and resilient integration with Splunk core and Splunk Enterprise Security.
+
+The Add-on is compatible with:
+- JIRA Server
+- JIRA Cloud
+- JIRA Data center&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/77911516-4962-11f1-a70c-ba8048a1aea8.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Guilhem Marchand</dc:creator>
+      <pubDate>Wed, 06 May 2026 15:50:04 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4958/#v2.1.2</guid>
+    </item>
+    <item>
+      <title>spl_quiz - v0.1.3 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8716/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Bug fixed&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;A quiz-style app for learning SPL through concrete examples. Solve predefined exercises to build your skills, or author your own problems for yourself and your team.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;New to Splunk and unsure how to learn SPL? This app was built to help. Use it to practice real SPL on a live Splunk instance with hands-on exercises. Work through built-in challenges or create your own. Learn SPL in a practical, engaging way.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/6b1b65ac-4962-11f1-9dc8-fe83d7a0257b.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Koichi Kuranami</dc:creator>
+      <pubDate>Wed, 06 May 2026 15:46:19 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8716/#v0.1.3</guid>
+    </item>
     <item>
       <title>Monitoring OpenShift - Metrics and Log Forwarding - v26.4.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/3836/</link>
@@ -279,14 +327,6 @@ It is designed for security teams who need fast visibility into potentially mali
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Guy Amir</dc:creator>
       <pubDate>Wed, 06 May 2026 12:40:58 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8711/#v1.0.0</guid>
-    </item>
-    <item>
-      <title>spl_quiz - v0.1.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8716/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;A quiz-style app for learning SPL through concrete examples. Solve predefined exercises to build your skills, or author your own problems for yourself and your team.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;New to Splunk and unsure how to learn SPL? This app was built to help. Use it to practice real SPL on a live Splunk instance with hands-on exercises. Work through built-in challenges or create your own. Learn SPL in a practical, engaging way.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/017eb39a-4879-11f1-a816-fe0d670316f8.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Koichi Kuranami</dc:creator>
-      <pubDate>Wed, 06 May 2026 12:40:08 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8716/#v0.1.1</guid>
     </item>
     <item>
       <title>ANY.RUN Add-on for Splunk - v1.2.3 [New App Release]</title>
@@ -1288,23 +1328,6 @@ Known issues:
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Recorded Future</dc:creator>
       <pubDate>Thu, 30 Apr 2026 13:19:24 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/4920/#v3.2.1</guid>
-    </item>
-    <item>
-      <title>DDoS Detector for Splunk - v1.1.46 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4016/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
-  &lt;li&gt;Updated documentation&lt;/li&gt;
-  &lt;li&gt;Bug fixes&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This App relies on flow data processed by NetFlow Optimizer™ (NFO) and provides alerting and visualization capabilities for distributed denial-of-service (DDoS) attacks detected and reported to Splunk® by NFO DDoS Detector Module.
-
-The operators benefit from being able to address traffic anomalies and DDoS attacks before network devices and servers targeted by DDoS are incapacitated.
-
-Use this App to setup and receive email alerts within minutes after a DDoS attack is detected. Select the detection confidence level for notifications to reduce false positives. View details of the anomaly, and/or browse through the history of detected attacks, searching for common origins and victims.
- 
-Start Your NFO Free Trial by registering at https://www.netflowlogic.com/download/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/989e9270-3fb1-11f1-a3cd-729ae58b5a05.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">NetFlow Logic</dc:creator>
-      <pubDate>Thu, 30 Apr 2026 12:49:04 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4016/#v1.1.46</guid>
     </item>
     <item>
       <title>Via Verde App for Splunk - v1.1.2 [Version Update]</title>
