@@ -6,7 +6,147 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Thu, 07 May 2026 11:02:04 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 07 May 2026 13:30:35 +0000</lastBuildDate>
+    <item>
+      <title>Whisper Security Graph App for Splunk - v1.0.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8695/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;The first GA release of the Whisper Security App for Splunk. TA-whisper-security delivers Knowledge Graph enrichment, threat intelligence, attack surface monitoring, and Splunk Enterprise Security integration backed by the Whisper Security Knowledge Graph (7.3B nodes, 38B edges, millions of threat intelligence edges).&lt;/p&gt;
+&lt;h3&gt;Search commands&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;`whisperlookup` — streaming enrichment of hostnames, IPs, and ASNs against the Whisper Knowledge Graph with KV Store-backed caching.&lt;/li&gt;
+  &lt;li&gt;`whisperquery` — execute parameterized read-only Cypher queries against the Whisper Graph API directly from SPL.&lt;/li&gt;
+  &lt;li&gt;`whisperschema` — discover available node labels, relationship types, and properties from the Whisper Graph.&lt;/li&gt;
+  &lt;li&gt;`whisperflush` and `whisperevict` — manage the local enrichment cache (full flush or TTL-based eviction).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Modular inputs&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Threat intelligence collector&lt;/strong&gt; — populates IP and domain threat-intelligence KV Store collections from the Whisper Graph.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;DNS baseline collector&lt;/strong&gt; — captures DNS resolution baselines for change detection.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Watchlist collector&lt;/strong&gt; — synchronizes user-defined watchlists into the KV Store.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;KV Store collections&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;`whisper_enrichment_cache` — TTL-based enrichment cache with accelerated fields.&lt;/li&gt;
+  &lt;li&gt;`whisper_precomputed_enrichment` — pre-resolved enrichment for high-volume entities.&lt;/li&gt;
+  &lt;li&gt;`whisper_ip_intel` and `whisper_domain_intel` — threat intelligence collections for IPs and domains.&lt;/li&gt;
+  &lt;li&gt;`whisper_watchlist` — user-curated entity watchlist.&lt;/li&gt;
+  &lt;li&gt;`whisper_dns_baseline` — DNS resolution baseline for drift detection.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Splunk Enterprise Security integration&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;CIM compliance for Network Traffic, DNS, and Threat Intelligence data models via FIELDALIAS, event types, and tags.&lt;/li&gt;
+  &lt;li&gt;Threat intelligence framework integration through the IP and domain intel collections.&lt;/li&gt;
+  &lt;li&gt;Adaptive response action for ES correlation searches and notable events.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Dashboards&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Investigation&lt;/strong&gt; — interactive entity drill-down across hostnames, IPs, and ASNs.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Attack Surface Timeline&lt;/strong&gt; — historical view of exposed assets and changes.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Compliance Summary&lt;/strong&gt; and &lt;strong&gt;SPF Compliance&lt;/strong&gt; — email and DNS posture reporting.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Mail Config&lt;/strong&gt; — DMARC, SPF, and DKIM configuration insight.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Saved searches&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Scheduled cache eviction for expired enrichment entries.&lt;/li&gt;
+  &lt;li&gt;Threat intelligence KV Store population (IP, domain, precomputed enrichment).&lt;/li&gt;
+  &lt;li&gt;Example searches for enriching DNS domains, destination IPs, and proxy hostnames.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Configuration &amp;amp; operations&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;UCC Framework-based setup UI with encrypted credential storage in `storage/passwords`.&lt;/li&gt;
+  &lt;li&gt;Per-tier query depth controls (Anonymous, Free, Professional) honored by all search commands.&lt;/li&gt;
+  &lt;li&gt;Structured key\=value logging via `whisper_logging` for SIEM-friendly diagnostics.&lt;/li&gt;
+  &lt;li&gt;`[diag]` stanza with `whisper_diag.py` for Splunk supportability bundles.&lt;/li&gt;
+  &lt;li&gt;`whisper_user` role defined in `authorize.conf` with least-privilege permissions.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Compatibility&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Splunk Enterprise 10.2+ and Splunk Cloud (Victoria, Classic).&lt;/li&gt;
+  &lt;li&gt;Splunk Enterprise Security 7.x.&lt;/li&gt;
+  &lt;li&gt;Python 3.13 runtime.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Enriches Splunk events with DNS, BGP, WHOIS, GeoIP, SPF, and threat intelligence context from the Whisper Security Knowledge Graph, provides Cypher query capabilities, and monitors attack surface changes for owned domains.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Whisper Security Add-on for Splunk connects Splunk to the Whisper Security Knowledge Graph, a repository of over 7.3 billion infrastructure nodes and 38 billion edges. The add-on enables enrichment of security events with DNS, BGP, WHOIS, GeoIP, SPF, and threat intelligence context. It provides custom search commands for executing Cypher graph queries, modular inputs for attack surface monitoring and threat intelligence collection, and dashboards for compliance posture tracking and infrastructure change detection. The add-on maps events to the CIM Network Resolution and Threat Intelligence data models. Supported data sources include whisper_threat_intel, whisper_baseline, and whisper_watchlist. Source types include whisper:attack_surface, whisper:threat_intel, whisper:watchlist, whisper:change, whisper:enrichment, ta_whisper_graph, and whisper:spf_compliance. The add-on serves organizations requiring infrastructure context enrichment for security analytics, compliance monitoring, and threat intelligence workflows.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/cd711a54-441b-11f1-939b-3efe2e481b15.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Whisper Security</dc:creator>
+      <pubDate>Thu, 07 May 2026 13:20:27 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8695/#v1.0.0</guid>
+    </item>
+    <item>
+      <title>Fleak OCSF Mapper - v0.1.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8693/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;What's new in v0.1.0&lt;/h2&gt;
+&lt;p&gt;Initial public release of Fleak OCSF Mapper for Splunk. Highlights:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;AI-powered Mapping Studio that generates parsers and OCSF mapping rules from sample logs&lt;/li&gt;
+&lt;li&gt;Custom search command &lt;code&gt;| fleakmapping&lt;/code&gt; that streams events through the Zephflow engine and returns OCSF-normalized fields&lt;/li&gt;
+&lt;li&gt;Setup page stores credentials in Splunk's encrypted credential store (&lt;code&gt;storage/passwords&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Splunk Cloud compatible (passed AppInspect cloud + future tags with zero failures)&lt;/li&gt;
+&lt;li&gt;Supports Splunk Enterprise 10.2+ and Splunk Cloud (custom search command requires Python 3.13)&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;AI-powered OCSF mapping for custom and long-tail log sources. Generate parsers and rules from sample events, preview in Splunk, and apply at search time via the | fleakmapping command.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Fleak OCSF Mapper turns custom and long-tail log sources into clean, OCSF-normalized events inside Splunk — without hand-writing regex, transforms, or field aliases.
+
+Paste a few sample events into the Mapping Studio. Fleak&amp;#x27;s AI service inspects the structure, generates a parser and an OCSF mapping expression, and lets you preview the result before
+deploying. Once a rule is saved, the included | fleakmapping search command streams events through the Zephflow engine and returns standardized OCSF fields, ready for downstream
+dashboards, SIEM rules, and security analytics.
+
+Use cases:
+- Onboard new vendor or proprietary log formats in minutes instead of weeks
+- Normalize firewall, endpoint, identity, and application logs to a shared OCSF schema
+- Reduce the regex and transforms toil that slows Splunk ingestion projects&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b4f80140-43cb-11f1-9ca4-0a4ea679d7ae.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Xing Guo</dc:creator>
+      <pubDate>Thu, 07 May 2026 13:08:07 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8693/#v0.1.0</guid>
+    </item>
+    <item>
+      <title>Threat Hunting Essentials - v1.2.31 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7633/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
+
+For Premium Version - Contact sales https://www.avertpoint.com/contactus.html
+
+It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
+
+Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
+
+1. Backdoor.
+2. Worms.
+3. Ransomware.
+4. Bots.
+5. Trojan horses.
+6. Keyloggers.
+7. Rootkits.
+8. Spyware.
+9. Fileless malware.
+10. Cryptojacking.
+11. Wiper malware.
+12. Adware.
+14. Viruses
+15. P2P-Worm
+16. Internet Worms
+17. Net-worm
+18. Clickjacking
+19. Cryptominer
+20. Fileless malware
+
+You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
+
+Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/1901d002-4a08-11f1-ba3b-2a2babab0426.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
+      <pubDate>Thu, 07 May 2026 11:30:40 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7633/#v1.2.31</guid>
+    </item>
     <item>
       <title>Telegram APP - v1.1.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8293/</link>
@@ -177,83 +317,6 @@ This application provides advanced maintenance management capabilities while ens
       <guid>https://splunkbase.splunk.com/app/8704/#v0.4.1</guid>
     </item>
     <item>
-      <title>Whisper Security Graph App for Splunk - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8695/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;The first GA release of the Whisper Security App for Splunk. TA-whisper-security delivers Knowledge Graph enrichment, threat intelligence, attack surface monitoring, and Splunk Enterprise Security integration backed by the Whisper Security Knowledge Graph (7.3B nodes, 38B edges, millions of threat intelligence edges).&lt;/p&gt;
-&lt;h3&gt;Search commands&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;`whisperlookup` — streaming enrichment of hostnames, IPs, and ASNs against the Whisper Knowledge Graph with KV Store-backed caching.&lt;/li&gt;
-  &lt;li&gt;`whisperquery` — execute parameterized read-only Cypher queries against the Whisper Graph API directly from SPL.&lt;/li&gt;
-  &lt;li&gt;`whisperschema` — discover available node labels, relationship types, and properties from the Whisper Graph.&lt;/li&gt;
-  &lt;li&gt;`whisperflush` and `whisperevict` — manage the local enrichment cache (full flush or TTL-based eviction).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Modular inputs&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Threat intelligence collector&lt;/strong&gt; — populates IP and domain threat-intelligence KV Store collections from the Whisper Graph.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;DNS baseline collector&lt;/strong&gt; — captures DNS resolution baselines for change detection.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Watchlist collector&lt;/strong&gt; — synchronizes user-defined watchlists into the KV Store.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;KV Store collections&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;`whisper_enrichment_cache` — TTL-based enrichment cache with accelerated fields.&lt;/li&gt;
-  &lt;li&gt;`whisper_precomputed_enrichment` — pre-resolved enrichment for high-volume entities.&lt;/li&gt;
-  &lt;li&gt;`whisper_ip_intel` and `whisper_domain_intel` — threat intelligence collections for IPs and domains.&lt;/li&gt;
-  &lt;li&gt;`whisper_watchlist` — user-curated entity watchlist.&lt;/li&gt;
-  &lt;li&gt;`whisper_dns_baseline` — DNS resolution baseline for drift detection.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Splunk Enterprise Security integration&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;CIM compliance for Network Traffic, DNS, and Threat Intelligence data models via FIELDALIAS, event types, and tags.&lt;/li&gt;
-  &lt;li&gt;Threat intelligence framework integration through the IP and domain intel collections.&lt;/li&gt;
-  &lt;li&gt;Adaptive response action for ES correlation searches and notable events.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Dashboards&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Investigation&lt;/strong&gt; — interactive entity drill-down across hostnames, IPs, and ASNs.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Attack Surface Timeline&lt;/strong&gt; — historical view of exposed assets and changes.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Compliance Summary&lt;/strong&gt; and &lt;strong&gt;SPF Compliance&lt;/strong&gt; — email and DNS posture reporting.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Mail Config&lt;/strong&gt; — DMARC, SPF, and DKIM configuration insight.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Saved searches&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Scheduled cache eviction for expired enrichment entries.&lt;/li&gt;
-  &lt;li&gt;Threat intelligence KV Store population (IP, domain, precomputed enrichment).&lt;/li&gt;
-  &lt;li&gt;Example searches for enriching DNS domains, destination IPs, and proxy hostnames.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Configuration &amp;amp; operations&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;UCC Framework-based setup UI with encrypted credential storage in `storage/passwords`.&lt;/li&gt;
-  &lt;li&gt;Per-tier query depth controls (Anonymous, Free, Professional) honored by all search commands.&lt;/li&gt;
-  &lt;li&gt;Structured key\=value logging via `whisper_logging` for SIEM-friendly diagnostics.&lt;/li&gt;
-  &lt;li&gt;`[diag]` stanza with `whisper_diag.py` for Splunk supportability bundles.&lt;/li&gt;
-  &lt;li&gt;`whisper_user` role defined in `authorize.conf` with least-privilege permissions.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Compatibility&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Splunk Enterprise 10.2+ and Splunk Cloud (Victoria, Classic).&lt;/li&gt;
-  &lt;li&gt;Splunk Enterprise Security 7.x.&lt;/li&gt;
-  &lt;li&gt;Python 3.13 runtime.&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Enriches Splunk events with DNS, BGP, WHOIS, GeoIP, SPF, and threat intelligence context from the Whisper Security Knowledge Graph, provides Cypher query capabilities, and monitors attack surface changes for owned domains.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Whisper Security Add-on for Splunk connects Splunk to the Whisper Security Knowledge Graph, a repository of over 7.3 billion infrastructure nodes and 38 billion edges. The add-on enables enrichment of security events with DNS, BGP, WHOIS, GeoIP, SPF, and threat intelligence context. It provides custom search commands for executing Cypher graph queries, modular inputs for attack surface monitoring and threat intelligence collection, and dashboards for compliance posture tracking and infrastructure change detection. The add-on maps events to the CIM Network Resolution and Threat Intelligence data models. Supported data sources include whisper_threat_intel, whisper_baseline, and whisper_watchlist. Source types include whisper:attack_surface, whisper:threat_intel, whisper:watchlist, whisper:change, whisper:enrichment, ta_whisper_graph, and whisper:spf_compliance. The add-on serves organizations requiring infrastructure context enrichment for security analytics, compliance monitoring, and threat intelligence workflows.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/cd711a54-441b-11f1-939b-3efe2e481b15.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Whisper Security</dc:creator>
-      <pubDate>Wed, 06 May 2026 18:05:39 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8695/#v1.0.0</guid>
-    </item>
-    <item>
       <title>Splunk ES Content Update - v5.27.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/3449/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;GitHub - &lt;a href=&quot;https://github.com/splunk/security_content/releases/tag/v5.27.0&quot;&gt;https://github.com/splunk/security_content/releases/tag/v5.27.0&lt;/a&gt;&lt;/p&gt;
@@ -375,31 +438,6 @@ An application requires Collectord built by Outcold Solutions, see https://www.o
       <guid>https://splunkbase.splunk.com/app/3723/#v26.4.1</guid>
     </item>
     <item>
-      <title>Fleak OCSF Mapper - v0.1.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8693/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;What's new in v0.1.0&lt;/h2&gt;
-&lt;p&gt;Initial public release of Fleak OCSF Mapper for Splunk. Highlights:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;AI-powered Mapping Studio that generates parsers and OCSF mapping rules from sample logs&lt;/li&gt;
-&lt;li&gt;Custom search command &lt;code&gt;| fleakmapping&lt;/code&gt; that streams events through the Zephflow engine and returns OCSF-normalized fields&lt;/li&gt;
-&lt;li&gt;Setup page stores credentials in Splunk's encrypted credential store (&lt;code&gt;storage/passwords&lt;/code&gt;)&lt;/li&gt;
-&lt;li&gt;Splunk Cloud compatible (passed AppInspect cloud + future tags with zero failures)&lt;/li&gt;
-&lt;li&gt;Supports Splunk Enterprise 10.2+ and Splunk Cloud (custom search command requires Python 3.13)&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;AI-powered OCSF mapping for custom and long-tail log sources. Generate parsers and rules from sample events, preview in Splunk, and apply at search time via the | fleakmapping command.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Fleak OCSF Mapper turns custom and long-tail log sources into clean, OCSF-normalized events inside Splunk — without hand-writing regex, transforms, or field aliases.
-
-Paste a few sample events into the Mapping Studio. Fleak&amp;#x27;s AI service inspects the structure, generates a parser and an OCSF mapping expression, and lets you preview the result before
-deploying. Once a rule is saved, the included | fleakmapping search command streams events through the Zephflow engine and returns standardized OCSF fields, ready for downstream
-dashboards, SIEM rules, and security analytics.
-
-Use cases:
-- Onboard new vendor or proprietary log formats in minutes instead of weeks
-- Normalize firewall, endpoint, identity, and application logs to a shared OCSF schema
-- Reduce the regex and transforms toil that slows Splunk ingestion projects&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b4f80140-43cb-11f1-9ca4-0a4ea679d7ae.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Xing Guo</dc:creator>
-      <pubDate>Wed, 06 May 2026 12:54:01 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8693/#v0.1.0</guid>
-    </item>
-    <item>
       <title>CCX Add-on for Snowflake - v1.0.4 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/8696/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;- This TA currently supports logtypes tagged under the following CIM datamodels: Change, and Authentication.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;CCX Security Operations has taken it upon ourselves to develop a CCX Add-on for Snowflake to provide CIM compliance coverage for logs ingested via HEC (JSON) and Generic S3 input leveraging Splunk Add-on for AWS.
@@ -419,44 +457,6 @@ See who&amp;#x27;s joining, when, and from where — as the Splunk community gro
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Border Innovation</dc:creator>
       <pubDate>Wed, 06 May 2026 12:50:57 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8697/#v2.0.0</guid>
-    </item>
-    <item>
-      <title>Threat Hunting Essentials - v1.2.31 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7633/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
-
-For Premium Version - Contact sales https://www.avertpoint.com/contactus.html
-
-It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
-
-Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
-
-1. Backdoor.
-2. Worms.
-3. Ransomware.
-4. Bots.
-5. Trojan horses.
-6. Keyloggers.
-7. Rootkits.
-8. Spyware.
-9. Fileless malware.
-10. Cryptojacking.
-11. Wiper malware.
-12. Adware.
-14. Viruses
-15. P2P-Worm
-16. Internet Worms
-17. Net-worm
-18. Clickjacking
-19. Cryptominer
-20. Fileless malware
-
-You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
-
-Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/eedef422-493e-11f1-b109-6a34cb7de860.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
-      <pubDate>Wed, 06 May 2026 12:48:36 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7633/#v1.2.31</guid>
     </item>
     <item>
       <title>GitHub Dashboard Collection - v1.3.2 [New App Release]</title>
