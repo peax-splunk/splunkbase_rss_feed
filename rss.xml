@@ -6,7 +6,40 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sun, 10 May 2026 23:42:09 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 11 May 2026 02:14:11 +0000</lastBuildDate>
+    <item>
+      <title>AWS-DFD-Visualizer - v2.5.8 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8628/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;# Release Notes: AWS-DFD-Visualizer v2.5.8&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;**Release Date:**&lt;/strong&gt; May 5, 2026&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;**Framework:**&lt;/strong&gt; Splunk Unified Dashboard Framework (Dashboard Studio) &amp;amp; Legacy Simple XML Compatible&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;## Overview&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Version 2.5.8 represents a major architectural overhaul. The legacy Simple XML Backbone.js visualization has been entirely rewritten into a modern, native React component using the Splunk UI Toolkit (`@splunk/react-ui`). This ensures full compatibility with Splunk Dashboard Studio, allowing you to migrate your AWS network gap analysis dashboards to the modern framework without breaking custom visualizations.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;## Major Features &amp;amp; Enhancements&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;### 1. Dashboard Studio Modernization (TECH-003)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**React/D3 Hybrid Architecture:**&lt;/strong&gt; The visualization now strictly separates concerns. D3 handles the heavy mathematical physics calculations (force simulation, collision, links), while React exclusively manages DOM rendering (`\&amp;lt;NodeCard&amp;gt;`, `\&amp;lt;Link&amp;gt;`). This resolves performance bottlenecks and prevents &quot;ghost DOM elements&quot; when Splunk state changes.&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Constrained Zoom/Pan:**&lt;/strong&gt; The `d3.zoom()` functionality is now constrained via `scaleExtent`, preventing users from infinitely panning into blank white space.&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Empty States:**&lt;/strong&gt; The visualizer now gracefully handles queries returning 0 results by displaying a clean &quot;No data found&quot; UI standard to Splunk, rather than rendering a broken blank panel.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;### 2. Stencil Decoupling Engine (BUG-001)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Explicit Icon Mapping:**&lt;/strong&gt; The visualization no longer relies exclusively on string-matching the display node names to determine which AWS stencil to draw. It now accepts `icon` or `stencil` columns in your SPL payload.&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Graceful Degradation:**&lt;/strong&gt; If an explicit `icon`/`stencil` is missing from the search results, the visualizer continues to support legacy fallback logic (string-matching on `type`, `id`, and `node_label`).&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Semantic Normalization:**&lt;/strong&gt; The mapping engine is now case-insensitive, seamlessly handling messy Splunk data (e.g., matching &quot;lambda&quot;, &quot;Lambda&quot;, or &quot;LAMBDA&quot;).&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Static Stencils:**&lt;/strong&gt; We removed the experimental &quot;flowing&quot; zero-trust animations. The component now correctly renders static, rich AWS Stencil cards with shadows and explicit grouping zones.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;### 3. Edge Labeling for Ports/Protocols (ENH-002)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Link Text Support:**&lt;/strong&gt; Added native support for rendering metadata directly on the D3 connecting links. You no longer need to artificially concatenate ports/protocols into node names in your SPL.&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Collision Prevention (Halo):**&lt;/strong&gt; Edge labels now render with a white, semi-transparent rounded rectangle &quot;halo&quot; behind the text. This guarantees high readability when paths cross grid lines or overlapping nodes.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;## Documentation&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;* Added `README_STENCILS.md` to the package root. This provides a complete dictionary of all exact strings supported by the visualization (e.g., `WAFV2`, `EC2`, `ALB`, `CLOUDTRAIL`) and instructions on how to use the new `stencil` column in SPL.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;## Build &amp;amp; Security&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**AppInspect Hardened:**&lt;/strong&gt; Version 2.5.8 successfully passes all rigorous Splunk Cloud `splunk-appinspect` checks with 0 errors, 0 failures, and 0 warnings.&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Dependencies:**&lt;/strong&gt; Clean NPM security audit (0 vulnerabilities found across all 483 sub-modules). Updated dependencies to `@splunk/webpack-configs: latest`.&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Makefile Integration:**&lt;/strong&gt; Reconfigured the Makefile to correctly execute `npm run build` using Webpack before packaging, preventing build desynchronization.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Interactive D3.js force-directed graph for AWS Security Data Flows, featuring official AWS icons and Application Composer aesthetics for &amp;quot;Zero Trust&amp;quot; visibility.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The AWS DFD Visualizer provides a high-fidelity, interactive force-directed graph visualization specifically designed for AWS infrastructure and security data flows. In complex cloud environments, SOC analysts and Security Architects often struggle to visualize &amp;quot;Zero Trust&amp;quot; data patterns and service-to-service relationships using standard tables or basic charts.
+
+This app addresses that gap by mapping search results directly into an architect-grade visualization using D3.js v7 and official AWS Application Composer aesthetics. It allows users to instantly identify connectivity patterns, data silos, and security relationships across services like Lambda, S3, RDS, and CloudWatch.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Young Suh</dc:creator>
+      <pubDate>Mon, 11 May 2026 01:36:16 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8628/#v2.5.8</guid>
+    </item>
     <item>
       <title>Splunkconf-backup - v1.11.2 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5600/</link>
@@ -773,39 +806,6 @@ This add-on has two main functions:
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Analyst1 Team</dc:creator>
       <pubDate>Tue, 05 May 2026 21:48:12 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6816/#v1.5.9</guid>
-    </item>
-    <item>
-      <title>AWS-DFD-Visualizer - v2.5.8 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8628/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;# Release Notes: AWS-DFD-Visualizer v2.5.8&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;**Release Date:**&lt;/strong&gt; May 5, 2026&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;**Framework:**&lt;/strong&gt; Splunk Unified Dashboard Framework (Dashboard Studio) &amp;amp; Legacy Simple XML Compatible&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;## Overview&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Version 2.5.8 represents a major architectural overhaul. The legacy Simple XML Backbone.js visualization has been entirely rewritten into a modern, native React component using the Splunk UI Toolkit (`@splunk/react-ui`). This ensures full compatibility with Splunk Dashboard Studio, allowing you to migrate your AWS network gap analysis dashboards to the modern framework without breaking custom visualizations.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;## Major Features &amp;amp; Enhancements&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;### 1. Dashboard Studio Modernization (TECH-003)&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;* &lt;strong&gt;**React/D3 Hybrid Architecture:**&lt;/strong&gt; The visualization now strictly separates concerns. D3 handles the heavy mathematical physics calculations (force simulation, collision, links), while React exclusively manages DOM rendering (`\&amp;lt;NodeCard&amp;gt;`, `\&amp;lt;Link&amp;gt;`). This resolves performance bottlenecks and prevents &quot;ghost DOM elements&quot; when Splunk state changes.&lt;/p&gt;
-&lt;p&gt;* &lt;strong&gt;**Constrained Zoom/Pan:**&lt;/strong&gt; The `d3.zoom()` functionality is now constrained via `scaleExtent`, preventing users from infinitely panning into blank white space.&lt;/p&gt;
-&lt;p&gt;* &lt;strong&gt;**Empty States:**&lt;/strong&gt; The visualizer now gracefully handles queries returning 0 results by displaying a clean &quot;No data found&quot; UI standard to Splunk, rather than rendering a broken blank panel.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;### 2. Stencil Decoupling Engine (BUG-001)&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;* &lt;strong&gt;**Explicit Icon Mapping:**&lt;/strong&gt; The visualization no longer relies exclusively on string-matching the display node names to determine which AWS stencil to draw. It now accepts `icon` or `stencil` columns in your SPL payload.&lt;/p&gt;
-&lt;p&gt;* &lt;strong&gt;**Graceful Degradation:**&lt;/strong&gt; If an explicit `icon`/`stencil` is missing from the search results, the visualizer continues to support legacy fallback logic (string-matching on `type`, `id`, and `node_label`).&lt;/p&gt;
-&lt;p&gt;* &lt;strong&gt;**Semantic Normalization:**&lt;/strong&gt; The mapping engine is now case-insensitive, seamlessly handling messy Splunk data (e.g., matching &quot;lambda&quot;, &quot;Lambda&quot;, or &quot;LAMBDA&quot;).&lt;/p&gt;
-&lt;p&gt;* &lt;strong&gt;**Static Stencils:**&lt;/strong&gt; We removed the experimental &quot;flowing&quot; zero-trust animations. The component now correctly renders static, rich AWS Stencil cards with shadows and explicit grouping zones.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;### 3. Edge Labeling for Ports/Protocols (ENH-002)&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;* &lt;strong&gt;**Link Text Support:**&lt;/strong&gt; Added native support for rendering metadata directly on the D3 connecting links. You no longer need to artificially concatenate ports/protocols into node names in your SPL.&lt;/p&gt;
-&lt;p&gt;* &lt;strong&gt;**Collision Prevention (Halo):**&lt;/strong&gt; Edge labels now render with a white, semi-transparent rounded rectangle &quot;halo&quot; behind the text. This guarantees high readability when paths cross grid lines or overlapping nodes.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;## Documentation&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;* Added `README_STENCILS.md` to the package root. This provides a complete dictionary of all exact strings supported by the visualization (e.g., `WAFV2`, `EC2`, `ALB`, `CLOUDTRAIL`) and instructions on how to use the new `stencil` column in SPL.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;## Build &amp;amp; Security&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;* &lt;strong&gt;**AppInspect Hardened:**&lt;/strong&gt; Version 2.5.8 successfully passes all rigorous Splunk Cloud `splunk-appinspect` checks with 0 errors, 0 failures, and 0 warnings.&lt;/p&gt;
-&lt;p&gt;* &lt;strong&gt;**Dependencies:**&lt;/strong&gt; Clean NPM security audit (0 vulnerabilities found across all 483 sub-modules). Updated dependencies to `@splunk/webpack-configs: latest`.&lt;/p&gt;
-&lt;p&gt;* &lt;strong&gt;**Makefile Integration:**&lt;/strong&gt; Reconfigured the Makefile to correctly execute `npm run build` using Webpack before packaging, preventing build desynchronization.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Interactive D3.js force-directed graph for AWS Security Data Flows, featuring official AWS icons and Application Composer aesthetics for &amp;quot;Zero Trust&amp;quot; visibility.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The AWS DFD Visualizer provides a high-fidelity, interactive force-directed graph visualization specifically designed for AWS infrastructure and security data flows. In complex cloud environments, SOC analysts and Security Architects often struggle to visualize &amp;quot;Zero Trust&amp;quot; data patterns and service-to-service relationships using standard tables or basic charts.
-
-This app addresses that gap by mapping search results directly into an architect-grade visualization using D3.js v7 and official AWS Application Composer aesthetics. It allows users to instantly identify connectivity patterns, data silos, and security relationships across services like Lambda, S3, RDS, and CloudWatch.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/53da49a6-48c4-11f1-87b6-56696580569a.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Young Suh</dc:creator>
-      <pubDate>Tue, 05 May 2026 20:59:42 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8628/#v2.5.8</guid>
     </item>
     <item>
       <title>Rapid7 InsightAppSec Add-On - v1.0.3 [Version Update]</title>
