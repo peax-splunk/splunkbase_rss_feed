@@ -6,7 +6,140 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Mon, 11 May 2026 10:29:26 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 11 May 2026 13:38:43 +0000</lastBuildDate>
+    <item>
+      <title>Cisco Security Cloud - v3.6.5 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7404/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Stability &amp;amp; Performance: Resolved input issues for Cisco Secure Endpoint and added the missing offset parameter for SMA API calls.&lt;/p&gt;
+&lt;p&gt;Data &amp;amp; Mapping: Improved Data Model (DM) mapping for Secure Firewall, updated field aliases for intrusion events, and optimized query timing for Secure Workload.&lt;/p&gt;
+&lt;p&gt;UI &amp;amp; Export: Fixed dashboard pagination overlaps and enhanced incident exports in Cisco XDR to include missing observables and asset identifiers.&lt;/p&gt;
+&lt;p&gt;Compliance &amp;amp; Standards: Implemented &quot;Magic 8&quot; best practices across Secure Workload, NVM, Multicloud Defense, Firewall, and AI Defense modules.&lt;/p&gt;
+&lt;p&gt;General Improvements: Updated ETD URLs for Fed-Prod environments and standardized product naming and CIM mapping within the Shell App.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Cisco Security Cloud application offers seamless integration for connecting your Cisco devices with Splunk. It features a modular UX input design, built-in health checks, and constant monitoring to ensure operational integrity.
+
+Product(s) Enabled:
+    Cisco AI Defense
+    Cisco Duo
+    Cisco Email Threat Defense (ETD)
+    Cisco Endpoint Visibility Module (EVM) CIM Mappings (Beta)
+    Cisco Identity Intelligence (CII)
+    Cisco Multicloud Defense
+    Cisco NVM
+    Cisco Secure Endpoint
+    Cisco Secure Firewall (FTD/eStreamer/ASA)
+    Cisco Secure Workload
+    Cisco Isovalent
+    Cisco Isovalent Edge Processor **Alpha
+    Cisco Secure Malware Analytics (SMA)
+    Cisco Secure Network Analytics (SNA)
+    Cisco Vulnerability Intelligence
+    Cisco XDR (Incident Import &amp;amp; Promote to ES Notable)&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8c2c83d6-4564-11f1-9cf8-869c769a1271.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco Systems, Inc.</dc:creator>
+      <pubDate>Mon, 11 May 2026 13:10:30 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7404/#v3.6.5</guid>
+    </item>
+    <item>
+      <title>Ensign ElasticSearch Data Integrator - v1.2.3 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8645/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;
+&lt;/p&gt;&lt;h2&gt;v1.2.3 (2026-05-11)&lt;/h2&gt;
+&lt;h3&gt;Critical Fix — SSL/TLS Runtime Crash&lt;/h3&gt;
+&lt;p&gt;Fixed a fatal &lt;code&gt;SSL_CERTIFICATE_VERIFY_FAILED&lt;/code&gt; exception that prevented all data collection on Splunk Enterprise deployments using the default self-signed management certificate.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Root Cause&lt;/strong&gt;: The internal REST API call to &lt;code&gt;splunkd&lt;/code&gt; (127.0.0.1:8089) was configured with &lt;code&gt;verify=True&lt;/code&gt;. Since splunkd uses a self-signed certificate by default, every input execution cycle crashed before reaching the Elasticsearch cluster.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Resolution&lt;/strong&gt;: Reverted to &lt;code&gt;verify=False&lt;/code&gt; for the localhost-only REST call. Session-key authentication provides sufficient security for this internal request.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Impact&lt;/strong&gt;: All users on v1.2.2 are affected and should upgrade immediately.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;Added — Comprehensive Operational Logging&lt;/h3&gt;
+&lt;p&gt;7 structured log points covering the entire data collection cycle:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Input Config&lt;/strong&gt;: cluster target, ES index, date field, polling interval&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Filter Config&lt;/strong&gt;: ENABLED/DISABLED status with key/value parameters&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Proxy Status&lt;/strong&gt;: ENABLED with host/port, or NOT configured&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Sourcetype&lt;/strong&gt;: CUSTOM or DEFAULT resolution&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ES Client&lt;/strong&gt;: hosts count, retries, timeout, sniffing, TLS verification&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Query DSL&lt;/strong&gt;: full Elasticsearch query body logged before execution&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Response Summary&lt;/strong&gt;: total_hits, first page doc count, scroll_id&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All logs are written to &lt;code&gt;index=_internal&lt;/code&gt; — operators can now diagnose collection issues without inspecting Python source code.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;Added — Internal Log Monitoring Resilience&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Added explicit &lt;code&gt;[monitor://...]&lt;/code&gt; stanza with &lt;code&gt;crcSalt=&amp;lt;SOURCE&amp;gt;&lt;/code&gt; to prevent fishbucket CRC corruption after Deployment Server push events or log file rotation.&lt;/li&gt;
+&lt;li&gt;Added &lt;code&gt;props.conf&lt;/code&gt; and &lt;code&gt;transforms.conf&lt;/code&gt; for structured parsing and index-time field extraction of operational logs.&lt;/li&gt;
+&lt;li&gt;20 index-time field extractions for operational and audit events.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3&gt;Inherited from v1.2.2&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;python.required = 3.9, 3.13&lt;/code&gt; for Splunk 10.2+ (Python 3.13) dual compatibility&lt;/li&gt;
+&lt;li&gt;All security hardening from v1.2.1 (SSRF protection, input sanitization)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;Upgrade&lt;/strong&gt;: Drop-in replacement for v1.2.2. No configuration changes required.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Compatibility&lt;/strong&gt;: Splunk Enterprise 9.4, 10.0, 10.1, 10.2&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Requires&lt;/strong&gt;: Elasticsearch 8.x&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Libraries&lt;/strong&gt;: elasticsearch-py 8.19.3, elastic-transport 8.17.1&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Splunk modular input for ingesting data from Elasticsearch 8.x clusters by leveraging call the ElasticSearch v8.x REST API. Features multi-cluster profiles, DSL query filters, scroll-based pagination with crash recovery, document-level deduplication, SSL/TLS support, and a full GUI configuration experience. Compatible with Elasticsearch 8.x only and DSL based only,&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Ensign ElasticSearch Data Integrator is a Splunk modular input add-on for ingesting data from Elasticsearch 8.x clusters into Splunk via the Elasticsearch 8 REST API.
+
+Built on the Splunk UCC Framework, it provides a full GUI-driven configuration experience through Splunk Web — no manual file editing required.
+
+Key Features:
+• Multi-cluster Elasticsearch profile management via Splunk UI
+• DSL Query-focused data retrieval with configurable time-based fetching
+• ES Scroll API pagination for efficient large-volume data collection
+• Crash-resilient scroll recovery with a dedicated checkpoint directory
+• Document-level deduplication guard (rolling 50,000 IDs per stanza)
+• SSL/TLS certificate verification support
+• Custom term filters per data source
+• Global proxy support with Splunk-native credential encryption
+• Custom sourcetype override per input stanza
+
+IMPORTANT: This add-on is designed exclusively for Elasticsearch 8.x API. It is NOT compatible with Elasticsearch 7.x or earlier versions.
+
+Compatibility:
+• Elasticsearch: 8.x only
+• Splunk Enterprise: 8.2+ and 9.x (You can try for 10.x, let me know the updates)
+• Python: 3.x (bundled with Splunk)&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c95db6b4-4d37-11f1-a3ee-d2921fd2c765.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Muhammad Rafdi Aufar Ahmad</dc:creator>
+      <pubDate>Mon, 11 May 2026 13:05:02 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8645/#v1.2.3</guid>
+    </item>
+    <item>
+      <title>Threat Hunting Essentials - v1.2.35 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7633/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
+
+For Premium Version - Contact sales https://www.avertpoint.com/contactus.html
+
+It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
+
+Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
+
+1. Backdoor.
+2. Worms.
+3. Ransomware.
+4. Bots.
+5. Trojan horses.
+6. Keyloggers.
+7. Rootkits.
+8. Spyware.
+9. Fileless malware.
+10. Cryptojacking.
+11. Wiper malware.
+12. Adware.
+14. Viruses
+15. P2P-Worm
+16. Internet Worms
+17. Net-worm
+18. Clickjacking
+19. Cryptominer
+20. Fileless malware
+
+You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
+
+Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c2eaa432-4d2c-11f1-a08b-7205a9fed507.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
+      <pubDate>Mon, 11 May 2026 11:30:41 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7633/#v1.2.35</guid>
+    </item>
     <item>
       <title>IPInfo App for Splunk - v9.5.4 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/4070/</link>
@@ -141,44 +274,6 @@ You can also access app repository on https://github.com/splunk/splunkconf-backu
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
       <pubDate>Sun, 10 May 2026 20:00:31 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5600/#v1.11.2</guid>
-    </item>
-    <item>
-      <title>Threat Hunting Essentials - v1.2.35 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7633/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
-
-For Premium Version - Contact sales https://www.avertpoint.com/contactus.html
-
-It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
-
-Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
-
-1. Backdoor.
-2. Worms.
-3. Ransomware.
-4. Bots.
-5. Trojan horses.
-6. Keyloggers.
-7. Rootkits.
-8. Spyware.
-9. Fileless malware.
-10. Cryptojacking.
-11. Wiper malware.
-12. Adware.
-14. Viruses
-15. P2P-Worm
-16. Internet Worms
-17. Net-worm
-18. Clickjacking
-19. Cryptominer
-20. Fileless malware
-
-You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
-
-Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/98948b40-4c63-11f1-a66d-da559823aa72.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
-      <pubDate>Sun, 10 May 2026 15:30:43 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7633/#v1.2.35</guid>
     </item>
     <item>
       <title>Git Version Control for Splunk - v1.3.2 [Version Update]</title>
@@ -1327,18 +1422,6 @@ This data loaded by this add-on can be viewed using the SpyCloud Application for
       <guid>https://splunkbase.splunk.com/app/7169/#v2.3.2</guid>
     </item>
     <item>
-      <title>Luminar IOCs and leaked credentials - v1.1.7 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6346/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Updated required python 3.13 for Cloud Compatibility&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This connector allows integration of intelligence-based IOC data and customer-related leaked records identified by Luminar.
- 
-Luminar is an asset-based cybersecurity intelligence platform that empowers enterprise organizations to build and maintain a proactive threat intelligence operation that enables to anticipate and mitigate cyber threats, reduce risk and enhance security resilience. Luminar enables security teams to define a customized, dynamic monitoring plan to uncover malicious activity in its earliest stages on all layers of the Web.
- 
-Cognyte is a global leader in security analytics software that empowers governments and enterprises with Actionable Intelligence for a safer world. Our open software fuses, analyzes and visualizes disparate data sets at scale to help security organizations find the needles in the haystacks. Over 1,000 government and enterprise customers in more than 100 countries rely on Cognyte’s solutions to accelerate security investigations and connect the dots to successfully identify, neutralize, and prevent threats to national security, business continuity and cyber security.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/800b992c-4242-11f1-856d-4a4161de20bb.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cognyte Technologies Israel Ltd</dc:creator>
-      <pubDate>Thu, 30 Apr 2026 14:27:38 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6346/#v1.1.7</guid>
-    </item>
-    <item>
       <title>Red Hat Advanced Cluster Security - Splunk Technology Add-on - v3.0.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5315/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
@@ -1360,20 +1443,6 @@ RHACS add-on for Splunk provides visibility into your Kubernetes environment&amp
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Nicholas DiCola</dc:creator>
       <pubDate>Thu, 30 Apr 2026 14:14:49 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6539/#v2.0.9</guid>
-    </item>
-    <item>
-      <title>IBM QRadar SOAR Add-on for Splunk - v2.4.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6498/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Version 2.4.1 includes a workaround for Splunk Enterprise Security 8.3.0 compatibility. ES 8.3.0's new Detection Editor uses a different rendering system that does not automatically display complex multi-field parameters. This workaround consolidates these fields into a single pipe-delimited format that ES 8.3.0 can display. This is not the final polished solution but provides immediate functionality while maintaining full backward compatibility.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The QRadar SOAR Add-on integrates the IBM Security QRadar SOAR Platform with Splunk to simplify and streamline the process of escalating and managing cases. Escalating a Splunk alert or Splunk ES notable event to IBM QRadar SOAR allows the platform to generate a detailed, case-specific response plan that enables security team members to quickly respond.
-
-Additionally, security team members can add artifacts and other incident details to case records, and can leverage built-in threat intelligence to gather valuable context needed to inform an intelligent and decisive response.
-
-Complete documentation is available on GitHub: https://github.com/ibmresilient/resilient-reference/tree/master/developer_guides/qradar-soar-splunk-addon
-
-For support, please visit https://ibm.com/mysupport . Do not use the &amp;quot;Contact Developer&amp;quot; link, as that email address is not monitored.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9b3ed688-4241-11f1-89c9-1e9a20bc84b3.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">IBM QRadar SOAR</dc:creator>
-      <pubDate>Thu, 30 Apr 2026 14:11:05 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6498/#v2.4.1</guid>
     </item>
     <item>
       <title>Mural - v1.3.0 [Version Update]</title>
