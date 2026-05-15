@@ -6,7 +6,37 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Fri, 15 May 2026 11:48:28 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 15 May 2026 13:44:58 +0000</lastBuildDate>
+    <item>
+      <title>IPQualityScore (IPQS) Threat Risk Scoring - v1.2.3 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5423/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Updated required python 3.13 for Cloud Compatibility&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Expand intelligence for IP address reputation (including proxy, TOR, &amp;amp; VPN detection), email address risk scoring, domain intelligence, and malicious URL scanning. Tap into the largest honeypot network online featuring the most accurate detection for residential proxies, botnets, compromised devices/websites, private VPN networks, and similar abusive IP addresses. Worldwide coverage ensures high risk users, cyber threats, and suspicious logins can be accurately detected in any region.
+
+Email risk scoring provides additional security for filtering registrations and user details. Detect disposable email services and high risk email addresses recently used for fraudulent behavior online. Abuse monitored by IPQS includes chargebacks, payment fraud, fake accounts, account takeover (ATO), credential stuffing, business email compromise (BEC), bot activity, and similar high risk behavior.
+
+Live URL scanning identifies malicious links including phishing and malware. Detect low reputation domains including parked domains, spammers, and similar threats. Machine learning and artificial intelligence identify suspicious URLs in real-time.
+
+Search data from the dark web including database leaks and user data compromises along with threat data reported by Fortune 500s and the most popular sites online.
+
+This Splunk addon provides custom commands to interact with IPQualityScore REST API. Supported endpoints include:
+
+- IP Reputation - Proxy &amp;amp; VPN Detection API
+- Email Validation &amp;amp; Risk Scoring API
+- Malicious URL Scanner &amp;amp; Domain Reputation API
+- Phone Reputation API
+
+More details on the API can be found at IPQualityScore Documentation page at: https://www.ipqualityscore.com/documentation/overview
+Learn more about our threat intelligence feeds: https://www.ipqualityscore.com/threat-intelligence-feed-api
+
+Documentation for the Splunk add-on commands can be found here: https://ta-ipqualityscore.readthedocs.io
+
+IPQS is a leading fraud prevention and cyber threat company providing enterprise grade solutions that fit any sized businesses. Benefit from over 10 years of technology in identifying the latest trends and threats by bad actors online.
+
+Create a free account at: https://www.ipqualityscore.com/create-account/splunk&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d566dcde-505b-11f1-bdf8-7aa01dcde91d.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">IPQS Team</dc:creator>
+      <pubDate>Fri, 15 May 2026 12:53:18 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5423/#v1.2.3</guid>
+    </item>
     <item>
       <title>Threat Hunting Essentials - v1.2.39 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7633/</link>
@@ -1814,87 +1844,6 @@ Key capabilities include natural language to SPL conversion, AI provider managem
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">sevion xia</dc:creator>
       <pubDate>Sat, 02 May 2026 19:03:30 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8538/#v3.0.7</guid>
-    </item>
-    <item>
-      <title>Cloud Migration Assessment App for Splunk (SCMA) - v5.4.11 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4974/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;Version 5.4.11&lt;/h2&gt;
-&lt;p&gt;Documentation&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;New:&lt;/strong&gt; Documentation website! — Retired the old SCMA Google Doc (RIP — it had gone 404 and was haunting the internet as a ghost link) and replaced it with a proper, hosted documentation site styled as close as possible after our beloved Splunk Docs. Covers installation, how checks work, the full checks reference, troubleshooting, FAQ, and how-to guides.&lt;/li&gt;
-  &lt;li&gt;Documentation links in the SCMA App now point to the hosted SCMA docs site from Setup, Checks, and Search Troubleshooting.&lt;/li&gt;
-  &lt;li&gt;Setup highlights the documentation entry point more clearly for new installs.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Splunkbase catalog&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Fixed rebuilding the Splunkbase apps catalog from the IS4S gzip feed: correct gzip handling, more reliable download path and error reporting, search pipeline fixes for &lt;code&gt;inputlookup&lt;/code&gt;/&lt;code&gt;append&lt;/code&gt;, and clearer failures in the Setup UI (including surfacing command stderr).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Cryptographic hashing in SPL&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Replaced MD5 with SHA-256 (&lt;code&gt;sha256()&lt;/code&gt;) for redaction and fingerprinting across saved searches, macros, embedded check SPL, and related dashboards. Redacted strings and checksum labels change accordingly (for example fingerprint prefixes updated to match SHA-256).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Forwarder compatibility check — SCMA-035&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Extended the supported forwarder matrix for Splunk 10.x (including UF/heavy patterns through current 10.x lines), with updates to check metadata, compatibility text, and the forwarder topology dashboard (including wider layout and result limits where applicable).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Splunk SOAR naming&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;User-visible &quot;Phantom&quot; wording updated to Splunk SOAR in scoping overview, saved searches, KPIs, and lookups.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Navigation Cleanup&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Removed Application Migration and ACS Helper entries from the SCMA app navigation menu.&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;SCMA evaluates Splunk Enterprise for Splunk Cloud migration: KPI checks, exports for PS scoping, and uploads only when you initiate them. Full guide: https://scma-docs.s3.amazonaws.com/index.html&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Welcome to the Splunk Cloud Migration Assessment App (SCMA)
-
-SCMA is for Splunk customers planning a move to Splunk Cloud. It assesses your Splunk Enterprise deployment—on-premises or BYOL—and produces directional KPI results, export packages, and guidance that Sales Engineering and Professional Services use to scope migration work.
-
-Primary documentation (installation, how checks run, full checks reference, troubleshooting, FAQ): https://scma-docs.s3.amazonaws.com/index.html
-
-Before you run assessments, install the latest SCMA build and confirm your Splunk Enterprise version appears under Compatibility on this Splunkbase listing. For Splunk Cloud Service Description limits and “sweet spot” comparisons, follow the in-app and documentation guidance.
-
-For third-party and Splunkbase app compatibility analysis beyond SCMA, consider the Analysis of SplunkBase Apps for Splunk tool where appropriate.
-
-Data Policy for the Splunk Cloud Migration Assessment App
-
-Purpose of Data Collection:
-SCMA is designed to assess your Splunk Enterprise deployment and support migration planning to Splunk Cloud. Collected information enables environment-specific insights and recommendations.
-
-Data Collection and Handling:
-• The app analyzes your deployment locally in your environment.
-• Nothing is automatically uploaded to Splunk or external systems.
-• Data is uploaded only when a user explicitly starts an upload.
-
-User Control:
-• You decide whether and when to share assessment outputs.
-
-Data Usage:
-• Uploaded data is used to assess the environment and support migration to Splunk Cloud.
-• Splunk Sales Engineering and Professional Services may use it to scope migration efforts.
-
-Data Security:
-• Splunk follows industry-standard practices to protect uploaded assessment data.
-
-By using SCMA, you agree to this data policy. Questions: Splunk Support.
-
-Disclaimer:
-SCMA is self-guiding—follow in-app prompts. Results are directional and educational; they are not guarantees. Contact Splunk Support for product questions.
-
-Upgrade note:
-When upgrading SCMA, remove the previous app installation folder completely before installing the new version, then restart Splunk (see Installation on this listing or the hosted documentation).&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/7efbd9aa-457d-11f1-aa65-b2bfd0f346de.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Fri, 01 May 2026 20:35:30 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4974/#v5.4.11</guid>
     </item>
   </channel>
 </rss>
