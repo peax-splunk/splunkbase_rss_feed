@@ -6,7 +6,72 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sun, 17 May 2026 23:51:04 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 18 May 2026 02:32:19 +0000</lastBuildDate>
+    <item>
+      <title>Ensign ElasticSearch Data Integrator - v1.2.3 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8645/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;
+&lt;/p&gt;&lt;h2&gt;v1.2.3 (2026-05-11)&lt;/h2&gt;
+&lt;h3&gt;Critical Fix — SSL/TLS Runtime Crash&lt;/h3&gt;
+&lt;p&gt;Fixed a fatal &lt;code&gt;SSL_CERTIFICATE_VERIFY_FAILED&lt;/code&gt; exception that prevented all data collection on Splunk Enterprise deployments using the default self-signed management certificate.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Root Cause&lt;/strong&gt;: The internal REST API call to &lt;code&gt;splunkd&lt;/code&gt; (127.0.0.1:8089) was configured with &lt;code&gt;verify=True&lt;/code&gt;. Since splunkd uses a self-signed certificate by default, every input execution cycle crashed before reaching the Elasticsearch cluster.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Resolution&lt;/strong&gt;: Reverted to &lt;code&gt;verify=False&lt;/code&gt; for the localhost-only REST call. Session-key authentication provides sufficient security for this internal request.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Impact&lt;/strong&gt;: All users on v1.2.2 are affected and should upgrade immediately.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;Added — Comprehensive Operational Logging&lt;/h3&gt;
+&lt;p&gt;7 structured log points covering the entire data collection cycle:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Input Config&lt;/strong&gt;: cluster target, ES index, date field, polling interval&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Filter Config&lt;/strong&gt;: ENABLED/DISABLED status with key/value parameters&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Proxy Status&lt;/strong&gt;: ENABLED with host/port, or NOT configured&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Sourcetype&lt;/strong&gt;: CUSTOM or DEFAULT resolution&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ES Client&lt;/strong&gt;: hosts count, retries, timeout, sniffing, TLS verification&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Query DSL&lt;/strong&gt;: full Elasticsearch query body logged before execution&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Response Summary&lt;/strong&gt;: total_hits, first page doc count, scroll_id&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All logs are written to &lt;code&gt;index=_internal&lt;/code&gt; — operators can now diagnose collection issues without inspecting Python source code.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;Added — Internal Log Monitoring Resilience&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Added explicit &lt;code&gt;[monitor://...]&lt;/code&gt; stanza with &lt;code&gt;crcSalt=&amp;lt;SOURCE&amp;gt;&lt;/code&gt; to prevent fishbucket CRC corruption after Deployment Server push events or log file rotation.&lt;/li&gt;
+&lt;li&gt;Added &lt;code&gt;props.conf&lt;/code&gt; and &lt;code&gt;transforms.conf&lt;/code&gt; for structured parsing and index-time field extraction of operational logs.&lt;/li&gt;
+&lt;li&gt;20 index-time field extractions for operational and audit events.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3&gt;Inherited from v1.2.2&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;python.required = 3.9, 3.13&lt;/code&gt; for Splunk 10.2+ (Python 3.13) dual compatibility&lt;/li&gt;
+&lt;li&gt;All security hardening from v1.2.1 (SSRF protection, input sanitization)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;Upgrade&lt;/strong&gt;: Drop-in replacement for v1.2.2. No configuration changes required.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Compatibility&lt;/strong&gt;: Splunk Enterprise 9.4, 10.0, 10.1, 10.2&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Requires&lt;/strong&gt;: Elasticsearch 8.x&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Libraries&lt;/strong&gt;: elasticsearch-py 8.19.3, elastic-transport 8.17.1&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Splunk modular input for ingesting data from Elasticsearch 8.x clusters by leveraging call the ElasticSearch v8.x REST API. Features multi-cluster profiles, DSL query filters, scroll-based pagination with crash recovery, document-level deduplication, SSL/TLS support, and a full GUI configuration experience. Compatible with Elasticsearch 8.x only and DSL based only,&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Ensign ElasticSearch Data Integrator is a Splunk modular input add-on for ingesting data from Elasticsearch 8.x clusters into Splunk via the Elasticsearch 8 REST API.
+
+Built on the Splunk UCC Framework, it provides a full GUI-driven configuration experience through Splunk Web — no manual file editing required.
+
+Key Features:
+• Multi-cluster Elasticsearch profile management via Splunk UI
+• DSL Query-focused data retrieval with configurable time-based fetching
+• ES Scroll API pagination for efficient large-volume data collection
+• Crash-resilient scroll recovery with a dedicated checkpoint directory
+• Document-level deduplication guard (rolling 50,000 IDs per stanza)
+• SSL/TLS certificate verification support
+• Custom term filters per data source
+• Global proxy support with Splunk-native credential encryption
+• Custom sourcetype override per input stanza
+
+IMPORTANT: This add-on is designed exclusively for Elasticsearch 8.x API. It is NOT compatible with Elasticsearch 7.x or earlier versions.
+
+Compatibility:
+• Elasticsearch: 8.x only
+• Splunk Enterprise: 8.2+ and 9.x (You can try for 10.x, let me know the updates)
+• Python: 3.x (bundled with Splunk)&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c95db6b4-4d37-11f1-a3ee-d2921fd2c765.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Muhammad Rafdi Aufar Ahmad</dc:creator>
+      <pubDate>Mon, 18 May 2026 01:00:00 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8645/#v1.2.3</guid>
+    </item>
     <item>
       <title>Threat Hunting Essentials - v1.2.42 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7633/</link>
@@ -1081,71 +1146,6 @@ NOTE: This app runs in python3 without any problems and without any changes requ
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Christiaan van Tienhoven</dc:creator>
       <pubDate>Mon, 11 May 2026 21:38:28 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5735/#v2.2.0</guid>
-    </item>
-    <item>
-      <title>Ensign ElasticSearch Data Integrator - v1.2.3 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8645/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;
-&lt;/p&gt;&lt;h2&gt;v1.2.3 (2026-05-11)&lt;/h2&gt;
-&lt;h3&gt;Critical Fix — SSL/TLS Runtime Crash&lt;/h3&gt;
-&lt;p&gt;Fixed a fatal &lt;code&gt;SSL_CERTIFICATE_VERIFY_FAILED&lt;/code&gt; exception that prevented all data collection on Splunk Enterprise deployments using the default self-signed management certificate.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Root Cause&lt;/strong&gt;: The internal REST API call to &lt;code&gt;splunkd&lt;/code&gt; (127.0.0.1:8089) was configured with &lt;code&gt;verify=True&lt;/code&gt;. Since splunkd uses a self-signed certificate by default, every input execution cycle crashed before reaching the Elasticsearch cluster.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Resolution&lt;/strong&gt;: Reverted to &lt;code&gt;verify=False&lt;/code&gt; for the localhost-only REST call. Session-key authentication provides sufficient security for this internal request.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Impact&lt;/strong&gt;: All users on v1.2.2 are affected and should upgrade immediately.&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3&gt;Added — Comprehensive Operational Logging&lt;/h3&gt;
-&lt;p&gt;7 structured log points covering the entire data collection cycle:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Input Config&lt;/strong&gt;: cluster target, ES index, date field, polling interval&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Filter Config&lt;/strong&gt;: ENABLED/DISABLED status with key/value parameters&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Proxy Status&lt;/strong&gt;: ENABLED with host/port, or NOT configured&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Sourcetype&lt;/strong&gt;: CUSTOM or DEFAULT resolution&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;ES Client&lt;/strong&gt;: hosts count, retries, timeout, sniffing, TLS verification&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Query DSL&lt;/strong&gt;: full Elasticsearch query body logged before execution&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Response Summary&lt;/strong&gt;: total_hits, first page doc count, scroll_id&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;All logs are written to &lt;code&gt;index=_internal&lt;/code&gt; — operators can now diagnose collection issues without inspecting Python source code.&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3&gt;Added — Internal Log Monitoring Resilience&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Added explicit &lt;code&gt;[monitor://...]&lt;/code&gt; stanza with &lt;code&gt;crcSalt=&amp;lt;SOURCE&amp;gt;&lt;/code&gt; to prevent fishbucket CRC corruption after Deployment Server push events or log file rotation.&lt;/li&gt;
-&lt;li&gt;Added &lt;code&gt;props.conf&lt;/code&gt; and &lt;code&gt;transforms.conf&lt;/code&gt; for structured parsing and index-time field extraction of operational logs.&lt;/li&gt;
-&lt;li&gt;20 index-time field extractions for operational and audit events.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h3&gt;Inherited from v1.2.2&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;python.required = 3.9, 3.13&lt;/code&gt; for Splunk 10.2+ (Python 3.13) dual compatibility&lt;/li&gt;
-&lt;li&gt;All security hardening from v1.2.1 (SSRF protection, input sanitization)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;Upgrade&lt;/strong&gt;: Drop-in replacement for v1.2.2. No configuration changes required.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Compatibility&lt;/strong&gt;: Splunk Enterprise 9.4, 10.0, 10.1, 10.2&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Requires&lt;/strong&gt;: Elasticsearch 8.x&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Libraries&lt;/strong&gt;: elasticsearch-py 8.19.3, elastic-transport 8.17.1&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Splunk modular input for ingesting data from Elasticsearch 8.x clusters by leveraging call the ElasticSearch v8.x REST API. Features multi-cluster profiles, DSL query filters, scroll-based pagination with crash recovery, document-level deduplication, SSL/TLS support, and a full GUI configuration experience. Compatible with Elasticsearch 8.x only and DSL based only,&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Ensign ElasticSearch Data Integrator is a Splunk modular input add-on for ingesting data from Elasticsearch 8.x clusters into Splunk via the Elasticsearch 8 REST API.
-
-Built on the Splunk UCC Framework, it provides a full GUI-driven configuration experience through Splunk Web — no manual file editing required.
-
-Key Features:
-• Multi-cluster Elasticsearch profile management via Splunk UI
-• DSL Query-focused data retrieval with configurable time-based fetching
-• ES Scroll API pagination for efficient large-volume data collection
-• Crash-resilient scroll recovery with a dedicated checkpoint directory
-• Document-level deduplication guard (rolling 50,000 IDs per stanza)
-• SSL/TLS certificate verification support
-• Custom term filters per data source
-• Global proxy support with Splunk-native credential encryption
-• Custom sourcetype override per input stanza
-
-IMPORTANT: This add-on is designed exclusively for Elasticsearch 8.x API. It is NOT compatible with Elasticsearch 7.x or earlier versions.
-
-Compatibility:
-• Elasticsearch: 8.x only
-• Splunk Enterprise: 8.2+ and 9.x (You can try for 10.x, let me know the updates)
-• Python: 3.x (bundled with Splunk)&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c95db6b4-4d37-11f1-a3ee-d2921fd2c765.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Muhammad Rafdi Aufar Ahmad</dc:creator>
-      <pubDate>Mon, 11 May 2026 13:05:02 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8645/#v1.2.3</guid>
     </item>
     <item>
       <title>Saviynt Events Add-on - v1.2.1 [Version Update]</title>
