@@ -6,98 +6,313 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Thu, 21 May 2026 18:53:45 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 21 May 2026 20:46:31 +0000</lastBuildDate>
     <item>
-      <title>TrackMe - v2.3.23 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4621/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;TrackMe 2.3.23 — Lookups monitoring, Backup &amp;amp; Restore v3 hardening, SLA correctness and DHM per-host extras&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Lookups monitoring (DSM)&lt;/strong&gt;: new &lt;code&gt;lookups&lt;/code&gt; search mode in the Hybrid Trackers wizard. CSV files and KVstore collections become first-class DSM entities, with delay-based alerting and volume tracking. Supersedes the previous Elastic-source approach. Requires the dedicated &lt;code&gt;TA-trackme-lookupmonitor&lt;/code&gt; add-on. See :ref:&lt;code&gt;admin_guide_lookups_monitoring&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Backup &amp;amp; Restore v3 — hardening at scale&lt;/strong&gt;: consolidated fixes after SHC field testing of 2.3.22. Stuck SHC-local restores, mis-classified imported archives, parallel schema-upgrade backup storms, disruptive UI delete on a per-archive basis, and host-identifier drift are all fixed; orphan sidecars and run manifests are cleaned up by the retention sweep; the download selector becomes a cascading &lt;strong&gt;run → archive&lt;/strong&gt; picker.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;SLA correctness — orange no longer counts as breach&lt;/strong&gt;: SLA compliance and &lt;code&gt;percent_sla&lt;/code&gt; are now computed against time &lt;strong&gt;not in critical (red)&lt;/strong&gt; state. Warning (orange) is treated as compliant. The same red-only semantics apply to the Tenant Home &lt;em&gt;“in alert”&lt;/em&gt; KPI tiles, so tile counts, click-filtered tables and &lt;em&gt;Open in Search&lt;/em&gt; now agree on a single definition.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;DHM per-host extras&lt;/strong&gt;: new &lt;code&gt;breakby_extra_fields&lt;/code&gt; option to extend the per-host combo grain beyond &lt;code&gt;(index, sourcetype)&lt;/code&gt; with extra metadata fields (e.g. &lt;code&gt;source&lt;/code&gt;). Useful when a host produces multiple distinct event streams.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Variable / adaptive delay — honour existing slots&lt;/strong&gt;: auto-compute and adaptive delay now refresh thresholds &lt;strong&gt;inside&lt;/strong&gt; an entity’s existing slot layout instead of regenerating it. Adaptive delay can also heal variable-delay entities automatically.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Two new FLX use cases (Splunk infrastructure)&lt;/strong&gt;: &lt;code&gt;splk_bucket_health_per_index&lt;/code&gt; (per-index bucket health via &lt;code&gt;dbinspect&lt;/code&gt;) and &lt;code&gt;splk_parsing_issues_per_component&lt;/code&gt; (Splunk indexing-time parsing failures from the three pipeline components). Both ship with default dynamic thresholds and one-click drilldowns.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;UX polish&lt;/strong&gt;: AI Assistant empty state links directly to the in-app provider configuration; Blocklist views gain inline search and bulk actions; lag-monitoring modals show a banner when adaptive delay last refreshed the threshold; the AI Assistant icon now appears on the &lt;em&gt;Events format recognition&lt;/em&gt; child modals.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Various fixes &amp;amp; hygiene&lt;/strong&gt;: FQM wizard &lt;em&gt;Benchmark sampling mode&lt;/em&gt; honours the sampling ratio on LOCAL tenants; &lt;em&gt;Ops → Parsing issues&lt;/em&gt; and &lt;em&gt;Data Parsing Quality&lt;/em&gt; panels work again on newer Splunk versions; two high-volume INFO log lines demoted to DEBUG; forward-compat regex cleanup across the licensing handler, the OOTB regex library and the URL validator.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;See: &lt;a href=&quot;https://docs.trackme-solutions.com/latest/releasenotes.html#version-2-3-23-build-1779189227-19-05-2026&quot;&gt;https://docs.trackme-solutions.com/latest/releasenotes.html#version-2-3-23-build-1779189227-19-05-2026&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TrackMe for Splunk provides visibility and operational excellence to monitor at scale your Splunk data sources availability and quality, and many more. 
-
-With a rich set of features and a powerful workflow, TrackMe empowers you day after day to get the most from your Splunk investments and deliver the five stars quality of service your users deserve.
-
-Discover TrackMe: https://trackme-solutions.com/discover
-
-Documentation: https://docs.trackme-solutions.com
-
-You can subscribe to our newsletter, and receive important communications from us.
-We will send notifications for instance when publishing new releases, so we can you let you know the cool and powerful things we&amp;#x27;ve been working on!
-
-https://trackme-solutions.com/subscribe/
-
-TrackMe has transitioned to a new licensing model.
-The Free Community Edition has been discontinued.
-
-What this means for you:
-
-- Existing licensed customers are not impacted. Your current license continues unchanged.
-- Community users are automatically upgraded to a Foundation Edition trial for 90 days, with full functionality enabled.
-
-After the trial period:
-
-- TrackMe remains active and fully usable for monitoring
-- The platform enters read-only mode
-
-You can continue to view data, dashboards, alerts, and history
-Creation of new tenants, trackers, or entities will be disabled
-
-To continue using TrackMe with full capabilities after the trial, a Foundation license is required.
-
-Buy Foundation Edition: https://trackme-solutions.com/get-foundation/
-
-See all plans: https://trackme-solutions.com/pricing/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/6011e57c-5543-11f1-ac28-fea6eaf8b9cf.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Trackme Limited</dc:creator>
-      <pubDate>Thu, 21 May 2026 18:47:59 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4621/#v2.3.23</guid>
-    </item>
-    <item>
-      <title>Akamai WAF - v2.1.4 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5987/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
-&lt;li&gt;Released app with Python 3.13 support&lt;/li&gt;
-&lt;li&gt;Adds optional ssl verify configuration&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The WAF API allows you to manage a common set of lists for use in various Akamai security products such as Kona Site Defender, Web App Protector, and Bot Manager&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8118da48-5541-11f1-bf38-6275a57c4fee.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
-      <pubDate>Thu, 21 May 2026 18:18:45 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5987/#v2.1.4</guid>
-    </item>
-    <item>
-      <title>Splunk Health Assistant Add-on - v2026.5.23 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4603/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Health Assistant Add-on lets you download and install new health check items as they become available for the monitoring console in Splunk Enterprise. The add-on is updated with new health check items independently of Splunk Enterprise releases, which lets you update and monitor your deployment with the latest health checks, without waiting for a Splunk Enterprise release or requesting help from Splunk Support. 
-
-You can download the the Splunk Health Assistant Add-on directly through the monitoring console UI. This installs the latest version of the add-on in $SPLUNK_HOME/etc/apps and automatically adds the new health checks to the Health Check page in the monitoring console. No restart is required. Or, you can manually download the add-on and install it using the app management page or command line if your splunk instance cannot access Splunkbase, for example, due to firewall restrictions.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Thu, 21 May 2026 18:04:15 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4603/#v2026.5.23</guid>
-    </item>
-    <item>
-      <title>ServiceDeskPlus - v1.0.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7381/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
-&lt;li&gt;Updated REQUEST_FIELDS in servicedeskplus_const.py to include the &quot;template&quot; field.&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This App supports a variety of ticket management actions on ManageEngine ServiceDesk Plus&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c12a1870-553e-11f1-b69b-9a5d1d6a95e3.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
-      <pubDate>Thu, 21 May 2026 17:59:04 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7381/#v1.0.2</guid>
-    </item>
-    <item>
-      <title>AI Workbench - v0.6.0 [New App Release]</title>
+      <title>AI Workbench - v0.9.3 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/8747/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h1&gt;Release notes — AI Assistent for Splunk&lt;/h1&gt;
 &lt;p&gt;This file tracks every customer-visible change.&lt;/p&gt;
 &lt;p&gt;Format: &lt;a href=&quot;https://keepachangelog.com/en/1.1.0/&quot;&gt;Keep a Changelog&lt;/a&gt;. Dates&lt;br&gt;
 are ISO-8601. &lt;strong&gt;App version&lt;/strong&gt; in &lt;code&gt;default/app.conf&lt;/code&gt; always matches the&lt;br&gt;
 top entry.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;0.9.3 — 2026-05-21&lt;/h2&gt;
+&lt;p&gt;Foundation pass for Concise Mode (v0.10.0 spec, Phase 1). Ships behind&lt;br&gt;
+a default-off feature flag so this is a pure-upgrade release — no&lt;br&gt;
+behaviour changes until an admin opts in.&lt;/p&gt;
+&lt;h3&gt;Added&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Concise Mode wiring&lt;/strong&gt; (see &lt;code&gt;instructions/AI_Workbench_Concise_Mode_Requirements.md&lt;/code&gt;).&lt;br&gt;
+  Caveman-inspired response compression for prose-heavy templates and&lt;br&gt;
+  the tool/template catalogue. When enabled per-template (or globally&lt;br&gt;
+  for follow-up turns), the dispatcher appends a style block that&lt;br&gt;
+  tells the LLM to drop filler while keeping SPL / Simple XML /&lt;br&gt;
+  dashboard markup / alert config / MLTK config / code blocks&lt;br&gt;
+  uncompressed. Template authors stay in control via a per-template&lt;br&gt;
+&lt;code&gt;style_profile&lt;/code&gt; dropdown; admins flip the global &lt;code&gt;[concise_mode]&lt;/code&gt;&lt;br&gt;
+  feature flag in &lt;code&gt;local/itmip_ai_workbench.conf&lt;/code&gt; once they've read&lt;br&gt;
+  the trade-off table.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;short_description_concise&lt;/code&gt;&lt;/strong&gt; field on every tool and template.&lt;br&gt;
+  When set AND Concise Mode is active, this variant replaces the&lt;br&gt;
+  full &lt;code&gt;short_description&lt;/code&gt; in the catalogue the LLM sees on every&lt;br&gt;
+&lt;code&gt;splunk_route_tools&lt;/code&gt; / &lt;code&gt;splunk_list_use_case_templates&lt;/code&gt; call.&lt;br&gt;
+  Shipped pre-populated for the 5 always-called universal tools&lt;br&gt;
+  (&lt;code&gt;splunk_get_version&lt;/code&gt;, &lt;code&gt;splunk_run_search&lt;/code&gt;,&lt;br&gt;
+&lt;code&gt;splunk_list_use_case_templates&lt;/code&gt;, &lt;code&gt;splunk_get_use_case_template_prompt&lt;/code&gt;,&lt;br&gt;
+&lt;code&gt;splunk_route_tools&lt;/code&gt;). The other 18+ built-ins fall back to their&lt;br&gt;
+  full description until an admin (or a follow-up content pass)&lt;br&gt;
+  fills them in.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;style_profile = &quot;concise&quot;&lt;/code&gt;&lt;/strong&gt; seeded on two shipped templates that&lt;br&gt;
+  are pure prose by design: &quot;AI Toolkit – Stats vs ML decision&lt;br&gt;
+  helper&quot; and &quot;Audit &amp;amp; refresh an existing ML use case&quot;. Every other&lt;br&gt;
+  shipped template stays &lt;code&gt;&quot;default&quot;&lt;/code&gt; — artefact-generating flows&lt;br&gt;
+  (SPL / Simple XML / alerts / MLTK) benefit from the model's&lt;br&gt;
+  verbose intent in the validate-and-retry loop.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Per-LLM kill switch&lt;/strong&gt; &lt;code&gt;disable_style_profiles&lt;/code&gt; on &lt;code&gt;LlmConfig&lt;/code&gt;.&lt;br&gt;
+  Settings → LLM configurations now exposes a checkbox to skip&lt;br&gt;
+  Concise Mode for one specific LLM (intended for on-prem / fine-&lt;br&gt;
+  tuned models that respond poorly to style instructions) without&lt;br&gt;
+  disrupting the global flag.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Telemetry&lt;/strong&gt; &lt;code&gt;style_profile_used&lt;/code&gt; recorded on every history entry&lt;/li&gt;
+&lt;li&gt;every &lt;code&gt;_metrics&lt;/code&gt; usage event under field name&lt;br&gt;
+&lt;code&gt;ai_style_profile&lt;/code&gt;. Group-by dimension ready for the forthcoming&lt;br&gt;
+  &quot;Concise mode delta&quot; panel.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Configuration&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;New &lt;code&gt;[concise_mode]&lt;/code&gt; stanza in &lt;code&gt;default/itmip_ai_workbench.conf&lt;/code&gt;:&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;feature_concise_mode = 0&lt;/code&gt; (master flag, default off).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;followup_concise_mode = 1&lt;/code&gt; (when the global flag is on, also&lt;br&gt;
+    compress follow-up turns regardless of the active template's&lt;br&gt;
+    profile; rationale: follow-ups are pure chat about the artefact,&lt;br&gt;
+    not new artefact generation).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Out of scope this release (tracked for v0.10.0)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Tokens &amp;amp; Costs &quot;Concise mode delta&quot; panel + scorecard + group-by&lt;br&gt;
+  Style profile (telemetry is recorded; visualisation lands in&lt;br&gt;
+  v0.10.0).&lt;/li&gt;
+&lt;li&gt;Eval-harness numbers published in &lt;code&gt;docs/CONCISE_MODE.md&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Hand-written concise variants for the remaining ~50 ES / ITSI /&lt;br&gt;
+  TrackMe / metric-store tools.&lt;/li&gt;
+&lt;li&gt;Playwright specs for the new editor fields.&lt;/li&gt;
+&lt;li&gt;&quot;Verbose&quot; profile (the dropdown lists it as a disabled option).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2&gt;0.9.2 — 2026-05-21&lt;/h2&gt;
+&lt;p&gt;Splunkbase certification fixes. No functional changes — pure&lt;br&gt;
+packaging/configuration compliance with Splunk Cloud's AppInspect&lt;br&gt;
+vetting rules.&lt;/p&gt;
+&lt;h3&gt;Fixed&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;AppInspect FAIL &lt;code&gt;check_lower_cased_index_names&lt;/code&gt;.&lt;/strong&gt; Splunk Cloud&lt;br&gt;
+  disallows the substring &lt;code&gt;kvstore&lt;/code&gt; in index names. Renamed&lt;br&gt;
+&lt;code&gt;itmip_kvstore_snapshots&lt;/code&gt; → &lt;code&gt;itmip_snapshots&lt;/code&gt; and&lt;br&gt;
+&lt;code&gt;itmip_kvstore_changes&lt;/code&gt; → &lt;code&gt;itmip_changes&lt;/code&gt; in &lt;code&gt;default/indexes.conf&lt;/code&gt;,&lt;br&gt;
+  in every Python handler that writes to them, in the Backups UI text,&lt;br&gt;
+  and in all docs/SPL recipes.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;AppInspect FAIL &lt;code&gt;check_indexes_conf_properties&lt;/code&gt;.&lt;/strong&gt; Splunk Cloud&lt;br&gt;
+  also rejects &lt;code&gt;maxTotalDataSizeMB&lt;/code&gt;. Dropped the property from both&lt;br&gt;
+  index stanzas — operators can tune retention through the Splunk Cloud&lt;br&gt;
+  index settings instead.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;AppInspect FAIL &lt;code&gt;check_collections_conf_for_specified_name_field_type&lt;/code&gt;.&lt;/strong&gt;&lt;br&gt;
+  KVStore field types are restricted to &lt;code&gt;number / bool / string / time&lt;/code&gt;;&lt;br&gt;
+&lt;code&gt;array&lt;/code&gt; is not accepted by AppInspect. Changed &lt;code&gt;field.tags = array&lt;/code&gt;&lt;br&gt;
+  and &lt;code&gt;field.categories = array&lt;/code&gt; on &lt;code&gt;[itmip_tool_overrides]&lt;/code&gt; to&lt;br&gt;
+&lt;code&gt;string&lt;/code&gt;. The collection has &lt;code&gt;enforceTypes = false&lt;/code&gt; and the app&lt;br&gt;
+  POSTs JSON-encoded arrays — no runtime behaviour change.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;AppInspect FAIL &lt;code&gt;check_reload_trigger_for_all_custom_confs&lt;/code&gt;.&lt;/strong&gt;&lt;br&gt;
+  Added &lt;code&gt;[triggers] reload.itmip_ai_workbench = simple&lt;/code&gt; to&lt;br&gt;
+&lt;code&gt;default/app.conf&lt;/code&gt; so splunkd reloads our custom conf without a&lt;br&gt;
+  full restart.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Changed (forward compatibility)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Bumped &lt;code&gt;python.required&lt;/code&gt; from &lt;code&gt;3.9&lt;/code&gt; → &lt;code&gt;3.13&lt;/code&gt; on every persistent&lt;br&gt;
+  REST handler in &lt;code&gt;default/restmap.conf&lt;/code&gt; (13 stanzas) and on both&lt;br&gt;
+  scripted inputs in &lt;code&gt;default/inputs.conf&lt;/code&gt;. Splunk 10.2 deprecates&lt;br&gt;
+  Python 3.9.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2&gt;0.9.1 — 2026-05-21&lt;/h2&gt;
+&lt;p&gt;A focused fixes-and-polish release on top of the v0.9.0 restore engine.&lt;/p&gt;
+&lt;h3&gt;Fixed&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;tools.0.custom.tags: Extra inputs are not permitted&lt;/code&gt; 400 from Anthropic on every Ask turn.&lt;/strong&gt; The v0.7.0 tag/category metadata&lt;br&gt;
+  we use for the in-app tool router was leaking onto the wire to LLM&lt;br&gt;
+  providers. A single chokepoint in &lt;code&gt;dispatcher.ts::stripToolMetadataForApi&lt;/code&gt;&lt;br&gt;
+  now strips &lt;code&gt;tags&lt;/code&gt; / &lt;code&gt;categories&lt;/code&gt; / &lt;code&gt;short_description&lt;/code&gt; before any&lt;br&gt;
+  adapter sees the tool list. Covers built-in + custom HTTP + MCP&lt;br&gt;
+  tools.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;Error starting: Can't load script &quot;...itmip_llm_mcp.py&quot;&lt;/code&gt; with no&lt;br&gt;
+  Python traceback.&lt;/strong&gt; The v0.7.0 MCP REST handler was missing the&lt;br&gt;
+&lt;code&gt;sys.path.insert&lt;/code&gt; block every other handler in this app has;&lt;br&gt;
+  Splunk's persistent-handler runtime imports via&lt;br&gt;
+&lt;code&gt;importlib.util.spec_from_file_location&lt;/code&gt;, which does NOT add the&lt;br&gt;
+  script's directory to &lt;code&gt;sys.path&lt;/code&gt;. Every &lt;code&gt;from itmip_llm_* import&lt;/code&gt;&lt;br&gt;
+  raised silently and Splunk reported the generic load failure. Fixed,&lt;br&gt;
+  documented in TROUBLESHOOTING + tasks/lessons.md.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Raw HTML markup appearing literally on Simple XML dashboards.&lt;/strong&gt; The&lt;br&gt;
+  LLM had been putting &quot;How to read this dashboard&quot; HTML into the&lt;br&gt;
+  Simple XML &lt;code&gt;&amp;lt;description&amp;gt;&lt;/code&gt; / &lt;code&gt;&amp;lt;title&amp;gt;&lt;/code&gt; / &lt;code&gt;&amp;lt;label&amp;gt;&lt;/code&gt; elements; Splunk&lt;br&gt;
+  renders those as plain text. The dashboard validator now rejects&lt;br&gt;
+  HTML markup in those elements with a clear error, and the&lt;br&gt;
+  auto-correct loop moves the HTML into a proper&lt;br&gt;
+&lt;code&gt;&amp;lt;row&amp;gt;&amp;lt;panel&amp;gt;&amp;lt;html&amp;gt;…&amp;lt;/html&amp;gt;&amp;lt;/panel&amp;gt;&amp;lt;/row&amp;gt;&lt;/code&gt; block.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Changed&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;TrackMe health panel is now mandatory on every dashboard.&lt;/strong&gt; If&lt;br&gt;
+  TrackMe is installed and visible to the caller, every Simple XML&lt;br&gt;
+  and Studio dashboard the LLM creates pins a &quot;feed health&quot; panel&lt;br&gt;
+  at the top — green / delayed / broken status per index or&lt;br&gt;
+  sourcetype with the lag + anomaly reason. Copy-paste-ready SPL&lt;br&gt;
+  for single-index, multi-index status tile, and sourcetype-level&lt;br&gt;
+  variants is in the system prompt.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&quot;ARTIFACT IMPLIES DASHBOARD&quot; rule expanded to cover every&lt;br&gt;
+  template that creates persistent state.&lt;/strong&gt; The old &quot;alert →&lt;br&gt;
+  dashboard&quot; rule now also covers MLTK models, ES notable&lt;br&gt;
+  updates, ITSI episode changes, TrackMe entity changes, saved&lt;br&gt;
+  searches, AND multi-angle investigations. Investigation&lt;br&gt;
+  templates now end with a Simple XML proof dashboard summarising&lt;br&gt;
+  the findings.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GitHub Releases workflow&lt;/strong&gt; rewritten to drop the AppInspect&lt;br&gt;
+  step (deferred to Splunkbase upload-time) and attach the .spl&lt;br&gt;
+  tarball to a Release with notes pulled from this file.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Internal&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;default/app.conf&lt;/code&gt; + &lt;code&gt;package.json&lt;/code&gt; bumped to 0.9.1.&lt;/li&gt;
+&lt;li&gt;Tarball file leak fixed: &lt;code&gt;lookups/&lt;/code&gt; is now in &lt;code&gt;.gitattributes
+  export-ignore&lt;/code&gt;, and &lt;code&gt;README/*.spec&lt;/code&gt; was being filtered by the&lt;br&gt;
+  Python &lt;code&gt;*.spec&lt;/code&gt; rule in &lt;code&gt;.gitignore&lt;/code&gt; — added a &lt;code&gt;!README/*.spec&lt;/code&gt;&lt;br&gt;
+  exception so the conf-spec file ships.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2&gt;0.9.0 — 2026-05-21&lt;/h2&gt;
+&lt;p&gt;KVStore restore (engine + UI) — closes phases 9.4 and 9.5 from the&lt;br&gt;
+v0.8.0 design's deferred list. Plus a one-line Ask-tab filter UI&lt;br&gt;
+rebuild.&lt;/p&gt;
+&lt;h3&gt;Added&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;KVStore restore — from the Web UI.&lt;/strong&gt; New three-step wizard on&lt;br&gt;
+  the Backups tab: pick collections → preview the diff (inserts /&lt;br&gt;
+  updates / deletes vs current state) → acknowledge + commit.&lt;br&gt;
+  Per-collection verification (row count + SHA-256). Restore never&lt;br&gt;
+  touches &lt;code&gt;storage/passwords&lt;/code&gt; — the referenced-credentials&lt;br&gt;
+  inventory tells admins which secrets to re-populate.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Restore engine&lt;/strong&gt; (&lt;code&gt;bin/itmip_llm_kvstore_restore.py&lt;/code&gt;) with the&lt;br&gt;
+  full safety net: single-row lock to prevent concurrent commits,&lt;br&gt;
+  forensic rollback aside to the snapshot index, atomic-ish&lt;br&gt;
+  per-collection commit with &lt;code&gt;_key&lt;/code&gt; preservation, 15-minute stale&lt;br&gt;
+  lock auto-break.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Restore REST&lt;/strong&gt;: &lt;code&gt;POST /services/itmip_llm/kvstore_admin/restore&lt;/code&gt;,&lt;br&gt;
+&lt;code&gt;GET /restore/lock&lt;/code&gt;, &lt;code&gt;POST /restore/lock/break&lt;/code&gt;,&lt;br&gt;
+&lt;code&gt;GET /restore/collections&lt;/code&gt;. Admin only. Refuses commit without&lt;br&gt;
+&lt;code&gt;acknowledge=true&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Audit event&lt;/strong&gt; per restore (&lt;code&gt;sourcetype=itmip:kvstore:restore&lt;/code&gt;)&lt;br&gt;
+  so admins can reconstruct the full restore history via SPL.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Changed&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Ask tab filter UI&lt;/strong&gt;: search box + tag chip-input + category&lt;br&gt;
+  chip-input now live on a single flex row. Chips are inside the&lt;br&gt;
+  input (Gmail-recipient pattern), no more long row of&lt;br&gt;
+&lt;code&gt;+anomaly&lt;/code&gt; / &lt;code&gt;+audit&lt;/code&gt; / &lt;code&gt;+alerts&lt;/code&gt; suggestion pills above the&lt;br&gt;
+  field. Single &quot;Clear&quot; button resets search + tags + categories&lt;br&gt;
+  together. New &lt;code&gt;src/components/ChipInput.tsx&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MCP servers section&lt;/strong&gt; rendered correctly again (see 0.9.1 fix&lt;br&gt;
+  notes — same bug; the temporary lazy-import workaround in 0.9.0&lt;br&gt;
+  was replaced with the proper &lt;code&gt;sys.path&lt;/code&gt; block in 0.9.1).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Security&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;New 0.9.0 surface review section in &lt;code&gt;docs/SECURITY_AUDIT.md&lt;/code&gt;&lt;br&gt;
+  walks through every mitigation for the destructive-write&lt;br&gt;
+  surface: authorization (handler + meta ACL + acknowledge),&lt;br&gt;
+  no-touch-storage/passwords guarantee, lock semantics,&lt;br&gt;
+  partial-failure no-auto-rollback rationale.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2&gt;0.8.0 — 2026-05-21&lt;/h2&gt;
+&lt;p&gt;Enterprise-grade KVStore backup. The app's configuration / tenancy /&lt;br&gt;
+custom-tool catalogue / MCP registrations / license now back up&lt;br&gt;
+daily, independently of the KVStore service itself.&lt;/p&gt;
+&lt;h3&gt;Added&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Daily snapshot scripted input&lt;/strong&gt; (&lt;code&gt;bin/itmip_llm_kvstore_backup.py&lt;/code&gt;)&lt;br&gt;
+  writes every backed-up collection to &lt;code&gt;index=itmip_kvstore_snapshots&lt;/code&gt;&lt;br&gt;
+  with manifest + verification + referenced-credentials inventory&lt;br&gt;
+  events. Tiered retention: 30 days daily, ~26 weeks weekly,&lt;br&gt;
+  ~24 months monthly. Independent failure domain — a KVStore wipe&lt;br&gt;
+  leaves the backup index untouched.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Continuous change log&lt;/strong&gt;: every successful POST/DELETE on a&lt;br&gt;
+  tracked collection emits a structured event to&lt;br&gt;
+&lt;code&gt;index=itmip_kvstore_changes&lt;/code&gt; (60-day retention). Lets point-in-&lt;br&gt;
+  time recovery resolve to the minute, not just last night's&lt;br&gt;
+  backup. Best-effort default; &lt;code&gt;mandatory&lt;/code&gt; mode flips it to&lt;br&gt;
+  zero-loss-audit.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Referenced-credentials inventory (Option A)&lt;/strong&gt;: every backup&lt;br&gt;
+  emits an inventory event listing the names of credentials each&lt;br&gt;
+  config references + a presence probe against &lt;code&gt;storage/passwords&lt;/code&gt;.&lt;br&gt;
+  No cleartext ever leaves the password store. After a restore,&lt;br&gt;
+  admins know exactly which credentials to re-populate.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Backups subtab UI&lt;/strong&gt;: browse manifests, drill into per-backup&lt;br&gt;
+  detail (per-collection row counts + SHA-256s, verification&lt;br&gt;
+  result, credentials inventory with per-row &quot;fix in&quot; hint),&lt;br&gt;
+  trigger an out-of-schedule backup.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Operational config moved to &lt;code&gt;default/itmip_ai_workbench.conf&lt;/code&gt;&lt;/strong&gt;&lt;br&gt;
+  (NOT &lt;code&gt;app.conf&lt;/code&gt;). No &lt;code&gt;server.conf&lt;/code&gt; SHC replication shim required&lt;br&gt;
+  — bundle replication distributes the file identically to every&lt;br&gt;
+  SH member, keeping Splunk Cloud vetting friction lower.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Internal&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;New REST handler &lt;code&gt;bin/itmip_llm_kvstore_admin.py&lt;/code&gt; with&lt;br&gt;
+&lt;code&gt;GET /backups&lt;/code&gt;, &lt;code&gt;GET /backups/&amp;lt;id&amp;gt;&lt;/code&gt;, &lt;code&gt;POST /backups/now&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;New helper &lt;code&gt;bin/itmip_llm_kvstore_changelog.py::emit_change()&lt;/code&gt;&lt;br&gt;
+  wired into the tenancy / custom-tools / MCP / history handlers.&lt;/li&gt;
+&lt;li&gt;Browser-direct KVStore writes (templates / tool_assignments /&lt;br&gt;
+  tool_overrides) bypass the change log by design in this&lt;br&gt;
+  release — daily snapshot still captures resulting state.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2&gt;0.7.0 — 2026-05-19&lt;/h2&gt;
+&lt;p&gt;Three-tier credentials + Model Context Protocol integration.&lt;/p&gt;
+&lt;h3&gt;Added&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Three-tier credential model for custom tools.&lt;/strong&gt;&lt;br&gt;
+&lt;code&gt;credential_model: &quot;global&quot; | &quot;per_tenant&quot; | &quot;per_user&quot;&lt;/code&gt; plus&lt;br&gt;
+&lt;code&gt;credential_ref_template&lt;/code&gt; with &lt;code&gt;{org}/{bu}/{user}&lt;/code&gt; placeholders.&lt;br&gt;
+  Per-tenant tools without a stored credential are dropped from&lt;br&gt;
+  the LLM's catalogue (never visible-and-broken). Per-user is&lt;br&gt;
+  schema-only — runtime ships in v0.10.0.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MCP server integration&lt;/strong&gt; (spec 2025-11-25). Admins register&lt;br&gt;
+  upstream MCP servers in the Tools tab, test the connection,&lt;br&gt;
+  import a subset of tools, refresh to detect drift. Streamable&lt;br&gt;
+  HTTP transport with legacy SSE fallback. &lt;code&gt;stdio&lt;/code&gt; rejected by&lt;br&gt;
+  design.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Per-tool metadata overrides.&lt;/strong&gt; Admins can override the tags,&lt;br&gt;
+  category, and short description of any built-in tool from the&lt;br&gt;
+  Tools tab without code changes. Stored in&lt;br&gt;
+&lt;code&gt;itmip_tool_overrides&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Tag / category filter bars&lt;/strong&gt; on Ask, Templates, and Tools tabs.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Tool routing.&lt;/strong&gt; New &lt;code&gt;splunk_route_tools&lt;/code&gt; tool the LLM calls to&lt;br&gt;
+  discover the broader catalogue. By default the dispatcher&lt;br&gt;
+  exposes a minimal essentials set; the model expands its view on&lt;br&gt;
+  demand. Prevents token bloat on every question.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Outbound proxy + custom TLS CA on custom tools.&lt;/strong&gt; Three new&lt;br&gt;
+  optional &lt;code&gt;implementation&lt;/code&gt; fields. Shared outbound HTTP builder&lt;br&gt;
+  backs custom tools and MCP.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Investigation template&lt;/strong&gt; — multi-angle correlation using&lt;br&gt;
+  ES / ITSI / TrackMe tools together when those apps are&lt;br&gt;
+  installed.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Changed&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Customer-auth hook&lt;/strong&gt; gained a third &lt;code&gt;target_kind=&quot;mcp&quot;&lt;/code&gt;&lt;br&gt;
+  discriminator. Existing &lt;code&gt;&quot;llm&quot;&lt;/code&gt; / &lt;code&gt;&quot;tool&quot;&lt;/code&gt; hooks continue to&lt;br&gt;
+  work unchanged.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2&gt;0.5.0 — 2026-05-18 (internal release stream)&lt;/h2&gt;
+&lt;p&gt;Custom-visualisation awareness, AI Toolkit / SageMaker / ONNX&lt;br&gt;
+template polish, &quot;Created in Splunk&quot; drilldown panel. See&lt;br&gt;
+&lt;code&gt;docs/FUNCTIONALITY.md&lt;/code&gt;'s &quot;What's new in 0.5.0&quot; section for the&lt;br&gt;
+full breakdown.&lt;/p&gt;
+&lt;h3&gt;Added&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;splunk_list_visualizations&lt;/code&gt; and &lt;code&gt;splunk_get_visualization_docs&lt;/code&gt;&lt;br&gt;
+  tools so the LLM picks the right viz when third-party packs&lt;br&gt;
+  (Punchcard, Sankey, Status Indicator, …) are installed.&lt;/li&gt;
+&lt;li&gt;AI Toolkit SageMaker / ONNX templates ship as&lt;br&gt;
+&lt;code&gt;operational&lt;/code&gt; (no longer draft).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Changed&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;The &quot;Default&quot; router template auto-selects the best template&lt;br&gt;
+  for the question instead of asking the user to pick.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;hr&gt;
 &lt;h2&gt;0.4.0 — 2026-05-18&lt;/h2&gt;
 &lt;p&gt;The &quot;bring your own tools&quot; release. Admins can now define their own LLM&lt;br&gt;
@@ -611,10 +826,151 @@ Two audiences benefit immediately. Splunk users who know what they want but find
 
 Bring your own LLM. Eight providers supported: Anthropic, OpenAI, Azure OpenAI, Groq, Google Gemini, AWS Bedrock, Ollama (local, fully offline) and OpenRouter. Browser-direct for speed, or Splunk-server-side proxy mode so API keys never leave the search head. Streaming where the provider supports it. Bring your own corporate IAM — WebEAM.Next, Ping, Okta, AzureAD, internal SAML — via a customer-supplied Python hook that mints fresh auth headers per request.
 Multi-tenant by design. Organisations and Business Units scope templates, LLM configurations and tool availability. Disable alert creation for a BU that uses a separate alerting platform. Restrict an MLTK-heavy template to users who actually have the AI Toolkit installed. Run one Splunk environment for many teams or many customers without them seeing each other.
-See the cost. Tokens and Costs breaks spend down by App, User, Model, Provider, Organisation, Business Unit or LLM configuration — over time, side-by-side, with real per-model pricing. Free, Professional, Enterprise and MSP licence tiers, activated self-serve from the License tab, air-gap-friendly.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/3e30d482-5529-11f1-9b82-8ed807e781f5.png&quot;&gt;</description>
+See the cost. Tokens and Costs breaks spend down by App, User, Model, Provider, Organisation, Business Unit or LLM configuration — over time, side-by-side, with real per-model pricing. Free, Professional, Enterprise and MSP licence tiers, activated self-serve from the License tab, air-gap-friendly.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Eduard Lekanne</dc:creator>
-      <pubDate>Thu, 21 May 2026 15:26:47 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8747/#v0.6.0</guid>
+      <pubDate>Thu, 21 May 2026 19:54:06 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8747/#v0.9.3</guid>
+    </item>
+    <item>
+      <title>TrackMe - v2.3.24 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4621/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;TrackMe 2.3.24 — Stabilization: logging hygiene, restored DHM per-host blocklists, FLX self-heal &amp;amp; Outliers continuity&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Logging hygiene — schema-upgrade visibility restored&lt;/strong&gt;: a long-standing root-logger hijack (since 2.3.22) silently redirected the Health Tracker’s schema-upgrade logs into the wrong log file. Health Tracker activity is back where operators expect it, and six previously-unmapped custom-command log files now show up under their proper &lt;code&gt;trackme:custom_commands:*&lt;/code&gt; sourcetypes.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DHM per-host blocklists — restored in React UI&lt;/strong&gt;: the per-host index / sourcetype blocklist editor lost during the 2.3 React migration is back, with wildcard matching, suggestion-driven Multiselects, and shortcut buttons from the DHM Inspect modal.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;FLX entities — self-heal for pre-2.3.12 upgrades&lt;/strong&gt;: entities upgraded from \&amp;lt;2.3.12 carried stale top-level keys that broke the &lt;code&gt;splk_hosts_tracking&lt;/code&gt; and &lt;code&gt;cribl_edge_fleet_metrics&lt;/code&gt; templates. Auto-heals on the next tracker cycle — no migration needed.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;FLX Outliers continuity on inactive entities&lt;/strong&gt;: the inactive tracker now emits zero-value KPI metrics for inactive entities so the Outliers chart keeps a continuous timeline through inactivity windows.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;FLX thresholds UX&lt;/strong&gt;: shared Configuration Guide across the FLX / FQM / WLK threshold modals. The FLX add form gains a Variable schedule switch so a variable threshold can be created in one step.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DSM merged-mode (``:@all``) remediation now lands&lt;/strong&gt;: the sourcetype-cap safeguard no longer silently drops new &lt;code&gt;&amp;lt;index&amp;gt;:@all&lt;/code&gt; aggregates, so the documented &lt;em&gt;blocklist + re-cover with one aggregate&lt;/em&gt; remediation path works again.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Performance — initial threshold seeding&lt;/strong&gt;: FLX / FQM / WLK trackers’ first-run seeding is now batched into a single round-trip — typical 10-100× speed-up on tenants with hundreds of entities.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;AI Provider — discover models on Splunk Hosted&lt;/strong&gt;: the &lt;em&gt;Discover models&lt;/em&gt; button in &lt;em&gt;Manage AI Providers&lt;/em&gt; now correctly populates the model selector for the Splunk Hosted (SLIM API) provider.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Security &amp;amp; dependencies&lt;/strong&gt;: bumps for &lt;code&gt;ws&lt;/code&gt; and &lt;code&gt;webpack-dev-server&lt;/code&gt; (security advisories) plus a bundled Dependabot update.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TrackMe for Splunk provides visibility and operational excellence to monitor at scale your Splunk data sources availability and quality, and many more. 
+
+With a rich set of features and a powerful workflow, TrackMe empowers you day after day to get the most from your Splunk investments and deliver the five stars quality of service your users deserve.
+
+Discover TrackMe: https://trackme-solutions.com/discover
+
+Documentation: https://docs.trackme-solutions.com
+
+You can subscribe to our newsletter, and receive important communications from us.
+We will send notifications for instance when publishing new releases, so we can you let you know the cool and powerful things we&amp;#x27;ve been working on!
+
+https://trackme-solutions.com/subscribe/
+
+TrackMe has transitioned to a new licensing model.
+The Free Community Edition has been discontinued.
+
+What this means for you:
+
+- Existing licensed customers are not impacted. Your current license continues unchanged.
+- Community users are automatically upgraded to a Foundation Edition trial for 90 days, with full functionality enabled.
+
+After the trial period:
+
+- TrackMe remains active and fully usable for monitoring
+- The platform enters read-only mode
+
+You can continue to view data, dashboards, alerts, and history
+Creation of new tenants, trackers, or entities will be disabled
+
+To continue using TrackMe with full capabilities after the trial, a Foundation license is required.
+
+Buy Foundation Edition: https://trackme-solutions.com/get-foundation/
+
+See all plans: https://trackme-solutions.com/pricing/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/6011e57c-5543-11f1-ac28-fea6eaf8b9cf.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Trackme Limited</dc:creator>
+      <pubDate>Thu, 21 May 2026 19:42:11 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4621/#v2.3.24</guid>
+    </item>
+    <item>
+      <title>Zscaler Technical Add-On for Splunk - v4.1.5 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/3865/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;V4.1.5&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Refactored props and transforms configurations for ‘zscalernss-web’ and ‘zscalernss-tunnel’ sourcetypes to accommodate JSON and TSV log formats containing urls with additional query parameters that may cause inconsistent parsing.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;V4.1.4&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Updated sourcetype configurations for 'zscalernss-web' and 'zscalernss-tunnel' sourcetypes to accommodate Web and Tunnel logs in the &quot;Splunk CIM&quot; and JSON formats.&lt;/li&gt;
+  &lt;li&gt;Updated API URI content for audit logs fetched via the API to use the status ID captured in the response from the initialization call.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;V4.1.3&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Updated API hostnames to match current zscaler APIs&lt;/li&gt;
+  &lt;li&gt;Updated sourcetype definition for zscalernss-audit to fix timestamp recognition.&lt;/li&gt;
+  &lt;li&gt;Note, if zscalernss-audit data is not in UTC, update props.conf to have :&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;     &lt;/p&gt;
+&lt;p&gt;# $SPLUNK\_HOME/etc/apps/TA-Zscaler\_CIM/local/props.conf&lt;/p&gt;
+&lt;p&gt;     &lt;/p&gt;
+&lt;p&gt;        \[zscalernss-audit]&lt;/p&gt;
+&lt;p&gt;        TZ \= US/Eastern&lt;/p&gt;
+&lt;p&gt;        # replace with the appropriate Timezone identifier&lt;/p&gt;
+&lt;p&gt;     &lt;/p&gt;
+&lt;h2&gt;V4.1.2&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;For sourcetype &lt;strong&gt;zscalernss-admin&lt;/strong&gt; fixed spacing on category and interface fieldaliases, removed extra quote on interface fieldalias, Fixed time recognition to match proper format&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Zscaler Technical Add-On for Splunk takes events from Zscaler data sources and maps these to Splunk’s Common Information Model, this can be leveraged by Splunk Enterprise Security and and app leveraging the CIM Data Model, including the Zscaler App for Splunk
+
+This TA should be installed as per Splunk&amp;#x27;s guidelines on TA installation, e.g. http://docs.splunk.com/Documentation/ES/5.0.0/Install/InstallTechnologyAdd-ons
+
+Full App and TA Documentarian is available here --&amp;gt; https://help.zscaler.com/downloads/zscaler-technology-partners/operations/zscaler-and-splunk-deployment-guide/Zscaler-Splunk-Deployment-Guide-FINAL.pdf&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0cbcacc8-4f98-11f1-ac40-b2240978fa24.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Zscaler</dc:creator>
+      <pubDate>Thu, 21 May 2026 19:28:22 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/3865/#v4.1.5</guid>
+    </item>
+    <item>
+      <title>GreyNoise - v3.0.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4113/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
+  &lt;li&gt; Fixed connection failures on RHEL systems caused by IPv6 resolution issues&lt;/li&gt;
+  &lt;li&gt; Fixed issue with Live Investigation&lt;/li&gt;
+  &lt;li&gt; Updated GreyNoise SDK to v3.0.3&lt;/li&gt;
+  &lt;li&gt; Updated `gnquery` to include `excluded_fields` param&lt;/li&gt;
+  &lt;li&gt; Updated Feed Import functionality to use new `excluded_fields` param, includes updates to the default savedsearches&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Every device with a routable IPv4 IP address sees some amount of scan and attack traffic from Internet-wide scanners, attackers, bots, and worms. GreyNoise collects, analyzes, and filters this Internet background noise. Use the GreyNoise Splunk app to reduce false-positives and filter Internet-wide scanners from your logs.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/40e8d21c-5545-11f1-b7c5-064b06ad8256.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Andrew Morris</dc:creator>
+      <pubDate>Thu, 21 May 2026 19:06:56 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4113/#v3.0.2</guid>
+    </item>
+    <item>
+      <title>Akamai WAF - v2.1.4 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5987/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
+&lt;li&gt;Released app with Python 3.13 support&lt;/li&gt;
+&lt;li&gt;Adds optional ssl verify configuration&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The WAF API allows you to manage a common set of lists for use in various Akamai security products such as Kona Site Defender, Web App Protector, and Bot Manager&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8118da48-5541-11f1-bf38-6275a57c4fee.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
+      <pubDate>Thu, 21 May 2026 18:18:45 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5987/#v2.1.4</guid>
+    </item>
+    <item>
+      <title>Splunk Health Assistant Add-on - v2026.5.23 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4603/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Health Assistant Add-on lets you download and install new health check items as they become available for the monitoring console in Splunk Enterprise. The add-on is updated with new health check items independently of Splunk Enterprise releases, which lets you update and monitor your deployment with the latest health checks, without waiting for a Splunk Enterprise release or requesting help from Splunk Support. 
+
+You can download the the Splunk Health Assistant Add-on directly through the monitoring console UI. This installs the latest version of the add-on in $SPLUNK_HOME/etc/apps and automatically adds the new health checks to the Health Check page in the monitoring console. No restart is required. Or, you can manually download the add-on and install it using the app management page or command line if your splunk instance cannot access Splunkbase, for example, due to firewall restrictions.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Thu, 21 May 2026 18:04:15 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4603/#v2026.5.23</guid>
+    </item>
+    <item>
+      <title>ServiceDeskPlus - v1.0.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7381/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
+&lt;li&gt;Updated REQUEST_FIELDS in servicedeskplus_const.py to include the &quot;template&quot; field.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This App supports a variety of ticket management actions on ManageEngine ServiceDesk Plus&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c12a1870-553e-11f1-b69b-9a5d1d6a95e3.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
+      <pubDate>Thu, 21 May 2026 17:59:04 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7381/#v1.0.2</guid>
     </item>
     <item>
       <title>Forescout App for Splunk - v3.0.5 [Version Update] (Archived)</title>
@@ -2500,40 +2856,6 @@ APT Falconer is built for security teams that want to reduce context switching, 
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Picus Security Inc.</dc:creator>
       <pubDate>Tue, 12 May 2026 13:10:31 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6860/#v1.4.7</guid>
-    </item>
-    <item>
-      <title>Siemplify Add-on for Splunk - v4.2.12 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5010/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Improved the stability and resilience of alert delivery in distributed Splunk environments through optimized state tracking and enhanced error handling.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Siemplify Add-on for Splunk provides an ability to ingest alerts and events from Splunk to Siemplify.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/5dd0ba58-4dd8-11f1-8078-1e330138bf61.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Yuriy Landovskyy</dc:creator>
-      <pubDate>Tue, 12 May 2026 08:08:26 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5010/#v4.2.12</guid>
-    </item>
-    <item>
-      <title>Canary - v2.2.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4697/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h4&gt;Version 2.2.0 (May 11th, 2026)&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;  &amp;lt;ul&amp;gt;
-    &amp;lt;li&amp;gt;updating Chart module to chart.js 4.5.1.&amp;lt;/li&amp;gt;
-    &amp;lt;li&amp;gt;Canary now includes a beta version of our new Sankey module.&amp;lt;/li&amp;gt;
-    &amp;lt;li&amp;gt;Resolved a layer/menu alignment problem that most notably caused action menu drilldown on bar charts to render action menus partly offscreen when the bar being clicked was near the bottom or near the right edge of the viewport.&amp;lt;/li&amp;gt;
-    &amp;lt;li&amp;gt;Performance - Code changes so we could eliminate three of the REST calls we make to the Splunk API while rendering a page.&amp;lt;/li&amp;gt;
-    &amp;lt;li&amp;gt;Performance - Rendering speed improvements to the Table module.&amp;lt;/li&amp;gt;
-    &amp;lt;li&amp;gt;Implementation changes to reduce jittering/flickering elements during page loads, most notably with the TimePicker, Link and AppNav modules.&amp;lt;/li&amp;gt;
-    &amp;lt;li&amp;gt;Improvement to some error messaging if the view developer forgets their 'valueField' param on a dynamic form element module.&amp;lt;/li&amp;gt;
-    &amp;lt;li&amp;gt;Added the new key required by Splunk, &quot;python.required&quot; to commands.conf and restmap.conf.  No code change was required. This app has been compatible with Python 3.9 for a long time.&amp;lt;/li&amp;gt;
-    &amp;lt;li&amp;gt;Fixed a bug in the TopNav module where 2 of the menu arrow icons weren't the right color in dark mode.&amp;lt;/li&amp;gt;
-    &amp;lt;li&amp;gt;Added new documentation pages for the Chart and Button modules.&amp;lt;/li&amp;gt;
-  &amp;lt;/ul&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Canary is essentially an alternate User Interface framework for Splunk.  It implements its own extensible view creation slash dashboarding system that other apps can use.   
-  
-It is a descendant of the old Sideview Utils (defunct for years now) but whereas Sideview Utils ran on top of Splunk’s “Advanced XML” systems, Canary does not.
-For a great deal more information about Canary, see our website ( https://sideviewapps.com/documentation/canary )
-
-NOTE: This app runs in python3 without any problems and without any changes required.  Splunk&amp;#x27;s &amp;quot;Upgrade Readiness App&amp;quot; may erroneously state that our apps do not run in python3 but it is wrong and please contact us if you have any questions about this.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0503abe2-4db0-11f1-8c03-fe0e5b6dd648.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview LLC</dc:creator>
-      <pubDate>Tue, 12 May 2026 03:16:06 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4697/#v2.2.0</guid>
     </item>
   </channel>
 </rss>
