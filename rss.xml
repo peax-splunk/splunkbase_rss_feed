@@ -6,7 +6,35 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Wed, 20 May 2026 23:06:02 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 21 May 2026 02:31:57 +0000</lastBuildDate>
+    <item>
+      <title>Maps+ for Splunk - v4.6.7 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/3124/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;# Maps+ for Splunk — Release Notes v4.6.7&lt;/p&gt;
+&lt;p&gt;## Airgapped / on-premises deployment guide&lt;/p&gt;
+&lt;p&gt;Maps+ now ships with an end-to-end guide and reference Docker Compose stack for running in environments with no internet access — for customers behind air-gaps, in classified networks, or with strict egress controls.&lt;/p&gt;
+&lt;p&gt;The new guide ([`docs/airgapped-tile-server.md`](&lt;a href=&quot;https://github.com/sghaskell/maps-plus/blob/master/docs/airgapped-tile-server.md&quot;&gt;https://github.com/sghaskell/maps-plus/blob/master/docs/airgapped-tile-server.md&lt;/a&gt;)) covers:&lt;/p&gt;
+&lt;p&gt;- Three architecture options at different complexity points (`tileserver-gl` + vector tiles, pre-rendered raster pyramid, or full `renderd` / PostGIS stack)&lt;/p&gt;
+&lt;p&gt;- Disk-size estimates so you can plan capacity for your coverage area and zoom range&lt;/p&gt;
+&lt;p&gt;- Licensing considerations across OpenStreetMap (ODbL), OpenMapTiles (CC-BY), and OpenFreeMap (MIT)&lt;/p&gt;
+&lt;p&gt;- A one-command mirror script that downloads any of the four free OpenFreeMap styles (Liberty, Positron, Bright, Fiord) along with their fonts, sprites, and Natural Earth hillshade rasters, and produces an airgapped style JSON with all URLs pre-rewritten to your internal hostname&lt;/p&gt;
+&lt;p&gt;- Instructions for pointing Maps+ at your internal tile server via the **Map Tile Override** field (raster) or **MapLibre Style URL** field (vector)&lt;/p&gt;
+&lt;p&gt;A working Docker Compose example is in [`docs/examples/airgapped-tile-server/`](&lt;a href=&quot;https://github.com/sghaskell/maps-plus/tree/master/docs/examples/airgapped-tile-server&quot;&gt;https://github.com/sghaskell/maps-plus/tree/master/docs/examples/airgapped-tile-server&lt;/a&gt;). It has been verified end-to-end against a live Maps+ dashboard.&lt;/p&gt;
+&lt;p&gt;## Acceptance-test dashboard&lt;/p&gt;
+&lt;p&gt;Maps+ now ships an **Airgapped Tile Server Acceptance Test** dashboard (under **Examples** in the app sidebar). It renders six globally-distributed synthetic markers in both raster mode (Map Tile Override) and vector mode (MapLibre Style URL) against any tile server you configure via the dashboard's three input fields. A six-point sign-off checklist and a `tcpdump` verification command help confirm no requests leak to public CDNs.&lt;/p&gt;
+&lt;p&gt;The dashboard's tile-URL inputs default to empty and the map panels stay hidden until they're filled. This prevents the dashboard from accidentally loading Maps+'s built-in default basemaps (which would produce false-positive &quot;leak&quot; signals on first load) and tells operators exactly what to paste in via an inline Quick Start block.&lt;/p&gt;
+&lt;p&gt;Useful for airgapped-deployment verification, but works equally well as a quick functional smoke-test against any custom tile server.&lt;/p&gt;
+&lt;p&gt;## Bug Fixes&lt;/p&gt;
+&lt;p&gt;### Fixed: Visualization formatter help text rendered with raw HTML in two places&lt;/p&gt;
+&lt;p&gt;Two help captions in the visualization formatter — under **Heatmap → Color Gradient** and **Path Lines → Path Lines** — were rendering with raw, broken HTML because the help strings contained literal double-quote characters inside an HTML attribute. The captions are now properly escaped and render in full.&lt;/p&gt;
+&lt;p&gt;## Upgrade Notes&lt;/p&gt;
+&lt;p&gt;- Drop-in upgrade — no dashboard changes, SPL field changes, or formatter option changes are required.&lt;/p&gt;
+&lt;p&gt;- The airgapped tile-server guide and Docker Compose example are documentation only; no behavior changes for customers running Maps+ with the default public basemaps.&lt;/p&gt;
+&lt;p&gt;- Customers planning an airgap migration should follow the new guide and validate with the bundled acceptance-test dashboard before cutover.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The mapping equivalent of a Swiss Army knife for Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2b24ed46-54a8-11f1-ac28-fea6eaf8b9cf.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
+      <pubDate>Thu, 21 May 2026 00:01:50 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/3124/#v4.6.7</guid>
+    </item>
     <item>
       <title>Cisco DC Networking - v1.2.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7777/</link>
@@ -819,21 +847,6 @@ per-model pricing.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quo
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Eduard Lekanne</dc:creator>
       <pubDate>Wed, 20 May 2026 15:00:00 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8747/#v0.6.0</guid>
-    </item>
-    <item>
-      <title>Maps+ for Splunk - v4.6.6 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/3124/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;# Maps+ for Splunk — Release Notes v4.6.6&lt;/p&gt;
-&lt;p&gt;## Bug Fixes&lt;/p&gt;
-&lt;p&gt;### Fixed: Duplicate or stale markers after transforming searches finish&lt;/p&gt;
-&lt;p&gt;Maps+ could show duplicate pins, or keep a small number of stale pins, on dashboards whose SPL uses transforming commands such as `stats`. The completed Splunk search results were correct, but the map could continue showing markers created from an earlier preview result set while the search was still running.&lt;/p&gt;
-&lt;p&gt;This release updates Maps+ to redraw from Splunk's completed result set when the search finishes. Preview results can still appear while a search is running, but the final map state now matches the final SPL output.&lt;/p&gt;
-&lt;p&gt;## Upgrade Notes&lt;/p&gt;
-&lt;p&gt;- Drop-in upgrade — no dashboard changes, SPL field changes, or formatter option changes are required.&lt;/p&gt;
-&lt;p&gt;- Recommended for dashboards that use transforming searches and display clustered markers.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The mapping equivalent of a Swiss Army knife for Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9003288c-5457-11f1-b69b-9a5d1d6a95e3.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
-      <pubDate>Wed, 20 May 2026 14:25:16 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/3124/#v4.6.6</guid>
     </item>
     <item>
       <title>Threat Hunting Essentials - v1.2.45 [Version Update]</title>
