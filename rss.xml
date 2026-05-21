@@ -6,7 +6,90 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Thu, 21 May 2026 16:36:14 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 21 May 2026 18:53:45 +0000</lastBuildDate>
+    <item>
+      <title>TrackMe - v2.3.23 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4621/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;TrackMe 2.3.23 — Lookups monitoring, Backup &amp;amp; Restore v3 hardening, SLA correctness and DHM per-host extras&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Lookups monitoring (DSM)&lt;/strong&gt;: new &lt;code&gt;lookups&lt;/code&gt; search mode in the Hybrid Trackers wizard. CSV files and KVstore collections become first-class DSM entities, with delay-based alerting and volume tracking. Supersedes the previous Elastic-source approach. Requires the dedicated &lt;code&gt;TA-trackme-lookupmonitor&lt;/code&gt; add-on. See :ref:&lt;code&gt;admin_guide_lookups_monitoring&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Backup &amp;amp; Restore v3 — hardening at scale&lt;/strong&gt;: consolidated fixes after SHC field testing of 2.3.22. Stuck SHC-local restores, mis-classified imported archives, parallel schema-upgrade backup storms, disruptive UI delete on a per-archive basis, and host-identifier drift are all fixed; orphan sidecars and run manifests are cleaned up by the retention sweep; the download selector becomes a cascading &lt;strong&gt;run → archive&lt;/strong&gt; picker.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;SLA correctness — orange no longer counts as breach&lt;/strong&gt;: SLA compliance and &lt;code&gt;percent_sla&lt;/code&gt; are now computed against time &lt;strong&gt;not in critical (red)&lt;/strong&gt; state. Warning (orange) is treated as compliant. The same red-only semantics apply to the Tenant Home &lt;em&gt;“in alert”&lt;/em&gt; KPI tiles, so tile counts, click-filtered tables and &lt;em&gt;Open in Search&lt;/em&gt; now agree on a single definition.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DHM per-host extras&lt;/strong&gt;: new &lt;code&gt;breakby_extra_fields&lt;/code&gt; option to extend the per-host combo grain beyond &lt;code&gt;(index, sourcetype)&lt;/code&gt; with extra metadata fields (e.g. &lt;code&gt;source&lt;/code&gt;). Useful when a host produces multiple distinct event streams.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Variable / adaptive delay — honour existing slots&lt;/strong&gt;: auto-compute and adaptive delay now refresh thresholds &lt;strong&gt;inside&lt;/strong&gt; an entity’s existing slot layout instead of regenerating it. Adaptive delay can also heal variable-delay entities automatically.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Two new FLX use cases (Splunk infrastructure)&lt;/strong&gt;: &lt;code&gt;splk_bucket_health_per_index&lt;/code&gt; (per-index bucket health via &lt;code&gt;dbinspect&lt;/code&gt;) and &lt;code&gt;splk_parsing_issues_per_component&lt;/code&gt; (Splunk indexing-time parsing failures from the three pipeline components). Both ship with default dynamic thresholds and one-click drilldowns.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;UX polish&lt;/strong&gt;: AI Assistant empty state links directly to the in-app provider configuration; Blocklist views gain inline search and bulk actions; lag-monitoring modals show a banner when adaptive delay last refreshed the threshold; the AI Assistant icon now appears on the &lt;em&gt;Events format recognition&lt;/em&gt; child modals.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Various fixes &amp;amp; hygiene&lt;/strong&gt;: FQM wizard &lt;em&gt;Benchmark sampling mode&lt;/em&gt; honours the sampling ratio on LOCAL tenants; &lt;em&gt;Ops → Parsing issues&lt;/em&gt; and &lt;em&gt;Data Parsing Quality&lt;/em&gt; panels work again on newer Splunk versions; two high-volume INFO log lines demoted to DEBUG; forward-compat regex cleanup across the licensing handler, the OOTB regex library and the URL validator.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;See: &lt;a href=&quot;https://docs.trackme-solutions.com/latest/releasenotes.html#version-2-3-23-build-1779189227-19-05-2026&quot;&gt;https://docs.trackme-solutions.com/latest/releasenotes.html#version-2-3-23-build-1779189227-19-05-2026&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TrackMe for Splunk provides visibility and operational excellence to monitor at scale your Splunk data sources availability and quality, and many more. 
+
+With a rich set of features and a powerful workflow, TrackMe empowers you day after day to get the most from your Splunk investments and deliver the five stars quality of service your users deserve.
+
+Discover TrackMe: https://trackme-solutions.com/discover
+
+Documentation: https://docs.trackme-solutions.com
+
+You can subscribe to our newsletter, and receive important communications from us.
+We will send notifications for instance when publishing new releases, so we can you let you know the cool and powerful things we&amp;#x27;ve been working on!
+
+https://trackme-solutions.com/subscribe/
+
+TrackMe has transitioned to a new licensing model.
+The Free Community Edition has been discontinued.
+
+What this means for you:
+
+- Existing licensed customers are not impacted. Your current license continues unchanged.
+- Community users are automatically upgraded to a Foundation Edition trial for 90 days, with full functionality enabled.
+
+After the trial period:
+
+- TrackMe remains active and fully usable for monitoring
+- The platform enters read-only mode
+
+You can continue to view data, dashboards, alerts, and history
+Creation of new tenants, trackers, or entities will be disabled
+
+To continue using TrackMe with full capabilities after the trial, a Foundation license is required.
+
+Buy Foundation Edition: https://trackme-solutions.com/get-foundation/
+
+See all plans: https://trackme-solutions.com/pricing/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/6011e57c-5543-11f1-ac28-fea6eaf8b9cf.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Trackme Limited</dc:creator>
+      <pubDate>Thu, 21 May 2026 18:47:59 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4621/#v2.3.23</guid>
+    </item>
+    <item>
+      <title>Akamai WAF - v2.1.4 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5987/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
+&lt;li&gt;Released app with Python 3.13 support&lt;/li&gt;
+&lt;li&gt;Adds optional ssl verify configuration&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The WAF API allows you to manage a common set of lists for use in various Akamai security products such as Kona Site Defender, Web App Protector, and Bot Manager&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8118da48-5541-11f1-bf38-6275a57c4fee.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
+      <pubDate>Thu, 21 May 2026 18:18:45 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5987/#v2.1.4</guid>
+    </item>
+    <item>
+      <title>Splunk Health Assistant Add-on - v2026.5.23 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4603/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Health Assistant Add-on lets you download and install new health check items as they become available for the monitoring console in Splunk Enterprise. The add-on is updated with new health check items independently of Splunk Enterprise releases, which lets you update and monitor your deployment with the latest health checks, without waiting for a Splunk Enterprise release or requesting help from Splunk Support. 
+
+You can download the the Splunk Health Assistant Add-on directly through the monitoring console UI. This installs the latest version of the add-on in $SPLUNK_HOME/etc/apps and automatically adds the new health checks to the Health Check page in the monitoring console. No restart is required. Or, you can manually download the add-on and install it using the app management page or command line if your splunk instance cannot access Splunkbase, for example, due to firewall restrictions.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Thu, 21 May 2026 18:04:15 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4603/#v2026.5.23</guid>
+    </item>
+    <item>
+      <title>ServiceDeskPlus - v1.0.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7381/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
+&lt;li&gt;Updated REQUEST_FIELDS in servicedeskplus_const.py to include the &quot;template&quot; field.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This App supports a variety of ticket management actions on ManageEngine ServiceDesk Plus&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c12a1870-553e-11f1-b69b-9a5d1d6a95e3.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
+      <pubDate>Thu, 21 May 2026 17:59:04 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7381/#v1.0.2</guid>
+    </item>
     <item>
       <title>AI Workbench - v0.6.0 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/8747/</link>
@@ -1487,58 +1570,6 @@ This add-on provides the inputs and CIM-compatible knowledge to use with other S
       <guid>https://splunkbase.splunk.com/app/6211/#v2.5.0</guid>
     </item>
     <item>
-      <title>TrackMe - v2.3.23 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4621/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;TrackMe 2.3.23 — Lookups monitoring, Backup &amp;amp; Restore v3 hardening, SLA correctness and DHM per-host extras&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Lookups monitoring (DSM)&lt;/strong&gt;: new &lt;code&gt;lookups&lt;/code&gt; search mode in the Hybrid Trackers wizard. CSV files and KVstore collections become first-class DSM entities, with delay-based alerting and volume tracking. Supersedes the previous Elastic-source approach. Requires the dedicated &lt;code&gt;TA-trackme-lookupmonitor&lt;/code&gt; add-on. See :ref:&lt;code&gt;admin_guide_lookups_monitoring&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Backup &amp;amp; Restore v3 — hardening at scale&lt;/strong&gt;: consolidated fixes after SHC field testing of 2.3.22. Stuck SHC-local restores, mis-classified imported archives, parallel schema-upgrade backup storms, disruptive UI delete on a per-archive basis, and host-identifier drift are all fixed; orphan sidecars and run manifests are cleaned up by the retention sweep; the download selector becomes a cascading &lt;strong&gt;run → archive&lt;/strong&gt; picker.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;SLA correctness — orange no longer counts as breach&lt;/strong&gt;: SLA compliance and &lt;code&gt;percent_sla&lt;/code&gt; are now computed against time &lt;strong&gt;not in critical (red)&lt;/strong&gt; state. Warning (orange) is treated as compliant. The same red-only semantics apply to the Tenant Home &lt;em&gt;“in alert”&lt;/em&gt; KPI tiles, so tile counts, click-filtered tables and &lt;em&gt;Open in Search&lt;/em&gt; now agree on a single definition.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;DHM per-host extras&lt;/strong&gt;: new &lt;code&gt;breakby_extra_fields&lt;/code&gt; option to extend the per-host combo grain beyond &lt;code&gt;(index, sourcetype)&lt;/code&gt; with extra metadata fields (e.g. &lt;code&gt;source&lt;/code&gt;). Useful when a host produces multiple distinct event streams.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Variable / adaptive delay — honour existing slots&lt;/strong&gt;: auto-compute and adaptive delay now refresh thresholds &lt;strong&gt;inside&lt;/strong&gt; an entity’s existing slot layout instead of regenerating it. Adaptive delay can also heal variable-delay entities automatically.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Two new FLX use cases (Splunk infrastructure)&lt;/strong&gt;: &lt;code&gt;splk_bucket_health_per_index&lt;/code&gt; (per-index bucket health via &lt;code&gt;dbinspect&lt;/code&gt;) and &lt;code&gt;splk_parsing_issues_per_component&lt;/code&gt; (Splunk indexing-time parsing failures from the three pipeline components). Both ship with default dynamic thresholds and one-click drilldowns.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;UX polish&lt;/strong&gt;: AI Assistant empty state links directly to the in-app provider configuration; Blocklist views gain inline search and bulk actions; lag-monitoring modals show a banner when adaptive delay last refreshed the threshold; the AI Assistant icon now appears on the &lt;em&gt;Events format recognition&lt;/em&gt; child modals.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Various fixes &amp;amp; hygiene&lt;/strong&gt;: FQM wizard &lt;em&gt;Benchmark sampling mode&lt;/em&gt; honours the sampling ratio on LOCAL tenants; &lt;em&gt;Ops → Parsing issues&lt;/em&gt; and &lt;em&gt;Data Parsing Quality&lt;/em&gt; panels work again on newer Splunk versions; two high-volume INFO log lines demoted to DEBUG; forward-compat regex cleanup across the licensing handler, the OOTB regex library and the URL validator.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;See: &lt;a href=&quot;https://docs.trackme-solutions.com/latest/releasenotes.html#version-2-3-23-build-1779189227-19-05-2026&quot;&gt;https://docs.trackme-solutions.com/latest/releasenotes.html#version-2-3-23-build-1779189227-19-05-2026&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TrackMe for Splunk provides visibility and operational excellence to monitor at scale your Splunk data sources availability and quality, and many more. 
-
-With a rich set of features and a powerful workflow, TrackMe empowers you day after day to get the most from your Splunk investments and deliver the five stars quality of service your users deserve.
-
-Discover TrackMe: https://trackme-solutions.com/discover
-
-Documentation: https://docs.trackme-solutions.com
-
-You can subscribe to our newsletter, and receive important communications from us.
-We will send notifications for instance when publishing new releases, so we can you let you know the cool and powerful things we&amp;#x27;ve been working on!
-
-https://trackme-solutions.com/subscribe/
-
-TrackMe has transitioned to a new licensing model.
-The Free Community Edition has been discontinued.
-
-What this means for you:
-
-- Existing licensed customers are not impacted. Your current license continues unchanged.
-- Community users are automatically upgraded to a Foundation Edition trial for 90 days, with full functionality enabled.
-
-After the trial period:
-
-- TrackMe remains active and fully usable for monitoring
-- The platform enters read-only mode
-
-You can continue to view data, dashboards, alerts, and history
-Creation of new tenants, trackers, or entities will be disabled
-
-To continue using TrackMe with full capabilities after the trial, a Foundation license is required.
-
-Buy Foundation Edition: https://trackme-solutions.com/get-foundation/
-
-See all plans: https://trackme-solutions.com/pricing/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/651da42a-5377-11f1-bf38-6275a57c4fee.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Trackme Limited</dc:creator>
-      <pubDate>Tue, 19 May 2026 12:15:56 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4621/#v2.3.23</guid>
-    </item>
-    <item>
       <title>Mandiant Advantage App for Splunk - v1.7.2 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/6128/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
@@ -2357,22 +2388,6 @@ Start here when considering integrations with MQTT, OPC-UA, MODBUS and several o
       <guid>https://splunkbase.splunk.com/app/4975/#v2.8.15</guid>
     </item>
     <item>
-      <title>TA Entra ID Group Lookup - v1.0.3 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8739/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;External lookup for listing Microsoft Entra ID groups for a user via Microsoft Graph.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Microsoft Entra ID Group Lookup is a Splunk add-on that provides an external lookup for resolving a user’s Microsoft Entra ID group memberships through Microsoft Graph. Given a user principal name or Entra object ID, the lookup returns direct or transitive group memberships, including group ID, display name, mail address, group type, and security/mail-enabled flags.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Eric Jorgensen</dc:creator>
-      <pubDate>Wed, 13 May 2026 12:49:36 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8739/#v1.0.3</guid>
-    </item>
-    <item>
-      <title>GreenZone Splunk HealthCheck - v0.1.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8738/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Monitors CIM compliance and health metrics for remote Splunk Enterprise Security deployments via API-based queries and cached dashboard visualizations.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The GreenZone Splunk Healthcheck app provides health monitoring and CIM compliance assessment capabilities for Splunk Enterprise Security deployments. The app connects remotely to Enterprise Security search heads to query CIM tag coverage across sourcetypes and indexes, caching the results for dashboard-based visualization and analysis. It includes custom search commands that communicate with the Enterprise Security management API to retrieve data model coverage information and scheduled searches that maintain cached lookup tables of CIM tag compliance metrics. The app is designed for deployment on Monitoring Console instances or dedicated search heads that perform centralized health checks of remote Enterprise Security installations, enabling administrators to track data source normalization and CIM adoption across their environment.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d00c1a0c-4d62-11f1-9ad8-16a272266b15.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">GreenZone Tech</dc:creator>
-      <pubDate>Wed, 13 May 2026 12:48:59 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8738/#v0.1.0</guid>
-    </item>
-    <item>
       <title>CCX Add-on for Snowflake - v1.0.5 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8696/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;- This TA currently supports logtypes tagged under the following CIM datamodels: Change, and Authentication&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;CCX Security Operations has taken it upon ourselves to develop a CCX Add-on for Snowflake to provide CIM compliance coverage for logs ingested via HEC (JSON) and Generic S3 input leveraging Splunk Add-on for AWS.
@@ -2519,14 +2534,6 @@ NOTE: This app runs in python3 without any problems and without any changes requ
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview LLC</dc:creator>
       <pubDate>Tue, 12 May 2026 03:16:06 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/4697/#v2.2.0</guid>
-    </item>
-    <item>
-      <title>Slack App Alert Integration - v2.2.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5735/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;New package for Splunk Cloud compatibility.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Slack App Alert Integration TA is meant to integrate with Slack Apps, the new way of communicating with Slack in favor of the deprecated Incoming Webhooks integration. The Incoming Webhooks integration allows sending messages to multiple channels which is highly flexible. A Slack App has to join a channel before it can post messages in it, but using the correct configuration in combination with this TA, a Slack App can join a channel if needed and post messages to it with customized bot name and emoji icon.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9bd4c586-4d80-11f1-be15-e6c6d0389170.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Christiaan van Tienhoven</dc:creator>
-      <pubDate>Mon, 11 May 2026 21:38:28 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5735/#v2.2.0</guid>
     </item>
   </channel>
 </rss>
