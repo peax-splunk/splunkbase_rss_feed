@@ -6,7 +6,27 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Fri, 22 May 2026 02:33:44 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 22 May 2026 06:41:01 +0000</lastBuildDate>
+    <item>
+      <title>CyberArk Audit for Splunk (for Linux 64-bit) - v3.0.38 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6608/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Issue&lt;/p&gt;
+&lt;p&gt;On certain Splunk Cloud environments, KV store collections were not being created at startup, causing the plugin to fail with a &lt;code&gt;KeyError&lt;/code&gt; when reading device configurations and proxy settings.&lt;/p&gt;
+&lt;p&gt;Fix&lt;/p&gt;
+&lt;p&gt;Removed runtime KV store collection creation. Collections are now declared statically in &lt;code&gt;default/collections.conf&lt;/code&gt; and provisioned by Splunk automatically at app install time. This is the recommended approach for Splunk Cloud-compatible apps.&lt;/p&gt;
+&lt;p&gt;Requirements&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Splunk Enterprise or Splunk Cloud 10.2+&lt;/li&gt;
+&lt;li&gt;Python 3.13&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Impact&lt;/p&gt;
+&lt;p&gt;No data loss. Existing configurations are preserved on upgrade.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;This add-on will collect audit data from the CyberArk services.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;CyberArk Audit for Splunk is a Splunk Add-on that automatically collects and indexes audit logs from your CyberArk services. This integration enables security teams and compliance officers to monitor, investigate, and analyze activities across CyberArk services.
+
+Once configured, it runs autonomously- collecting events, maintaining state, and recovering gracefully from interruptions without manual intervention.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/4ad553a6-5593-11f1-918b-0ab8408a6f48.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">CyberArk Software Ltd</dc:creator>
+      <pubDate>Fri, 22 May 2026 04:14:45 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6608/#v3.0.38</guid>
+    </item>
     <item>
       <title>Cisco Talos Intelligence - v1.0.15 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7711/</link>
@@ -2801,53 +2821,6 @@ Address Your Critical Use Cases with Dataminr
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Dataminr Pulse</dc:creator>
       <pubDate>Tue, 12 May 2026 23:45:24 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6520/#v3.1.1</guid>
-    </item>
-    <item>
-      <title>APT Falconer - v3.2.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7469/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;### v3.2.2 Release Focus&lt;/p&gt;
-&lt;p&gt;APT Falconer v3.2 updates the ATT\&amp;amp;CK experience for MITRE ATT\&amp;amp;CK Enterprise v19 while preserving the signal-driven investigation workflows introduced in v3.1.&lt;/p&gt;
-&lt;p&gt;Release highlights:&lt;/p&gt;
-&lt;p&gt;- ATT\&amp;amp;CK Enterprise v19 technique lookup generated from the official MITRE STIX release&lt;/p&gt;
-&lt;p&gt;- New Resource Development, Stealth, and Defense Impairment dashboards&lt;/p&gt;
-&lt;p&gt;- Defense Evasion navigation replaced by the v19 Stealth and Defense Impairment tactics&lt;/p&gt;
-&lt;p&gt;- MITRE context pivots updated for Resource Development, Stealth, and Defense Impairment&lt;/p&gt;
-&lt;p&gt;- ATT\&amp;amp;CK v19 Detection Strategy and Analytic objects used to populate detection guidance in the documentation lookup&lt;/p&gt;
-&lt;p&gt;- Repeatable `tools/update_attack_v19.py` updater for future ATT\&amp;amp;CK data refreshes&lt;/p&gt;
-&lt;p&gt;- Signal-to-hunt workflows with accurate hunt signal counts&lt;/p&gt;
-&lt;p&gt;- Hunt-scoped Signal Story workbench with direct hunt browsing, filtering, paging, notes, disposition, and ES note handoff&lt;/p&gt;
-&lt;p&gt;- Enterprise Security adaptive response actions for seeding Falconer hunts with typed investigation context and sending Falconer notes back to ES&lt;/p&gt;
-&lt;p&gt;- Owner metadata for new hunts/signals created through right-click workflows, standalone Add Signal, and ES adaptive response actions&lt;/p&gt;
-&lt;p&gt;- Consolidated public navigation that favors canonical dashboard routes over implementation suffixes&lt;/p&gt;
-&lt;p&gt;- Setup support for all shipped index-scope macros used by the app&lt;/p&gt;
-&lt;p&gt;- Lightweight release-readiness validation for dashboard assets, nav links, REST handlers, alert action scripts, KVStore lookups, context actions, and setup macro coverage&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;APT Falconer is a production-ready Splunk threat hunting workbench with right-click pivots, managed signals and hunts, MITRE-aligned workflows, local intel authoring, and no-code context actions.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;APT Falconer is a production-ready, Splunk-native threat hunting workbench that helps analysts move from suspicious entities to structured investigations.
-
-Falconer connects entity pivots, managed signals, hunts, analyst notes, MITRE ATT&amp;amp;CK-aligned workflows, local intelligence, suppression review, and conclusions into one operational workflow.
-
-Analysts can right-click IPs, users, hosts, processes, domains, files, hashes, URLs, and other values to launch focused searches, open host or network workflows, enrich indicators, create signals, seed hunts, suppress known noise, review MITRE context, or open Story Workbench.
-
-Key capabilities include:
-
-• Falconer Home - a central analyst starting point for active signals, open hunts, recent conclusions, and suppression review.
-
-• Right-click investigation workflow - turn dashboard entities into immediate pivots for search, enrichment, signal creation, hunt workflows, MITRE views, and Story Workbench.
-
-• No-code Context Actions Manager - create and maintain right-click actions by defining labels, field mappings, target URLs, REST targets, regex matching, groups, ordering, and view-specific behavior from the UI.
-
-• Signals and hunts - convert interesting entities into managed signals, group related signals into hunts, and track investigation status over time.
-
-• Story Workbench - capture related signals, notes, confidence, disposition, summaries, supporting context, and final conclusions.
-
-• MITRE-aligned hunt workflows - use focused host, network, stealth, credential access, persistence, lateral movement, command and control, collection, exfiltration, heatmap, and coverage views to guide analyst reasoning.
-
-• Intel Detection Builder - stage, review, enrich, and publish locally managed intelligence into lookup-based detection workflows.
-
-• Production access control - use dedicated Falconer capabilities such as falconer_admin, falconer_context, falconer_signal, falconer_view_write, and falconer_allowlist_approve to separate analyst workflows from administrative control.
-
-APT Falconer is built for security teams that want to reduce context switching, preserve analyst reasoning, standardize investigation pivots, and operationalize threat hunting inside Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f467c09a-4e2a-11f1-ac40-b2240978fa24.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
-      <pubDate>Tue, 12 May 2026 21:45:21 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7469/#v3.2.2</guid>
     </item>
     <item>
       <title>Webex Add-on for Splunk - v1.4.1 [Version Update]</title>
