@@ -6,7 +6,116 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Mon, 25 May 2026 14:36:39 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 25 May 2026 17:00:13 +0000</lastBuildDate>
+    <item>
+      <title>AI Query Assistant for Splunk - v4.0.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8538/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h1&gt;Release Notes&lt;/h1&gt;
+&lt;h2&gt;v4.0.0 — Conversational AI Query Assistant&lt;/h2&gt;
+&lt;p&gt;Ask Splunk questions in plain language. v4 turns the app from a one-shot NL→SPL translator into a real conversational assistant.&lt;/p&gt;
+&lt;h2&gt;WHAT'S NEW&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Multi-turn conversations&lt;/strong&gt; — Every query belongs to a thread. Ask a follow-up that omits earlier context, such as “now show me just the top 3 by count”, and the agent remembers the index, time range, and filters from the previous turn. Switch between recent conversations from a dropdown, or start fresh with “+ New”.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Clarifying questions&lt;/strong&gt; — When your question is too vague to answer well, the agent flags it and asks for specifics instead of guessing. Answer inline and refine on the same thread.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Result narration (opt-in)&lt;/strong&gt; — The agent reads the rows returned by your SPL and writes a 2–3 sentence summary, highlights key findings with actual numbers, and suggests follow-up searches.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Supervisor pipeline (opt-in)&lt;/strong&gt; — Turn on a 4-subagent flow: planner → schema_resolver → spl_generator → auditor, for tougher queries. The schema_resolver grounds SPL in your actual indexes, sourcetypes, and fields, helping reduce hallucinated data source or field names. The auditor provides an independent safety review before the SPL runs.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Google Gemini provider&lt;/strong&gt; — First-class support for Gemini 1.5 / 2.0 / 2.5, including both Google AI Studio with an API key and Vertex AI with a project and service account, alongside the existing OpenAI-compatible and Anthropic adapters.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Smarter Query Templates&lt;/strong&gt; — Templates now carry an SPL pattern plus searchable tags. When your question matches a saved template, the agent adapts the template’s SPL to your current intent and tells you which template it used.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;SAFETY&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Pre-flight checks&lt;/strong&gt;: Dangerous keywords such as &lt;code&gt;delete&lt;/code&gt;, &lt;code&gt;drop&lt;/code&gt;, &lt;code&gt;purge&lt;/code&gt;, &lt;code&gt;truncate&lt;/code&gt;, &lt;code&gt;wipe&lt;/code&gt;, and &lt;code&gt;shutdown&lt;/code&gt; are blocked before any LLM call, avoiding API spend on requests that would not be allowed to run.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Post-flight checks&lt;/strong&gt;: Generated SPL is scanned for write operations such as &lt;code&gt;| outputlookup&lt;/code&gt;, &lt;code&gt;| delete&lt;/code&gt;, &lt;code&gt;| script&lt;/code&gt;, &lt;code&gt;| collect&lt;/code&gt;, and &lt;code&gt;| sendalert&lt;/code&gt;, as well as unbounded time ranges and sensitive-field references. Dangerous SPL is refused; risky-but-readable SPL is downgraded to a yellow &lt;code&gt;caution&lt;/code&gt; badge.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Independent LLM audit&lt;/strong&gt;: In supervisor mode, the app performs a second independent safety review before SPL ever reaches the executor.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;RELIABILITY&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Automatic retries on transient LLM errors&lt;/strong&gt; — Supports automatic retries for Cloudflare 429, brief 5xx errors, and gateway timeouts. A single network blip no longer fails the whole query.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Append-only conversation history&lt;/strong&gt; — Keeps long-lived threads responsive by storing conversation history in an append-only model.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Structured logs&lt;/strong&gt; — Every query records latency, token usage, subagent transitions, and guardrail decisions. These logs can be indexed in &lt;code&gt;_internal&lt;/code&gt; as &lt;code&gt;event=agentic.*&lt;/code&gt; for Splunk-on-Splunk dashboards.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;COMPATIBILITY&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Dual-path compatibility&lt;/strong&gt; — Runs on every Splunk 10.x version. Splunk 10.0 / 10.1 keep v3 behavior, so NL→SPL continues to work as before. Splunk 10.2+ on Python 3.13 automatically enables all new features with no additional configuration required.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;UPGRADE PROCEDURE&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Stop Splunk.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install the new app:&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;splunk install app AI_Query_Assistant_for_Splunk_v4.0.0.tar.gz -update 1&lt;/code&gt;&lt;/pre&gt;
+&lt;ol&gt;
+&lt;li&gt;On Splunk 10.2+, pull agentic dependencies:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;splunk cmd python3.13 $SPLUNK_HOME/etc/apps/AI_Query_Assistant_for_Splunk/bin/install_deps.py&lt;/code&gt;&lt;/pre&gt;
+&lt;ol&gt;
+&lt;li&gt;Run the one-time migration:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;splunk cmd python3.13 $SPLUNK_HOME/etc/apps/AI_Query_Assistant_for_Splunk/bin/migrate_v3_to_v4.py&lt;/code&gt;&lt;/pre&gt;
+&lt;ol&gt;
+&lt;li&gt;Start Splunk.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Existing AI Provider records, query history, and license activation carry forward unchanged.&lt;/p&gt;
+&lt;h2&gt;BUG FIXES vs v3.0.7&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Risk-level audit verdict is now reliably attached to the response.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Anthropic-compatible providers whose base URL omits &lt;code&gt;/v1&lt;/code&gt;, such as Volcengine Ark, now authenticate correctly instead of returning 401.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Conversation history records are written correctly even when message content contains LLM-specific binary block types.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Dangerous-keyword detection now works through the new async pipeline.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;SSL trust store fallback now works when &lt;code&gt;SSL_CERT_FILE&lt;/code&gt; points to a missing path.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;LICENSE&lt;/h2&gt;
+&lt;p&gt;Online activation against:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;https://license.reallysec.com&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Existing v3 license keys remain valid for v4.&lt;/p&gt;
+&lt;p&gt;Trial license: contact &lt;code&gt;support@reallysec.com&lt;/code&gt; with your Server GUID and company email.&lt;/p&gt;
+&lt;p&gt;Issues / feedback: &lt;code&gt;support@reallysec.com&lt;/code&gt;&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Use natural language to generate SPL queries in Splunk with support for multiple AI providers, query history, templates, and enterprise security guardrails.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;AI Query Assistant for Splunk is an AI-powered app that enables users to query and analyze Splunk data using natural language. It helps convert plain-language questions into structured SPL searches, reducing the learning curve for SPL and improving analyst efficiency.
+
+The app is designed for security operations, IT operations, and data exploration scenarios where users need faster and more intuitive access to Splunk data. It supports multiple AI providers, including OpenAI-compatible APIs and Anthropic Claude, and provides configurable safeguards to help reduce the risk of unsafe or invalid query generation.
+
+Key capabilities include natural language to SPL conversion, AI provider management, query history, reusable query templates, and controlled enterprise usage with license-based activation. This app is intended for organizations that want to improve Splunk usability while maintaining operational control and security.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/98037804-5856-11f1-90a6-661a73dd9221.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">sevion xia</dc:creator>
+      <pubDate>Mon, 25 May 2026 16:36:03 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8538/#v4.0.0</guid>
+    </item>
     <item>
       <title>Threat Hunting Essentials - v1.2.50 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7633/</link>
@@ -209,29 +318,6 @@ This add-on is available for Linux (64-bit), Windows (64-bit) and Mac. Make sure
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Fri, 22 May 2026 17:34:34 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6785/#v4.3.2</guid>
-    </item>
-    <item>
-      <title>Splunk Operational Technology Intelligence (OTI) - v4.13.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5180/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h5&gt;What's new:&lt;/h5&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Operational Telemetry data model for normalizing telemetry across Manufacturing, Facilities/BMS, Smart Cities, Events, and Critical Infrastructure into a single, queryable schema. &lt;/li&gt;
-  &lt;li&gt;Security fix for Spacebridge communications. &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h5&gt;Known issues:&lt;/h5&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;p&gt;Some capabilities are missing for the deployer role in Splunk Cloud environments&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;h5&gt;&lt;p&gt;&lt;/p&gt;&lt;/h5&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk OTI helps you manage Edge Hub and other edge devices while jumpstarting your OT data journey with guided onboarding, dashboards, and analytics across industrial and smart environments.
-
-NEW! - The app simplifies edge device onboarding with guided setup, provides more prebuilt dashboards and introduces OT data models, enabling rapid time-to-value for a wide variety of use cases—from asset monitoring and anomaly detection to environmental control and energy optimization.
-
-Start here when considering integrations with MQTT, OPC-UA, MODBUS and several other IoT/OT protocols with Splunk!&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/6feeaeec-55fe-11f1-a8b6-52d81f84286d.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Fri, 22 May 2026 17:05:43 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5180/#v4.13.2</guid>
     </item>
     <item>
       <title>Orca Security Add-On for Splunk - v5.0.3 [Version Update]</title>
