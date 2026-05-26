@@ -6,7 +6,86 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Tue, 26 May 2026 21:42:43 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 26 May 2026 23:02:19 +0000</lastBuildDate>
+    <item>
+      <title>CrowdStrike Scheduled Search Technical Add-on - v3.1.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6902/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;It is recommended that new versions of the TA be tested prior to being deployed into a production environment.&lt;/h2&gt;
+&lt;h3&gt;TA\_crowdstrike\_scheduled\_search v3.1.2 Release Notes&lt;/h3&gt;
+&lt;h3&gt;Bug Fixes&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Fixed a potential data loss issue where the add-on could advance its collection checkpoint before confirming data was successfully delivered to Splunk&lt;/li&gt;
+  &lt;li&gt;Fixed an issue where the add-on could silently fail to authenticate without reporting detailed error information&lt;/li&gt;
+  &lt;li&gt;Removed unsupported SOCKS proxy types from the configuration UI&lt;/li&gt;
+  &lt;li&gt;Fixed an issue where large scheduled search results could cause collection to stop unexpectedly&lt;/li&gt;
+  &lt;li&gt;Fixed an issue where CSV-format report timestamps could fail to parse correctly, causing Splunk indexing warnings&lt;/li&gt;
+  &lt;li&gt;Inputs now detect authentication failures and include specific error details with troubleshooting guidance&lt;/li&gt;
+  &lt;li&gt;Fixed an issue where unexpected data in CSV-format reports could cause collection errors&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Improvements&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Attempts to automatically recover from temporary API errors, rate limiting, and expired authentication tokens instead of stopping collection&lt;/li&gt;
+  &lt;li&gt;Inputs now recover automatically after errors instead of requiring manual restart&lt;/li&gt;
+  &lt;li&gt;Improved error messages with clear guidance when checkpoint data becomes corrupted, preventing unnecessary re-collection of historical data&lt;/li&gt;
+  &lt;li&gt;Added checkpoint health tracking to improve visibility into collection progress&lt;/li&gt;
+  &lt;li&gt;Improved log messages with TA version, API version, redacted credentials, and collection progress for faster troubleshooting&lt;/li&gt;
+  &lt;li&gt;Updated dashboard queries and log search patterns for consistency with other CrowdStrike add-ons&lt;/li&gt;
+  &lt;li&gt;Updated bundled dependencies including API and platform libraries to their latest supported versions&lt;/li&gt;
+  &lt;li&gt;Large scheduled search results are now processed in batches to prevent delivery failures on high-volume collections&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The CrowdStrike Falcon Platform provides customers with extensive visibility into the configuration of and events taking place on endpoints and workloads. While triggered detections are an important part of endpoint security, CrowdStrike also provides the ability to search the raw event data. Scheduled searches can be used to automate the recurrence of those searches. This technical add-on allows CrowdStrike Falcon customers to retrieve successful scheduled searched from the Falcon platform via public APIs and have the events indexed into Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/75f638fc-5953-11f1-80d2-2694cee47fd7.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">CrowdStrike</dc:creator>
+      <pubDate>Tue, 26 May 2026 22:46:58 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6902/#v3.1.2</guid>
+    </item>
+    <item>
+      <title>CrowdStrike Falcon Spotlight Vulnerability Data - v3.5.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6167/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;It is recommended that new versions of the TA be tested prior to being deployed into a production environment.&lt;/h2&gt;
+&lt;h3&gt;TA\_crowdstrike\_falcon\_spotlight\_data v3.5.1 Release Notes&lt;/h3&gt;
+&lt;h3&gt;New Features&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Increased compatiblity with Splunk Enterprise Security — vulnerability data should now populate the Vulnerabilities data model automatically&lt;/li&gt;
+  &lt;li&gt;Added an option to remove pagination metadata from events to help reduce storage costs&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Bug Fixes&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Fixed a potential data loss issue where the first page of vulnerability data could set an incorrect checkpoint, causing some records to be skipped on subsequent collections&lt;/li&gt;
+  &lt;li&gt;Fixed an issue where the add-on could stop unexpectedly when the API is unreachable during collection&lt;/li&gt;
+  &lt;li&gt;Fixed an issue where selecting SOCKS proxy types in the configuration UI caused the add-on to stop working&lt;/li&gt;
+  &lt;li&gt;Fixed filter selections (Status, CVE Severity, ExPRT Rating) that could produce invalid API queries when multiple values were chosen&lt;/li&gt;
+  &lt;li&gt;Fixed an issue where the facet parameter was not sent correctly to the API, potentially returning incomplete vulnerability details&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Improvements&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Attempts to automatically recover from temporary API errors and rate limiting instead of stopping collection&lt;/li&gt;
+  &lt;li&gt;Inputs now detect network failures and expired credentials with clear error messages instead of failing silently&lt;/li&gt;
+  &lt;li&gt;Added checkpoint health checks that provide clear guidance if corruption is detected, preventing unnecessary re-collection of data&lt;/li&gt;
+  &lt;li&gt;Improved collection performance by removing unnecessary processing overhead during pagination&lt;/li&gt;
+  &lt;li&gt;Improved log messages with version info, redacted credentials, and collection progress for faster troubleshooting&lt;/li&gt;
+  &lt;li&gt;Updated bundled dependencies including API and platform libraries to their latest supported versions&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This add-on enables CrowdStrike customers to retrieve vulnerability data from their Falcon Spotlight module. In addition to the the basic vulnerability data the inputs can be configured to also retrieve additional details about the CVE&amp;#x27;s, remediations and hosts with the observed vulnerability.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/5a4c1656-5478-11f1-ac28-fea6eaf8b9cf.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">CrowdStrike</dc:creator>
+      <pubDate>Tue, 26 May 2026 22:25:22 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6167/#v3.5.1</guid>
+    </item>
+    <item>
+      <title>ReversingLabs TitaniumScale Dashboard for Splunk - v1.0.5 [Version Update] (Archived)</title>
+      <link>https://splunkbase.splunk.com/app/4318/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Update to v1.0.5 for compatibility.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The ReversingLabs TitaniumScale Dashboard for Splunk is a tool that provides an advanced visual breakdown of potentially harmful files analyzed by the ReversingLabs TitaniumScale security solution.
+
+The visualization application is meant to be used only with the ReversingLabs TitaniumScale product.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ac223708-5950-11f1-ad1c-9e402cd45cf8.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">ReversingLabs Corporation</dc:creator>
+      <pubDate>Tue, 26 May 2026 22:24:02 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4318/#v1.0.5</guid>
+    </item>
     <item>
       <title>Spur Enrichment for Splunk - v1.1.2 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7126/</link>
@@ -2185,16 +2264,6 @@ or visit our page : https://www.valantic.com/en/cx/services/cx-monitoring/&lt;/p
       <guid>https://splunkbase.splunk.com/app/7315/#v0.0.5</guid>
     </item>
     <item>
-      <title>HCP Terraform for Splunk - v0.0.15 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5141/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;HashiCorp HCP Terraform customers can integrate this Splunk® app to understand HCP Terraform operations. Audit logs from HCP Terraform are regularly pulled into the Splunk app, immediately giving visibility into key platform events within the pre-defined dashboards. Identify the most active policies, significant changes in resource operations, or filter actions by specific users within your organization. The app can be used with both Splunk Cloud and Splunk Enterprise.
-
-Note: This app is currently not supported on a clustered deployment of Splunk Enterprise.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b91e074c-4f15-11f1-8078-1e330138bf61.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">HashiCorp 󠇐</dc:creator>
-      <pubDate>Thu, 21 May 2026 03:01:14 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5141/#v0.0.15</guid>
-    </item>
-    <item>
       <title>Monitoring OpenShift - Metrics and Log Forwarding - v26.4.2 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/3836/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;a href=&quot;https://www.outcoldsolutions.com/docs/monitoring-openshift/release-history/&quot;&gt;https://www.outcoldsolutions.com/docs/monitoring-openshift/release-history/&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Focus on your applications, we will take care of infrastructure monitoring and logs forwarding.
@@ -3396,48 +3465,6 @@ Once you connect the Add-on for Splunk, alerts will be shared with Splunk.&lt;/p
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Atlassian Inc</dc:creator>
       <pubDate>Thu, 14 May 2026 06:44:07 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6961/#v2.2.2</guid>
-    </item>
-    <item>
-      <title>CCX Extensions for Netskope - v1.0.6 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7420/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Added additional support for sourcetype netskope:web_transactions:nls and CIM compliance for Web proxy.&amp;#x20;&lt;/p&gt;
-&lt;p&gt;Requirements:&lt;br&gt;
-- This Add-on is intended to be installed following the installation guidance.&lt;br&gt;
-- Install Add-on Netskope Add-on For Splunk (&lt;a href=&quot;https://splunkbase.splunk.com/app/3808/&quot;&gt;https://splunkbase.splunk.com/app/3808/&lt;/a&gt;) version 4.2.0 or higher&lt;/p&gt;
-&lt;p&gt;Known issues:&lt;br&gt;
-- The CCX Add-on for Netskope Extensions if installed along deprecated Netskope Add-on For Splunk (&lt;a href=&quot;https://splunkbase.splunk.com/app/3808/&quot;&gt;https://splunkbase.splunk.com/app/3808/&lt;/a&gt;) may experience lower accuracy on CIM fields and tagging match, however, no compatibility issues detected.&lt;br&gt;
-- The macro &quot;netskope_idx&quot; if not updated no eventtype or tagging will be populated.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;About Us:
-CyberCX is Australia’s greatest force of cyber security experts. Our highly skilled professional services team operates a 24x7 on-shore security operations centre (SOC) servicing corporate and public sector organisations across Australia and New Zealand, specialising in Security Operations services leveraging Splunk.
-
-Description:
-The CCX Add-on for Netskope Extensions looks to provide additional field extraction and CIM compliance for Netskope log sources captured via the Add-on Netskope Add-on For Splunk.
-
-This Technical Add-on does not replace the public Splunk Add-on for Netskope (https://splunkbase.splunk.com/app/3808/) but works as an additonal extension to be deployed on Search Heads (only).
-
-Currently this add-on provides additional extraction and CIM compliance for sourcetypes:
-
-- netskope:alert
-- netskope:application
-- netskope:connection
-- netskope:incident
-- netskope:audit
-- netskope:cloud_exchange
-
-Fully compatible with Splunk Enterprise and Splunk Cloud, built by an Ops team for Ops teams.
-
-Features:
-- This TA currently supports logtypes tagged under the following CIM datamodels: Alerts, Authentication, Change, Inventory, Data Loss Prevention (DLP), Malware, Network Traffic, Network Session, and Web.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/64aa26d8-4f28-11f1-ac40-b2240978fa24.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Henrique Linsmeyer</dc:creator>
-      <pubDate>Thu, 14 May 2026 00:05:51 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7420/#v1.0.6</guid>
-    </item>
-    <item>
-      <title>Canadian Centre for Cyber Security - v3.1.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8318/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Fix python Splunk Cloud requirements&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Automated CCCS alert monitoring with MITRE ATT&amp;amp;CK enrichment. Features 185+ technique mapping, threat scoring and pre-configured dashboards for Canadian cybersecurity intelligence.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Monitor Canadian Centre for Cyber Security (CCCS) alerts with automated MITRE ATT&amp;amp;CK threat intelligence enrichment. This application collects alerts every 15 minutes, maps 185+ MITRE techniques, calculates threat scores (0-100). Perfect for SOC teams and threat intelligence analysts monitoring Canadian cybersecurity threats.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/771817e8-4f06-11f1-b503-b2717b0d062d.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">alexandre argeris</dc:creator>
-      <pubDate>Wed, 13 May 2026 20:06:45 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8318/#v3.1.1</guid>
     </item>
   </channel>
 </rss>
