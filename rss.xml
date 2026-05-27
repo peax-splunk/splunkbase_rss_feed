@@ -6,7 +6,133 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Wed, 27 May 2026 20:02:16 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 27 May 2026 22:25:41 +0000</lastBuildDate>
+    <item>
+      <title>Synack App for Splunk - v3.1.8 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4288/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Bug fixes and CI version consistency check&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Synack helps organizations with the full spectrum of their security testing needs. We harness the world’s most exclusive team of security researchers and give them access to a powerful platform for trusted security testing. That testing yields vulnerabilities, data to measure attack surfaces, and provides documentation to aid compliance.
+
+The Synack App for Splunk provides an easy way to bring live, up-to-date Synack data into your Splunk environment. By putting IT, Security, and Synack-discovered vulnerability data in one place, richer reporting, analytics, custom dashboards and queries are available to reduce the effort and time to gain insights. It comes with an out-of-the-box dashboard, or users can customize their use of Synack data.  
+
+Common use cases include:
+• Security Operations - Integration of vulnerability data into the Security Operations Center (SOC) and related workflows enables security teams to get more efficient and streamline your security stack
+• Threat Hunting - Find evidence of active or past threats using verified, Synack data about true exploitable vulnerabilities
+• Incident Management - Efficiently bring incidents to conclusion using all available data sources
+- Web logs: Correlate exploitable vulnerabilities &amp;amp; locations with web logs to determine if there are other locations where this vulnerability can be exploited
+- IPS/IDS: Correlate exploitable vulnerabilities &amp;amp; locations with network traffic to define new rules for detection and prevention
+- Scanners: Correlate exploitable vulnerabilities with scanner data for better scanner efficacy
+- Threat Intel: Correlate exploitable vulnerabilities &amp;amp; locations with Threat intel to build out predictive patterns
+• Custom Reporting &amp;amp; Analytics for the above scenarios, or other workflows in your security organization
+
+Please login to your Synack Client Portal for configuration options or email Synack support to get started. Further documentation is also available in the Synack Client Portal.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/243411e6-5a17-11f1-8f2a-9248555c68a2.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Synack</dc:creator>
+      <pubDate>Wed, 27 May 2026 22:00:29 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4288/#v3.1.8</guid>
+    </item>
+    <item>
+      <title>MCP Watch - v1.0.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8765/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;v1.0.0 — Initial release&lt;/p&gt;
+&lt;p&gt;&amp;#x20; First public release of MCP-Watch: zero-dependency visibility and governance&lt;/p&gt;
+&lt;p&gt;&amp;#x20; for AI agents (MCP servers) operating against Splunk, using only the built-in&lt;/p&gt;
+&lt;p&gt;&amp;#x20; _audit and _internal indexes.&lt;/p&gt;
+&lt;p&gt;&amp;#x20; Highlights:&lt;/p&gt;
+&lt;p&gt;&amp;#x20; - Four dashboards: MCP Overview, Activity Timeline, Quality &amp;amp; Hygiene, and&lt;/p&gt;
+&lt;p&gt;&amp;#x20;   MCP Access &amp;amp; Tools (per-user × per-tool access matrix).&lt;/p&gt;
+&lt;p&gt;&amp;#x20; - Weighted risk scoring and anti-pattern detection (wildcard index,&lt;/p&gt;
+&lt;p&gt;&amp;#x20;   dbinspect index\=*, missing/overly-wide time bounds, len(_raw), off-hours&lt;/p&gt;
+&lt;p&gt;&amp;#x20;   and high-volume pulls).&lt;/p&gt;
+&lt;p&gt;&amp;#x20; - Four scheduled reports + two alerts (wildcard index, overly-wide time range),&lt;/p&gt;
+&lt;p&gt;&amp;#x20;   plus a manual anti-pattern self-test.&lt;/p&gt;
+&lt;p&gt;&amp;#x20; - No restart required; no telemetry; reads audit data in place.&lt;/p&gt;
+&lt;p&gt;&amp;#x20; Configuration: edit lookups/mcp_users.csv with the Splunk username(s) your&lt;/p&gt;
+&lt;p&gt;&amp;#x20; MCP server authenticates as. Optional tool-access governance via&lt;/p&gt;
+&lt;p&gt;&amp;#x20; lookups/mcp_tool_denied.csv.&lt;/p&gt;
+&lt;p&gt;&amp;#x20; Note: assumes the official Splunk MCP Server for full functionality.&lt;/p&gt;
+&lt;p&gt;&amp;#x20; Built with AI assistance; provided as-is.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Tracks AI agent activity in Splunk by analyzing _audit and _internal logs to surface MCP server queries, flag anti-patterns, and report REST endpoint usage.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;MCP-Watch provides visibility and governance for AI agents operating against Splunk through the Model Context Protocol. The app surfaces every SPL query executed by MCP servers, flags anti-patterns such as wildcard index searches and overly wide time ranges, and reports on REST endpoint usage. It reads exclusively from Splunk&amp;#x27;s built-in _audit and _internal indexes, requiring no additional data ingestion or dependencies. Administrators configure a lookup table with the Splunk usernames their MCP servers authenticate as, and the app then tracks query volume, identifies quality issues, and enables per-user tool access governance. Four dashboards present MCP activity across operational and compliance dimensions, while scheduled searches and alerts provide ongoing monitoring of agent behavior.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f72c58f6-5a12-11f1-b55c-0eaea943b5aa.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Alper Keske</dc:creator>
+      <pubDate>Wed, 27 May 2026 21:49:19 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8765/#v1.0.0</guid>
+    </item>
+    <item>
+      <title>Microsoft Graph Email Alert Action for Splunk - v1.0.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8774/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Initial Version&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Send Splunk alert emails through Microsoft Graph using Microsoft Entra ID app-only authentication and Splunk password storage.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The add-on uses Microsoft Entra ID app-only authentication, stores credentials in Splunk password storage, and supports common alert fields such as To, CC, Subject, and Message. Alert messages can include Splunk tokens such as $name$, $results_link$, and result fields.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e4c24800-58b0-11f1-8ccf-3e8d4fe257ec.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Christian Rodrigo Meza Ortiz</dc:creator>
+      <pubDate>Wed, 27 May 2026 21:46:57 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8774/#v1.0.0</guid>
+    </item>
+    <item>
+      <title>VIAVI Observer Apex App - v1.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8514/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h1&gt;VIAVI Observer Apex App for Splunk – Version 1.0.1 Release Notes&lt;/h1&gt;
+&lt;p&gt;Welcome to &lt;strong&gt;a release&lt;/strong&gt; of the &lt;strong&gt;VIAVI Observer Apex App for Splunk&lt;/strong&gt; (v 1.0.1). This document provides a complete overview of the capabilities, integration points, and operational guidance you need to start ingesting VIAVI Observer Threat Forensics (OTF) and Network Performance data into Splunk.&lt;/p&gt;
+&lt;h2&gt;Information&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Version Number: 1.0.1&lt;/li&gt;
+  &lt;li&gt;Company: &lt;a href=&quot;https://www.viavisolutions.com/en-us/enterprise&quot;&gt;VIAVI Solutions&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Application Name: VIAVI Observer Apex App for Splunk&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Release Information&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Update requirements specific to splunk cloud&lt;/strong&gt; &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Previous Release Information&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Secure Event Ingestion&lt;/strong&gt;: Dedicated REST endpoint that receives OTF events over TLS‑encrypted channels.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;OCSF Normalization:&lt;/strong&gt; All incoming data is mapped to the &lt;strong&gt;Open Cybersecurity Schema Framework (OCSF)&lt;/strong&gt; before indexing.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Rich Metadata Export&lt;/strong&gt;: Every alert carries the full suite of metadata (packet‑level details, flow records, TLS fingerprints, device identifiers, etc.) for both security and network performance monitoring.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Pivot to Observer Apex&lt;/strong&gt;: Each alert contains a URL that allows a pivot back to the information dashboard, and details generating the alert for further investigatons.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Pre‑built Splunk Dashboards&lt;/strong&gt;: Ready‑to‑import example dashboards for DNS Errors, User Experience Score (EUE), Interface Utilization and TLS Certificate health.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Automatic Alerting&lt;/strong&gt;: Out‑of‑the‑box alert rules map OTF security events&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;API‑First Integration&lt;/strong&gt;: Leverages the Rich VIAVI Observer API for:&lt;/li&gt;
+  &lt;li&gt;Pulling additional metadata on demand for custom dashboard&lt;/li&gt;
+  &lt;li&gt;Automating mitigation workflow orchestration with Splunk SOAR platform.&lt;/li&gt;
+  &lt;li&gt;Use API and Splunk SOAR to pull all information, even to the packet data from Observer Apex platform.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Bring VIAVI Observer Apex alerts directly into your Splunk environment, enabling real-time visibility into critical network and security issues.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;VIAVI Observer Apex App for Splunk: Turning Network Data into NetSecOps Actionable Insight.
+
+Transform your network and security monitoring data into actionable insights with the Observer Apex App for Splunk. This powerful integration brings Viavi Observer Apex alerts directly into your Splunk environment, enabling real-time visibility into critical network or security issues.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ce858be2-5a0e-11f1-b41c-6692b8f70154.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">VIAVI Solutions</dc:creator>
+      <pubDate>Wed, 27 May 2026 21:24:04 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8514/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>APT Falconer - v3.2.3 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7469/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Corrected missing expose: within restmap.conf for ES ARA. &lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;APT Falconer is a production-ready Splunk threat hunting workbench with right-click pivots, managed signals and hunts, MITRE-aligned workflows, local intel authoring, and no-code context actions.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;APT Falconer is a production-ready, Splunk-native threat hunting workbench that helps analysts move from suspicious entities to structured investigations.
+
+Falconer connects entity pivots, managed signals, hunts, analyst notes, MITRE ATT&amp;amp;CK-aligned workflows, local intelligence, suppression review, and conclusions into one operational workflow.
+
+Analysts can right-click IPs, users, hosts, processes, domains, files, hashes, URLs, and other values to launch focused searches, open host or network workflows, enrich indicators, create signals, seed hunts, suppress known noise, review MITRE context, or open Story Workbench.
+
+Key capabilities include:
+
+• Falconer Home - a central analyst starting point for active signals, open hunts, recent conclusions, and suppression review.
+
+• Right-click investigation workflow - turn dashboard entities into immediate pivots for search, enrichment, signal creation, hunt workflows, MITRE views, and Story Workbench.
+
+• No-code Context Actions Manager - create and maintain right-click actions by defining labels, field mappings, target URLs, REST targets, regex matching, groups, ordering, and view-specific behavior from the UI.
+
+• Signals and hunts - convert interesting entities into managed signals, group related signals into hunts, and track investigation status over time.
+
+• Story Workbench - capture related signals, notes, confidence, disposition, summaries, supporting context, and final conclusions.
+
+• MITRE-aligned hunt workflows - use focused host, network, stealth, credential access, persistence, lateral movement, command and control, collection, exfiltration, heatmap, and coverage views to guide analyst reasoning.
+
+• Intel Detection Builder - stage, review, enrich, and publish locally managed intelligence into lookup-based detection workflows.
+
+• Production access control - use dedicated Falconer capabilities such as falconer_admin, falconer_context, falconer_signal, falconer_view_write, and falconer_allowlist_approve to separate analyst workflows from administrative control.
+
+APT Falconer is built for security teams that want to reduce context switching, preserve analyst reasoning, standardize investigation pivots, and operationalize threat hunting inside Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/368154ce-5a0a-11f1-a164-deff7fc89905.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
+      <pubDate>Wed, 27 May 2026 20:28:44 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7469/#v3.2.3</guid>
+    </item>
     <item>
       <title>Video Experience Observability - v1.0.1 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/8618/</link>
@@ -1817,39 +1943,6 @@ This add-on is designed to address a common operational challenge faced by secur
       <guid>https://splunkbase.splunk.com/app/8763/#v1.0.0</guid>
     </item>
     <item>
-      <title>MCP Watch - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8765/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;v1.0.0 — Initial release&lt;/p&gt;
-&lt;p&gt;&amp;#x20; First public release of MCP-Watch: zero-dependency visibility and governance&lt;/p&gt;
-&lt;p&gt;&amp;#x20; for AI agents (MCP servers) operating against Splunk, using only the built-in&lt;/p&gt;
-&lt;p&gt;&amp;#x20; _audit and _internal indexes.&lt;/p&gt;
-&lt;p&gt;&amp;#x20; Highlights:&lt;/p&gt;
-&lt;p&gt;&amp;#x20; - Four dashboards: MCP Overview, Activity Timeline, Quality &amp;amp; Hygiene, and&lt;/p&gt;
-&lt;p&gt;&amp;#x20;   MCP Access &amp;amp; Tools (per-user × per-tool access matrix).&lt;/p&gt;
-&lt;p&gt;&amp;#x20; - Weighted risk scoring and anti-pattern detection (wildcard index,&lt;/p&gt;
-&lt;p&gt;&amp;#x20;   dbinspect index\=*, missing/overly-wide time bounds, len(_raw), off-hours&lt;/p&gt;
-&lt;p&gt;&amp;#x20;   and high-volume pulls).&lt;/p&gt;
-&lt;p&gt;&amp;#x20; - Four scheduled reports + two alerts (wildcard index, overly-wide time range),&lt;/p&gt;
-&lt;p&gt;&amp;#x20;   plus a manual anti-pattern self-test.&lt;/p&gt;
-&lt;p&gt;&amp;#x20; - No restart required; no telemetry; reads audit data in place.&lt;/p&gt;
-&lt;p&gt;&amp;#x20; Configuration: edit lookups/mcp_users.csv with the Splunk username(s) your&lt;/p&gt;
-&lt;p&gt;&amp;#x20; MCP server authenticates as. Optional tool-access governance via&lt;/p&gt;
-&lt;p&gt;&amp;#x20; lookups/mcp_tool_denied.csv.&lt;/p&gt;
-&lt;p&gt;&amp;#x20; Note: assumes the official Splunk MCP Server for full functionality.&lt;/p&gt;
-&lt;p&gt;&amp;#x20; Built with AI assistance; provided as-is.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Tracks AI agent activity in Splunk by analyzing _audit and _internal logs to surface MCP server queries, flag anti-patterns, and report REST endpoint usage.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;MCP-Watch provides visibility and governance for AI agents operating against Splunk through the Model Context Protocol. The app surfaces every SPL query executed by MCP servers, flags anti-patterns such as wildcard index searches and overly wide time ranges, and reports on REST endpoint usage. It reads exclusively from Splunk&amp;#x27;s built-in _audit and _internal indexes, requiring no additional data ingestion or dependencies. Administrators configure a lookup table with the Splunk usernames their MCP servers authenticate as, and the app then tracks query volume, identifies quality issues, and enables per-user tool access governance. Four dashboards present MCP activity across operational and compliance dimensions, while scheduled searches and alerts provide ongoing monitoring of agent behavior.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/1d7c3cf8-55de-11f1-8bb0-ca94f5d56f34.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Alper Keske</dc:creator>
-      <pubDate>Wed, 27 May 2026 12:51:18 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8765/#v1.0.0</guid>
-    </item>
-    <item>
-      <title>Microsoft Graph Email Alert Action for Splunk - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8774/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Initial Version&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Send Splunk alert emails through Microsoft Graph using Microsoft Entra ID app-only authentication and Splunk password storage.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The add-on uses Microsoft Entra ID app-only authentication, stores credentials in Splunk password storage, and supports common alert fields such as To, CC, Subject, and Message. Alert messages can include Splunk tokens such as $name$, $results_link$, and result fields.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e4c24800-58b0-11f1-8ccf-3e8d4fe257ec.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Christian Rodrigo Meza Ortiz</dc:creator>
-      <pubDate>Wed, 27 May 2026 12:43:41 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8774/#v1.0.0</guid>
-    </item>
-    <item>
       <title>SA-Investigator for Enterprise Security - v4.1.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/3749/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Added workflow actions for Entity and Risk Object&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;SA-Investigator is an extension that integrates with Splunk Enterprise Security.  It provides a set of views based on the asset, identity or file/process values.  Tabs for individual data models like malware, network traffic, certificates are set up for easy viewing and allow the analyst to pivot between these views on a specific entity without having to open multiple dashboards and enter in criteria to start a search.  Workflow actions that allow pivoting from Incident Review are also included.
@@ -2795,28 +2888,6 @@ Customizable Dashboards: Includes a default dashboard optimized for faster loadi
       <guid>https://splunkbase.splunk.com/app/7777/#v1.2.1</guid>
     </item>
     <item>
-      <title>Synack App for Splunk - v3.1.4 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4288/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;bug fixes&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Synack helps organizations with the full spectrum of their security testing needs. We harness the world’s most exclusive team of security researchers and give them access to a powerful platform for trusted security testing. That testing yields vulnerabilities, data to measure attack surfaces, and provides documentation to aid compliance.
-
-The Synack App for Splunk provides an easy way to bring live, up-to-date Synack data into your Splunk environment. By putting IT, Security, and Synack-discovered vulnerability data in one place, richer reporting, analytics, custom dashboards and queries are available to reduce the effort and time to gain insights. It comes with an out-of-the-box dashboard, or users can customize their use of Synack data.  
-
-Common use cases include:
-• Security Operations - Integration of vulnerability data into the Security Operations Center (SOC) and related workflows enables security teams to get more efficient and streamline your security stack
-• Threat Hunting - Find evidence of active or past threats using verified, Synack data about true exploitable vulnerabilities
-• Incident Management - Efficiently bring incidents to conclusion using all available data sources
-- Web logs: Correlate exploitable vulnerabilities &amp;amp; locations with web logs to determine if there are other locations where this vulnerability can be exploited
-- IPS/IDS: Correlate exploitable vulnerabilities &amp;amp; locations with network traffic to define new rules for detection and prevention
-- Scanners: Correlate exploitable vulnerabilities with scanner data for better scanner efficacy
-- Threat Intel: Correlate exploitable vulnerabilities &amp;amp; locations with Threat intel to build out predictive patterns
-• Custom Reporting &amp;amp; Analytics for the above scenarios, or other workflows in your security organization
-
-Please login to your Synack Client Portal for configuration options or email Synack support to get started. Further documentation is also available in the Synack Client Portal.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/905596ba-547c-11f1-b092-5a1140f03157.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Synack</dc:creator>
-      <pubDate>Wed, 20 May 2026 18:52:56 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4288/#v3.1.4</guid>
-    </item>
-    <item>
       <title>CrowdStrike Falcon Detections Technical Add-on - v2.1.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8100/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;It is recommended that new versions of the TA be tested prior to being deployed into a production environment.&lt;/h2&gt;
@@ -3494,34 +3565,6 @@ Support: developer@cyberfox.kz&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&q
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyberfox DEVELOPER</dc:creator>
       <pubDate>Mon, 18 May 2026 05:55:25 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5621/#v2.1.0</guid>
-    </item>
-    <item>
-      <title>Puppet Alert Orchestrator add-on for Splunk - v2.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7318/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
-&lt;li&gt;Migrate add-on to UCC Framework&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This Splunk add-on can be used to trigger Puppet Enterprise Orchestration actions such as plan or task execution; as well as generating detailed Puppet report data.
-
-This add-on is intended to be used alongside the Puppet Report Viewer app for Splunk, with data provided by the splunk_hec report processor available on the Puppet Forge.
-
-Note: This add-on replaces the Puppet Alert Actions add-on.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/5a92619e-50a7-11f1-90e4-56586579fc66.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Puppet, Inc.</dc:creator>
-      <pubDate>Fri, 15 May 2026 23:59:27 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7318/#v2.0.0</guid>
-    </item>
-    <item>
-      <title>Restart It - v2.0.5 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6130/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
-&lt;li&gt;Pins Python version to 3.9 with 3.13 fallback to ensure compatibility from Splunk version 9.3.x onward&lt;/li&gt;
-&lt;li&gt;Bundled Splunk SDK for Python updated to 2.1.1.&lt;/li&gt;
-&lt;li&gt;restartinput now drives the inputs endpoint through the Splunk SDK instead of hand-built REST URLs — more reliable for scripted inputs and for input names with characters that previously needed manual URL-encoding.&lt;/li&gt;
-&lt;li&gt;Clearer error messages when input\= or script\= is missing from the search arguments.&lt;/li&gt;
-&lt;li&gt;Documentation refreshed with tighter usage examples&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TA-restart_it provides a custom command to enable the restarting of inputs via a Splunk search.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/02975fb8-507e-11f1-be15-e6c6d0389170.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Hurricane Labs</dc:creator>
-      <pubDate>Fri, 15 May 2026 17:00:42 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6130/#v2.0.5</guid>
     </item>
   </channel>
 </rss>
