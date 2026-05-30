@@ -6,7 +6,44 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sat, 30 May 2026 06:16:12 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 30 May 2026 09:10:00 +0000</lastBuildDate>
+    <item>
+      <title>Alerts For Splunk Admins - v4.0.9 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/3796/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;New reports:&lt;/p&gt;
+&lt;p&gt;- `SearchHeadLevel - KV Store collections replicated size`&lt;/p&gt;
+&lt;p&gt;Updated macros:&lt;/p&gt;
+&lt;p&gt;- `splunkadmins_audit_logs_macro_sub` - this is now the v8 version renamed, added a mvfilter to avoid invalid macro name matching&lt;/p&gt;
+&lt;p&gt;- `splunkadmins_audit_logs_datamodel_sub` - so that it will not substitute if it doesn't have a definition&lt;/p&gt;
+&lt;p&gt;Updated reports/alerts:&lt;/p&gt;
+&lt;p&gt;- `AllSplunkEnterpriseLevel - Splunkd Log Messages Admins Only` - additional criteria&lt;/p&gt;
+&lt;p&gt;- `SearchHeadLevel - KVStore Or Conf Replication Issues Are Occurring` - correct to use searchheadhosts macro&lt;/p&gt;
+&lt;p&gt;- `SearchHeadLevel - platform_stats access summary` - rewritten to include audit.log entries to catch all savedsearch calls`&lt;/p&gt;
+&lt;p&gt;- `SearchHeadLevel - macros in use` - added splunkd_access logs for indirect macro usage (not via search directly)&lt;/p&gt;
+&lt;p&gt;Removed macros:&lt;/p&gt;
+&lt;p&gt;- `splunkadmins_audit_logs_macro_sub_v8`&lt;/p&gt;
+&lt;p&gt;All searches:&lt;/p&gt;
+&lt;p&gt;- Links to answers.splunk.com updated with community.splunk.com links&lt;/p&gt;
+&lt;p&gt;- Links to docs.splunk.com replaced with links to help.splunk.com&lt;/p&gt;
+&lt;p&gt;- Descriptions updated for most reports and alerts&lt;/p&gt;
+&lt;p&gt;Deprecated reports/alerts:&lt;/p&gt;
+&lt;p&gt;- `ForwarderLevel - SSL Errors In Logs (Potential Universal Forwarder and License Issue)`&lt;/p&gt;
+&lt;p&gt;- `IndexerLevel - Buckets rolling more frequently than expected`&lt;/p&gt;
+&lt;p&gt;- `IndexerLevel - S2SFileReceiver Error`&lt;/p&gt;
+&lt;p&gt;- `SearchHeadLevel - SHCluster Artifact Replication Issues`&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This application accompanies the Splunk conf 2017 presentation &amp;quot;How did you get so big? Tips and tricks for growing your Splunk installation from 50GB/day to 1TB/day&amp;quot;
+
+The 2017 conf presentation is linked from the detailed notes, the overall idea behind this application is to provide a variety of alerts that detect issues or potential issues within the splunk log files and then advise via an alert that this has occurred.
+This application was built as there were a variety of messages in the Splunk console and logs in Splunk that if acted upon could have prevented an issue within the environment.
+
+In addition to the alerts there are a few dashboards that relate to troubleshooting indexer/heavy forwarder performance issues.
+Many of the alerts are informational and the description and comments inside the alert explain which alerts are likely to generate the most noise.
+All alerts are disabled by default so you can choose which alerts may be appropriate for your environment.
+
+Feedback is welcome!&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ebbf1f72-5c00-11f1-8aac-1adb1e4efea6.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Gareth Anderson</dc:creator>
+      <pubDate>Sat, 30 May 2026 08:25:01 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/3796/#v4.0.9</guid>
+    </item>
     <item>
       <title>Searchbase App for Splunk - v1.1.6 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7188/</link>
@@ -3562,30 +3599,6 @@ A trial key can be obtained from https://www.rstcloud.com/#free-trial&lt;/p&gt;&
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">CrowdStrike</dc:creator>
       <pubDate>Tue, 19 May 2026 20:09:30 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7090/#v3.0.0</guid>
-    </item>
-    <item>
-      <title>CrowdStrike Intel Indicator Technical Add-On - v3.5.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5083/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;&lt;strong&gt;It is recommended that new versions of the TA be tested prior to being deployed into a production environment.&lt;/strong&gt;&lt;/h2&gt;
-&lt;h3&gt;Major Changes/Enhancements:&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Automatic retry on API errors — Temporary API failures are now retried automatically instead of failing the collection&lt;/li&gt;
-  &lt;li&gt;US GovCloud 2 support — Added new cloud environment option&lt;/li&gt;
-  &lt;li&gt;Updated proxy configuration selections — Removed unsupported proxy types from the dropdown&lt;/li&gt;
-  &lt;li&gt;Splunk Cloud compatibility — Added required platform declarations for Splunk Cloud deployments&lt;/li&gt;
-  &lt;li&gt;Updated Enterprise Security field mappings — Improved CIM field mappings for the Threat Intelligence data model&lt;/li&gt;
-  &lt;li&gt;Improved error messages — API failures now include error codes and request IDs for faster troubleshooting&lt;/li&gt;
-  &lt;li&gt;Improved logging — Collection progress and checkpoint status logged clearly for operational monitoring&lt;/li&gt;
-  &lt;li&gt;Fixed authentication handling — Resolved an issue where credentials could fail silently on network interruption&lt;/li&gt;
-  &lt;li&gt;Dark mode support — Dashboards render correctly in both light and dark Splunk themes&lt;/li&gt;
-  &lt;li&gt;CrowdStrike branding — Updated dashboard styling and navigation colors&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The technical add-on allows CrowdStrike Intelligence customers to periodically retrieve Intelligence Indicator data from the CrowdStrike Intel Indicator API and ingest that data into their Splunk Environment. This enables organizations to leverage CrowdStrike&amp;#x27;s industry leading intelligence to provide proper security context to the rest of their machine data.
-
-This add-on also is used to support the CrowdStrike Falcon App (https://splunkbase.splunk.com/app/5094/).&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/616dd288-5399-11f1-9b82-8ed807e781f5.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">CrowdStrike</dc:creator>
-      <pubDate>Tue, 19 May 2026 19:01:54 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5083/#v3.5.1</guid>
     </item>
   </channel>
 </rss>
