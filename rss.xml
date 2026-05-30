@@ -6,7 +6,80 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sat, 30 May 2026 13:05:40 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 30 May 2026 14:59:11 +0000</lastBuildDate>
+    <item>
+      <title>AI Query Assistant for Splunk - v4.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8538/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h1&gt;AI Query Assistant for Splunk — v4.0.1&lt;/h1&gt;
+&lt;p&gt;v4.0.1 is a security and license stability hardening release.&lt;/p&gt;
+&lt;p&gt;AI capabilities, Agentic Pipeline behavior, Provider configuration, and query behavior are unchanged from v4.0.0. Existing 4.x licenses continue to work after upgrade, with no license re-issuance required.&lt;/p&gt;
+&lt;h2&gt;WHAT'S NEW&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Enhanced local license validation to detect modified or invalid license files, including offline environments.&lt;/li&gt;
+  &lt;li&gt;Improved license protection when the license server is temporarily unavailable.&lt;/li&gt;
+  &lt;li&gt;Stronger consistency checks between the license and the current runtime environment.&lt;/li&gt;
+  &lt;li&gt;Improved isolation between different licenses and license states.&lt;/li&gt;
+  &lt;li&gt;More reliable license status handling for enterprise deployment scenarios.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;HARDENING FIXES&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Removed a development-only configuration path from release builds.&lt;/li&gt;
+  &lt;li&gt;Fixed scenarios where license state could be reused unexpectedly.&lt;/li&gt;
+  &lt;li&gt;Improved license state isolation in multi-license and multi-environment scenarios.&lt;/li&gt;
+  &lt;li&gt;Strengthened offline license validation behavior.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;COMPATIBILITY&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Splunk Enterprise 10.0+: Basic NL-to-SPL query capability.&lt;/li&gt;
+  &lt;li&gt;Splunk Enterprise 10.2+: Agentic Pipeline capability.&lt;/li&gt;
+  &lt;li&gt;Splunk Enterprise 10.4+: Full Agentic query path enabled by default.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;UPGRADE FROM 4.0.0&lt;/h2&gt;
+&lt;p&gt;In-place upgrade is supported. No data migration or license re-issuance is required.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Install the new app package from Splunkbase or run:&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;`splunk install app ... -update 1`&lt;/pre&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Install or update runtime dependencies:&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;`python bin/install_deps.py`&lt;/pre&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Restart Splunk and confirm that the existing license is still active.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2&gt;ROLLBACK&lt;/h2&gt;
+&lt;p&gt;Rollback to v4.0.0 is safe. v4.0.1 uses the same data formats and license compatibility as v4.0.0.&lt;/p&gt;
+&lt;h2&gt;KNOWN LIMITATIONS&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Splunk 10.0 and 10.1 support only the basic NL-to-SPL query capability.&lt;/li&gt;
+  &lt;li&gt;The full Agentic Pipeline requires Splunk 10.2 or later.&lt;/li&gt;
+  &lt;li&gt;First-time dependency installation downloads approximately 150 MB of runtime packages.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;SUPPORT&lt;/h2&gt;
+&lt;p&gt;Support: &lt;a href=&quot;mailto:support@reallysec.com&quot;&gt;support@reallysec.com&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Developed by Anhui Reallysec Information Technology Co., Ltd.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Use natural language to generate SPL queries in Splunk with support for multiple AI providers, query history, templates, and enterprise security guardrails.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;AI Query Assistant for Splunk is an AI-powered app that enables users to query and analyze Splunk data using natural language. It helps convert plain-language questions into structured SPL searches, reducing the learning curve for SPL and improving analyst efficiency.
+
+The app is designed for security operations, IT operations, and data exploration scenarios where users need faster and more intuitive access to Splunk data. It supports multiple AI providers, including OpenAI-compatible APIs and Anthropic Claude, and provides configurable safeguards to help reduce the risk of unsafe or invalid query generation.
+
+Key capabilities include natural language to SPL conversion, AI provider management, query history, reusable query templates, and controlled enterprise usage with license-based activation. This app is intended for organizations that want to improve Splunk usability while maintaining operational control and security.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e1a55620-5c30-11f1-97c0-86d8b4557b29.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">sevion xia</dc:creator>
+      <pubDate>Sat, 30 May 2026 14:31:14 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8538/#v4.0.1</guid>
+    </item>
     <item>
       <title>Alerts For Splunk Admins - v4.0.9 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/3796/</link>
@@ -2622,115 +2695,6 @@ The Indicators of Compromise produced by SEKOIA.IO are contextualized, exploitab
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Flare Inc</dc:creator>
       <pubDate>Mon, 25 May 2026 18:28:39 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7602/#v1.3.4</guid>
-    </item>
-    <item>
-      <title>AI Query Assistant for Splunk - v4.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8538/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h1&gt;Release Notes&lt;/h1&gt;
-&lt;h2&gt;v4.0.0 — Conversational AI Query Assistant&lt;/h2&gt;
-&lt;p&gt;Ask Splunk questions in plain language. v4 turns the app from a one-shot NL→SPL translator into a real conversational assistant.&lt;/p&gt;
-&lt;h2&gt;WHAT'S NEW&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Multi-turn conversations&lt;/strong&gt; — Every query belongs to a thread. Ask a follow-up that omits earlier context, such as “now show me just the top 3 by count”, and the agent remembers the index, time range, and filters from the previous turn. Switch between recent conversations from a dropdown, or start fresh with “+ New”.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Clarifying questions&lt;/strong&gt; — When your question is too vague to answer well, the agent flags it and asks for specifics instead of guessing. Answer inline and refine on the same thread.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Result narration (opt-in)&lt;/strong&gt; — The agent reads the rows returned by your SPL and writes a 2–3 sentence summary, highlights key findings with actual numbers, and suggests follow-up searches.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Supervisor pipeline (opt-in)&lt;/strong&gt; — Turn on a 4-subagent flow: planner → schema_resolver → spl_generator → auditor, for tougher queries. The schema_resolver grounds SPL in your actual indexes, sourcetypes, and fields, helping reduce hallucinated data source or field names. The auditor provides an independent safety review before the SPL runs.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Google Gemini provider&lt;/strong&gt; — First-class support for Gemini 1.5 / 2.0 / 2.5, including both Google AI Studio with an API key and Vertex AI with a project and service account, alongside the existing OpenAI-compatible and Anthropic adapters.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Smarter Query Templates&lt;/strong&gt; — Templates now carry an SPL pattern plus searchable tags. When your question matches a saved template, the agent adapts the template’s SPL to your current intent and tells you which template it used.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;SAFETY&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Pre-flight checks&lt;/strong&gt;: Dangerous keywords such as &lt;code&gt;delete&lt;/code&gt;, &lt;code&gt;drop&lt;/code&gt;, &lt;code&gt;purge&lt;/code&gt;, &lt;code&gt;truncate&lt;/code&gt;, &lt;code&gt;wipe&lt;/code&gt;, and &lt;code&gt;shutdown&lt;/code&gt; are blocked before any LLM call, avoiding API spend on requests that would not be allowed to run.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Post-flight checks&lt;/strong&gt;: Generated SPL is scanned for write operations such as &lt;code&gt;| outputlookup&lt;/code&gt;, &lt;code&gt;| delete&lt;/code&gt;, &lt;code&gt;| script&lt;/code&gt;, &lt;code&gt;| collect&lt;/code&gt;, and &lt;code&gt;| sendalert&lt;/code&gt;, as well as unbounded time ranges and sensitive-field references. Dangerous SPL is refused; risky-but-readable SPL is downgraded to a yellow &lt;code&gt;caution&lt;/code&gt; badge.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Independent LLM audit&lt;/strong&gt;: In supervisor mode, the app performs a second independent safety review before SPL ever reaches the executor.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;RELIABILITY&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Automatic retries on transient LLM errors&lt;/strong&gt; — Supports automatic retries for Cloudflare 429, brief 5xx errors, and gateway timeouts. A single network blip no longer fails the whole query.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Append-only conversation history&lt;/strong&gt; — Keeps long-lived threads responsive by storing conversation history in an append-only model.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Structured logs&lt;/strong&gt; — Every query records latency, token usage, subagent transitions, and guardrail decisions. These logs can be indexed in &lt;code&gt;_internal&lt;/code&gt; as &lt;code&gt;event=agentic.*&lt;/code&gt; for Splunk-on-Splunk dashboards.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;COMPATIBILITY&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Dual-path compatibility&lt;/strong&gt; — Runs on every Splunk 10.x version. Splunk 10.0 / 10.1 keep v3 behavior, so NL→SPL continues to work as before. Splunk 10.2+ on Python 3.13 automatically enables all new features with no additional configuration required.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;UPGRADE PROCEDURE&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;Stop Splunk.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Install the new app:&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre&gt;&lt;code&gt;splunk install app AI_Query_Assistant_for_Splunk_v4.0.0.tar.gz -update 1&lt;/code&gt;&lt;/pre&gt;
-&lt;ol&gt;
-&lt;li&gt;On Splunk 10.2+, pull agentic dependencies:&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre&gt;&lt;code&gt;splunk cmd python3.13 $SPLUNK_HOME/etc/apps/AI_Query_Assistant_for_Splunk/bin/install_deps.py&lt;/code&gt;&lt;/pre&gt;
-&lt;ol&gt;
-&lt;li&gt;Run the one-time migration:&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre&gt;&lt;code&gt;splunk cmd python3.13 $SPLUNK_HOME/etc/apps/AI_Query_Assistant_for_Splunk/bin/migrate_v3_to_v4.py&lt;/code&gt;&lt;/pre&gt;
-&lt;ol&gt;
-&lt;li&gt;Start Splunk.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Existing AI Provider records, query history, and license activation carry forward unchanged.&lt;/p&gt;
-&lt;h2&gt;BUG FIXES vs v3.0.7&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Risk-level audit verdict is now reliably attached to the response.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Anthropic-compatible providers whose base URL omits &lt;code&gt;/v1&lt;/code&gt;, such as Volcengine Ark, now authenticate correctly instead of returning 401.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Conversation history records are written correctly even when message content contains LLM-specific binary block types.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Dangerous-keyword detection now works through the new async pipeline.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;SSL trust store fallback now works when &lt;code&gt;SSL_CERT_FILE&lt;/code&gt; points to a missing path.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;LICENSE&lt;/h2&gt;
-&lt;p&gt;Online activation against:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;https://license.reallysec.com&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Existing v3 license keys remain valid for v4.&lt;/p&gt;
-&lt;p&gt;Trial license: contact &lt;code&gt;support@reallysec.com&lt;/code&gt; with your Server GUID and company email.&lt;/p&gt;
-&lt;p&gt;Issues / feedback: &lt;code&gt;support@reallysec.com&lt;/code&gt;&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Use natural language to generate SPL queries in Splunk with support for multiple AI providers, query history, templates, and enterprise security guardrails.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;AI Query Assistant for Splunk is an AI-powered app that enables users to query and analyze Splunk data using natural language. It helps convert plain-language questions into structured SPL searches, reducing the learning curve for SPL and improving analyst efficiency.
-
-The app is designed for security operations, IT operations, and data exploration scenarios where users need faster and more intuitive access to Splunk data. It supports multiple AI providers, including OpenAI-compatible APIs and Anthropic Claude, and provides configurable safeguards to help reduce the risk of unsafe or invalid query generation.
-
-Key capabilities include natural language to SPL conversion, AI provider management, query history, reusable query templates, and controlled enterprise usage with license-based activation. This app is intended for organizations that want to improve Splunk usability while maintaining operational control and security.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/98037804-5856-11f1-90a6-661a73dd9221.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">sevion xia</dc:creator>
-      <pubDate>Mon, 25 May 2026 16:36:03 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8538/#v4.0.0</guid>
     </item>
     <item>
       <title>IPInfo App for Splunk - v9.5.5 [Version Update]</title>
