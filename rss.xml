@@ -6,7 +6,87 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Mon, 01 Jun 2026 16:31:34 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 01 Jun 2026 20:50:42 +0000</lastBuildDate>
+    <item>
+      <title>Hydrolix Search - v1.5.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7540/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
+  &lt;li&gt;The new hdxsql command runs raw ClickHouse SQL queries against Hydrolix and streams the results into Splunk. Use it for queries the hdxsearch command doesn't cover, such as joins, CTEs, UNION, window functions, and EXPLAIN. You can embed your own ClickHouse SETTINGS in the query and bind the Splunk time picker through SPL.&lt;/li&gt;
+  &lt;li&gt;The hdxsearch and hdxsql commands can now back Splunk dashboards and alerts.&lt;/li&gt;
+  &lt;li&gt;The setup page now includes a &quot;Test connection&quot; action that verifies a cluster is reachable before saving the configuration.&lt;/li&gt;
+  &lt;li&gt;Queries to Hydrolix clusters running version 5.12 or later now run with bound parameters for safer query handling. Older clusters continue to work as before.&lt;/li&gt;
+  &lt;li&gt;Hydrolix query attribution now includes the originating Splunk user, dashboard, panel, and alert, making it easier to identify and attribute a query to its Splunk source in Hydrolix query telemetry.&lt;/li&gt;
+  &lt;li&gt;Fixed TLS connection failures when a cluster's certificate is signed by a certificate authority newer than the one bundled with the app.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;With Hydrolix Search for Splunk, you can connect Splunk to solutions that use Hydrolix&amp;#x27;s streaming data lake technology and partner solutions like TrafficPeak based on Hydrolix.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/20feb558-5df0-11f1-83d2-fa9cef5586a9.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Hydrolix</dc:creator>
+      <pubDate>Mon, 01 Jun 2026 20:19:00 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7540/#v1.5.0</guid>
+    </item>
+    <item>
+      <title>Splunk ES Content Update - v6.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/3449/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;GitHub - &lt;a href=&quot;https://github.com/splunk/security_content/releases/tag/v6.0.0&quot;&gt;https://github.com/splunk/security\_content/releases/tag/v6.0.0&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Splunk Docs - &lt;a href=&quot;https://help.splunk.com/en/splunk-enterprise-security-8/security-content-update/release-notes/6.0/splunk-security-content-release-notes/whats-new&quot;&gt;https://help.splunk.com/en/splunk-enterprise-security-8/security-content-update/release-notes/6.0/splunk-security-content-release-notes/whats-new&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk ES Content Update (ESCU) app delivers pre-packaged Security Content. ESCU provides regular Security Content updates to help security practitioners address ongoing time-sensitive threats, attack methods, and other security issues.
+
+Security Content consists of tactics, techniques, and methodologies that help with detection, investigation, and response. Security Content enables security teams to directly operationalize detection searches, investigative searches, and other supporting details. ESCU can generate Notable/Risk Events in Splunk Enterprise Security. Security Content also contains easy-to-read background information and guidance, for key context on motivations and risks associated with attack techniques, as well as pragmatic advice on how to combat those techniques.
+
+The analytic stories and their searches are also available at - https://github.com/splunk/security_content.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ae8c752a-5ded-11f1-9310-2a9ba03559b6.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Mon, 01 Jun 2026 19:55:18 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/3449/#v6.0.0</guid>
+    </item>
+    <item>
+      <title>DomainTools App For Splunk and Splunk ES - v5.6.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5226/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Bug Fixes&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Fixed: TLDExtract suffix list causing connectivity issues&lt;/strong&gt; — The TLDExtract library's fallback public suffix list snapshot has been re-added after being accidentally removed. The app will no longer attempt outgoing connections to download updated suffix lists, which was causing failures for users routing traffic through a proxy. Users can still manually update the suffix list if needed.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Fixed: &quot;Iris Investigate (API only)&quot; SKU not recognized&lt;/strong&gt; — The app now correctly recognizes the new &quot;Iris Investigate (API only)&quot; API SKU. Previously, users with this entitlement were incorrectly shown error messages indicating they lacked access to Domain Profile, Pivoting features, and the Iris Investigate Lookup Dashboard. The &quot;Test Connection&quot; and &quot;Iris Investigate&quot; dashboards have been updated to accept this SKU.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Gain fast insights and situational awareness around risky infrastructure
+
+DomainTools enables Security Operations Centers (SOCs) and security analysts to take domain observables from their network and connect them with other active domains on the Internet. Those connections inform risk assessments, help profile attackers, guide online fraud investigations, and map cyber activity to attacker infrastructure.
+
+With the influx in events per second rising, organizations need the ability to execute high-volume queries with improved response times. The DomainTools App for Splunk delivers, with enrichment at scale and drill-down details to add context. Leveraging the DomainTools Iris and Farsight DNSDB datasets, users have immediate access to dozens of attributes attached to every domain event in Splunk, efficiently delivering event enrichment at scale. 
+
+Domain Monitoring
+
+SOCs and Security Analysts can leverage the DomainTools Iris Detect product in Splunk to discover and watch newly registered domains associated with any terms their organization currently monitors (such as a brand or company name), and to monitor domains and append domains to your allowlist (list of trusted domains) from the Domain Investigation workflow. 
+
+Predictive Risk Scoring
+
+DomainTools Risk Score gives teams with emerging threat hunting skills an instant advantage in
+helping to identify and optionally alert on Splunk events with suspicious domains they would have otherwise missed. Individual component scores give experienced hunters the tools they need to refine their alerts and precisely target their resources. DomainTools Risk Score, including Proximity and Threat Profile classifiers, is available in both key-value stores and Splunk indexes.
+
+Proven Capability for Enterprise Organizations
+
+DomainTools’ proven solution for Splunk includes a cloud-certified Splunk Application that deploys on Splunk search heads in both standalone and clustered configurations, with and without Splunk Enterprise Security. Event sources can be customized to match the unique requirements of each environment.
+
+DomainTools Capabilities in Splunk
+
+Reduce MTTD
+• Bulk enrichment of domains with meaningful context
+• At-a-glance alerting and reporting of malicious network traffic 
+• Domain monitoring using DomainTools Iris Detect
+
+Reduce MTTR
+• Discover newly registered domains and further enable monitoring
+• Create a Splunk ES notable event in case a high-risk domain is observed
+• Investigate connected infrastructure using Iris and Farsight Passive DNS
+
+The DomainTools App works in parallel with Splunk Enterprise Security (ES) but does not depend on it. Customers who have not yet deployed ES can still realize significant value from the DomainTools solution.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/4688cb8e-5de5-11f1-a36f-da60579292f5.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">DomainTools Integrations Team</dc:creator>
+      <pubDate>Mon, 01 Jun 2026 18:39:00 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5226/#v5.6.2</guid>
+    </item>
+    <item>
+      <title>Jamf Pro Add-on - v3.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4729/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;⚠️ Please read the upgrade guide in &lt;a href=&quot;https://github.com/Jamf-Concepts/jamf-pro-addon-for-splunk&quot;&gt;https://github.com/Jamf-Concepts/jamf-pro-addon-for-splunk&lt;/a&gt; prior to installing the 3.0.0 version.&amp;#x20;&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This add-on supports scheduled imports of Jamf Pro data into Splunk. Dedicated input types are available for Computers and Mobile Devices. Arbitrary custom API endpoints are also available.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8317f350-5dda-11f1-9310-2a9ba03559b6.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jamf Integrations</dc:creator>
+      <pubDate>Mon, 01 Jun 2026 17:25:18 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4729/#v3.0.0</guid>
+    </item>
     <item>
       <title>Form Viz - v2.1.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8569/</link>
@@ -78,22 +158,6 @@ Information Use: Your email address is used to improve detection logic based on 
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Pradeep Vasu</dc:creator>
       <pubDate>Mon, 01 Jun 2026 11:23:36 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8053/#v1.1.0</guid>
-    </item>
-    <item>
-      <title>Jamf Pro Add-on - v2.12.7 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4729/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h3&gt;Jamf Pro Add-on for Splunk Change Log&lt;/h3&gt;
-&lt;h4&gt;Version 2.12.7 (Bugfix)&lt;/h4&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Customers who cannot run the modernized v3 of the add-on because they're still using an older version of Splunk are urged to install this version to resolve a number of potential issues that could arise due to a configuration mistake (network errors, a typo in an endpoint, mis-configured API permissions in Pro, etc.) Unless a serious defect or security issue is discovered, we expect this to the be final release in the v2 family. &lt;strong&gt;Please upgrade to v3 as soon as you are able as it provides many improvements.&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;strong&gt;Compatibility Notice:&lt;/strong&gt;  v2.12.7 supports Splunk 8.2 through 9.3. If you are running Splunk 9.4 or later, please use v3 (will be released within the week if it's not there already) instead.&lt;/p&gt;
-&lt;p&gt;\[bugs] - Updated error handling on Jamf Pro API connections and also addressed several unhandled `None` dereferences to prevent input respawns. - Fixed `print()` login calls to stdout in `uapiModels/jamfpro.py` that were incompatible with Splunk's XML event stream&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Scheduled imports of Jamf Pro data into Splunk&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f6e73026-5d93-11f1-a8ac-eea14f45257e.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jamf Integrations</dc:creator>
-      <pubDate>Mon, 01 Jun 2026 08:57:36 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4729/#v2.12.7</guid>
     </item>
     <item>
       <title>Mandiant Threat Intelligence - v1.1.1 [Version Update]</title>
@@ -3424,81 +3488,6 @@ Customizable Dashboards: Includes a default dashboard optimized for faster loadi
       <guid>https://splunkbase.splunk.com/app/8100/#v2.1.0</guid>
     </item>
     <item>
-      <title>DomainTools App For Splunk and Splunk ES - v5.6.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5226/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Update to support Python 3.13, ensuring full compatibility with Splunk Cloud 10.x.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Gain fast insights and situational awareness around risky infrastructure
-
-DomainTools enables Security Operations Centers (SOCs) and security analysts to take domain observables from their network and connect them with other active domains on the Internet. Those connections inform risk assessments, help profile attackers, guide online fraud investigations, and map cyber activity to attacker infrastructure.
-
-With the influx in events per second rising, organizations need the ability to execute high-volume queries with improved response times. The DomainTools App for Splunk delivers, with enrichment at scale and drill-down details to add context. Leveraging the DomainTools Iris and Farsight DNSDB datasets, users have immediate access to dozens of attributes attached to every domain event in Splunk, efficiently delivering event enrichment at scale. 
-
-Domain Monitoring
-
-SOCs and Security Analysts can leverage the DomainTools Iris Detect product in Splunk to discover and watch newly registered domains associated with any terms their organization currently monitors (such as a brand or company name), and to monitor domains and append domains to your allowlist (list of trusted domains) from the Domain Investigation workflow. 
-
-Predictive Risk Scoring
-
-DomainTools Risk Score gives teams with emerging threat hunting skills an instant advantage in
-helping to identify and optionally alert on Splunk events with suspicious domains they would have otherwise missed. Individual component scores give experienced hunters the tools they need to refine their alerts and precisely target their resources. DomainTools Risk Score, including Proximity and Threat Profile classifiers, is available in both key-value stores and Splunk indexes.
-
-Proven Capability for Enterprise Organizations
-
-DomainTools’ proven solution for Splunk includes a cloud-certified Splunk Application that deploys on Splunk search heads in both standalone and clustered configurations, with and without Splunk Enterprise Security. Event sources can be customized to match the unique requirements of each environment.
-
-DomainTools Capabilities in Splunk
-
-Reduce MTTD
-• Bulk enrichment of domains with meaningful context
-• At-a-glance alerting and reporting of malicious network traffic 
-• Domain monitoring using DomainTools Iris Detect
-
-Reduce MTTR
-• Discover newly registered domains and further enable monitoring
-• Create a Splunk ES notable event in case a high-risk domain is observed
-• Investigate connected infrastructure using Iris and Farsight Passive DNS
-
-The DomainTools App works in parallel with Splunk Enterprise Security (ES) but does not depend on it. Customers who have not yet deployed ES can still realize significant value from the DomainTools solution.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8dd956c2-546a-11f1-9b82-8ed807e781f5.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">DomainTools Integrations Team</dc:creator>
-      <pubDate>Wed, 20 May 2026 17:07:48 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5226/#v5.6.1</guid>
-    </item>
-    <item>
-      <title>Splunk AI Toolkit - v5.7.4 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/2890/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk AI Toolkit delivers new SPL commands, custom visualizations, assistants, and examples to explore a variety of ML concepts.
-
-Each assistant includes end-to-end examples with datasets, plus the ability to apply the visualizations and SPL commands to your own data. You can inspect the assistant panels and underlying code to see how it all works.
-
-AI Toolkit Quick Reference Guide: https://docs.splunk.com/images/3/3f/Splunk-MLTK-QuickRefGuide-2019-web.pdf
-
-
-
-Generative AI:
-With release 5.6, AI Toolkit supports Generative AI, allowing customers to integrate Large Language Models (LLMs) and Time Series Foundational Models directly into their search pipelines.
-
-
-
-Assistants:
-* Predict Numeric Fields (Linear Regression): e.g. predict median house values.
-* Predict Categorical Fields (Logistic Regression): e.g. predict customer churn.
-* Detect Numeric Outliers (distribution statistics): e.g. detect outliers in IT Ops data.
-* Detect Categorical Outliers (probabilistic measures): e.g. detect outliers in diabetes patient records.
-* Forecast Time Series: e.g. forecast data center growth and capacity planning.
-* Cluster Numeric Events: e.g. cluster business anomalies to reduce noise.
-
-
-
-Smart Assistants (new assistants with revamped UI and better ml pipeline/experiment management):
-
-* Smart Forecasting Assistant:: e.g. forecasting app logons with special days.
-* Smart Outlier Detection Assistant: e.g. find anomalies in supermarket purchases.
-* Smart Clustering Assistant: e.g. cluster houses by property descriptions.
-* Smart Prediction Assistant: e.g. predict vulnerabilities in firewall data.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/20455772-5434-11f1-9b12-ee57508e39d0.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Wed, 20 May 2026 16:20:47 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/2890/#v5.7.4</guid>
-    </item>
-    <item>
       <title>Python for Scientific Computing (for Windows 64-bit) - v4.3.2 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/2883/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This add-on contains a Python interpreter bundled with the following scientific and machine learning libraries: numpy, scipy, pandas, scikit-learn, and statsmodels. With this add-on, you can import these powerful libraries in your own custom search commands, custom rest endpoints, modular inputs, and so forth.
@@ -3507,14 +3496,6 @@ This add-on is available for Linux (64-bit), Windows (64-bit) and Mac. Make sure
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Wed, 20 May 2026 16:18:21 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/2883/#v4.3.2</guid>
-    </item>
-    <item>
-      <title>Send to Element - v1.0.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7953/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Version 1.0.2 improves Splunkbase package readiness by updating documentation, alert action parameter descriptions, SSL troubleshooting guidance, and app.manifest formatting. Python cache files were removed from the package. No changes were made to the Matrix/Element message sending logic.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Send to Element is a Splunk alert action that delivers real-time notifications to Element, offering a secure, self-hosted alternative to Telegram or WhatsApp.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8e99eb4e-5438-11f1-b092-5a1140f03157.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyberfox DEVELOPER</dc:creator>
-      <pubDate>Wed, 20 May 2026 10:43:37 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7953/#v1.0.2</guid>
     </item>
   </channel>
 </rss>
