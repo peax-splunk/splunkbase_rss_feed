@@ -6,9 +6,37 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Wed, 03 Jun 2026 18:17:39 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 03 Jun 2026 21:42:31 +0000</lastBuildDate>
     <item>
-      <title>AI Workbench - v1.3.1 [New App Release]</title>
+      <title>Splunk Cloud Connect - v1.1.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8772/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Cloud Connect 1.1 Release Notes&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Cloud Connect 1.1 is the first release of the Cloud Connect app for self-managed Splunk Enterprise deployments. It enables eligible Splunk products to connect to selected Splunk Cloud services while the core Splunk Enterprise deployment remains in the customer's environment.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Highlights&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Guided Cloud Connect setup: Administrators can create a secure cloud connection using a guided setup flow with region selection, tenant identifier, administrator email, and one-time passcode verification.&lt;/li&gt;
+&lt;li&gt;License-based product discovery: Cloud Connect detects eligible installed products and features based on the customer's licenses and entitlements.&lt;/li&gt;
+&lt;li&gt;Product activation from one place: Administrators can activate supported cloud-connected products individually after the main connection is established.&lt;/li&gt;
+&lt;li&gt;Connection status visibility: The app shows whether the deployment is not configured, waiting for passcode verification, provisioning, connected, temporarily unavailable, or failed.&lt;/li&gt;
+&lt;li&gt;Secure cloud identity model: Cloud Connect creates dedicated cloud identities for the main connection and activated products, with local secret storage, access token refresh, and periodic key rotation.&lt;/li&gt;
+&lt;li&gt;Health monitoring: Cloud Connect checks required Splunk Cloud endpoints and can mark the connection temporarily unavailable when network reachability is interrupted.&lt;/li&gt;
+&lt;li&gt;Troubleshooting events: Lifecycle events are recorded to help administrators and Splunk Support troubleshoot setup, activation, connectivity, token refresh, and key rotation.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Availability and Requirements&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Built for self-managed Splunk Enterprise deployments.&lt;/li&gt;
+&lt;li&gt;Available in selected commercial AWS regions.&lt;/li&gt;
+&lt;li&gt;Supports one Search Head Unit per Cloud Connect tenant.&lt;/li&gt;
+&lt;li&gt;Product availability depends on license, entitlement, installed app version, and selected region.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Cloud Connect enables licensed CMP Splunk deployments to connect with select Splunk Cloud Platform and Security features in commercial AWS regions.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Cloud Connect (CC) is a platform application that enables license-based connectivity between a Customer Managed Platform (CMP) Splunk deployment and select Splunk Cloud features for Platform and Security in commercial AWS regions.
+
+Cloud Connect is a foundational addition in how Splunk delivers product capabilities to self-managed customers providing minimal deployment friction, improved visibility  for admins and scalable onboarding framework.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/dfdb6268-5f31-11f1-8295-3ed5a7e21dfb.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Wed, 03 Jun 2026 21:04:04 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8772/#v1.1.0</guid>
+    </item>
+    <item>
+      <title>AI Workbench - v1.3.2 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/8747/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h1&gt;Release notes — AI Assistent for Splunk&lt;/h1&gt;
 &lt;p&gt;This file tracks every customer-visible change.&lt;/p&gt;
@@ -29,6 +57,138 @@ foundation and platform-ops releases are now &lt;strong&gt;1.4.0&lt;/strong&gt; 
 renumbering — only version strings, headers, and &quot;introduced-in&quot; references.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;hr&gt;
+&lt;h2&gt;1.3.2 — 2026-06-03&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;First Splunkbase 1.x publish — packaging hygiene + KVStore ACL completeness.&lt;/strong&gt;&lt;br&gt;
+Carries everything in 1.3.1 (token-cost cuts, knowledge-unlocks-tools, TrackMe&lt;br&gt;
++ audit + Org/BU fixes); this entry adds the release-readiness changes.&lt;/p&gt;
+&lt;h3&gt;Fixed&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;trackme_health_for_indexes&lt;/code&gt; now actually finds tracked indexes (was&lt;br&gt;
+  always &lt;code&gt;not_tracked&lt;/code&gt;).&lt;/strong&gt; The tool called TrackMe v2 endpoints that &lt;strong&gt;do not&lt;br&gt;
+  exist&lt;/strong&gt; — &lt;code&gt;trackme/v2/tenants/list_tenants&lt;/code&gt; and&lt;br&gt;
+&lt;code&gt;trackme/v2/data_source/get_entities&lt;/code&gt; — which 404'd and were swallowed, so&lt;br&gt;
+  every index came back &lt;code&gt;not_tracked&lt;/code&gt; even when TrackMe was clearly tracking it&lt;br&gt;
+  (e.g. &lt;code&gt;_internal&lt;/code&gt; with 100+ entities under the &lt;code&gt;dutchdatadifference&lt;/code&gt; tenant).&lt;br&gt;
+  It now uses the real API: &lt;code&gt;GET trackme/v2/vtenants/show_tenants&lt;/code&gt; for the&lt;br&gt;
+  tenant list and &lt;code&gt;POST trackme/v2/splk_dsm/dsm_get_table&lt;/code&gt; (JSON under the&lt;br&gt;
+&lt;code&gt;payload&lt;/code&gt; form field) per tenant, parses the plain-array responses, matches on&lt;br&gt;
+  the entity's &lt;code&gt;data_index&lt;/code&gt; field (robust to any &lt;code&gt;index&lt;/code&gt; / &lt;code&gt;index:sourcetype&lt;/code&gt; /&lt;br&gt;
+&lt;code&gt;index:sourcetype:source&lt;/code&gt; DSM split — with a first-segment-of-&lt;code&gt;object&lt;/code&gt;&lt;br&gt;
+  fallback), and reads the correct status field &lt;code&gt;object_state&lt;/code&gt;. The result is&lt;br&gt;
+  now a token-cheap summary — verdict + &lt;code&gt;entity_count&lt;/code&gt; + per-status counts +&lt;br&gt;
+  tracking tenants + a worst-first capped sample — instead of dumping every&lt;br&gt;
+  entity. After live testing showed the custom &lt;code&gt;trackme/v2&lt;/code&gt; handlers can return&lt;br&gt;
+  an &lt;strong&gt;empty body through the splunkweb browser proxy&lt;/strong&gt; (the tenant list came&lt;br&gt;
+  back empty, so every index was still falsely &lt;code&gt;not_tracked&lt;/code&gt;),&lt;br&gt;
+&lt;code&gt;trackme_health_for_indexes&lt;/code&gt; — plus &lt;code&gt;trackme_list_tenants&lt;/code&gt; and&lt;br&gt;
+&lt;code&gt;trackme_list_entities&lt;/code&gt; — now read TrackMe's KVStore &lt;strong&gt;collections directly&lt;/strong&gt;&lt;br&gt;
+  via the core &lt;code&gt;storage/collections/data&lt;/code&gt; endpoint&lt;br&gt;
+  (&lt;code&gt;kv_trackme_virtual_tenants&lt;/code&gt;, &lt;code&gt;kv_trackme_&amp;lt;comp&amp;gt;_tenant_&amp;lt;tenant&amp;gt;&lt;/code&gt;), which&lt;br&gt;
+  proxies reliably and returns clean records, with the index filter pushed into&lt;br&gt;
+  the KVStore &lt;code&gt;query&lt;/code&gt;. Verified live: &lt;code&gt;_internal&lt;/code&gt; now resolves as tracked with&lt;br&gt;
+  its real green/red counts. (&lt;code&gt;src/services/tools.ts&lt;/code&gt;.)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;The generated TrackMe dashboard panel now works (and stops claiming&lt;br&gt;
+  &quot;TrackMe does not monitor this index&quot;).&lt;/strong&gt; The &lt;code&gt;feed-health-verdict&lt;/code&gt; skill's&lt;br&gt;
+  panel recipe pointed at the wrong collection name (missing the &lt;code&gt;kv_&lt;/code&gt; prefix),&lt;br&gt;
+  the wrong status field (&lt;code&gt;coalesce(state,status)&lt;/code&gt; instead of &lt;code&gt;object_state&lt;/code&gt;),&lt;br&gt;
+  and produced no rows (TrackMe's &lt;code&gt;| trackme&lt;/code&gt; / KVStore reads return the whole&lt;br&gt;
+  result as one JSON event, so &lt;code&gt;search&lt;/code&gt;/&lt;code&gt;stats&lt;/code&gt; silently did nothing — which is&lt;br&gt;
+  why the assistant gave up and wrote a misleading &quot;not monitored&quot; note). The&lt;br&gt;
+  skill now leads with a &lt;strong&gt;plain TrackMe summary-index search&lt;/strong&gt; (live-verified&lt;br&gt;
+  against the running instance) — &lt;code&gt;trackme_health_for_indexes&lt;/code&gt; returns the&lt;br&gt;
+  tenant's &lt;code&gt;summary_index&lt;/code&gt; plus ready-made &lt;code&gt;panel_spl_trend&lt;/code&gt;&lt;br&gt;
+  (&lt;code&gt;index=&amp;lt;summary&amp;gt; object=&amp;lt;index&amp;gt;* object_state=* | timechart span=5m count by
+  object_state&lt;/code&gt;) and &lt;code&gt;panel_spl_current&lt;/code&gt; (latest state per object → counts), so&lt;br&gt;
+  the panel is a normal index search with no KVStore read, no &lt;code&gt;inputlookup&lt;/code&gt;, no&lt;br&gt;
+&lt;code&gt;| trackme&lt;/code&gt;/&lt;code&gt;spath&lt;/code&gt;. (The &lt;code&gt;| trackme … dsm_get_table | spath | mvexpand&lt;/code&gt; route&lt;br&gt;
+  is kept as a documented fallback.) The skill also tells the model never to&lt;br&gt;
+  claim an index is unmonitored unless &lt;code&gt;trackme_health_for_indexes&lt;/code&gt; returned&lt;br&gt;
+&lt;code&gt;tracked:false&lt;/code&gt;. The always-applied &lt;code&gt;dashboard-xml-discipline&lt;/code&gt; skill carries&lt;br&gt;
+  the same HARD rule (never &lt;code&gt;inputlookup trackme_*&lt;/code&gt;, never invent a lookup name&lt;br&gt;
+  like &lt;code&gt;trackme_dsm_idx_summary&lt;/code&gt;). &lt;code&gt;trackme_health_for_indexes&lt;/code&gt; also returns&lt;br&gt;
+  three &lt;strong&gt;ready-to-paste, live-verified panel SPLs&lt;/strong&gt; — &lt;code&gt;panel_spl_summary&lt;/code&gt;&lt;br&gt;
+  (one panel: per-state counts + total + a readable string, using &lt;code&gt;count AS
+  total_feeds&lt;/code&gt; NOT &lt;code&gt;count(*)&lt;/code&gt;), &lt;code&gt;panel_spl_trend&lt;/code&gt; (timechart), and&lt;br&gt;
+&lt;code&gt;panel_spl_red_table&lt;/code&gt; (red-feed detail) — so the model pastes a working panel&lt;br&gt;
+  instead of composing one. The same canonical recipe is registered as a&lt;br&gt;
+&lt;strong&gt;curated knowledge entry&lt;/strong&gt; (&lt;code&gt;trackme-feed-health-dashboard-panel-recipe&lt;/code&gt;,&lt;br&gt;
+&lt;code&gt;assigned_tools: [trackme_health_for_indexes]&lt;/code&gt;) so it's retrievable via the&lt;br&gt;
+  knowledge layer — the exact-search-as-data pattern. Finally the &lt;strong&gt;dashboard&lt;br&gt;
+  validator&lt;/strong&gt; now appends actionable fix-hints for three recurring failures so&lt;br&gt;
+  the self-correct loop fixes them deterministically (bundle-level, no skill&lt;br&gt;
+  reseed needed): &lt;code&gt;inputlookup trackme_*&lt;/code&gt;; a &lt;code&gt;stats&lt;/code&gt; rename with a &lt;code&gt;*&lt;/code&gt; wildcard&lt;br&gt;
+  (&quot;number of wildcards … do not match&quot;); and a malformed &lt;code&gt;where&lt;/code&gt; from the&lt;br&gt;
+&lt;code&gt;field=$token$ OR &quot;*&quot;=&quot;*&quot;&lt;/code&gt; multiselect-filter idiom (bare &lt;code&gt;field=*&lt;/code&gt; is invalid&lt;br&gt;
+  in &lt;code&gt;where&lt;/code&gt; — filter in the base search via &lt;code&gt;| search field=$token$&lt;/code&gt; instead).&lt;br&gt;
+  (&lt;code&gt;src/services/skillSeeds.ts&lt;/code&gt;, &lt;code&gt;src/services/tools.ts&lt;/code&gt;,&lt;br&gt;
+&lt;code&gt;bin/knowledge_seeds.py&lt;/code&gt;.)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;The entire TrackMe tool suite now hits real endpoints.&lt;/strong&gt; Every other&lt;br&gt;
+&lt;code&gt;trackme_*&lt;/code&gt; tool was calling invented v2 paths that 404'd. All were rewritten&lt;br&gt;
+  against TrackMe's actual handlers (verified from the handler source):&lt;br&gt;
+&lt;code&gt;trackme_list_tenants&lt;/code&gt;/&lt;code&gt;get_tenant&lt;/code&gt; → &lt;code&gt;vtenants/show_tenants&lt;/code&gt;/&lt;code&gt;show_tenant&lt;/code&gt;;&lt;br&gt;
+&lt;code&gt;trackme_list_entities&lt;/code&gt;/&lt;code&gt;get_entity&lt;/code&gt;/&lt;code&gt;get_identity_card&lt;/code&gt; → the per-component&lt;br&gt;
+  table + &lt;code&gt;&amp;lt;short&amp;gt;_entity_info&lt;/code&gt; (&lt;code&gt;dsm_get_table&lt;/code&gt;, &lt;code&gt;ds_entity_info&lt;/code&gt;, …, with the&lt;br&gt;
+  inconsistent short prefix dsm→ds/dhm→dh/mhm→mh/wlk→wlk handled centrally);&lt;br&gt;
+&lt;code&gt;trackme_smart_status&lt;/code&gt; → &lt;code&gt;splk_smart_status/&amp;lt;short&amp;gt;_smart_status&lt;/code&gt; (trimmed to&lt;br&gt;
+  the verdict); &lt;code&gt;trackme_get_workload_status&lt;/code&gt;/&lt;code&gt;get_search_perf&lt;/code&gt; →&lt;br&gt;
+&lt;code&gt;splk_wlk/wlk_get_table&lt;/code&gt;/&lt;code&gt;wlk_entity_info&lt;/code&gt;; &lt;code&gt;trackme_list_acks&lt;/code&gt; →&lt;br&gt;
+&lt;code&gt;ack/get_ack_for_object&lt;/code&gt;; &lt;code&gt;trackme_ack_entity&lt;/code&gt; → &lt;code&gt;ack/write/ack_manage&lt;/code&gt;&lt;br&gt;
+  (&lt;code&gt;ack_period&lt;/code&gt; in &lt;strong&gt;seconds&lt;/strong&gt;); &lt;code&gt;trackme_list_maintenance&lt;/code&gt;/&lt;code&gt;update_maintenance&lt;/code&gt;&lt;br&gt;
+  → the &lt;strong&gt;per-tenant/global&lt;/strong&gt; maintenance endpoints (maintenance is NOT&lt;br&gt;
+  per-entity — the tool signature changed accordingly);&lt;br&gt;
+&lt;code&gt;trackme_update_entity_priority&lt;/code&gt; → &lt;code&gt;splk_&amp;lt;comp&amp;gt;/write/&amp;lt;short&amp;gt;_update_priority&lt;/code&gt;&lt;br&gt;
+  with the &lt;strong&gt;correct named-tier values &lt;code&gt;low&lt;/code&gt;/&lt;code&gt;medium&lt;/code&gt;/&lt;code&gt;high&lt;/code&gt;/&lt;code&gt;critical&lt;/code&gt;/&lt;code&gt;pending&lt;/code&gt;&lt;/strong&gt;&lt;br&gt;
+  (was wrongly validating P1/P2/P3); &lt;code&gt;trackme_get_outliers&lt;/code&gt; →&lt;br&gt;
+&lt;code&gt;splk_outliers_engine/outliers_get_data&lt;/code&gt;; &lt;code&gt;trackme_get_version&lt;/code&gt; →&lt;br&gt;
+&lt;code&gt;configuration/request_info&lt;/code&gt;. All POSTs now send JSON under the &lt;code&gt;payload&lt;/code&gt;&lt;br&gt;
+  form field and parse the plain-array/object responses via shared helpers.&lt;br&gt;
+  Two tools were honestly down-scoped: &lt;strong&gt;CIM compliance&lt;/strong&gt; has no per-entity REST&lt;br&gt;
+  endpoint in this TrackMe version, so &lt;code&gt;trackme_get_cim_compliance&lt;/code&gt; /&lt;br&gt;
+&lt;code&gt;trackme_list_cim_issues&lt;/code&gt; now return the tenant-level CIM summary with a clear&lt;br&gt;
+  note; &lt;code&gt;trackme_get_entity_metrics&lt;/code&gt; returns the entity's deployment-correct&lt;br&gt;
+  mstats/timechart SPL templates (TrackMe metrics live in a metric index) rather&lt;br&gt;
+  than guessing measure names. (&lt;code&gt;src/services/tools.ts&lt;/code&gt;.)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Ask no longer fails with &lt;code&gt;A maximum of 4 blocks with cache_control may be
+  provided. Found 5.&lt;/code&gt;&lt;/strong&gt; The 1.3.1 prompt-caching change marked a &lt;code&gt;cache_control&lt;/code&gt;&lt;br&gt;
+  breakpoint on the last message block, but it &lt;strong&gt;mutated the shared message&lt;br&gt;
+  content in place&lt;/strong&gt; — and the dispatcher reuses one growing &lt;code&gt;messages&lt;/code&gt; array&lt;br&gt;
+  across every tool-loop turn, so each turn left a stale breakpoint on a prior&lt;br&gt;
+  block. After three tool turns the count reached 5 and Anthropic rejected the&lt;br&gt;
+  request (HTTP 400), breaking any multi-step Ask (e.g. the Simple XML dashboard&lt;br&gt;
+  template). The adapter now &lt;strong&gt;clones&lt;/strong&gt; the last message before marking it, so&lt;br&gt;
+&lt;code&gt;cache_control&lt;/code&gt; never persists onto earlier turns and the breakpoint count is&lt;br&gt;
+  a deterministic 3 (system + last tool + last message) every call.&lt;br&gt;
+  (&lt;code&gt;src/services/llm/anthropic_adapter.ts&lt;/code&gt;.)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Every KVStore collection now ships an explicit ACL.&lt;/strong&gt; Seven collections —&lt;br&gt;
+  the three knowledge collections (&lt;code&gt;itmip_ai_knowledge_entries&lt;/code&gt;,&lt;br&gt;
+&lt;code&gt;itmip_knowledge_connectors&lt;/code&gt;, &lt;code&gt;itmip_knowledge_static_rules&lt;/code&gt;), the two MCP&lt;br&gt;
+  collections (&lt;code&gt;itmip_mcp_servers&lt;/code&gt;, &lt;code&gt;itmip_mcp_tools&lt;/code&gt;), &lt;code&gt;itmip_tool_overrides&lt;/code&gt;,&lt;br&gt;
+  and the internal &lt;code&gt;itmip_kvstore_restore_lock&lt;/code&gt; — had &lt;strong&gt;no stanza in&lt;br&gt;
+&lt;code&gt;metadata/default.meta&lt;/code&gt;&lt;/strong&gt; and silently inherited the global default&lt;br&gt;
+  (&lt;code&gt;write: [admin, sc_admin, power]&lt;/code&gt;, &lt;code&gt;export = system&lt;/code&gt;). They now carry&lt;br&gt;
+  explicit stanzas matching the app's uniform convention: &lt;strong&gt;writes are&lt;br&gt;
+  admin-only&lt;/strong&gt; (authoring / configuration is an admin act) and &lt;strong&gt;&lt;code&gt;export =
+  none&lt;/code&gt;&lt;/strong&gt; (app-scoped, like every other collection). This does &lt;strong&gt;not&lt;/strong&gt; change&lt;br&gt;
+  what &lt;code&gt;user&lt;/code&gt; / &lt;code&gt;power&lt;/code&gt; roles can do — the React shell reaches collections via&lt;br&gt;
+  an explicit &lt;code&gt;/servicesNS/nobody/&amp;lt;app&amp;gt;/&lt;/code&gt; path (where &lt;code&gt;export&lt;/code&gt; governs cross-app&lt;br&gt;
+&lt;em&gt;visibility&lt;/em&gt;, not &lt;em&gt;role&lt;/em&gt; access), and normal users reach the knowledge / MCP&lt;br&gt;
+  data only through system-token REST handlers. Read stays open on the content&lt;br&gt;
+  collections (knowledge, tool-overrides, MCP tool defs) so nothing end-user is&lt;br&gt;
+  blocked; &lt;code&gt;itmip_mcp_servers&lt;/code&gt; (which carries endpoint + auth references) is&lt;br&gt;
+  read-scoped to admin / sc_admin / power like &lt;code&gt;itmip_llm_configs&lt;/code&gt;. The&lt;br&gt;
+  knowledge REST handler also gets an explicit &lt;code&gt;read: [*]&lt;/code&gt; / &lt;code&gt;export = system&lt;/code&gt;&lt;br&gt;
+  stanza so the Ask flow can always invoke it. (&lt;code&gt;metadata/default.meta&lt;/code&gt;.)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Dev-only &lt;code&gt;scripts/*.ts&lt;/code&gt; no longer ships in the &lt;code&gt;.spl&lt;/code&gt;.&lt;/strong&gt; &lt;code&gt;git archive&lt;/code&gt;&lt;br&gt;
+  was packaging &lt;code&gt;scripts/snapshot_prompts.ts&lt;/code&gt; (a build/diagnostic helper never&lt;br&gt;
+  loaded by Splunk at runtime). Added &lt;code&gt;scripts/ export-ignore&lt;/code&gt; so the tarball&lt;br&gt;
+  carries only Splunk app content. (&lt;code&gt;.gitattributes&lt;/code&gt;.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Changed&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Docs:&lt;/strong&gt; &lt;code&gt;docs/PACKAGING.md&lt;/code&gt; refreshed to 1.3.2 — corrected the tarball&lt;br&gt;
+  file count and size, and added the knowledge-layer handlers + connectors and&lt;br&gt;
+  the knowledge-health view to the &quot;what the tarball contains&quot; table.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2&gt;1.3.1 — 2026-06-03&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Bug fixes — Org/BU editing data loss, and a seed-drift guard.&lt;/strong&gt;&lt;/p&gt;
 &lt;h3&gt;Fixed&lt;/h3&gt;
@@ -1809,10 +1969,41 @@ Bring your own LLM: Anthropic, OpenAI, Azure OpenAI, Groq, Google Gemini, AWS Be
 
 Multi-tenant by design. Organisations and Business Units are resolved automatically from the calling app and the user&amp;#x27;s roles — end users don&amp;#x27;t pick a tenant. Templates, LLM configurations and tool availability all scope per Org or BU. Run one Splunk environment for many teams or many customers without them seeing each other.
 
-Tokens and Costs breaks spend down by App, User, Model, Provider, Organisation, BU or LLM configuration — over time, with real per-model pricing. Free, Professional, Enterprise and MSP licence tiers, activated self-serve, air-gap-friendly.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/982bd152-5f5c-11f1-a2bc-0eb6848471bd.png&quot;&gt;</description>
+Tokens and Costs breaks spend down by App, User, Model, Provider, Organisation, BU or LLM configuration — over time, with real per-model pricing. Free, Professional, Enterprise and MSP licence tiers, activated self-serve, air-gap-friendly.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/3185ce48-5f85-11f1-9310-2a9ba03559b6.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Eduard Lekanne</dc:creator>
-      <pubDate>Wed, 03 Jun 2026 15:02:06 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8747/#v1.3.1</guid>
+      <pubDate>Wed, 03 Jun 2026 19:54:23 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8747/#v1.3.2</guid>
+    </item>
+    <item>
+      <title>Splunk ES Content Update - v6.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/3449/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;GitHub - &lt;a href=&quot;https://github.com/splunk/security_content/releases/tag/v6.0.0&quot;&gt;https://github.com/splunk/security\_content/releases/tag/v6.0.0&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Splunk Docs - &lt;a href=&quot;https://help.splunk.com/en/splunk-enterprise-security-8/security-content-update/release-notes/6.0/splunk-security-content-release-notes/whats-new&quot;&gt;https://help.splunk.com/en/splunk-enterprise-security-8/security-content-update/release-notes/6.0/splunk-security-content-release-notes/whats-new&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk ES Content Update (ESCU) app delivers pre-packaged Security Content. ESCU provides regular Security Content updates to help security practitioners address ongoing time-sensitive threats, attack methods, and other security issues.
+
+Security Content consists of tactics, techniques, and methodologies that help with detection, investigation, and response. Security Content enables security teams to directly operationalize detection searches, investigative searches, and other supporting details. ESCU can generate Notable/Risk Events in Splunk Enterprise Security. Security Content also contains easy-to-read background information and guidance, for key context on motivations and risks associated with attack techniques, as well as pragmatic advice on how to combat those techniques.
+
+The analytic stories and their searches are also available at - https://github.com/splunk/security_content.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ae8c752a-5ded-11f1-9310-2a9ba03559b6.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Wed, 03 Jun 2026 19:45:23 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/3449/#v6.0.0</guid>
+    </item>
+    <item>
+      <title>Datavira Add-on for USOM Threat Intelligence - v1.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8797/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;First release&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Integrates Turkey&amp;#x27;s USOM (TR-CERT) threat intelligence API into Splunk, producing IP, IPv6, domain, and URL lookup tables and optionally pushing IOCs to Enterprise Security.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The USOM Threat Intelligence add-on integrates the Turkish Cybersecurity Presidency&amp;#x27;s TR-CERT threat-intelligence API into Splunk. It polls the USOM REST API on a configurable schedule and produces five lookup tables containing indicators of compromise: IP addresses, IPv6 addresses, IPv6 networks, domains, and URLs. The add-on resolves USOM&amp;#x27;s short threat-classification codes to English titles using companion API endpoints. For environments running Splunk Enterprise Security 7.0 or later, the add-on includes optional threatlist:// inputs that push these lookups into ES&amp;#x27;s threat intelligence framework for automated correlation. The add-on emits operational logs and per-cycle statistics events to aid monitoring and troubleshooting. On Search Head Clusters, the modular input automatically runs only on the captain and replicates lookup tables to members via bundle replication.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8bfbbfb8-5dc3-11f1-89a3-12e113bfc2cd.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Suat Celikok</dc:creator>
+      <pubDate>Wed, 03 Jun 2026 19:42:40 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8797/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>IMAP v2 - v1.1.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8610/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
+&lt;li&gt;Added make request action for Universal API support&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app supports email ingestion and various investigative actions over IMAP&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/de510a50-5f7d-11f1-8295-3ed5a7e21dfb.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Wed, 03 Jun 2026 18:56:04 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8610/#v1.1.0</guid>
     </item>
     <item>
       <title>ExtraHop Add-On for Splunk - v2.7.0 [Version Update]</title>
@@ -1947,14 +2138,6 @@ suppress_alert	Suppress an alert for a specified duration&lt;/p&gt;&lt;img heigh
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Kenshin Xu</dc:creator>
       <pubDate>Wed, 03 Jun 2026 13:02:39 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8793/#v1.0.0</guid>
-    </item>
-    <item>
-      <title>Datavira Add-on for USOM Threat Intelligence - v1.0.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8797/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;First release&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Integrates Turkey&amp;#x27;s USOM (TR-CERT) threat intelligence API into Splunk, producing IP, IPv6, domain, and URL lookup tables and optionally pushing IOCs to Enterprise Security.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The USOM Threat Intelligence add-on integrates the Turkish Cybersecurity Presidency&amp;#x27;s TR-CERT threat-intelligence API into Splunk. It polls the USOM REST API on a configurable schedule and produces five lookup tables containing indicators of compromise: IP addresses, IPv6 addresses, IPv6 networks, domains, and URLs. The add-on resolves USOM&amp;#x27;s short threat-classification codes to English titles using companion API endpoints. For environments running Splunk Enterprise Security 7.0 or later, the add-on includes optional threatlist:// inputs that push these lookups into ES&amp;#x27;s threat intelligence framework for automated correlation. The add-on emits operational logs and per-cycle statistics events to aid monitoring and troubleshooting. On Search Head Clusters, the modular input automatically runs only on the captain and replicates lookup tables to members via bundle replication.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8bfbbfb8-5dc3-11f1-89a3-12e113bfc2cd.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Suat Celikok</dc:creator>
-      <pubDate>Wed, 03 Jun 2026 12:59:57 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8797/#v1.0.1</guid>
     </item>
     <item>
       <title>SA - Splunk UF Upgrade Monitoring for Windows - v1.0.0 [New App Release]</title>
@@ -2302,44 +2485,6 @@ Built as standard `studio_visualization` custom viz, themable to light/dark, and
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Will Searle</dc:creator>
       <pubDate>Wed, 03 Jun 2026 12:35:39 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8817/#v1.0.0</guid>
-    </item>
-    <item>
-      <title>Splunk Cloud Connect - v1.1.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8772/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;Splunk Cloud Connect 1.1.1 Release Notes&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Updated Enterprise Security product names and descriptions.&lt;/li&gt;
-  &lt;li&gt;Clarified the Enterprise Security cloud services deactivation message.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;Splunk Cloud Connect 1.1 Release Notes&lt;/h2&gt;
-&lt;p&gt;Cloud Connect 1.1 is the first release of the Cloud Connect app for self-managed Splunk Enterprise deployments. It enables eligible Splunk products to connect to selected Splunk Cloud services while the core Splunk Enterprise deployment remains in the customer's environment.&lt;/p&gt;
-&lt;h3&gt;Highlights&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Guided Cloud Connect setup: Administrators can create a secure cloud connection using a guided setup flow with region selection, tenant identifier, administrator email, and one-time passcode verification.&lt;/li&gt;
-  &lt;li&gt;License-based product discovery: Cloud Connect detects eligible installed products and features based on the customer's licenses and entitlements.&lt;/li&gt;
-  &lt;li&gt;Product activation from one place: Administrators can activate supported cloud-connected products individually after the main connection is established.&lt;/li&gt;
-  &lt;li&gt;Connection status visibility: The app shows whether the deployment is not configured, waiting for passcode verification, provisioning, connected, temporarily unavailable, or failed.&lt;/li&gt;
-  &lt;li&gt;Secure cloud identity model: Cloud Connect creates dedicated cloud identities for the main connection and activated products, with local secret storage, access token refresh, and periodic key rotation.&lt;/li&gt;
-  &lt;li&gt;Health monitoring: Cloud Connect checks required Splunk Cloud endpoints and can mark the connection temporarily unavailable when network reachability is interrupted.&lt;/li&gt;
-  &lt;li&gt;Troubleshooting events: Lifecycle events are recorded to help administrators and Splunk Support troubleshoot setup, activation, connectivity, token refresh, and key rotation.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Availability and Requirements&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Built for self-managed Splunk Enterprise deployments.&lt;/li&gt;
-  &lt;li&gt;Available in selected commercial AWS regions.&lt;/li&gt;
-  &lt;li&gt;Supports one Search Head Unit per Cloud Connect tenant.&lt;/li&gt;
-  &lt;li&gt;Product availability depends on license, entitlement, installed app version, and selected region.&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Cloud Connect enables licensed CMP Splunk deployments to connect with select Splunk Cloud Platform and Security features in commercial AWS regions.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Cloud Connect (CC) is a platform application that enables license-based connectivity between a Customer Managed Platform (CMP) Splunk deployment and select Splunk Cloud features for Platform and Security in commercial AWS regions.
-
-Cloud Connect is a foundational addition in how Splunk delivers product capabilities to self-managed customers providing minimal deployment friction, improved visibility  for admins and scalable onboarding framework.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/dfdb6268-5f31-11f1-8295-3ed5a7e21dfb.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Wed, 03 Jun 2026 10:21:41 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8772/#v1.1.1</guid>
     </item>
     <item>
       <title>ReversingLabs Search Extension - v1.0.5 [Version Update]</title>
@@ -2779,19 +2924,6 @@ Note that this app provides the front end interface and dashboard for 2 Steps. T
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Hydrolix</dc:creator>
       <pubDate>Mon, 01 Jun 2026 20:19:00 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7540/#v1.5.0</guid>
-    </item>
-    <item>
-      <title>Splunk ES Content Update - v6.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/3449/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;GitHub - &lt;a href=&quot;https://github.com/splunk/security_content/releases/tag/v6.0.0&quot;&gt;https://github.com/splunk/security\_content/releases/tag/v6.0.0&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Splunk Docs - &lt;a href=&quot;https://help.splunk.com/en/splunk-enterprise-security-8/security-content-update/release-notes/6.0/splunk-security-content-release-notes/whats-new&quot;&gt;https://help.splunk.com/en/splunk-enterprise-security-8/security-content-update/release-notes/6.0/splunk-security-content-release-notes/whats-new&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk ES Content Update (ESCU) app delivers pre-packaged Security Content. ESCU provides regular Security Content updates to help security practitioners address ongoing time-sensitive threats, attack methods, and other security issues.
-
-Security Content consists of tactics, techniques, and methodologies that help with detection, investigation, and response. Security Content enables security teams to directly operationalize detection searches, investigative searches, and other supporting details. ESCU can generate Notable/Risk Events in Splunk Enterprise Security. Security Content also contains easy-to-read background information and guidance, for key context on motivations and risks associated with attack techniques, as well as pragmatic advice on how to combat those techniques.
-
-The analytic stories and their searches are also available at - https://github.com/splunk/security_content.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ae8c752a-5ded-11f1-9310-2a9ba03559b6.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Mon, 01 Jun 2026 19:55:18 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/3449/#v6.0.0</guid>
     </item>
     <item>
       <title>DomainTools App For Splunk and Splunk ES - v5.6.2 [Version Update]</title>
@@ -3455,19 +3587,6 @@ Documentation can be found at https://docs.splunk.com/Documentation/AddOns/relea
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Thu, 28 May 2026 10:36:50 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/2911/#v4.0.0</guid>
-    </item>
-    <item>
-      <title>Splunk App for Data Science and Deep Learning - v5.2.4 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4607/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
-&lt;li&gt;Chatbox component enhanced with Splunk MCP&lt;/li&gt;
-&lt;li&gt;Chatbox component as custom viz&lt;/li&gt;
-&lt;li&gt;Container images rebuild&lt;/li&gt;
-&lt;li&gt;Minor bugfixes and other improvements&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk App for Data Science and Deep Learning (DSDL), formerly known as the Deep Learning Toolkit (DLTK), lets you integrate advanced custom machine learning and deep learning systems with the Splunk platform. DSDL extends the Splunk AI Toolkit (AITK), formerly known as the Machine Learning Toolkit (MLTK), with prebuilt Docker containers for TensorFlow, PyTorch, and a collection of data science, NLP, machine learning and advanced AI libraries. By using predefined workflows for rapid development with Jupyter Lab Notebooks, DSDL enables you to build, test, and operationalize your custom AI models with Splunk. You can leverage GPUs for compute intense training tasks or LLM inference and flexibly deploy models on CPU or GPU enabled containers. The app ships with 40+ examples that showcase different artificial intelligence, deep learning and machine learning algorithms for classification, regression, forecasting, clustering, graph analytics, and natural language processing tasks. Learn from these examples to tackle your most advanced data science and custom AI use cases in the areas of IT Operations, Security, Application Development, IoT, Business Analytics, and beyond.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/dfb65532-560c-11f1-a80f-4ed91e2bff60.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Thu, 28 May 2026 10:30:27 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4607/#v5.2.4</guid>
     </item>
     <item>
       <title>CCX Extensions for Netskope - v1.0.7 [Version Update]</title>
