@@ -6,7 +6,67 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Thu, 04 Jun 2026 19:14:01 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 04 Jun 2026 21:24:42 +0000</lastBuildDate>
+    <item>
+      <title>HCP Terraform for Splunk - v0.0.16 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5141/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
+&lt;li&gt;Added &lt;code&gt;python.required = 3.13&lt;/code&gt; for Splunk Cloud Platform compatibility&lt;/li&gt;
+&lt;li&gt;Upgraded Splunk SDK for Python from 2.0.2 to 2.1.1&lt;/li&gt;
+&lt;li&gt;Updated CI workflows to fix deprecated GitHub Actions and Ruby/Python version compatibility&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;HashiCorp HCP Terraform customers can integrate this Splunk® app to understand HCP Terraform operations. Audit logs from HCP Terraform are regularly pulled into the Splunk app, immediately giving visibility into key platform events within the pre-defined dashboards. Identify the most active policies, significant changes in resource operations, or filter actions by specific users within your organization. The app can be used with both Splunk Cloud and Splunk Enterprise.
+
+Note: This app is currently not supported on a clustered deployment of Splunk Enterprise.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e6ad5e08-6057-11f1-a36f-da60579292f5.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">HashiCorp 󠇐</dc:creator>
+      <pubDate>Thu, 04 Jun 2026 21:06:39 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5141/#v0.0.16</guid>
+    </item>
+    <item>
+      <title>Broken Hosts App for Splunk - v5.1.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/3247/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;The 5.1.1 release fixes a UI issue where dashboard table entries would flicker at specific window resolutions&lt;/p&gt;
+&lt;p&gt;The 5.1.0 release is a UI refresh focused on the Configure Lookup and Configure Suppressions dashboards. Alerting and suppression semantics are unchanged.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;What's New&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Faster dashboards at scale &lt;/li&gt;
+  &lt;li&gt;The configuration tables stay responsive when your `expectedTime` collection holds tens of thousands of rows. Scrolling, sorting, and filtering work smoothly at 25,000+ entries.&lt;/li&gt;
+  &lt;li&gt;Smart Index / Sourcetype / Host inputs&lt;/li&gt;
+  &lt;li&gt;When adding or editing entries, these fields now autocomplete against your environment's actual values. Type two or more characters to see matches; free-text values that don't appear in the dropdown are still accepted.&lt;/li&gt;
+  &lt;li&gt;Cleaner batch entry layout&lt;/li&gt;
+  &lt;li&gt;&quot;Add Multiple Entries&quot; lays each row's fields out vertically so long index/sourcetype/host names no longer scrunch.&lt;/li&gt;
+  &lt;li&gt;Refreshed look &lt;/li&gt;
+  &lt;li&gt;Dashboards use the current generation of Splunk's UI components for a more consistent look with modern Splunk Enterprise / Cloud.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Fixed&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The Configure Lookup table search filter now broadens results when you correct a typo, instead of narrowing further from the previous match.&lt;/li&gt;
+  &lt;li&gt;The &quot;Populate with Default Values&quot; button no longer appears when a search filters the table to zero matches. It only appears when the underlying collection is genuinely empty.&lt;/li&gt;
+  &lt;li&gt;Edits, additions, and deletions are immediately visible to subsequent searches without a page refresh.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Note on first install&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;  The Index / Sourcetype / Host autocomplete reads from three lookups populated by scheduled searches that run every four hours (`Lookup Gen - bh_host_cache`, `Lookup Gen - bh_index_cache`, `Lookup Gen - bh_sourcetype_cache`). On a brand-new install the autocomplete dropdowns will be empty until the first scheduled run completes. A Splunk admin can run any of these searches manually to populate the caches immediately.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Upgrading from 5.0.x&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;  No data migration or configuration changes are required. Install the new version through Splunkbase or by reloading the app; the new dashboards take effect immediately.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Please review the documentation if upgrading to Broken Hosts 5.0.0+ from a 4.x.x version.
+
+The Broken Hosts App for Splunk is a useful tool for monitoring data going into Splunk. It has the ability to alert when hosts stop sending data into Splunk, as well as inspect the last time the final combination of data was received by Splunk.
+
+If the arrival of the final log for the index/sourcetype/host combination is later than expected, the Broken Hosts App will send an alert. This allows for quick status detection of the hosts and fast issue resolution.
+
+The Broken Hosts App for Splunk is the app for monitoring missing data in Splunk. The app’s three main objectives include:
+1. Alerting when data is missing from Splunk in order to determine the cause.
+2. Utilizing saved searches to facilitate rapid detection of the missing data.
+3. Creating dashboards for visualization to help with further investigations.
+
+* Latest documentation can be found here: 
+https://brokenhosts.hurricanelabs.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f494831e-604f-11f1-9310-2a9ba03559b6.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Hurricane Labs</dc:creator>
+      <pubDate>Thu, 04 Jun 2026 20:03:22 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/3247/#v5.1.1</guid>
+    </item>
     <item>
       <title>MCP Watch - v1.1.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8765/</link>
@@ -3583,51 +3643,6 @@ To learn more about how Splunk Observability Cloud works with your environment t
       <guid>https://splunkbase.splunk.com/app/7125/#v0.153.0</guid>
     </item>
     <item>
-      <title>Broken Hosts App for Splunk - v5.1.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/3247/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;The 5.1.0 release is a UI refresh focused on the Configure Lookup and Configure Suppressions dashboards. Alerting and suppression semantics are unchanged.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;What's New&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Faster dashboards at scale &lt;/li&gt;
-  &lt;li&gt;The configuration tables stay responsive when your `expectedTime` collection holds tens of thousands of rows. Scrolling, sorting, and filtering work smoothly at 25,000+ entries.&lt;/li&gt;
-  &lt;li&gt;Smart Index / Sourcetype / Host inputs&lt;/li&gt;
-  &lt;li&gt;When adding or editing entries, these fields now autocomplete against your environment's actual values. Type two or more characters to see matches; free-text values that don't appear in the dropdown are still accepted.&lt;/li&gt;
-  &lt;li&gt;Cleaner batch entry layout&lt;/li&gt;
-  &lt;li&gt;&quot;Add Multiple Entries&quot; lays each row's fields out vertically so long index/sourcetype/host names no longer scrunch.&lt;/li&gt;
-  &lt;li&gt;Refreshed look &lt;/li&gt;
-  &lt;li&gt;Dashboards use the current generation of Splunk's UI components for a more consistent look with modern Splunk Enterprise / Cloud.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Fixed&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;The Configure Lookup table search filter now broadens results when you correct a typo, instead of narrowing further from the previous match.&lt;/li&gt;
-  &lt;li&gt;The &quot;Populate with Default Values&quot; button no longer appears when a search filters the table to zero matches. It only appears when the underlying collection is genuinely empty.&lt;/li&gt;
-  &lt;li&gt;Edits, additions, and deletions are immediately visible to subsequent searches without a page refresh.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Note on first install&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;  The Index / Sourcetype / Host autocomplete reads from three lookups populated by scheduled searches that run every four hours (`Lookup Gen - bh_host_cache`, `Lookup Gen - bh_index_cache`, `Lookup Gen - bh_sourcetype_cache`). On a brand-new install the autocomplete dropdowns will be empty until the first scheduled run completes. A Splunk admin can run any of these searches manually to populate the caches immediately.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Upgrading from 5.0.x&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;  No data migration or configuration changes are required. Install the new version through Splunkbase or by reloading the app; the new dashboards take effect immediately.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Please review the documentation if upgrading to Broken Hosts 5.0.0+ from a 4.x.x version.
-
-The Broken Hosts App for Splunk is a useful tool for monitoring data going into Splunk. It has the ability to alert when hosts stop sending data into Splunk, as well as inspect the last time the final combination of data was received by Splunk.
-
-If the arrival of the final log for the index/sourcetype/host combination is later than expected, the Broken Hosts App will send an alert. This allows for quick status detection of the hosts and fast issue resolution.
-
-The Broken Hosts App for Splunk is the app for monitoring missing data in Splunk. The app’s three main objectives include:
-1. Alerting when data is missing from Splunk in order to determine the cause.
-2. Utilizing saved searches to facilitate rapid detection of the missing data.
-3. Creating dashboards for visualization to help with further investigations.
-
-* Latest documentation can be found here: 
-https://brokenhosts.hurricanelabs.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/36e21a26-5ac7-11f1-97c0-86d8b4557b29.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Hurricane Labs</dc:creator>
-      <pubDate>Thu, 28 May 2026 19:05:36 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/3247/#v5.1.0</guid>
-    </item>
-    <item>
       <title>Add-On for ConnectWise PSA - v2.0.7 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/6855/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;AppInspect updates&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Add-On for ConnectWise PSA (formerly Manage) queries the ConnectWise API via modular input to Splunk changes to objects as a stateful event stream and to cache selected objects in the Splunk KVstore. Based on the Add-On for ConnectWise Manage.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/7e28997c-5abe-11f1-86e7-aa343882d8e7.png&quot;&gt;</description>
@@ -4028,52 +4043,6 @@ CrowdStrike Host configuration: Maintain a history of device policy configuratio
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">CrowdStrike</dc:creator>
       <pubDate>Wed, 27 May 2026 18:06:46 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5570/#v3.4.1</guid>
-    </item>
-    <item>
-      <title>Splunk Add-on for CrowdStrike FDR - v3.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5579/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;1. Expanded Bitmask Lookup Definitions&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Introduced comprehensive bitmask lookup definitions to improve data clarity and telemetry interpretation. This update provides deeper visibility across the following fields: &lt;code&gt;AntiTamperStateFlag&lt;/code&gt;, &lt;code&gt;AssemblyFlags&lt;/code&gt;, &lt;code&gt;AudioUpdate&lt;/code&gt;, &lt;code&gt;AuthenticationFailureMsErrorCode&lt;/code&gt;, &lt;code&gt;CodeSigningFlags&lt;/code&gt;, &lt;code&gt;ConfigurationDescriptorAttributes&lt;/code&gt;, &lt;code&gt;DcPolicyFlags&lt;/code&gt;, &lt;code&gt;DotnetModuleFlags&lt;/code&gt;, &lt;code&gt;DriverPreventionStatusFlags&lt;/code&gt;, &lt;code&gt;EndpointDescriptorAttributes&lt;/code&gt;, &lt;code&gt;FfcServiceFlags&lt;/code&gt;, &lt;code&gt;FileEcpBitmask&lt;/code&gt;, &lt;code&gt;FileWrittenFlags&lt;/code&gt;, &lt;code&gt;IntegrityLevel&lt;/code&gt;, &lt;code&gt;KerberosAnomaly&lt;/code&gt;, &lt;code&gt;LdapSearchQueryClassification&lt;/code&gt;, &lt;code&gt;LocalIpAddressPipelineSource&lt;/code&gt;, &lt;code&gt;ModuleInitFlags&lt;/code&gt;, &lt;code&gt;NtlmAvFlags&lt;/code&gt;, &lt;code&gt;PlatformSecuritySettings&lt;/code&gt;, &lt;code&gt;RegConfigFlags&lt;/code&gt;, &lt;code&gt;SignInfoFlags&lt;/code&gt;, &lt;code&gt;Status&lt;/code&gt; (NTSTATUS selection), &lt;code&gt;SuspectStackFlag&lt;/code&gt;, &lt;code&gt;UserFlags&lt;/code&gt;, &lt;code&gt;UserGroupsBitmask&lt;/code&gt;, &lt;code&gt;UserLogonFlags&lt;/code&gt;, and &lt;code&gt;VolumeTeardownFlags&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;2. Optimized Collections and New Fields&lt;br&gt;
-To support faster search capabilities and richer data correlation, we have updated several collection schemas:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Accelerated Search: Added the &lt;code&gt;aid&lt;/code&gt; (Agent ID) field to &lt;code&gt;crowdstrike_ta_host_resolution_collection&lt;/code&gt; and &lt;code&gt;crowdstrike_ta_build_mac_ip_resolution_collection&lt;/code&gt; to accelerate query performance.&lt;/li&gt;
-&lt;li&gt;Application Insights: Introduced the &lt;code&gt;SHA256HashData&lt;/code&gt; field to the &lt;code&gt;crowdstrike_ta_build_appinfo_resolution_collection&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;User Identity: Added the &lt;code&gt;UserSid&lt;/code&gt; field to the &lt;code&gt;crowdstrike_ta_build_userinfo_resolution_collection&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;3. CrowdStrike FDR Logging Enhancements&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Dedicated Log Files: The CrowdStrike FDR ingestion engine now generates an independent log file for each configured input channel.This change prevents rapid log rotation and ensures your teams can troubleshoot individual inputs quickly and efficiently.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;5.  Added configuration option to Crowdstrike FDR managed S3 consumer input to shutdown after each ingested event batch file/resource.  Recommended for environments with several parallel ingest pipelines configured  for better ingest pipeline load balancing&amp;#x20;&lt;/p&gt;
-&lt;p&gt;4. Bug Fixes&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Resolved Field Redundancy: Corrected an issue where the &lt;code&gt;file_hash&lt;/code&gt; and &lt;code&gt;FileIdentifier&lt;/code&gt; fields erroneously displayed identical duplicate values. Both fields now function as intended.&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Add-on for CrowdStrike FDR lets you collect event data stored in CrowdStrike and bring it into your own Splunk instance for retention and further analysis. The Add-on collects different logs and events from different sources monitored by the CrowdStrike platform and provides CIM-compatible knowledge to use with other Splunk apps.
-
-Crowdstrike FDR events must be fetched from an AWS S3 bucket that is provisioned for you. The integration utilizes AWS SQS to support scaling horizontally if required.
-
-Version 2.0.0 of the Splunk Add-on for Crowdstrike FDR contains the following new and changed features:
-
--New monitoring dashboard
--New events for CIM normalization
--Updated events CIM normalization
--FedRAMP certification
--IPv6 compatibility
-
-----
-Additional Note:
-For Splunk Cloud customers:
-You can now ingest CrowdStrike data with Data Manager, providing the most scalable and efficient solution for managing your FDR feeds. By utilizing the Splunk Add-on for CrowdStrike FDR, this integration automates complex configurations and ensures seamless, high-performance data processing as your environment scales. Streamline your security operations today with this robust, infrastructure-ready ingestion method.
-
-Data Manager is a built-in application exclusively available within the Splunk Cloud Platform.
-documentation:
-https://help.splunk.com/en/splunk-cloud-platform/ingest-data-from-cloud-services/data-manager-user-manual/1.16/crowdstrike-data/crowdstrike-introduction&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/34bd5c08-59b2-11f1-a6f6-f6fd64f4bdf0.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Wed, 27 May 2026 15:16:29 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5579/#v3.0.0</guid>
     </item>
     <item>
       <title>Everpure Unified Add-on for Splunk - v2.0.2 [Version Update]</title>
