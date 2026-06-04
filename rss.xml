@@ -6,7 +6,87 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Thu, 04 Jun 2026 16:45:45 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 04 Jun 2026 19:14:01 +0000</lastBuildDate>
+    <item>
+      <title>MCP Watch - v1.1.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8765/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;MCP-Watch 1.1.0 — multi-signal detection, liveness heartbeats, governance polish&lt;/p&gt;
+&lt;p&gt;First update since 1.0.0. Three themes: catching custom/community MCPs, real liveness signals, and a CRITICAL alert on data-exfil  or data-destroy commands.&lt;/p&gt;
+&lt;p&gt;NEW&lt;/p&gt;
+&lt;p&gt;- Multi-signal MCP detection: catches custom / community / non-official MCP servers (no official provenance, generic user-agent) via REST-side user-agent matching + endpoint-based tool inference. New MCP Detection (REST) dashboard, new mcp\_user\_agents.csv lookup. Splunk's reserved identities (admin, splunk-system-user, sidecar\_agent-manager, nobody) are excluded by default via mcp\_excluded\_users.csv.&lt;/p&gt;
+&lt;p&gt;- Unified MCP Access &amp;amp; Tools dashboard: works whether the official Splunk MCP Server is present (mcp\_tool\_execute capability + tool catalog) or not (RBAC + REST-detected tool usage). Custom MCPs no longer leave the dashboard blank.&lt;/p&gt;
+&lt;p&gt;- Liveness heartbeats with UP / IDLE / STALE: per-MCP status via mcp\_heartbeat KV collection. Three-state model separates &quot;MCP server down&quot; from &quot;agent idle&quot;. Auto-heartbeat for the official Splunk MCP Server when present.&lt;/p&gt;
+&lt;p&gt;- Getting Started dashboard: in-app onboarding showing current config and live &quot;is data flowing?&quot; checks. Open this first.&lt;/p&gt;
+&lt;p&gt;- CRITICAL-severity alert &quot;Export or Delete Command Used&quot;: captures agent intent to exfil (| outputcsv, | outputlookup, | collect, | sendemail) or destroy (| delete) data. Single hit fires CRITICAL (weight +15).&lt;/p&gt;
+&lt;p&gt;CHANGED&lt;/p&gt;
+&lt;p&gt;- &quot;Risky queries %&quot; KPI replaces the unbounded &quot;Risk score&quot; sum (now bounded 0-100, share of MCP queries at MEDIUM band or higher).&lt;/p&gt;
+&lt;p&gt;- is\_no\_time\_bound weight set to 0 (was 2): MCP servers pass time range as an API parameter, so the flag fired on virtually every query and saturated the score. Still reported in dashboards for transparency.&lt;/p&gt;
+&lt;p&gt;- REST tool inference covers more endpoints: SAIA tools (saia\_generate\_spl / explain / optimize / ask), validate\_spl, search\_summary, auth\_check.&lt;/p&gt;
+&lt;p&gt;FIXED&lt;/p&gt;
+&lt;p&gt;- Phantom MCP agents removed: admin and splunk-system-user no longer appear in detection / access panels (admin role inherits every capability; official server's own housekeeping runs as splunk-system-user with the same user-agent as real traffic).&lt;/p&gt;
+&lt;p&gt;- Heartbeat scheduled search no longer logs HTTP 404 every 5 minutes when the official MCP Server isn't installed.&lt;/p&gt;
+&lt;p&gt;- Getting Started Step 1 explains the empty state and shows a helper row on fresh installs.&lt;/p&gt;
+&lt;p&gt;- Step 2 SPL drops the default placeholder row when editing the user lookup.&lt;/p&gt;
+&lt;p&gt;- User x Tool matrix no longer errors when no user has the mcp\_tool\_execute capability.&lt;/p&gt;
+&lt;p&gt;COMPATIBILITY&lt;/p&gt;
+&lt;p&gt;Splunk Enterprise &amp;amp; Cloud 9.x / 10.x. No restart required.&lt;/p&gt;
+&lt;p&gt;Reads only built-in \_audit / \_internal — no ingestion, no CIM, no companion app needed.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Tracks AI agent activity in Splunk by analyzing _audit and _internal logs to surface MCP server queries, flag anti-patterns, and report REST endpoint usage.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;MCP-Watch provides visibility and governance for AI agents operating against Splunk through the Model Context Protocol. The app surfaces every SPL query executed by MCP servers, flags anti-patterns such as wildcard index searches and overly wide time ranges, and reports on REST endpoint usage. It reads exclusively from Splunk&amp;#x27;s built-in _audit and _internal indexes, requiring no additional data ingestion or dependencies. Administrators configure a lookup table with the Splunk usernames their MCP servers authenticate as, and the app then tracks query volume, identifies quality issues, and enables per-user tool access governance. Four dashboards present MCP activity across operational and compliance dimensions, while scheduled searches and alerts provide ongoing monitoring of agent behavior.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f72c58f6-5a12-11f1-b55c-0eaea943b5aa.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Alper Keske</dc:creator>
+      <pubDate>Thu, 04 Jun 2026 19:12:03 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8765/#v1.1.0</guid>
+    </item>
+    <item>
+      <title>SA-PaloAltoIoTDevices for Enterprise Security - v1.0.1 [Version Update] (Archived)</title>
+      <link>https://splunkbase.splunk.com/app/7061/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This supporting add-on comes with prebuilt content for Palo Alto IoT data to be easily used with Splunk Enterprise Security&amp;#x27;s Asset database.
+
+See documentation at https://pa-iot.rba.community/ 
+
+** This supporting add-on is only intended to work with Splunk Enterprise Security deployments **&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c6b5714e-6034-11f1-a36f-da60579292f5.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arcus Data</dc:creator>
+      <pubDate>Thu, 04 Jun 2026 17:43:52 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7061/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>SA-CortexXDRDevices for Enterprise Security - v1.0.1 [Version Update] (Archived)</title>
+      <link>https://splunkbase.splunk.com/app/7063/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This supporting add-on comes with prebuilt content for Palo Alto Networks Cortex XDR data to be easily used with Splunk Enterprise Security&amp;#x27;s Asset database.
+
+See documentation at https://pan-xdr.rba.community/
+
+** This supporting add-on is only intended to work with Splunk Enterprise Security deployments **&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/39d276ae-6035-11f1-a8ac-eea14f45257e.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arcus Data</dc:creator>
+      <pubDate>Thu, 04 Jun 2026 17:43:40 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7063/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>SA-CrowdstrikeIntelIndicators for Enterprise Security - v1.0.1 [Version Update] (Archived)</title>
+      <link>https://splunkbase.splunk.com/app/7064/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This supporting add-on Adds CrowdStrike&amp;#x27;s intelligence indicators to Splunk Enterprise Security&amp;#x27;s threat framework. 
+
+Supports the following IOC types OOB:
+* IP 
+* Domain
+* URL
+* Hash
+
+See documentation - including important prerequisites - at https://cs-intel.rba.community
+
+** This supporting add-on is only intended to work with Splunk Enterprise Security deployments **&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/bcd7a90c-6035-11f1-afac-46cd8f21b9fa.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arcus Data</dc:creator>
+      <pubDate>Thu, 04 Jun 2026 17:43:29 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7064/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>Wonderware (Archestra) - v1.0.4 [Version Update] (Archived)</title>
+      <link>https://splunkbase.splunk.com/app/3878/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk your Wonderware (Archestra) data!
+
+See https://blog.arcusdata.io/splunking-wonderware-industrial-data-the-wonderware-app for more information on how to setup this App.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/af5d6234-6036-11f1-b3b2-2659942d7eb8.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arcus Data</dc:creator>
+      <pubDate>Thu, 04 Jun 2026 17:42:54 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/3878/#v1.0.4</guid>
+    </item>
     <item>
       <title>Jamf Pro Add-on - v2.12.7 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/4729/</link>
@@ -335,18 +415,6 @@ LATEST UPDATES
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Query AI</dc:creator>
       <pubDate>Thu, 04 Jun 2026 00:35:41 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/4634/#v3.1.0</guid>
-    </item>
-    <item>
-      <title>Anomali Link - v2.4.6 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/3151/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Python library fix; add support for Splunk 10.0&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Anomali Link for Splunk is a Splunk App that collects events from your Splunk server and uploads them to the Anomali Match product.
-
-This app is only available to Anomali Match customers, and is therefore restricted. To gain access to this application, please contact your Anomali account team, or send an email to support@anomali.com. 
-
-Find out more about Anomali Match here: https://www.anomali.com/products/match&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/623aa3f8-5957-11f1-80d2-2694cee47fd7.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Anomali Team</dc:creator>
-      <pubDate>Wed, 03 Jun 2026 21:47:52 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/3151/#v2.4.6</guid>
     </item>
     <item>
       <title>Splunk Cloud Connect - v1.1.0 [New App Release]</title>
@@ -4114,75 +4182,6 @@ Helps organizations validate their PCI compliance posture with specialised dashb
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">AlphaSOC, Inc.</dc:creator>
       <pubDate>Wed, 27 May 2026 10:55:15 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7911/#v1.2.0</guid>
-    </item>
-    <item>
-      <title>3D Graph Network Topology Visualization - v1.4.3 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4611/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Fixed security vulnerabilities on dependencies&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Graph Algorithms for Machine Learning Toolkit and custom visualisation for Splunk to plot relationships between objects with force directed graph based on ThreeJS/WebGL.
-
-Find more information on the details page with link to blog articles like:
-https://www.splunk.com/en_us/blog/machine-learning/chasing-a-hidden-gem-graph-analytics-with-splunk-s-machine-learning-toolkit.html&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f685851a-59ab-11f1-a9ca-c211b51198c7.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
-      <pubDate>Wed, 27 May 2026 09:13:34 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4611/#v1.4.3</guid>
-    </item>
-    <item>
-      <title>ReversingLabs TitaniumScale Dashboard for Splunk - v1.0.5 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4318/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Update to v1.0.5 for compatibility.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The ReversingLabs TitaniumScale Dashboard for Splunk is a tool that provides an advanced visual breakdown of potentially harmful files analyzed by the ReversingLabs TitaniumScale security solution.
-
-The visualization application is meant to be used only with the ReversingLabs TitaniumScale product.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ac223708-5950-11f1-ad1c-9e402cd45cf8.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">ReversingLabs Corporation</dc:creator>
-      <pubDate>Wed, 27 May 2026 03:01:22 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4318/#v1.0.5</guid>
-    </item>
-    <item>
-      <title>CrowdStrike Scheduled Search Technical Add-on - v3.1.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6902/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;It is recommended that new versions of the TA be tested prior to being deployed into a production environment.&lt;/h2&gt;
-&lt;h3&gt;TA\_crowdstrike\_scheduled\_search v3.1.2 Release Notes&lt;/h3&gt;
-&lt;h3&gt;Bug Fixes&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Fixed a potential data loss issue where the add-on could advance its collection checkpoint before confirming data was successfully delivered to Splunk&lt;/li&gt;
-  &lt;li&gt;Fixed an issue where the add-on could silently fail to authenticate without reporting detailed error information&lt;/li&gt;
-  &lt;li&gt;Removed unsupported SOCKS proxy types from the configuration UI&lt;/li&gt;
-  &lt;li&gt;Fixed an issue where large scheduled search results could cause collection to stop unexpectedly&lt;/li&gt;
-  &lt;li&gt;Fixed an issue where CSV-format report timestamps could fail to parse correctly, causing Splunk indexing warnings&lt;/li&gt;
-  &lt;li&gt;Inputs now detect authentication failures and include specific error details with troubleshooting guidance&lt;/li&gt;
-  &lt;li&gt;Fixed an issue where unexpected data in CSV-format reports could cause collection errors&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Improvements&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Attempts to automatically recover from temporary API errors, rate limiting, and expired authentication tokens instead of stopping collection&lt;/li&gt;
-  &lt;li&gt;Inputs now recover automatically after errors instead of requiring manual restart&lt;/li&gt;
-  &lt;li&gt;Improved error messages with clear guidance when checkpoint data becomes corrupted, preventing unnecessary re-collection of historical data&lt;/li&gt;
-  &lt;li&gt;Added checkpoint health tracking to improve visibility into collection progress&lt;/li&gt;
-  &lt;li&gt;Improved log messages with TA version, API version, redacted credentials, and collection progress for faster troubleshooting&lt;/li&gt;
-  &lt;li&gt;Updated dashboard queries and log search patterns for consistency with other CrowdStrike add-ons&lt;/li&gt;
-  &lt;li&gt;Updated bundled dependencies including API and platform libraries to their latest supported versions&lt;/li&gt;
-  &lt;li&gt;Large scheduled search results are now processed in batches to prevent delivery failures on high-volume collections&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The CrowdStrike Falcon Platform provides customers with extensive visibility into the configuration of and events taking place on endpoints and workloads. While triggered detections are an important part of endpoint security, CrowdStrike also provides the ability to search the raw event data. Scheduled searches can be used to automate the recurrence of those searches. This technical add-on allows CrowdStrike Falcon customers to retrieve successful scheduled searched from the Falcon platform via public APIs and have the events indexed into Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/75f638fc-5953-11f1-80d2-2694cee47fd7.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">CrowdStrike</dc:creator>
-      <pubDate>Tue, 26 May 2026 22:46:58 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6902/#v3.1.2</guid>
-    </item>
-    <item>
-      <title>Spur Enrichment for Splunk - v1.1.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7126/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;`ip\=X` searches against non-Spur sourcetypes silently returned zero results after installing the Spur TA. Indexed-field stanzas in `fields.conf` (`ip`, `feed_type`, `infrastructure`, `tunnel_operator`, `anonymous_tunnel_operator`) were declared globally, so Splunk shadowed search-time extractions for those field names in every other sourcetype.&lt;/p&gt;
-&lt;p&gt;Stanzas are now scoped to `sourcetype::spur_feed::\&amp;lt;field&amp;gt;`. `sourcetype\=spur_feed ip\=X` queries still hit the TSIDX; no reindex, no query rewrites.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Official Spur Splunk Application. Enhance your Splunk experience with the Spur Enrichment for Splunk App. This application integrates with Spur products, providing you with enriched data and insights right in your Splunk environment. Generate events based on IP inputs, enrich existing events with data from the Spur Context API, and insert feed data into a Splunk index with our modular input feature.
-
-The Spur Splunk App requires an active Spur subscription and specific user privileges for installation. 
-
-Once installed, you can utilize our search commands and modular input features to generate and enrich your data. 
-
-Get the most out of your data with the Spur Splunk App. Download today and start exploring your data in new ways.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/72b600e2-5948-11f1-ad1c-9e402cd45cf8.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Spur Intelligence Corporation</dc:creator>
-      <pubDate>Tue, 26 May 2026 21:22:46 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7126/#v1.1.2</guid>
     </item>
   </channel>
 </rss>
