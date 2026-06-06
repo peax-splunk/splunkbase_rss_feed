@@ -6,7 +6,115 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sat, 06 Jun 2026 20:54:41 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 06 Jun 2026 21:57:43 +0000</lastBuildDate>
+    <item>
+      <title>GenAI Observability for Splunk - v1.1.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8308/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;## v1.1.0 — OpenTelemetry GenAI support&lt;/p&gt;
+&lt;p&gt;Ingest GenAI traces from any OpenTelemetry pipeline — no custom SDK required.&lt;/p&gt;
+&lt;p&gt;**Added**&lt;/p&gt;
+&lt;p&gt;- New `genai:otel` sourcetype: ingest GenAI traces collected through an&lt;/p&gt;
+&lt;p&gt;  OpenTelemetry Collector. Spans using the OpenTelemetry GenAI semantic&lt;/p&gt;
+&lt;p&gt;  conventions (`gen_ai.*`) map to the dashboards automatically.&lt;/p&gt;
+&lt;p&gt;- Dashboards now support both direct HEC ingestion (`genai:trace`) and&lt;/p&gt;
+&lt;p&gt;  OpenTelemetry Collector ingestion (`genai:otel`), indexed to `genai_traces`.&lt;/p&gt;
+&lt;p&gt;**Improved**&lt;/p&gt;
+&lt;p&gt;- Splunk Cloud compatibility for dashboard and knowledge-object access.&lt;/p&gt;
+&lt;p&gt;Works with the official OpenTelemetry auto-instrumentation for OpenAI,&lt;/p&gt;
+&lt;p&gt;LangChain, LlamaIndex, and more. See the project repository for the collector&lt;/p&gt;
+&lt;p&gt;configuration and a ready-to-run example.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Observability for LLM, RAG &amp;amp; agent apps. Works with any OpenTelemetry GenAI pipeline — no custom SDK required. Pre-built Splunk dashboards for tokens, latency, cost &amp;amp; errors.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;GenAI Observability for Splunk provides production monitoring for LLM, RAG, and
+agent applications — track token usage, latency, cost, retrieval quality, and
+errors across OpenAI, Anthropic, LangChain, and more.
+
+**Works with any OpenTelemetry GenAI pipeline — no custom SDK required.**
+If you already emit OpenTelemetry GenAI traces (gen_ai.* semantic conventions),
+point your OpenTelemetry Collector at Splunk and the dashboards light up — with
+no changes to your application code. Prefer a turnkey setup? An optional
+lightweight Python SDK instruments your code with simple decorators.
+
+Key Features:
+- Ingests standard OpenTelemetry GenAI traces (gen_ai.* semantic conventions) via the OpenTelemetry Collector
+- Real-time monitoring of LLM calls, RAG pipelines, and AI agents
+- Token usage tracking with cost estimation (bundled model-pricing lookup)
+- Latency analysis with P50, P95, P99 percentiles and tokens/sec
+- Error detection and alerting
+- Pre-built dashboards for immediate insights
+- Optional Python SDK for one-line, decorator-based instrumentation
+- Works with OpenAI, Anthropic, LangChain, LlamaIndex, and any OpenTelemetry-instrumented framework
+
+Use Cases:
+- Monitor production AI applications
+- Optimize token usage and reduce costs
+- Debug slow or failing LLM calls
+- Track AI spend by model, workflow, or user
+- Ensure SLA compliance for AI services
+
+Bring your existing OpenTelemetry pipeline, or use the optional SDK — either way
+you get ready-to-use dashboards, model-pricing lookups, and a collector recipe
+to get started in minutes.
+
+Docs, examples, and the collector configuration:  https://github.com/rootiq-ai/splunk_genai_observability/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">kamal singh bisht</dc:creator>
+      <pubDate>Sat, 06 Jun 2026 21:53:10 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8308/#v1.1.0</guid>
+    </item>
+    <item>
+      <title>Microsoft 365 Defender Threat Vulnerability Add-on for Splunk - v2.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6470/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Major release.&lt;/strong&gt; This version re-architects data collection to run natively inside&lt;br&gt;
+Splunk and migrates to Microsoft's current, supported API endpoints. It supersedes the&lt;br&gt;
+1.x line, which relied on externally-run Python scripts.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Highlights&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Native Splunk modular inputs — no external runner required.&lt;/strong&gt; Data collection is now&lt;br&gt;
+  fully self-contained inside the add-on as Splunk modular inputs. Previous versions&lt;br&gt;
+  shipped standalone Python scripts that had to run outside Splunk (e.g. a Splunk HF on a&lt;br&gt;
+  schedule, or an Azure Function). Credentials, scheduling, and secret management are now&lt;br&gt;
+  handled entirely within Splunk.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Advanced Hunting migrated to the Microsoft Graph API.&lt;/strong&gt; CVE description collection&lt;br&gt;
+  (&lt;code&gt;ms:defender:vulnerabilities:description&lt;/code&gt;) now calls&lt;br&gt;
+&lt;a href=&quot;https://graph.microsoft.com/v1.0/security/runHuntingQuery&quot;&gt;&lt;code&gt;https://graph.microsoft.com/v1.0/security/runHuntingQuery&lt;/code&gt;&lt;/a&gt;, replacing the deprecated&lt;br&gt;
+&lt;a href=&quot;https://api.security.microsoft.com/api/advancedhunting/run&quot;&gt;&lt;code&gt;https://api.security.microsoft.com/api/advancedhunting/run&lt;/code&gt;&lt;/a&gt; endpoint that Microsoft will&lt;br&gt;
+  retire on &lt;strong&gt;February 1, 2027&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Unified Defender for Endpoint endpoint.&lt;/strong&gt; The default base URL is now&lt;br&gt;
+&lt;a href=&quot;https://api.security.microsoft.com&quot;&gt;&lt;code&gt;https://api.security.microsoft.com&lt;/code&gt;&lt;/a&gt; (Microsoft's recommended unified endpoint),&lt;br&gt;
+  replacing the legacy &lt;a href=&quot;https://api.securitycenter.microsoft.com.&quot;&gt;&lt;code&gt;https://api.securitycenter.microsoft.com&lt;/code&gt;.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GCC High / DoD login URL corrected.&lt;/strong&gt; OAuth for GCC High / DoD accounts is now routed&lt;br&gt;
+  to &lt;a href=&quot;https://login.microsoftonline.us&quot;&gt;&lt;code&gt;https://login.microsoftonline.us&lt;/code&gt;&lt;/a&gt; instead of &lt;a href=&quot;https://login.microsoftonline.com.&quot;&gt;&lt;code&gt;https://login.microsoftonline.com&lt;/code&gt;.&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;⚠️ &lt;strong&gt;Breaking changes &amp;amp; required actions&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;New API permission required.&lt;/strong&gt; The Graph migration changes the OAuth token resource to&lt;br&gt;
+&lt;a href=&quot;https://graph.microsoft.com.&quot;&gt;&lt;code&gt;https://graph.microsoft.com&lt;/code&gt;.&lt;/a&gt; Your app registration must hold the&lt;br&gt;
+&lt;strong&gt;&lt;code&gt;ThreatHunting.Read.All&lt;/code&gt;&lt;/strong&gt; application permission (replacing &lt;code&gt;AdvancedQuery.Read.All&lt;/code&gt;&lt;br&gt;
+  under Microsoft Defender for Endpoint). Grant it and obtain admin consent &lt;strong&gt;before&lt;br&gt;
+  upgrading&lt;/strong&gt;, or CVE description collection will fail.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;External scripts removed.&lt;/strong&gt; If you previously ran the bundled Python scripts via an HF&lt;br&gt;
+  or Azure Function, decommission them after upgrading — collection is now driven by the&lt;br&gt;
+  add-on's modular inputs, which you configure on the &lt;strong&gt;Inputs&lt;/strong&gt; tab.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Compatibility notes&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Both &lt;code&gt;api.security.microsoft.com&lt;/code&gt; and the legacy &lt;code&gt;api.securitycenter.microsoft.com&lt;/code&gt;&lt;br&gt;
+  continue to work; &lt;strong&gt;existing account configurations are unaffected&lt;/strong&gt; by the default&lt;br&gt;
+  endpoint change.&lt;/li&gt;
+&lt;li&gt;US GCC and GCC High / DoD Defender endpoints are unchanged (only the GCC High / DoD&lt;br&gt;
+&lt;em&gt;login&lt;/em&gt; URL was corrected).&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Vulnerabilities are flaws in a computer system that weakens the overall security of the device or system.
+And in both small and large organizations it can be quite daunting to keep all devices patched against all vulnerabilities at all times.
+
+This is also troublesome for managers, who need to give compliance reports regarding their systems.
+By utilizing MS Defender Vulnerability framework it is much easier to give a clear answer regarding how well patched your devices are.
+
+Import the Defender data to Splunk and give your organization a boost in both threat insights and security analytics.
+The app comes packaged with one example dashboard to give you an idea of how to use the data.
+It also CIM normalizes the data into the Vulnerability data model, and holds reports that generates ES ready asset lookups for you.
+
+Check out the README for more details.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/cbb5d54c-61e9-11f1-bc37-9e93a22edca0.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Thomas Hillesøy</dc:creator>
+      <pubDate>Sat, 06 Jun 2026 21:08:50 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6470/#v2.0.0</guid>
+    </item>
     <item>
       <title>Threat Hunting Essentials - v1.3.8 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7633/</link>
@@ -3897,14 +4005,6 @@ Because Splunk has both historical and realtime data, this app allows you to app
       <guid>https://splunkbase.splunk.com/app/3969/#v2.1.8</guid>
     </item>
     <item>
-      <title>Orca Security Add-On for Splunk - v5.1.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5148/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Orca Security Technology Add-on (TA) for Splunk combines the deep and contextual alert findings of Orca with the Splunk real-time security analytic engine. Use this technology add-on to prioritize critical vulnerabilities that exist across your cloud estate and create data-driven outcomes. This add-on imports Orca alerts regarding vulnerabilities, malware, misconfigurations, lateral movement risk, authentication risk, and insecure high-risk data.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ca08713e-59e5-11f1-b1d7-1623a410537a.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Orca Security</dc:creator>
-      <pubDate>Thu, 28 May 2026 12:47:10 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5148/#v5.1.0</guid>
-    </item>
-    <item>
       <title>CSmon Add-on - v1.0.2 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8550/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
@@ -4102,63 +4202,6 @@ CrowdStrike Host configuration: Maintain a history of device policy configuratio
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">CrowdStrike</dc:creator>
       <pubDate>Wed, 27 May 2026 18:06:46 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5570/#v3.4.1</guid>
-    </item>
-    <item>
-      <title>Everpure Unified Add-on for Splunk - v2.0.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5513/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Version - 2.0.2&lt;/p&gt;
-&lt;p&gt;Bug Fixes&lt;br&gt;
-Skip destroyed buckets in FlashBlade Bucket performance collection&lt;br&gt;
-Version - 2.0.1&lt;/p&gt;
-&lt;p&gt;Added support for Splunk 10.x&lt;br&gt;
-Migrated to Splunk add-on builder v4.5.0&lt;br&gt;
-Updated to Everpure branding&lt;br&gt;
-Bug Fixes&lt;br&gt;
-Version - 1.6.0&lt;/p&gt;
-&lt;p&gt;Renamed the index field in FlashBlade Alerts to alert_index.&lt;br&gt;
-Version - 1.5.0&lt;/p&gt;
-&lt;p&gt;Added support for 'array_total_load' metric.&lt;br&gt;
-Version - 1.4.0&lt;/p&gt;
-&lt;p&gt;Migrated to Splunk add-on builder v4.1.3&lt;br&gt;
-Version - 1.3.0&lt;/p&gt;
-&lt;p&gt;Added support for APIv2 for FlashArray and FlashBlade.&lt;br&gt;
-Enhanced checkpointing mechanism for sessions, alert and audit endpoints.&lt;br&gt;
-Migrated to Splunk add-on builder v4. (Supporting jQuery 3.5.0)&lt;br&gt;
-UI overhaul&lt;br&gt;
-Mitigated jQuery vulnerabilities&lt;br&gt;
-Removed support for python2.&lt;br&gt;
-Bugfixes&lt;br&gt;
-Version - 1.2.0&lt;/p&gt;
-&lt;p&gt;Provided support of Mirrored Write in FlashArray and Pure1 &amp;gt; Array (only for FlashArray).&lt;br&gt;
-Version - 1.1.0&lt;/p&gt;
-&lt;p&gt;Provided support of Pure1.&lt;br&gt;
-Added support for Batch configuration of Systems and Inputs.&lt;br&gt;
-Version - 1.0.0&lt;/p&gt;
-&lt;p&gt;Provided support of FlashArray and FlashBlade.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;The Everpure Unified Add-on is used to collect logs, alerts, audits, and metrics from Everpure FlashBlade, FlashArray, and Pure1 into your Splunk environment.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Everpure Unified Add-on is used to collect logs, alerts, audits, and metrics from Everpure FlashBlade, FlashArray, and Pure1 into your Splunk environment.
-This Add-on uses the Splunk KV store for the checkpoint mechanism.
-Author - Everpure
-Version - 2.0.1
-Supported Splunk versions are 10.3.x, 10.2.x, 10.1.x, 10.0.x, 9.4.x, 9.3.x
-Supported OS versions are CentOS and Windows
-Supported Browser versions are Chrome and Firefox
-Supports FlashBlade REST API 1.0 to 1.11, 2.2 and 2.8 (except 1.10)
-Supports FlashArray REST API 1.13 to 1.18 and 2.2(all endpoints) and 2.4(sessions endpoint) (FA/Purity Version 5.0.0 and above)
-Supports Pure1 REST API 1.latest
-
-
-# REQUIREMENTS
-* Splunk version 10.3.x, 10.2.x, 10.1.x, 10.0.x, 9.4.x, 9.3.x
-* Appropriate API Token for collecting data from FlashBlade and FlashArray or JWT token for Pure1.
-* Supports only secured connection between Splunk and the arrays.
-
-Please check out the README.md that is included with this package or the following article for configuring this add-on as well as handling self-signed certificates.
-
-https://support.purestorage.com/Solutions/Splunk/Splunk_Reference/Array_Monitoring_on_Splunk_with_PureStorage_Unified_App_and_TA
-
-Please see the Details tab in this page for more details if you are upgrading from v1.0.0 to v1.x.0.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/1d41e94a-59d5-11f1-b41c-6692b8f70154.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Everpure</dc:creator>
-      <pubDate>Wed, 27 May 2026 14:25:31 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5513/#v2.0.2</guid>
     </item>
   </channel>
 </rss>
