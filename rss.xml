@@ -6,7 +6,37 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Tue, 09 Jun 2026 03:24:51 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 09 Jun 2026 07:38:12 +0000</lastBuildDate>
+    <item>
+      <title>Google SCC Add-on For Splunk - v2.0.3 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6426/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
+&lt;li&gt;Eliminated the additional API calls associated with each input invocation&lt;/li&gt;
+&lt;li&gt;Bumped the minimum required Python version to 3.13 as per Splunk standards&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Add-on typically imports and enriches data from Google SCC SDK, creating a rich data set ready for direct analysis or use in an App. The GoogleSCC Add-on for Splunk will provide the below functionalities:
+	- Collect sources data, findings data, assets data and audit logs from Google SCC SDK and store in Splunk indexes.
+	- Categorize the data in different sourcetypes.
+	- Parse the data and extract important fields&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/22d76c9a-63c1-11f1-ad08-46fbdbfa194f.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Google</dc:creator>
+      <pubDate>Tue, 09 Jun 2026 05:12:27 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6426/#v2.0.3</guid>
+    </item>
+    <item>
+      <title>Google SCC App for Splunk - v2.0.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6425/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
+&lt;li&gt;Bumped the minimum required Python version to 3.13 as per Splunk standards&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The GoogleSCC App uses the data that are indexed in Splunk via add-on for Data Visualization. The GoogleSCC App for Splunk will provide the below dashboards:
+
+  - Overview
+  - Sources
+  - Findings
+  - Assets
+  - Audit Logs&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8e019f22-63c1-11f1-bc37-9e93a22edca0.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Google</dc:creator>
+      <pubDate>Tue, 09 Jun 2026 05:11:55 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6425/#v2.0.2</guid>
+    </item>
     <item>
       <title>IBM DataPower Add-on for Splunk - v1.0.2 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/4662/</link>
@@ -591,34 +621,6 @@ https://brokenhosts.hurricanelabs.com&lt;/p&gt;&lt;img height=&quot;36px&quot; w
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Hurricane Labs</dc:creator>
       <pubDate>Thu, 04 Jun 2026 20:03:22 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/3247/#v5.1.1</guid>
-    </item>
-    <item>
-      <title>MCP Watch - v1.1.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8765/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;MCP-Watch 1.1.0 — multi-signal detection, liveness heartbeats, governance polish&lt;/p&gt;
-&lt;p&gt;First update since 1.0.0. Three themes: catching custom/community MCPs, real liveness signals, and a CRITICAL alert on data-exfil  or data-destroy commands.&lt;/p&gt;
-&lt;p&gt;NEW&lt;/p&gt;
-&lt;p&gt;- Multi-signal MCP detection: catches custom / community / non-official MCP servers (no official provenance, generic user-agent) via REST-side user-agent matching + endpoint-based tool inference. New MCP Detection (REST) dashboard, new mcp\_user\_agents.csv lookup. Splunk's reserved identities (admin, splunk-system-user, sidecar\_agent-manager, nobody) are excluded by default via mcp\_excluded\_users.csv.&lt;/p&gt;
-&lt;p&gt;- Unified MCP Access &amp;amp; Tools dashboard: works whether the official Splunk MCP Server is present (mcp\_tool\_execute capability + tool catalog) or not (RBAC + REST-detected tool usage). Custom MCPs no longer leave the dashboard blank.&lt;/p&gt;
-&lt;p&gt;- Liveness heartbeats with UP / IDLE / STALE: per-MCP status via mcp\_heartbeat KV collection. Three-state model separates &quot;MCP server down&quot; from &quot;agent idle&quot;. Auto-heartbeat for the official Splunk MCP Server when present.&lt;/p&gt;
-&lt;p&gt;- Getting Started dashboard: in-app onboarding showing current config and live &quot;is data flowing?&quot; checks. Open this first.&lt;/p&gt;
-&lt;p&gt;- CRITICAL-severity alert &quot;Export or Delete Command Used&quot;: captures agent intent to exfil (| outputcsv, | outputlookup, | collect, | sendemail) or destroy (| delete) data. Single hit fires CRITICAL (weight +15).&lt;/p&gt;
-&lt;p&gt;CHANGED&lt;/p&gt;
-&lt;p&gt;- &quot;Risky queries %&quot; KPI replaces the unbounded &quot;Risk score&quot; sum (now bounded 0-100, share of MCP queries at MEDIUM band or higher).&lt;/p&gt;
-&lt;p&gt;- is\_no\_time\_bound weight set to 0 (was 2): MCP servers pass time range as an API parameter, so the flag fired on virtually every query and saturated the score. Still reported in dashboards for transparency.&lt;/p&gt;
-&lt;p&gt;- REST tool inference covers more endpoints: SAIA tools (saia\_generate\_spl / explain / optimize / ask), validate\_spl, search\_summary, auth\_check.&lt;/p&gt;
-&lt;p&gt;FIXED&lt;/p&gt;
-&lt;p&gt;- Phantom MCP agents removed: admin and splunk-system-user no longer appear in detection / access panels (admin role inherits every capability; official server's own housekeeping runs as splunk-system-user with the same user-agent as real traffic).&lt;/p&gt;
-&lt;p&gt;- Heartbeat scheduled search no longer logs HTTP 404 every 5 minutes when the official MCP Server isn't installed.&lt;/p&gt;
-&lt;p&gt;- Getting Started Step 1 explains the empty state and shows a helper row on fresh installs.&lt;/p&gt;
-&lt;p&gt;- Step 2 SPL drops the default placeholder row when editing the user lookup.&lt;/p&gt;
-&lt;p&gt;- User x Tool matrix no longer errors when no user has the mcp\_tool\_execute capability.&lt;/p&gt;
-&lt;p&gt;COMPATIBILITY&lt;/p&gt;
-&lt;p&gt;Splunk Enterprise &amp;amp; Cloud 9.x / 10.x. No restart required.&lt;/p&gt;
-&lt;p&gt;Reads only built-in \_audit / \_internal — no ingestion, no CIM, no companion app needed.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Tracks AI agent activity in Splunk by analyzing _audit and _internal logs to surface MCP server queries, flag anti-patterns, and report REST endpoint usage.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;MCP-Watch provides visibility and governance for AI agents operating against Splunk through the Model Context Protocol. The app surfaces every SPL query executed by MCP servers, flags anti-patterns such as wildcard index searches and overly wide time ranges, and reports on REST endpoint usage. It reads exclusively from Splunk&amp;#x27;s built-in _audit and _internal indexes, requiring no additional data ingestion or dependencies. Administrators configure a lookup table with the Splunk usernames their MCP servers authenticate as, and the app then tracks query volume, identifies quality issues, and enables per-user tool access governance. Four dashboards present MCP activity across operational and compliance dimensions, while scheduled searches and alerts provide ongoing monitoring of agent behavior.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f72c58f6-5a12-11f1-b55c-0eaea943b5aa.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Alper Keske</dc:creator>
-      <pubDate>Thu, 04 Jun 2026 19:12:03 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8765/#v1.1.0</guid>
     </item>
     <item>
       <title>Jamf Pro Add-on - v2.12.7 [Version Update]</title>
@@ -4078,45 +4080,6 @@ Please login to your Synack Client Portal for configuration options or email Syn
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Synack</dc:creator>
       <pubDate>Wed, 27 May 2026 22:00:29 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/4288/#v3.1.8</guid>
-    </item>
-    <item>
-      <title>VIAVI Observer Apex App - v1.0.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8514/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h1&gt;VIAVI Observer Apex App for Splunk – Version 1.0.1 Release Notes&lt;/h1&gt;
-&lt;p&gt;Welcome to &lt;strong&gt;a release&lt;/strong&gt; of the &lt;strong&gt;VIAVI Observer Apex App for Splunk&lt;/strong&gt; (v 1.0.1). This document provides a complete overview of the capabilities, integration points, and operational guidance you need to start ingesting VIAVI Observer Threat Forensics (OTF) and Network Performance data into Splunk.&lt;/p&gt;
-&lt;h2&gt;Information&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Version Number: 1.0.1&lt;/li&gt;
-  &lt;li&gt;Company: &lt;a href=&quot;https://www.viavisolutions.com/en-us/enterprise&quot;&gt;VIAVI Solutions&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Application Name: VIAVI Observer Apex App for Splunk&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;Release Information&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Update requirements specific to splunk cloud&lt;/strong&gt; &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;Previous Release Information&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Secure Event Ingestion&lt;/strong&gt;: Dedicated REST endpoint that receives OTF events over TLS‑encrypted channels.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;OCSF Normalization:&lt;/strong&gt; All incoming data is mapped to the &lt;strong&gt;Open Cybersecurity Schema Framework (OCSF)&lt;/strong&gt; before indexing.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Rich Metadata Export&lt;/strong&gt;: Every alert carries the full suite of metadata (packet‑level details, flow records, TLS fingerprints, device identifiers, etc.) for both security and network performance monitoring.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Pivot to Observer Apex&lt;/strong&gt;: Each alert contains a URL that allows a pivot back to the information dashboard, and details generating the alert for further investigatons.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Pre‑built Splunk Dashboards&lt;/strong&gt;: Ready‑to‑import example dashboards for DNS Errors, User Experience Score (EUE), Interface Utilization and TLS Certificate health.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Automatic Alerting&lt;/strong&gt;: Out‑of‑the‑box alert rules map OTF security events&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;API‑First Integration&lt;/strong&gt;: Leverages the Rich VIAVI Observer API for:&lt;/li&gt;
-  &lt;li&gt;Pulling additional metadata on demand for custom dashboard&lt;/li&gt;
-  &lt;li&gt;Automating mitigation workflow orchestration with Splunk SOAR platform.&lt;/li&gt;
-  &lt;li&gt;Use API and Splunk SOAR to pull all information, even to the packet data from Observer Apex platform.&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Bring VIAVI Observer Apex alerts directly into your Splunk environment, enabling real-time visibility into critical network and security issues.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;VIAVI Observer Apex App for Splunk: Turning Network Data into NetSecOps Actionable Insight.
-
-Transform your network and security monitoring data into actionable insights with the Observer Apex App for Splunk. This powerful integration brings Viavi Observer Apex alerts directly into your Splunk environment, enabling real-time visibility into critical network or security issues.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ce858be2-5a0e-11f1-b41c-6692b8f70154.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">VIAVI Solutions</dc:creator>
-      <pubDate>Wed, 27 May 2026 21:24:04 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8514/#v1.0.1</guid>
     </item>
   </channel>
 </rss>
