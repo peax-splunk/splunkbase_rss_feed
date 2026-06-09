@@ -6,25 +6,67 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Tue, 09 Jun 2026 21:41:41 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 09 Jun 2026 23:12:46 +0000</lastBuildDate>
     <item>
-      <title>TrackMe - v2.4.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4621/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;TrackMe 2.4.0 — AI Agents (TrackMe Agentic, GA)&lt;/strong&gt;&lt;/p&gt;
+      <title>Proficio Threat and Compliance Library - v2.2.200 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6799/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Proficio&amp;#x27;s content repository: alerts, dashboards and other knowledge objects.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9726b6b6-6455-11f1-8b39-42181864549a.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Proficio Content</dc:creator>
+      <pubDate>Tue, 09 Jun 2026 22:52:58 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6799/#v2.2.200</guid>
+    </item>
+    <item>
+      <title>Proficio HDE - v2.2.200 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7164/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;No description&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/935d6686-644d-11f1-8b39-42181864549a.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Proficio Content</dc:creator>
+      <pubDate>Tue, 09 Jun 2026 22:34:30 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7164/#v2.2.200</guid>
+    </item>
+    <item>
+      <title>ZeroFox Data Connector - v4.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5041/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;v4.0.0&lt;/h2&gt;
+&lt;h3&gt;Breaking changes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;AI Advisors (GA)&lt;/strong&gt;: six AI agents inspect TrackMe’s monitored entities, propose grounded recommendations, and — in &lt;em&gt;act&lt;/em&gt; mode, with consent — apply them through TrackMe’s REST API. ML Advisor (outlier models), Feed Lifecycle (DSM/DHM thresholds), FLX Threshold, FQM (field quality + data dictionary), Component Health (WLK/MHM), and the catalog-driven Concierge.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Inspect by default&lt;/strong&gt;: every advisor runs read-only first and emits typed recommendations; &lt;em&gt;act&lt;/em&gt; mode applies changes and verifies each write. Write tools are absent from the agent in inspect mode.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;AI Assistant ↔ Advisor bridge&lt;/strong&gt;: the chat proposes an advisor as a one-click consent card, launches it inline with the session’s resolved entity/tenant context, and renders the structured result — the chat never calls a write tool directly.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;AI Concierge&lt;/strong&gt;: a catalog-driven generalist grounded in the live REST API; zero static write tools — every action is a consent-card click, with per-action typed confirmation for destructive operations.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;AI Agents automation&lt;/strong&gt;: per-tenant scheduled advisor runs, scoped by priority / freshness filters, with a decommission guard disabled by default.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Audit&lt;/strong&gt;: two dashboards — &lt;em&gt;Review AI Advisor activity&lt;/em&gt; and &lt;em&gt;Review Scheduled AI Advisor activity&lt;/em&gt; — plus an &lt;code&gt;[AI Agent]&lt;/code&gt; prefix on every entity write.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;AI Provider accounts&lt;/strong&gt;: configure one or more providers — OpenAI, Azure OpenAI, Anthropic, Google Gemini, Mistral, Ollama, Splunk Hosted (SLIM API), xAI — with optional Anthropic prompt caching.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Compatibility&lt;/strong&gt;: fully opt-in and fully compatible with all supported Splunk releases. The AI Advisors require Splunk 10.2.x and later (Python 3.13.x); the AI Assistant and AI Concierge run on Python 3.9.x and later. TrackMe blocks an advisor on an incompatible release, and the Assistant will not propose one.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Smart Status retired&lt;/strong&gt;: superseded by the AI Advisors; schema migration &lt;code&gt;2401&lt;/code&gt; removes the legacy Smart Status collection on upgrade.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Non-AI fixes&lt;/strong&gt;: restored shared-library logging traces in the REST request path, KV de-duplication and pagination correctness, an &lt;code&gt;object_id&lt;/code&gt; alias on write endpoints, per-entity maintenance mode, browser-local time display for variable-delay/threshold slots, and a SplunkUI dependency pin.&lt;/li&gt;
-&lt;li&gt;See the new &lt;a href=&quot;https://docs.trackme-solutions.com/latest/ai_overview.html#ai-overview&quot;&gt;Artificial Intelligence&lt;/a&gt; documentation section.&lt;/li&gt;
+&lt;li&gt;The 13 separate per-feed CTI inputs (zfox_cti_botnet://, etc.) are consolidated&lt;br&gt;
+  into a single &quot;ZeroFox Intel (CTI)&quot; input type with a feed selector. Existing&lt;br&gt;
+  inputs must be recreated in Settings &amp;gt; Data inputs &amp;gt; ZeroFox Intel (CTI).&lt;/li&gt;
+&lt;li&gt;Checkpoints migrate automatically on first run — no data loss.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Release notes: &lt;a href=&quot;https://docs.trackme-solutions.com/latest/releasenotes.html#version-2-4-0-build-1780402698-02-06-2026&quot;&gt;https://docs.trackme-solutions.com/latest/releasenotes.html#version-2-4-0-build-1780402698-02-06-2026&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TrackMe for Splunk provides visibility and operational excellence to monitor at scale your Splunk data sources availability and quality, and many more. 
+&lt;h3&gt;New features&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Full proxy support: HTTP, SOCKS4, SOCKS5, SOCKS5h, and authenticated proxies&lt;br&gt;
+  with encrypted credentials (Configuration &amp;gt; Proxy tab)&lt;/li&gt;
+&lt;li&gt;Unified CTI input covering 12 feeds: botnet, botnet_credentials, c2_domains,&lt;br&gt;
+  credentials, credit_cards, disruption, exploits, indicators, malware, phishing,&lt;br&gt;
+  ransomware, vulnerabilities&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Internal&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Migrated from Add-on Builder (AoB) to UCC framework&lt;/li&gt;
+&lt;li&gt;All collection logic rewritten in standard Python (no aob_py3 dependency)&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The ZeroFox Data Connector Add-on should be installed on your IDM or Heavy Forwarder as a way to ingest ZeroFOX alert data.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f9c171a6-6452-11f1-b9ae-2ac61e2499c6.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">ZeroFOX Integrations</dc:creator>
+      <pubDate>Tue, 09 Jun 2026 22:33:12 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5041/#v4.0.0</guid>
+    </item>
+    <item>
+      <title>TrackMe - v2.4.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4621/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;TrackMe 2.4.1 — Threshold Lock, Topology graphs, Coverage gap analysis &amp;amp; audit dashboard rewrite&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Unified Threshold Lock (DSM &amp;amp; DHM)&lt;/strong&gt;: a single, safer control replaces the former overlapping &lt;em&gt;override lagging classes&lt;/em&gt; / &lt;em&gt;allow adaptive delay&lt;/em&gt; / &lt;em&gt;lock&lt;/em&gt; options. Locking an entity guarantees the operator’s intent — the pinned threshold (static or variable) is never silently overwritten by automation — and is clearly surfaced in the UI with a lock badge. A safety-net reconcile restores any drift and leaves an audit note explaining what was corrected.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Automatic Label Assignment&lt;/strong&gt;: tenant admins can now define rules that automatically assign tenant labels to entities based on their lifecycle (discovered, enters alert, recovers) or a custom filter expression — with additive or self-reconciling removal — evaluated by the scheduled decision maker, so labelling no longer has to be done by hand.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Topology graphs for every component&lt;/strong&gt;: a new built-in topology view shows the relationships between nodes (tenant → groups → entities) as interactive link and network graphs, now available for DSM, DHM, MHM, WLK, FQM and Flex Objects.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Coverage gap analysis (DSM &amp;amp; DHM)&lt;/strong&gt;: a new built-in UI compares TrackMe’s knowledge against a CMDB lookup or a live Splunk query in a few clicks, surfacing what is not covered (hosts, indexes, sourcetypes…) in both directions, each gap downloadable as a CSV.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DHM asset field&lt;/strong&gt;: each host entity now carries a normalised set of all known identifiers (short name, FQDN, alias…), so lookup-based operations recognise a machine however it is named — used by both &lt;em&gt;Inject Expected Hosts&lt;/em&gt; and the coverage gap analysis.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;AI Feed Lifecycle Advisor — Data Sampling&lt;/strong&gt;: the advisor now understands the DSM Data Sampling feature and can assist the generation of custom sampling rules (regex models) directly from sample events, surfaced inside the existing custom-rule wizard.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Adaptive delay&lt;/strong&gt;: now surfaces its activity directly on entity nodes through automated summary notes, and drops its last dependency on the Splunk Machine Learning Toolkit native ML commands. TrackMe no longer requires the Splunk AI Toolkit nor the Python for Scientific Computing add-on.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Audit dashboards rewrite&lt;/strong&gt;: all audit dashboard studios have been fully rewritten as native React user interfaces, with assorted UX improvements.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;FLX converging trackers&lt;/strong&gt;: improved visibility of the underlying member entities directly from the metrics &lt;em&gt;inspect&lt;/em&gt; screen, plus UI-driven in-place modification of a converging tracker.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;See: &lt;a href=&quot;https://docs.trackme-solutions.com/2.4.1/releasenotes.html#version-2-4-1-build-1781039179-09-06-2026&quot;&gt;https://docs.trackme-solutions.com/2.4.1/releasenotes.html#version-2-4-1-build-1781039179-09-06-2026&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TrackMe for Splunk provides visibility and operational excellence to monitor at scale your Splunk data sources availability and quality, and many more. 
 
 With a rich set of features and a powerful workflow, TrackMe empowers you day after day to get the most from your Splunk investments and deliver the five stars quality of service your users deserve.
 
@@ -59,8 +101,8 @@ Buy Foundation Edition: https://trackme-solutions.com/get-foundation/
 
 See all plans: https://trackme-solutions.com/pricing/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/85f42acc-644b-11f1-b04f-6e6968a961d0.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Trackme Limited</dc:creator>
-      <pubDate>Tue, 09 Jun 2026 21:38:25 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4621/#v2.4.0</guid>
+      <pubDate>Tue, 09 Jun 2026 22:12:44 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4621/#v2.4.1</guid>
     </item>
     <item>
       <title>Microsoft 365 Defender Threat Vulnerability Add-on for Splunk - v2.0.1 [Version Update]</title>
@@ -143,34 +185,6 @@ Certificate monitoring endpoint&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Kamil Dolezel</dc:creator>
       <pubDate>Tue, 09 Jun 2026 15:33:40 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8516/#v1.2.1</guid>
-    </item>
-    <item>
-      <title>ZeroFox Data Connector - v4.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5041/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;v4.0.0&lt;/h2&gt;
-&lt;h3&gt;Breaking changes&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;The 13 separate per-feed CTI inputs (zfox_cti_botnet://, etc.) are consolidated&lt;br&gt;
-  into a single &quot;ZeroFox Intel (CTI)&quot; input type with a feed selector. Existing&lt;br&gt;
-  inputs must be recreated in Settings &amp;gt; Data inputs &amp;gt; ZeroFox Intel (CTI).&lt;/li&gt;
-&lt;li&gt;Checkpoints migrate automatically on first run — no data loss.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;New features&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Full proxy support: HTTP, SOCKS4, SOCKS5, SOCKS5h, and authenticated proxies&lt;br&gt;
-  with encrypted credentials (Configuration &amp;gt; Proxy tab)&lt;/li&gt;
-&lt;li&gt;Unified CTI input covering 12 feeds: botnet, botnet_credentials, c2_domains,&lt;br&gt;
-  credentials, credit_cards, disruption, exploits, indicators, malware, phishing,&lt;br&gt;
-  ransomware, vulnerabilities&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Internal&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Migrated from Add-on Builder (AoB) to UCC framework&lt;/li&gt;
-&lt;li&gt;All collection logic rewritten in standard Python (no aob_py3 dependency)&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The ZeroFox Data Connector Add-on should be installed on your IDM or Heavy Forwarder as a way to ingest ZeroFOX alert data.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/22cd9ea6-640f-11f1-92d6-6a04764a8bd8.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">ZeroFOX Integrations</dc:creator>
-      <pubDate>Tue, 09 Jun 2026 14:33:14 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5041/#v4.0.0</guid>
     </item>
     <item>
       <title>Threat Hunting Essentials - v1.3.11 [Version Update]</title>
@@ -2977,14 +2991,6 @@ The Splunk Add-on for GitHub lets you collect audit logs from the GitHub Enterpr
       <guid>https://splunkbase.splunk.com/app/6254/#v3.3.0</guid>
     </item>
     <item>
-      <title>Teamviewer Add-on for Splunk - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8787/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects and parses TeamViewer session logs, network connection reports, and audit data from Windows endpoints, providing CIM-compliant field extractions for Authentication, Network Sessions, Network Traffic, and Data Access data models.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The TeamViewer Add-on for Splunk collects and parses TeamViewer log files from Windows endpoints, enabling monitoring and security analysis of remote access sessions. The add-on ingests log data from TeamViewer 15.x installations, including session logs, network connection reports, and audit data. It provides field extractions that map TeamViewer events to the Common Information Model (CIM), specifically the Authentication, Network Sessions, Network Traffic, and Data Access data models. The add-on defines two source types: teamviewer for general session and audit logs, and teamviewer:network for network connection details. By normalizing TeamViewer data into CIM-compliant fields, the add-on enables correlation with other security data sources and supports use cases such as remote access auditing, connection monitoring, and security investigations involving remote support sessions.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/896295a6-5a80-11f1-94f7-b2b7f37653ac.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Netbytesec Sdn Bhd</dc:creator>
-      <pubDate>Wed, 03 Jun 2026 13:07:52 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8787/#v1.0.0</guid>
-    </item>
-    <item>
       <title>LegacyTel - vnull [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8791/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;LegacyTel is a zero-dependency, high-performance Go-based log normalization gateway designed to bridge the gap between legacy core infrastructure (IBM z/OS Mainframe SMF, IBM i AS/400 QAUDJRN, HPE NonStop EMS) and Splunk. It securely ingests, decodes CP1047 EBCDIC, and maps native legacy security events directly into standard, Splunk CIM-compliant structures.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The LegacyTel Add-on for Splunk addresses one of the most critical and costly blind spots in modern Security Operations Centers (SOCs): the lack of visibility into legacy core transaction systems.
@@ -3978,22 +3984,6 @@ Because Splunk has both historical and realtime data, this app allows you to app
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
       <pubDate>Thu, 28 May 2026 15:21:36 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/3969/#v2.1.8</guid>
-    </item>
-    <item>
-      <title>CSmon Add-on - v1.0.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8550/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
-  This release addresses Splunk Cloud compatibility and resolves critical issues regarding JSON field extraction and UI visibility.
-
-  Bug Fixes &amp;amp; Optimizations:
-
-  &lt;li&gt;Search-time Extraction: Switched JSON parsing from index-time (INDEXED\_EXTRACTIONS) to search-time (KV\_MODE \= json) in props.conf. This ensures all JSON fields are immediately and correctly extracted for all users, even if the App is solely installed on the Search Head. This also retroactively fixes field extraction for already indexed historical data.&lt;/li&gt;
-  &lt;li&gt;Source Types: Added the missing pulldown\_type \= 1 attribute. csmon:hostperf and csmon:serviceperf are now correctly visible in the Splunk Web Data Inputs dropdown.&lt;/li&gt;
-  &lt;li&gt;Cloud Compatibility: Resolved the check\_admin\_external\_restmap\_conf\_python\_required AppInspect failure by ensuring python.required \= python3 is properly injected into the REST handler configuration.&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Advanced technical Add-on (TA) for SAP Monitoring. Bridges the gap between CSmon Server and Splunk with high-performance dashboards, optimized bundle sizes, and seamless UCC-based configuration.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;CSmon Add-on for Splunk provides advanced technical monitoring and high-end visualizations for SAP environments. It connects Splunk to the CSmon Monitoring Server to deliver real-time insights into SAP HANA databases and application servers.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a67ecb3c-5a85-11f1-b991-766cfd27a700.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Victor Hasler</dc:creator>
-      <pubDate>Thu, 28 May 2026 12:07:07 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8550/#v1.0.2</guid>
     </item>
   </channel>
 </rss>
