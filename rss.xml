@@ -6,7 +6,49 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Wed, 10 Jun 2026 07:00:14 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 10 Jun 2026 10:58:45 +0000</lastBuildDate>
+    <item>
+      <title>Spex Add-on for Microsoft M365 Automation - v1.2.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7809/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&amp;#x20;Fixed&lt;/p&gt;
+&lt;p&gt;&amp;#x20;- Cloud Type now honored by all inputs. The Environments, Flows, and Flow Runs inputs were always authenticating against the Commercial cloud regardless of the Cloud Type configured on the App Registration/Account. As a result, US Government tenants (GCC, GCC High, DoD) failed with 401 Unauthorized during token acquisition, even with valid credentials that worked outside the add-on. The configured Cloud Type is now passed through to all authentication and API calls, selecting the correct authority, scope, and API endpoints for the chosen environment.&lt;/p&gt;
+&lt;p&gt;&amp;#x20;Notes&lt;/p&gt;
+&lt;p&gt;&amp;#x20;- Commercial (public) tenants are unaffected; behavior is unchanged.&lt;/p&gt;
+&lt;p&gt;&amp;#x20;- To use a Government cloud: edit your App Registration and Account and set Cloud Type to GCC, GCC High, or DoD, then re-enable the inputs.&lt;/p&gt;
+&lt;p&gt;&amp;#x20;- Government cloud support remains experimental and is validated on a best-effort basis.&lt;/p&gt;
+&lt;p&gt;&amp;#x20;- No configuration migration is required when upgrading from 1.2.0.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Automate and scale your data ingestion from Microsoft Power Platform into Splunk.
+
+The Spex Add-on for Microsoft M365 Automation captures Power Platform Environments, Flows, Flow Runs and Actions, giving you full visibility across your tenant. Built with secure credential handling, robust checkpointing and modular architecture, this add-on ensures reliability and flexibility in production environments.
+
+This add-on replaces the legacy Microsoft Power Platform Add-on for Splunk and introduces a modern, UCC-based configuration interface, as well as a custom Python library designed for Microsoft APIs.
+
+Future updates will include support for Azure Logic Apps and Azure Automation, further expanding observability for your Microsoft 365 ecosystem.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/de91c4ba-64a4-11f1-b534-8a230eaa3fca.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Mario Almeida</dc:creator>
+      <pubDate>Wed, 10 Jun 2026 08:23:55 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7809/#v1.2.1</guid>
+    </item>
+    <item>
+      <title>Criminal IP Search - v1.1.12 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7733/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Bug Fixes&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Fixed an issue where the scheduled search &quot;Clean Old KV Store Data&quot; failed with &lt;code&gt;Unknown search command 'kvstore'&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Fixed an issue where IP lookup results were not being cached, causing repeated API calls for the same IP address.&lt;/li&gt;
+&lt;li&gt;Fixed IP address validation accepting out-of-range values (e.g., &lt;code&gt;999.0.0.1&lt;/code&gt;).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Improvements&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Added KV Store lookup definition to enable SPL-based access via &lt;code&gt;inputlookup&lt;/code&gt; and &lt;code&gt;outputlookup&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Improved Splunk Cloud Search Head Cluster compatibility for KV Store collection and lookup replication.&lt;/li&gt;
+&lt;li&gt;Updated Python compatibility to support both Python 3.9 and 3.13 for Splunk Cloud Platform 10.2 and later.&lt;/li&gt;
+&lt;li&gt;Updated &quot;Monitor KV Store Usage&quot; saved search to display meaningful cache statistics.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Criminal IP Search App is a streaming custom command application that allows you to query Criminal IP data for a given IP address.
+
+The Criminal IP Search App for Splunk is a command that integrates with Splunk Search, enabling users to retrieve detailed analysis data from Criminal IP for IP addresses identified in incoming logs.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2ca0f3c0-649a-11f1-b9ae-2ac61e2499c6.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">AI Spera Inc</dc:creator>
+      <pubDate>Wed, 10 Jun 2026 07:29:42 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7733/#v1.1.12</guid>
+    </item>
     <item>
       <title>Supporting Add-on for Oracle SBC CDR - v1.0.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8467/</link>
@@ -3934,24 +3976,6 @@ Contact us with any questions!&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&q
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview LLC</dc:creator>
       <pubDate>Fri, 29 May 2026 06:30:29 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/4640/#v1.2.8</guid>
-    </item>
-    <item>
-      <title>Add-On for ConnectWise PSA - v2.0.7 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6855/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;AppInspect updates&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Add-On for ConnectWise PSA (formerly Manage) queries the ConnectWise API via modular input to Splunk changes to objects as a stateful event stream and to cache selected objects in the Splunk KVstore. Based on the Add-On for ConnectWise Manage.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/7e28997c-5abe-11f1-86e7-aa343882d8e7.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">VisiCore Tech</dc:creator>
-      <pubDate>Thu, 28 May 2026 17:58:53 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6855/#v2.0.7</guid>
-    </item>
-    <item>
-      <title>WebGL Globe - v2.1.4 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/3674/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;AppInspect updates&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Visualize data on a 3D globe! The WebGL globe uses the same | geostats syntax as cluster maps and plots data by series. The globe is configurable with nine textures, a starfield or flat color background, and allows you to select static or animated, a default zoom level, and the rotation period, if animated. The visualization includes a configurable control panel and legend.
-
-Please see the Details tab for install and configuration documentation.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9919a262-5abe-11f1-af10-5a5bd2409ac4.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">VisiCore Tech</dc:creator>
-      <pubDate>Thu, 28 May 2026 17:57:35 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/3674/#v2.1.4</guid>
     </item>
   </channel>
 </rss>
