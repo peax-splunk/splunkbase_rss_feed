@@ -6,7 +6,81 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Thu, 11 Jun 2026 00:09:34 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 11 Jun 2026 05:22:04 +0000</lastBuildDate>
+    <item>
+      <title>AWS-DFD-Visualizer - v2.7.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8628/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;# AWS-DFD-Visualizer v2.7.2 Release Notes&lt;/p&gt;
+&lt;p&gt;## 🌟 Enhancements &amp;amp; Security Integration&lt;/p&gt;
+&lt;p&gt;* **Hybrid Dynamic JIT SPL Drilldowns ([Issue #2](&lt;a href=&quot;https://github.com/JohnYoungSuh/AWS-DFD-Visualizer/issues/2&quot;&gt;https://github.com/JohnYoungSuh/AWS-DFD-Visualizer/issues/2&lt;/a&gt;))**: Implemented secure token escaping (`sanitizeSplunkToken`) and query interpolation in node/link click handlers. Allows users to click visualizer elements to instantly search VPC flow logs or configuration history.&lt;/p&gt;
+&lt;p&gt;* **Tenable/Nessus &amp;amp; Threat Telemetry Overlays**:&lt;/p&gt;
+&lt;p&gt;&amp;#x20; - Implemented flashing red keyframe pulsing styling on compute node cards flagged with threat alert statuses (`status\=&quot;incident&quot;`, `status\=&quot;failing&quot;`).&lt;/p&gt;
+&lt;p&gt;&amp;#x20; - Added vulnerability status overrides that map critical CVE scan findings (`status\=&quot;Critical&quot;`) to a custom **&quot;skull&quot;** icon.&lt;/p&gt;
+&lt;p&gt;&amp;#x20; - Shipped predefined search macros in `default/macros.conf` to easily join Nessus, GuardDuty, or latency events with `aws:config` topology data.&lt;/p&gt;
+&lt;p&gt;* **Native Print &amp;amp; SVG Export Controls**:&lt;/p&gt;
+&lt;p&gt;&amp;#x20; - Added a client-side &quot;Download SVG/PNG&quot; button using SVG serialization to allow raw diagram downloads, bypassing Splunk's headless PDF clipping issues.&lt;/p&gt;
+&lt;p&gt;&amp;#x20; - Established print-friendly media CSS overrides (`@media print`).&lt;/p&gt;
+&lt;p&gt;* **Visual and Contrast Adjustments**:&lt;/p&gt;
+&lt;p&gt;&amp;#x20; - **Dynamic Theme Contrast ([Issue #4](&lt;a href=&quot;https://github.com/JohnYoungSuh/AWS-DFD-Visualizer/issues/4&quot;&gt;https://github.com/JohnYoungSuh/AWS-DFD-Visualizer/issues/4&lt;/a&gt;))**: VPC, Subnet, and Plane labels adapt font colors dynamically based on light/dark mode.&lt;/p&gt;
+&lt;p&gt;&amp;#x20; - **Compliance Edge Violation Styling ([Issue #5](&lt;a href=&quot;https://github.com/JohnYoungSuh/AWS-DFD-Visualizer/issues/5&quot;&gt;https://github.com/JohnYoungSuh/AWS-DFD-Visualizer/issues/5&lt;/a&gt;))**: Violated paths (e.g., SSH/22 SG violations) render as dashed bold red lines with warning icons. VPC/Subnet headers display active violation counts.&lt;/p&gt;
+&lt;p&gt;&amp;#x20; - **Resource Lifecycle Decorator ([Issue #6](&lt;a href=&quot;https://github.com/JohnYoungSuh/AWS-DFD-Visualizer/issues/6&quot;&gt;https://github.com/JohnYoungSuh/AWS-DFD-Visualizer/issues/6&lt;/a&gt;))**: Deleted assets (`configurationItemStatus: ResourceDeleted`) render with a strikethrough, and stale configuration items fade out dynamically.&lt;/p&gt;
+&lt;p&gt;&amp;#x20; - **Hover Halos &amp;amp; Zoom LOD ([Issue #7](&lt;a href=&quot;https://github.com/JohnYoungSuh/AWS-DFD-Visualizer/issues/7&quot;&gt;https://github.com/JohnYoungSuh/AWS-DFD-Visualizer/issues/7&lt;/a&gt;))**: Hovering on nodes scales labels and adds a high-contrast text shadow/halo. SVG zooms trigger LOD adjustments (hiding text/shadows at $k \&amp;lt; 0.45$) to save rendering performance.&lt;/p&gt;
+&lt;p&gt;* **Identity Plane Spacing**: Increased the horizontal spacing gap parameter for unassociated Identity plane nodes to prevent AssumesRole link labels from overlapping.&lt;/p&gt;
+&lt;p&gt;## 🐞 Bug Fixes&lt;/p&gt;
+&lt;p&gt;* **Static Grouped Layout Spacing and Centering**: Resolved visual overlaps in the static grouped hierarchy layout (&quot;Blueprint Mode&quot;) by replacing the fixed-size `treeLayout.size` with dynamic `treeLayout.nodeSize` coordinates mapping and coordinate shifting/centering bounds calculations.&lt;/p&gt;
+&lt;p&gt;* **Clamped Coordinate Scaling &amp;amp; Dynamic viewBox Width**: Prevented card overlaps in wide tree layouts by clamping the coordinate compression factor (`scaleX` / `scaleY`) to a minimum safe threshold. Implemented dynamic `viewBox` width/height expansion to automatically fit the expanded clamped tree.&lt;/p&gt;
+&lt;p&gt;* **Overlapping Parallel Edges**: Aggregated bidirectional edge records with multiple connecting protocols into a single visual edge with a comma-separated label.&lt;/p&gt;
+&lt;p&gt;* **Case-Sensitivity Option Parser**: Resolved a configuration parsing bug where `clusterBy` and `layoutMode` values failed to parse unless written in exact lowercase format.&lt;/p&gt;
+&lt;p&gt;* **Release Hygiene Sync**: Version synchronized to `2.7.2` across `package.json`, `splunk-app-manifest.json`, `Makefile`, `default/app.conf`, and UI header.&lt;/p&gt;
+&lt;p&gt;---&lt;/p&gt;
+&lt;p&gt;## 📍 GitHub Issues Status&lt;/p&gt;
+&lt;p&gt;The GitHub issues list **has not been updated yet**.&amp;#x20;&lt;/p&gt;
+&lt;p&gt;The following 6 resolved issues are still marked as **Open** on GitHub:&lt;/p&gt;
+&lt;p&gt;1. **#8** `docs: Upgrade Application Screenshots`&lt;/p&gt;
+&lt;p&gt;2. **#7** `style: Hover State Font Enlargement and Background Halo`&lt;/p&gt;
+&lt;p&gt;3. **#6** `style: Resource Lifecycle &amp;amp; Staleness Text Styling`&lt;/p&gt;
+&lt;p&gt;4. **#5** `style: Compliance Violation Styling for Edge &amp;amp; Zone Labels`&lt;/p&gt;
+&lt;p&gt;5. **#4** `style: Dynamic Contrast Text Labels for Planes, VPC, and Subnet`&lt;/p&gt;
+&lt;p&gt;6. **#2** `feat: Hybrid Dynamic JIT Drilldown SPL Generation`&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Interactive AWS Data Flow Diagrams (DFD) for Splunk. Visualizes AWS Config topologies, nested VPCs/Subnets, and Zero-Trust compliance highlights.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;AWS DFD Visualizer (Splunkbase App Summary)
+Purpose &amp;amp; Background Auditing complex cloud infrastructure for compliance (e.g., DoD Impact Level 5 (IL5), NIST 800-53, or NIST 800-207 Zero-Trust Architectures) is extremely challenging. While AWS accounts generate high-volume telemetry from AWS Config, VPC Flow Logs, and GuardDuty, reviewing these complex configurations in standard tabular logs or flat Splunk tables makes it difficult for security teams, system auditors, and DevSecOps engineers to analyze isolation boundaries, spot structural gaps, or verify access routes.
+
+The Solution The AWS DFD (Data Flow Diagram) Visualizer solves this by transforming raw relationship logs and configuration items into interactive, visual security topologies styled after AWS Application Composer. It gives compliance officers and analysts an intuitive, visual framework to audit security posture in real-time.
+
+Key Features:
+
+Zero-Trust Layout Engine: Segregates assets deterministically into distinct swimlanes—separating the Identity plane (users/roles), Policy &amp;amp; Control plane (global network assets like WAF/CloudFront), and Infrastructure plane (VPCs/Subnets).
+Nested Enclosures: Renders nested container boundaries representing VPCs and Subnets with real-time compliance validation markers.
+Security &amp;amp; Telemetry Overlays:
+Highlights Security Group associations as outer compliance rings around compute nodes (Green for compliant, Red for non-compliant).
+Automatically isolates and flashes incident-flagged resources in pulsing red alerts.
+Overrides critical Nessus/Tenable vulnerability states with a custom &amp;quot;skull&amp;quot; threat icon.
+Dynamically intercepts and highlights non-compliant connection paths (e.g., SSH/22 path violations) as dashed Vibrant Red links.
+Dashboard Studio &amp;amp; SimpleXML Ready: Integrates natively with Splunk Dashboard Studio, supporting dynamic click-capturing drilldown tokens, responsive light/dark themes, and performance-saving Level of Detail (LOD) controls.
+Export &amp;amp; Live Console Feed: Includes a native client-side SVG/PNG exporter, a standard draw.io XML generator, and an ad-hoc CSV console feed for drafting cloud topologies on the fly.
+🛠️ Configuration &amp;amp; Code Updates Done:
+To align your app bundle with this new description, I have updated the description strings in the following files:
+
+
+
+package.json
+
+
+splunk-app-manifest.json
+
+
+default/app.conf
+Additionally:
+
+Added /cypress/screenshots/ to
+
+.gitignore
+ to keep the repository clean of test artifacts.
+Ran npm run build to compile the production bundle (webpack compiled successfully).
+Committed the changes and successfully pushed them to master.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c499fb12-6531-11f1-bd9c-ba6872003878.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Young Suh</dc:creator>
+      <pubDate>Thu, 11 Jun 2026 01:33:48 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8628/#v2.7.2</guid>
+    </item>
     <item>
       <title>runZero Asset Inventory - v3.3.4 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/6549/</link>
@@ -2166,20 +2240,6 @@ For dashboards with Illumio data, please install the Illumio App for Splunk avai
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Clayfield</dc:creator>
       <pubDate>Tue, 02 Jun 2026 09:13:42 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7104/#v2.0.5</guid>
-    </item>
-    <item>
-      <title>2Steps - Cloud - v14.0.179 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4807/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;2 Steps produces automated customer journeys with video replay across any platform (Windows, Web, mobile, etc) in minutes without writing any code.
-
-This app provides a graphical user interface for test creation, scheduling and results analysis all without leaving Splunk. 2 Steps is designed to allow any user to build end to end synthetic tests for any graphical application in minutes without specialist training. Please visit us at https://www.2steps.io/ for more information.
-
- 
-
-Note that this app provides the front end interface and dashboard for 2 Steps. The 2 Steps back end is available from  https://www.2steps.io/ and is not on Splunkbase. The app is not functional without a correctly installed and configured back end. Please contact us to enquire about installation of the 2 Steps server.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/bb8e292e-5d86-11f1-97c0-86d8b4557b29.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">2Steps Development</dc:creator>
-      <pubDate>Tue, 02 Jun 2026 03:05:08 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4807/#v14.0.179</guid>
     </item>
     <item>
       <title>Hydrolix Search - v1.5.0 [Version Update]</title>
