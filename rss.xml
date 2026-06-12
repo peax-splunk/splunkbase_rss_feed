@@ -6,7 +6,59 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Fri, 12 Jun 2026 21:25:13 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 12 Jun 2026 23:08:10 +0000</lastBuildDate>
+    <item>
+      <title>ChatGPT 4 Splunk - v3.3.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6779/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;v3.3.2 Release Notes:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Updated to latest OpenAI models (gpt-4o, gpt-4o-mini, gpt-4-turbo, DALL-E 3, tts, embeddings)&lt;/li&gt;
+  &lt;li&gt;Added list\_models\=true option to fetch available models dynamically from OpenAI API&lt;/li&gt;
+  &lt;li&gt;Added python.required\=3.13 for Python 3.13 compatibility&lt;/li&gt;
+  &lt;li&gt;Updated Splunk SDK from 2.0.1 to 2.0.2&lt;/li&gt;
+  &lt;li&gt;Fixed Python 3.12+ escape sequence warnings in openai.py&lt;/li&gt;
+  &lt;li&gt;Removed .pyc/&lt;strong&gt;pycache&lt;/strong&gt; files for Splunk Cloud compliance&lt;/li&gt;
+  &lt;li&gt;Updated app.manifest to version 3.3.2&lt;/li&gt;
+  &lt;li&gt;AppInspect: 0 failures, 0 future failures, cloud compatible&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The ChatGPT 4 Splunk is a powerful tool that allows users to easily access the OpenAI API. The add-on is based on the Apache License, Version 2.0 and is designed to work seamlessly with Splunk, the popular data analytics platform.
+
+The add-on now supports Chats, Completions, Edits, and Moderations, making it powerful and user-friendly. This means that users can now perform chat requests, completion requests, edit requests, and moderation requests to the ChatGPT using the SPL command &amp;quot;| openai&amp;quot;. This command enables users to quickly and easily generate natural language responses to a wide variety of prompts, making it a valuable tool for anyone working with natural language processing or AI.
+
+Please report issues and discuss feature requests on github: https://github.com/bentleymi/ta-openai-api.
+
+If you want support for private models or Azure OpenAI, please contact the author for our commercial version of the app.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/78d97eac-66a6-11f1-81c6-7ea941ecdec8.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Fri, 12 Jun 2026 22:03:23 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6779/#v3.3.2</guid>
+    </item>
+    <item>
+      <title>CrowdStrike Falcon Event Streams Technical Add-On - v3.7.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5082/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;It is recommended that new versions of the TA be tested prior to being deployed into a production environment.&lt;/h2&gt;
+&lt;h3&gt;TA_crowdstrike_falcon_event_streams v3.7.2 Release Notes&lt;/h3&gt;
+&lt;h3&gt;Bug Fixes&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fixed an issue where metadata-only events with invalid timestamps were being ingested into Splunk instead of being automatically skipped&lt;/li&gt;
+&lt;li&gt;Fixed an issue where a checkpoint read failure could cause the add-on to restart collection from the beginning, resulting in duplicate events&lt;/li&gt;
+&lt;li&gt;Fixed an issue where a temporary API error during stream initialization could permanently stop the add-on instead of automatically retrying&lt;/li&gt;
+&lt;li&gt;Fixed an issue where a single malformed event could cause the entire stream collection to stop instead of skipping the problematic event and continuing&lt;/li&gt;
+&lt;li&gt;Fixed an issue where a failed stream session refresh would cause the add-on to stop collecting events instead of continuing and retrying automatically&lt;/li&gt;
+&lt;li&gt;Fixed an issue where the add-on would repeatedly attempt to reconnect with an expired session token instead of immediately requesting a new session&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Improvements&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Stream connections now detect and recover from silently dropped connections within 5 minutes instead of hanging indefinitely&lt;/li&gt;
+&lt;li&gt;Reconnection delays now reset after successful collection periods, ensuring faster recovery from brief network interruptions&lt;/li&gt;
+&lt;li&gt;Reduced session refresh timeout from 10 minutes to 30 seconds to prevent blocking event collection&lt;/li&gt;
+&lt;li&gt;Improved log messages for stream disconnections with more accurate descriptions and appropriate severity levels&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This technical add-on enables customers to create a persistent connect to CrowdStrike&amp;#x27;s Event Streams API so that the available detection, event, incident and audit data can be continually streamed to their Splunk environment. This connection enables organizations to combine the power of the Splunk platform with the visibility and rich event data of the CrowdStrike platform.
+
+This add-on also is used to support the CrowdStrike Falcon App  (https://splunkbase.splunk.com/app/5094/).&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2c755026-6616-11f1-a397-32b301eeafc5.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">CrowdStrike</dc:creator>
+      <pubDate>Fri, 12 Jun 2026 21:55:11 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5082/#v3.7.2</guid>
+    </item>
     <item>
       <title>Webtools Add-on - v3.1.3 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/4146/</link>
@@ -1870,19 +1922,6 @@ LATEST UPDATES
       <guid>https://splunkbase.splunk.com/app/4634/#v3.1.0</guid>
     </item>
     <item>
-      <title>Splunk ES Content Update - v6.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/3449/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;GitHub - &lt;a href=&quot;https://github.com/splunk/security_content/releases/tag/v6.0.0&quot;&gt;https://github.com/splunk/security\_content/releases/tag/v6.0.0&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Splunk Docs - &lt;a href=&quot;https://help.splunk.com/en/splunk-enterprise-security-8/security-content-update/release-notes/6.0/splunk-security-content-release-notes/whats-new&quot;&gt;https://help.splunk.com/en/splunk-enterprise-security-8/security-content-update/release-notes/6.0/splunk-security-content-release-notes/whats-new&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk ES Content Update (ESCU) app delivers pre-packaged Security Content. ESCU provides regular Security Content updates to help security practitioners address ongoing time-sensitive threats, attack methods, and other security issues.
-
-Security Content consists of tactics, techniques, and methodologies that help with detection, investigation, and response. Security Content enables security teams to directly operationalize detection searches, investigative searches, and other supporting details. ESCU can generate Notable/Risk Events in Splunk Enterprise Security. Security Content also contains easy-to-read background information and guidance, for key context on motivations and risks associated with attack techniques, as well as pragmatic advice on how to combat those techniques.
-
-The analytic stories and their searches are also available at - https://github.com/splunk/security_content.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ae8c752a-5ded-11f1-9310-2a9ba03559b6.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Wed, 03 Jun 2026 19:45:23 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/3449/#v6.0.0</guid>
-    </item>
-    <item>
       <title>ExtraHop Add-On for Splunk - v2.7.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/3938/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
@@ -1914,28 +1953,6 @@ By normalizing logs at the ingest layer and providing pre-built CIM mapping conf
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ganapati Sridhar</dc:creator>
       <pubDate>Wed, 03 Jun 2026 13:04:26 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8791/#vnull</guid>
-    </item>
-    <item>
-      <title>Maze - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8803/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;v1.0.0&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Fetch investigations from Maze&lt;/li&gt;
-&lt;li&gt;Use dashboards to review and triage vulnerabilities&amp;#x20;&lt;/li&gt;
-&lt;li&gt;Built with macros to allow for index flexibility&amp;#x20;&lt;/li&gt;
-&lt;li&gt;CIM compliant for data mapping&amp;#x20;&lt;/li&gt;
-&lt;li&gt;Three pre-built alerts: Critical Exploitable Findings, Stale Data, Exploitable Findings Spike (ship disabled)&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Maze for Splunk integrates your Maze vulnerability investigation data directly into Splunk. Polls the Maze API for investigation results including exploitability verdicts, severity scores, root cause analysis, and remediation guidance.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Maze for Splunk integrates your Maze vulnerability investigation data directly into Splunk. Polls the Maze API for investigation results including exploitability verdicts, severity scores, root cause analysis, and remediation guidance.
-
-Features:
-- Modular input polls Maze API on configurable interval with incremental sync
-- Automatic pagination for large datasets
-- Configurable backfill window for initial data pull
-- Pre-built dashboard for vulnerability investigation overview
-- Supports Splunk Enterprise 9.0+ and Splunk Cloud&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/86ef0d7a-5ded-11f1-a8ac-eea14f45257e.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Tyler Diderich</dc:creator>
-      <pubDate>Wed, 03 Jun 2026 12:54:34 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8803/#v1.0.0</guid>
     </item>
     <item>
       <title>UK Open Data inputs - v1.0.1 [New App Release]</title>
