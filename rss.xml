@@ -6,7 +6,86 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Fri, 12 Jun 2026 19:55:01 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 12 Jun 2026 21:25:13 +0000</lastBuildDate>
+    <item>
+      <title>Webtools Add-on - v3.1.3 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4146/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h3&gt;Release v3.1.3&amp;#x20;
+
+J.R. Murray - PR41 Enhancements + Latest Cloud Vetting&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Highlights:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Splunk Cloud &amp;amp; AppInspect Compliant:&lt;/strong&gt; Fixed all AppInspect validation errors (0 failures). Fully compliant with Splunk Cloud security policies.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;HTTPS Bypass for Localhost:&lt;/strong&gt; Intelligent logic now allows &lt;a href=&quot;http://127.0.0.1/&quot;&gt;`http://127.0.0.1`&lt;/a&gt; and &lt;a href=&quot;http://localhost/&quot;&gt;`http://localhost`&lt;/a&gt; to bypass HTTPS enforcement for internal testing, while maintaining strict TLS for external requests.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Modern Auth Support:&lt;/strong&gt; Full support for Bearer Tokens (`token=&quot;...&quot;`) in addition to traditional session key authentication (`splunkauth=true`).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Python 3.13 Ready:&lt;/strong&gt; Updated `commands.conf` with `python.required = 3.13` for future Splunk Enterprise 8.0 compatibility.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Enhanced Test Harness:&lt;/strong&gt; Updated dashboard (`curl_test_harness`) with fixed XML syntax and cleaner UI for validating API connections.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;SHC Support:&lt;/strong&gt; Added `server.conf` with `conf_replication_include` for Search Head Clustering compatibility.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Changes &amp;amp; Improvements:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Removed `install_source_checksum` from `app.conf` (auto-populated by Splunk).&lt;/li&gt;
+  &lt;li&gt;Removed deprecated `metadata/local.meta` file (uses `default.meta` only).&lt;/li&gt;
+  &lt;li&gt;Fixed invalid XML syntax in dashboard views (self-closing tags).&lt;/li&gt;
+  &lt;li&gt;Cleaned up `.git` and **`pycache`** from distribution packages.&lt;/li&gt;
+  &lt;li&gt;Made the app visible in the Splunk UI (`is_visible = 1`).&lt;/li&gt;
+  &lt;li&gt;Removed internal development notes (`NEXT_STEPS.md`) for a cleaner distribution.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Deprecations:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;None.&lt;/em&gt; This release is a full backward-compatible update. All existing `curl` and `urlencode` commands function exactly as before, with added security and flexibility.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Installation Notes:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Requires Splunk Enterprise 9.0+ or Splunk Cloud.&lt;/li&gt;
+  &lt;li&gt;No restart required for app installation, but a restart is recommended after upgrading from v3.1.2 to ensure all configuration changes take effect.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app is intended to solve the problem of connecting to external APIs/REST with Splunk Search. It allows you to use CURL inline with your other SPL and to URLENCODE as needed too.
+
+IF YOU LIKE THIS APP, PLEASE LEAVE A RATING... TIA!!!
+
+Source code is published at https://github.com/bentleymi/ta-webtools/.
+
+I actively support my apps and am anxious to receive any feedback. Tag me on community.splunk.com or call use &amp;quot;contact the developer&amp;quot; to discuss via email.
+
+-JKat54&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c597dd6a-66a1-11f1-b0b7-7247f8ab4a12.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Fri, 12 Jun 2026 21:14:12 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4146/#v3.1.3</guid>
+    </item>
+    <item>
+      <title>STIG Compliance App for Splunk - v1.2.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8486/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;v1.2.1 — Splunk Cloud Victoria compatibility fix. Added XML pre-processing in parse_ckl.py to prevent lxml XMLSyntaxError (huge text node) when parsing large CKL files. Splunk Cloud Victoria uses lxml as the default XML parser, which enforces a 10 MB text node size limit. The parser now truncates oversized text nodes before parsing. CKLB (JSON) parsing is unaffected.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free STIG compliance tracking and reporting. Drag-and-drop CKL/CKLB upload, instant dashboards, zero infrastructure required.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Managing STIG compliance shouldn&amp;#x27;t require expensive vendor platforms, complex infrastructure, or weeks of deployment. I built this app because I believe every organization — regardless of size or budget — deserves access to effective compliance tools. My goal is to help as many people and organizations as possible by providing a free, production-ready resource that solves a real problem.
+
+STIG Compliance App for Splunk imports DISA STIG checklists and transforms them into searchable, reportable compliance data — with zero external dependencies and zero infrastructure beyond your existing Splunk deployment.
+
+Upload .ckl and .cklb checklist files directly through your browser. The app parses, indexes, and visualizes your compliance posture in minutes — not days.
+
+KEY FEATURES
+
+- Browser-based drag-and-drop upload for .ckl and .cklb files — no forwarders, no file shares, no scripted inputs
+- Custom CKL/CKLB parser converts DISA STIG XML checklists into searchable Splunk events
+- Four compliance dashboards: Compliance Overview, Executive Summary, POA&amp;amp;M Report, and Upload History
+- Risk scoring by severity: (CAT I x 10) + (CAT II x 5) + (CAT III x 1)
+- Deduplication logic displays only the latest checklist per host/STIG combination
+- Historical upload tracking with timestamps for audit trail
+- Pre-built saved searches and alert templates for CAT I findings and compliance thresholds
+- Works on a single search head or in a clustered environment — fully self-contained
+
+WHY THIS APP EXISTS
+
+Most STIG compliance workflows today involve Excel spreadsheets, manual tracking, or paid platforms that require additional licensing and infrastructure. This app eliminates those barriers. Install one app, upload through your browser, and get compliance dashboards immediately.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Marcus House</dc:creator>
+      <pubDate>Fri, 12 Jun 2026 20:32:31 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8486/#v1.2.1</guid>
+    </item>
     <item>
       <title>Compliance Posture for Splunk - v1.0.3 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/8501/</link>
@@ -1835,173 +1914,6 @@ By normalizing logs at the ingest layer and providing pre-built CIM mapping conf
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ganapati Sridhar</dc:creator>
       <pubDate>Wed, 03 Jun 2026 13:04:26 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8791/#vnull</guid>
-    </item>
-    <item>
-      <title>TA - Splunk UF Upgrade Parsing for Windows - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8801/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;Version 1.0.0&lt;/h2&gt;
-&lt;p&gt;Initial release of &lt;strong&gt;TA - Splunk UF Upgrade Parsing for Windows&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;This release provides the parsing-tier and indexing support component for the Splunk Windows Universal Forwarder Upgrade App solution.&lt;/p&gt;
-&lt;h3&gt;Added&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Index configuration&lt;/strong&gt; for Windows Universal Forwarder upgrade telemetry.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;splunk_upgrade&lt;/code&gt; index support for upgrade workflow logs and MSI installer logs.&lt;/li&gt;
-&lt;li&gt;Sourcetype parsing support for &lt;code&gt;splunk_upgrade&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Sourcetype parsing support for &lt;code&gt;splunk_upgrade_msi&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Timestamp recognition guidance for operational upgrade events.&lt;/li&gt;
-&lt;li&gt;Event breaking and line merging support for upgrade logs.&lt;/li&gt;
-&lt;li&gt;Support for setup, execution, state tracking, cleanup, retry prevention, force retry, and retry reset events.&lt;/li&gt;
-&lt;li&gt;Support for verbose MSI installer logs generated during upgrade attempts.&lt;/li&gt;
-&lt;li&gt;Parsing-tier deployment guidance for indexers, indexer clusters, and heavy forwarders.&lt;/li&gt;
-&lt;li&gt;Validation searches for index availability, sourcetype distribution, operational events, MSI events, and event code extraction.&lt;/li&gt;
-&lt;li&gt;Troubleshooting guidance for index, sourcetype, timestamp, line breaking, and field extraction issues.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Supported Companion Apps&lt;/h3&gt;
-&lt;p&gt;This app is designed to work with:&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;App&lt;/th&gt;
-&lt;th&gt;Purpose&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;TA-windows_uf_upgrade_automation&lt;/td&gt;
-&lt;td&gt;Performs endpoint-side Windows Universal Forwarder upgrade automation and log collection.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;SA-windows_uf_upgrade_monitoring&lt;/td&gt;
-&lt;td&gt;Provides dashboards, reporting views, data model support, and troubleshooting workflows.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3&gt;Important Notes&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;This TA provides parsing and indexing support only.&lt;/li&gt;
-&lt;li&gt;This TA does &lt;strong&gt;not&lt;/strong&gt; perform endpoint upgrades.&lt;/li&gt;
-&lt;li&gt;This TA does &lt;strong&gt;not&lt;/strong&gt; run PowerShell scripts.&lt;/li&gt;
-&lt;li&gt;This TA does &lt;strong&gt;not&lt;/strong&gt; create Windows Scheduled Tasks.&lt;/li&gt;
-&lt;li&gt;This TA does &lt;strong&gt;not&lt;/strong&gt; collect endpoint logs directly.&lt;/li&gt;
-&lt;li&gt;This TA does &lt;strong&gt;not&lt;/strong&gt; provide dashboards or Search Head navigation.&lt;/li&gt;
-&lt;li&gt;Deploy this TA to the parsing/indexing tier before enabling endpoint log collection at scale.&lt;/li&gt;
-&lt;li&gt;Do not deploy this TA to Windows Universal Forwarders.&lt;/li&gt;
-&lt;li&gt;Endpoint upgrade execution and log collection are handled by &lt;code&gt;TA-windows_uf_upgrade_automation&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Dashboard and reporting visibility is handled by &lt;code&gt;SA-windows_uf_upgrade_monitoring&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Known Considerations&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;The &lt;code&gt;splunk_upgrade&lt;/code&gt; index must exist before endpoint logs can be indexed successfully.&lt;/li&gt;
-&lt;li&gt;For indexer clusters, this TA should be deployed through the cluster manager using the standard bundle process.&lt;/li&gt;
-&lt;li&gt;Deploy to Heavy Forwarders only if Heavy Forwarders perform parsing before forwarding data to indexers.&lt;/li&gt;
-&lt;li&gt;Dashboard field visibility may also depend on Search Head knowledge objects and data model configuration in &lt;code&gt;SA-windows_uf_upgrade_monitoring&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;MSI logs can be verbose and may require retention and sizing review.&lt;/li&gt;
-&lt;li&gt;If other apps define the same sourcetypes or index stanzas, review app precedence and configuration conflicts.&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Provides index and sourcetype parsing support for Windows Universal Forwarder upgrade logs, retry-control events, and verbose MSI installer logs.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TA - Splunk UF Upgrade Parsing for Windows provides the parsing-tier and indexing support for the Splunk Windows Universal Forwarder Upgrade App solution.
-
-This TA defines the `splunk_upgrade` index and sourcetype parsing behavior used by Windows Universal Forwarder upgrade telemetry generated by the companion endpoint automation TA.
-
-It supports operational upgrade logs, retry-control logs, and verbose MSI installer logs, including:
-
-* Setup and validation events
-* Upgrade execution events
-* Splunk service stop/start events
-* MSI upgrade result events
-* Installer cleanup events
-* JSON state tracking events
-* Retry-loop prevention events
-* Controlled force retry events
-* Retry reset events
-* Verbose MSI installer logs
-
-This TA is intended for the parsing and indexing tier, including indexers, indexer clusters, and heavy forwarders when heavy forwarders perform parsing before forwarding data to indexers.
-
-This TA does **not** perform endpoint upgrades, run PowerShell scripts, create Windows Scheduled Tasks, collect endpoint logs directly, or provide dashboards. Endpoint upgrade automation is handled by `TA-windows_uf_upgrade_automation`, and dashboard/reporting visibility is handled by `SA-windows_uf_upgrade_monitoring`.
-
-Deploy this TA before enabling endpoint log collection at scale to ensure the `splunk_upgrade` index exists and upgrade events are parsed consistently.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/7b6f3ca2-5dea-11f1-a36f-da60579292f5.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Joshua Johnson</dc:creator>
-      <pubDate>Wed, 03 Jun 2026 12:57:37 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8801/#v1.0.0</guid>
-    </item>
-    <item>
-      <title>TA - Splunk UF Upgrade Automation for Windows - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8802/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h3&gt;Version 1.0.0&lt;/h3&gt;
-&lt;p&gt;Initial release of &lt;strong&gt;TA - Splunk UF Upgrade Automation for Windows&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;This release provides the endpoint-side automation component for controlled Windows Universal Forwarder upgrade workflows.&lt;/p&gt;
-&lt;h3&gt;Added&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Windows Universal Forwarder upgrade automation&lt;/strong&gt; for targeted Windows endpoints.&lt;/li&gt;
-&lt;li&gt;MSI installer discovery from the local &lt;code&gt;splunk_installer&lt;/code&gt; directory.&lt;/li&gt;
-&lt;li&gt;MSI filename validation and target version extraction.&lt;/li&gt;
-&lt;li&gt;Current Splunk Universal Forwarder version validation.&lt;/li&gt;
-&lt;li&gt;Upgrade path validation to help prevent unsupported upgrade attempts.&lt;/li&gt;
-&lt;li&gt;Installer hash calculation for state tracking and retry-loop prevention.&lt;/li&gt;
-&lt;li&gt;Windows Scheduled Task creation and execution workflow.&lt;/li&gt;
-&lt;li&gt;Upgrade execution using a scheduled task running as &lt;code&gt;SYSTEM&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Splunk Universal Forwarder service stop/start handling.&lt;/li&gt;
-&lt;li&gt;Verbose MSI installer log generation.&lt;/li&gt;
-&lt;li&gt;Setup, execution, MSI, cleanup, state, and retry-control log collection.&lt;/li&gt;
-&lt;li&gt;Persistent JSON state tracking under &lt;code&gt;C:\ProgramData\SplunkUpgrade\state\&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Retry-loop prevention for previously attempted MSI installers.&lt;/li&gt;
-&lt;li&gt;Controlled force retry support for selected failed endpoints.&lt;/li&gt;
-&lt;li&gt;Retry marker reset support for preparing selected endpoints for another retry wave.&lt;/li&gt;
-&lt;li&gt;Event code coverage for setup, validation, scheduled task, service control, upgrade result, cleanup, state tracking, retry prevention, force retry, and retry reset activity.&lt;/li&gt;
-&lt;li&gt;All inputs disabled by default for safer customer deployment.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Supported Companion Apps&lt;/h3&gt;
-&lt;p&gt;This app is designed to work with:&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;App&lt;/th&gt;
-&lt;th&gt;Purpose&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;TA-windows_uf_upgrade_parsing&lt;/td&gt;
-&lt;td&gt;Provides index and sourcetype parsing support for upgrade logs and MSI installer logs.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;SA-windows_uf_upgrade_monitoring&lt;/td&gt;
-&lt;td&gt;Provides dashboards, reporting views, data model support, and troubleshooting workflows.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3&gt;Important Notes&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;This TA performs endpoint-side operational actions on Windows Universal Forwarders.&lt;/li&gt;
-&lt;li&gt;All inputs are &lt;strong&gt;disabled by default&lt;/strong&gt; and should be enabled intentionally through Deployment Server server classes, local overrides, or approved configuration management.&lt;/li&gt;
-&lt;li&gt;The main upgrade scripted input should be enabled only when the target endpoints and MSI package are ready.&lt;/li&gt;
-&lt;li&gt;The force retry input should be enabled only for selected failed endpoints after the underlying issue has been reviewed and fixed.&lt;/li&gt;
-&lt;li&gt;The retry reset input should be enabled only when preparing selected endpoints for another retry wave.&lt;/li&gt;
-&lt;li&gt;The force retry input and retry reset input should &lt;strong&gt;not&lt;/strong&gt; be enabled at the same time during normal operations.&lt;/li&gt;
-&lt;li&gt;This TA should not be deployed to Search Heads, Indexers, Linux Universal Forwarders, or Splunk Cloud search/indexing tiers.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Known Considerations&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;The &lt;code&gt;splunk_upgrade&lt;/code&gt; index must exist before endpoint logs can be indexed successfully.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;TA-windows_uf_upgrade_parsing&lt;/code&gt; should be deployed to the parsing/indexing tier before enabling log collection at scale.&lt;/li&gt;
-&lt;li&gt;MSI log collection can generate verbose data and should be enabled according to troubleshooting, audit, and retention needs.&lt;/li&gt;
-&lt;li&gt;The app expects the Splunk Universal Forwarder to be installed in the default path unless script variables are adjusted.&lt;/li&gt;
-&lt;li&gt;The staged MSI filename must contain a parseable target version.&lt;/li&gt;
-&lt;li&gt;A failed upgrade may be intentionally skipped on later runs if the same MSI hash is marked &lt;code&gt;do_not_retry=true&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Controlled retry should be used instead of manually deleting state files when retrying failed endpoints at scale.&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Automates Windows Universal Forwarder upgrades with MSI validation, scheduled task execution, upgrade logging, state tracking, retry-loop prevention, and controlled retry/reset support.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TA - Splunk UF Upgrade Automation for Windows is the endpoint-side automation component for controlled Windows Universal Forwarder upgrade workflows.
-
-This TA is deployed to Windows Universal Forwarders and can validate staged Splunk Universal Forwarder MSI installers, check installed and target versions, create and start a Windows Scheduled Task, execute the upgrade process, stop and start the Splunk Universal Forwarder service, write upgrade logs, and track local JSON state.
-
-The app is designed to help administrators perform safer upgrade rollouts by preventing uncontrolled retry loops against the same MSI installer. If an installer has already reached a terminal state, the app can skip repeated attempts and log retry-prevention activity. When a retry is intentionally needed, the TA also includes controlled force retry and retry reset logic that can be enabled only for selected endpoints.
-
-All inputs are disabled by default for safety. Administrators should enable only the required inputs through Deployment Server server classes, local overrides, or approved configuration management.
-
-This TA works with the companion parsing app TA-windows_uf_upgrade_parsing, which provides index and sourcetype parsing support, and the optional monitoring app SA-windows_uf_upgrade_monitoring, which provides dashboards, reporting views, and troubleshooting workflows.
-
-This app is intended for Windows Universal Forwarders only. It should not be deployed to Search Heads, Indexers, Linux Universal Forwarders, or Splunk Cloud search/indexing tiers.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2726c142-5dea-11f1-a36f-da60579292f5.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Joshua Johnson</dc:creator>
-      <pubDate>Wed, 03 Jun 2026 12:56:29 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8802/#v1.0.0</guid>
     </item>
     <item>
       <title>Maze - v1.0.0 [New App Release]</title>
