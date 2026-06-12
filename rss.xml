@@ -6,17 +6,65 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Fri, 12 Jun 2026 17:32:03 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 12 Jun 2026 19:55:01 +0000</lastBuildDate>
     <item>
-      <title>Cyera TA - v4.1.26 [Version Update]</title>
+      <title>Compliance Posture for Splunk - v1.0.3 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8501/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;v1.0.3 — Large ARF File Support&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Resolves upload failure on Splunk Cloud Victoria when processing real-world CIS-CAT ARF XML files larger than 10MB.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Added XML pre-processing to strip embedded OVAL definitions, OVAL results, and full benchmark XML sections before parsing. These sections are not used by the parser and caused lxml XMLSyntaxError on Splunk Cloud Victoria. Typical file size reduction: ~13MB to ~1.3MB with zero data loss to compliance results.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;No changes to output schema, dashboards, or scoring logic. All existing scan results are unaffected.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free CIS Benchmark compliance tracking for Splunk. Upload scan results from your browser. See your compliance posture in minutes. No forwarders. No TAs. No infrastructure required.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;CIS Benchmark compliance reporting shouldn&amp;#x27;t require a paid dashboard platform, a dedicated ingestion pipeline, or weeks of integration work.
+
+I built this app because I believe compliance visibility shouldn&amp;#x27;t be gated behind expensive platforms or complex integrations. Whether you&amp;#x27;re a small team without budget for commercial tooling or a large organization looking for a lightweight alternative, you deserve a solution that works out of the box. My goal is to help as many teams as possible by providing a free, production-ready app that solves a real gap in the Splunk ecosystem.
+
+Compliance Posture for Splunk is a free, self-contained Splunk application that gives you consolidated CIS Benchmark compliance visibility across your entire infrastructure — from install to dashboards in minutes.
+
+Upload your CIS-CAT Pro Assessor ARF XML scan results directly through the browser using drag-and-drop. No file shares. No scripted inputs. No forwarder configuration. Just install the app, upload your scan files, and see where you stand.
+
+Built by a Splunk Enterprise Architect with 10+ years of hands-on experience implementing compliance reporting solutions across commercial and federal environments.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Marcus House</dc:creator>
+      <pubDate>Fri, 12 Jun 2026 19:39:07 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8501/#v1.0.3</guid>
+    </item>
+    <item>
+      <title>Intruex for Splunk - v1.0.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8819/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Updating search_name to  be sent with results&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Forward Splunk alerts and search results to the Intruex AI SOC platform for automated analysis. Includes a custom search command (| intruexsend) and an alert action (Send to Intruex).&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Intruex for Splunk connects your Splunk environment to the Intruex AI SOC platform, enabling automated forwarding of alerts and search results for AI-driven analysis and triage.
+
+The app provides two integration paths:
+
+- Custom Search Command (| intruexsend): Pipe any SPL search results directly to Intruex from the search bar. Results are enriched with delivery status fields (intruex_status, intruex_http_code, intruex_response) so you can confirm successful delivery inline.
+
+- Alert Action (Send to Intruex): Attach to any saved search or correlation search to automatically forward triggered alerts to Intruex for real-time analysis.
+
+Key features:
+
+- Automatic field mapping with type coercion (integers, booleans) for clean data delivery
+- Batched HTTP transport with configurable batch size and timeout
+- API key stored securely in Splunk&amp;#x27;s encrypted credential storage (storage/passwords)
+- Credentials configured once via the setup page, used automatically by both the search command and alert action
+- Per-use credential overrides via inline arguments or alert action parameters
+- Splunk internal fields automatically stripped; _raw preserved for full event context
+- SSL verification enabled by default with optional override for development environments
+
+This app is designed for security teams using Intruex as their AI SOC platform and Splunk as their SIEM. It bridges the gap between detection in Splunk and automated analysis in Intruex.
+
+Requires an active Intruex account and API key.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a7fdcd2a-6686-11f1-909b-aaccb41b3470.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Moneeb Waseem</dc:creator>
+      <pubDate>Fri, 12 Jun 2026 17:54:01 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8819/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>Cyera TA - v4.1.27 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7330/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;As of TA-cyera 4.1.26 (Splunk 8.0–10.1) and 5.0.2 (Splunk 10.2+), the add-on natively supports SSL-inspection environments. Under Configuration &amp;gt; Add-on Settings there are two new options:&lt;/p&gt;
-&lt;p&gt;1. CA Certificate Bundle Path (recommended): set this to the absolute path of a PEM bundle containing your proxy's CA certificate (placed on the search head / heavy forwarder running the inputs, e.g. $SPLUNK_HOME/etc/auth/proxy_ca.pem). The add-on will then validate the inspected connection against your corporate CA — no code changes, and certificate validation stays fully enabled.&lt;/p&gt;
-&lt;p&gt;2. Disable SSL Certificate Verification: available for testing, but we do not recommend it for production and the add-on logs a warning when it's active. Please prefer option 1.&lt;/p&gt;
-&lt;p&gt;Deployment guidance for SSL-inspection proxies: either configure the CA bundle path as above, or have the proxy team exempt api.cyera.io from TLS inspection (common practice for authenticated API egress). Manually patching verify\=False is no longer necessary and would be overwritten on upgrade.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This add-on allows Splunk admins to see audit trail and event data for the Cyera application. It also allows them to see when issues discovered by Cyera&amp;#x27;s classification and DSPM capabilities are added or updated in the platform. If users wish to see datastore and classification information in Splunk, that is also available. OCSF data models for use with CIM are available. In the latest release, all events in the platform are available, and the current Cyera API endpoints are used.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/434d9cdc-6683-11f1-ab25-5aa63b438bb3.png&quot;&gt;</description>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Adds support for trusting the host operating system's native certificate store (Windows certificate store, macOS Keychain, Linux system CAs) via a new &quot;Use OS Certificate Trust Store&quot; setting (Configuration &amp;gt; Add-on Settings, enabled by default). This requires a Python 3.13 runtime, so it activates automatically only when this package runs on Splunk 10.2 or later; on Splunk 8.0 through 10.1 (Python 3.9) the add-on logs this condition and continues using the bundled certificate store.&lt;/p&gt;
+&lt;p&gt;For SSL-inspection proxies on Splunk 8.0 through 10.1, use the &quot;CA Certificate Bundle Path&quot; setting introduced in 4.1.26 to point at a PEM bundle containing your proxy CA. All previous SSL settings and their precedence are unchanged.&lt;/p&gt;
+&lt;p&gt;For Splunk 8.0 through 10.1; users on Splunk 10.2+ should use the 5.x line.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This add-on allows Splunk admins to see audit trail and event data for the Cyera application. It also allows them to see when issues discovered by Cyera&amp;#x27;s classification and DSPM capabilities are added or updated in the platform. If users wish to see datastore and classification information in Splunk, that is also available. OCSF data models for use with CIM are available. In the latest release, all events in the platform are available, and the current Cyera API endpoints are used.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/434d9cdc-6683-11f1-ab25-5aa63b438bb3.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Hampton</dc:creator>
-      <pubDate>Fri, 12 Jun 2026 17:25:53 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7330/#v4.1.26</guid>
+      <pubDate>Fri, 12 Jun 2026 17:35:12 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7330/#v4.1.27</guid>
     </item>
     <item>
       <title>BeyondTrust Password Safe/Cloud Dashboard - v1.0.6 [Version Update] (Archived)</title>
@@ -752,34 +800,6 @@ This app extracts website information from the site, url, or dest fields of the 
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
       <pubDate>Wed, 10 Jun 2026 14:25:56 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8831/#v1.0.0</guid>
-    </item>
-    <item>
-      <title>Intruex for Splunk - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8819/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Forward Splunk alerts and search results to the Intruex AI SOC platform for automated analysis. Includes a custom search command (| intruexsend) and an alert action (Send to Intruex).&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Intruex for Splunk connects your Splunk environment to the Intruex AI SOC platform, enabling automated forwarding of alerts and search results for AI-driven analysis and triage.
-
-The app provides two integration paths:
-
-- Custom Search Command (| intruexsend): Pipe any SPL search results directly to Intruex from the search bar. Results are enriched with delivery status fields (intruex_status, intruex_http_code, intruex_response) so you can confirm successful delivery inline.
-
-- Alert Action (Send to Intruex): Attach to any saved search or correlation search to automatically forward triggered alerts to Intruex for real-time analysis.
-
-Key features:
-
-- Automatic field mapping with type coercion (integers, booleans) for clean data delivery
-- Batched HTTP transport with configurable batch size and timeout
-- API key stored securely in Splunk&amp;#x27;s encrypted credential storage (storage/passwords)
-- Credentials configured once via the setup page, used automatically by both the search command and alert action
-- Per-use credential overrides via inline arguments or alert action parameters
-- Splunk internal fields automatically stripped; _raw preserved for full event context
-- SSL verification enabled by default with optional override for development environments
-
-This app is designed for security teams using Intruex as their AI SOC platform and Splunk as their SIEM. It bridges the gap between detection in Splunk and automated analysis in Intruex.
-
-Requires an active Intruex account and API key.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/3bf72cc8-605c-11f1-8295-3ed5a7e21dfb.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Moneeb Waseem</dc:creator>
-      <pubDate>Wed, 10 Jun 2026 13:48:35 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8819/#v1.0.0</guid>
     </item>
     <item>
       <title>Crytica App for Alerting - v1.0.1 [New App Release]</title>
@@ -1815,94 +1835,6 @@ By normalizing logs at the ingest layer and providing pre-built CIM mapping conf
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ganapati Sridhar</dc:creator>
       <pubDate>Wed, 03 Jun 2026 13:04:26 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8791/#vnull</guid>
-    </item>
-    <item>
-      <title>SA - Splunk UF Upgrade Monitoring for Windows - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8799/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;
-&lt;/h2&gt;&lt;h3&gt;Version 1.0.0&lt;/h3&gt;
-&lt;p&gt;Initial release of &lt;strong&gt;SA - Splunk UF Upgrade Monitoring for Windows&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;This release provides the Search Head monitoring and reporting component for the Windows Universal Forwarder upgrade solution.&lt;/p&gt;
-&lt;h3&gt;Added&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Windows UF Upgrade Overview&lt;/strong&gt; dashboard for high-level rollout visibility.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Windows UF Upgrade Troubleshooting&lt;/strong&gt; dashboard for investigating failed or incomplete upgrade activity.&lt;/li&gt;
-  &lt;li&gt;Dashboard support for upgrade success, failure, retry prevention, retry-control activity, cleanup status, and state tracking events.&lt;/li&gt;
-  &lt;li&gt;Data model support for structured reporting on Windows Universal Forwarder upgrade events.&lt;/li&gt;
-  &lt;li&gt;Event code visibility for upgrade workflow events in the `9800-9839` range.&lt;/li&gt;
-  &lt;li&gt;Documentation for installation, event codes, state management, testing, and troubleshooting.&lt;/li&gt;
-  &lt;li&gt;Support for monitoring upgrade telemetry generated by the companion endpoint automation TA.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Supported Companion Apps&lt;/h3&gt;
-&lt;p&gt;This app is designed to work with:&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;App&lt;/th&gt;
-      &lt;th&gt;Purpose&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;[TA-windows\_uf\_upgrade\_automation](https://splunkbase.splunk.com/app/8802)&lt;/td&gt;
-      &lt;td&gt;Performs endpoint-side Windows Universal Forwarder upgrade automation and log collection.&lt;/td&gt;
-    &lt;/tr&gt;
-
-    &lt;tr&gt;
-      &lt;td&gt;[TA-windows\_uf\_upgrade\_parsing](https://splunkbase.splunk.com/app/8801)&lt;/td&gt;
-      &lt;td&gt;Provides index and sourcetype parsing support for upgrade logs and MSI installer logs.&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h3&gt;Notes&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;This app does &lt;strong&gt;not&lt;/strong&gt; perform endpoint upgrades directly.&lt;/li&gt;
-  &lt;li&gt;Endpoint upgrade execution is handled by `TA-windows_uf_upgrade_automation`.&lt;/li&gt;
-  &lt;li&gt;Parsing and index configuration are handled by `TA-windows_uf_upgrade_parsing`.&lt;/li&gt;
-  &lt;li&gt;This app is recommended for visibility, reporting, and troubleshooting, but is not required for the endpoint automation TA to execute upgrades.&lt;/li&gt;
-  &lt;li&gt;Dashboards require upgrade telemetry in `index=splunk_upgrade` to populate.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Known Considerations&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Dashboard panels may appear empty until endpoint upgrade logs are generated and indexed.&lt;/li&gt;
-  &lt;li&gt;Data model-based panels require expected fields to be present before acceleration is enabled.&lt;/li&gt;
-  &lt;li&gt;MSI-level visibility depends on whether MSI log collection is enabled in the endpoint automation TA.&lt;/li&gt;
-  &lt;li&gt;Controlled retry and retry reset visibility depends on retry-control events being generated and forwarded by the endpoint automation TA.&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Provides dashboards, data model support, reporting, and troubleshooting views for Windows Universal Forwarder upgrade activity generated by the companion Windows UF upgrade automation TA .&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;SA - Splunk UF Upgrade Monitoring for Windows is a Search Head app that provides dashboards, reporting views, data model support, event code visibility, and troubleshooting workflows for Windows Universal Forwarder upgrade activity.
-
-This app is designed to help Splunk administrators monitor upgrade outcomes across Windows Universal Forwarders, identify hosts that successfully upgraded, find hosts that failed or remain below the target version, and investigate setup, scheduled task, service control, MSI, cleanup, state tracking, and retry-control events.
-
-This Search Head app does not perform endpoint upgrades directly. Upgrade execution is handled by the companion endpoint automation TA, `TA-windows_uf_upgrade_automation`. Parsing and indexing support is handled by the companion parsing TA, `TA-windows_uf_upgrade_parsing`.
-
-While this Search Head app is not required to execute Windows Universal Forwarder upgrades, it is recommended for operational visibility, troubleshooting, and reporting. It helps administrators understand what happened during an upgrade rollout and which endpoints may need remediation.
-
-The app provides visibility into events such as:
-
-* Upgrade attempts
-* Successful upgrades
-* Failed upgrades
-* Hosts not on the target version
-* Version validation results
-* Scheduled task creation and execution
-* Splunk service stop/start activity
-* MSI installer results
-* Installer cleanup activity
-* JSON state tracking
-* Retry-loop prevention
-* Controlled force retry and retry reset activity
-
-This app is intended for Splunk Enterprise Search Heads or Search Head Clusters. It should not be deployed to Windows Universal Forwarders as the upgrade execution component.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/1d95ff08-5dea-11f1-a8ac-eea14f45257e.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Joshua Johnson</dc:creator>
-      <pubDate>Wed, 03 Jun 2026 12:58:59 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8799/#v1.0.0</guid>
     </item>
     <item>
       <title>TA - Splunk UF Upgrade Parsing for Windows - v1.0.0 [New App Release]</title>
