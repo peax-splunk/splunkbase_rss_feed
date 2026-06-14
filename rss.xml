@@ -6,7 +6,31 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sat, 13 Jun 2026 23:59:31 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 14 Jun 2026 04:24:00 +0000</lastBuildDate>
+    <item>
+      <title>Config Explorer - v1.8.25 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4353/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Fix for layout on Splunk 10.4&lt;/p&gt;
+&lt;p&gt;Fix for tree filter not working in some panes&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app provides a VS code editor interface for viewing and editing Splunk files.
+
+* Code completion and tooltip hinting for &amp;#x27;.conf&amp;#x27; files (by loading the Splunk &amp;#x27;.spec&amp;#x27; files)
+* Code gutter highlights if the line can be found in btool and if it is valid according to spec files
+* Displays the spec files relevant to your Splunk installation
+* Diff files
+* Provides a syntax-highlighted interface to btool, and allows diffing against the currently running config
+* Embeds the excellent Microsoft Monaco editor (Visual Studio Code) - with three themes
+* Provides useful developer hooks (bump, debug refresh etc) that can be customised and extended
+* Optional version control of all changes by committing them to a git repository before and after changes
+* Works on Linux and Windows (it is quite slow on Windows)
+
+By default, the app is not able to save files, but this can be enabled from the &amp;quot;Settings&amp;quot; link.
+As this app provides unrestricted access to Splunk files, users must have the  &amp;quot;admin&amp;quot; role to see the app.
+
+Please read the warnings on the &amp;quot;details&amp;quot; page.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a625fba8-67a8-11f1-9836-22969a633d28.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Chris Younger</dc:creator>
+      <pubDate>Sun, 14 Jun 2026 04:23:39 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4353/#v1.8.25</guid>
+    </item>
     <item>
       <title>Threat Hunting Essentials - v1.3.15 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7633/</link>
@@ -1843,51 +1867,6 @@ Splunk EMEA Technology Innovation Partner 2025.&lt;/p&gt;&lt;img height=&quot;36
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Deslicer AB</dc:creator>
       <pubDate>Thu, 04 Jun 2026 14:44:29 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8558/#v1.0.1</guid>
-    </item>
-    <item>
-      <title>CryptView for Splunk - v0.1.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8786/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Initial beta/community preview release of CryptView for Splunk.&lt;/p&gt;
-&lt;p&gt;This release provides a Splunk dashboard and supporting sourcetypes for visualizing CryptView-generated cryptographic asset inventory, certificate lifecycle risk, and post-quantum cryptography readiness evidence.&lt;/p&gt;
-&lt;p&gt;Included in v0.1.0:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;CBOM asset inventory dashboard&lt;/li&gt;
-&lt;li&gt;Certificate expiry and lifecycle visibility&lt;/li&gt;
-&lt;li&gt;Layered PQC readiness views separating transport/key-exchange evidence, certificate identity, and evidence confidence&lt;/li&gt;
-&lt;li&gt;Priority and risk scoring panels&lt;/li&gt;
-&lt;li&gt;Latest-state asset deduplication by asset_id&lt;/li&gt;
-&lt;li&gt;Rotation-friendly NDJSON ingestion support&lt;/li&gt;
-&lt;li&gt;Optional CycloneDX CBOM artifact sourcetype&lt;/li&gt;
-&lt;li&gt;Audit/event sourcetype support&lt;/li&gt;
-&lt;li&gt;Example inputs.conf for file-monitor onboarding&lt;/li&gt;
-&lt;li&gt;Beta/community preview license, usage disclaimers, and troubleshooting guidance&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Important beta scope:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;This Splunk app visualizes CryptView-generated data only.&lt;/li&gt;
-&lt;li&gt;It does not perform active scans from Splunk.&lt;/li&gt;
-&lt;li&gt;It does not include the CryptView Collector/CLI.&lt;/li&gt;
-&lt;li&gt;Raw CSV should be processed by CryptView first, then exported as Splunk-ready NDJSON.&lt;/li&gt;
-&lt;li&gt;PQC readiness results are evidence-based and advisory only, not certification.&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Visualize CryptView-generated CBOM, certificate lifecycle, risk, and post-quantum readiness evidence in Splunk.
-Beta feedback, pilot access, and Collector/CLI waitlist: https://forms.gle/qJRaDb1sXaMo2yqA7&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;CryptView for Splunk (package id: TA-cryptview) provides visibility in Splunk into CryptView-generated cryptographic asset inventory, certificate lifecycle risk, and post-quantum cryptography readiness evidence.
-
-The app helps security, PKI, identity, infrastructure, and SIEM teams review Cryptographic Bill of Materials (CBOM) data directly in Splunk. It visualizes TLS endpoints, certificate expiry pressure, key type and key size signals, issuer concentration, migration priorities, and layered Post-Quantum Cryptography (PQC) readiness evidence.
-
-CryptView separates certificate identity, transport/key-exchange evidence, and evidence confidence so standard TLS-only scans do not overclaim PQC readiness. Where active PQC transport evidence is not available, the dashboard reports transport status as “not tested” rather than assuming support or lack of support.
-
-This beta/community preview does not perform active scanning from Splunk. CryptView Collector/CLI generates normalized NDJSON data separately, and this Splunk app ingests and visualizes that output. Optional CycloneDX CBOM JSON can also be indexed as a standards/audit artifact.
-
-CryptView Collector/CLI beta access is provided separately. For access, support, feedback, or pilot participation, complete the beta feedback form or contact hello@qwocks.com
-
-Beta feedback, pilot access, and Collector/CLI waitlist: https://forms.gle/qJRaDb1sXaMo2yqA7
-
-Compatibility: Splunk Enterprise 9.x. Splunk Cloud deployment may require separate validation/review.
-
-License: Beta/community preview license. See LICENSE included in the package.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Qwocks Admin</dc:creator>
-      <pubDate>Thu, 04 Jun 2026 14:19:43 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8786/#v0.1.0</guid>
     </item>
     <item>
       <title>TA for Corelight - v2.6.0 [Version Update]</title>
