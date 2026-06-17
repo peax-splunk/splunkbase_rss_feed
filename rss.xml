@@ -6,7 +6,107 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Wed, 17 Jun 2026 14:52:49 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 17 Jun 2026 17:45:26 +0000</lastBuildDate>
+    <item>
+      <title>Splunk ODBC - v3.2.0 Windows 64 bit [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/1606/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk ODBC Driver allows industry-standard connectivity between Splunk and Analytics Tools (Microsoft PowerBI, Microsoft Excel, and Tableau Desktop).  Keep your Splunk data where it is while manipulating and visualizing subsets of that data with ODBC-compatible BI Tools.
+
+The Splunk ODBC Driver should not be installed on your Splunk instance (Enterprise or Cloud). It should be installed on the Windows or Mac machine running your BI tool. Versions 3.0.x and higher can connect to both Splunk Enterprise and Splunk Enterprise Cloud versions 7.3 and higher.
+
+For use with Windows machines, make sure to download the Windows version of this product.
+For use with Mac machines, make sure to download the MacOS version of this product.
+
+Starting with Splunk version 9.4 and later, use the 3.2 version of the ODBC Driver, which uses the new search REST endpoint. The 3.1.1 version of the ODBC driver can be used with Splunk&amp;#x27;s 9.4 and later, but only if the server.conf setting  V1APIBlockGETSearchLaunch must be set to false. This flag is deprecated, and will be removed.
+
+The 3.2 version of the ODBC driver is only available on Windows 64 bit.
+
+Note: To download different versions in the new layout, go to the &amp;quot;Version History&amp;quot; tab.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Wed, 17 Jun 2026 16:53:34 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/1606/#v3.2.0 Windows 64 bit</guid>
+    </item>
+    <item>
+      <title>REST Profiler for Splunk - v1.0.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8855/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h1&gt;REST Profiler for Splunk — Release Notes&lt;/h1&gt;
+&lt;h2&gt;1.0.0 — First Stable Release&lt;/h2&gt;
+&lt;p&gt;This is the first public release of REST Profiler for Splunk.&lt;/p&gt;
+&lt;h3&gt;What it does&lt;/h3&gt;
+&lt;p&gt;REST Profiler lets you define reusable HTTP request profiles and fire them as Splunk alert actions — with full control over authentication, payload format, reliability, and delivery — without ever typing credentials in plain text or rebuilding the same configuration twice.&lt;/p&gt;
+&lt;h3&gt;Profiles&lt;/h3&gt;
+&lt;p&gt;Each profile is a complete, saved HTTP request definition:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;All standard HTTP methods: GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS&lt;/li&gt;
+&lt;li&gt;Custom headers (free-form, one per line)&lt;/li&gt;
+&lt;li&gt;Request body with configurable Content-Type&lt;/li&gt;
+&lt;li&gt;Per-profile &lt;strong&gt;request timeout&lt;/strong&gt; (1–600 seconds)&lt;/li&gt;
+&lt;li&gt;Per-profile &lt;strong&gt;SSL certificate verification&lt;/strong&gt; with support for private and internal CAs&lt;/li&gt;
+&lt;li&gt;Full &lt;strong&gt;create / edit / clone / delete&lt;/strong&gt; from a dedicated configuration page&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Preview&lt;/strong&gt; button: shows the exact outgoing request with all secrets masked — before anything is sent&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Test send&lt;/strong&gt; button: fires the request live and shows the full response&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Authentication&lt;/h3&gt;
+&lt;p&gt;Four methods per profile, with all secrets stored encrypted in Splunk secure storage:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;None&lt;/strong&gt; — open endpoints&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HTTP Basic&lt;/strong&gt; — username and encrypted password&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Token / Bearer&lt;/strong&gt; — configurable header name, prefix, and encrypted token value&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Mutual TLS (mTLS)&lt;/strong&gt; — client certificate and optional encrypted private-key passphrase; combined PEM format&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Result delivery&lt;/h3&gt;
+&lt;p&gt;When an alert fires, each triggering result row can be sent as a separate request in five formats:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;JSON body&lt;/strong&gt; — &lt;code&gt;application/json&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;XML body&lt;/strong&gt; — &lt;code&gt;application/xml&lt;/code&gt; with named field elements&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Form body&lt;/strong&gt; — &lt;code&gt;application/x-www-form-urlencoded&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Query parameters&lt;/strong&gt; — fields appended to the URL&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Custom template&lt;/strong&gt; — &lt;code&gt;$fieldname$&lt;/code&gt; tokens in the body and URL replaced with row values&lt;br&gt;
+Field selection and ordering are configurable per profile.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Reliability controls&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Retry with exponential backoff&lt;/strong&gt; — 0 to 5 attempts; configurable initial backoff; retry scope selectable (connection errors only, also HTTP 5xx, or also HTTP 429)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Rate limiting&lt;/strong&gt; — minimum delay between consecutive per-row requests within one alert run&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Response validation&lt;/strong&gt; — optional expected status code ranges and required body content; success is only declared when both conditions are met&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Proxy support&lt;/h3&gt;
+&lt;p&gt;Per-profile HTTP, HTTPS, or SOCKS5 proxy with a separate proxy authentication option (none or username / encrypted password).&lt;/p&gt;
+&lt;h3&gt;Observability&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Monitoring dashboard with overview, error, and activity panels&lt;/li&gt;
+&lt;li&gt;Configurable log level (Configuration → Logging)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;| restprofilersend profile=&quot;&amp;lt;name&amp;gt;&quot; mode=preview|send&lt;/code&gt; search command for ad-hoc execution and integration testing&lt;/li&gt;
+&lt;li&gt;Optional response indexing: the full HTTP response (status, headers, truncated body) can be written back to Splunk as a structured event on every alert trigger&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Compatibility&lt;/h3&gt;
+&lt;p&gt;Splunk Enterprise 10.x · Linux · Apache License 2.0&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;REST Profiler for Splunk turns any HTTP API into a Splunk alert action. Define reusable, fully-featured REST request profiles once, authentication, proxy, retries, validation, encrypted secrets and fire them automatically when alerts trigger, including sending the triggering results themselves in JSON, XML, form, query-parameter, or templated format.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Most HTTP alert actions make you retype an endpoint, headers, and credentials into every alert — in plain text. REST Profiler takes a different approach: requests are profiles managed once on a dedicated configuration page with all secrets encrypted in Splunk secure storage, then reused everywhere.
+
+Typical use cases:
+
+- Notify through any SMS or messaging gateway— call Twilio, Kavenegar, or any HTTP SMS API with the alert&amp;#x27;s fields templated into the request body.
+- Exchange security incidents (IODEF— deliver RFC 7970 IODEF XML incident documents to a CSIRT/CERT endpoint, with mutual-TLS client-certificate authentication where required.
+- Create and update tickets— open incidents in ServiceNow, Jira, or any REST-capable ITSM tool, one ticket per triggering result row.
+- Trigger SOAR / automation platforms— kick off playbooks via webhook with validated delivery (expected status codes, response-content checks) and automatic retry with exponential backoff.
+- Send chat notifications— post to Slack, Microsoft Teams, Mattermost, or any incoming-webhook endpoint.
+- Integrate with internal systems— reach services behind a corporate proxy (HTTP/HTTPS/SOCKS5, with separate proxy credentials), including self-signed or private-CA TLS endpoints.
+
+Feature highlights:
+
+- Reusable profiles: create, edit, clone, delete from a dedicated UI.
+- Exact request Preview(secrets masked) and live Test send per profile.
+- All HTTP methods: GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS.
+- Authentication: none, HTTP Basic, token/bearer (custom header and prefix), and mutual TLS* (client certificate, optional encrypted private-key passphrase).
+- Secrets (passwords, tokens, certificates, passphrases) encrypted in Splunk secure storage; never shown in previews or logs.
+- Per-row result delivery: send each triggering result as a JSON, XML, or form-urlencoded body, as URL query parameters, or through a custom `$field$` template in the body and URL.
+- Reliability controls per profile: request timeout, retry with exponential backoff (connection errors, optionally HTTP 5xx/429), rate limiting between requests, and response validation (expected status codes, required body content).
+- Proxy support per profile: HTTP, HTTPS, or SOCKS5, with a separate proxy-authentication option.
+- `| restprofilersend` search command for ad-hoc and scheduled execution.
+- Monitoring dashboard, configurable logging level, and a built-in Search view.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/fc8478c0-6993-11f1-ae8d-96f11bbf7bce.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">majid ershadi</dc:creator>
+      <pubDate>Wed, 17 Jun 2026 16:39:18 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8855/#v1.0.0</guid>
+    </item>
     <item>
       <title>Threat Hunting Essentials - v1.3.19 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7633/</link>
@@ -680,87 +780,6 @@ Built and supported by Outcold Solutions. Documentation: https://www.outcoldsolu
       <guid>https://splunkbase.splunk.com/app/8858/#v1.0.0</guid>
     </item>
     <item>
-      <title>REST Profiler for Splunk - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8855/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h1&gt;REST Profiler for Splunk — Release Notes&lt;/h1&gt;
-&lt;h2&gt;1.0.0 — First Stable Release&lt;/h2&gt;
-&lt;p&gt;This is the first public release of REST Profiler for Splunk.&lt;/p&gt;
-&lt;h3&gt;What it does&lt;/h3&gt;
-&lt;p&gt;REST Profiler lets you define reusable HTTP request profiles and fire them as Splunk alert actions — with full control over authentication, payload format, reliability, and delivery — without ever typing credentials in plain text or rebuilding the same configuration twice.&lt;/p&gt;
-&lt;h3&gt;Profiles&lt;/h3&gt;
-&lt;p&gt;Each profile is a complete, saved HTTP request definition:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;All standard HTTP methods: GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS&lt;/li&gt;
-&lt;li&gt;Custom headers (free-form, one per line)&lt;/li&gt;
-&lt;li&gt;Request body with configurable Content-Type&lt;/li&gt;
-&lt;li&gt;Per-profile &lt;strong&gt;request timeout&lt;/strong&gt; (1–600 seconds)&lt;/li&gt;
-&lt;li&gt;Per-profile &lt;strong&gt;SSL certificate verification&lt;/strong&gt; with support for private and internal CAs&lt;/li&gt;
-&lt;li&gt;Full &lt;strong&gt;create / edit / clone / delete&lt;/strong&gt; from a dedicated configuration page&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Preview&lt;/strong&gt; button: shows the exact outgoing request with all secrets masked — before anything is sent&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Test send&lt;/strong&gt; button: fires the request live and shows the full response&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Authentication&lt;/h3&gt;
-&lt;p&gt;Four methods per profile, with all secrets stored encrypted in Splunk secure storage:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;None&lt;/strong&gt; — open endpoints&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;HTTP Basic&lt;/strong&gt; — username and encrypted password&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Token / Bearer&lt;/strong&gt; — configurable header name, prefix, and encrypted token value&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Mutual TLS (mTLS)&lt;/strong&gt; — client certificate and optional encrypted private-key passphrase; combined PEM format&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Result delivery&lt;/h3&gt;
-&lt;p&gt;When an alert fires, each triggering result row can be sent as a separate request in five formats:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;JSON body&lt;/strong&gt; — &lt;code&gt;application/json&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;XML body&lt;/strong&gt; — &lt;code&gt;application/xml&lt;/code&gt; with named field elements&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Form body&lt;/strong&gt; — &lt;code&gt;application/x-www-form-urlencoded&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Query parameters&lt;/strong&gt; — fields appended to the URL&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Custom template&lt;/strong&gt; — &lt;code&gt;$fieldname$&lt;/code&gt; tokens in the body and URL replaced with row values&lt;br&gt;
-Field selection and ordering are configurable per profile.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Reliability controls&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Retry with exponential backoff&lt;/strong&gt; — 0 to 5 attempts; configurable initial backoff; retry scope selectable (connection errors only, also HTTP 5xx, or also HTTP 429)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Rate limiting&lt;/strong&gt; — minimum delay between consecutive per-row requests within one alert run&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Response validation&lt;/strong&gt; — optional expected status code ranges and required body content; success is only declared when both conditions are met&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Proxy support&lt;/h3&gt;
-&lt;p&gt;Per-profile HTTP, HTTPS, or SOCKS5 proxy with a separate proxy authentication option (none or username / encrypted password).&lt;/p&gt;
-&lt;h3&gt;Observability&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Monitoring dashboard with overview, error, and activity panels&lt;/li&gt;
-&lt;li&gt;Configurable log level (Configuration → Logging)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;| restprofilersend profile=&quot;&amp;lt;name&amp;gt;&quot; mode=preview|send&lt;/code&gt; search command for ad-hoc execution and integration testing&lt;/li&gt;
-&lt;li&gt;Optional response indexing: the full HTTP response (status, headers, truncated body) can be written back to Splunk as a structured event on every alert trigger&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Compatibility&lt;/h3&gt;
-&lt;p&gt;Splunk Enterprise 10.x · Linux · Apache License 2.0&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;REST Profiler for Splunk turns any HTTP API into a Splunk alert action. Define reusable, fully-featured REST request profiles once, authentication, proxy, retries, validation, encrypted secrets and fire them automatically when alerts trigger, including sending the triggering results themselves in JSON, XML, form, query-parameter, or templated format.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Most HTTP alert actions make you retype an endpoint, headers, and credentials into every alert — in plain text. REST Profiler takes a different approach: requests are profiles managed once on a dedicated configuration page with all secrets encrypted in Splunk secure storage, then reused everywhere.
-
-Typical use cases:
-
-- Notify through any SMS or messaging gateway— call Twilio, Kavenegar, or any HTTP SMS API with the alert&amp;#x27;s fields templated into the request body.
-- Exchange security incidents (IODEF— deliver RFC 7970 IODEF XML incident documents to a CSIRT/CERT endpoint, with mutual-TLS client-certificate authentication where required.
-- Create and update tickets— open incidents in ServiceNow, Jira, or any REST-capable ITSM tool, one ticket per triggering result row.
-- Trigger SOAR / automation platforms— kick off playbooks via webhook with validated delivery (expected status codes, response-content checks) and automatic retry with exponential backoff.
-- Send chat notifications— post to Slack, Microsoft Teams, Mattermost, or any incoming-webhook endpoint.
-- Integrate with internal systems— reach services behind a corporate proxy (HTTP/HTTPS/SOCKS5, with separate proxy credentials), including self-signed or private-CA TLS endpoints.
-
-Feature highlights:
-
-- Reusable profiles: create, edit, clone, delete from a dedicated UI.
-- Exact request Preview(secrets masked) and live Test send per profile.
-- All HTTP methods: GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS.
-- Authentication: none, HTTP Basic, token/bearer (custom header and prefix), and mutual TLS* (client certificate, optional encrypted private-key passphrase).
-- Secrets (passwords, tokens, certificates, passphrases) encrypted in Splunk secure storage; never shown in previews or logs.
-- Per-row result delivery: send each triggering result as a JSON, XML, or form-urlencoded body, as URL query parameters, or through a custom `$field$` template in the body and URL.
-- Reliability controls per profile: request timeout, retry with exponential backoff (connection errors, optionally HTTP 5xx/429), rate limiting between requests, and response validation (expected status codes, required body content).
-- Proxy support per profile: HTTP, HTTPS, or SOCKS5, with a separate proxy-authentication option.
-- `| restprofilersend` search command for ad-hoc and scheduled execution.
-- Monitoring dashboard, configurable logging level, and a built-in Search view.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/fc8478c0-6993-11f1-ae8d-96f11bbf7bce.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">majid ershadi</dc:creator>
-      <pubDate>Wed, 17 Jun 2026 12:47:20 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8855/#v1.0.0</guid>
-    </item>
-    <item>
       <title>Splunk WLM Resource Protection App - v1.0.0 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/8839/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Monitors active searches and terminates over-threshold workloads to protect Splunk stack performance and stability.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk WLM Resource Protection App helps protect Splunk search performance by monitoring active searches and automatically terminating searches that exceed configured CPU or memory thresholds. It addresses situations where a small number of resource-intensive searches can degrade stack stability, impact other users, or consume excessive search head and indexer capacity.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
@@ -1287,25 +1306,6 @@ Subin Nidiyandiyil - Cyber Security Technical Consultant
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Flo Flo</dc:creator>
       <pubDate>Mon, 15 Jun 2026 15:26:21 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8820/#v1.0.3</guid>
-    </item>
-    <item>
-      <title>Splunk ODBC - v3.2.0 Windows 64 bit [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/1606/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk ODBC Driver allows industry-standard connectivity between Splunk and Analytics Tools (Microsoft PowerBI, Microsoft Excel, and Tableau Desktop).  Keep your Splunk data where it is while manipulating and visualizing subsets of that data with ODBC-compatible BI Tools.
-
-The Splunk ODBC Driver should not be installed on your Splunk instance (Enterprise or Cloud). It should be installed on the Windows or Mac machine running your BI tool. Versions 3.0.x and higher can connect to both Splunk Enterprise and Splunk Enterprise Cloud versions 7.3 and higher.
-
-For use with Windows machines, make sure to download the Windows version of this product.
-For use with Mac machines, make sure to download the MacOS version of this product.
-
-Starting with Splunk version 9.4 and later, use the 3.2 version of the ODBC Driver, which uses the new search REST endpoint. The 3.1.1 version of the ODBC driver can be used with Splunk&amp;#x27;s 9.4 and later, but only if the server.conf setting  V1APIBlockGETSearchLaunch must be set to false. This flag is deprecated, and will be removed.
-
-The 3.2 version of the ODBC driver is only available on Windows 64 bit.
-
-Note: To download different versions in the new layout, go to the &amp;quot;Version History&amp;quot; tab.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Mon, 15 Jun 2026 14:33:18 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/1606/#v3.2.0 Windows 64 bit</guid>
     </item>
     <item>
       <title>Splunk Add-on for Google Cloud Platform - v5.0.3 [Version Update]</title>
