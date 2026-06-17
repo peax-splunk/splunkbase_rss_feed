@@ -6,7 +6,87 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Wed, 17 Jun 2026 17:45:26 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 17 Jun 2026 20:01:10 +0000</lastBuildDate>
+    <item>
+      <title>Cisco Security Cloud - v3.6.7 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7404/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;CiscoSecurityCloud 3.6.7&lt;/strong&gt; is a maintenance release on top of 3.6.6, focused on ingestion accuracy and stability. This release improves Secure Firewall syslog filtering and field extraction, adds new FTD 10.5 log coverage for QUIC, SSL, SSH, and FILE,  strengthens JSON parsing defaults across multiple data sources, fixes Secure Endpoint bookmark handling, and refines AI Defense content extraction for more consistent event mapping and search behavior.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Cisco Security Cloud application offers seamless integration for connecting your Cisco devices with Splunk. It features a modular UX input design, built-in health checks, and constant monitoring to ensure operational integrity.
+
+Product(s) Enabled:
+    Cisco AI Defense
+    Cisco Duo
+    Cisco Email Threat Defense (ETD)
+    Cisco Endpoint Visibility Module (EVM) CIM Mappings (Beta)
+    Cisco Identity Intelligence (CII)
+    Cisco Multicloud Defense
+    Cisco NVM
+    Cisco Secure Endpoint
+    Cisco Secure Firewall (FTD/eStreamer/ASA)
+    Cisco Secure Workload
+    Cisco Isovalent
+    Cisco Isovalent Edge Processor **Alpha
+    Cisco Secure Malware Analytics (SMA)
+    Cisco Secure Network Analytics (SNA)
+    Cisco Vulnerability Intelligence
+    Cisco XDR (Incident Import &amp;amp; Promote to ES Notable)
+
+Here’s the revised version with the sourcetype list and stronger 3.x transition language.
+
+**MAJOR VERSION CHANGE:  CiscoSecurityCloud 4.0.0 Release Notes**
+
+CiscoSecurityCloud 4.0.0 introduces expanded Cisco Secure Firewall / FTD syslog and Advanced Logging support, with improved parsing, event routing, CIM/data model alignment, dashboard visibility, and ingestion reliability.
+
+This release adds a new FTD sourcetype routing model that separates FTD events by event family instead of keeping all events under a single generic `cisco:ftd:syslog` sourcetype. This improves field extraction accuracy, dashboard filtering, data model mapping, and long-term supportability for FTD syslog and Advanced Logging data.
+
+Because this changes how FTD events are categorized, **4.0.0 may be a breaking change for customers with custom Splunk content**.
+
+Content that may require review includes:
+
+- Saved searches, alerts, reports, and dashboards that filter only on `sourcetype=&amp;quot;cisco:ftd:syslog&amp;quot;`
+- Custom macros, eventtypes, tags, and CIM/data model constraints
+- Custom props/transforms or routing assumptions for FTD syslog
+- Data model acceleration searches scoped to the previous FTD sourcetype
+- External integrations or correlation searches that expect all FTD events in one sourcetype
+
+Customers should update broad FTD searches from &amp;quot;cisco:ftd:syslog&amp;quot; to
+
+```text
+cisco:ftd:intrusion
+cisco:ftd:connection
+cisco:ftd:connection:security
+cisco:ftd:file
+cisco:ftd:malware
+cisco:ftd:discovery
+cisco:ftd:useractivity
+cisco:ftd:correlation
+cisco:ftd:intrusionpacket
+cisco:ftd:adv:http
+cisco:ftd:adv:ftp
+cisco:ftd:adv:conn
+cisco:ftd:adv:dns
+cisco:ftd:adv:weird
+cisco:ftd:adv:notice
+```
+CiscoSecurityCloud 4.0.0 is intended for customers who want the new FTD Advanced Logging model and are ready to validate custom content against the expanded sourcetypes.
+
+To ease the transition, the CiscoSecurityCloud 3.x branch will be actively maintained and should remain the recommended stable branch for customers who require the existing FTD sourcetype behavior. Customers can continue using 3.x while they assess 4.0.0, update custom SPL, and validate dashboards, alerts, and data model acceleration.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d64ef6bc-6a74-11f1-b4ee-363587161d2a.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco Systems, Inc.</dc:creator>
+      <pubDate>Wed, 17 Jun 2026 19:14:41 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7404/#v3.6.7</guid>
+    </item>
+    <item>
+      <title>Splunk ES Content Update - v6.1.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/3449/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;GitHub - &lt;a href=&quot;https://github.com/splunk/security_content/releases/tag/v6.1.0&quot;&gt;https://github.com/splunk/security_content/releases/tag/v6.1.0&lt;/a&gt;&lt;br&gt;
+Splunk Docs - &lt;a href=&quot;https://help.splunk.com/en/splunk-enterprise-security-8/security-content-update/release-notes/6.0/splunk-security-content-release-notes/whats-new&quot;&gt;https://help.splunk.com/en/splunk-enterprise-security-8/security-content-update/release-notes/6.0/splunk-security-content-release-notes/whats-new&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk ES Content Update (ESCU) app delivers pre-packaged Security Content. ESCU provides regular Security Content updates to help security practitioners address ongoing time-sensitive threats, attack methods, and other security issues.
+
+Security Content consists of tactics, techniques, and methodologies that help with detection, investigation, and response. Security Content enables security teams to directly operationalize detection searches, investigative searches, and other supporting details. ESCU can generate Notable/Risk Events in Splunk Enterprise Security. Security Content also contains easy-to-read background information and guidance, for key context on motivations and risks associated with attack techniques, as well as pragmatic advice on how to combat those techniques.
+
+The analytic stories and their searches are also available at - https://github.com/splunk/security_content.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0fb645fe-6a70-11f1-9e9d-4e0635637383.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Wed, 17 Jun 2026 18:33:57 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/3449/#v6.1.0</guid>
+    </item>
     <item>
       <title>Splunk ODBC - v3.2.0 Windows 64 bit [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/1606/</link>
@@ -2357,44 +2437,6 @@ To enable data ingestion, the add-on should be installed on your IDM or Heavy Fo
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
       <pubDate>Mon, 08 Jun 2026 13:01:47 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7066/#v1.3.1</guid>
-    </item>
-    <item>
-      <title>Mandiant Advantage App for Splunk - v1.7.4 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6128/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
-&lt;li&gt;Fixed checkpoint save failure in Mandiant Security Validation input.&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Mandiant Advantage App for Splunk allows users to pull Mandiant threat intelligence into Splunk’s powerful data platform to stay ahead of attackers and threats. The app provides users a formidable combination of Splunk Enterprise Security’s (ES) powerful analytics, Splunk SOAR’s automation and massive scale along with Mandiant industry-leading threat intelligence, security validation and incident response.
-
-Splunk ingests Mandiant intelligence, performs correlation and analysis, and provides dashboards for visualization. When combined, Splunk and Mandiant enable security professionals to validate their security stack and analyze security events through the eyes of Mandiant cyber security experts.
-
-Maximize Mandiant Advantage with Splunk:
-
-- Mandiant Threat Intelligence delivers the latest threat research directly to the SOC, allowing security teams to quickly see and detect real-time adversary activity. This empowers organizations to better understand the adversary and their tradecraft to make informed decisions and take decisive action. Mandiant intelligence feeds provide insights into well-known malicious actors, malware families, and map to MITRE ATT&amp;amp;CK for strategic response.
-
-- Mandiant Attack Surface Management enables comprehensive visibility of the extended enterprise, so security teams can proactively mitigate real-world threats. Attack Surface Management scans corporate assets and cloud resources daily and identifies application and service technologies. The module assesses risks to the organization, assigns severity, and provides information security teams can use within Splunk to remediate.
-
-- Mandiant Digital Threat Monitoring delivers customized alerts on potential targeting and data or credential leaks. Triggered alerts from monitoring the surface, deep and dark web can be viewed in pre-configured charts via the Splunk visualization tool. These charts provide a high-level overview of alerts and bring what matters most to the forefront in Digital Threat Monitoring. 
-
-- Mandiant Security Validation allows customers to gain confidence in their readiness to withstand cyber-attacks. Mandiant tests the efficacy of control points to block attacks and validates that event information is being sent to and triggering alerts in Splunk Enterprise Security. With Mandiant and Splunk continuously validating the effectiveness of their cybersecurity controls, customers will have real data on how security controls are performing, allowing them to optimize their environments and make the right investments for the future.
-
-- In the face of a suspected or active breach, customers can use the integration between Mandiant Incident Response and Splunk to engage with Mandiant incident response experts with the click of a button. These experts can help customers build their incident response capabilities, respond to active breaches, and bolster their security operations to detect and respond to attacks in the future.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/3c06b45c-6329-11f1-adb4-16a93a88dc2d.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Mandiant Advantage</dc:creator>
-      <pubDate>Mon, 08 Jun 2026 11:04:16 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6128/#v1.7.4</guid>
-    </item>
-    <item>
-      <title>Machine Data Lab - v2.1.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8697/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
-&lt;li&gt;new features&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Register yourself and watch the global Splunk community grow, one pin on the map at a time.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Machine Data Lab is a community-driven app built by Border Innovation, where Splunk users from around the world register and leave their mark.
-
-Sign up in seconds and watch as a global map comes alive with registrations from fellow users across every corner of the planet.
-
-See who&amp;#x27;s joining, when, and from where — as the Splunk community grows, one registration at a time.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8fb4b4b8-47c3-11f1-88e5-2e106c170e05.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Border Innovation</dc:creator>
-      <pubDate>Mon, 08 Jun 2026 11:00:21 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8697/#v2.1.1</guid>
     </item>
   </channel>
 </rss>
