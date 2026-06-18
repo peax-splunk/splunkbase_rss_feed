@@ -6,7 +6,34 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Thu, 18 Jun 2026 05:28:50 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 18 Jun 2026 10:07:04 +0000</lastBuildDate>
+    <item>
+      <title>Cohesity Add-on For Splunk - v1.2.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7530/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;Version 1.2.0&lt;/h2&gt;
+&lt;p&gt;This release resolves an issue where audit and alert logs could be missed at short polling intervals, and hardens data collection for reliable, exactly-once ingestion.&lt;/p&gt;
+&lt;h3&gt;Fixed&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Resolved silent data loss at short polling intervals (e.g., 60s). Collection now checkpoints on the data actually retrieved (not the system clock), with a look-back window and de-duplication, guaranteeing complete, exactly-once ingestion at any interval.&lt;/li&gt;
+&lt;li&gt;Collection now fails closed on API errors (non-200 responses) so a transient error retries the window instead of skipping it.&lt;/li&gt;
+&lt;li&gt;Each audit/alert record is now indexed as its own event, preventing index-time truncation of large API responses.&lt;/li&gt;
+&lt;li&gt;Event timestamps are now set from the record's UTC time, so &lt;code&gt;_time&lt;/code&gt; is correct regardless of forwarder/indexer timezone.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Improved&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Cohesity access tokens are cached and reused until near expiry, eliminating repeated logins.&lt;/li&gt;
+&lt;li&gt;Upgraded the bundled Splunk SDK for Python and aligned packaging for Splunk Cloud certification.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Requirements&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Splunk Enterprise 9.0+ recommended. Splunk 10.0+ is required when the Cohesity cluster enforces TLS 1.3.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Cohesity Add-On for Splunk enables seamless integration with your systems, allowing users to automatically pull alerts and audit logs into Splunk for real-time monitoring, analysis, and reporting.
+
+The Cohesity cluster must be at least version 6.7.x or newer. For support with this add-on, please contact Cohesity Support.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/067dc638-6ae8-11f1-ad9f-764824e3268c.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cohesity Cohesity</dc:creator>
+      <pubDate>Thu, 18 Jun 2026 09:06:28 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7530/#v1.2.0</guid>
+    </item>
     <item>
       <title>NVD CVE Fetcher Add-on - v1.0.6 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7121/</link>
@@ -23,8 +50,16 @@ Compatible with Splunk Enterprise 9.0.1 and later versions, the app offers flexi
 
 For Security Operations Centers (SOCs) and vulnerability management teams, this application serves as an essential tool for maintaining situational awareness, prioritizing patching efforts, correlating vulnerabilities with existing assets, and enhancing overall security posture through data-driven decision-making.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2627ff04-6a47-11f1-806c-06b8ed15aa4a.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Metron Consulting LLC</dc:creator>
-      <pubDate>Thu, 18 Jun 2026 04:42:04 +0000</pubDate>
+      <pubDate>Thu, 18 Jun 2026 08:28:50 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7121/#v1.0.6</guid>
+    </item>
+    <item>
+      <title>DBX addon for clickhouse (sample) - v1.0.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8832/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Provides a custom JDBC driver package that enables Splunk DB Connect to connect to ClickHouse Cloud databases.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk DBX Add-on for Clickhouse extends Splunk DB Connect by providing a custom JDBC driver package specifically designed to connect to ClickHouse Cloud databases. This add-on addresses the absence of native ClickHouse support in Splunk DB Connect by bundling the clickhouse-jdbc driver along with the necessary configuration files. Once installed and registered with DB Connect, the add-on enables ClickHouse as a selectable database type, allowing administrators to configure connections, execute queries, and ingest data from ClickHouse instances. The add-on uses an all-in-one JAR distribution to ensure compatibility with DB Connect&amp;#x27;s class loader architecture and to prevent dependency-related runtime errors that can occur with multi-JAR configurations.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Masayuki Hyugaji</dc:creator>
+      <pubDate>Thu, 18 Jun 2026 08:00:00 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8832/#v1.0.0</guid>
     </item>
     <item>
       <title>Cisco Security Cloud - v3.6.7 [Version Update]</title>
@@ -2268,25 +2303,6 @@ Check out the README for more details.&lt;/p&gt;&lt;img height=&quot;36px&quot; 
       <guid>https://splunkbase.splunk.com/app/7188/#v1.1.7</guid>
     </item>
     <item>
-      <title>Cyware Intel Exchange - v4.0.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4876/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ol&gt;
-&lt;li&gt;Updated the Indicator Overview dashboard to use the &lt;strong&gt;&lt;em&gt;splunk_ingest_time&lt;/em&gt;&lt;/strong&gt; field across all time-based panels and timeline visualizations.&amp;#x20;&lt;/li&gt;
-&lt;li&gt;Introduced the &lt;strong&gt;&lt;em&gt;cyware_index&lt;/em&gt;&lt;/strong&gt; macro to centrally manage index references used throughout the app dashboards, simplifying configuration and maintenance.&amp;#x20;&lt;/li&gt;
-&lt;li&gt;Added an option to disable SSL certificate validation in &lt;strong&gt;&lt;em&gt;ta_cyware_ctix_settings.conf&lt;/em&gt;&lt;/strong&gt;, allowing on-premises deployments to optionally bypass SSL verification when required.&lt;/li&gt;
-&lt;/ol&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Integrate Cyware Intel Exchange with Splunk to ingest, correlate, and act on threat intelligence directly within your Splunk environment.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Cyware Intel Exchange App for Splunk integrates Intel Exchange directly into Splunk Enterprise, enabling teams to ingest, correlate, and operationalize threat indicators without leaving their Splunk environment.
-
-Using this add-on, you can:
-
-1. Ingest threat indicators from Cyware Intel Exchange into Splunk using KV Store–based lookups.
-2. Correlate indicators with Splunk events to identify sightings and support detection workflows.
-3. Visualize threat intelligence activity through prebuilt dashboards for indicator and correlation insights.
-4. Manage indicators directly from Splunk using operational actions such as updating status, applying tags, creating tasks, and adding notes.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2607039e-633a-11f1-adb4-16a93a88dc2d.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyware Labs</dc:creator>
-      <pubDate>Tue, 09 Jun 2026 13:12:16 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4876/#v4.0.2</guid>
-    </item>
-    <item>
       <title>Agent Management Versioned App Retrieval - v1.0.2 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8278/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Remove requests / urllib3 dependency - use Splunk-shipped libraries.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Automate the download of artifacts from external repositories and update your agent management deployment. New apps are available for deployment at configurable intervals. It enables you to maintain up-to-date Splunk apps for agent deployment.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Agent management versioned app retrieval add-on fetches Splunk apps and configurations from configured artifact repositories, such as GitHub, GitLab, JFrog Artifactory, and Sonatype Nexus Repository, for deployment by agent management.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
@@ -2420,17 +2436,6 @@ To enable data ingestion, the add-on should be installed on your IDM or Heavy Fo
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Dev Axur</dc:creator>
       <pubDate>Mon, 08 Jun 2026 15:02:29 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7622/#v2.0.3</guid>
-    </item>
-    <item>
-      <title>SA-DetectionInsights - v1.3.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7066/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
-&lt;li&gt;Added data_source information to the overview checks and multiple dashboards&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Important Note:&lt;/strong&gt; This release has a new visualization requirement: &lt;a href=&quot;https://splunkbase.splunk.com/app/7977&quot;&gt;https://splunkbase.splunk.com/app/7977&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Detection Insights is an application for Splunk Enterprise Security providing additional insights into everything surrounding and/or impacting your security detections.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/4ee9f8a8-6339-11f1-9167-caaa152ce87e.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
-      <pubDate>Mon, 08 Jun 2026 13:01:47 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7066/#v1.3.1</guid>
     </item>
   </channel>
 </rss>
