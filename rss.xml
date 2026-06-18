@@ -6,11 +6,58 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Thu, 18 Jun 2026 19:19:02 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 18 Jun 2026 21:58:05 +0000</lastBuildDate>
     <item>
-      <title>Atlas Software Platform for Splunk - v5.0.3 [Version Update]</title>
+      <title>SA-cim_vladiator - v2.1.0 [Version Update] (Archived)</title>
+      <link>https://splunkbase.splunk.com/app/2968/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h1&gt;Splunk 10.4 upkeep &amp;amp; cleanup — Python 3.13 support, mvmath fixes, doc refresh&lt;/h1&gt;
+&lt;p&gt;This release is general maintenance ahead of Splunk 10.4 — Python version compliance, bug fixes in &lt;code&gt;mvmath&lt;/code&gt;, shared-code cleanup, AppInspect fixes, and a documentation refresh. No new commands or breaking changes to existing search syntax.&lt;/p&gt;
+&lt;h2&gt;Python 3.13 / Splunk 10.4 compatibility&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Declared &lt;code&gt;python.required = 3.13&lt;/code&gt; for &lt;code&gt;mvrex&lt;/code&gt; and &lt;code&gt;mvmath&lt;/code&gt; in &lt;code&gt;commands.conf&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Extracted shared logic (&lt;code&gt;configure_logger&lt;/code&gt;, &lt;code&gt;validate_command_args&lt;/code&gt;, option helpers, &lt;code&gt;safe_pct&lt;/code&gt;) into a new &lt;code&gt;cim_vladiator_common.py&lt;/code&gt;, removing duplication between &lt;code&gt;mvrex.py&lt;/code&gt; and &lt;code&gt;mvmath.py&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Restored proper logging: reads &lt;code&gt;SPLUNK_HOME&lt;/code&gt; from the environment and writes to &lt;code&gt;$SPLUNK_HOME/var/log/splunk/&lt;/code&gt;, with a safe fallback if unavailable.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Bug fixes — mvmath&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Fixed a &lt;code&gt;KeyError&lt;/code&gt; in debug logging.&lt;/li&gt;
+&lt;li&gt;Fixed unhandled division errors during percentage computation (now uses &lt;code&gt;safe_pct&lt;/code&gt;, which returns &lt;code&gt;None&lt;/code&gt; instead of crashing on bad input).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;field&lt;/code&gt;/&lt;code&gt;field2&lt;/code&gt; are now correctly enforced as mandatory options, matching &lt;code&gt;mvrex&lt;/code&gt;'s validation pattern.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Logging&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Standardized all log output to a uniform &lt;code&gt;event=&quot;...&quot; command=&quot;...&quot; key=&quot;value&quot;&lt;/code&gt; format across both commands.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Code quality&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Renamed unclear shared helper functions (e.g. &lt;code&gt;die&lt;/code&gt; → &lt;code&gt;abort_command&lt;/code&gt;) for clarity.&lt;/li&gt;
+&lt;li&gt;Removed stale, manually-maintained &quot;rev. history&quot; comment blocks (some dating to 2015) — git history supersedes these now.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;AppInspect / packaging&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Added the missing &lt;code&gt;[id]&lt;/code&gt; stanza to &lt;code&gt;app.conf&lt;/code&gt; (name/version), resolving an AppInspect warning; uses the &lt;code&gt;%%APPID%%&lt;/code&gt;/&lt;code&gt;%%VERSION%%&lt;/code&gt; template macros to stay correct across release, PR, and manual-dispatch builds.&lt;/li&gt;
+&lt;li&gt;Added &lt;code&gt;searchbnf.conf&lt;/code&gt; documentation for &lt;code&gt;mvmath&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Added &lt;code&gt;props.conf&lt;/code&gt; source/sourcetype stanzas for &lt;code&gt;mvmath.log&lt;/code&gt;, mirroring the existing &lt;code&gt;mvrex.log&lt;/code&gt; setup.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Documentation&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Full README rewrite: usage docs for the CIM Compliance Dashboard and CIM Dictionary pages, install/placement guidance, best-practices workflows, and new screenshots.&lt;/li&gt;
+&lt;li&gt;Removed the old, now-unused screenshots.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This Splunk app was developed with one goal in mind, reduce amount of time spent validating Splunk Common Information Model (CIM) compliance of technology add-ons (TA&amp;#x27;s). Use of this app simplifies validation process in several ways:
+
+-Identifies fields that are required, but missing
+-Validates data confirms to expected CIM values
+-Rapid prototyping and validation
+
+This project is hosted on GitHub, https://github.com/hire-vladimir/SA-cim_vladiator&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d5174ce4-6b5b-11f1-b8b0-f68c476a4511.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
+      <pubDate>Thu, 18 Jun 2026 21:33:28 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/2968/#v2.1.0</guid>
+    </item>
+    <item>
+      <title>Atlas Software Platform for Splunk - v5.0.4 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5614/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;a href=&quot;https://docs.atlas.kinneygroup.com/docs/references/release-notes&quot; title=&quot;See Release Notes Online!&quot;&gt;See Release Notes Online!&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Atlas™ is the premier enablement platform for Splunk. Whatever you’re creating in Splunk, be it powerful dashboards, incredible insights, more secure IT environments, or the analytics you need to generate business results, Atlas is jet fuel for your Splunk journey.
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;a href=&quot;https://docs.atlas.kinneygroup.com/&quot; title=&quot;Link to Documentation&quot;&gt;Link to Documentation&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Atlas™ is the premier enablement platform for Splunk. Whatever you’re creating in Splunk, be it powerful dashboards, incredible insights, more secure IT environments, or the analytics you need to generate business results, Atlas is jet fuel for your Splunk journey.
 
 With knowledge from 650+ Splunk engagements, we&amp;#x27;ve developed a comprehensive platform that combines software tools and expert services to help organizations maximize their Splunk investment and overcome common challenges.
 
@@ -29,10 +76,55 @@ Atlas Benefits:
 - Access to specialized expertise
 - Continuous Environment Improvement
 
-Atlas combines technology and expertise to transform your data into actionable insights and measurable business outcomes. Whether you&amp;#x27;re just starting with Splunk or looking to enhance an established environment, the Atlas Platform provides the tools and knowledge to accelerate your success.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f2a6f4d6-6b32-11f1-8335-06ba7e874f70.png&quot;&gt;</description>
+Atlas combines technology and expertise to transform your data into actionable insights and measurable business outcomes. Whether you&amp;#x27;re just starting with Splunk or looking to enhance an established environment, the Atlas Platform provides the tools and knowledge to accelerate your success.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/5ca6ea44-6b56-11f1-b8b0-f68c476a4511.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Presidio - Key Partner Acct</dc:creator>
-      <pubDate>Thu, 18 Jun 2026 16:38:51 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5614/#v5.0.3</guid>
+      <pubDate>Thu, 18 Jun 2026 21:00:53 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5614/#v5.0.4</guid>
+    </item>
+    <item>
+      <title>STIG Compliance App for Splunk - v1.2.2 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8486/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;v1.2.2 — Client-side fix for Splunk Cloud Victoria lxml compatibility. The server-side fix in v1.2.1 does not execute because lxml rejects oversized POST data at the Splunk REST framework level before the Python handler runs. This release adds client-side stripping in upload_checklist.js to remove large unused DISA reference text (Vuln_Discuss, Check_Content, Fix_Text) before the POST. An 11 MB CKL file reduces to under 1 MB. All dashboard fields (status, finding_details, comments, rule_title) are preserved. CKLB files are also handled.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free STIG compliance tracking and reporting. Drag-and-drop CKL/CKLB upload, instant dashboards, zero infrastructure required.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Managing STIG compliance shouldn&amp;#x27;t require expensive vendor platforms, complex infrastructure, or weeks of deployment. I built this app because I believe every organization — regardless of size or budget — deserves access to effective compliance tools. My goal is to help as many people and organizations as possible by providing a free, production-ready resource that solves a real problem.
+
+STIG Compliance App for Splunk imports DISA STIG checklists and transforms them into searchable, reportable compliance data — with zero external dependencies and zero infrastructure beyond your existing Splunk deployment.
+
+Upload .ckl and .cklb checklist files directly through your browser. The app parses, indexes, and visualizes your compliance posture in minutes — not days.
+
+KEY FEATURES
+
+- Browser-based drag-and-drop upload for .ckl and .cklb files — no forwarders, no file shares, no scripted inputs
+- Custom CKL/CKLB parser converts DISA STIG XML checklists into searchable Splunk events
+- Four compliance dashboards: Compliance Overview, Executive Summary, POA&amp;amp;M Report, and Upload History
+- Risk scoring by severity: (CAT I x 10) + (CAT II x 5) + (CAT III x 1)
+- Deduplication logic displays only the latest checklist per host/STIG combination
+- Historical upload tracking with timestamps for audit trail
+- Pre-built saved searches and alert templates for CAT I findings and compliance thresholds
+- Works on a single search head or in a clustered environment — fully self-contained
+
+WHY THIS APP EXISTS
+
+Most STIG compliance workflows today involve Excel spreadsheets, manual tracking, or paid platforms that require additional licensing and infrastructure. This app eliminates those barriers. Install one app, upload through your browser, and get compliance dashboards immediately.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Marcus House</dc:creator>
+      <pubDate>Thu, 18 Jun 2026 20:33:49 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8486/#v1.2.2</guid>
+    </item>
+    <item>
+      <title>Regularly index Splunkbase app listings - v1.0.3 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7795/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Migrated to UCC to maintain cloud compatibility.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app regularly retrieves Splunk app listing from Splunkbase. It can be useful for system administrators who would like to be alerted when new applications are published for their systems and software.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/4db4e010-6b4f-11f1-b8b0-f68c476a4511.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">marlin arnall</dc:creator>
+      <pubDate>Thu, 18 Jun 2026 20:16:00 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7795/#v1.0.3</guid>
+    </item>
+    <item>
+      <title>NVD CVE Add-on - v1.0.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7946/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Migrated to UCC for cloud compatibility.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This is an add-on to pull CVE records from the NIST CVE database. It offers customization of checkpoint type (based on publish time, modify time, index, or none), keyword searches, data fields of the CVEs to display, languages in the CVE description, and any other field supported by the NIST CVE API. It also supports proxies.
+
+NOTE: This product uses the NVD API but is not endorsed or certified by NIST or the NVD.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/184dbb8c-6b4e-11f1-970c-d249fc82faf7.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">marlin arnall</dc:creator>
+      <pubDate>Thu, 18 Jun 2026 19:54:50 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7946/#v1.0.2</guid>
     </item>
     <item>
       <title>Google Threat Intelligence App for Splunk - v1.5.0 [Version Update]</title>
@@ -1763,33 +1855,6 @@ I actively support my apps and am anxious to receive any feedback. Tag me on com
       <guid>https://splunkbase.splunk.com/app/4146/#v3.1.3</guid>
     </item>
     <item>
-      <title>STIG Compliance App for Splunk - v1.2.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8486/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;v1.2.1 — Splunk Cloud Victoria compatibility fix. Added XML pre-processing in parse_ckl.py to prevent lxml XMLSyntaxError (huge text node) when parsing large CKL files. Splunk Cloud Victoria uses lxml as the default XML parser, which enforces a 10 MB text node size limit. The parser now truncates oversized text nodes before parsing. CKLB (JSON) parsing is unaffected.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free STIG compliance tracking and reporting. Drag-and-drop CKL/CKLB upload, instant dashboards, zero infrastructure required.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Managing STIG compliance shouldn&amp;#x27;t require expensive vendor platforms, complex infrastructure, or weeks of deployment. I built this app because I believe every organization — regardless of size or budget — deserves access to effective compliance tools. My goal is to help as many people and organizations as possible by providing a free, production-ready resource that solves a real problem.
-
-STIG Compliance App for Splunk imports DISA STIG checklists and transforms them into searchable, reportable compliance data — with zero external dependencies and zero infrastructure beyond your existing Splunk deployment.
-
-Upload .ckl and .cklb checklist files directly through your browser. The app parses, indexes, and visualizes your compliance posture in minutes — not days.
-
-KEY FEATURES
-
-- Browser-based drag-and-drop upload for .ckl and .cklb files — no forwarders, no file shares, no scripted inputs
-- Custom CKL/CKLB parser converts DISA STIG XML checklists into searchable Splunk events
-- Four compliance dashboards: Compliance Overview, Executive Summary, POA&amp;amp;M Report, and Upload History
-- Risk scoring by severity: (CAT I x 10) + (CAT II x 5) + (CAT III x 1)
-- Deduplication logic displays only the latest checklist per host/STIG combination
-- Historical upload tracking with timestamps for audit trail
-- Pre-built saved searches and alert templates for CAT I findings and compliance thresholds
-- Works on a single search head or in a clustered environment — fully self-contained
-
-WHY THIS APP EXISTS
-
-Most STIG compliance workflows today involve Excel spreadsheets, manual tracking, or paid platforms that require additional licensing and infrastructure. This app eliminates those barriers. Install one app, upload through your browser, and get compliance dashboards immediately.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Marcus House</dc:creator>
-      <pubDate>Fri, 12 Jun 2026 20:32:31 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8486/#v1.2.1</guid>
-    </item>
-    <item>
       <title>Intruex for Splunk - v1.0.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8819/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Updating search_name to  be sent with results&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Forward Splunk alerts and search results to the Intruex AI SOC platform for automated analysis. Includes a custom search command (| intruexsend) and an alert action (Send to Intruex).&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Intruex for Splunk connects your Splunk environment to the Intruex AI SOC platform, enabling automated forwarding of alerts and search results for AI-driven analysis and triage.
@@ -1874,46 +1939,6 @@ See all plans: https://trackme-solutions.com/pricing/&lt;/p&gt;&lt;img height=&q
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Trackme Limited</dc:creator>
       <pubDate>Fri, 12 Jun 2026 10:57:05 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/4621/#v2.4.2</guid>
-    </item>
-    <item>
-      <title>Last Event Monitor - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8827/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Initial release of Last Event Monitor.&lt;/p&gt;
-&lt;p&gt;Added:&lt;/p&gt;
-&lt;p&gt;* Main Last Event Monitor dashboard for operational monitoring of log source availability.&lt;br&gt;
-* INDEX Monitoring dashboard for index-level event visibility and source inventory.&lt;br&gt;
-* Source Detail dashboard for detailed host/index investigation.&lt;br&gt;
-* Host and index based monitoring using the latest received event time.&lt;br&gt;
-* Status classification for monitored sources: OK, Warning/Late, and Critical/No Data.&lt;br&gt;
-* Automatic host/index pair discovery.&lt;br&gt;
-* Runtime lookup workflow using host_index_alert.csv.&lt;br&gt;
-* Initial lookup bootstrap report for first-time setup.&lt;br&gt;
-* Scheduled discovery report for new host/index pairs.&lt;br&gt;
-* Manual cleanup report for excluded sources.&lt;br&gt;
-* Optional delayed or missing log source alert, disabled by default.&lt;br&gt;
-* Exclusion macros for internal, test, summary, or non-monitored indexes and hosts.&lt;/p&gt;
-&lt;p&gt;Compatibility notes:&lt;/p&gt;
-&lt;p&gt;* This version is compatible with Splunk Enterprise 10.2 and later.&lt;br&gt;
-* The app was tested on recent Splunk Enterprise versions, including 10.2, 10.3, and 10.4.&lt;br&gt;
-* Splunk Enterprise 10.1 and earlier are not supported because some dashboard visualization features and UI functions used by this app require functionality available starting from Splunk Enterprise 10.2.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Monitor Splunk log source availability by host and index, detect delayed or missing data, and support SOC/SIEM health checks.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Last Event Monitor
-
-The app helps Splunk administrators, SOC teams, and SIEM operations teams monitor whether log sources are actively sending data to Splunk. It tracks the latest received event time for each monitored host/index pair and highlights sources that are healthy, delayed, or not sending data.
-
-The main problem this app addresses is the lack of simple operational visibility into log source availability. In many Splunk and SIEM environments, log sources may stop sending data because of network issues, forwarder problems, system downtime, configuration changes, or data collection failures. If this is not detected quickly, SOC monitoring, correlation searches, investigations, and compliance reporting may be affected.
-
-Last Event Monitor provides dashboards, reports, lookup-based monitoring, automatic host/index discovery, configurable thresholds, exclusion macros, and an optional alert for delayed or missing log sources.
-
-The app is useful for:
-
-SIEM health checks
-SOC daily operational control
-Log collection monitoring
-Splunk administration
-Data source availability tracking
-Investigation of missing or delayed logs&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/88a91baa-63cf-11f1-adb4-16a93a88dc2d.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyberfox DEVELOPER</dc:creator>
-      <pubDate>Fri, 12 Jun 2026 07:17:06 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8827/#v1.0.0</guid>
     </item>
     <item>
       <title>SecurityScorecard App for Splunk - v1.0.2 [Version Update]</title>
@@ -2395,22 +2420,6 @@ The Effective Configuration add-on is designed to work exclusively with Splunk a
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Tue, 09 Jun 2026 11:11:23 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7796/#v1.0.5</guid>
-    </item>
-    <item>
-      <title>Cisco ThousandEyes App for Splunk - v0.8.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7719/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Add support for Splunk 10.4&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The ThousandEyes App For Splunk enables organizations to collect and analyze CEA (Cloud and Enterprise Agent) and Endpoint test results data, Event and Activity logs. Integrated with Splunk, it provides visibility into the health and performance of IT systems, applications, and network endpoints. The App also offers pre-built dashboards for easy analysis. This helps operational teams monitor performance, troubleshoot issues, and optimize both infrastructure and end-user experiences.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/252e8d7c-63e7-11f1-92d6-6a04764a8bd8.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco Systems, Inc.</dc:creator>
-      <pubDate>Tue, 09 Jun 2026 10:28:17 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7719/#v0.8.0</guid>
-    </item>
-    <item>
-      <title>AlphaSOC for Splunk - v1.2.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7911/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;This release improves API communication and compression negotiation, cutting bandwidth and speeding up large transfers.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Security teams use this app to render OCSF security findings generated by the AlphaSOC Analytics Engine across different layers (cloud infrastructure, SaaS applications, identity providers, and endpoint telemetry). Use AlphaSOC for Splunk to instantly uncover network exfiltration and C2 traffic patterns, infected Windows, Linux, and macOS endpoints, compromised cloud workloads, and identities.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e37c8d7c-63da-11f1-b534-8a230eaa3fca.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">AlphaSOC, Inc.</dc:creator>
-      <pubDate>Tue, 09 Jun 2026 08:32:22 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7911/#v1.2.1</guid>
     </item>
   </channel>
 </rss>
