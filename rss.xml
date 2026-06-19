@@ -6,9 +6,9 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Thu, 18 Jun 2026 23:44:01 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 19 Jun 2026 03:29:27 +0000</lastBuildDate>
     <item>
-      <title>SA-cim_vladiator - v2.1.0 [Version Update] (Archived)</title>
+      <title>SA-cim_vladiator - v2.1.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/2968/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h1&gt;Splunk 10.4 upkeep &amp;amp; cleanup — Python 3.13 support, mvmath fixes, doc refresh&lt;/h1&gt;
 &lt;p&gt;This release is general maintenance ahead of Splunk 10.4 — Python version compliance, bug fixes in &lt;code&gt;mvmath&lt;/code&gt;, shared-code cleanup, AppInspect fixes, and a documentation refresh. No new commands or breaking changes to existing search syntax.&lt;/p&gt;
@@ -51,8 +51,255 @@
 
 This project is hosted on GitHub, https://github.com/hire-vladimir/SA-cim_vladiator&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d5174ce4-6b5b-11f1-b8b0-f68c476a4511.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
-      <pubDate>Thu, 18 Jun 2026 21:33:28 +0000</pubDate>
+      <pubDate>Fri, 19 Jun 2026 03:25:14 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/2968/#v2.1.0</guid>
+    </item>
+    <item>
+      <title>Compliance Posture for Splunk - v1.0.4 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8501/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;v1.0.4 — Large ARF File Upload Fix&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Resolves upload failure on Splunk Cloud Victoria when processing CIS-CAT ARF XML files larger than 10MB. The previous server-side fix in v1.0.3 was insufficient because Splunk Cloud Victoria's lxml parser rejects oversized POST data at the platform level before the server-side handler executes.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Added client-side XML pre-processing in upload_scan.js to strip embedded OVAL definitions, OVAL results, and full benchmark XML sections in the browser before sending to the REST endpoint. Typical file size reduction: ~13MB to ~1.3MB with zero data loss to compliance results.&lt;/li&gt;
+&lt;li&gt;Server-side pre-processing from v1.0.3 retained as defense-in-depth.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;No changes to output schema, dashboards, or scoring logic.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free CIS Benchmark compliance tracking for Splunk. Upload scan results from your browser. See your compliance posture in minutes. No forwarders. No TAs. No infrastructure required.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;CIS Benchmark compliance reporting shouldn&amp;#x27;t require a paid dashboard platform, a dedicated ingestion pipeline, or weeks of integration work.
+
+I built this app because I believe compliance visibility shouldn&amp;#x27;t be gated behind expensive platforms or complex integrations. Whether you&amp;#x27;re a small team without budget for commercial tooling or a large organization looking for a lightweight alternative, you deserve a solution that works out of the box. My goal is to help as many teams as possible by providing a free, production-ready app that solves a real gap in the Splunk ecosystem.
+
+Compliance Posture for Splunk is a free, self-contained Splunk application that gives you consolidated CIS Benchmark compliance visibility across your entire infrastructure — from install to dashboards in minutes.
+
+Upload your CIS-CAT Pro Assessor ARF XML scan results directly through the browser using drag-and-drop. No file shares. No scripted inputs. No forwarder configuration. Just install the app, upload your scan files, and see where you stand.
+
+Built by a Splunk Enterprise Architect with 10+ years of hands-on experience implementing compliance reporting solutions across commercial and federal environments.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Marcus House</dc:creator>
+      <pubDate>Fri, 19 Jun 2026 02:37:13 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8501/#v1.0.4</guid>
+    </item>
+    <item>
+      <title>DBX addon for clickhouse (sample) - v1.0.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8832/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Quickly tested with Splunk Cloud with port 443 to Clickhouse.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Provides a custom JDBC driver package that enables Splunk DB Connect to connect to ClickHouse Cloud databases.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk DBX Add-on for Clickhouse extends Splunk DB Connect by providing a custom JDBC driver package specifically designed to connect to ClickHouse Cloud databases. This add-on addresses the absence of native ClickHouse support in Splunk DB Connect by bundling the clickhouse-jdbc driver along with the necessary configuration files. Once installed and registered with DB Connect, the add-on enables ClickHouse as a selectable database type, allowing administrators to configure connections, execute queries, and ingest data from ClickHouse instances. The add-on uses an all-in-one JAR distribution to ensure compatibility with DB Connect&amp;#x27;s class loader architecture and to prevent dependency-related runtime errors that can occur with multi-JAR configurations.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Masayuki Hyugaji</dc:creator>
+      <pubDate>Fri, 19 Jun 2026 01:45:02 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8832/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>AWS-DFD-Visualizer - v2.8.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8628/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;# Release Notes: AWS-DFD-Visualizer v2.8.0&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;**Release Date:**&lt;/strong&gt; June 18, 2026&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;**Framework:**&lt;/strong&gt; Splunk Unified Dashboard Framework (Dashboard Studio) &amp;amp; Classic SimpleXML&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;**Target Environment:**&lt;/strong&gt; DoD Impact Level 5 (IL5) / NIST 800-53 / Zero-Trust Architecture&lt;/p&gt;
+&lt;p&gt;---&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;## Overview&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Version 2.8.0 is a &lt;strong&gt;**major feature release**&lt;/strong&gt; delivering five pillars of advancement: Multi-Cloud Service Provider (CSP) rendering for hybrid AWS/Azure/GCP environments, a fully hardened Zero-Trust Static Blueprint Layout Engine for IL5 RMF audit compliance, commercial license enforcement, advanced security hardening (STIG/NIST), and a complete suite of rendering quality, performance, and UX polish fixes. This release encompasses work from 7 engineering sessions (June 2 – June 18, 2026).&lt;/p&gt;
+&lt;p&gt;---&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;## 🌐 Feature: Multi-Cloud Service Provider (CSP) Extension&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;AWS-DFD-Visualizer now renders hybrid and multi-cloud architectures — AWS, Microsoft Azure, and Google Cloud Platform — on a single canvas.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Dynamic CSP Auto-Detection:**&lt;/strong&gt; A dataset-wide voting algorithm scans all incoming resource IDs and types to automatically select the dominant cloud provider (`aws`, `azure`, `gcp`). Manual override available via the `cspStencilSet` formatter option.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Per-Node Stencil Resolution:**&lt;/strong&gt; Individual node cards resolve their own provider stencils independently, enabling true hybrid rendering where AWS EC2 instances, Azure Virtual Machines, and GCP Compute Engines appear side-by-side with accurate vendor icons.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Recursive Multi-Tier Container Layout:**&lt;/strong&gt; The layout engine now processes arbitrary container nesting depth (e.g., Subscription → Resource Group → VNet → Subnet) using recursive post-order/pre-order traversal, replacing the previous 2-level hardcoded VPC/Subnet structure.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Azure &amp;amp; GCP SVG Asset Library:**&lt;/strong&gt; Azure and GCP architecture SVG stencils are deployed to `appserver/static/icons/azure/` and `appserver/static/icons/gcp/` respectively, maintaining strict `755`/`644` AppInspect-compliant permissions.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Dynamic URL Subpath Resolution:**&lt;/strong&gt; Icon base paths now resolve dynamically via `window.Splunk.util.make_full_url` to support non-default Splunk web mount locations (e.g., `/splunk/` prefix environments).&lt;/p&gt;
+&lt;p&gt;---&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;## 🏛️ Feature: Zero-Trust Static Blueprint Engine (IL5 RMF Audit Mode)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;A fully deterministic, physics-free layout engine for producing reproducible, audit-ready network topology diagrams.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Three-Plane Swimlane Architecture:**&lt;/strong&gt; Resources are automatically sorted into Identity Plane (top), Policy &amp;amp; Control Plane (middle), and Infrastructure / Data Plane (bottom) using resource type classification. Empty planes display annotated placeholder banners rather than blank space.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Nested VPC/Subnet Enclosures:**&lt;/strong&gt; VPC and Subnet containers are rendered as labeled nested bounding boxes with deterministic coordinate assignment — no physics jitter, no variation between renders.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Orthogonal Manhattan Routing:**&lt;/strong&gt; All inter-node connections use clamped-radius rounded orthogonal paths (`Q` Bezier arcs), giving diagrams a clean, formal blueprint appearance suitable for DoD briefings.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**SSH/22 Compliance Interception:**&lt;/strong&gt; Links targeting nodes with non-compliant security groups or `status\=violation` are automatically routed in Vibrant Red (`#FF0000`) with dashed line styling (`stroke-dasharray: 4,4`), providing an instant visual audit signal for open SSH ingress violations.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Concentric Security Group Envelopes:**&lt;/strong&gt; Security group compliance state is rendered as concentric ring overlays around compute node cards (Green \= compliant, Red \= non-compliant).&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Static Blueprint Group Layout:**&lt;/strong&gt; The `clusterBy\=group` + `layoutMode\=Hierarchy` combination now routes through a fully static deterministic layout engine, bypassing the Splunk Dashboard Engine rendering bug that previously ignored `clusterBy`.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Dynamic viewBox Height:**&lt;/strong&gt; Canvas height auto-expands to fit actual VPC container heights, eliminating the vertical clipping and extreme bottom whitespace seen in prior releases.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Reversed Arrow Correction:**&lt;/strong&gt; Fixed a D3 link aggregation bug where bidirectional edge deduplication reversed arrowhead direction. Primary flow direction is now preserved.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Two-Pass Link Rendering:**&lt;/strong&gt; Link paths and link label capsules are rendered in separate SVG passes, guaranteeing that white label backgrounds always occlude the lines beneath them — fixing the &quot;label behind line&quot; visual artifact.&lt;/p&gt;
+&lt;p&gt;---&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;## 🔒 Feature: STIG Hardening &amp;amp; Security Compliance&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Text-Only DOM Rendering Policy:**&lt;/strong&gt; Formally documented and enforced a strict `dangerouslySetInnerHTML` and D3 `.html()` ban. All dynamic strings are set via React standard string interpolation to prevent DOM-Based XSS (CWE-79).&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**SPL Injection Sanitization:**&lt;/strong&gt; `sanitizeSplunkToken` now applies a strict regex allow-list query check (rather than blocklist), hardening drilldown token interpolation against SPL injection payloads.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**DoS Circuit Breaker:**&lt;/strong&gt; A client-side guard blocks rendering and displays a full-screen warning if raw row count exceeds 5,000 records, preventing browser thread exhaustion from adversarial or misconfigured queries.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**SVG &amp;amp; Draw.io Export Scanning:**&lt;/strong&gt; Exported SVG and Draw.io XML files are scanned for embedded `\&amp;lt;script&amp;gt;` tags before download. Any file containing dynamic script injection is blocked and triggers a Splunk audit log event via `Splunk.util.trackEvent()`.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Dependency Remediations:**&lt;/strong&gt; Upgraded `shell-quote` to `1.8.4` (CVE patch), `form-data` to `4.0.6` (GHSA-hmw2-7cc7-3qxx), and added `uuid` override to `11.1.1`. All packages pass `npm audit` clean.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**CI/CD Hardening:**&lt;/strong&gt; Pinned TruffleHog to `v3.95.5` stable tag; added explicit `contents: read` permissions to GitHub Actions workflow to resolve CodeQL workflow permission alerts.&lt;/p&gt;
+&lt;p&gt;---&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;## 🔑 Feature: Commercial License Enforcement&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Free / Developer Tier:**&lt;/strong&gt; Unlicensed instances cap rendering at 50 nodes. Datasets exceeding this threshold display a glassmorphic &quot;License Capacity Exceeded&quot; overlay with tier upgrade call-to-action.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Enterprise / Sovereign License Parsing:**&lt;/strong&gt; Base64-encoded license keys are validated entirely client-side (no network calls) — supporting air-gapped DoD IL5 environments. Validation checks signature, tier, client, expiration date, and node capacity.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**License HUD Indicator:**&lt;/strong&gt; Licensed instances display tier status (`Enterprise` / `Sovereign`) in the debug HUD.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Formatter Panel Integration:**&lt;/strong&gt; A &quot;Licensing&quot; section is exposed in the Splunk Format panel (`formatter.html`) allowing administrators to enter license keys without editing XML.&lt;/p&gt;
+&lt;p&gt;---&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;## ⚡ Feature: Performance &amp;amp; Physics Engine Upgrades&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Zero-Latency Layout Bypass:**&lt;/strong&gt; Graphs with fewer than 100 nodes now pre-tick 300 physics simulation cycles synchronously before first render — eliminating the visible &quot;settling&quot; animation in operational briefings.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Batched requestAnimationFrame Layout:**&lt;/strong&gt; Graphs with 150+ nodes process physics in 30-tick batches via `requestAnimationFrame`, with a glassmorphic loading overlay, preventing UI thread blocking on large topologies.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Rectangular Collision Force (`rectCollide`):**&lt;/strong&gt; Replaced the circular `forceCollide` radius with a custom D3 force that accounts for actual card rectangular bounds (`280×100`px default), eliminating horizontal card overlaps and excessive vertical gaps.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**D3 Submodule Tree-Shaking:**&lt;/strong&gt; Replaced monolithic `import * as d3` with explicit submodule imports (`d3-array`, `d3-selection`, `d3-zoom`, `d3-drag`, `d3-polygon`, `d3-shape`, `d3-hierarchy`, `d3-force`) linked via a namespace bridge, reducing unused module weight.&lt;/p&gt;
+&lt;p&gt;---&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;## 🎨 Feature: Rendering Quality &amp;amp; UX Polish&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Dynamic Edge Label Pill Width:**&lt;/strong&gt; Edge label background capsules now auto-size to fit their text content using `Math.max(80, chars × fontSize × 0.58 + 24)px`. Fixes truncated long labels (e.g., &quot;Core PDP/PEP Data Access Path&quot;, &quot;Multi-Source PIP Query Engine&quot;) and violation labels with emoji prefixes.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Violation Label Sizing Fixed:**&lt;/strong&gt; `⚠️ SSH/22` labels now compute pill width from the &lt;em&gt;*full display string*&lt;/em&gt; (including the warning prefix), matching the HTTPS/443 capsule sizing behavior.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Cross-Link Routing for Same-Level Nodes:**&lt;/strong&gt; In Blueprint Mode, links between horizontally adjacent same-row nodes now route side-to-side rather than wrapping through the midpoint elbow — producing cleaner, less tangled diagrams.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Arrowhead Clearance Padding:**&lt;/strong&gt; Added 12px target offset to orthogonal path endpoints so arrowheads clear the type badge below node cards without overlapping.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Increased Grid Spacing:**&lt;/strong&gt; Column gap increased 60px and row gap increased 30px across all layout presets to give link labels breathing room and eliminate label collisions (e.g., &quot;Assume Role&quot;).&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**SSH/22 Label Float:**&lt;/strong&gt; On same-row horizontal Zero-Trust links, the label midpoint is offset −22px above the line so the ⚠️ capsule floats clearly above the arrow.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Hover State Enhancements:**&lt;/strong&gt; Node cards and edge labels scale to 115% on hover with text-shadow halos for improved legibility over dense diagrams.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Compliance Violation Indicators:**&lt;/strong&gt; Container labels (VPCs, Subnets) append a live violation count (e.g., `Default VPC (1 Violation)`) in red when non-compliant security groups exist within them.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Resource Lifecycle Styling:**&lt;/strong&gt; Deleted resources (`ResourceDeleted`) render with dashed borders and 60% opacity; stale config nodes drift with a CSS keyframe animation.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**App Icon Corrected:**&lt;/strong&gt; `appIcon.png` and `appIcon_2x.png` updated to Splunk-required `36×36` and `72×72` pixel dimensions respectively, with new navy/orange DFD graph branding. Deployed to both `appserver/static/` and `static/` (Classic XML path).&lt;/p&gt;
+&lt;p&gt;---&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;## 🧪 Testing &amp;amp; Quality&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**27 Cypress Component Tests Passing:**&lt;/strong&gt; Test suite covers node count, link count, `viewBox` integrity, edge stroke attributes, ARN normalization, empty state handling, license gate trigger, and license key validation.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Splunk AppInspect:**&lt;/strong&gt; `0 errors, 0 failures, 0 warnings` — maintained across all sessions.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Webpack Build:**&lt;/strong&gt; `webpack compiled with 3 warnings` (known bundle-size advisory only, no errors).&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**CI/CD Pipeline:**&lt;/strong&gt; 2-stage GitHub Actions pipeline (TruffleHog → Bandit → AppInspect → Node 22 Build → CycloneDX SBOM) passes green on `master`.&lt;/p&gt;
+&lt;p&gt;---&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;## 📦 Delivery Artifacts&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;| Artifact | Description |&lt;/p&gt;
+&lt;p&gt;|---|---|&lt;/p&gt;
+&lt;p&gt;| `AWS-DFD-Visualizer-2.8.0.spl` | Splunk app package — deploy via Splunk Web or `make deploy` |&lt;/p&gt;
+&lt;p&gt;| `bom.json` | CycloneDX SBOM (generated by CI via Syft) |&lt;/p&gt;
+&lt;p&gt;| `LESSONS_LEARNED.md` | New institutional memory doc for recurring bug patterns |&lt;/p&gt;
+&lt;p&gt;| `IMPLEMENTATION_PLAN.md` | Zero-Trust layout engine design specification |&lt;/p&gt;
+&lt;p&gt;---&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;## 🔄 Upgrade Notes&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**No breaking changes**&lt;/strong&gt; to existing SPL query schemas — all existing `from`, `to`, `node_label`, `edge_label`, `vpcId`, `subnetId`, `securityGroups`, `stencil`, `status` columns are backward compatible.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**New optional columns:**&lt;/strong&gt; `cspStencilSet`, `node_drilldown`, `link_drilldown` — safely ignored if absent.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**License key required**&lt;/strong&gt; only for datasets &amp;gt; 50 nodes. Contact your account manager for Enterprise or Sovereign tier keys.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Formatter panel**&lt;/strong&gt; (`format` button in Splunk) now exposes: CSP selector, License key input, Link text size, Node text size, Design layout density, Hierarchy direction.&lt;/p&gt;
+&lt;p&gt;---&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;# Release Notes: AWS-DFD-Visualizer v2.7.0&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;**Release Date:**&lt;/strong&gt; June 1, 2026&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;**Framework:**&lt;/strong&gt; Splunk Unified Dashboard Framework (Dashboard Studio) &amp;amp; Classic SimpleXML&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;## Overview&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Version 2.7.0 introduces four major advanced visualizer capabilities to improve diagram portability, dense dashboard integration, visual stabilization, and client-side testing:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;## Major Features &amp;amp; Enhancements&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;### 1. Export to draw.io XML&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Portability:**&lt;/strong&gt; Added an &quot;Export to draw.io&quot; button in the HUD overlay. Clicking this button dynamically generates an uncompressed, standard mxGraphModel XML diagram of the current network state, including node placement coordinates, nested subnet/VPC shapes, edge connection paths, and security compliance coloration.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;### 2. SPL → D3 Live Feed CSV Parser&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Ad-hoc Console:**&lt;/strong&gt; Implemented a collapsable CSV console overlay. Pasting a standard CSV edge table (with headers like `from,to,node_label,vpcId,subnetId,securityGroups`) allows users to immediately render and test custom diagram topologies client-side without executing backend Splunk searches.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;### 3. Dashboard Layout Optimization (Compact Layouts)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Density Scaling:**&lt;/strong&gt; Introduced a &quot;Dashboard Layout&quot; formatter setting (`compact`, `default`, `expanded`). Selecting `compact` automatically down-scales compute node card boundaries, font sizes, padding metrics, and grid gaps, making it optimal for dense, multi-panel Splunk dashboards.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;### 4. Alternative Physics Models &amp;amp; shakeTowards Stabilization&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Alternate Formats:**&lt;/strong&gt; Added `physicsModel` configurations (`classic`, `cluster`, `horizontal-stack`) to adjust node spacing and group alignments in Auto mode.&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Directional Pull:**&lt;/strong&gt; Added `shakeTowards` option (`none`, `center`, `top`, `bottom`, `left`, `right`) to gently pull isolated nodes toward specific screen bounds to prevent layout drifts.&lt;/p&gt;
+&lt;p&gt;---&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;# Release Notes: AWS-DFD-Visualizer v2.6.2&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;**Release Date:**&lt;/strong&gt; June 1, 2026&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;**Framework:**&lt;/strong&gt; Splunk Unified Dashboard Framework (Dashboard Studio) &amp;amp; Classic SimpleXML&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;## Overview&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Version 2.6.2 introduces the &lt;strong&gt;**Zero-Trust Static Deterministic Layout Engine (IL5 RMF Audit Mode)**&lt;/strong&gt;. This release replaces the dynamic D3 force-directed physics engine with a 100% reproducible, static, nested-box network topology visualizer designed to meet DoD Impact Level 5 (IL5) Risk Management Framework (RMF) auditing requirements.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;## Major Features &amp;amp; Enhancements&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;### 1. Pure Deterministic Layout Engine&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Two-Pass Layout Engine:**&lt;/strong&gt; Developed custom Bottom-Up Dimensioning (`computeDimensions`) and Top-Down Coordinate Allocation (`assignCoordinates`) to render a predictable grid topology without physics jitter.&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Canvas Expansion:**&lt;/strong&gt; Expanded the viewport viewBox boundary to $1200 \times 1400$ to prevent vertical layout clipping across high-density nodes.&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Physics &amp;amp; Drag Lockout:**&lt;/strong&gt; Draggability and D3 tick calculations are completely frozen when Zero-Trust layout mode is active.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;### 2. Segmented Zero-Trust Planes (Swimlanes)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Identity Plane Toolbar:**&lt;/strong&gt; Locked unassociated IAM roles, users, and policy nodes horizontally at the top of the canvas to clarify identity boundaries.&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Policy &amp;amp; Control Plane:**&lt;/strong&gt; Locked global network assets (AWS WAF, CloudFront distributions) centered horizontally between identity and infrastructure boundaries.&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Infrastructure Plane:**&lt;/strong&gt; Nested VPC containers and subnet enclosures are placed strictly within the lower infrastructure bounds.&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Decorations:**&lt;/strong&gt; Added distinct background bands, swimlane labels, and center-aligned placeholders for empty planes to improve layout scannability.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;### 3. Mid-Flight Compliance Interception &amp;amp; Manhattan Routing&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Orthogonal Manhattan Paths:**&lt;/strong&gt; Routed connecting lines using rounded, orthogonal Manhattan vectors.&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Clamped Corner Radius ($\hat{R}$):**&lt;/strong&gt; Curvature radius dynamically clamps to prevent loop overlaps on high-density node clusters.&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Interception Interrogation:**&lt;/strong&gt; Interrogates target security posture mid-flight. Port 22/SSH connections targeting non-compliant nodes are rendered in Vibrant Red with dashed line styles, while compliant links render in Vibrant Green.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;### 4. Concentric Security Group Envelopes&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Visual Compliance Envelopes:**&lt;/strong&gt; Renders nested outer rings around compute nodes representing their associated security groups, colored by their compliance state (Green for compliant, Red for non-compliant) to make configurations immediately auditable.&lt;/p&gt;
+&lt;p&gt;---&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;# Release Notes: AWS-DFD-Visualizer v2.6.1&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;**Release Date:**&lt;/strong&gt; May 22, 2026&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;**Framework:**&lt;/strong&gt; Splunk Unified Dashboard Framework (Dashboard Studio) &amp;amp; Classic SimpleXML&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;## Overview&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Version 2.6.1 delivers all Critical, High, and Medium enhancements prioritized in the May 2026 backlog. This release introduces advanced data formatting for edge-case AWS Config environments, robust zero-trust grouping visualizers, and interactive token integration for complex Splunk dashboard workflows.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;## Major Features &amp;amp; Enhancements&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;### 1. Robust Data Normalization &amp;amp; Edge Guarding&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**ARN-Safe Node Normalization:**&lt;/strong&gt; ARNs passed as `resourceId` (e.g., Lambda, S3, Firehose) containing colons and slashes no longer crash D3 physics math. They are slugged internally while preserving the original ARN for display.&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Bidirectional Edge Deduplication:**&lt;/strong&gt; Complex AWS Config data mapping relationships on both ends (A→B and B→A) are now deduplicated via a canonical sorting algorithm `[from,to].sort().join('|')` to prevent D3 force stacking and graph collapse.&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Null Label Fallbacks:**&lt;/strong&gt; Automatically falls back to parsing short, human-readable labels from full ARNs if `resourceName` is missing in the telemetry.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;### 2. Zero-Trust &amp;amp; Architecture Layouts&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**ZTA Pillar Cluster Hulls:**&lt;/strong&gt; Nodes can now be logically grouped into convex polygons representing distinct Zero Trust boundaries (Identity, Network, Data, Visibility).&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Region/VPC Swim Lanes:**&lt;/strong&gt; Floating resources can now be constrained using `forceX/forceY` logic to pull them into distinct Region or VPC horizontal bands.&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Hierarchical Tree Mode:**&lt;/strong&gt; Added `layoutMode\=&quot;hierarchy&quot;` toggle for use cases better represented as top-down trees rather than standard force graphs.&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Control Plane Boundaries:**&lt;/strong&gt; Nodes flagged as Control Plane now render with distinct visual boundaries to isolate them from Data Plane workloads.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;### 3. Interactive Dashboard Token Drilldowns&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Advanced Token Integration:**&lt;/strong&gt; Implemented an aggressive, capture-phase React listener (`onClickCapture`) to safely bypass D3 drag intercepts. Clicking a node now instantly pushes `tokenValue`, `tokenNode`, and `tokenToolTip` variables up to the Splunk dashboard framework so secondary panels can load dynamic SPL queries.&lt;/p&gt;
+&lt;p&gt;---&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;# Release Notes: AWS-DFD-Visualizer v2.5.19 (Cumulative Update)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;**Release Date:**&lt;/strong&gt; May 10, 2026&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;**Framework:**&lt;/strong&gt; Splunk Unified Dashboard Framework (Dashboard Studio) &amp;amp; Classic SimpleXML&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;## Overview&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Version 2.5.19 is a major cumulative update (rolling up hotfixes 2.5.9 through 2.5.19) that completely hardens the React/D3 migration for Splunk Dashboard Studio. It resolves multiple critical rendering bugs, theme detection failures, and SPL parsing edge-cases, ensuring production-ready stability for both Dark Mode NOC dashboards and Classic SimpleXML layouts.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;## Engineering Improvements&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Cypress Component Testing:**&lt;/strong&gt; We have fully decoupled the React rendering layer from Splunk UI dependencies, enabling a robust Cypress headless testing pipeline. Node physics (D3) and mathematical coordinate mapping are now automatically verified before `.spl` compilation, eliminating manual &quot;upload-and-pray&quot; cycles.&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Theme Hook &amp;amp; AMD Module Removal:**&lt;/strong&gt; Ripped out failing `@splunk/themes` dependencies that caused silent React unmounts (White Screen of Death) and resolved the AMD `CustomVizClassDef is not a constructor` wrapper issue natively at the Webpack layer via `libraryExport: 'default'`.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;## Bug Fixes&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**White Box Render Bug in Dashboard Studio:**&lt;/strong&gt; The visualizer now features robust dark mode detection tailored for Dashboard Studio. It intercepts `$config` payloads to correctly trigger dark themes when `&quot;backgroundColor&quot;: &quot;#000000&quot;` is detected, and forces the container background to `transparent` so it seamlessly inherits the exact Splunk dashboard panel color behind it.&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**SPL Column Fallback Parsing Error:**&lt;/strong&gt; Fixed an issue where queries lacking a specific `node_label` field incorrectly fell back to the 4th column (`edge_label`), mislabeling nodes with connection protocols (e.g., &quot;HTTPS&quot; instead of &quot;Internet&quot;).&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**D3 Physics Engine NaN Collapse:**&lt;/strong&gt; Fixed a catastrophic division-by-zero math cascade in D3's `forceCollide` algorithm. Nodes now instantiate with a random spatial jitter algorithm (`Math.random() * 50 - 25`), preventing perfectly stacked coordinates from crashing the SVG renderer.&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Dashboard Studio Results Support:**&lt;/strong&gt; Added fallback support to process object arrays (`data.results`) natively passed by Dashboard Studio instead of forcing Classic SimpleXML row arrays (`data.rows`).&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**SVG Coordinate Scaling:**&lt;/strong&gt; Added an explicit `viewBox\=&quot;0 0 1200 1000&quot;` and a hardcoded `minHeight: 400px` to decouple the visualization from Splunk's bounding box logic, forcing the map to scale dynamically into any panel size without clipping.&lt;/p&gt;
+&lt;p&gt;---&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;# Release Notes: AWS-DFD-Visualizer v2.5.8&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;**Release Date:**&lt;/strong&gt; May 5, 2026&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;**Framework:**&lt;/strong&gt; Splunk Unified Dashboard Framework (Dashboard Studio) &amp;amp; Legacy Simple XML Compatible&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;## Overview&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Version 2.5.8 represents a major architectural overhaul. The legacy Simple XML Backbone.js visualization has been entirely rewritten into a modern, native React component using the Splunk UI Toolkit (`@splunk/react-ui`). This ensures full compatibility with Splunk Dashboard Studio, allowing you to migrate your AWS network gap analysis dashboards to the modern framework without breaking custom visualizations.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;## Major Features &amp;amp; Enhancements&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;### 1. Dashboard Studio Modernization (TECH-003)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**React/D3 Hybrid Architecture:**&lt;/strong&gt; The visualization now strictly separates concerns. D3 handles the heavy mathematical physics calculations (force simulation, collision, links), while React exclusively manages DOM rendering (`\&amp;lt;NodeCard&amp;gt;`, `\&amp;lt;Link&amp;gt;`). This resolves performance bottlenecks and prevents &quot;ghost DOM elements&quot; when Splunk state changes.&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Constrained Zoom/Pan:**&lt;/strong&gt; The `d3.zoom()` functionality is now constrained via `scaleExtent`, preventing users from infinitely panning into blank white space.&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Empty States:**&lt;/strong&gt; The visualizer now gracefully handles queries returning 0 results by displaying a clean &quot;No data found&quot; UI standard to Splunk, rather than rendering a broken blank panel.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;### 2. Stencil Decoupling Engine (BUG-001)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Explicit Icon Mapping:**&lt;/strong&gt; The visualization no longer relies exclusively on string-matching the display node names to determine which AWS stencil to draw. It now accepts `icon` or `stencil` columns in your SPL payload.&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Graceful Degradation:**&lt;/strong&gt; If an explicit `icon`/`stencil` is missing from the search results, the visualizer continues to support legacy fallback logic (string-matching on `type`, `id`, and `node_label`).&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Semantic Normalization:**&lt;/strong&gt; The mapping engine is now case-insensitive, seamlessly handling messy Splunk data (e.g., matching &quot;lambda&quot;, &quot;Lambda&quot;, or &quot;LAMBDA&quot;).&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Static Stencils:**&lt;/strong&gt; We removed the experimental &quot;flowing&quot; zero-trust animations. The component now correctly renders static, rich AWS Stencil cards with shadows and explicit grouping zones.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;### 3. Edge Labeling for Ports/Protocols (ENH-002)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Link Text Support:**&lt;/strong&gt; Added native support for rendering metadata directly on the D3 connecting links. You no longer need to artificially concatenate ports/protocols into node names in your SPL.&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Collision Prevention (Halo):**&lt;/strong&gt; Edge labels now render with a white, semi-transparent rounded rectangle &quot;halo&quot; behind the text. This guarantees high readability when paths cross grid lines or overlapping nodes.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;## Documentation&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;* Added `README_STENCILS.md` to the package root. This provides a complete dictionary of all exact strings supported by the visualization (e.g., `WAFV2`, `EC2`, `ALB`, `CLOUDTRAIL`) and instructions on how to use the new `stencil` column in SPL.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;## Build &amp;amp; Security&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**AppInspect Hardened:**&lt;/strong&gt; Version 2.5.8 successfully passes all rigorous Splunk Cloud `splunk-appinspect` checks with 0 errors, 0 failures, and 0 warnings.&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Dependencies:**&lt;/strong&gt; Clean NPM security audit (0 vulnerabilities found across all 483 sub-modules). Updated dependencies to `@splunk/webpack-configs: latest`.&lt;/p&gt;
+&lt;p&gt;* &lt;strong&gt;**Makefile Integration:**&lt;/strong&gt; Reconfigured the Makefile to correctly execute `npm run build` using Webpack before packaging, preventing build desynchronization.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Interactive AWS Data Flow Diagrams (DFD) for Splunk. Visualizes AWS Config topologies, nested VPCs/Subnets, and Zero-Trust compliance highlights.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;AWS DFD Visualizer (Splunkbase App Summary)
+Purpose &amp;amp; Background Auditing complex cloud infrastructure for compliance (e.g., DoD Impact Level 5 (IL5), NIST 800-53, or NIST 800-207 Zero-Trust Architectures) is extremely challenging. While AWS accounts generate high-volume telemetry from AWS Config, VPC Flow Logs, and GuardDuty, reviewing these complex configurations in standard tabular logs or flat Splunk tables makes it difficult for security teams, system auditors, and DevSecOps engineers to analyze isolation boundaries, spot structural gaps, or verify access routes.
+
+The Solution The AWS DFD (Data Flow Diagram) Visualizer solves this by transforming raw relationship logs and configuration items into interactive, visual security topologies styled after AWS Application Composer. It gives compliance officers and analysts an intuitive, visual framework to audit security posture in real-time.
+
+Key Features:
+
+Zero-Trust Layout Engine: Segregates assets deterministically into distinct swimlanes—separating the Identity plane (users/roles), Policy &amp;amp; Control plane (global network assets like WAF/CloudFront), and Infrastructure plane (VPCs/Subnets).
+Nested Enclosures: Renders nested container boundaries representing VPCs and Subnets with real-time compliance validation markers.
+Security &amp;amp; Telemetry Overlays:
+Highlights Security Group associations as outer compliance rings around compute nodes (Green for compliant, Red for non-compliant).
+Automatically isolates and flashes incident-flagged resources in pulsing red alerts.
+Overrides critical Nessus/Tenable vulnerability states with a custom &amp;quot;skull&amp;quot; threat icon.
+Dynamically intercepts and highlights non-compliant connection paths (e.g., SSH/22 path violations) as dashed Vibrant Red links.
+Dashboard Studio &amp;amp; SimpleXML Ready: Integrates natively with Splunk Dashboard Studio, supporting dynamic click-capturing drilldown tokens, responsive light/dark themes, and performance-saving Level of Detail (LOD) controls.
+Export &amp;amp; Live Console Feed: Includes a native client-side SVG/PNG exporter, a standard draw.io XML generator, and an ad-hoc CSV console feed for drafting cloud topologies on the fly.
+🛠️ Configuration &amp;amp; Code Updates Done:
+To align your app bundle with this new description, I have updated the description strings in the following files:
+
+
+
+package.json
+
+
+splunk-app-manifest.json
+
+
+default/app.conf
+Additionally:
+
+Added /cypress/screenshots/ to
+
+.gitignore
+ to keep the repository clean of test artifacts.
+Ran npm run build to compile the production bundle (webpack compiled successfully).
+Committed the changes and successfully pushed them to master.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a1d705ea-6b6f-11f1-a061-86020d90d456.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Young Suh</dc:creator>
+      <pubDate>Fri, 19 Jun 2026 00:06:18 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8628/#v2.8.0</guid>
     </item>
     <item>
       <title>Atlas Software Platform for Splunk - v5.0.4 [Version Update]</title>
@@ -176,28 +423,6 @@ Data Heartbeat is compatible with Splunk Enterprise 8.2+, Splunk Cloud Classic, 
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Steve Koelpin</dc:creator>
       <pubDate>Thu, 18 Jun 2026 15:23:45 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8833/#v1.3.0</guid>
-    </item>
-    <item>
-      <title>Compliance Posture for Splunk - v1.0.4 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8501/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;v1.0.4 — Large ARF File Upload Fix&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Resolves upload failure on Splunk Cloud Victoria when processing CIS-CAT ARF XML files larger than 10MB. The previous server-side fix in v1.0.3 was insufficient because Splunk Cloud Victoria's lxml parser rejects oversized POST data at the platform level before the server-side handler executes.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Added client-side XML pre-processing in upload_scan.js to strip embedded OVAL definitions, OVAL results, and full benchmark XML sections in the browser before sending to the REST endpoint. Typical file size reduction: ~13MB to ~1.3MB with zero data loss to compliance results.&lt;/li&gt;
-&lt;li&gt;Server-side pre-processing from v1.0.3 retained as defense-in-depth.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;No changes to output schema, dashboards, or scoring logic.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free CIS Benchmark compliance tracking for Splunk. Upload scan results from your browser. See your compliance posture in minutes. No forwarders. No TAs. No infrastructure required.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;CIS Benchmark compliance reporting shouldn&amp;#x27;t require a paid dashboard platform, a dedicated ingestion pipeline, or weeks of integration work.
-
-I built this app because I believe compliance visibility shouldn&amp;#x27;t be gated behind expensive platforms or complex integrations. Whether you&amp;#x27;re a small team without budget for commercial tooling or a large organization looking for a lightweight alternative, you deserve a solution that works out of the box. My goal is to help as many teams as possible by providing a free, production-ready app that solves a real gap in the Splunk ecosystem.
-
-Compliance Posture for Splunk is a free, self-contained Splunk application that gives you consolidated CIS Benchmark compliance visibility across your entire infrastructure — from install to dashboards in minutes.
-
-Upload your CIS-CAT Pro Assessor ARF XML scan results directly through the browser using drag-and-drop. No file shares. No scripted inputs. No forwarder configuration. Just install the app, upload your scan files, and see where you stand.
-
-Built by a Splunk Enterprise Architect with 10+ years of hands-on experience implementing compliance reporting solutions across commercial and federal environments.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Marcus House</dc:creator>
-      <pubDate>Thu, 18 Jun 2026 15:14:09 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8501/#v1.0.4</guid>
     </item>
     <item>
       <title>Threat Hunting Essentials - v1.3.19 [Version Update]</title>
@@ -327,14 +552,6 @@ For Security Operations Centers (SOCs) and vulnerability management teams, this 
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Metron Consulting LLC</dc:creator>
       <pubDate>Thu, 18 Jun 2026 08:28:50 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7121/#v1.0.6</guid>
-    </item>
-    <item>
-      <title>DBX addon for clickhouse (sample) - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8832/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Provides a custom JDBC driver package that enables Splunk DB Connect to connect to ClickHouse Cloud databases.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk DBX Add-on for Clickhouse extends Splunk DB Connect by providing a custom JDBC driver package specifically designed to connect to ClickHouse Cloud databases. This add-on addresses the absence of native ClickHouse support in Splunk DB Connect by bundling the clickhouse-jdbc driver along with the necessary configuration files. Once installed and registered with DB Connect, the add-on enables ClickHouse as a selectable database type, allowing administrators to configure connections, execute queries, and ingest data from ClickHouse instances. The add-on uses an all-in-one JAR distribution to ensure compatibility with DB Connect&amp;#x27;s class loader architecture and to prevent dependency-related runtime errors that can occur with multi-JAR configurations.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Masayuki Hyugaji</dc:creator>
-      <pubDate>Thu, 18 Jun 2026 08:00:00 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8832/#v1.0.0</guid>
     </item>
     <item>
       <title>Cisco Security Cloud - v3.6.7 [Version Update]</title>
@@ -1344,80 +1561,6 @@ It provides a secure gateway that enables seamless dashboard embedding into the 
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
       <pubDate>Tue, 16 Jun 2026 19:36:03 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/4746/#v2.2.0</guid>
-    </item>
-    <item>
-      <title>AWS-DFD-Visualizer - v2.7.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8628/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;# AWS-DFD-Visualizer v2.7.2 Release Notes&lt;/p&gt;
-&lt;p&gt;## 🌟 Enhancements &amp;amp; Security Integration&lt;/p&gt;
-&lt;p&gt;* **Hybrid Dynamic JIT SPL Drilldowns ([Issue #2](&lt;a href=&quot;https://github.com/JohnYoungSuh/AWS-DFD-Visualizer/issues/2&quot;&gt;https://github.com/JohnYoungSuh/AWS-DFD-Visualizer/issues/2&lt;/a&gt;))**: Implemented secure token escaping (`sanitizeSplunkToken`) and query interpolation in node/link click handlers. Allows users to click visualizer elements to instantly search VPC flow logs or configuration history.&lt;/p&gt;
-&lt;p&gt;* **Tenable/Nessus &amp;amp; Threat Telemetry Overlays**:&lt;/p&gt;
-&lt;p&gt;&amp;#x20; - Implemented flashing red keyframe pulsing styling on compute node cards flagged with threat alert statuses (`status\=&quot;incident&quot;`, `status\=&quot;failing&quot;`).&lt;/p&gt;
-&lt;p&gt;&amp;#x20; - Added vulnerability status overrides that map critical CVE scan findings (`status\=&quot;Critical&quot;`) to a custom **&quot;skull&quot;** icon.&lt;/p&gt;
-&lt;p&gt;&amp;#x20; - Shipped predefined search macros in `default/macros.conf` to easily join Nessus, GuardDuty, or latency events with `aws:config` topology data.&lt;/p&gt;
-&lt;p&gt;* **Native Print &amp;amp; SVG Export Controls**:&lt;/p&gt;
-&lt;p&gt;&amp;#x20; - Added a client-side &quot;Download SVG/PNG&quot; button using SVG serialization to allow raw diagram downloads, bypassing Splunk's headless PDF clipping issues.&lt;/p&gt;
-&lt;p&gt;&amp;#x20; - Established print-friendly media CSS overrides (`@media print`).&lt;/p&gt;
-&lt;p&gt;* **Visual and Contrast Adjustments**:&lt;/p&gt;
-&lt;p&gt;&amp;#x20; - **Dynamic Theme Contrast ([Issue #4](&lt;a href=&quot;https://github.com/JohnYoungSuh/AWS-DFD-Visualizer/issues/4&quot;&gt;https://github.com/JohnYoungSuh/AWS-DFD-Visualizer/issues/4&lt;/a&gt;))**: VPC, Subnet, and Plane labels adapt font colors dynamically based on light/dark mode.&lt;/p&gt;
-&lt;p&gt;&amp;#x20; - **Compliance Edge Violation Styling ([Issue #5](&lt;a href=&quot;https://github.com/JohnYoungSuh/AWS-DFD-Visualizer/issues/5&quot;&gt;https://github.com/JohnYoungSuh/AWS-DFD-Visualizer/issues/5&lt;/a&gt;))**: Violated paths (e.g., SSH/22 SG violations) render as dashed bold red lines with warning icons. VPC/Subnet headers display active violation counts.&lt;/p&gt;
-&lt;p&gt;&amp;#x20; - **Resource Lifecycle Decorator ([Issue #6](&lt;a href=&quot;https://github.com/JohnYoungSuh/AWS-DFD-Visualizer/issues/6&quot;&gt;https://github.com/JohnYoungSuh/AWS-DFD-Visualizer/issues/6&lt;/a&gt;))**: Deleted assets (`configurationItemStatus: ResourceDeleted`) render with a strikethrough, and stale configuration items fade out dynamically.&lt;/p&gt;
-&lt;p&gt;&amp;#x20; - **Hover Halos &amp;amp; Zoom LOD ([Issue #7](&lt;a href=&quot;https://github.com/JohnYoungSuh/AWS-DFD-Visualizer/issues/7&quot;&gt;https://github.com/JohnYoungSuh/AWS-DFD-Visualizer/issues/7&lt;/a&gt;))**: Hovering on nodes scales labels and adds a high-contrast text shadow/halo. SVG zooms trigger LOD adjustments (hiding text/shadows at $k \&amp;lt; 0.45$) to save rendering performance.&lt;/p&gt;
-&lt;p&gt;* **Identity Plane Spacing**: Increased the horizontal spacing gap parameter for unassociated Identity plane nodes to prevent AssumesRole link labels from overlapping.&lt;/p&gt;
-&lt;p&gt;## 🐞 Bug Fixes&lt;/p&gt;
-&lt;p&gt;* **Static Grouped Layout Spacing and Centering**: Resolved visual overlaps in the static grouped hierarchy layout (&quot;Blueprint Mode&quot;) by replacing the fixed-size `treeLayout.size` with dynamic `treeLayout.nodeSize` coordinates mapping and coordinate shifting/centering bounds calculations.&lt;/p&gt;
-&lt;p&gt;* **Clamped Coordinate Scaling &amp;amp; Dynamic viewBox Width**: Prevented card overlaps in wide tree layouts by clamping the coordinate compression factor (`scaleX` / `scaleY`) to a minimum safe threshold. Implemented dynamic `viewBox` width/height expansion to automatically fit the expanded clamped tree.&lt;/p&gt;
-&lt;p&gt;* **Overlapping Parallel Edges**: Aggregated bidirectional edge records with multiple connecting protocols into a single visual edge with a comma-separated label.&lt;/p&gt;
-&lt;p&gt;* **Case-Sensitivity Option Parser**: Resolved a configuration parsing bug where `clusterBy` and `layoutMode` values failed to parse unless written in exact lowercase format.&lt;/p&gt;
-&lt;p&gt;* **Release Hygiene Sync**: Version synchronized to `2.7.2` across `package.json`, `splunk-app-manifest.json`, `Makefile`, `default/app.conf`, and UI header.&lt;/p&gt;
-&lt;p&gt;---&lt;/p&gt;
-&lt;p&gt;## 📍 GitHub Issues Status&lt;/p&gt;
-&lt;p&gt;The GitHub issues list **has not been updated yet**.&amp;#x20;&lt;/p&gt;
-&lt;p&gt;The following 6 resolved issues are still marked as **Open** on GitHub:&lt;/p&gt;
-&lt;p&gt;1. **#8** `docs: Upgrade Application Screenshots`&lt;/p&gt;
-&lt;p&gt;2. **#7** `style: Hover State Font Enlargement and Background Halo`&lt;/p&gt;
-&lt;p&gt;3. **#6** `style: Resource Lifecycle &amp;amp; Staleness Text Styling`&lt;/p&gt;
-&lt;p&gt;4. **#5** `style: Compliance Violation Styling for Edge &amp;amp; Zone Labels`&lt;/p&gt;
-&lt;p&gt;5. **#4** `style: Dynamic Contrast Text Labels for Planes, VPC, and Subnet`&lt;/p&gt;
-&lt;p&gt;6. **#2** `feat: Hybrid Dynamic JIT Drilldown SPL Generation`&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Interactive AWS Data Flow Diagrams (DFD) for Splunk. Visualizes AWS Config topologies, nested VPCs/Subnets, and Zero-Trust compliance highlights.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;AWS DFD Visualizer (Splunkbase App Summary)
-Purpose &amp;amp; Background Auditing complex cloud infrastructure for compliance (e.g., DoD Impact Level 5 (IL5), NIST 800-53, or NIST 800-207 Zero-Trust Architectures) is extremely challenging. While AWS accounts generate high-volume telemetry from AWS Config, VPC Flow Logs, and GuardDuty, reviewing these complex configurations in standard tabular logs or flat Splunk tables makes it difficult for security teams, system auditors, and DevSecOps engineers to analyze isolation boundaries, spot structural gaps, or verify access routes.
-
-The Solution The AWS DFD (Data Flow Diagram) Visualizer solves this by transforming raw relationship logs and configuration items into interactive, visual security topologies styled after AWS Application Composer. It gives compliance officers and analysts an intuitive, visual framework to audit security posture in real-time.
-
-Key Features:
-
-Zero-Trust Layout Engine: Segregates assets deterministically into distinct swimlanes—separating the Identity plane (users/roles), Policy &amp;amp; Control plane (global network assets like WAF/CloudFront), and Infrastructure plane (VPCs/Subnets).
-Nested Enclosures: Renders nested container boundaries representing VPCs and Subnets with real-time compliance validation markers.
-Security &amp;amp; Telemetry Overlays:
-Highlights Security Group associations as outer compliance rings around compute nodes (Green for compliant, Red for non-compliant).
-Automatically isolates and flashes incident-flagged resources in pulsing red alerts.
-Overrides critical Nessus/Tenable vulnerability states with a custom &amp;quot;skull&amp;quot; threat icon.
-Dynamically intercepts and highlights non-compliant connection paths (e.g., SSH/22 path violations) as dashed Vibrant Red links.
-Dashboard Studio &amp;amp; SimpleXML Ready: Integrates natively with Splunk Dashboard Studio, supporting dynamic click-capturing drilldown tokens, responsive light/dark themes, and performance-saving Level of Detail (LOD) controls.
-Export &amp;amp; Live Console Feed: Includes a native client-side SVG/PNG exporter, a standard draw.io XML generator, and an ad-hoc CSV console feed for drafting cloud topologies on the fly.
-🛠️ Configuration &amp;amp; Code Updates Done:
-To align your app bundle with this new description, I have updated the description strings in the following files:
-
-
-
-package.json
-
-
-splunk-app-manifest.json
-
-
-default/app.conf
-Additionally:
-
-Added /cypress/screenshots/ to
-
-.gitignore
- to keep the repository clean of test artifacts.
-Ran npm run build to compile the production bundle (webpack compiled successfully).
-Committed the changes and successfully pushed them to master.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c499fb12-6531-11f1-bd9c-ba6872003878.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Young Suh</dc:creator>
-      <pubDate>Tue, 16 Jun 2026 15:15:18 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8628/#v2.7.2</guid>
     </item>
     <item>
       <title>IPQualityScore (IPQS) Threat Risk Scoring - v1.2.4 [Version Update]</title>
