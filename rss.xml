@@ -6,7 +6,55 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Fri, 19 Jun 2026 15:56:20 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 19 Jun 2026 17:50:43 +0000</lastBuildDate>
+    <item>
+      <title>Insights Suite for Splunk (IS4S) - v1.2.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7186/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h3&gt;1.2.0 — Release date: June 19, 2026&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;New features &amp;amp; improvements&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Media Manager&lt;/strong&gt; — The Dashboard, Presentation, and Template Managers are now unified in a single Media Manager workspace with quick links between them, so there are fewer pages to navigate and a smoother authoring flow.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Collection health check &amp;amp; dependency graph&lt;/strong&gt; — A new health check surfaces collection issues such as missed searches, unscheduled source searches, and broken dependencies, and an interactive dependency graph visualizes how the searches in a collection relate to one another.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Dependency-aware scheduling&lt;/strong&gt; — Collection searches are now scheduled in dependency order, so source searches run before the searches that depend on them — improving data freshness and reducing missed or empty results.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Slide vs. General dashboard format&lt;/strong&gt; — Dashboard Builder now lets you build a dashboard as a presentation-ready &lt;strong&gt;Slide&lt;/strong&gt; (preset 1920×1080 layout) or as a free-form &lt;strong&gt;General&lt;/strong&gt; dashboard. Presentation Builder shows only Slide-formatted dashboards for clean, consistent decks.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Period-over-period time picker&lt;/strong&gt; — The Value Insights home time picker now compares each window against the prior period (last 7 days vs. the previous 7, 30 vs. the previous 30, and so on) for true trend analysis.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Multi-select in Presentation Manager&lt;/strong&gt; — Add several dashboards to a presentation at once instead of one at a time.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Export presentations from dashboard cards&lt;/strong&gt; — Generate a presentation directly from a dashboard card; the export now completes in the background to prevent partial saves.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Diagnostic modal navigation&lt;/strong&gt; — A persistent forward / back / count control in the modal header makes it easy to page through diagnostics no matter how far you scroll.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Linked diagnostics&lt;/strong&gt; — Diagnostic drill-downs now surface both the searches a KPI feeds into and the searches that reference it, so you can trace a metric's full lineage from a single place.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Streamlined navigation&lt;/strong&gt; — A new icon set (including Splunkie icons in Dashboard Builder), a restructured navigation bar, and new &lt;strong&gt;Tools&lt;/strong&gt; and &lt;strong&gt;Help &amp;amp; Support&lt;/strong&gt; menus (with the Installation/User Guide now under &lt;strong&gt;Help &amp;amp; Support&lt;/strong&gt;); legacy and redundant Splunk Search links were removed.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;Metrics &amp;amp; data&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Clearer user-adoption KPIs&lt;/strong&gt; — &lt;em&gt;Daily Active Users&lt;/em&gt; (signed-in users), &lt;em&gt;# of Active Users&lt;/em&gt; (users who ran at least one search), and &lt;em&gt;# of Regularly Seen Users&lt;/em&gt; (users active on at least 10% of days over a 30-day window) are now distinct, non-overlapping measures.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Updated KPI guidance&lt;/strong&gt; — Adoption and Capability Attainment searches refreshed with current definitions and recommendations, plus &lt;em&gt;related info&lt;/em&gt; and &lt;em&gt;Recommended For You&lt;/em&gt; links.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;More accurate trend columns&lt;/strong&gt; — Historical comparison charts on the Adoption and Capability Attainment dashboards now calculate prior-period columns correctly, with improved estimates for the current, in-progress week.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Searchbase metadata refresh&lt;/strong&gt; — Search metadata updated across the companion Searchbase catalog.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Automatic Searchbase migration&lt;/strong&gt; — On upgrade, existing IS4S searches are migrated into the Searchbase catalog automatically; the migration is idempotent and permission-gated, so it is safe to re-run.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;Performance &amp;amp; reliability&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Faster Manager pages&lt;/strong&gt; — Dashboard and Template Manager previews render far more efficiently, improving initial load and responsiveness while filtering, searching, and paginating.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Reliable scheduled runs on large stacks&lt;/strong&gt; — Daily collection runs now always complete on very large deployments: individual checks that stall are automatically time-boxed, and long-running checks are surfaced as an informational notice.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Optimized large-deployment checks&lt;/strong&gt; — Diagnostic and instance-info checks tuned for large Splunk Cloud and Enterprise environments.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;Security &amp;amp; hardening&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;General security hardening across the app, including stronger input validation, tighter access-control checks, and safe external-link handling.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;UI/UX&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Search Collection Builder &amp;amp; Searches table cleanup&lt;/strong&gt; — Consistent, centralized styling; required Title and Description fields; a resizable description editor; tooltip help icons; a clearer wizard header and Review &amp;amp; Save step; inline validation that warns when a search ID contains spaces (which would break summary collection); and an easier-to-scan Searches table with fixed column widths, hover-to-reveal truncation, and expandable detail rows.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;Documentation &amp;amp; training&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Installation and User Guide refreshed with updated processes and screenshots.&lt;/li&gt;
+&lt;li&gt;Clarified component requirements — Searchbase is needed only to create or edit custom collections, and CIM only for the Enterprise Security collection.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Understand and maximize the value of your Splunk investment. IS4S runs curated search collections on a schedule, delivering continuous visibility into usage, adoption, performance, and analytic-capability attainment through executive-ready dashboards and in-app guidance. Works standalone; pairs with the Searchbase App to build custom collections.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Insights Suite for Splunk (IS4S) helps you understand and maximize the value of your Splunk investment. Through curated search collections that run on a defined schedule, IS4S delivers continuous visibility into usage, adoption, system performance, and analytic-capability attainment — surfaced through executive-ready dashboards and actionable in-app guidance. It works standalone out of the box, and pairs with the companion Searchbase App for Splunk when you want to author or extend your own custom collections.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/7c05c970-6bf9-11f1-b408-2e794e2a1edf.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
+      <pubDate>Fri, 19 Jun 2026 16:56:28 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7186/#v1.2.0</guid>
+    </item>
     <item>
       <title>Gigamon Deep Observability App - CEF - v2.1.0 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/7636/</link>
@@ -2742,23 +2790,6 @@ Check out the README for more details.&lt;/p&gt;&lt;img height=&quot;36px&quot; 
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Tue, 09 Jun 2026 20:20:15 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8612/#v1.2.1</guid>
-    </item>
-    <item>
-      <title>Searchbase App for Splunk - v1.1.7 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/7188/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Maintenance release.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Fixed&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Admins can now apply changes to &lt;code&gt;search_similarity.conf&lt;/code&gt; (&lt;code&gt;max_index_cache_entries&lt;/code&gt;) using &lt;code&gt;splunk reload search_similarity&lt;/code&gt; or by editing the file on disk. Previously a &lt;code&gt;splunkd&lt;/code&gt; restart was required.&lt;/li&gt;
-&lt;li&gt;The handler now keeps the previously loaded settings if the conf file is malformed, instead of erroring on every request.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Upgrade&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Drop-in upgrade from &lt;strong&gt;1.1.6&lt;/strong&gt;. No configuration migration required.&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;A centralized search repository with 930+ curated SPL queries, enriched metadata, search type classification, and point-and-click execution. Discover, store, and share searches across your Splunk environment.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Searchbase is a centralized search repository designed for daily use by Splunk users — a place to discover, store, enrich, and execute SPL searches without ever leaving Splunk. With 930+ curated searches at your fingertips, Searchbase promotes collaboration, standardization, and continuous improvement across your entire Splunk practice. Powered by the same engine behind IS4S, Searchbase helps users find inspiration, recall searches instantly, and execute them with a single click.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/711f2b26-6408-11f1-b5c6-6ab4ac9c9e14.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
-      <pubDate>Tue, 09 Jun 2026 15:37:16 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7188/#v1.1.7</guid>
     </item>
   </channel>
 </rss>
