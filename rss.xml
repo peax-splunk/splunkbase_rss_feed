@@ -6,7 +6,51 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Fri, 19 Jun 2026 22:44:19 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 20 Jun 2026 00:01:27 +0000</lastBuildDate>
+    <item>
+      <title>Data Heartbeat - v1.4.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8833/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;Fixed — Search Head Cluster / Splunk Cloud&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Negative / wrong &quot;Last Seen&quot; from bad timestamps. Detection now measures data arrival time (recentTime), not the event's own timestamp — so a future-dated or way-old event no longer breaks a source's status. Future timestamps clamp to now; &quot;minutes since&quot; floors at 0.&lt;/li&gt;
+&lt;li&gt;&quot;Run Discovery&quot; now returns results on an SHC (it no longer ranks on a value that's empty on a clustered search).&lt;/li&gt;
+&lt;li&gt;Alert-action settings, audit log, and self-monitoring metrics now replicate across SHC members — migrated from CSV lookups to KV-store collections, so the Settings, Audit, and metrics no longer differ per node. Existing rows are carried over automatically on upgrade.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Fixed — reliability &amp;amp; correctness&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;New sourcetypes load with an empty Note; discovered sources record the correct provenance.&lt;/li&gt;
+&lt;li&gt;Email recipients are validated when you save; the &quot;Configured&quot; badge only shows green for a valid target.&lt;/li&gt;
+&lt;li&gt;Removed a Python-version pin that could stop the alert action / admin endpoint on some Splunk Cloud stacks.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Changed — alert delivery&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;One consolidated digest per destination instead of one message per flagged source. Email is a clean HTML table; Slack uses Block Kit; Teams a multi-section card; the webhook sends a sources[] digest. (Webhook consumers: read sources[].)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Accessibility&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Monitor filter chips are now keyboard-operable (Tab + Enter/Space).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Known limitations (planned)&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;App-level default settings still use a CSV lookup (may differ per SHC member); detection flags a brand-new never-seen source immediately (no grace window); some badge contrast and the saved-search-based discovery ranking are slated for a follow-up.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Know the moment a data source goes silent. Data Heartbeat monitors every source type in your Splunk environment and fires Slack, Teams, webhook, or email alerts the instant data stops flowing — before gaps turn into blind spots.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Data Heartbeat monitors your Splunk environment for source types that have stopped sending data. When a data source goes silent — whether from a misconfigured forwarder, a failed log shipper, or a broken integration — Data Heartbeat detects the gap and alerts you before the silence becomes a blind spot.
+
+Every monitored source type has a configurable threshold, measured in minutes. When no data arrives within that window, the app flags the source type and fires your chosen alert action: Slack, Microsoft Teams, a generic webhook, or email via Splunk&amp;#x27;s built-in SMTP relay.
+
+Key features:
+• Monitor dashboard — a live status table showing every tracked source type, the minutes since its last event, its threshold, and its importance level, with color-coded severity (green, yellow, red, and critical).
+• Per-row alert actions — each source type can use its own notification target, independent of the global default.
+• Auto Discovery — a nightly scan that surfaces new source types appearing in your environment and queues them for review.
+• Importance tagging — mark business-critical sources as High, Medium, or Low importance. When a high-importance source goes silent, the app raises a red-alert banner.
+• Settings page — configure global defaults (threshold, alert action, and notification target), enable or disable the monitoring pipeline, and test alert actions without waiting for a real outage.
+• Audit log — a full history of every configuration change, with timestamps and user attribution.
+• No index footprint — all configuration is stored in KV Store, so no custom indexes are required.
+
+Data Heartbeat is compatible with Splunk Enterprise 8.2+, Splunk Cloud Classic, and Splunk Cloud Victoria.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/18789024-6c38-11f1-a061-86020d90d456.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Steve Koelpin</dc:creator>
+      <pubDate>Fri, 19 Jun 2026 23:50:28 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8833/#v1.4.0</guid>
+    </item>
     <item>
       <title>Atlas Software Platform for Splunk - v5.0.5 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5614/</link>
@@ -813,46 +857,6 @@ NOTE: This product uses the NVD API but is not endorsed or certified by NIST or 
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">VirusTotal Team</dc:creator>
       <pubDate>Thu, 18 Jun 2026 15:48:30 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7351/#v1.5.0</guid>
-    </item>
-    <item>
-      <title>Data Heartbeat - v1.3.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8833/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;Highlights&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Now installs on Splunk Cloud Platform (Victoria &amp;amp; Classic) and Search Head Clusters. The app now declares search-head-cluster support, so it installs cleanly on Splunk Cloud — previously the install was rejected with &quot;does not support a SHC deployment.&quot;&lt;/li&gt;
-&lt;li&gt;Monitored-sourcetype state is KV-store-backed and replicates across SHC members.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Fixed&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Audit dashboard no longer fails to load on Splunk 10.x with its default time range; &quot;All time&quot; and absolute date ranges now render correctly across all panels.&lt;/li&gt;
-&lt;li&gt;&quot;Restore from Backup&quot; can no longer wipe your live monitored-sourcetypes collection — a 0-row restore is now a safe, logged no-op.&lt;/li&gt;
-&lt;li&gt;Splunk Free support — the Enable Monitoring and Test Alert actions now work (the admin endpoint previously returned 403).&lt;/li&gt;
-&lt;li&gt;Detection accuracy — sourcetypes silent longer than the 24-hour metadata window no longer reset to &quot;never&quot;; Auto Discovery no longer surfaces unmatchable wildcard/token candidates.&lt;/li&gt;
-&lt;li&gt;Concurrency safety — all KV-store writes are serialized, so rapid edits (or an edit overlapping the auto-refresh/discovery run) no longer silently lose changes.&lt;/li&gt;
-&lt;li&gt;Locale-independent REST URLs (fixes writes on non-English / custom-root deployments) and removal of dead placeholder UI.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Changed&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Now maintained by O11y Innovators Network (&lt;a href=&quot;&amp;#109;&amp;#97;&amp;#105;&amp;#108;&amp;#116;&amp;#111;&amp;#58;&amp;#115;&amp;#117;&amp;#112;&amp;#112;&amp;#111;&amp;#114;&amp;#116;&amp;#64;&amp;#111;&amp;#49;&amp;#49;&amp;#121;&amp;#105;&amp;#110;&amp;#110;&amp;#111;&amp;#118;&amp;#97;&amp;#116;&amp;#111;&amp;#114;&amp;#115;&amp;#110;&amp;#101;&amp;#116;&amp;#119;&amp;#111;&amp;#114;&amp;#107;&amp;#46;&amp;#99;&amp;#111;&amp;#109;&quot;&gt;&amp;#115;&amp;#117;&amp;#112;&amp;#112;&amp;#111;&amp;#114;&amp;#116;&amp;#64;&amp;#111;&amp;#49;&amp;#49;&amp;#121;&amp;#105;&amp;#110;&amp;#110;&amp;#111;&amp;#118;&amp;#97;&amp;#116;&amp;#111;&amp;#114;&amp;#115;&amp;#110;&amp;#101;&amp;#116;&amp;#119;&amp;#111;&amp;#114;&amp;#107;&amp;#46;&amp;#99;&amp;#111;&amp;#109;&lt;/a&gt;).&lt;/li&gt;
-&lt;li&gt;Open source under the Apache-2.0 license.&lt;br&gt;
-  Compatibility: Splunk Enterprise 8.2+ · Splunk Cloud Platform (Victoria &amp;amp; Classic) · Search Head Clusters · Splunk Free&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Know the moment a data source goes silent. Data Heartbeat monitors every source type in your Splunk environment and fires Slack, Teams, webhook, or email alerts the instant data stops flowing — before gaps turn into blind spots.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Data Heartbeat monitors your Splunk environment for source types that have stopped sending data. When a data source goes silent — whether from a misconfigured forwarder, a failed log shipper, or a broken integration — Data Heartbeat detects the gap and alerts you before the silence becomes a blind spot.
-
-Every monitored source type has a configurable threshold, measured in minutes. When no data arrives within that window, the app flags the source type and fires your chosen alert action: Slack, Microsoft Teams, a generic webhook, or email via Splunk&amp;#x27;s built-in SMTP relay.
-
-Key features:
-• Monitor dashboard — a live status table showing every tracked source type, the minutes since its last event, its threshold, and its importance level, with color-coded severity (green, yellow, red, and critical).
-• Per-row alert actions — each source type can use its own notification target, independent of the global default.
-• Auto Discovery — a nightly scan that surfaces new source types appearing in your environment and queues them for review.
-• Importance tagging — mark business-critical sources as High, Medium, or Low importance. When a high-importance source goes silent, the app raises a red-alert banner.
-• Settings page — configure global defaults (threshold, alert action, and notification target), enable or disable the monitoring pipeline, and test alert actions without waiting for a real outage.
-• Audit log — a full history of every configuration change, with timestamps and user attribution.
-• No index footprint — all configuration is stored in KV Store, so no custom indexes are required.
-
-Data Heartbeat is compatible with Splunk Enterprise 8.2+, Splunk Cloud Classic, and Splunk Cloud Victoria.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/1d7714e4-6b1e-11f1-b8b0-f68c476a4511.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Steve Koelpin</dc:creator>
-      <pubDate>Thu, 18 Jun 2026 15:23:45 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8833/#v1.3.0</guid>
     </item>
     <item>
       <title>KELA IoCs - v1.5.3 [Version Update]</title>
