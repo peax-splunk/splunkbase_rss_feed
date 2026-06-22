@@ -6,7 +6,70 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Mon, 22 Jun 2026 18:40:56 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 22 Jun 2026 21:28:16 +0000</lastBuildDate>
+    <item>
+      <title>Data Heartbeat - v1.4.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8833/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;A security, reliability, and Cloud-readiness hardening release. Validated with Splunk AppInspect (cloud + future) and live-tested on a single Splunk 10.2 instance and a 3-member Search Head Cluster.&lt;/p&gt;
+&lt;h2&gt;Security&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Alert target secrets (Slack/Teams/webhook URLs, email recipient lists) are now isolated in admin-read-only KV-store collections. Non-admins keep a read-only Monitor view but can no longer read configured webhook/recipient values via the KV REST API, the audit log, the backup copy, or scheduled-alert results.&lt;/li&gt;
+&lt;li&gt;The custom REST endpoint is capability-gated: enable/disable monitoring requires edit_search_scheduler or admin_all_objects; Send Test Alert requires admin_all_objects.&lt;/li&gt;
+&lt;li&gt;Outbound alert delivery includes SSRF protection — internal/loopback/link-local/private/cloud-metadata (incl. RFC 6598 CGNAT and IPv4-mapped IPv6) targets are blocked.&lt;/li&gt;
+&lt;li&gt;Uninstall instructions now scrub all seven KV-store collections (where secrets persist) before the app is removed.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Reliability &amp;amp; data integrity&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Splunk Cloud / 10.2 compatibility: python.required = 3.9, 3.13 so the alert action and admin endpoint run on the platform default (3.9) everywhere and prefer 3.13 where enabled.&lt;/li&gt;
+&lt;li&gt;Detection now uses tstats (keyed on index time) instead of | metadata — no 10,000-sourcetype cap, robust to clock skew; empty/garbage thresholds still flag.&lt;/li&gt;
+&lt;li&gt;Settings, alert config, audit history, and metrics live in KV-store and replicate across a Search Head Cluster, and survive app upgrades. Per-row edits use single-key upserts to avoid lost updates.&lt;/li&gt;
+&lt;li&gt;Consolidated alert digests: one notification per destination per fire (not one per flagged source). Alert bodies show the real &quot;last event&quot; age.&lt;/li&gt;
+&lt;li&gt;Upgrades migrate prior CSV-based data into KV without overwriting your settings; Backup/Restore is guarded so an empty source can't destroy the recovery point.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Accessibility &amp;amp; UX&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Full keyboard operation and ARIA labelling for the Monitor table — importance/notes/alert-action editors, the importance picker, threshold inputs, filter chips, and modal controls.&lt;/li&gt;
+&lt;li&gt;Non-admins get a coherent read-only experience (write controls hidden/inert; clear messaging).&lt;/li&gt;
+&lt;li&gt;Add-Sourcetype picker is capped for large environments; clearer onboarding and discovery labelling.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Documentation&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;README corrected for the seven KV-store collections, the admin-only secret model, tstats -based detection, the consolidated-digest model, and a correct uninstall procedure.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Upgrade note&lt;/h2&gt;
+&lt;p&gt;Existing CSV-based settings/audit/metrics migrate to KV-store automatically on first dashboard load after upgrade. No manual steps required.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Know the moment a data source goes silent. Data Heartbeat monitors every source type in your Splunk environment and fires Slack, Teams, webhook, or email alerts the instant data stops flowing — before gaps turn into blind spots.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Data Heartbeat monitors your Splunk environment for source types that have stopped sending data. When a data source goes silent — whether from a misconfigured forwarder, a failed log shipper, or a broken integration — Data Heartbeat detects the gap and alerts you before the silence becomes a blind spot.
+
+Every monitored source type has a configurable threshold, measured in minutes. When no data arrives within that window, the app flags the source type and fires your chosen alert action: Slack, Microsoft Teams, a generic webhook, or email via Splunk&amp;#x27;s built-in SMTP relay.
+
+Key features:
+• Monitor dashboard — a live status table showing every tracked source type, the minutes since its last event, its threshold, and its importance level, with color-coded severity (green, yellow, red, and critical).
+• Per-row alert actions — each source type can use its own notification target, independent of the global default.
+• Auto Discovery — a nightly scan that surfaces new source types appearing in your environment and queues them for review.
+• Importance tagging — mark business-critical sources as High, Medium, or Low importance. When a high-importance source goes silent, the app raises a red-alert banner.
+• Settings page — configure global defaults (threshold, alert action, and notification target), enable or disable the monitoring pipeline, and test alert actions without waiting for a real outage.
+• Audit log — a full history of every configuration change, with timestamps and user attribution.
+• No index footprint — all configuration is stored in KV Store, so no custom indexes are required.
+
+Data Heartbeat is compatible with Splunk Enterprise 8.2+, Splunk Cloud Classic, and Splunk Cloud Victoria.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c690ad2a-6e74-11f1-a788-1efce93a800a.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Steve Koelpin</dc:creator>
+      <pubDate>Mon, 22 Jun 2026 20:19:36 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8833/#v1.4.1</guid>
+    </item>
+    <item>
+      <title>Maze - v1.0.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8803/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Search memory optimizations&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Maze for Splunk integrates your Maze vulnerability investigation data directly into Splunk. Polls the Maze API for investigation results including exploitability verdicts, severity scores, root cause analysis, and remediation guidance.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Maze for Splunk integrates your Maze vulnerability investigation data directly into Splunk. Polls the Maze API for investigation results including exploitability verdicts, severity scores, root cause analysis, and remediation guidance.
+
+Features:
+- Modular input polls Maze API on configurable interval with incremental sync
+- Automatic pagination for large datasets
+- Configurable backfill window for initial data pull
+- Pre-built dashboard for vulnerability investigation overview
+- Supports Splunk Enterprise 9.0+ and Splunk Cloud&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b7b2a44c-6e75-11f1-a5fc-2e0230f9ff26.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Tyler Diderich</dc:creator>
+      <pubDate>Mon, 22 Jun 2026 20:10:28 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8803/#v1.0.1</guid>
+    </item>
     <item>
       <title>Splunk Add-on for Java Management Extensions - v6.0.1 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/2647/</link>
@@ -194,50 +257,6 @@ For Cybereason 21.1 environment, Admin role needed for fetching User Action Logs
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cybereason</dc:creator>
       <pubDate>Sat, 20 Jun 2026 00:49:11 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6427/#v2.1.21</guid>
-    </item>
-    <item>
-      <title>Data Heartbeat - v1.4.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8833/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;Fixed — Search Head Cluster / Splunk Cloud&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Negative / wrong &quot;Last Seen&quot; from bad timestamps. Detection now measures data arrival time (recentTime), not the event's own timestamp — so a future-dated or way-old event no longer breaks a source's status. Future timestamps clamp to now; &quot;minutes since&quot; floors at 0.&lt;/li&gt;
-&lt;li&gt;&quot;Run Discovery&quot; now returns results on an SHC (it no longer ranks on a value that's empty on a clustered search).&lt;/li&gt;
-&lt;li&gt;Alert-action settings, audit log, and self-monitoring metrics now replicate across SHC members — migrated from CSV lookups to KV-store collections, so the Settings, Audit, and metrics no longer differ per node. Existing rows are carried over automatically on upgrade.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Fixed — reliability &amp;amp; correctness&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;New sourcetypes load with an empty Note; discovered sources record the correct provenance.&lt;/li&gt;
-&lt;li&gt;Email recipients are validated when you save; the &quot;Configured&quot; badge only shows green for a valid target.&lt;/li&gt;
-&lt;li&gt;Removed a Python-version pin that could stop the alert action / admin endpoint on some Splunk Cloud stacks.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Changed — alert delivery&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;One consolidated digest per destination instead of one message per flagged source. Email is a clean HTML table; Slack uses Block Kit; Teams a multi-section card; the webhook sends a sources[] digest. (Webhook consumers: read sources[].)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Accessibility&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Monitor filter chips are now keyboard-operable (Tab + Enter/Space).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Known limitations (planned)&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;App-level default settings still use a CSV lookup (may differ per SHC member); detection flags a brand-new never-seen source immediately (no grace window); some badge contrast and the saved-search-based discovery ranking are slated for a follow-up.&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Know the moment a data source goes silent. Data Heartbeat monitors every source type in your Splunk environment and fires Slack, Teams, webhook, or email alerts the instant data stops flowing — before gaps turn into blind spots.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Data Heartbeat monitors your Splunk environment for source types that have stopped sending data. When a data source goes silent — whether from a misconfigured forwarder, a failed log shipper, or a broken integration — Data Heartbeat detects the gap and alerts you before the silence becomes a blind spot.
-
-Every monitored source type has a configurable threshold, measured in minutes. When no data arrives within that window, the app flags the source type and fires your chosen alert action: Slack, Microsoft Teams, a generic webhook, or email via Splunk&amp;#x27;s built-in SMTP relay.
-
-Key features:
-• Monitor dashboard — a live status table showing every tracked source type, the minutes since its last event, its threshold, and its importance level, with color-coded severity (green, yellow, red, and critical).
-• Per-row alert actions — each source type can use its own notification target, independent of the global default.
-• Auto Discovery — a nightly scan that surfaces new source types appearing in your environment and queues them for review.
-• Importance tagging — mark business-critical sources as High, Medium, or Low importance. When a high-importance source goes silent, the app raises a red-alert banner.
-• Settings page — configure global defaults (threshold, alert action, and notification target), enable or disable the monitoring pipeline, and test alert actions without waiting for a real outage.
-• Audit log — a full history of every configuration change, with timestamps and user attribution.
-• No index footprint — all configuration is stored in KV Store, so no custom indexes are required.
-
-Data Heartbeat is compatible with Splunk Enterprise 8.2+, Splunk Cloud Classic, and Splunk Cloud Victoria.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/18789024-6c38-11f1-a061-86020d90d456.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Steve Koelpin</dc:creator>
-      <pubDate>Fri, 19 Jun 2026 23:50:28 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8833/#v1.4.0</guid>
     </item>
     <item>
       <title>Atlas Software Platform for Splunk - v5.0.5 [Version Update]</title>
@@ -2711,24 +2730,6 @@ this app is a part of Sideview&amp;#x27;s overall Investigation and Reporting so
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk</dc:creator>
       <pubDate>Wed, 10 Jun 2026 01:37:58 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8610/#v1.1.1</guid>
-    </item>
-    <item>
-      <title>Fortinet FortiGate Add-On for Splunk - v1.6.10 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/2846/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;fix the regex to accommodate the mixed ordering of the log fields.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Fortinet FortiGate Add-On for Splunk is the technical add-on (TA) developed by Fortinet, Inc.  The add-on enables Splunk Enterprise to ingest or map security and traffic data collected from FortiGate physical and virtual appliances across domains. The key features include: 
-
-•	Streamlining authentication and access from FortiGate such as administrator login, user login, VPN termination authentication into to Splunk Enterprise Security Access Center
-
-•	Mapping FortiGate virus report into Splunk Enterprise Security Endpoint Malware Center
-
-•	Ingesting traffic logs, IPS logs, system configuration logs and Web filtering data etc. 
-
-Fortinet FortiGate Add-On for Splunk provides common information model (CIM) knowledge, advanced “saved search”, indexers and macros to use with other Splunk Enterprise apps such as Splunk App for Enterprise Security.
-
-The compatible FOS version is 5.0 and later.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/5e6924cc-6454-11f1-b5c6-6ab4ac9c9e14.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Fortinet Inc</dc:creator>
-      <pubDate>Tue, 09 Jun 2026 23:32:46 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/2846/#v1.6.10</guid>
     </item>
     <item>
       <title>Supporting App for Expressway CDR - v0.5.3 [Version Update]</title>
