@@ -6,7 +6,33 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Tue, 23 Jun 2026 06:40:23 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 23 Jun 2026 10:28:51 +0000</lastBuildDate>
+    <item>
+      <title>Japanese Hankaku/Zenkaku Character Converter(for Linux 64-bit) - v1.2.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5695/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;u&gt;&lt;strong&gt;TA-mojimoji 1.2.0 (オンプレミス版 / mojimoji 同梱)&lt;/strong&gt;&lt;/u&gt;&lt;/p&gt;
+&lt;p&gt;日本語の半角の文字列を全角にするコマンド han2zen コマンドと全角の文字列を半角にする zen2han コマンドを提供します。&lt;/p&gt;
+&lt;p&gt;Python ライブラリ mojimoji (&lt;a href=&quot;https://github.com/studio-ousia/mojimoji&quot; rel=&quot;noopener noreferrer&quot;&gt;https://github.com/studio-ousia/mojimoji&lt;/a&gt;) を Splunk から利用できるようにしたものです。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;使い方:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;| han2zen input_field outfield=&quot;zenkaku_field&quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;outfield は省略可能で、省略した場合、zen2han では &quot;hankaku&quot; フィールドに、han2zen では &quot;zenkaku&quot; フィールドに出力されます。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;オプション:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;カナ、数字、ASCII 文字列のうち特定の文字のみ変換対象から外したい場合、exclude オプションで変換対象から外すことができます。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;| zen2han input_field outfield=&quot;hankaku_field&quot; exclude=&quot;kana&quot; exclude=[kana|digit|ascii]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;対応バージョン / 制約:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Splunk Enterprise 9.3 以上 (Splunk 10.4 を含む) に対応するオンプレミス専用版です。&lt;/li&gt;
+&lt;li&gt;変換に Cython バイナリ (mojimoji.cpython-39-x86_64-linux-gnu.so) を同梱しているため、&lt;/li&gt;
+&lt;li&gt;Splunk Cloud には対応していません (Splunk Cloud は純 Python 版の 2.0.0 を使用してください)。&lt;/li&gt;
+&lt;li&gt;このバイナリは Python 3.9 専用です。そのため commands.conf で python.version \= python3.9 を&lt;/li&gt;
+&lt;li&gt;明示的に指定しており、Python 3.13 をオプトインした環境でも本コマンドは 3.9 で実行されます。&lt;/li&gt;
+&lt;li&gt;Splunk が将来 Python 3.9 のサポートを終了した後は、純 Python 版の 2.0.0 系を利用してください。&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;日本語の半角の文字列を全角にするコマンド han2zen コマンドと全角の文字列を半角にする zen2han コマンドを提供します。
+Python ライブラリmojimoji(https://github.com/studio-ousia/mojimoji) を Splunk から利用できるようにしたものです。&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/fcaf285a-6eb5-11f1-b0b2-06732670a147.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">h n</dc:creator>
+      <pubDate>Tue, 23 Jun 2026 07:27:04 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5695/#v1.2.0</guid>
+    </item>
     <item>
       <title>CCX Extensions for Wiz - v1.0.2 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7233/</link>
@@ -2764,24 +2790,6 @@ The Criminal IP Search App for Splunk is a command that integrates with Splunk S
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">AI Spera Inc</dc:creator>
       <pubDate>Wed, 10 Jun 2026 07:29:42 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7733/#v1.1.12</guid>
-    </item>
-    <item>
-      <title>Supporting Add-on for Oracle SBC CDR - v1.0.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8467/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
-&lt;li&gt;Fixed a bug in our sourcetype-forking in props/transforms, where the header_rows would end up being indexed as the original &quot;oracle_sbc_cdr&quot; sourcetype. Now those events are sent to the nullQueue.&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app provides the index-time configuration to ingest the CDR data from Oracle Session Border Controller (Oracle SBC) and also from Oracle Session Router.     Specifically the CSV-formatted CDR format that you get if you enable local cdr storage on the oracle boxes.      The app correctly separates the intermingled start, interim and end records of this dataset,  into three distinct sourcetypes, and extract the fields from each correctly.
-
-Note that although you can use it purely to onboard the data,   this app contains NO search-time config and will not by itself extract the search-time fields properly.    This is because it is designed to always work in conjunction with Sideview&amp;#x27;s &amp;quot;Supporting App for Oracle SBC&amp;quot;, which is to be installed on the Search Head and which handles the search-time field extractions among other things.
-
-Furthermore ,both of these apps together are also designed to work with Sideview&amp;#x27;s &amp;quot;Cisco CDR Reporting and Analytics&amp;quot; app.   When all three pieces are used together, the solution gives users a more general Investigation and Reporting solution for Oracle SBC and Oracle Session Router.
-
-The use cases are actually nearly endless so please contact Sideview if you have questions or would just like to find out more.
-
-this app is a part of Sideview&amp;#x27;s overall Investigation and Reporting solution, and you can find more documentation on the Sideview website:  https://sideviewapps.com/documentation/oracle-sbc-cdr&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/3653e0b0-6492-11f1-a7fb-fe6c411cce30.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
-      <pubDate>Wed, 10 Jun 2026 06:05:13 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8467/#v1.0.1</guid>
     </item>
   </channel>
 </rss>
