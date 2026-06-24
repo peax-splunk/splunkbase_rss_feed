@@ -6,7 +6,233 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Wed, 24 Jun 2026 17:00:14 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 24 Jun 2026 18:53:48 +0000</lastBuildDate>
+    <item>
+      <title>Cisco Enterprise Networking for Splunk Platform - v3.2.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7539/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h3&gt;Overview&lt;/h3&gt;
+&lt;h3&gt;Fixed&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;ISE Syslog System Health datamodel (Cisco_Catalyst_App)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Version 3.1.0 shipped a corrupted datamodel: the `ISE_Syslog_System_Health` child object was missing from the model while still referenced in metadata, and the parent `Cisco_Catalyst_ISE_Syslog_Events` constraints were overwritten. Panels depending on ISE syslog system-health data (CPU, memory, disk, RADIUS/TACACS latency) could return empty results.&lt;/p&gt;
+&lt;p&gt;Version 3.2.0 restores `ISE_Syslog_System_Health` and its seven calculated fields from the last known-good structure.&lt;/p&gt;
+&lt;h3&gt;Changed&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;C2C / CYBERCOM compliance reporting pipeline&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Compliance and Master Endpoint Record data is now materialized through a KV Store pipeline instead of running large inline searches at dashboard time.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;New KV collection `cisco_catalyst_assets` (~80 fields per endpoint)&lt;/li&gt;
+  &lt;li&gt;Scheduled stage searches populate intermediate lookups; `cisco_catalyst_kv_update` merges them into `cisco_catalyst_assets_lookup` approximately every 10 minutes&lt;/li&gt;
+  &lt;li&gt;`cisco_catalyst_assets_reaper` removes stale records (7-day retention)&lt;/li&gt;
+  &lt;li&gt;Expanded posture rule-result macros for ICAM/C2C policy evaluation&lt;/li&gt;
+  &lt;li&gt;Updated CYBERCOM device-category and access-level macros&lt;/li&gt;
+  &lt;li&gt;Additional datamodel fields on ISE Full Reports and ISE Syslog Analytics&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The following dashboards now read from the centralized asset lookup:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Overview Analytics Reports&lt;/li&gt;
+  &lt;li&gt;Endpoint Compliance Analytics Reports&lt;/li&gt;
+  &lt;li&gt;Master Endpoint Record Analytics Reports&lt;/li&gt;
+  &lt;li&gt;Implementation Metrics&lt;/li&gt;
+  &lt;li&gt;Step 1 Report (Device Classification)&lt;/li&gt;
+  &lt;li&gt;Step 2 Report (Manageability and Compliance)&lt;/li&gt;
+  &lt;li&gt;Step 3 Report (Compliance Remediation)&lt;/li&gt;
+  &lt;li&gt;Step 4 Report (ICAM Summary)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Added&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;ISE endpoint manageability classification&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Endpoints are classified as Managed, Manageable, or Unmanageable based on authentication, posture status, and CYBERCOM category&lt;/li&gt;
+  &lt;li&gt;New `managed` field on the master asset record, used in Step 2 and Implementation Metrics&lt;/li&gt;
+  &lt;li&gt;Endpoint Compliance dashboard: endpoints with populated rule-result fields are sorted ahead of rows with no rule results within each posture group&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;This application provides a dashboard component to visualize data collected by the 2 Technical Add-ons: Cisco Catalyst Add-on for Splunk and Cisco Catalyst Enhanced Netflow Add-on for Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Author -  Cisco Systems
+Version - 3.1.0
+Build - 1
+Prerequisites - This application is dependent on the &amp;#x27;Cisco Catalyst Add-on for Splunk&amp;#x27;  and &amp;#x27;Cisco Catalyst Enhanced Netflow Add-on for Splunk&amp;#x27;
+
+Supported Products:
+Cisco Catalyst SD-WAN
+Cisco Identity Services Engine
+Cisco Catalyst Center
+ThousandEyes --&amp;gt; Requires installation of the ThousandEyes TA (https://splunkbase.splunk.com/app/7719)
+Meraki --&amp;gt; Requires installation of the Meraki TA (https://splunkbase.splunk.com/app/5580)
+Cyber Vision
+Cisco Network Infrastructure Devices which include the below platform series:
+* Cisco Catalyst series switches (1000, 1200, 1300, 2960, 3650, 3750, 4500, 6500, 6800, 7600, 9000 etc.)
+* Cisco ASR - Aggregation Services Routers (900, 1000, 5000, 9000 etc.)
+* Cisco ISR - Integrated Services Routers (800, 1900, 2900, 3900, 4451 etc.)
+* Cisco Nexus Data Center switches (1000V, 2000, 3000, 4000, 5000, 6000, 7000, 9000 etc.)
+* Cisco Carrier Routing System
+* Other Cisco IOS based devices (Metro Ethernet, Industrial Ethernet, Blade Switches, Connected Grid etc.)
+* Cisco Access Points
+* Cisco WLC - WLAN Controller&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0c563aea-6f5c-11f1-805f-eaca360df156.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco</dc:creator>
+      <pubDate>Wed, 24 Jun 2026 18:38:29 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7539/#v3.2.0</guid>
+    </item>
+    <item>
+      <title>Local AI Assistant for Splunk - v1.0.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8374/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h3&gt;Changes in This Release&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Fixed an issue where saved configurations were not displayed correctly in the user interface.&lt;/li&gt;
+&lt;li&gt;Fixed an issue with the custom OpenAI command on Splunk instances running on Windows.&lt;/li&gt;
+&lt;li&gt;Added support for automatically discovering available models from a local Ollama instance.&lt;/li&gt;
+&lt;li&gt;Added a&amp;nbsp;&lt;strong&gt;Refresh Models&lt;/strong&gt;&amp;nbsp;button to update the available model list on demand.&lt;/li&gt;
+&lt;li&gt;Upgraded the Splunk Python SDK to version&amp;nbsp;&lt;strong&gt;3.0.0&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;Resolved several minor compatibility and stability issues.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Run local LLM prompts against your Splunk data — no API keys, no cloud, complete data privacy.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;OAI (Observalytics AI) integrates your local Ollama instance directly into Splunk, enabling AI-powered analysis without sending data to external services.
+
+The Problem: Security and operations teams want AI-driven insights but face compliance, privacy, and cost concerns with cloud-based AI APIs. Sending log data to external services introduces risk and may violate data governance policies.
+
+The Solution: OAI connects Splunk to your local Ollama server, keeping all inference on-premises. Your data never leaves your environment — no API keys, no cloud dependencies, no per-token costs.
+
+Key Benefits:
+- Privacy-first: All inference happens locally — your data never leaves your environment
+- Simple syntax: Just `| oai &amp;quot;your question&amp;quot;` — intuitive SPL integration
+- Index investigation: Automatically analyze any index for volume, EPS, log types, and anomalies
+- Event classification: Pipe events into OAI to have the model categorize and explain them
+- Fully configurable: Choose your model, endpoint, timeouts, and more via the setup page
+
+Perfect for security analysts, SOC teams, and anyone who wants to augment their Splunk workflows with AI-driven analysis while maintaining complete data sovereignty.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Bob van Bussel</dc:creator>
+      <pubDate>Wed, 24 Jun 2026 18:34:59 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8374/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>Cisco Catalyst Add-on for Splunk - v3.2.30 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7538/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h3&gt;New Inputs (7 new modular inputs)&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Custom API (Generic Endpoint)&lt;/strong&gt; — Catalyst Center — Catalog-driven input with 50+ curated OpenAPI endpoints; pick any Catalyst Center API without writing code&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Custom API (Generic Endpoint)&lt;/strong&gt; — SD-WAN — Catalog-driven input for vManage OpenAPI endpoints with scroll pagination&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Custom API (Generic Endpoint)&lt;/strong&gt; — ISE — Catalog-driven input migrated to Open API 3.1+, replacing the legacy ERS-only interface&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Application Visibility (AVC) Traffic&lt;/strong&gt; — Catalyst Center — Collects per-application traffic statistics from Catalyst Center&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Software Image Inventory (SWIM)&lt;/strong&gt; — Catalyst Center — Collects software image details and compliance status from Catalyst Center&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;SD-WAN Audit Logs&lt;/strong&gt; — SD-WAN — Dedicated input for vManage change audit trail with configurable initial backfill (default 7 days) and full config diff capture&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;SD-WAN Energy Statistics&lt;/strong&gt; — SD-WAN — Collects device energy/power consumption metrics from vManage&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;New Dashboards (2 new)&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Data Collection Health&lt;/strong&gt; — Real-time monitoring of all TA inputs; shows collection status, event counts, errors, and last-poll times across all 4 products&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;SD-WAN Change Audit&lt;/strong&gt; — Drill-down dashboard for vManage configuration changes with config diff viewer&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;New Saved Searches and Alerts (12 new — none existed in v3.1.0)&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Catalyst Center&lt;/strong&gt; — Device Unreachable, Low Device Health Score, Critical (P1) Issue Detected, Client Health Distribution (Daily Report)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;ISE&lt;/strong&gt; — Authentication Failure Spike, TACACS Authentication Failures, Top Authentication Failures by User (Daily Report)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Cyber Vision&lt;/strong&gt; — New OT Vulnerability Detected, Security Event Surge&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;SD-WAN&lt;/strong&gt; — UTD Security Engine Memory Pressure, Poor Tunnel Application Experience, Daily Tunnel Traffic Summary (Report)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;New Capabilities&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Test Connection&lt;/strong&gt; — All 4 account types (Catalyst Center, SD-WAN, ISE, Cyber Vision) now have a Test Connection button in the UI that validates connectivity and credentials before saving&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Per-Account Verify SSL Toggle&lt;/strong&gt; — SSL certificate verification can now be disabled per account for environments with self-signed certificates (Catalyst Center, SD-WAN, ISE, Cyber Vision)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Structured Logging Framework&lt;/strong&gt; — All inputs migrated to canonical structured key\=value logging with standardized event IDs (poll-complete, api-call, api-error, collection-exception, state-transition, auth-failure)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Per-Input Log Level&lt;/strong&gt; — Log verbosity can be configured per input instance rather than globally&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Auto-Populated Query Parameters&lt;/strong&gt; — Generic API inputs auto-fill required query parameters from the OpenAPI catalog&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Reports Multi-Select&lt;/strong&gt; — Catalyst Center Reports input now supports selecting multiple report templates&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Grouped Endpoint Picker&lt;/strong&gt; — Generic API inputs present endpoints in a categorized, searchable dropdown&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Recoverable-error logging (v3.2.30)&lt;/strong&gt; — New `handled_failure()` helper emits single-line structured WARNINGs for expected failures (for example transient Catalyst Center timeouts during Issue enrichment) instead of ERROR tracebacks when the poll continues&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Bug Fixes&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;SSL verify regression on upgrade from v3.1.x&lt;/strong&gt; — Upgrading from v3.1.x could break collection when accounts used use\_ca\_cert \= false and relied on the global verify\_ssl \= false setting in ta\_cisco\_catalyst\_settings.conf. v3.2.20+ restores that legacy behavior so TLS no longer fails with CERTIFICATE\_VERIFY\_FAILED on controllers using self-signed certificates. Per-account verify\_ssl still overrides when explicitly set on the account stanza.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Compliance and Security Advisory site assignment (v3.2.30)&lt;/strong&gt; — Restored missing `get_site_assigned_network_device` API method (regression since v3.2.10). Compliance and Security Advisory inputs again call `GET /dna/intent/api/v1/networkDevices/{id}/assignedToSite` for per-device site enrichment instead of failing each poll with AttributeError&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Issue input misleading log noise (v3.2.30)&lt;/strong&gt; — Transient Catalyst Center timeouts on issue-enrichment-details are logged as structured `event=api-error` at WARNING when enrichment is skipped and the poll continues; no Python traceback for handled network blips&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Data Collection Health empty panels (v3.2.30)&lt;/strong&gt; — DNAC API gap analysis, CC HTTP 429 throttling, SD-WAN sourcetype health, and SD-WAN events-over-time panels now show friendly empty-state rows instead of blank tables and charts when there is no data in the selected time range&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Host field regression&lt;/strong&gt; — Fixed across all 21 event-emission call sites. The host metadata field is now consistently lowercase and scheme-stripped (for example cclive-ai.cisco.com instead of [https://cclive-ai.cisco.com).](https://cclive-ai.cisco.com\).) Device-level sourcetypes use the device hostname; non-device sourcetypes use the controller hostname&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Per-record event emission&lt;/strong&gt; — Inputs now emit one Splunk event per record instead of one event containing a JSON array. Improves search performance and CIM compatibility&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Device Health crash&lt;/strong&gt; — Fixed KeyError when device IP field is missing from the API response (Issue #22)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Audit Logs crash&lt;/strong&gt; — Fixed JSONDecodeError on empty API response (Issue #19)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Account validation SSL failure&lt;/strong&gt; — Fixed CERTIFICATE\_VERIFY\_FAILED when validating accounts with self-signed certs (Issue #20)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Data Collection Health dashboard&lt;/strong&gt; — tstats queries now search all indexes so inputs writing to custom indexes (for example dnac) appear on the dashboard&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Reports silent data loss&lt;/strong&gt; — JSON-format reports were silently dropped; now properly ingested&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Reports 404 handling&lt;/strong&gt; — CC zero-reports 404 treated as benign instead of erroring&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Missing Linux binaries&lt;/strong&gt; — Restored 9 missing Linux compiled .so binaries that were absent from the v3.1.0 package (pre-existing bug)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;AVC/SWIM empty results&lt;/strong&gt; — Fixed collectors not populating the results list&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;SD-WAN 400 errors&lt;/strong&gt; — Demoted benign per-device 400s in unified-threat health to debug level&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;HTTP error wrapping&lt;/strong&gt; — 404/500/generic-400 errors are now wrapped cleanly without unhandled exception tracebacks&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;DateParserVerbose noise&lt;/strong&gt; — Silenced spurious Splunk timestamp parser warnings on 6 CC JSON-array sourcetypes&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Cyber Vision logging&lt;/strong&gt; — Converted bare except blocks to logger.exception() for proper traceback capture&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Knowledge Objects&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;94 props.conf stanzas&lt;/strong&gt; (up from 71) — new sourcetype definitions, field extractions, timestamp configs&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;136 eventtypes&lt;/strong&gt; (up from 123) — expanded CIM-mapped event classifications&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Backward-compatible sourcetype migration&lt;/strong&gt; — cisco:dnac sourcetypes aliased to cisco:catalyst for search parity during migration&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;CIM field aliases&lt;/strong&gt; — SD-WAN audit logs mapped to Splunk CIM Change data model&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;New macros.conf&lt;/strong&gt; — Parameterized SPL extracted from saved searches for reusability&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Build and Operations&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Automated build pipeline&lt;/strong&gt; — Single package/VERSION file drives version across app.conf, app.manifest, releaseNotes, and tarball name&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Auto-incrementing build number&lt;/strong&gt; — Each build stamps a unique, strictly-increasing build number&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Git provenance&lt;/strong&gt; — Build SHA, branch, builder, and timestamp embedded in app.conf&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;17 unit test files / 440+ tests&lt;/strong&gt; — Comprehensive test coverage for all products, including regression tests for SSL verify resolution, DNAC site-assignment API, and structured logging helpers&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Pre-push hook&lt;/strong&gt; — Runs tests before push to prevent regressions&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Inputs ship disabled&lt;/strong&gt; — All new inputs default to disabled \= true to prevent surprise data collection on install&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Upgrade Notes&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Upgrading from v3.1.x and self-signed certificates&lt;/strong&gt; — If you upgraded directly to an earlier 3.2.x build and collection stopped with CERTIFICATE\_VERIFY\_FAILED or TLS handshake errors, install v3.2.30 (or v3.2.20+). No account reconfiguration is required when your v3.1.x setup used use\_ca\_cert \= false with global verify\_ssl \= false. Alternatively, set Verify SSL to off on the account or install your CA certificate.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Upgrading from v3.2.10–v3.2.20 and Compliance / Security Advisory errors&lt;/strong&gt; — If logs showed `AttributeError: 'Devices' object has no attribute 'get_site_assigned_network_device'` on every poll, upgrade to v3.2.30. No input reconfiguration is required.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Device Health RxRate / TxRate (v3.2.10+)&lt;/strong&gt; — Interface traffic rates are collected only when &lt;strong&gt;Enable Interface Stats&lt;/strong&gt; is turned on for the Device Health input (default off). After enabling, disable and re-enable the input (or restart) so the worker reloads configuration.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Breaking: Event structure&lt;/strong&gt; — Inputs that emitted a single event with a JSON array payload now emit one event per record. Update saved searches or dashboards that parse arrays from single events.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Breaking: Host field format&lt;/strong&gt; — The host metadata field no longer includes https://. Update any searches filtering on host values that still include the URL scheme.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Event volume&lt;/strong&gt; — Per-record emission increases total event count. This is expected behavior, not duplicate data.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Sourcetype migration&lt;/strong&gt; — Both cisco:dnac and cisco:catalyst sourcetype prefixes are recognized via backward-compat stanzas. No search changes required.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Supported Products&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Cisco Catalyst Center (formerly DNA Center)&lt;/li&gt;
+  &lt;li&gt;Cisco SD-WAN (vManage)&lt;/li&gt;
+  &lt;li&gt;Cisco Identity Services Engine (ISE)&lt;/li&gt;
+  &lt;li&gt;Cisco Cyber Vision&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Technical Add-on that collects Syslog, Netflow and API information from various Cisco products. The data parsed by this TA can be visualized using the Cisco Enterprise Networking application
+For parsing Netflow data, the Cisco Catalyst Enhanced Netflow Add-on for Splunk is needed to map the Netflow elements&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Author - Cisco Systems
+Version - 3.1.0
+Build - 1
+Prerequisites - This Technical Add-on is dependent on &amp;#x27;Splunk Add-on for Stream Forwarders&amp;#x27; and &amp;#x27;Splunk App for Stream&amp;#x27;
+
+Supported Cisco Products:
+Cisco Catalyst SD-WAN
+Cisco Identity Services Engine
+Cisco Catalyst Center
+Cyber Vision
+Cisco Network Infrastructure Devices which include the below platform series:
+* Cisco Catalyst series switches (1000, 1200, 1300, 2960, 3650, 3750, 4500, 6500, 6800, 7600, 9000 etc.)
+* Cisco ASR - Aggregation Services Routers (900, 1000, 5000, 9000 etc.)
+* Cisco ISR - Integrated Services Routers (800, 1900, 2900, 3900, 4451 etc.)
+* Cisco Nexus Data Center switches (1000V, 2000, 3000, 4000, 5000, 6000, 7000, 9000 etc.)
+* Cisco Carrier Routing System
+* Other Cisco IOS based devices (Metro Ethernet, Industrial Ethernet, Blade Switches, Connected Grid etc.)
+* Cisco Access Points
+* Cisco WLC - WLAN Controller&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2505c8d0-6ff7-11f1-bac5-e2735de49483.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco</dc:creator>
+      <pubDate>Wed, 24 Jun 2026 18:18:03 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7538/#v3.2.30</guid>
+    </item>
     <item>
       <title>Add-on for VMRay Platform - v2.3.4 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5563/</link>
@@ -103,114 +329,6 @@ The Splunk Add-on for GitHub lets you collect audit logs from the GitHub Enterpr
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">HyunHo Noh</dc:creator>
       <pubDate>Wed, 24 Jun 2026 04:31:32 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8873/#v1.0.0</guid>
-    </item>
-    <item>
-      <title>Cisco Catalyst Add-on for Splunk - v3.2.20 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7538/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h3&gt;New Inputs (7 new modular inputs)&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Custom API (Generic Endpoint)&lt;/strong&gt; — Catalyst Center — Catalog-driven input with 50+ curated OpenAPI endpoints; pick any Catalyst Center API without writing code&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Custom API (Generic Endpoint)&lt;/strong&gt; — SD-WAN — Catalog-driven input for vManage OpenAPI endpoints with scroll pagination&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Custom API (Generic Endpoint)&lt;/strong&gt; — ISE — Catalog-driven input migrated to Open API 3.1+, replacing the legacy ERS-only interface&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Application Visibility (AVC) Traffic&lt;/strong&gt; — Catalyst Center — Collects per-application traffic statistics from Catalyst Center&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Software Image Inventory (SWIM)&lt;/strong&gt; — Catalyst Center — Collects software image details and compliance status from Catalyst Center&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;SD-WAN Audit Logs&lt;/strong&gt; — SD-WAN — Dedicated input for vManage change audit trail with configurable initial backfill (default 7 days) and full config diff capture&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;SD-WAN Energy Statistics&lt;/strong&gt; — SD-WAN — Collects device energy/power consumption metrics from vManage&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;New Dashboards (2 new)&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Data Collection Health&lt;/strong&gt; — Real-time monitoring of all TA inputs; shows collection status, event counts, errors, and last-poll times across all 4 products&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;SD-WAN Change Audit&lt;/strong&gt; — Drill-down dashboard for vManage configuration changes with config diff viewer&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;New Saved Searches and Alerts (12 new — none existed in v3.1.0)&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Catalyst Center&lt;/strong&gt; — Device Unreachable, Low Device Health Score, Critical (P1) Issue Detected, Client Health Distribution (Daily Report)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;ISE&lt;/strong&gt; — Authentication Failure Spike, TACACS Authentication Failures, Top Authentication Failures by User (Daily Report)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Cyber Vision&lt;/strong&gt; — New OT Vulnerability Detected, Security Event Surge&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;SD-WAN&lt;/strong&gt; — UTD Security Engine Memory Pressure, Poor Tunnel Application Experience, Daily Tunnel Traffic Summary (Report)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;New Capabilities&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Test Connection&lt;/strong&gt; — All 4 account types (Catalyst Center, SD-WAN, ISE, Cyber Vision) now have a Test Connection button in the UI that validates connectivity and credentials before saving&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Per-Account Verify SSL Toggle&lt;/strong&gt; — SSL certificate verification can now be disabled per account for environments with self-signed certificates (Catalyst Center, SD-WAN, ISE, Cyber Vision)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Structured Logging Framework&lt;/strong&gt; — All inputs migrated to canonical structured key=value logging with standardized event IDs (poll-complete, api-call, api-error, collection-exception, state-transition, auth-failure)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Per-Input Log Level&lt;/strong&gt; — Log verbosity can be configured per input instance rather than globally&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Auto-Populated Query Parameters&lt;/strong&gt; — Generic API inputs auto-fill required query parameters from the OpenAPI catalog&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Reports Multi-Select&lt;/strong&gt; — Catalyst Center Reports input now supports selecting multiple report templates&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Grouped Endpoint Picker&lt;/strong&gt; — Generic API inputs present endpoints in a categorized, searchable dropdown&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Bug Fixes&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;SSL verify regression on upgrade from v3.1.x&lt;/strong&gt; — Upgrading from v3.1.x could break collection when accounts used use_ca_cert = false and relied on the global verify_ssl = false setting in ta_cisco_catalyst_settings.conf. v3.2.20 restores that legacy behavior so TLS no longer fails with CERTIFICATE_VERIFY_FAILED on controllers using self-signed certificates. Per-account verify_ssl still overrides when explicitly set on the account stanza.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Host field regression&lt;/strong&gt; — Fixed across all 21 event-emission call sites. The host metadata field is now consistently lowercase and scheme-stripped (for example cclive-ai.cisco.com instead of &lt;a href=&quot;https://cclive-ai.cisco.com&quot; rel=&quot;noopener noreferrer&quot;&gt;https://cclive-ai.cisco.com&lt;/a&gt;). Device-level sourcetypes use the device hostname; non-device sourcetypes use the controller hostname&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Per-record event emission&lt;/strong&gt; — Inputs now emit one Splunk event per record instead of one event containing a JSON array. Improves search performance and CIM compatibility&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Device Health crash&lt;/strong&gt; — Fixed KeyError when device IP field is missing from the API response (Issue #22)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Audit Logs crash&lt;/strong&gt; — Fixed JSONDecodeError on empty API response (Issue #19)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Account validation SSL failure&lt;/strong&gt; — Fixed CERTIFICATE_VERIFY_FAILED when validating accounts with self-signed certs (Issue #20)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Data Collection Health dashboard&lt;/strong&gt; — tstats queries now search all indexes so inputs writing to custom indexes (for example dnac) appear on the dashboard&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Reports silent data loss&lt;/strong&gt; — JSON-format reports were silently dropped; now properly ingested&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Reports 404 handling&lt;/strong&gt; — CC zero-reports 404 treated as benign instead of erroring&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Missing Linux binaries&lt;/strong&gt; — Restored 9 missing Linux compiled .so binaries that were absent from the v3.1.0 package (pre-existing bug)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;AVC/SWIM empty results&lt;/strong&gt; — Fixed collectors not populating the results list&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;SD-WAN 400 errors&lt;/strong&gt; — Demoted benign per-device 400s in unified-threat health to debug level&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;HTTP error wrapping&lt;/strong&gt; — 404/500/generic-400 errors are now wrapped cleanly without unhandled exception tracebacks&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;DateParserVerbose noise&lt;/strong&gt; — Silenced spurious Splunk timestamp parser warnings on 6 CC JSON-array sourcetypes&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Cyber Vision logging&lt;/strong&gt; — Converted bare except blocks to logger.exception() for proper traceback capture&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Knowledge Objects&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;94 props.conf stanzas&lt;/strong&gt; (up from 71) — new sourcetype definitions, field extractions, timestamp configs&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;136 eventtypes&lt;/strong&gt; (up from 123) — expanded CIM-mapped event classifications&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Backward-compatible sourcetype migration&lt;/strong&gt; — cisco:dnac sourcetypes aliased to cisco:catalyst for search parity during migration&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;CIM field aliases&lt;/strong&gt; — SD-WAN audit logs mapped to Splunk CIM Change data model&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;New macros.conf&lt;/strong&gt; — Parameterized SPL extracted from saved searches for reusability&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Build and Operations&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Automated build pipeline&lt;/strong&gt; — Single package/VERSION file drives version across app.conf, app.manifest, releaseNotes, and tarball name&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Auto-incrementing build number&lt;/strong&gt; — Each build stamps a unique, strictly-increasing build number&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Git provenance&lt;/strong&gt; — Build SHA, branch, builder, and timestamp embedded in app.conf&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;17 unit test files / 433 tests&lt;/strong&gt; — Comprehensive test coverage for all products, including regression tests for SSL verify resolution across all four products&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Pre-push hook&lt;/strong&gt; — Runs tests before push to prevent regressions&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Inputs ship disabled&lt;/strong&gt; — All new inputs default to disabled = true to prevent surprise data collection on install&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Upgrade Notes&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Upgrading from v3.1.x and self-signed certificates&lt;/strong&gt; — If you upgraded directly to an earlier 3.2.x build and collection stopped with CERTIFICATE_VERIFY_FAILED or TLS handshake errors, install v3.2.20. No account reconfiguration is required when your v3.1.x setup used use_ca_cert = false with global verify_ssl = false. Alternatively, set Verify SSL to off on the account or install your CA certificate.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Breaking: Event structure&lt;/strong&gt; — Inputs that emitted a single event with a JSON array payload now emit one event per record. Update saved searches or dashboards that parse arrays from single events.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Breaking: Host field format&lt;/strong&gt; — The host metadata field no longer includes https://. Update any searches filtering on host values that still include the URL scheme.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Event volume&lt;/strong&gt; — Per-record emission increases total event count. This is expected behavior, not duplicate data.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Sourcetype migration&lt;/strong&gt; — Both cisco:dnac and cisco:catalyst sourcetype prefixes are recognized via backward-compat stanzas. No search changes required.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Supported Products&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Cisco Catalyst Center (formerly DNA Center)&lt;/li&gt;
-&lt;li&gt;Cisco SD-WAN (vManage)&lt;/li&gt;
-&lt;li&gt;Cisco Identity Services Engine (ISE)&lt;/li&gt;
-&lt;li&gt;Cisco Cyber Vision&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Technical Add-on that collects Syslog, Netflow and API information from various Cisco products. The data parsed by this TA can be visualized using the Cisco Enterprise Networking application
-For parsing Netflow data, the Cisco Catalyst Enhanced Netflow Add-on for Splunk is needed to map the Netflow elements&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Author - Cisco Systems
-Version - 3.1.0
-Build - 1
-Prerequisites - This Technical Add-on is dependent on &amp;#x27;Splunk Add-on for Stream Forwarders&amp;#x27; and &amp;#x27;Splunk App for Stream&amp;#x27;
-
-Supported Cisco Products:
-Cisco Catalyst SD-WAN
-Cisco Identity Services Engine
-Cisco Catalyst Center
-Cyber Vision
-Cisco Network Infrastructure Devices which include the below platform series:
-* Cisco Catalyst series switches (1000, 1200, 1300, 2960, 3650, 3750, 4500, 6500, 6800, 7600, 9000 etc.)
-* Cisco ASR - Aggregation Services Routers (900, 1000, 5000, 9000 etc.)
-* Cisco ISR - Integrated Services Routers (800, 1900, 2900, 3900, 4451 etc.)
-* Cisco Nexus Data Center switches (1000V, 2000, 3000, 4000, 5000, 6000, 7000, 9000 etc.)
-* Cisco Carrier Routing System
-* Other Cisco IOS based devices (Metro Ethernet, Industrial Ethernet, Blade Switches, Connected Grid etc.)
-* Cisco Access Points
-* Cisco WLC - WLAN Controller&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e7a1e932-6f57-11f1-a5fc-2e0230f9ff26.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco</dc:creator>
-      <pubDate>Tue, 23 Jun 2026 23:24:55 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7538/#v3.2.20</guid>
     </item>
     <item>
       <title>MaxMind GeoIP App - v1.1.1 [Version Update]</title>
@@ -1927,14 +2045,6 @@ IP geolocation, IP enrichment, proxy detection, VPN detection, residential proxy
       <guid>https://splunkbase.splunk.com/app/4070/#v9.5.6</guid>
     </item>
     <item>
-      <title>MITRE ATLAS Framework Heatmap for Splunk - v1.0.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8845/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Provides a custom visualization for rendering MITRE ATLAS heatmap diagrams that display tactics and techniques used to attack AI and ML systems.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The MITRE ATLAS Heatmap for Splunk provides a custom visualization for rendering MITRE ATLAS (Adversarial Threat Landscape for Artificial-Intelligence Systems) heatmap diagrams within Splunk environments. This visualization enables security teams and data scientists to map and display tactics and techniques used to attack AI and machine learning systems. The app integrates with Splunk&amp;#x27;s native visualization framework, allowing users to create visual representations of ATLAS technique coverage based on search results. Users can map numerical values and aggregation counts to specific ATLAS technique identifiers, creating heatmaps that highlight areas of concern or coverage in their AI/ML security posture. The visualization is built on ATLAS v5.6.0 and renders the ATLAS matrix structure, which documents adversarial techniques specific to artificial intelligence and machine learning systems. This differs from traditional cyber attack frameworks by focusing specifically on threats to AI/ML environments, including attacks on training data, model manipulation, and inference-time attacks.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/325d9c44-6663-11f1-ab25-5aa63b438bb3.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Rajuaravind s</dc:creator>
-      <pubDate>Wed, 17 Jun 2026 12:53:46 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8845/#v1.0.1</guid>
-    </item>
-    <item>
       <title>Appbase version catalogue - v1.1.2 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/8846/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Polls the Splunkbase API to maintain a local KV Store catalogue of app versions and provides dashboards to compare installed apps against Splunkbase releases.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunkbase Version Catalog app builds and maintains a local catalogue of Splunkbase app versions by polling the public Splunkbase API on a scheduled basis. The app records release metadata for tracked applications, including version numbers, release dates, compatible Splunk platform versions, cloud-compatibility flags, FedRAMP status, and archival state. All catalogue data is stored in a KV Store collection keyed by Splunkbase numeric app ID, enabling efficient updates without duplication. Each polling cycle also writes versioned events to an index for historical tracking. Two dashboards provide views into the catalogue: one for browsing all tracked Splunkbase apps and their metadata, and another that compares locally installed apps against their corresponding Splunkbase releases to identify available updates. A saved search automates the detection of outdated installed apps. The app is implemented entirely with the Python 3 standard library, avoiding bundled third-party dependencies to simplify AppInspect vetting for Splunk Cloud Platform deployments.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/7df13890-66c8-11f1-909b-aaccb41b3470.png&quot;&gt;</description>
@@ -2406,58 +2516,6 @@ If you want support for private models or Azure OpenAI, please contact the autho
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
       <pubDate>Fri, 12 Jun 2026 22:03:23 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6779/#v3.3.2</guid>
-    </item>
-    <item>
-      <title>Webtools Add-on - v3.1.3 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4146/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h3&gt;Release v3.1.3&amp;#x20;
-
-J.R. Murray - PR41 Enhancements + Latest Cloud Vetting&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;Highlights:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Splunk Cloud &amp;amp; AppInspect Compliant:&lt;/strong&gt; Fixed all AppInspect validation errors (0 failures). Fully compliant with Splunk Cloud security policies.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;HTTPS Bypass for Localhost:&lt;/strong&gt; Intelligent logic now allows &lt;a href=&quot;http://127.0.0.1/&quot;&gt;`http://127.0.0.1`&lt;/a&gt; and &lt;a href=&quot;http://localhost/&quot;&gt;`http://localhost`&lt;/a&gt; to bypass HTTPS enforcement for internal testing, while maintaining strict TLS for external requests.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Modern Auth Support:&lt;/strong&gt; Full support for Bearer Tokens (`token=&quot;...&quot;`) in addition to traditional session key authentication (`splunkauth=true`).&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Python 3.13 Ready:&lt;/strong&gt; Updated `commands.conf` with `python.required = 3.13` for future Splunk Enterprise 8.0 compatibility.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Enhanced Test Harness:&lt;/strong&gt; Updated dashboard (`curl_test_harness`) with fixed XML syntax and cleaner UI for validating API connections.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;SHC Support:&lt;/strong&gt; Added `server.conf` with `conf_replication_include` for Search Head Clustering compatibility.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Changes &amp;amp; Improvements:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Removed `install_source_checksum` from `app.conf` (auto-populated by Splunk).&lt;/li&gt;
-  &lt;li&gt;Removed deprecated `metadata/local.meta` file (uses `default.meta` only).&lt;/li&gt;
-  &lt;li&gt;Fixed invalid XML syntax in dashboard views (self-closing tags).&lt;/li&gt;
-  &lt;li&gt;Cleaned up `.git` and **`pycache`** from distribution packages.&lt;/li&gt;
-  &lt;li&gt;Made the app visible in the Splunk UI (`is_visible = 1`).&lt;/li&gt;
-  &lt;li&gt;Removed internal development notes (`NEXT_STEPS.md`) for a cleaner distribution.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Deprecations:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;em&gt;None.&lt;/em&gt; This release is a full backward-compatible update. All existing `curl` and `urlencode` commands function exactly as before, with added security and flexibility.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Installation Notes:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Requires Splunk Enterprise 9.0+ or Splunk Cloud.&lt;/li&gt;
-  &lt;li&gt;No restart required for app installation, but a restart is recommended after upgrading from v3.1.2 to ensure all configuration changes take effect.&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app is intended to solve the problem of connecting to external APIs/REST with Splunk Search. It allows you to use CURL inline with your other SPL and to URLENCODE as needed too.
-
-IF YOU LIKE THIS APP, PLEASE LEAVE A RATING... TIA!!!
-
-Source code is published at https://github.com/bentleymi/ta-webtools/.
-
-I actively support my apps and am anxious to receive any feedback. Tag me on community.splunk.com or call use &amp;quot;contact the developer&amp;quot; to discuss via email.
-
--JKat54&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c597dd6a-66a1-11f1-b0b7-7247f8ab4a12.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Fri, 12 Jun 2026 21:14:12 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4146/#v3.1.3</guid>
     </item>
   </channel>
 </rss>
