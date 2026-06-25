@@ -6,21 +6,34 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Thu, 25 Jun 2026 10:35:21 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 25 Jun 2026 13:11:33 +0000</lastBuildDate>
     <item>
-      <title>TrackMe - v2.4.3 [Version Update]</title>
+      <title>Internet Registry Lookup - v3.0.3 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/3503/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;## v3.0.3&lt;/p&gt;
+&lt;p&gt;Defined python.required for the commands.conf stanza for compatibility. (python.version is deprecated.)&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Add‐on for Regional Internet Registry Consolidated Extended Statistics Tables (TA‐rirstats) creates
+and maintains a lookup containing all the network ranges documented by the five regional Internet
+registries (RIRs). Splunk queries can use this lookup to determine with what subnet a particular public IP
+address is associated. The lookup also includes the registry responsible for the subnet, the date the
+registration was changed, the status, the country the registration is in and a registration ID for the party
+to whom the registration was made.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f4fe5188-7092-11f1-abc0-ee11b1988db6.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Frank Wayne</dc:creator>
+      <pubDate>Thu, 25 Jun 2026 12:42:26 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/3503/#v3.0.3</guid>
+    </item>
+    <item>
+      <title>TrackMe - v2.4.4 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/4621/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;TrackMe 2.4.3 — Slipstream: a major performance &amp;amp; scalability initiative, configurable backups &amp;amp; S3 export, Saved Views, and AI advisor evolutions&lt;/strong&gt;&lt;/p&gt;
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;TrackMe 2.4.4 — Slipstream follow-ups, DHM &amp;amp; MHM reliability fixes, and minor corrections&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Slipstream — performance &amp;amp; scalability initiative (the headline of this release)&lt;/strong&gt;: TrackMe now makes dramatically fewer REST round-trips on its hot paths, which is the dominant cost on large standalone and Search Head Cluster deployments. Dozens of redundant or sequential calls previously made by the user interface and the schedulers are now consolidated into a single load, resolved in-process, or removed entirely. At the centre of the initiative is the&amp;nbsp;&lt;strong&gt;shadow filesystem cache&lt;/strong&gt;&amp;nbsp;— a local read cache that serves hot KV-store reads without a network round-trip — which is&amp;nbsp;&lt;strong&gt;now enabled by default for every tenant&lt;/strong&gt;&amp;nbsp;(new tenants, and every qualifying existing tenant at upgrade). The result is a faster, lighter user interface and materially less pressure on the Splunk KV-store proxy layer, with&amp;nbsp;&lt;strong&gt;no configuration required&lt;/strong&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Saved Views&lt;/strong&gt;: administrators can curate named, RBAC-scoped subsets of tenants and Virtual Groups, giving each team a focused view of only the tenants relevant to them.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;AI advisor evolutions&lt;/strong&gt;: a dedicated FQM dictionary-generation panel (choose the provider and add scoped instructions without a chat detour), natural-language generation of Flex Object trackers from the AI Assistant, support for the xAI (Grok) reasoning-effort parameter, and protection against AI automation running on tenants owned by&amp;nbsp;&lt;em&gt;nobody&lt;/em&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Configurable SLA calculation window&lt;/strong&gt;: the SLA percentage time window (previously fixed at 90 days) is now configurable, for deployments where searches cannot run over the full default window.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Configurable backup directory&lt;/strong&gt;: the backup root location is now configurable from the&amp;nbsp;&lt;em&gt;Backup &amp;amp; Restore&lt;/em&gt;&amp;nbsp;settings (with environment-variable support) and falls back safely to the default location — raising a Configuration Guardian alert — if the configured path is ever unusable.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Backup retention managed from the UI&lt;/strong&gt;: backup retention is now a setting in the&amp;nbsp;&lt;em&gt;Backup &amp;amp; Restore&lt;/em&gt;&amp;nbsp;tab instead of being hard-coded in the scheduler search.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Optional S3 export of backups&lt;/strong&gt;: backup archives can optionally be exported to an S3-compatible object store, with a built-in connectivity test and a fail-open design so a remote issue never blocks local backups.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Shadow records polish&lt;/strong&gt;: a set of follow-up fixes to the 2.4.3 Slipstream read cache. Notes, entity maintenance and entity details now always reflect the latest state immediately, instead of occasionally showing a stale value until the next tracker cycle.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Silent metric hosts now raise alerts (MHM)&lt;/strong&gt;: a metric host that stopped sending all of its metrics could stay green forever with no alert. TrackMe now re-evaluates fully-silent hosts, so they turn red as expected and SLA and alerting follow.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;More robust host coverage gap analysis (DHM)&lt;/strong&gt;: large reference inventories are now read in full, with no silent truncation, and matched more reliably. Hosts are no longer mis-reported as missing on either side.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MHM entity Overview tab restored&lt;/strong&gt;: the per-entity Overview tab, broken since 2.3.16, works again.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Logical groups protected against accidental member removal&lt;/strong&gt;: fixed a case where valid logical-group members could be wrongly purged on certain tenants.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Minor fixes&lt;/strong&gt;: a half-width Workload chart is corrected, automated AI ML model review now also covers FQM and Workload entities, plus documentation and dependency maintenance.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;See:  &lt;a href=&quot;https://docs.trackme-solutions.com/latest/releasenotes.html#version-2-4-3-build-1782214134-23-06-2026&quot; rel=&quot;noopener noreferrer&quot;&gt;https://docs.trackme-solutions.com/latest/releasenotes.html#version-2-4-3-build-1782214134-23-06-2026&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TrackMe for Splunk provides visibility and operational excellence to monitor at scale your Splunk data sources availability and quality, and many more. 
+&lt;p&gt;See: &lt;a href=&quot;https://docs.trackme-solutions.com/latest/releasenotes.html#version-2-4-4-build-1782379508-25-06-2026&quot; rel=&quot;noopener noreferrer&quot;&gt;https://docs.trackme-solutions.com/latest/releasenotes.html#version-2-4-4-build-1782379508-25-06-2026&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TrackMe for Splunk provides visibility and operational excellence to monitor at scale your Splunk data sources availability and quality, and many more. 
 
 With a rich set of features and a powerful workflow, TrackMe empowers you day after day to get the most from your Splunk investments and deliver the five stars quality of service your users deserve.
 
@@ -55,8 +68,8 @@ Buy Foundation Edition: https://trackme-solutions.com/get-foundation/
 
 See all plans: https://trackme-solutions.com/pricing/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e8a1116e-707e-11f1-82c3-aa6a3a3f2a9a.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Trackme Limited</dc:creator>
-      <pubDate>Thu, 25 Jun 2026 10:16:30 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4621/#v2.4.3</guid>
+      <pubDate>Thu, 25 Jun 2026 10:53:36 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4621/#v2.4.4</guid>
     </item>
     <item>
       <title>FULLSTACKS Add-on for Exoscale - v1.5.0 [Version Update]</title>
@@ -2482,16 +2495,6 @@ Subin Nidiyandiyil - Cyber Security Technical Consultant
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Subin N</dc:creator>
       <pubDate>Mon, 15 Jun 2026 17:34:44 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7596/#v1.0.8</guid>
-    </item>
-    <item>
-      <title>CTM360 App for Splunk - v1.3.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6577/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
-&lt;li&gt;New dashboard views for the additional Cyber Blindspot and HackerView data.&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The CTM360 App for Splunk allows subscribed users to import their asset inventory, issues, and incidents into Splunk®, and utilize this data to build reports, trigger alerts and identify vulnerabilities, exposures and misconfigurations against your assets. The CTM360 Splunk App and Add-on are designed to work together.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/1fe621fc-67ef-11f1-b333-421eb8ca53bc.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">CTM360 Ltd</dc:creator>
-      <pubDate>Sun, 14 Jun 2026 12:48:41 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6577/#v1.3.0</guid>
     </item>
   </channel>
 </rss>
