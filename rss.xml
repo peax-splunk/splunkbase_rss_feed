@@ -6,7 +6,45 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Fri, 26 Jun 2026 18:23:41 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 26 Jun 2026 20:27:24 +0000</lastBuildDate>
+    <item>
+      <title>Akamai SIEM Integration - v1.4.24 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4310/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Changes include: &lt;/p&gt;
+&lt;p&gt;- Upgrade libraries to fix vulnerabilities.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;It’s common for companies with mature security organizations to have a Security Operations Center (SOC) that leverages security information and event management (SIEM) tools. SIEM provides a centralized view for security teams to easily access and analyze security information from a large number of sources, and prioritize mitigation efforts based on risk profiles.
+
+SIEM Integration is a comprehensive solution for capture, retention, and delivery of security information and events in real-time to SIEM applications. Customers using Kona Site Defender, Client Reputation, Web Application, or Bot Manager (BETA) can analyze security events generated on the Akamai platform and correlate them with security events generated from other sources.
+
+System Requirements
+
+Akamai’s Splunk Connector requires Oracle JRE 1.8+. Download the latest from the Oracle Java site (Java Platform, Standard Edition) or install it from a software distribution package on Linux.
+
+You must have Java installed on the host running Splunk Enterprise https://java.com/en/download/
+
+Also, check to make sure that splunk forwarder is NOT installed on your Splunk Enterprise host machine.
+
+Proxy server
+
+To access the SIEM API from behind a proxy server, ensure that your proxy:
+
+whitelists the domains *.cloudsecurity.akamaiapis.net and *.luna.akamaiapis.net
+does not interfere with HTTP request headers for those domains. If, due to a strict enterprise security policy, your proxy does change these headers, make sure that at a minimum you allow and don&amp;#x27;t change the Host and Authorization headers.
+Hardware Requirements
+
+This application is has been tested with the following operating systems:
+
+CentOS 7
+Windows Server 2012 R2
+Mac OS X El Capitan Version 10.11.6
+Some additional hardware requirements:
+
+4 CPU cores
+16 GB RAM
+2GB Free Disk Space&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a42f596a-719a-11f1-abc0-ee11b1988db6.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Akamai Technologies Inc.</dc:creator>
+      <pubDate>Fri, 26 Jun 2026 20:10:11 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4310/#v1.4.24</guid>
+    </item>
     <item>
       <title>Cisco Catalyst Add-on for Splunk - v3.2.33 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7538/</link>
@@ -117,7 +155,7 @@ Cisco Network Infrastructure Devices which include the below platform series:
 * Cisco Access Points
 * Cisco WLC - WLAN Controller&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/367c65a2-718b-11f1-8928-6a870bf5be93.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco</dc:creator>
-      <pubDate>Fri, 26 Jun 2026 18:17:21 +0000</pubDate>
+      <pubDate>Fri, 26 Jun 2026 18:24:34 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7538/#v3.2.33</guid>
     </item>
     <item>
@@ -2079,32 +2117,6 @@ IP geolocation, IP enrichment, proxy detection, VPN detection, residential proxy
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">IPinfo Support</dc:creator>
       <pubDate>Wed, 17 Jun 2026 14:25:10 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/4070/#v9.5.6</guid>
-    </item>
-    <item>
-      <title>Kubernetes Search - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8858/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;2026-06-16 Initial Release&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Query your Kubernetes clusters live from the Splunk search bar - like kubectl, as SPL. List resources, stream pod logs, read events, and describe objects across every registered cluster. Read-only and RBAC-controlled. No in-cluster agent, no ingestion, no index storage. Free tier for one cluster; a paid license unlocks multi-cluster and per-user access.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Kubernetes Search brings live, read-only access to the Kubernetes API into the Splunk search bar. Instead of switching to a terminal and kubectl, you run SPL - | k8s kind=pods namespace=payments - and Splunk queries the cluster&amp;#x27;s API server directly and streams the current state into your search.
-
-The problem it solves: when something breaks in a cluster, the question is usually &amp;quot;what is true right now?&amp;quot; - is the pod still crash-looping, what do its events say, is the node Ready. Answering that has meant leaving Splunk, holding cluster credentials, and running kubectl by hand. Ingestion pipelines give you history, but at the cost of storage and license volume, and they show the cluster only as of the last sample. Kubernetes Search answers the live question from inside Splunk, with no credentials handed out and every query recorded in the Splunk audit log.
-
-How it works:
-- Five search commands cover the common kubectl verbs: | k8s (list or get any resource), | k8slogs (stream pod logs), | k8sevents (cluster events), | k8sdescribe (an object plus its events), and | k8syaml (format JSON as YAML).
-- Everything runs on the search head and is strictly read-only - it never applies, scales, or deletes anything.
-- Nothing is indexed: no storage cost, no license volume, no source types, no field extractions. Results exist only for the life of your search.
-- Register many clusters and fan out with context=* - each row carries a cluster field, so you query and aggregate across your whole fleet from one pane.
-- Access is gated by a Splunk capability and a per-cluster credential model (shared, per-user, or Kubernetes impersonation), so analysts get controlled, audited read access without being handed kubectl or cluster credentials.
-- A short-lived on-disk cache keeps dashboards from hammering your API servers; Secrets are never cached.
-
-There is no agent to install in your cluster - only a network route from the search head to the API server and a credential. The app installs on search heads only and writes nothing to any index.
-
-It pairs naturally with ingestion: use Monitoring Kubernetes or OpenTelemetry for history and trends, and Kubernetes Search for the live picture - in the same Splunk session.
-
-Kubernetes Search runs on a free tier with no license key (one cluster, single standalone search head). A paid license unlocks multiple clusters, search head clustering, per-user credentials, and impersonation.
-
-Built and supported by Outcold Solutions. Documentation: https://www.outcoldsolutions.com/docs/kubernetes-search/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/feca1ddc-6980-11f1-8677-36b2b15d7d6b.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Outcold Solutions LLC</dc:creator>
-      <pubDate>Wed, 17 Jun 2026 12:48:31 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8858/#v1.0.0</guid>
     </item>
     <item>
       <title>Code42 Insider Risk - v3.0.1 [Version Update]</title>
