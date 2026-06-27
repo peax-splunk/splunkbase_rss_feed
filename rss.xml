@@ -6,7 +6,69 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sat, 27 Jun 2026 09:23:27 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 27 Jun 2026 11:21:23 +0000</lastBuildDate>
+    <item>
+      <title>TheHive/Cortex - v4.2.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5329/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;# Release Notes&lt;/p&gt;
+&lt;p&gt;## Summary&lt;/p&gt;
+&lt;p&gt;Version 4.2.0 is a **stability and reliability release**. It hardens the alert actions and adaptive responses (alert/case creation), fixes several observable parsing edge cases that could silently drop data or get the whole payload rejected by TheHive, and corrects date/timestamp handling in TTP processing and the Cases LIST search command. No new feature is introduced and no configuration change is required — this is a safe, drop-in update from v4.1.0.&lt;/p&gt;
+&lt;p&gt;## Improvements &amp;amp; Bug Fixes&lt;/p&gt;
+&lt;p&gt;### 🧩 Alert Actions: robust observable parsing&lt;/p&gt;
+&lt;p&gt;- **Valid observable sub-field types**: observable sub-fields are now read with&lt;/p&gt;
+&lt;p&gt;  their documented `snake_case` names (`\:is_ioc`, `\:sighted`,&lt;/p&gt;
+&lt;p&gt;  `\:sighted_at`, `\:ignore_similarity`) and coerced to the native&lt;/p&gt;
+&lt;p&gt;  types TheHive expects. Previously the boolean `sighted` value was forwarded as&lt;/p&gt;
+&lt;p&gt;  the raw string `&quot;1&quot;`, causing TheHive to reject the request with&lt;/p&gt;
+&lt;p&gt;  `BadRequest - Invalid json` and silently dropping `is_ioc`, `sighted_at` and&lt;/p&gt;
+&lt;p&gt;  `ignore_similarity`. The sighting timestamp now also accepts float epoch&lt;/p&gt;
+&lt;p&gt;  values and is normalized to milliseconds.&lt;/p&gt;
+&lt;p&gt;- **Multi-value observable splitting**: fixed a regex that split observable&lt;/p&gt;
+&lt;p&gt;  values on the literal letter `n` instead of a newline, which mangled&lt;/p&gt;
+&lt;p&gt;  multi-value observables.&lt;/p&gt;
+&lt;p&gt;- **Resilient row handling**: improved handling of sanitized rows to avoid&lt;/p&gt;
+&lt;p&gt;  `KeyError` exceptions on incomplete events, and corrected the `sourceRef`&lt;/p&gt;
+&lt;p&gt;  variable used in debug logging.&lt;/p&gt;
+&lt;p&gt;### 📎 Alert Actions: reliable result attachments&lt;/p&gt;
+&lt;p&gt;- Result attachments (`attach_results`) now use a **uniquely-named temporary&lt;/p&gt;
+&lt;p&gt;  directory per invocation** instead of a fixed file name in the shared system&lt;/p&gt;
+&lt;p&gt;  temp directory. On Windows (where `splunkd` runs as the SYSTEM service and the&lt;/p&gt;
+&lt;p&gt;  temp directory is `C:\WINDOWS\TEMP`), the previous behavior caused concurrent&lt;/p&gt;
+&lt;p&gt;  or overlapping runs to collide on the same path, raising&lt;/p&gt;
+&lt;p&gt;  `Permission denied` / `No such file or directory` and **preventing the second&lt;/p&gt;
+&lt;p&gt;  alert/case of a multi-result search from being created** (e.g. UC2 — &quot;Saved&lt;/p&gt;
+&lt;p&gt;  search, several alerts&quot;). Temp files are now always cleaned up, and the&lt;/p&gt;
+&lt;p&gt;  attachment result is guarded against `None`.&lt;/p&gt;
+&lt;p&gt;### ⏱️ TTP &amp;amp; timestamp handling&lt;/p&gt;
+&lt;p&gt;- `_time` is now parsed as a **float** when processing TTPs, preventing failures&lt;/p&gt;
+&lt;p&gt;  on sub-second timestamps.&lt;/p&gt;
+&lt;p&gt;- When the configured `timestamp_field` is missing from an event, processing now&lt;/p&gt;
+&lt;p&gt;  **falls back to the current time** instead of failing.&lt;/p&gt;
+&lt;p&gt;### 🔎 Search commands&lt;/p&gt;
+&lt;p&gt;- **Cases LIST respects Date settings (#126)**: the Cases LIST action now&lt;/p&gt;
+&lt;p&gt;  correctly applies the configured date range instead of ignoring it.&lt;/p&gt;
+&lt;p&gt;## Deployment Notes&lt;/p&gt;
+&lt;p&gt;- **Prerequisite**: Python 3.9 (matches Splunk's bundled interpreter).&lt;/p&gt;
+&lt;p&gt;- **Migration Path**:&lt;/p&gt;
+&lt;p&gt;    - **From v4.1.0 / v4.0.0**: non-breaking update. Existing configuration,&lt;/p&gt;
+&lt;p&gt;      accounts, instances and certificates are preserved.&lt;/p&gt;
+&lt;p&gt;    - **From v3.9.0 (Direct Upgrade)**: you can upgrade directly to v4.2.0.&lt;/p&gt;
+&lt;p&gt;    - **⚠️ CRITICAL**: if upgrading from v3.x, the&lt;/p&gt;
+&lt;p&gt;      **[v4.0.0 migration instructions](./v4.0.0.md) are mandatory** and remain&lt;/p&gt;
+&lt;p&gt;      valid for this version (UCC architecture migration, breaking configuration&lt;/p&gt;
+&lt;p&gt;      changes, and new credential storage). Please read them carefully before&lt;/p&gt;
+&lt;p&gt;      proceeding.&lt;/p&gt;
+&lt;p&gt;- **Upgrade tip (Windows / on-prem)**: never delete the app's `local/` folder.&lt;/p&gt;
+&lt;p&gt;  Stop Splunk, back up `local/`, deploy the new build, restore `local/`, then&lt;/p&gt;
+&lt;p&gt;  start Splunk.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This TA allows to add interaction features between TheHive or Cortex (https://www.strangebee.com/) and Splunk. It allows to retrieve all kind of information from TheHive/Cortex and to perform actions on these instances using Splunk, from a search or from a predefined dashboard.
+
+This TA is supporting only TheHive 5. For having an app supporting TheHive 3 or 4, please check the oldest releases. It&amp;#x27;s also supporting the Cortex 3 version.
+
+More information here: https://github.com/LetMeR00t/TA-thehive-cortex&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8f7d9dbc-7210-11f1-a055-8a9e19acd01f.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Alexandre Demeyer</dc:creator>
+      <pubDate>Sat, 27 Jun 2026 10:16:31 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5329/#v4.2.0</guid>
+    </item>
     <item>
       <title>Cisco Catalyst Add-on for Splunk - v3.2.33 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7538/</link>
@@ -2318,36 +2380,6 @@ It provides a secure gateway that enables seamless dashboard embedding into the 
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
       <pubDate>Tue, 16 Jun 2026 19:36:03 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/4746/#v2.2.0</guid>
-    </item>
-    <item>
-      <title>IPQualityScore (IPQS) Threat Risk Scoring - v1.2.4 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5423/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;updated user roles&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Expand intelligence for IP address reputation (including proxy, TOR, &amp;amp; VPN detection), email address risk scoring, domain intelligence, and malicious URL scanning. Tap into the largest honeypot network online featuring the most accurate detection for residential proxies, botnets, compromised devices/websites, private VPN networks, and similar abusive IP addresses. Worldwide coverage ensures high risk users, cyber threats, and suspicious logins can be accurately detected in any region.
-
-Email risk scoring provides additional security for filtering registrations and user details. Detect disposable email services and high risk email addresses recently used for fraudulent behavior online. Abuse monitored by IPQS includes chargebacks, payment fraud, fake accounts, account takeover (ATO), credential stuffing, business email compromise (BEC), bot activity, and similar high risk behavior.
-
-Live URL scanning identifies malicious links including phishing and malware. Detect low reputation domains including parked domains, spammers, and similar threats. Machine learning and artificial intelligence identify suspicious URLs in real-time.
-
-Search data from the dark web including database leaks and user data compromises along with threat data reported by Fortune 500s and the most popular sites online.
-
-This Splunk addon provides custom commands to interact with IPQualityScore REST API. Supported endpoints include:
-
-- IP Reputation - Proxy &amp;amp; VPN Detection API
-- Email Validation &amp;amp; Risk Scoring API
-- Malicious URL Scanner &amp;amp; Domain Reputation API
-- Phone Reputation API
-
-More details on the API can be found at IPQualityScore Documentation page at: https://www.ipqualityscore.com/documentation/overview
-Learn more about our threat intelligence feeds: https://www.ipqualityscore.com/threat-intelligence-feed-api
-
-Documentation for the Splunk add-on commands can be found here: https://ta-ipqualityscore.readthedocs.io
-
-IPQS is a leading fraud prevention and cyber threat company providing enterprise grade solutions that fit any sized businesses. Benefit from over 10 years of technology in identifying the latest trends and threats by bad actors online.
-
-Create a free account at: https://www.ipqualityscore.com/create-account/splunk&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/78364452-6981-11f1-a263-8eb27033ea5d.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">IPQS Team</dc:creator>
-      <pubDate>Tue, 16 Jun 2026 12:54:43 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5423/#v1.2.4</guid>
     </item>
   </channel>
 </rss>
