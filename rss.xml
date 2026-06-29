@@ -6,7 +6,140 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Mon, 29 Jun 2026 17:28:15 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 29 Jun 2026 19:44:08 +0000</lastBuildDate>
+    <item>
+      <title>Cisco Catalyst Add-on for Splunk - v3.2.34 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7538/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h3&gt;New Inputs (7 new modular inputs)&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Custom API (Generic Endpoint)&lt;/strong&gt; — Catalyst Center — Catalog-driven input with 50+ curated OpenAPI endpoints; pick any Catalyst Center API without writing code&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Custom API (Generic Endpoint)&lt;/strong&gt; — SD-WAN — Catalog-driven input for vManage OpenAPI endpoints with scroll pagination&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Custom API (Generic Endpoint)&lt;/strong&gt; — ISE — Catalog-driven input migrated to Open API 3.1+, replacing the legacy ERS-only interface&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Application Visibility (AVC) Traffic&lt;/strong&gt; — Catalyst Center — Collects per-application traffic statistics from Catalyst Center&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Software Image Inventory (SWIM)&lt;/strong&gt; — Catalyst Center — Collects software image details and compliance status from Catalyst Center&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;SD-WAN Audit Logs&lt;/strong&gt; — SD-WAN — Dedicated input for vManage change audit trail with configurable initial backfill (default 7 days) and full config diff capture&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;SD-WAN Energy Statistics&lt;/strong&gt; — SD-WAN — Collects device energy/power consumption metrics from vManage&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;New Dashboards (2 new)&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Data Collection Health&lt;/strong&gt; — Real-time monitoring of all TA inputs; shows collection status, event counts, errors, and last-poll times across all 4 products&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;SD-WAN Change Audit&lt;/strong&gt; — Drill-down dashboard for vManage configuration changes with config diff viewer&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;New Saved Searches and Alerts (12 new — none existed in v3.1.0)&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Catalyst Center&lt;/strong&gt; — Device Unreachable, Low Device Health Score, Critical (P1) Issue Detected, Client Health Distribution (Daily Report)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;ISE&lt;/strong&gt; — Authentication Failure Spike, TACACS Authentication Failures, Top Authentication Failures by User (Daily Report)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Cyber Vision&lt;/strong&gt; — New OT Vulnerability Detected, Security Event Surge&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;SD-WAN&lt;/strong&gt; — UTD Security Engine Memory Pressure, Poor Tunnel Application Experience, Daily Tunnel Traffic Summary (Report)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;New Capabilities&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Test Connection&lt;/strong&gt; — All 4 account types (Catalyst Center, SD-WAN, ISE, Cyber Vision) now have a Test Connection button in the UI that validates connectivity and credentials before saving&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Per-Account Verify SSL Toggle&lt;/strong&gt; — SSL certificate verification can now be disabled per account for environments with self-signed certificates (Catalyst Center, SD-WAN, ISE, Cyber Vision)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Structured Logging Framework&lt;/strong&gt; — All inputs migrated to canonical structured key\=value logging with standardized event IDs (poll-complete, api-call, api-error, collection-exception, state-transition, auth-failure)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Per-Input Log Level&lt;/strong&gt; — Log verbosity can be configured per input instance rather than globally&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Auto-Populated Query Parameters&lt;/strong&gt; — Generic API inputs auto-fill required query parameters from the OpenAPI catalog&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Reports Multi-Select&lt;/strong&gt; — Catalyst Center Reports input now supports selecting multiple report templates&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Grouped Endpoint Picker&lt;/strong&gt; — Generic API inputs present endpoints in a categorized, searchable dropdown&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Recoverable-error logging (v3.2.33)&lt;/strong&gt; — New `handled_failure()` helper emits single-line structured WARNINGs for expected failures (for example transient Catalyst Center timeouts during Issue enrichment) instead of ERROR tracebacks when the poll continues&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Bug Fixes&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;SSL verify regression on upgrade from v3.1.x&lt;/strong&gt; — Upgrading from v3.1.x could break collection when accounts used use\_ca\_cert \= false and relied on the global verify\_ssl \= false setting in ta\_cisco\_catalyst\_settings.conf. v3.2.33+ restores that legacy behavior so TLS no longer fails with CERTIFICATE\_VERIFY\_FAILED on controllers using self-signed certificates. Per-account verify\_ssl still overrides when explicitly set on the account stanza.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Issue input misleading log noise (v3.2.33)&lt;/strong&gt; — Transient Catalyst Center timeouts on issue-enrichment-details are logged as structured `event=api-error` at WARNING when enrichment is skipped and the poll continues; no Python traceback for handled network blips&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Host field regression&lt;/strong&gt; — Fixed across all 21 event-emission call sites. The host metadata field is now consistently lowercase and scheme-stripped (for example cc.cisco.com instead of [https://cc.cisco.com).](https://cc.cisco.com).) Device-level sourcetypes use the device hostname; non-device sourcetypes use the controller hostname&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Per-record event emission&lt;/strong&gt; — Inputs now emit one Splunk event per record instead of one event containing a JSON array. Improves search performance and CIM compatibility&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Device Health crash&lt;/strong&gt; — Fixed KeyError when device IP field is missing from the API response (Issue #22)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Audit Logs crash&lt;/strong&gt; — Fixed JSONDecodeError on empty API response (Issue #19)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Account validation SSL failure&lt;/strong&gt; — Fixed CERTIFICATE\_VERIFY\_FAILED when validating accounts with self-signed certs (Issue #20)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Reports silent data loss&lt;/strong&gt; — JSON-format reports were silently dropped; now properly ingested&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Reports 404 handling&lt;/strong&gt; — CC zero-reports 404 treated as benign instead of erroring&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Missing Linux binaries&lt;/strong&gt; — Restored 9 missing Linux compiled .so binaries that were absent from the v3.1.0 package (pre-existing bug)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;AVC/SWIM empty results&lt;/strong&gt; — Fixed collectors not populating the results list&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;SD-WAN 400 errors&lt;/strong&gt; — Demoted benign per-device 400s in unified-threat health to debug level&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;HTTP error wrapping&lt;/strong&gt; — 404/500/generic-400 errors are now wrapped cleanly without unhandled exception tracebacks&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;DateParserVerbose noise&lt;/strong&gt; — Silenced spurious Splunk timestamp parser warnings on 6 CC JSON-array sourcetypes&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Cyber Vision logging&lt;/strong&gt; — Converted bare except blocks to logger.exception() for proper traceback capture&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Knowledge Objects&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;94 props.conf stanzas&lt;/strong&gt; (up from 71) — new sourcetype definitions, field extractions, timestamp configs&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;136 eventtypes&lt;/strong&gt; (up from 123) — expanded CIM-mapped event classifications&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Backward-compatible sourcetype migration&lt;/strong&gt; — cisco:dnac sourcetypes aliased to cisco:catalyst for search parity during migration&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;CIM field aliases&lt;/strong&gt; — SD-WAN audit logs mapped to Splunk CIM Change data model&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;New macros.conf&lt;/strong&gt; — Parameterized SPL extracted from saved searches for reusability&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Upgrade Notes&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Upgrading from v3.1.x and self-signed certificates&lt;/strong&gt; — If you upgraded directly to an earlier build and collection stopped with CERTIFICATE\_VERIFY\_FAILED or TLS handshake errors, install v3.2.33+. No account reconfiguration is required when your v3.1.x setup used use\_ca\_cert \= false with global verify\_ssl \= false. Alternatively, set Verify SSL to off on the account or install your CA certificate.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Device Health RxRate / TxRate (v3.2.33+)&lt;/strong&gt; — Interface traffic rates are collected only when &lt;strong&gt;Enable Interface Stats&lt;/strong&gt; is turned on for the Device Health input (default off). After enabling, disable and re-enable the input (or restart) so the worker reloads configuration.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Breaking: Event structure&lt;/strong&gt; — Inputs that emitted a single event with a JSON array payload now emit one event per record. Update saved searches or dashboards that parse arrays from single events.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Breaking: Host field format&lt;/strong&gt; — The host metadata field no longer includes https://. Update any searches filtering on host values that still include the URL scheme.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Event volume&lt;/strong&gt; — Per-record emission increases total event count. This is expected behavior, not duplicate data.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Sourcetype migration&lt;/strong&gt; — Both cisco:dnac and cisco:catalyst sourcetype prefixes are recognized via backward-compat stanzas. No search changes required.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Supported Products&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Cisco Catalyst Center (formerly DNA Center)&lt;/li&gt;
+  &lt;li&gt;Cisco SD-WAN (vManage)&lt;/li&gt;
+  &lt;li&gt;Cisco Identity Services Engine (ISE)&lt;/li&gt;
+  &lt;li&gt;Cisco Cyber Vision&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Cisco Catalyst Add-on for Splunk collects and normalizes API telemetry from Cisco Catalyst Center, SD-WAN (vManage), ISE, and Cyber Vision through modular inputs. It includes CIM-aligned knowledge objects, backward-compatible DNAC/Catalyst sourcetype coverage, and built-in health monitoring for input status, errors, and API load.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Author - Cisco Systems
+Prerequisites - This Technical Add-on is dependent on &amp;#x27;Splunk Add-on for Stream Forwarders&amp;#x27; and &amp;#x27;Splunk App for Stream&amp;#x27;
+
+Supported Cisco Products:
+Cisco Catalyst SD-WAN
+Cisco Identity Services Engine
+Cisco Catalyst Center
+Cyber Vision
+Cisco Network Infrastructure Devices which include the below platform series:
+* Cisco Catalyst series switches (1000, 1200, 1300, 2960, 3650, 3750, 4500, 6500, 6800, 7600, 9000 etc.)
+* Cisco ASR - Aggregation Services Routers (900, 1000, 5000, 9000 etc.)
+* Cisco ISR - Integrated Services Routers (800, 1900, 2900, 3900, 4451 etc.)
+* Cisco Nexus Data Center switches (1000V, 2000, 3000, 4000, 5000, 6000, 7000, 9000 etc.)
+* Cisco Carrier Routing System
+* Other Cisco IOS based devices (Metro Ethernet, Industrial Ethernet, Blade Switches, Connected Grid etc.)
+* Cisco Access Points
+* Cisco WLC - WLAN Controller&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2c53aabe-73f1-11f1-800e-2a990941abb0.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco</dc:creator>
+      <pubDate>Mon, 29 Jun 2026 19:42:06 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7538/#v3.2.34</guid>
+    </item>
+    <item>
+      <title>Darktrace for Splunk SOAR - v1.0.9 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6560/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
+&lt;li&gt;pre-commit update&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with Darktrace to perform investigative and containment actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/fa35aa8e-73e9-11f1-9c81-5a8c4023a0fa.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
+      <pubDate>Mon, 29 Jun 2026 18:40:19 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6560/#v1.0.9</guid>
+    </item>
+    <item>
+      <title>Brinqa - v1.0.3 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6918/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
+&lt;li&gt;remove beautifulsoup4 and pre-commit updates&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The query in this app is a query against the Brinqa GraphQL console. There are two direct usages, the first is to put in a singular model name (ie: Asset) to return the attributes that exist under that model. Otherwise, a pluralized version of the model is used (ie: assets, note case sensitivity) in conjunction with a filter string (ie: name = assetName) and a list of return values, space delineated (ie: ip id name risk) to return information, in the case of the example, on an asset with a specific name&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d3893c2a-73e9-11f1-a310-2e6ff0779073.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
+      <pubDate>Mon, 29 Jun 2026 18:39:14 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6918/#v1.0.3</guid>
+    </item>
     <item>
       <title>Atlas Software Platform for Splunk - v5.0.6 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5614/</link>
@@ -176,30 +309,6 @@ Perfect for security analysts, SOC teams, and anyone who wants to augment their 
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Bob van Bussel</dc:creator>
       <pubDate>Mon, 29 Jun 2026 07:45:46 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8374/#v1.0.1</guid>
-    </item>
-    <item>
-      <title>Cisco Catalyst Add-on for Splunk - v3.2.34 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7538/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Cisco Catalyst Add-on for Splunk collects and normalizes API telemetry from Cisco Catalyst Center, SD-WAN (vManage), ISE, and Cyber Vision through modular inputs. It includes CIM-aligned knowledge objects, backward-compatible DNAC/Catalyst sourcetype coverage, and built-in health monitoring for input status, errors, and API load.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Author - Cisco Systems
-Prerequisites - This Technical Add-on is dependent on &amp;#x27;Splunk Add-on for Stream Forwarders&amp;#x27; and &amp;#x27;Splunk App for Stream&amp;#x27;
-
-Supported Cisco Products:
-Cisco Catalyst SD-WAN
-Cisco Identity Services Engine
-Cisco Catalyst Center
-Cyber Vision
-Cisco Network Infrastructure Devices which include the below platform series:
-* Cisco Catalyst series switches (1000, 1200, 1300, 2960, 3650, 3750, 4500, 6500, 6800, 7600, 9000 etc.)
-* Cisco ASR - Aggregation Services Routers (900, 1000, 5000, 9000 etc.)
-* Cisco ISR - Integrated Services Routers (800, 1900, 2900, 3900, 4451 etc.)
-* Cisco Nexus Data Center switches (1000V, 2000, 3000, 4000, 5000, 6000, 7000, 9000 etc.)
-* Cisco Carrier Routing System
-* Other Cisco IOS based devices (Metro Ethernet, Industrial Ethernet, Blade Switches, Connected Grid etc.)
-* Cisco Access Points
-* Cisco WLC - WLAN Controller&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/177e1dd6-71ad-11f1-9566-fa0c084350f1.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco</dc:creator>
-      <pubDate>Sat, 27 Jun 2026 23:37:58 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7538/#v3.2.34</guid>
     </item>
     <item>
       <title>TheHive/Cortex - v4.2.0 [Version Update]</title>
@@ -2200,28 +2309,6 @@ To learn more about how Splunk Observability Cloud works with your environment t
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
       <pubDate>Tue, 16 Jun 2026 21:31:29 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7564/#v2.6.0</guid>
-    </item>
-    <item>
-      <title>Userful Infinity - v0.1.4 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8450/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;The Userful Infinity app provides a secure, enterprise-grade bridge between Splunk’s data visualization capabilities and the Userful Infinity operational platform. It enables organizations to project real-time Splunk dashboards onto mission-critical video walls and distributed displays without the security risks of exposed credentials or manual login prompts.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Userful Infinity app provides a secure, enterprise-grade bridge between Splunk’s data visualization capabilities and the Userful Infinity operational platform. It enables organizations to project real-time Splunk dashboards onto mission-critical video walls and distributed displays without the security risks of exposed credentials or manual login prompts.
-
-It provides a secure gateway that enables seamless dashboard embedding into the Userful Infinity platform using SSO header injection and IP-based security.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0e47282e-69bb-11f1-8871-0ad93a9b4e1d.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Rubesh kumar</dc:creator>
-      <pubDate>Tue, 16 Jun 2026 19:46:46 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8450/#v0.1.4</guid>
-    </item>
-    <item>
-      <title>ES Mothership App for Splunk - v2.2.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4746/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
-&lt;li&gt;Added new search &quot;Investigations&quot; to the list of search templates&lt;/li&gt;
-&lt;li&gt;| inputlookup mc_investigations_lookup&lt;/li&gt;
-&lt;li&gt;This search queries the KV store that contains investigations for ES 8.x&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;ES Mothership App for Splunk provides a single pane of glass into multi-instance Splunk Enterprise Security deployments including a roll-up of notable events and security posture dashboards. **ES Mothership App for Splunk is dependent on the Mothership App for Splunk** being installed. See the following link for more information on the Mothership App for Splunk: https://splunkbase.splunk.com/app/4646/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/82a939d6-69b7-11f1-8be5-a21545c7921d.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
-      <pubDate>Tue, 16 Jun 2026 19:36:03 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4746/#v2.2.0</guid>
     </item>
   </channel>
 </rss>
