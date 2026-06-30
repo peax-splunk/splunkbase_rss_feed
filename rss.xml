@@ -6,7 +6,83 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Tue, 30 Jun 2026 13:04:16 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 30 Jun 2026 16:16:54 +0000</lastBuildDate>
+    <item>
+      <title>Cisco Talos Intelligence for Enterprise Security Cloud - v1.0.3 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/7557/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Python 3.13 / Splunk 10.x migration&lt;/p&gt;
+&lt;p&gt;  - Updated the app to run on Python 3.13 — required for Splunk Cloud 10.x&lt;/p&gt;
+&lt;p&gt;  - Upgraded solnlib to 8.1.0 (brings OpenTelemetry support) and ucc-framework to 6.5.1&lt;/p&gt;
+&lt;p&gt;  - Fixed &quot;Success&quot; label disappearing in ES Incident Review panel — the completion log was being silently dropped when log level was set to WARNING or higher&lt;/p&gt;
+&lt;p&gt;  - Bumped Poetry to 1.8.5 in CI&lt;/p&gt;
+
+&lt;p&gt;  Python stanza declarations&lt;/p&gt;
+
+&lt;p&gt;  - Added python.required \= 3.13 to alert action and REST handler stanzas in alert\_actions.conf and restmap.conf&lt;/p&gt;
+&lt;p&gt;  Security fixes (MR !78 / VULN-74170, VULN-74171)&lt;/p&gt;
+&lt;p&gt;  - Fixed SSRF vulnerability: server URI now derived from splunkd directly instead of user-controllable input&lt;/p&gt;
+&lt;p&gt;  - Removed requests library (CVE-2026-25645) by upgrading framework deps that no longer need it&lt;/p&gt;
+&lt;p&gt;  Bug fixes (MR !79)&lt;/p&gt;
+&lt;p&gt;  - Removed deprecated Talos IP threatlist stanza (SINT-7410)&lt;/p&gt;
+&lt;p&gt;  - Improved error messages for ad-hoc notable validation (SINT-7411)&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Cisco Talos Intelligence for Splunk Enterprise Security is a threat intelligence integration between Splunk Enterprise Security and Cisco Talos with the following benefits:
+- Increased security value through easier prioritization of findings that are enriched by Talos threat intelligence.
+- Increased SOC efficiency due to reduced triage time and resolution for findings that are automatically enriched with Talos threat intelligence.
+
+Pre-reqs / requirements / supported cloud providers:
+Cisco Talos Intelligence for Enterprise Security is supported only on Splunk Enterprise Security Cloud deployments in AWS, GCP, and/or Azure, running Enterprise Security app versions 7.3.2 and higher.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/dd56d580-6b1c-11f1-8335-06ba7e874f70.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk</dc:creator>
+      <pubDate>Tue, 30 Jun 2026 15:43:41 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7557/#v1.0.3</guid>
+    </item>
+    <item>
+      <title>Infigo SIEM Content - v4.3.120260623115552 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7175/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;macros.conf&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Version Update&lt;/strong&gt;: App version bumped from 4.3.120260616115405 to 4.3.120260623115552.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;savedsearches.conf&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Modified&lt;/strong&gt; &lt;code&gt;DEC003&lt;/code&gt; — &lt;strong&gt;Authentication Attempt Using Honey Account&lt;/strong&gt;: Version updated to 1.0.2; introduced_in updated to 4.3.0.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Modified&lt;/strong&gt; &lt;code&gt;DEC002&lt;/code&gt; — &lt;strong&gt;Access To Honey File Detected&lt;/strong&gt;: Version updated to 1.0.2; introduced_in updated to 4.3.0; MITRE ID updated to T1552.001.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Modified&lt;/strong&gt; &lt;code&gt;OPS013&lt;/code&gt; — &lt;strong&gt;Forwarder Missing&lt;/strong&gt;: Logic updated to include &lt;code&gt;priority=&quot;low&quot;&lt;/code&gt; in threshold conditions; fillnull value changed to &quot;low&quot;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Other changes&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Lookups Updated&lt;/strong&gt;: &lt;code&gt;soc_free_mail_domains.csv&lt;/code&gt;, &lt;code&gt;soc_threat_intel_drivers.csv&lt;/code&gt;, and &lt;code&gt;soc_windows_living_of_the_land.csv&lt;/code&gt; updated.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This application is a part of the Infigo SIEM package: https://splunkbase.splunk.com/app/7147 
+Application provides default security rules with Infigo SIEM. There are 135 rules available out of the box. Visit the official Infigo SIEM site for additional information about the product.
+Official site: www.infigosiem.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8c96595a-748f-11f1-b951-be239d534578.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Infigo  IS</dc:creator>
+      <pubDate>Tue, 30 Jun 2026 15:29:26 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7175/#v4.3.120260623115552</guid>
+    </item>
+    <item>
+      <title>Admins Little Helper for Splunk - v1.7.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6368/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Updates for appinspect and updates to dependencies. &lt;br&gt;
+Updates to computing bundlefiles based on new features (specific files feature of distsearch.conf added in Splunk 10.2).  &lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;A collection of utilities to help make Splunk Cloud and Splunk Enterprise Admin&amp;#x27;s lives easier.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Admin&amp;#x27;s Little Helper for Splunk is a collection of utilities to help make Splunk Cloud and Splunk Enterprise Admin&amp;#x27;s lives easier.
+
+---------
+On the new Splunkbase website, see the Installation tab for dependencies and setup instructions, the Details tab for usage information, and the Troubleshooting tab for common issues.
+
+---------
+Privacy Note: These search commands make it easier to pull data about the local and remote search peers, and if deployed on a Search Head Cluster, can communicate across the search heads in the same cluster. No communication will go beyond the boundary of deployed Splunk environment. These commands are marked as risky out of the box because they are python and can expose system information.
+
+---------
+Help Note: While this app is not formally supported, the developer can be reached at teddybear@splunk.com / chuggard@cisco.com OR in splunk-community slack, @teddybfez. Responses are made on a best effort basis. Feedback is always welcome and appreciated! Learn more about splunk-community slack here: https://docs.splunk.com/Documentation/Community/current/community/AboutCommunity&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c48546ec-70dd-11f1-844d-026f4a74d0cf.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
+      <pubDate>Tue, 30 Jun 2026 15:26:18 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6368/#v1.7.0</guid>
+    </item>
+    <item>
+      <title>lookup-editor-ax - v1.1.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8873/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Field types (String/Number) with soft numeric validation, auto-loaded columns, and go-to-row navigation.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Safely edit CSV lookups in the browser — schema enforcement, Excel-style grid, automatic backups.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Safely edit CSV lookups in the browser — schema enforcement, Excel-style grid, automatic backups.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8c781b86-7492-11f1-b684-da9d459f9d63.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">HyunHo Noh</dc:creator>
+      <pubDate>Tue, 30 Jun 2026 14:51:50 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8873/#v1.1.0</guid>
+    </item>
     <item>
       <title>Plotly.js Charts for Splunk - v2.5.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5730/</link>
@@ -604,33 +680,6 @@ TianJi Partners Threat Intelligence Center(https://redqueen.tj-un.com/InterHome.
       <guid>https://splunkbase.splunk.com/app/5148/#v5.1.2</guid>
     </item>
     <item>
-      <title>Cisco Talos Intelligence for Enterprise Security Cloud - v1.0.3 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/7557/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Python 3.13 / Splunk 10.x migration&lt;/p&gt;
-&lt;p&gt;  - Updated the app to run on Python 3.13 — required for Splunk Cloud 10.x&lt;/p&gt;
-&lt;p&gt;  - Upgraded solnlib to 8.1.0 (brings OpenTelemetry support) and ucc-framework to 6.5.1&lt;/p&gt;
-&lt;p&gt;  - Fixed &quot;Success&quot; label disappearing in ES Incident Review panel — the completion log was being silently dropped when log level was set to WARNING or higher&lt;/p&gt;
-&lt;p&gt;  - Bumped Poetry to 1.8.5 in CI&lt;/p&gt;
-
-&lt;p&gt;  Python stanza declarations&lt;/p&gt;
-
-&lt;p&gt;  - Added python.required \= 3.13 to alert action and REST handler stanzas in alert\_actions.conf and restmap.conf&lt;/p&gt;
-&lt;p&gt;  Security fixes (MR !78 / VULN-74170, VULN-74171)&lt;/p&gt;
-&lt;p&gt;  - Fixed SSRF vulnerability: server URI now derived from splunkd directly instead of user-controllable input&lt;/p&gt;
-&lt;p&gt;  - Removed requests library (CVE-2026-25645) by upgrading framework deps that no longer need it&lt;/p&gt;
-&lt;p&gt;  Bug fixes (MR !79)&lt;/p&gt;
-&lt;p&gt;  - Removed deprecated Talos IP threatlist stanza (SINT-7410)&lt;/p&gt;
-&lt;p&gt;  - Improved error messages for ad-hoc notable validation (SINT-7411)&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Cisco Talos Intelligence for Splunk Enterprise Security is a threat intelligence integration between Splunk Enterprise Security and Cisco Talos with the following benefits:
-- Increased security value through easier prioritization of findings that are enriched by Talos threat intelligence.
-- Increased SOC efficiency due to reduced triage time and resolution for findings that are automatically enriched with Talos threat intelligence.
-
-Pre-reqs / requirements / supported cloud providers:
-Cisco Talos Intelligence for Enterprise Security is supported only on Splunk Enterprise Security Cloud deployments in AWS, GCP, and/or Azure, running Enterprise Security app versions 7.3.2 and higher.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/dd56d580-6b1c-11f1-8335-06ba7e874f70.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk</dc:creator>
-      <pubDate>Fri, 26 Jun 2026 06:19:51 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7557/#v1.0.3</guid>
-    </item>
-    <item>
       <title>TA for network port numbers - v1.0.2 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7275/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;v1.0.2&lt;/h2&gt;
@@ -690,24 +739,6 @@ See all plans: https://trackme-solutions.com/pricing/&lt;/p&gt;&lt;img height=&q
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Trackme Limited</dc:creator>
       <pubDate>Thu, 25 Jun 2026 22:15:52 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/4621/#v2.4.5</guid>
-    </item>
-    <item>
-      <title>Admins Little Helper for Splunk - v1.7.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6368/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Updates for appinspect and updates to dependencies. &lt;br&gt;
-Updates to computing bundlefiles based on new features (specific files feature of distsearch.conf added in Splunk 10.2).  &lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;A collection of utilities to help make Splunk Cloud and Splunk Enterprise Admin&amp;#x27;s lives easier.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Admin&amp;#x27;s Little Helper for Splunk is a collection of utilities to help make Splunk Cloud and Splunk Enterprise Admin&amp;#x27;s lives easier.
-
----------
-On the new Splunkbase website, see the Installation tab for dependencies and setup instructions, the Details tab for usage information, and the Troubleshooting tab for common issues.
-
----------
-Privacy Note: These search commands make it easier to pull data about the local and remote search peers, and if deployed on a Search Head Cluster, can communicate across the search heads in the same cluster. No communication will go beyond the boundary of deployed Splunk environment. These commands are marked as risky out of the box because they are python and can expose system information.
-
----------
-Help Note: While this app is not formally supported, the developer can be reached at teddybear@splunk.com / chuggard@cisco.com OR in splunk-community slack, @teddybfez. Responses are made on a best effort basis. Feedback is always welcome and appreciated! Learn more about splunk-community slack here: https://docs.splunk.com/Documentation/Community/current/community/AboutCommunity&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c48546ec-70dd-11f1-844d-026f4a74d0cf.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
-      <pubDate>Thu, 25 Jun 2026 22:02:21 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6368/#v1.7.0</guid>
     </item>
     <item>
       <title>FireAMP - v2.1.15 [Version Update]</title>
@@ -982,14 +1013,6 @@ The Splunk Add-on for GitHub lets you collect audit logs from the GitHub Enterpr
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">AlphaSOC, Inc.</dc:creator>
       <pubDate>Wed, 24 Jun 2026 09:40:43 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7911/#v1.3.0</guid>
-    </item>
-    <item>
-      <title>lookup-editor-ax - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8873/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;version change&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Safely edit CSV lookups in the browser — schema enforcement, Excel-style grid, automatic backups.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Safely edit CSV lookups in the browser — schema enforcement, Excel-style grid, automatic backups.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f8152da6-6b15-11f1-a061-86020d90d456.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">HyunHo Noh</dc:creator>
-      <pubDate>Wed, 24 Jun 2026 04:31:32 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8873/#v1.0.0</guid>
     </item>
     <item>
       <title>PagerDuty App for Splunk - v4.0.8 [Version Update]</title>
@@ -2319,16 +2342,6 @@ To learn more about how Splunk Observability Cloud works with your environment t
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk</dc:creator>
       <pubDate>Wed, 17 Jun 2026 02:23:02 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7125/#v0.154.2</guid>
-    </item>
-    <item>
-      <title>Splunk Add-On for OpenTelemetry Collector (for Windows x86_64) - v0.154.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8699/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Add-On with Splunk OpenTelemetry Collector v0.154.2&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/signalfx/splunk-otel-collector/releases/tag/v0.154.2&quot;&gt;Release Notes&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Use the Splunk Add-on for OpenTelemetry Collector (for Windows x86_64)  to collect traces and metrics for Splunk Observability Cloud on Windows amd64  machines.
-To learn more about how Splunk Observability Cloud works with your environment to provide data, see https://help.splunk.com/en/splunk-observability-cloud/get-started&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0e2e5430-69f1-11f1-b0bf-eec3244dad9e.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk</dc:creator>
-      <pubDate>Wed, 17 Jun 2026 02:13:31 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8699/#v0.154.2</guid>
     </item>
   </channel>
 </rss>
