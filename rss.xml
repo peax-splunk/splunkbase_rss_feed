@@ -6,7 +6,25 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Tue, 30 Jun 2026 20:51:36 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 30 Jun 2026 22:09:46 +0000</lastBuildDate>
+    <item>
+      <title>MaxMind GeoIP App - v1.1.3 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8554/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
+&lt;li&gt;Add a scripted-input variant (&lt;code&gt;[script://...]&lt;/code&gt;) of the database updater&lt;br&gt;
+  as a wrapper (&lt;code&gt;geoipupdate_script.py&lt;/code&gt;) around the existing&lt;br&gt;
+&lt;code&gt;run_database_update()&lt;/code&gt;&amp;nbsp;logic, and disable the&amp;nbsp;&lt;code&gt;geoipupdate_input&lt;/code&gt;&lt;br&gt;
+  modular input's default instance. This tests whether a scripted input&lt;br&gt;
+  runs on every search head cluster member in Splunk Cloud, unlike the&lt;br&gt;
+  modular input which only runs on one. The updater should continue to&lt;br&gt;
+  function through this alternate mechanism.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;MaxMind GeoIP database lookups for Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This is a Splunk app for MaxMind GeoIP database lookups. It provides IP geolocation and enrichment using MaxMind&amp;#x27;s GeoIP and GeoLite databases, including country, city, anonymous IP detection, ISP, and more.
+
+The app provides a streaming search command (geoip) that enriches events with data from one or more MaxMind databases.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/abc3036a-74c5-11f1-88c7-3af1738262a2.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">William Storey</dc:creator>
+      <pubDate>Tue, 30 Jun 2026 20:59:53 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8554/#v1.1.3</guid>
+    </item>
     <item>
       <title>UXM - Digital Employee Experience Monitoring  DEX DEM Web SaaS VDI Workplace - v26.6.26 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7177/</link>
@@ -948,28 +966,6 @@ to whom the registration was made.&lt;/p&gt;&lt;img height=&quot;36px&quot; widt
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Frank Wayne</dc:creator>
       <pubDate>Thu, 25 Jun 2026 12:42:26 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/3503/#v3.0.3</guid>
-    </item>
-    <item>
-      <title>MaxMind GeoIP App - v1.1.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8554/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
-&lt;li&gt;Declare&amp;nbsp;&lt;code&gt;run_only_one&lt;/code&gt;&amp;nbsp;as a scheme argument in the&amp;nbsp;&lt;code&gt;geoipupdate_input&lt;/code&gt;&lt;br&gt;
-  modular input's Python scheme (&lt;code&gt;get_scheme&lt;/code&gt;), in addition to the&lt;br&gt;
-&lt;code&gt;inputs.conf.spec&lt;/code&gt;&amp;nbsp;entry added in 1.1.1. Splunk appears to only honor&lt;br&gt;
-  modular input settings other than the standard&amp;nbsp;&lt;code&gt;name&lt;/code&gt;,&amp;nbsp;&lt;code&gt;interval&lt;/code&gt;,&lt;br&gt;
-&lt;code&gt;index&lt;/code&gt;, and&amp;nbsp;&lt;code&gt;sourcetype&lt;/code&gt;&amp;nbsp;when they are declared as scheme arguments, so&lt;br&gt;
-  setting&amp;nbsp;&lt;code&gt;run_only_one&lt;/code&gt;&amp;nbsp;in&amp;nbsp;&lt;code&gt;inputs.conf&lt;/code&gt;&amp;nbsp;alone was not enough for it to&lt;br&gt;
-  take effect. Splunk's own add-ons (for example, the Splunk Add-on for&lt;br&gt;
-  CrowdStrike FDR) declare&amp;nbsp;&lt;code&gt;run_only_one&lt;/code&gt;&amp;nbsp;this way. On Splunk Cloud&lt;br&gt;
-  Victoria this appears to be required for&amp;nbsp;&lt;code&gt;run_only_one = false&lt;/code&gt;&amp;nbsp;to be&lt;br&gt;
-  respected so that each search head cluster member runs the input and&lt;br&gt;
-  downloads its own databases.&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;MaxMind GeoIP database lookups for Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This is a Splunk app for MaxMind GeoIP database lookups. It provides IP geolocation and enrichment using MaxMind&amp;#x27;s GeoIP and GeoLite databases, including country, city, anonymous IP detection, ISP, and more.
-
-The app provides a streaming search command (geoip) that enriches events with data from one or more MaxMind databases.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f6c08134-7048-11f1-857c-0a7958785c10.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">William Storey</dc:creator>
-      <pubDate>Thu, 25 Jun 2026 03:56:09 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8554/#v1.1.2</guid>
     </item>
     <item>
       <title>Cybersixgill Darkfeed Enrichment - v1.0.7 [Version Update]</title>
