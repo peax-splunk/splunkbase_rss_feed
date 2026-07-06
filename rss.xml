@@ -6,7 +6,52 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Mon, 06 Jul 2026 03:30:58 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 06 Jul 2026 08:11:03 +0000</lastBuildDate>
+    <item>
+      <title>Splunk Add-on for Sysmon - v5.0.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5709/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Fixed issues&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Fixed Sysmon EventCode 15 Zone.Identifier URL extraction. ReferrerUrl and HostUrl values are now extracted from the Contents field, allowing related fields such as http_referrer, url, http_referrer_domain, url_domain, uri_path, and url_length to populate correctly.&lt;/li&gt;
+&lt;li&gt;Fixed sourcetype rename casing for Sysmon XmlWinEventLog data. Events are now normalized to XmlWinEventLog so Windows TA field extractions apply correctly.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Upgrade notes&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;For EventCode 15 events, uri_path now returns the full URL path, for example /files/Sysmon.zip, rather than only the filename.&lt;/li&gt;
+&lt;li&gt;Customers with local props.conf customizations targeting [xmlwineventlog] should review and, if needed, mirror those settings under [XmlWinEventLog].&lt;/li&gt;
+&lt;li&gt;Searches using normal sourcetype\=xmlwineventlog syntax should continue to work because Splunk search is case-insensitive by default. Exact/case-sensitive consumers such as CASE(xmlwineventlog), external tools comparing the sourcetype string, or dashboard token logic should be updated to XmlWinEventLog.&lt;/li&gt;
+&lt;li&gt;Customers who customize the Splunk Add-on for Windows [XmlWinEventLog] stanza should sanity-check Sysmon events after upgrade for unexpected field collisions.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Add-On for Sysmon enables customers to create and persist connection to Microsoft Sysmon so that the available detection, events, incident and audit data can be continually streamed to their Splunk Environment. This connection enables organisations to combine the power of the Splunk platform with the visibility and rich event data source of the Microsoft Sysmon utility running on Windows platforms. The Splunk Add-on for Sysmon collects data from Sysmon’s dedicated Windows Event log. Add-On map events for CIM data models: Endpoint, Network Resolution (DNS), Network Traffic, Change.
+
+The Splunk Add-on for Sysmon provides the inputs and CIM-compatible knowledge to use with other Splunk apps, such as Splunk Enterprise Security and the Splunk App for PCI Compliance.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/93bd2a1c-790b-11f1-ae04-de090d7a0a5c.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk</dc:creator>
+      <pubDate>Mon, 06 Jul 2026 07:47:26 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5709/#v5.0.1</guid>
+    </item>
+    <item>
+      <title>Google Threat Intelligence - v1.2.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7918/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
+&lt;li&gt;Added support for the following actions: 'Get RS Alert' and 'Update RS Alert Status'&lt;/li&gt;
+&lt;li&gt;Added Support for 'RS Alerts' ingestion type in 'on_pol' action&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Supercharge Splunk SOAR with Google Threat Intelligence by integrating real-time IOCs, breach insights, and threat actor data from VirusTotal, Mandiant, and Google for automated, context-rich responses&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/03862eaa-78fa-11f1-a451-de0b85fabed9.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
+      <pubDate>Mon, 06 Jul 2026 05:17:43 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7918/#v1.2.0</guid>
+    </item>
+    <item>
+      <title>SOCRadar Incidents - v1.9.28 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7871/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;- Filter collected alarms by tag, alarm type, main type or sub type &lt;br&gt;
+- New IOC Enrichment page: look up an IP, domain, hash or URL &lt;br&gt;
+- IOC Enrichment API Key is now set once under Configuration &lt;br&gt;
+- New Main Type and Sub Type filters on the Overview dashboard &lt;br&gt;
+- New Tags column and tag filters on the Overview dashboard &lt;br&gt;
+- Better input validation and clearer warnings&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Organizations struggle to quickly identify security threats. SOCRadar Incidents integrates incident data directly into Splunk. Clear dashboards simplify threat visualization, speeding up your response time.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8e419de4-78f1-11f1-9969-eadacc2dc252.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOCRadar Cyber Intelligence</dc:creator>
+      <pubDate>Mon, 06 Jul 2026 04:23:59 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7871/#v1.9.28</guid>
+    </item>
     <item>
       <title>KELA IoCs - v1.5.4 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7488/</link>
@@ -2030,18 +2075,6 @@ The PagerDuty App enables Splunk customers to deliver faster response times to s
       <guid>https://splunkbase.splunk.com/app/5862/#v2.1.4</guid>
     </item>
     <item>
-      <title>SOCRadar Incidents - v1.9.27 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7871/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Please update for the best performance&lt;/p&gt;
-&lt;p&gt;- Multi-select Severity (Risk Level) filter on the Incidents Overview dashboard; status management via the Manage Alarm Status view&lt;/p&gt;
-&lt;p&gt; - New option to choose which alarm severities are collected&lt;/p&gt;
-&lt;p&gt; - New option to choose which alarm statuses are collected&lt;/p&gt;
-&lt;p&gt;- More reliable alarm collection with improved rate-limit and retry handling&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Organizations struggle to quickly identify security threats. SOCRadar Incidents integrates incident data directly into Splunk. Clear dashboards simplify threat visualization, speeding up your response time.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0bab7314-6efb-11f1-87c0-86cb4d75083f.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOCRadar Cyber Intelligence</dc:creator>
-      <pubDate>Tue, 23 Jun 2026 12:18:16 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7871/#v1.9.27</guid>
-    </item>
-    <item>
       <title>Japanese Hankaku/Zenkaku Character Converter(for Linux 64-bit) - v1.2.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5695/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;u&gt;&lt;strong&gt;TA-mojimoji 1.2.0 (オンプレミス版 / mojimoji 同梱)&lt;/strong&gt;&lt;/u&gt;&lt;/p&gt;
@@ -2223,22 +2256,6 @@ Features:
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Tyler Diderich</dc:creator>
       <pubDate>Mon, 22 Jun 2026 20:10:28 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8803/#v1.0.1</guid>
-    </item>
-    <item>
-      <title>Splunk Add-on for Java Management Extensions - v6.0.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/2647/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Fixed Apache log4j vulnerability&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Add-on for Java Management Extensions (JMX) allows a Splunk software administrator to poll local or remote JMX Management Servers running in Java Virtual Machines and index MBean attributes, outputs from MBean operations, and MBean notifications. This add-on provides modular inputs and CIM-compatible knowledge to use with other Splunk apps, such as Splunk Enterprise Security, the Splunk App for PCI Compliance, and Splunk IT Service Intelligence.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/052aeee8-6e42-11f1-9065-6a99228be344.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk</dc:creator>
-      <pubDate>Mon, 22 Jun 2026 14:05:27 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/2647/#v6.0.1</guid>
-    </item>
-    <item>
-      <title>Splunk Add-on for JBoss - v4.0.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/2954/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Fixed Apache log4j vulnerability&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Add-on for JBoss allows a Splunk software administrator to collect JBoss file system logs from a local JBoss server and performance metrics from MBean attributes and operations from local and remote JBoss servers. This add-on provides the inputs and CIM-compatible knowledge to use with other Splunk apps, such as Splunk Enterprise Security and the Splunk App for PCI Compliance.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/cdaabaca-6e41-11f1-9065-6a99228be344.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk</dc:creator>
-      <pubDate>Mon, 22 Jun 2026 14:05:02 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/2954/#v4.0.1</guid>
     </item>
   </channel>
 </rss>
