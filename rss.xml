@@ -6,7 +6,78 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Thu, 09 Jul 2026 00:00:39 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 09 Jul 2026 04:42:12 +0000</lastBuildDate>
+    <item>
+      <title>AWS-DFD-Visualizer - v2.8.3 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8628/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;# Release Notes: AWS-DFD-Visualizer v2.8.3&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;**Release Date:**&lt;/strong&gt; July 9, 2026&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;**Framework:**&lt;/strong&gt; Splunk Unified Dashboard Framework (Dashboard Studio) &amp;amp; Classic SimpleXML&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;**Target Environment:**&lt;/strong&gt; DoD Impact Level 5 (IL5) / NIST 800-53 / Zero-Trust Architecture&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;## Overview&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Version 2.8.3 is a minor feature and security hardening release introducing native edge bundling/weighting for high-volume network environments, user-defined custom status color palettes via the Splunk Format panel UI, and strict CWE-79 input sanitization controls for Visualizer options.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;## ⚡ Feature: Native Edge Bundling &amp;amp; Logarithmic Weight Scaling (Req-1)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;AWS-DFD-Visualizer now automatically bundles overlapping connections to improve render performance and layout legibility.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Deduplication &amp;amp; Counter**&lt;/strong&gt;: The data aggregation pipeline clusters parallel records sharing identical source and target endpoints into a single edge containing a `count` attribute.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Logarithmic Stroke Weight**&lt;/strong&gt;: Links scale their rendered path thickness logarithmically based on the row count:&lt;/p&gt;
+&lt;p&gt;```javascript&lt;/p&gt;
+&lt;p&gt;strokeWidth \= Math.min(10, 2 + Math.log2(count + 1))&lt;/p&gt;
+&lt;p&gt;```&lt;/p&gt;
+&lt;p&gt;Single rows draw at a baseline 2.5px width, while high-volume traffic (50+ rows) scales up to 10px to visually signify volume. React owns this visual SVG attribute directly (React-D3 SoC rule preserved).&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Hover Count Badge**&lt;/strong&gt;: Hovering on a weighted edge displays a blue tooltip/badge containing the aggregated row counts (e.g. `×42 rows`) under the connection label.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;## 🎨 Feature: Configurable Custom Status Palettes (Req-2)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Enables dynamic, UI-driven color overrides for custom telemetry status codes.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Format Panel Integration**&lt;/strong&gt;: Adds a &quot;Custom Status Palette&quot; text input in the Format options panel (`formatter.html`) to allow mapping custom values to hex colors (e.g., `NonCompliant\=#FF6B6B,EXEMPT\=#4ECB71`).&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Unified Highlight Engine**&lt;/strong&gt;: Replaces two pre-existing diverging inline methods in `LinkLabel` and `NodeCard` with a module-level `buildStatusHighlight(status, customPaletteMap)` helper.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Priority Defenses**&lt;/strong&gt;: Custom visual overrides augment rather than replace core built-in safety highlights. Crucial life-cycle states (like `ResourceDeleted` dimming/opacity and `ResourceNotRecorded` dashed styling) take absolute precedence and cannot be disabled.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;## 🔒 Security &amp;amp; XSS Mitigation (CWE-79 / STIG)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Palette Input Sanitization**&lt;/strong&gt;: The status palette configuration parser applies strict key allow-listing (`/^[a-zA-Z0-9\-_\s]{1,64}$/`) and value format validation (`/^#[0-9A-Fa-f]{6}$/`). Malicious script tags or special character payloads are safely stripped and ignored before DOM rendering.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**AppInspect Cleanliness**&lt;/strong&gt;: The codebase compiles with 0 warnings, 0 failures, and 0 errors, meeting the zero-tolerance criteria for Splunk AppInspect.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;## 🧪 Testing and Quality Assurance&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**5 New Cypress Integration Tests**&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;- `TC-AUT-v2.8.3-A Spec A`: Mounts 50 duplicate paths to confirm 1 aggregated edge path is rendered with weight scaling.&lt;/p&gt;
+&lt;p&gt;- `TC-AUT-v2.8.3-A Spec B`: Asserts single-row baseline edge width resolves to baseline.&lt;/p&gt;
+&lt;p&gt;- `TC-AUT-v2.8.3-B Spec A`: Verifies custom palette mapping maps status to border colors.&lt;/p&gt;
+&lt;p&gt;- `TC-AUT-v2.8.3-B Spec B`: Asserts malicious `\&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;interactive Data Flow Diagram (DFD) visualizer for Splunk. Renders AWS, Azure, and GCP Config topologies as Zero-Trust blueprint diagrams with nested VPC/Subnet enclosures, SSH/22 compliance violation paths, and commercial license enforcement. Designed for DoD IL5 / NIST 800-53 / Zero-Trust Architecture environments.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;AWS DFD Visualizer (Splunkbase App Summary)
+Purpose &amp;amp; Background Auditing complex cloud infrastructure for compliance (e.g., DoD Impact Level 5 (IL5), NIST 800-53, or NIST 800-207 Zero-Trust Architectures) is extremely challenging. While AWS accounts generate high-volume telemetry from AWS Config, VPC Flow Logs, and GuardDuty, reviewing these complex configurations in standard tabular logs or flat Splunk tables makes it difficult for security teams, system auditors, and DevSecOps engineers to analyze isolation boundaries, spot structural gaps, or verify access routes.
+
+The Solution The AWS DFD (Data Flow Diagram) Visualizer solves this by transforming raw relationship logs and configuration items into interactive, visual security topologies styled after AWS Application Composer. It gives compliance officers and analysts an intuitive, visual framework to audit security posture in real-time.
+
+Key Features:
+
+Zero-Trust Layout Engine: Segregates assets deterministically into distinct swimlanes—separating the Identity plane (users/roles), Policy &amp;amp; Control plane (global network assets like WAF/CloudFront), and Infrastructure plane (VPCs/Subnets).
+Nested Enclosures: Renders nested container boundaries representing VPCs and Subnets with real-time compliance validation markers.
+Security &amp;amp; Telemetry Overlays:
+Highlights Security Group associations as outer compliance rings around compute nodes (Green for compliant, Red for non-compliant).
+Automatically isolates and flashes incident-flagged resources in pulsing red alerts.
+Overrides critical Nessus/Tenable vulnerability states with a custom &amp;quot;skull&amp;quot; threat icon.
+Dynamically intercepts and highlights non-compliant connection paths (e.g., SSH/22 path violations) as dashed Vibrant Red links.
+Dashboard Studio &amp;amp; SimpleXML Ready: Integrates natively with Splunk Dashboard Studio, supporting dynamic click-capturing drilldown tokens, responsive light/dark themes, and performance-saving Level of Detail (LOD) controls.
+Export &amp;amp; Live Console Feed: Includes a native client-side SVG/PNG exporter, a standard draw.io XML generator, and an ad-hoc CSV console feed for drafting cloud topologies on the fly.
+🛠️ Configuration &amp;amp; Code Updates Done:
+To align your app bundle with this new description, I have updated the description strings in the following files:
+
+
+
+package.json
+
+
+splunk-app-manifest.json
+
+
+default/app.conf
+Additionally:
+
+Added /cypress/screenshots/ to
+
+.gitignore
+ to keep the repository clean of test artifacts.
+Ran npm run build to compile the production bundle (webpack compiled successfully).
+Committed the changes and successfully pushed them to master.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d8f72dfe-7b35-11f1-bc8e-86cb28f9f693.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Young Suh</dc:creator>
+      <pubDate>Thu, 09 Jul 2026 01:46:13 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8628/#v2.8.3</guid>
+    </item>
     <item>
       <title>Query Federated Search - v3.1.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/4634/</link>
@@ -2252,16 +2323,6 @@ The PagerDuty App enables Splunk customers to deliver faster response times to s
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk</dc:creator>
       <pubDate>Tue, 23 Jun 2026 16:28:21 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5771/#v2.5.3</guid>
-    </item>
-    <item>
-      <title>Cisco Secure Malware Analytics (Threat Grid) - v2.4.5 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6145/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
-&lt;li&gt;Update datatype [PAPP-37820]&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app supports executing investigative actions to analyze executables and URLs on the Cisco Secure Malware Analytics sandbox&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/79827502-6f20-11f1-805f-eaca360df156.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk</dc:creator>
-      <pubDate>Tue, 23 Jun 2026 16:27:49 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6145/#v2.4.5</guid>
     </item>
   </channel>
 </rss>
