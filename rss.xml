@@ -6,68 +6,164 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Thu, 09 Jul 2026 17:12:31 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 09 Jul 2026 19:23:45 +0000</lastBuildDate>
     <item>
-      <title>TheHive/Cortex - v4.2.0 [Version Update]</title>
+      <title>ClickHouse Cloud Audit Add-on for Splunk - v1.0.5 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7709/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Set up default navigation to Search to prevent global navigation overrides from other add-ons.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;ClickHouse Cloud Audit Add-on for Splunk retrieves ClickHouse Cloud organization audit logs using the ClickHouse Cloud API to store them into Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b9dc9302-7bc9-11f1-b039-6a050a22ea2a.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">ClickHouse, Inc</dc:creator>
+      <pubDate>Thu, 09 Jul 2026 19:20:21 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7709/#v1.0.5</guid>
+    </item>
+    <item>
+      <title>Cisco Catalyst Add-on for Splunk - v3.2.36 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7538/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h3&gt;Fixes&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Timestamp parsing corrected across many sourcetypes&lt;/strong&gt; — SD-WAN link/tunnel/site/SSE health, Catalyst Center reports, device/client/network health, issues, ISE policy sets, SWIM, and Application Visibility traffic now index with the correct &lt;em&gt;event&lt;/em&gt; time instead of falling back to ingest time. Eliminates DateParserVerbose warnings and restores accurate event time ranges.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Catalyst Center custom CA certificate no longer lost on a failed account save&lt;/strong&gt; — the certificate is now written atomically, and if account validation fails the previous certificate is restored (or a newly added file removed) instead of being deleted. SSL verification failures return a clearer message with remediation guidance.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;SD-WAN audit config diff&lt;/strong&gt; — &lt;code&gt;audit_config_before&lt;/code&gt; / &lt;code&gt;audit_config_after&lt;/code&gt; now extract reliably for &lt;code&gt;cisco:sdwan:audit:logs&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;SD-WAN Energy Management data loss&lt;/strong&gt; — a stats-page error mid-collection no longer advances the watermark past un-fetched records (prevents silently skipped data).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;SD-WAN device pagination (issue #149)&lt;/strong&gt; — device-inventory collection now pages through vManage correctly (page counter increments per request) and uses a smaller 100-device page size for more reliable retrieval on large fabrics.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Cyber Vision asset/site enrichment&lt;/strong&gt; — now applied (was previously a silent no-op due to a misconfigured lookup).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Cyber Vision collectors&lt;/strong&gt; — hardened against null/empty API responses so an unexpected payload no longer stops the input.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Catalyst Center snapshot inputs&lt;/strong&gt; (Client, Site Topology) — now report a collection failure instead of indexing a truncated snapshot when an API call fails mid-collection.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Connection-audit macro&lt;/strong&gt; — fixed an argument-count error triggered by comma-containing multi-select tokens on Data Collection Health.&lt;/li&gt;
+  &lt;li&gt;Removed an orphaned lookup definition and closed a leaked HTTP session in the SD-WAN client.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Platform &amp;amp; Compatibility&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Splunk 10.4 / Python 3.13 support&lt;/strong&gt; — bundled Python 3.13 runtime libraries for the paramiko-based ISE Analytics Reports SSH/SFTP validation, required to run on Splunk 10.4 (including Windows).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;ISE Test Connection hardening&lt;/strong&gt; — the ISE Analytics Reports SSH credential check now runs in an out-of-process probe (&lt;code&gt;splunk cmd python3&lt;/code&gt;) so native crypto libraries load cleanly under Splunk's persistconn runtime instead of crashing the handler.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Security&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;ISE SSH/SFTP host-key handling&lt;/strong&gt; — connections now load known host keys and detect a changed/spoofed key, instead of blindly trusting whatever key is presented.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;ISE report cleanup&lt;/strong&gt; — report filenames scraped from ISE server output are validated before being used in CLI commands (command-injection guard).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Dashboards &amp;amp; Usability&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Data Collection Health&lt;/strong&gt; — new &lt;em&gt;Data Quality&lt;/em&gt; tab (timestamp mis-parse, event-breaking/truncation, unclassified sourcetypes, and checkpoint/KV-Store errors) and an integrated &lt;em&gt;Resource Utilization&lt;/em&gt; tab; every Overview single-value now drills down (opens in a new tab) to explain its number; the Date-Parsing Error trend shows a healthy baseline instead of “No results”; the “inputs below recommended interval” panel now uses a robust median with a steady-window guard so restarts/reloads don’t cause false positives; all panels honor the dashboard time picker.&lt;/li&gt;
+  &lt;li&gt;Removed the standalone SD-WAN Change Audit dashboard.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Branding&lt;/strong&gt; — “Cisco DNA Center” renamed to “Cisco Catalyst Center” across the UI.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Quality&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Expanded automated tests (timestamp props policy, checkpoint ordering, pxGrid, ISE API, SD-WAN energy stats, Catalyst Center account-validation cert rollback, and a dashboard interval-alignment guard).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Upgrade notes&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;No reconfiguration required. Checkpointing is unchanged (KV Store) — upgrades are seamless.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Cisco Catalyst Add-on for Splunk collects and normalizes API telemetry from Cisco Catalyst Center, SD-WAN (vManage), ISE, and Cyber Vision through modular inputs. It includes CIM-aligned knowledge objects, backward-compatible DNAC/Catalyst sourcetype coverage, and built-in health monitoring for input status, errors, and API load.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Author - Cisco Systems
+Prerequisites - This Technical Add-on is dependent on &amp;#x27;Splunk Add-on for Stream Forwarders&amp;#x27; and &amp;#x27;Splunk App for Stream&amp;#x27;
+
+Supported Cisco Products:
+Cisco Catalyst SD-WAN
+Cisco Identity Services Engine
+Cisco Catalyst Center
+Cyber Vision
+Cisco Network Infrastructure Devices which include the below platform series:
+* Cisco Catalyst series switches (1000, 1200, 1300, 2960, 3650, 3750, 4500, 6500, 6800, 7600, 9000 etc.)
+* Cisco ASR - Aggregation Services Routers (900, 1000, 5000, 9000 etc.)
+* Cisco ISR - Integrated Services Routers (800, 1900, 2900, 3900, 4451 etc.)
+* Cisco Nexus Data Center switches (1000V, 2000, 3000, 4000, 5000, 6000, 7000, 9000 etc.)
+* Cisco Carrier Routing System
+* Other Cisco IOS based devices (Metro Ethernet, Industrial Ethernet, Blade Switches, Connected Grid etc.)
+* Cisco Access Points
+* Cisco WLC - WLAN Controller&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/5417fa20-7bba-11f1-b039-6a050a22ea2a.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco</dc:creator>
+      <pubDate>Thu, 09 Jul 2026 17:56:25 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7538/#v3.2.36</guid>
+    </item>
+    <item>
+      <title>Atlas Software Platform for Splunk - v5.0.7 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5614/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;a href=&quot;https://docs.atlas.kinneygroup.com/docs/references/release-notes#atlas-version-507&quot; title=&quot;Release Notes Online&quot; rel=&quot;noopener noreferrer&quot;&gt;Release Notes Online&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Atlas™ is the premier enablement platform for Splunk. Whatever you’re creating in Splunk, be it powerful dashboards, incredible insights, more secure IT environments, or the analytics you need to generate business results, Atlas is jet fuel for your Splunk journey.
+
+With knowledge from 650+ Splunk engagements, we&amp;#x27;ve developed a comprehensive platform that combines software tools and expert services to help organizations maximize their Splunk investment and overcome common challenges.
+
+The Atlas Platform consists of:
+
+1. Atlas Assessment: Atlas Assessment provides high-level insights into what&amp;#x27;s working in your Splunk environment, what could be tuned, and how Atlas can help you manage your Splunk environment more effectively
+
+2. Atlas Software Suite: The Atlas Platform&amp;#x27;s Application Suite helps you speed up powerful searches, manage your data sources, optimize your license utilization, and get more value from your investment in Splunk.
+
+3. Atlas Expertise on Demand (EoD): EoD is the fastest and easiest way to solve pressing Splunk challenges and extend the Splunk capabilities of your team. Get on-demand access to our team of Splunk certified professionals for guidance, troubleshooting, custom development, and knowledge transfer.
+
+Atlas Benefits:
+- Faster time-to-value for Splunk implementation (Enterprise or Cloud)
+- Enhanced operation efficiency
+- Lower total cost of ownership
+- Access to specialized expertise
+- Continuous Environment Improvement
+
+Atlas combines technology and expertise to transform your data into actionable insights and measurable business outcomes. Whether you&amp;#x27;re just starting with Splunk or looking to enhance an established environment, the Atlas Platform provides the tools and knowledge to accelerate your success.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b6b6fb2e-7b04-11f1-890e-1ef256ec2553.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Presidio - Key Partner Acct</dc:creator>
+      <pubDate>Thu, 09 Jul 2026 17:56:00 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5614/#v5.0.7</guid>
+    </item>
+    <item>
+      <title>TheHive/Cortex - v4.2.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5329/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;# Release Notes&lt;/p&gt;
-&lt;p&gt;## Summary&lt;/p&gt;
-&lt;p&gt;Version 4.2.0 is a **stability and reliability release**. It hardens the alert actions and adaptive responses (alert/case creation), fixes several observable parsing edge cases that could silently drop data or get the whole payload rejected by TheHive, and corrects date/timestamp handling in TTP processing and the Cases LIST search command. No new feature is introduced and no configuration change is required — this is a safe, drop-in update from v4.1.0.&lt;/p&gt;
-&lt;p&gt;## Improvements &amp;amp; Bug Fixes&lt;/p&gt;
-&lt;p&gt;### 🧩 Alert Actions: robust observable parsing&lt;/p&gt;
-&lt;p&gt;- **Valid observable sub-field types**: observable sub-fields are now read with&lt;/p&gt;
-&lt;p&gt;  their documented `snake_case` names (`\:is_ioc`, `\:sighted`,&lt;/p&gt;
-&lt;p&gt;  `\:sighted_at`, `\:ignore_similarity`) and coerced to the native&lt;/p&gt;
-&lt;p&gt;  types TheHive expects. Previously the boolean `sighted` value was forwarded as&lt;/p&gt;
-&lt;p&gt;  the raw string `&quot;1&quot;`, causing TheHive to reject the request with&lt;/p&gt;
-&lt;p&gt;  `BadRequest - Invalid json` and silently dropping `is_ioc`, `sighted_at` and&lt;/p&gt;
-&lt;p&gt;  `ignore_similarity`. The sighting timestamp now also accepts float epoch&lt;/p&gt;
-&lt;p&gt;  values and is normalized to milliseconds.&lt;/p&gt;
-&lt;p&gt;- **Multi-value observable splitting**: fixed a regex that split observable&lt;/p&gt;
-&lt;p&gt;  values on the literal letter `n` instead of a newline, which mangled&lt;/p&gt;
-&lt;p&gt;  multi-value observables.&lt;/p&gt;
-&lt;p&gt;- **Resilient row handling**: improved handling of sanitized rows to avoid&lt;/p&gt;
-&lt;p&gt;  `KeyError` exceptions on incomplete events, and corrected the `sourceRef`&lt;/p&gt;
-&lt;p&gt;  variable used in debug logging.&lt;/p&gt;
-&lt;p&gt;### 📎 Alert Actions: reliable result attachments&lt;/p&gt;
-&lt;p&gt;- Result attachments (`attach_results`) now use a **uniquely-named temporary&lt;/p&gt;
-&lt;p&gt;  directory per invocation** instead of a fixed file name in the shared system&lt;/p&gt;
-&lt;p&gt;  temp directory. On Windows (where `splunkd` runs as the SYSTEM service and the&lt;/p&gt;
-&lt;p&gt;  temp directory is `C:\WINDOWS\TEMP`), the previous behavior caused concurrent&lt;/p&gt;
-&lt;p&gt;  or overlapping runs to collide on the same path, raising&lt;/p&gt;
-&lt;p&gt;  `Permission denied` / `No such file or directory` and **preventing the second&lt;/p&gt;
-&lt;p&gt;  alert/case of a multi-result search from being created** (e.g. UC2 — &quot;Saved&lt;/p&gt;
-&lt;p&gt;  search, several alerts&quot;). Temp files are now always cleaned up, and the&lt;/p&gt;
-&lt;p&gt;  attachment result is guarded against `None`.&lt;/p&gt;
-&lt;p&gt;### ⏱️ TTP &amp;amp; timestamp handling&lt;/p&gt;
-&lt;p&gt;- `_time` is now parsed as a **float** when processing TTPs, preventing failures&lt;/p&gt;
-&lt;p&gt;  on sub-second timestamps.&lt;/p&gt;
-&lt;p&gt;- When the configured `timestamp_field` is missing from an event, processing now&lt;/p&gt;
-&lt;p&gt;  **falls back to the current time** instead of failing.&lt;/p&gt;
-&lt;p&gt;### 🔎 Search commands&lt;/p&gt;
-&lt;p&gt;- **Cases LIST respects Date settings (#126)**: the Cases LIST action now&lt;/p&gt;
-&lt;p&gt;  correctly applies the configured date range instead of ignoring it.&lt;/p&gt;
-&lt;p&gt;## Deployment Notes&lt;/p&gt;
-&lt;p&gt;- **Prerequisite**: Python 3.9 (matches Splunk's bundled interpreter).&lt;/p&gt;
-&lt;p&gt;- **Migration Path**:&lt;/p&gt;
-&lt;p&gt;    - **From v4.1.0 / v4.0.0**: non-breaking update. Existing configuration,&lt;/p&gt;
-&lt;p&gt;      accounts, instances and certificates are preserved.&lt;/p&gt;
-&lt;p&gt;    - **From v3.9.0 (Direct Upgrade)**: you can upgrade directly to v4.2.0.&lt;/p&gt;
-&lt;p&gt;    - **⚠️ CRITICAL**: if upgrading from v3.x, the&lt;/p&gt;
-&lt;p&gt;      **[v4.0.0 migration instructions](./v4.0.0.md) are mandatory** and remain&lt;/p&gt;
-&lt;p&gt;      valid for this version (UCC architecture migration, breaking configuration&lt;/p&gt;
-&lt;p&gt;      changes, and new credential storage). Please read them carefully before&lt;/p&gt;
-&lt;p&gt;      proceeding.&lt;/p&gt;
-&lt;p&gt;- **Upgrade tip (Windows / on-prem)**: never delete the app's `local/` folder.&lt;/p&gt;
-&lt;p&gt;  Stop Splunk, back up `local/`, deploy the new build, restore `local/`, then&lt;/p&gt;
-&lt;p&gt;  start Splunk.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This TA allows to add interaction features between TheHive or Cortex (https://www.strangebee.com/) and Splunk. It allows to retrieve all kind of information from TheHive/Cortex and to perform actions on these instances using Splunk, from a search or from a predefined dashboard.
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;# Release Notes - v4.2.1: &quot;The Honey Keeper&quot; 🍯&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;## Summary&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Version 4.2.1 is a &lt;strong&gt;**hotfix release**&lt;/strong&gt; addressing a data-loss regression&lt;/p&gt;
+&lt;p&gt;introduced in v4.1.0: the `thehive_datatypes.csv` lookup could be periodically&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;**overwritten with default values**&lt;/strong&gt;, wiping out user-defined custom field&lt;/p&gt;
+&lt;p&gt;mappings and causing observables to go missing from TheHive alerts and cases.&lt;/p&gt;
+&lt;p&gt;No new feature is introduced and no configuration change is required — this is&lt;/p&gt;
+&lt;p&gt;a safe, drop-in update from v4.2.0.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;## Improvements &amp;amp; Bug Fixes&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;### 🗂️ Alert Actions: custom datatype mappings are no longer lost&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Root cause**&lt;/strong&gt;: since v4.1.0, alert actions refresh the&lt;/p&gt;
+&lt;p&gt;`thehive_datatypes.csv` lookup from the TheHive API whenever the file is&lt;/p&gt;
+&lt;p&gt;older than 24 hours. The refresh rebuilt the file &lt;strong&gt;**from scratch**&lt;/strong&gt; with only&lt;/p&gt;
+&lt;p&gt;the native observable types returned by TheHive, silently destroying every&lt;/p&gt;
+&lt;p&gt;custom row (e.g. `src_ip → ip`, `dest_domain → domain`) that detections rely&lt;/p&gt;
+&lt;p&gt;on to map Splunk fields to observables. In practice the lookup was reset&lt;/p&gt;
+&lt;p&gt;every 24-72 hours, depending on when the next alert action fired.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Fix — non-destructive merge**&lt;/strong&gt;: the periodic refresh is kept (it still&lt;/p&gt;
+&lt;p&gt;picks up new observable types created in TheHive), but it now **preserves&lt;/p&gt;
+&lt;p&gt;every existing row** of the lookup, custom mappings included. Only datatypes&lt;/p&gt;
+&lt;p&gt;not already listed are appended. A full regeneration never happens once the&lt;/p&gt;
+&lt;p&gt;file exists.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Atomic writes**&lt;/strong&gt;: the lookup is now written to a uniquely-named temporary&lt;/p&gt;
+&lt;p&gt;file and moved into place atomically, so a crash or two concurrent alert&lt;/p&gt;
+&lt;p&gt;actions can no longer leave a truncated or half-written lookup behind.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Safety guard**&lt;/strong&gt;: if the existing lookup cannot be read (locked, malformed&lt;/p&gt;
+&lt;p&gt;encoding, permissions), the refresh is &lt;strong&gt;**aborted**&lt;/strong&gt; instead of overwriting&lt;/p&gt;
+&lt;p&gt;content that could not be preserved (logged as `THC-4`).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;### 🧹 Minor&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;- Fixed a file-handle leak in the datatype lookup reader (the file was opened&lt;/p&gt;
+&lt;p&gt;on every alert action run but never closed).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;## Deployment Notes&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Prerequisite**&lt;/strong&gt;: Python 3.9 (matches Splunk's bundled interpreter).&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**After upgrading**&lt;/strong&gt;: if your custom `thehive_datatypes.csv` was recently&lt;/p&gt;
+&lt;p&gt;reset, restore it once from your backup — it will no longer be overwritten.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Migration Path**&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**From v4.2.0 / v4.1.0 / v4.0.0**&lt;/strong&gt;: non-breaking update. Existing&lt;/p&gt;
+&lt;p&gt;configuration, accounts, instances and certificates are preserved.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**From v3.9.0 (Direct Upgrade)**&lt;/strong&gt;: you can upgrade directly to v4.2.1.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**⚠️ CRITICAL**&lt;/strong&gt;: if upgrading from v3.x, the&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;**[v4.0.0 migration instructions](&lt;/strong&gt;&lt;u&gt;./v4.0.0.md&lt;/u&gt;&lt;strong&gt;) are mandatory**&lt;/strong&gt; and remain&lt;/p&gt;
+&lt;p&gt;valid for this version (UCC architecture migration, breaking configuration&lt;/p&gt;
+&lt;p&gt;changes, and new credential storage). Please read them carefully before&lt;/p&gt;
+&lt;p&gt;proceeding.&lt;/p&gt;
+&lt;p&gt;- &lt;strong&gt;**Upgrade tip (Windows / on-prem)**&lt;/strong&gt;: never delete the app's `local/` folder.&lt;/p&gt;
+&lt;p&gt;Stop Splunk, back up `local/`, deploy the new build, restore `local/`, then&lt;/p&gt;
+&lt;p&gt;start Splunk.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This TA allows to add interaction features between TheHive or Cortex (https://www.strangebee.com/) and Splunk. It allows to retrieve all kind of information from TheHive/Cortex and to perform actions on these instances using Splunk, from a search or from a predefined dashboard.
 
 This TA is supporting only TheHive 5. For having an app supporting TheHive 3 or 4, please check the oldest releases. It&amp;#x27;s also supporting the Cortex 3 version.
 
 More information here: https://github.com/LetMeR00t/TA-thehive-cortex&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/250b4fc6-7bb9-11f1-890e-1ef256ec2553.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Alexandre Demeyer</dc:creator>
-      <pubDate>Thu, 09 Jul 2026 17:10:55 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5329/#v4.2.0</guid>
+      <pubDate>Thu, 09 Jul 2026 17:21:15 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5329/#v4.2.1</guid>
     </item>
     <item>
       <title>Intruex for Splunk - v1.2.0 [New App Release]</title>
@@ -1952,119 +2048,6 @@ OktaIM2:appUser&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; 
       <guid>https://splunkbase.splunk.com/app/6553/#v5.0.3</guid>
     </item>
     <item>
-      <title>Cisco Catalyst Add-on for Splunk - v3.2.35 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7538/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h3&gt;New Inputs (7 new modular inputs)&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Custom API (Generic Endpoint)&lt;/strong&gt; — Catalyst Center — Catalog-driven input with 50+ curated OpenAPI endpoints; pick any Catalyst Center API without writing code&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Custom API (Generic Endpoint)&lt;/strong&gt; — SD-WAN — Catalog-driven input for vManage OpenAPI endpoints with scroll pagination&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Custom API (Generic Endpoint)&lt;/strong&gt; — ISE — Catalog-driven input migrated to Open API 3.1+, replacing the legacy ERS-only interface&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Application Visibility (AVC) Traffic&lt;/strong&gt; — Catalyst Center — Collects per-application traffic statistics from Catalyst Center&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Software Image Inventory (SWIM)&lt;/strong&gt; — Catalyst Center — Collects software image details and compliance status from Catalyst Center&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;SD-WAN Audit Logs&lt;/strong&gt; — SD-WAN — Dedicated input for vManage change audit trail with configurable initial backfill (default 7 days) and full config diff capture&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;SD-WAN Energy Statistics&lt;/strong&gt; — SD-WAN — Collects device energy/power consumption metrics from vManage&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;New Dashboards (2 new)&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Data Collection Health&lt;/strong&gt; — Real-time monitoring of all TA inputs; shows collection status, event counts, errors, and last-poll times across all 4 products&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;SD-WAN Change Audit&lt;/strong&gt; — Drill-down dashboard for vManage configuration changes with config diff viewer&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;New Saved Searches and Alerts (12 new — none existed in v3.1.0)&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Catalyst Center&lt;/strong&gt; — Device Unreachable, Low Device Health Score, Critical (P1) Issue Detected, Client Health Distribution (Daily Report)&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;ISE&lt;/strong&gt; — Authentication Failure Spike, TACACS Authentication Failures, Top Authentication Failures by User (Daily Report)&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Cyber Vision&lt;/strong&gt; — New OT Vulnerability Detected, Security Event Surge&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;SD-WAN&lt;/strong&gt; — UTD Security Engine Memory Pressure, Poor Tunnel Application Experience, Daily Tunnel Traffic Summary (Report)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;New Capabilities&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Test Connection&lt;/strong&gt; — All 4 account types (Catalyst Center, SD-WAN, ISE, Cyber Vision) now have a Test Connection button in the UI that validates connectivity and credentials before saving&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Per-Account Verify SSL Toggle&lt;/strong&gt; — SSL certificate verification can now be disabled per account for environments with self-signed certificates (Catalyst Center, SD-WAN, ISE, Cyber Vision)&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Structured Logging Framework&lt;/strong&gt; — All inputs migrated to canonical structured key\=value logging with standardized event IDs (poll-complete, api-call, api-error, collection-exception, state-transition, auth-failure)&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Per-Input Log Level&lt;/strong&gt; — Log verbosity can be configured per input instance rather than globally&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Auto-Populated Query Parameters&lt;/strong&gt; — Generic API inputs auto-fill required query parameters from the OpenAPI catalog&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Reports Multi-Select&lt;/strong&gt; — Catalyst Center Reports input now supports selecting multiple report templates&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Grouped Endpoint Picker&lt;/strong&gt; — Generic API inputs present endpoints in a categorized, searchable dropdown&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Recoverable-error logging (v3.2.33)&lt;/strong&gt; — New `handled_failure()` helper emits single-line structured WARNINGs for expected failures (for example transient Catalyst Center timeouts during Issue enrichment) instead of ERROR tracebacks when the poll continues&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Bug Fixes&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;SSL verify regression on upgrade from v3.1.x&lt;/strong&gt; — Upgrading from v3.1.x could break collection when accounts used use\_ca\_cert \= false and relied on the global verify\_ssl \= false setting in ta\_cisco\_catalyst\_settings.conf. v3.2.33+ restores that legacy behavior so TLS no longer fails with CERTIFICATE\_VERIFY\_FAILED on controllers using self-signed certificates. Per-account verify\_ssl still overrides when explicitly set on the account stanza.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Issue input misleading log noise (v3.2.33)&lt;/strong&gt; — Transient Catalyst Center timeouts on issue-enrichment-details are logged as structured `event=api-error` at WARNING when enrichment is skipped and the poll continues; no Python traceback for handled network blips&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Host field regression&lt;/strong&gt; — Fixed across all 21 event-emission call sites. The host metadata field is now consistently lowercase and scheme-stripped (for example cc.cisco.com instead of [https://cc.cisco.com).](https://cc.cisco.com).) Device-level sourcetypes use the device hostname; non-device sourcetypes use the controller hostname&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Per-record event emission&lt;/strong&gt; — Inputs now emit one Splunk event per record instead of one event containing a JSON array. Improves search performance and CIM compatibility&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Device Health crash&lt;/strong&gt; — Fixed KeyError when device IP field is missing from the API response (Issue #22)&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Audit Logs crash&lt;/strong&gt; — Fixed JSONDecodeError on empty API response (Issue #19)&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Account validation SSL failure&lt;/strong&gt; — Fixed CERTIFICATE\_VERIFY\_FAILED when validating accounts with self-signed certs (Issue #20)&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Reports silent data loss&lt;/strong&gt; — JSON-format reports were silently dropped; now properly ingested&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Reports 404 handling&lt;/strong&gt; — CC zero-reports 404 treated as benign instead of erroring&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Missing Linux binaries&lt;/strong&gt; — Restored 9 missing Linux compiled .so binaries that were absent from the v3.1.0 package (pre-existing bug)&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;AVC/SWIM empty results&lt;/strong&gt; — Fixed collectors not populating the results list&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;SD-WAN 400 errors&lt;/strong&gt; — Demoted benign per-device 400s in unified-threat health to debug level&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;HTTP error wrapping&lt;/strong&gt; — 404/500/generic-400 errors are now wrapped cleanly without unhandled exception tracebacks&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;DateParserVerbose noise&lt;/strong&gt; — Silenced spurious Splunk timestamp parser warnings on 6 CC JSON-array sourcetypes&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Cyber Vision logging&lt;/strong&gt; — Converted bare except blocks to logger.exception() for proper traceback capture&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Knowledge Objects&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;94 props.conf stanzas&lt;/strong&gt; (up from 71) — new sourcetype definitions, field extractions, timestamp configs&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;136 eventtypes&lt;/strong&gt; (up from 123) — expanded CIM-mapped event classifications&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Backward-compatible sourcetype migration&lt;/strong&gt; — cisco:dnac sourcetypes aliased to cisco:catalyst for search parity during migration&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;CIM field aliases&lt;/strong&gt; — SD-WAN audit logs mapped to Splunk CIM Change data model&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;New macros.conf&lt;/strong&gt; — Parameterized SPL extracted from saved searches for reusability&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Upgrade Notes&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Upgrading from v3.1.x and self-signed certificates&lt;/strong&gt; — If you upgraded directly to an earlier build and collection stopped with CERTIFICATE\_VERIFY\_FAILED or TLS handshake errors, install v3.2.33+. No account reconfiguration is required when your v3.1.x setup used use\_ca\_cert \= false with global verify\_ssl \= false. Alternatively, set Verify SSL to off on the account or install your CA certificate.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Device Health RxRate / TxRate (v3.2.33+)&lt;/strong&gt; — Interface traffic rates are collected only when &lt;strong&gt;Enable Interface Stats&lt;/strong&gt; is turned on for the Device Health input (default off). After enabling, disable and re-enable the input (or restart) so the worker reloads configuration.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Breaking: Event structure&lt;/strong&gt; — Inputs that emitted a single event with a JSON array payload now emit one event per record. Update saved searches or dashboards that parse arrays from single events.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Breaking: Host field format&lt;/strong&gt; — The host metadata field no longer includes https://. Update any searches filtering on host values that still include the URL scheme.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Event volume&lt;/strong&gt; — Per-record emission increases total event count. This is expected behavior, not duplicate data.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Sourcetype migration&lt;/strong&gt; — Both cisco:dnac and cisco:catalyst sourcetype prefixes are recognized via backward-compat stanzas. No search changes required.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Supported Products&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Cisco Catalyst Center (formerly DNA Center)&lt;/li&gt;
-  &lt;li&gt;Cisco SD-WAN (vManage)&lt;/li&gt;
-  &lt;li&gt;Cisco Identity Services Engine (ISE)&lt;/li&gt;
-  &lt;li&gt;Cisco Cyber Vision&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Cisco Catalyst Add-on for Splunk collects and normalizes API telemetry from Cisco Catalyst Center, SD-WAN (vManage), ISE, and Cyber Vision through modular inputs. It includes CIM-aligned knowledge objects, backward-compatible DNAC/Catalyst sourcetype coverage, and built-in health monitoring for input status, errors, and API load.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Author - Cisco Systems
-Prerequisites - This Technical Add-on is dependent on &amp;#x27;Splunk Add-on for Stream Forwarders&amp;#x27; and &amp;#x27;Splunk App for Stream&amp;#x27;
-
-Supported Cisco Products:
-Cisco Catalyst SD-WAN
-Cisco Identity Services Engine
-Cisco Catalyst Center
-Cyber Vision
-Cisco Network Infrastructure Devices which include the below platform series:
-* Cisco Catalyst series switches (1000, 1200, 1300, 2960, 3650, 3750, 4500, 6500, 6800, 7600, 9000 etc.)
-* Cisco ASR - Aggregation Services Routers (900, 1000, 5000, 9000 etc.)
-* Cisco ISR - Integrated Services Routers (800, 1900, 2900, 3900, 4451 etc.)
-* Cisco Nexus Data Center switches (1000V, 2000, 3000, 4000, 5000, 6000, 7000, 9000 etc.)
-* Cisco Carrier Routing System
-* Other Cisco IOS based devices (Metro Ethernet, Industrial Ethernet, Blade Switches, Connected Grid etc.)
-* Cisco Access Points
-* Cisco WLC - WLAN Controller&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2c53aabe-73f1-11f1-800e-2a990941abb0.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco</dc:creator>
-      <pubDate>Mon, 29 Jun 2026 19:47:09 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7538/#v3.2.35</guid>
-    </item>
-    <item>
       <title>Darktrace for Splunk SOAR - v1.0.9 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/6560/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
@@ -2423,30 +2406,6 @@ The Splunk Add-on for GitHub lets you collect audit logs from the GitHub Enterpr
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk</dc:creator>
       <pubDate>Wed, 24 Jun 2026 10:16:52 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6254/#v3.3.1</guid>
-    </item>
-    <item>
-      <title>PagerDuty App for Splunk - v4.0.8 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/3013/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Resolve issue with legacy global configuration migration&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;PagerDuty is an agile incident management solution that integrates with IT Ops and DevOps monitoring stacks to improve operational reliability and agility. With 350+ integrations, automated scheduling, advance reporting and guaranteed reliability, PagerDuty is trusted by 12,000+ organizations globally to increase business and employee efficiency.
-
-The PagerDuty App enables Splunk customers to deliver faster response times to service disruptions. Specifically, joint PagerDuty and Splunk customers are able to:
-
-- Allow PagerDuty to leverage the Splunk Alerts framework with one click, which saves users significant time and energy.
-- Connect a single Splunk instance to multiple PagerDuty services or accounts, which allows users to tailor their Splunk alerts in PagerDuty to their specific needs and workflow.
-- Streamline and group incident data within PagerDuty, which reduces alert noise and information overload by allowing users to group incidents in a manner that makes sense to them.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/49a210b2-6f35-11f1-a788-1efce93a800a.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">PagerDuty Inc</dc:creator>
-      <pubDate>Tue, 23 Jun 2026 19:42:47 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/3013/#v4.0.8</guid>
-    </item>
-    <item>
-      <title>Phantom - v3.8.5 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5834/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
-&lt;li&gt;Update datatype [PAPP-37820]&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This App exposes various Phantom APIs as actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/7315731c-6f21-11f1-a5fc-2e0230f9ff26.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk</dc:creator>
-      <pubDate>Tue, 23 Jun 2026 16:34:48 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5834/#v3.8.5</guid>
     </item>
   </channel>
 </rss>
