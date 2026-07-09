@@ -6,19 +6,106 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Thu, 09 Jul 2026 08:19:23 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 09 Jul 2026 11:46:09 +0000</lastBuildDate>
     <item>
-      <title>Splunk Add-on for Microsoft Windows - v10.1.0 [Version Update]</title>
+      <title>Ensign ElasticSearch Data Integrator - v1.5.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8645/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;v1.5.0 — 2026-07-09&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Elasticsearch 9.x Native Client — Now Fully Functional&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Fixed: The vendored&amp;nbsp;&lt;code&gt;elasticsearch9&lt;/code&gt;&amp;nbsp;package previously imported the 8.x&amp;nbsp;&lt;code&gt;elastic_transport&lt;/code&gt;&amp;nbsp;(version guard mismatch), causing silent fallback to the 8.x client on every run. Rewired all internal imports (122 statements across 104 files) to bind to isolated&amp;nbsp;&lt;code&gt;elastic_transport9&lt;/code&gt;&amp;nbsp;(9.4.1). The ES 9.x native client now imports and coexists correctly with the 8.19.3 client in the same process.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Runtime Capability Gating&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;New: Smart runtime detection selects the ES 9.x native client on Splunk 10 (Python 3.10+ / OpenSSL 1.1.1+) and the 8.19.3 client with REST API compatibility mode on Splunk 9.4 — never a hard failure.&lt;/li&gt;
+&lt;li&gt;New: Selecting &quot;Elasticsearch 9.x&quot; on an incompatible runtime is now rejected at save time with an actionable error message.&amp;nbsp;&lt;code&gt;escheck_config&lt;/code&gt;&amp;nbsp;and&amp;nbsp;&lt;code&gt;escheck_connection&lt;/code&gt;&amp;nbsp;report&amp;nbsp;&lt;code&gt;es9_native_capable&lt;/code&gt;&amp;nbsp;status.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;KVStore Checkpoint Backend Restored&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Fixed: Internal REST calls to splunkd hard-coded&amp;nbsp;&lt;code&gt;verify=True&lt;/code&gt;, which always failed against splunkd's self-signed certificate. Now verifies against the auto-discovered Splunk CA, with loopback fallback.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Security Hardening&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;proxy_password&lt;/code&gt;&amp;nbsp;is now stored encrypted via&amp;nbsp;&lt;code&gt;storage/passwords&lt;/code&gt;&amp;nbsp;instead of plaintext.&lt;/li&gt;
+&lt;li&gt;Single-term custom filter validates the filter key against Elasticsearch field-name grammar; rejects control characters and over-length values (fails closed).&lt;/li&gt;
+&lt;li&gt;ES version probe verifies TLS by default; warns loudly when run with verification disabled.&lt;/li&gt;
+&lt;li&gt;Removed global suppression of&amp;nbsp;&lt;code&gt;urllib3 InsecureRequestWarning&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Packaging &amp;amp; Framework&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Removed Linux-only CPython 3.7 binaries (PyYAML, MarkupSafe); pure-Python fallbacks used on all platforms — fully cross-platform.&lt;/li&gt;
+&lt;li&gt;Updated&amp;nbsp;&lt;code&gt;splunktaucclib&lt;/code&gt;&amp;nbsp;8.1.0 → 8.2.0.&lt;/li&gt;
+&lt;li&gt;Removed vestigial advanced-filter UI fields from the public build.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Splunk modular input for ingesting data from Elasticsearch 8.x and 9.x clusters. Dual ES client (auto-selected by runtime), multi-cluster profiles, DSL query filters, scroll-based pagination with crash recovery, document-level deduplication, KVStore checkpoints, SSL/TLS, proxy, and custom SPL diagnostic commands. Full GUI configuration.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Ensign ElasticSearch Data Integrator is a Splunk modular input add-on for ingesting data from Elasticsearch 8.x and 9.x clusters into Splunk via the Elasticsearch REST API.
+
+Built on the Splunk UCC Framework (Add-on Builder), it provides a full GUI-driven configuration experience through Splunk Web — no manual file editing required.
+
+Key Features:
+• Multi-cluster Elasticsearch profile management via Splunk UI
+• Multi-node cluster support with comma-separated hosts and node sniffing/auto-discovery
+• Dual ES client library: automatically selects elasticsearch-py 9.4.1 (native) on Splunk 10 or elasticsearch-py 8.19.3 (REST API compatibility mode) on Splunk 9.4
+• Per-cluster ES version override (Auto-Detect / 8.x / 9.x) with runtime capability gating
+• Time-based data fetching with configurable date field and ES Scroll API pagination
+• Single-term DSL query filter with input validation (fail-closed)
+• Crash-resilient scroll recovery with dedicated checkpoint directory
+• KVStore checkpoint storage with smart bidirectional fallback — enables SHC-native replication
+• Document-level deduplication guard (rolling 50,000 IDs per stanza)
+• SSL/TLS certificate verification enabled by default with custom CA support
+• Splunk CA auto-discovery for secure internal REST communication
+• Global proxy support with Splunk-native credential encryption
+• Custom sourcetype override per input stanza
+• Custom SPL diagnostic commands: escheck_connection, escheck_config, escheck_indexes
+• Comprehensive internal log parsing for taensignelasticsearchaddon:log
+• Preflight cluster health check before every collection run
+• 5W1H audit logging on all administrative operations
+• Minimum polling interval enforcement (15 seconds)
+• Adjustable log level (DEBUG/INFO/WARN/ERROR)
+• No pre-compiled binaries — pure Python, runs on any platform
+
+Compatibility:
+• Elasticsearch: 8.x and 9.x (NOT compatible with 7.x or earlier)
+• Splunk Enterprise: 9.4+ (Python 3.9) and 10.x (Python 3.13)
+• Network: HTTPS access to target Elasticsearch cluster(s)&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0256d48a-7b7f-11f1-9c6d-de2b4e781aa2.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Muhammad Rafdi Aufar Ahmad</dc:creator>
+      <pubDate>Thu, 09 Jul 2026 10:32:27 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8645/#v1.5.0</guid>
+    </item>
+    <item>
+      <title>Machine Data Lab - v2.1.8 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8697/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Register yourself and watch the global Splunk community grow, one pin on the map at a time.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Machine Data Lab is a community-driven app built by Border Innovation, where Splunk users from around the world register and leave their mark.
+
+Sign up in seconds and watch as a global map comes alive with registrations from fellow users across every corner of the planet.
+
+See who&amp;#x27;s joining, when, and from where — as the Splunk community grows, one registration at a time.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Border Innovation</dc:creator>
+      <pubDate>Thu, 09 Jul 2026 10:12:13 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8697/#v2.1.8</guid>
+    </item>
+    <item>
+      <title>Splunk Add-on for Microsoft Windows - v10.1.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/742/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Added SPL2 field extraction modules for the `WinEventLog`, `WinRegistry`, and `Perfmon:Process` sourcetypes&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;*** Important: Read upgrade instructions and test add-on update before deploying to production ***
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;fix:&amp;nbsp;Make sure Splunk Add-on for Microsoft Windows includes SPL2 field extraction modules only&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;*** Important: Read upgrade instructions and test add-on update before deploying to production ***
 The Splunk Add-on for Windows 5.0.0 introduced breaking changes. If you are upgrading from a version of the Splunk Add-on for Windows that is earlier than 5.0.0, you must follow the documented upgrade instructions to avoid data loss. A best practice is to test the upgraded version in a non-production environment before deploying to production.
 
 Neither the Splunk Add-on for Windows DNS version 1.0.1 nor the Splunk Add-on for Windows Active Directory version 1.0.0 is supported when installed alongside the Splunk Add-on for Windows version 6.0.0. The Splunk Add-on for Windows version 6.0.0 includes the Splunk Add-on for Windows DNS and the Splunk Add-on for Microsoft Active Directory.
 
 The Splunk for Microsoft Windows add-on includes predefined inputs to collect data from Windows systems and maps to normalize the data to the Common Information Model.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8648694a-7ae2-11f1-843b-5e70158ca11f.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk</dc:creator>
-      <pubDate>Thu, 09 Jul 2026 07:45:14 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/742/#v10.1.0</guid>
+      <pubDate>Thu, 09 Jul 2026 09:38:53 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/742/#v10.1.1</guid>
+    </item>
+    <item>
+      <title>Splunk Add-on for Unix and Linux - v10.3.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/833/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;fix:&amp;nbsp;Make sure Splunk Add-on for Unix and Linux includes SPL2 field extraction modules only&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;*** Important: Read upgrade Instructions and test add-on update before deploying to production ***
+There are changes to default indexes and .conf changes in version 6.0 of Splunk Add-on for Unix and Linux that can break an existing installation if upgrade instructions are not followed in detail. If an existing Splunk Add-on for Unix and Linux is being upgraded, please test in a non-production environment first.
+
+
+The Splunk Add-on for Unix and Linux works with the Splunk App for Unix and Linux to provide rapid insights and operational visibility into large-scale Unix and Linux environments.  With its new pre-packaged alerting capability, flexible service-based hosts grouping, and easy management of many data sources, it arms administrators with a powerful ability to quickly identify performance and capacity bottlenecks and outliers in Unix and Linux environments.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/6a2563b8-7ae6-11f1-ba33-e6a79855faf5.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk</dc:creator>
+      <pubDate>Thu, 09 Jul 2026 09:38:38 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/833/#v10.3.1</guid>
     </item>
     <item>
       <title>Log Continuity Manager for Splunk - v1.0.0 [New App Release]</title>
@@ -198,18 +285,6 @@ Use Splunk ITSI to perform the following tasks:
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk</dc:creator>
       <pubDate>Wed, 08 Jul 2026 19:40:27 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/1841/#v5.0.0</guid>
-    </item>
-    <item>
-      <title>Machine Data Lab - v2.1.7 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8697/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Register yourself and watch the global Splunk community grow, one pin on the map at a time.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Machine Data Lab is a community-driven app built by Border Innovation, where Splunk users from around the world register and leave their mark.
-
-Sign up in seconds and watch as a global map comes alive with registrations from fellow users across every corner of the planet.
-
-See who&amp;#x27;s joining, when, and from where — as the Splunk community grows, one registration at a time.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Border Innovation</dc:creator>
-      <pubDate>Wed, 08 Jul 2026 16:25:20 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8697/#v2.1.7</guid>
     </item>
     <item>
       <title>Bitwarden Event Logs - v2.2.0 [Version Update]</title>
@@ -2303,26 +2378,6 @@ The PagerDuty App enables Splunk customers to deliver faster response times to s
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk</dc:creator>
       <pubDate>Tue, 23 Jun 2026 16:30:40 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5763/#v2.1.9</guid>
-    </item>
-    <item>
-      <title>AD LDAP - v2.3.8 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5755/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
-&lt;li&gt;Update datatype [PAPP-37820]&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;App specifically designed for interacting with Microsoft Active Directory&amp;#x27;s LDAP Implementation&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d3bedb00-6f20-11f1-87c0-86cb4d75083f.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk</dc:creator>
-      <pubDate>Tue, 23 Jun 2026 16:30:21 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5755/#v2.3.8</guid>
-    </item>
-    <item>
-      <title>Azure AD Graph - v2.5.3 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5771/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
-&lt;li&gt;Update datatype [PAPP-37820]&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Connects to Azure AD Graph REST API services&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8c460028-6f20-11f1-87c0-86cb4d75083f.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk</dc:creator>
-      <pubDate>Tue, 23 Jun 2026 16:28:21 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5771/#v2.5.3</guid>
     </item>
   </channel>
 </rss>
