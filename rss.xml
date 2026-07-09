@@ -6,7 +6,65 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Thu, 09 Jul 2026 21:13:34 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 09 Jul 2026 23:02:59 +0000</lastBuildDate>
+    <item>
+      <title>Cisco Catalyst Add-on for Splunk - v3.2.36 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7538/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h3&gt;Fixes&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Timestamp parsing corrected across many sourcetypes&lt;/strong&gt; — SD-WAN link/tunnel/site/SSE health, Catalyst Center reports, device/client/network health, issues, ISE policy sets, SWIM, and Application Visibility traffic now index with the correct &lt;em&gt;event&lt;/em&gt; time instead of falling back to ingest time. Eliminates DateParserVerbose warnings and restores accurate event time ranges.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;SD-WAN audit config diff&lt;/strong&gt; — &lt;code&gt;audit_config_before&lt;/code&gt; / &lt;code&gt;audit_config_after&lt;/code&gt; now extract reliably for &lt;code&gt;cisco:sdwan:audit:logs&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;SD-WAN Energy Management data loss&lt;/strong&gt; — a stats-page error mid-collection no longer advances the watermark past un-fetched records (prevents silently skipped data).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;SD-WAN device pagination (issue #149)&lt;/strong&gt; — device-inventory collection now pages through vManage correctly (page counter increments per request) and uses a smaller 100-device page size for more reliable retrieval on large fabrics.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Cyber Vision asset/site enrichment&lt;/strong&gt; — now applied (was previously a silent no-op due to a misconfigured lookup).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Cyber Vision collectors&lt;/strong&gt; — hardened against null/empty API responses so an unexpected payload no longer stops the input.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;DNAC snapshot inputs&lt;/strong&gt; (Client, Site Topology) — now report a collection failure instead of indexing a truncated snapshot when an API call fails mid-collection.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Connection-audit macro&lt;/strong&gt; — fixed an argument-count error triggered by comma-containing multi-select tokens on Data Collection Health.&lt;/li&gt;
+  &lt;li&gt;Removed an orphaned lookup definition and closed a leaked HTTP session in the SD-WAN client.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Platform &amp;amp; Compatibility&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Splunk 10.4 / Python 3.13 support&lt;/strong&gt; — bundled Python 3.13 runtime libraries for the paramiko-based ISE Analytics Reports SSH/SFTP validation, required to run on Splunk 10.4 (including Windows).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;ISE Test Connection hardening&lt;/strong&gt; — the ISE Analytics Reports SSH credential check now runs in an out-of-process probe (&lt;code&gt;splunk cmd python3&lt;/code&gt;) so native crypto libraries load cleanly under Splunk's persistconn runtime instead of crashing the handler.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Dashboards &amp;amp; Usability&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Data Collection Health&lt;/strong&gt; — new &lt;em&gt;Data Quality&lt;/em&gt; tab (timestamp mis-parse, event-breaking/truncation, unclassified sourcetypes, and checkpoint/KV-Store errors) and an integrated &lt;em&gt;Resource Utilization&lt;/em&gt; tab; every Overview single-value now drills down (opens in a new tab) to explain its number; the Date-Parsing Error trend shows a healthy baseline instead of “No results”; the “inputs below recommended interval” panel now uses a robust median with a steady-window guard so restarts/reloads don’t cause false positives; all panels honor the dashboard time picker.&lt;/li&gt;
+  &lt;li&gt;Removed the standalone SD-WAN Change Audit dashboard.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Branding&lt;/strong&gt; — “Cisco DNA Center” renamed to “Cisco Catalyst Center” across the UI.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Quality&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Expanded automated tests (timestamp props policy, checkpoint ordering, pxGrid, ISE API, SD-WAN energy stats, and a dashboard interval-alignment guard).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Upgrade notes&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;No reconfiguration required. Checkpointing is unchanged (KV Store) — upgrades are seamless.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Cisco Catalyst Add-on for Splunk collects and normalizes API telemetry from Cisco Catalyst Center, SD-WAN (vManage), ISE, and Cyber Vision through modular inputs. It includes CIM-aligned knowledge objects, backward-compatible DNAC/Catalyst sourcetype coverage, and built-in health monitoring for input status, errors, and API load.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Author - Cisco Systems
+Prerequisites - This Technical Add-on is dependent on &amp;#x27;Splunk Add-on for Stream Forwarders&amp;#x27; and &amp;#x27;Splunk App for Stream&amp;#x27;
+
+Supported Cisco Products:
+Cisco Catalyst SD-WAN
+Cisco Identity Services Engine
+Cisco Catalyst Center
+Cyber Vision
+Cisco Network Infrastructure Devices which include the below platform series:
+* Cisco Catalyst series switches (1000, 1200, 1300, 2960, 3650, 3750, 4500, 6500, 6800, 7600, 9000 etc.)
+* Cisco ASR - Aggregation Services Routers (900, 1000, 5000, 9000 etc.)
+* Cisco ISR - Integrated Services Routers (800, 1900, 2900, 3900, 4451 etc.)
+* Cisco Nexus Data Center switches (1000V, 2000, 3000, 4000, 5000, 6000, 7000, 9000 etc.)
+* Cisco Carrier Routing System
+* Other Cisco IOS based devices (Metro Ethernet, Industrial Ethernet, Blade Switches, Connected Grid etc.)
+* Cisco Access Points
+* Cisco WLC - WLAN Controller&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/32917796-7be2-11f1-890e-1ef256ec2553.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco</dc:creator>
+      <pubDate>Thu, 09 Jul 2026 22:20:27 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7538/#v3.2.36</guid>
+    </item>
     <item>
       <title>Intruex for Splunk - v1.2.0 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/8819/</link>
@@ -374,71 +432,6 @@ Bring your own LLM: Anthropic, OpenAI, Azure OpenAI, Groq, Google Gemini, AWS Be
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Eduard Lekanne</dc:creator>
       <pubDate>Thu, 09 Jul 2026 19:39:39 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8747/#v1.8.4</guid>
-    </item>
-    <item>
-      <title>Cisco Catalyst Add-on for Splunk - v3.2.36 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7538/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h3&gt;Fixes&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Timestamp parsing corrected across many sourcetypes&lt;/strong&gt; — SD-WAN link/tunnel/site/SSE health, Catalyst Center reports, device/client/network health, issues, ISE policy sets, SWIM, and Application Visibility traffic now index with the correct &lt;em&gt;event&lt;/em&gt; time instead of falling back to ingest time. Eliminates DateParserVerbose warnings and restores accurate event time ranges.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Catalyst Center custom CA certificate no longer lost on a failed account save&lt;/strong&gt; — the certificate is now written atomically, and if account validation fails the previous certificate is restored (or a newly added file removed) instead of being deleted. SSL verification failures return a clearer message with remediation guidance.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;SD-WAN audit config diff&lt;/strong&gt; — &lt;code&gt;audit_config_before&lt;/code&gt; / &lt;code&gt;audit_config_after&lt;/code&gt; now extract reliably for &lt;code&gt;cisco:sdwan:audit:logs&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;SD-WAN Energy Management data loss&lt;/strong&gt; — a stats-page error mid-collection no longer advances the watermark past un-fetched records (prevents silently skipped data).&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;SD-WAN device pagination (issue #149)&lt;/strong&gt; — device-inventory collection now pages through vManage correctly (page counter increments per request) and uses a smaller 100-device page size for more reliable retrieval on large fabrics.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Cyber Vision asset/site enrichment&lt;/strong&gt; — now applied (was previously a silent no-op due to a misconfigured lookup).&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Cyber Vision collectors&lt;/strong&gt; — hardened against null/empty API responses so an unexpected payload no longer stops the input.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Catalyst Center snapshot inputs&lt;/strong&gt; (Client, Site Topology) — now report a collection failure instead of indexing a truncated snapshot when an API call fails mid-collection.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Connection-audit macro&lt;/strong&gt; — fixed an argument-count error triggered by comma-containing multi-select tokens on Data Collection Health.&lt;/li&gt;
-  &lt;li&gt;Removed an orphaned lookup definition and closed a leaked HTTP session in the SD-WAN client.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Platform &amp;amp; Compatibility&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Splunk 10.4 / Python 3.13 support&lt;/strong&gt; — bundled Python 3.13 runtime libraries for the paramiko-based ISE Analytics Reports SSH/SFTP validation, required to run on Splunk 10.4 (including Windows).&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;ISE Test Connection hardening&lt;/strong&gt; — the ISE Analytics Reports SSH credential check now runs in an out-of-process probe (&lt;code&gt;splunk cmd python3&lt;/code&gt;) so native crypto libraries load cleanly under Splunk's persistconn runtime instead of crashing the handler.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Security&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;ISE SSH/SFTP host-key handling&lt;/strong&gt; — connections now load known host keys and detect a changed/spoofed key, instead of blindly trusting whatever key is presented.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;ISE report cleanup&lt;/strong&gt; — report filenames scraped from ISE server output are validated before being used in CLI commands (command-injection guard).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Dashboards &amp;amp; Usability&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Data Collection Health&lt;/strong&gt; — new &lt;em&gt;Data Quality&lt;/em&gt; tab (timestamp mis-parse, event-breaking/truncation, unclassified sourcetypes, and checkpoint/KV-Store errors) and an integrated &lt;em&gt;Resource Utilization&lt;/em&gt; tab; every Overview single-value now drills down (opens in a new tab) to explain its number; the Date-Parsing Error trend shows a healthy baseline instead of “No results”; the “inputs below recommended interval” panel now uses a robust median with a steady-window guard so restarts/reloads don’t cause false positives; all panels honor the dashboard time picker.&lt;/li&gt;
-  &lt;li&gt;Removed the standalone SD-WAN Change Audit dashboard.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Branding&lt;/strong&gt; — “Cisco DNA Center” renamed to “Cisco Catalyst Center” across the UI.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Quality&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Expanded automated tests (timestamp props policy, checkpoint ordering, pxGrid, ISE API, SD-WAN energy stats, Catalyst Center account-validation cert rollback, and a dashboard interval-alignment guard).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Upgrade notes&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;No reconfiguration required. Checkpointing is unchanged (KV Store) — upgrades are seamless.&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Cisco Catalyst Add-on for Splunk collects and normalizes API telemetry from Cisco Catalyst Center, SD-WAN (vManage), ISE, and Cyber Vision through modular inputs. It includes CIM-aligned knowledge objects, backward-compatible DNAC/Catalyst sourcetype coverage, and built-in health monitoring for input status, errors, and API load.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Author - Cisco Systems
-Prerequisites - This Technical Add-on is dependent on &amp;#x27;Splunk Add-on for Stream Forwarders&amp;#x27; and &amp;#x27;Splunk App for Stream&amp;#x27;
-
-Supported Cisco Products:
-Cisco Catalyst SD-WAN
-Cisco Identity Services Engine
-Cisco Catalyst Center
-Cyber Vision
-Cisco Network Infrastructure Devices which include the below platform series:
-* Cisco Catalyst series switches (1000, 1200, 1300, 2960, 3650, 3750, 4500, 6500, 6800, 7600, 9000 etc.)
-* Cisco ASR - Aggregation Services Routers (900, 1000, 5000, 9000 etc.)
-* Cisco ISR - Integrated Services Routers (800, 1900, 2900, 3900, 4451 etc.)
-* Cisco Nexus Data Center switches (1000V, 2000, 3000, 4000, 5000, 6000, 7000, 9000 etc.)
-* Cisco Carrier Routing System
-* Other Cisco IOS based devices (Metro Ethernet, Industrial Ethernet, Blade Switches, Connected Grid etc.)
-* Cisco Access Points
-* Cisco WLC - WLAN Controller&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/5417fa20-7bba-11f1-b039-6a050a22ea2a.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco</dc:creator>
-      <pubDate>Thu, 09 Jul 2026 17:56:25 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7538/#v3.2.36</guid>
     </item>
     <item>
       <title>Atlas Software Platform for Splunk - v5.0.7 [Version Update]</title>
