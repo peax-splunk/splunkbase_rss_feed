@@ -6,7 +6,136 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Fri, 10 Jul 2026 16:15:09 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 10 Jul 2026 18:17:08 +0000</lastBuildDate>
+    <item>
+      <title>Whiteboard App - v0.3.71 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8908/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;# Release Notes&lt;/p&gt;
+&lt;p&gt;Highlights of recent Whiteboard App releases. For the full change list of any version, see the [GitHub Releases page](&lt;a href=&quot;https://github.com/bautt/splunk-whiteboard-app/releases&quot; rel=&quot;noopener noreferrer&quot;&gt;https://github.com/bautt/splunk-whiteboard-app/releases&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;---&lt;/p&gt;
+&lt;p&gt;## v0.3.71 — 2026-07-10&lt;/p&gt;
+&lt;p&gt;**Splunk Cloud compatibility fix**&lt;/p&gt;
+&lt;p&gt;- Fixed a version mismatch that failed Splunk Cloud AppInspect (SLIM validation + semver): `app.manifest` had drifted to `0.3.65` while `app.conf` was newer, so the package could not be SSAI-installed on Classic Splunk Cloud.&lt;/p&gt;
+&lt;p&gt;- The build now treats `src/web/lib/version.js` as the single source of truth and syncs the version/build into `default/app.conf` and `app.manifest` automatically, so they can never drift again.&lt;/p&gt;
+&lt;p&gt;- Updated the app manifest description (&quot;templates&quot; → &quot;example boards&quot;).&lt;/p&gt;
+&lt;p&gt;---&lt;/p&gt;
+&lt;p&gt;## v0.3.70 — 2026-07-10&lt;/p&gt;
+&lt;p&gt;**Board list layout &amp;amp; wording**&lt;/p&gt;
+&lt;p&gt;- Renamed **Starter boards** to **Example boards** throughout the app and docs.&lt;/p&gt;
+&lt;p&gt;- Your own boards now appear **first**; the shipped **Example boards** section moved to the **bottom** of the list.&lt;/p&gt;
+&lt;p&gt;- Fixed the cramped board card footer: **Open** is now a full-width button with the **Duplicate · Export · Copy link · Delete** actions on their own row below (no more truncated &quot;Op…&quot; button).&lt;/p&gt;
+&lt;p&gt;---&lt;/p&gt;
+&lt;p&gt;## v0.3.69 — 2026-07-10&lt;/p&gt;
+&lt;p&gt;**Starter boards replace the template concept**&lt;/p&gt;
+&lt;p&gt;- The board list now has a **Starter boards** section (Splunk Platform, Cisco Data Fabric, SVA C1/C11 &amp;amp; C3/C13). Click **Use** to create your own editable private copy and open it — the shipped originals never change, so app updates can't overwrite your work.&lt;/p&gt;
+&lt;p&gt;- **Duplicate** action on every board card makes a private copy (`\ (copy)`), so branching off any board (including a shared one) is one click.&lt;/p&gt;
+&lt;p&gt;- The separate **Templates** tab and the user-saved-template feature (with its 30-version history) have been removed. Reusing a layout across a team is now: make a board, share it, and colleagues **Duplicate** it.&lt;/p&gt;
+&lt;p&gt;- Existing user-saved templates are automatically **migrated to shared boards** on first load after upgrade.&lt;/p&gt;
+&lt;p&gt;**Uninstall cleanup**&lt;/p&gt;
+&lt;p&gt;- The **About** tab has a new *Danger zone* with **Delete all whiteboard data** — a guarded (type-to-confirm) action that purges every board, its history/snapshots, thumbnails, and legacy template data from KV Store before uninstalling the app.&lt;/p&gt;
+&lt;p&gt;---&lt;/p&gt;
+&lt;p&gt;## v0.3.68 — 2026-07-10&lt;/p&gt;
+&lt;p&gt;**SVA architecture templates**&lt;/p&gt;
+&lt;p&gt;- New prebuilt templates: **SVA C3/C13 — SHC Single Site** (Search Head Cluster) and **SVA C1/C11 — Single Site** (standalone search heads), with Splunk shape icons and doc links.&lt;/p&gt;
+&lt;p&gt;- Board generators (`scripts/generate-c3c13-shc-board.py`, `scripts/generate-c1c11-board.py`) and shared layout helpers for tight-fit text and baselines.&lt;/p&gt;
+&lt;p&gt;**Export all as ZIP**&lt;/p&gt;
+&lt;p&gt;- **Export all** now downloads a `.zip` archive with one `\.whiteboard.json` file per board (same format as single-board **Export**), instead of a single combined collection JSON.&lt;/p&gt;
+&lt;p&gt;- Legacy collection exports can still be imported via **Import board…**.&lt;/p&gt;
+&lt;p&gt;---&lt;/p&gt;
+&lt;p&gt;## v0.3.65 — 2026-07-10&lt;/p&gt;
+&lt;p&gt;**Board previews in the list**&lt;/p&gt;
+&lt;p&gt;- Each board card now shows a thumbnail preview of its content, so boards are easy to tell apart at a glance.&lt;/p&gt;
+&lt;p&gt;- Previews are stored in a dedicated `whiteboard_thumbnails` KV collection and refreshed shortly after edits are saved. Boards that don't yet have a stored preview generate one on demand the first time they scroll into view, then cache it for next time.&lt;/p&gt;
+&lt;p&gt;- Deleting a board also removes its stored preview.&lt;/p&gt;
+&lt;p&gt;---&lt;/p&gt;
+&lt;p&gt;## v0.3.64 — 2026-07-10&lt;/p&gt;
+&lt;p&gt;**Import &amp;amp; export from the board list**&lt;/p&gt;
+&lt;p&gt;- **Import board…** in the list toolbar loads one or more `.json` exports (single board or a legacy &quot;export all&quot; collection), creating them as private boards. Multiple files can be selected at once.&lt;/p&gt;
+&lt;p&gt;- **Export** on each board card downloads that board as `\.whiteboard.json`.&lt;/p&gt;
+&lt;p&gt;- **Export all** downloads every accessible board as individual `.whiteboard.json` files inside a ZIP archive.&lt;/p&gt;
+&lt;p&gt;---&lt;/p&gt;
+&lt;p&gt;## v0.3.63 — 2026-07-10&lt;/p&gt;
+&lt;p&gt;**Smarter entry page**&lt;/p&gt;
+&lt;p&gt;- First run (no saved boards) now opens straight onto an empty whiteboard instead of an empty list. Once any board exists, the app opens on the board list.&lt;/p&gt;
+&lt;p&gt;**About tab as a quick guide**&lt;/p&gt;
+&lt;p&gt;- The About tab now embeds a concise user guide with a **TL;DR** (build a whiteboard, use shapes &amp;amp; libraries, group &amp;amp; assign order, present) plus sections for getting started, drawing/shapes/libraries, grouping &amp;amp; presenting, and export/sharing — with links to the full README, release notes, and developer guide.&lt;/p&gt;
+&lt;p&gt;---&lt;/p&gt;
+&lt;p&gt;## v0.3.62 — 2026-07-10&lt;/p&gt;
+&lt;p&gt;**Theme reliability (readable in dark or light)**&lt;/p&gt;
+&lt;p&gt;- The app now reads Splunk Web's *actual* theme via Splunk's theme API (`getUserTheme`) instead of guessing from the OS `prefers-color-scheme`. Fixes unreadable text when the OS/browser is in dark mode but Splunk Web is light (or vice versa).&lt;/p&gt;
+&lt;p&gt;**Duplicate boards / delete-safety (data-loss fix)**&lt;/p&gt;
+&lt;p&gt;- Boards are de-duplicated by key, so a board no longer appears twice (once &quot;Shared&quot;, once &quot;Private&quot;). This removes the trap where deleting one card deleted the single underlying record for both.&lt;/p&gt;
+&lt;p&gt;- Legacy boards (created before RBAC, with no visibility field) are classified as **shared**, and a board's scope is aligned to its visibility so edits/deletes target the correct namespace.&lt;/p&gt;
+&lt;p&gt;**Template appearance saved &amp;amp; restored**&lt;/p&gt;
+&lt;p&gt;- Saving a board as a template now stores its canvas theme and background; applying the template restores that appearance. Previously user templates lost theme/background on save and apply. Template revisions capture appearance too.&lt;/p&gt;
+&lt;p&gt;---&lt;/p&gt;
+&lt;p&gt;## v0.3.61 — 2026-07-10&lt;/p&gt;
+&lt;p&gt;**RBAC hardening &amp;amp; sharing safety**&lt;/p&gt;
+&lt;p&gt;- Granted `write` on the `whiteboard_revisions` KV collection — fixes silent autosave-history failures for non-privileged users on shared boards.&lt;/p&gt;
+&lt;p&gt;- `shareBoard` is now failure-safe/idempotent (key-preserving upsert, best-effort history migration, surfaced warnings).&lt;/p&gt;
+&lt;p&gt;- Optimistic `updated_at` conflict check on board writes and autosave, with a reload/overwrite banner; autosave pauses on conflict so concurrent edits are never clobbered.&lt;/p&gt;
+&lt;p&gt;**UI polish**&lt;/p&gt;
+&lt;p&gt;- Visibility toggle and filter tabs now use Splunk `RadioBar`/`TabBar` (theme-aware, accessible).&lt;/p&gt;
+&lt;p&gt;- Share and delete confirmations use Splunk `Modal` instead of native `confirm()`.&lt;/p&gt;
+&lt;p&gt;**Template fixes**&lt;/p&gt;
+&lt;p&gt;- Templates apply their intended theme/background on load (fixes Splunk Platform loading in light mode).&lt;/p&gt;
+&lt;p&gt;- Splunk Platform ships as **light** and **dark** variants; Cisco Data Fabric templates default to dark.&lt;/p&gt;
+&lt;p&gt;- Reordered Platform build steps so the Correlate/Analyze pillar reveals fully before Act/Automate.&lt;/p&gt;
+&lt;p&gt;**Navigation &amp;amp; libraries**&lt;/p&gt;
+&lt;p&gt;- Opening a board pushes a history entry, so the browser Back button returns to the board list instead of exiting to the About tab.&lt;/p&gt;
+&lt;p&gt;- Wired up Excalidraw `useHandleLibrary` + `libraryReturnUrl` so libraries install from libraries.excalidraw.com and persist across reloads.&lt;/p&gt;
+&lt;p&gt;---&lt;/p&gt;
+&lt;p&gt;## v0.3.59 — 2026-07-10&lt;/p&gt;
+&lt;p&gt;- `state_change_requires_restart \= true` in `app.conf` — Splunk Manager shows **Restart Required** after install/upgrade/enable/disable, avoiding HTTP 500 when opening the app before Splunk Web picks up HTML templates.&lt;/p&gt;
+&lt;p&gt;- README: Sharing &amp;amp; access section; post-install restart note.&lt;/p&gt;
+&lt;p&gt;---&lt;/p&gt;
+&lt;p&gt;## v0.3.58 — 2026-07-10&lt;/p&gt;
+&lt;p&gt;- Documentation: README redesigned as an Excalidraw-first user guide (templates, shapes/SVGs, export/import, Present mode); build/deploy/extension guides moved to `DEVELOPER.md`.&lt;/p&gt;
+&lt;p&gt;- Build / Present: reveal-on-click workflow improvements; new `scripts/assign-reveal-order.py` helper.&lt;/p&gt;
+&lt;p&gt;- Cisco Data Fabric template asset refreshed; board bundle import/export refinements.&lt;/p&gt;
+&lt;p&gt;---&lt;/p&gt;
+&lt;p&gt;## v0.3.54 — 2026-06-22&lt;/p&gt;
+&lt;p&gt;- SSAI / SLIM validation: removed invalid `python.version` from `app.conf`; set `platformRequirements.splunk.Enterprise` to `&quot;*&quot;`.&lt;/p&gt;
+&lt;p&gt;- Splunkbase listing copy and README screenshot updates.&lt;/p&gt;
+&lt;p&gt;---&lt;/p&gt;
+&lt;p&gt;## v0.3.53 — 2026-06-22&lt;/p&gt;
+&lt;p&gt;- Splunkbase readiness: package `README.md` and `PRIVACY.md` in the tarball; manifest updated with release date, company, privacy policy, and release-notes paths.&lt;/p&gt;
+&lt;p&gt;- Enabled `check_for_updates`; added `splunkbase.md` listing copy; documented minimum Splunk Enterprise/Cloud 9.0.0.&lt;/p&gt;
+&lt;p&gt;---&lt;/p&gt;
+&lt;p&gt;## v0.3.51 — 2026-06-18&lt;/p&gt;
+&lt;p&gt;- Fixed custom colour field showing brown after selecting the Splunk navy preset (removed incorrect hardcoded dark-mode value).&lt;/p&gt;
+&lt;p&gt;- Preserve `displayBackgroundColor` when Excalidraw `onChange` fires after appearance-panel updates.&lt;/p&gt;
+&lt;p&gt;---&lt;/p&gt;
+&lt;p&gt;## v0.3.50 — 2026-06-18&lt;/p&gt;
+&lt;p&gt;- Canvas dark mode: persist `displayBackgroundColor` so a picked colour survives light ↔ dark toggles (fixes Splunk navy `#001B3A` shifting).&lt;/p&gt;
+&lt;p&gt;- Performance: replaced slow brute-force colour inversion with a cached iterative solver.&lt;/p&gt;
+&lt;p&gt;- Added Splunk navy (`#001b3a`) swatch to the Canvas appearance panel.&lt;/p&gt;
+&lt;p&gt;---&lt;/p&gt;
+&lt;p&gt;## v0.3.48 — 2026-06-18&lt;/p&gt;
+&lt;p&gt;- Board delete cascades removal of revision and snapshot KV rows.&lt;/p&gt;
+&lt;p&gt;- Autosave persists correctly for cleared canvases after Excalidraw mounts.&lt;/p&gt;
+&lt;p&gt;- Templates: **Replace board** replaces misleading **Apply**, with an unsaved-changes warning.&lt;/p&gt;
+&lt;p&gt;- 5 MB size cap on imported Excalidraw library JSON; portable `perl` telemetry-check build step.&lt;/p&gt;
+&lt;p&gt;- New Federated Search architecture example board.&lt;/p&gt;
+&lt;p&gt;---&lt;/p&gt;
+&lt;p&gt;## v0.3.47 — 2026-06-18&lt;/p&gt;
+&lt;p&gt;- Synced `app.manifest` with `app.conf`; declared Splunk Cloud support.&lt;/p&gt;
+&lt;p&gt;- Cascade-delete board history on board delete; fixed autosave for cleared canvases.&lt;/p&gt;
+&lt;p&gt;- Library import size limit, portable build tooling, README updates.&lt;/p&gt;
+&lt;p&gt;---&lt;/p&gt;
+&lt;p&gt;## v0.3.36 — 2026-06-17&lt;/p&gt;
+&lt;p&gt;- **About tab** showing app version and README link.&lt;/p&gt;
+&lt;p&gt;- **Dark canvas**: theme toggle auto-applies charcoal/black or white background.&lt;/p&gt;
+&lt;p&gt;- **Template SVG icons** rehydrate on save/apply so placeholders no longer appear.&lt;/p&gt;
+&lt;p&gt;- **Revision history**: auto-revisions on save plus named snapshots in the History panel.&lt;/p&gt;
+&lt;p&gt;- Dedicated Canvas appearance sidebar tab for theme and background colour.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collaborative Excalidraw whiteboard inside Splunk for platform architecture and workshop diagrams. Splunk shapes, example boards, and KV Store persistence — no external infrastructure.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Whiteboard App is a native Splunk canvas for architecture and workshop diagrams — no external database or middleware. Draw inside Splunk Web with Excalidraw, Splunk infrastructure shapes, and ready-made example boards; boards persist in KV Store. New boards are private by default; share with everyone on the instance when you are ready. Export PNG/SVG/JSON or walk through designs step-by-step in Present mode. Built for architects, SEs, and facilitators who sketch where their audience already works.
+
+
+Requires Splunk Enterprise or Splunk Cloud (Victoria) 9.0.0 or later. Source: https://github.com/bautt/splunk-whiteboard-app&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a4f7c6c6-7c84-11f1-890e-1ef256ec2553.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Tomas Baublys</dc:creator>
+      <pubDate>Fri, 10 Jul 2026 17:39:16 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8908/#v0.3.71</guid>
+    </item>
     <item>
       <title>Add-on for MongoDB Atlas AccessHistory - v1.1.1 [Version Update] (Archived)</title>
       <link>https://splunkbase.splunk.com/app/7026/</link>
@@ -215,20 +344,6 @@ License: Beta/community preview license. See LICENSE included in the package.&lt
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Peter Egon Schulle</dc:creator>
       <pubDate>Fri, 10 Jul 2026 11:55:54 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8971/#v1.0.5</guid>
-    </item>
-    <item>
-      <title>Whiteboard App - v0.3.63 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8908/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;## v0.3.63 — 2026-07-10&lt;/p&gt;
-&lt;p&gt;**Smarter entry page**&lt;/p&gt;
-&lt;p&gt;- First run (no saved boards) now opens straight onto an empty whiteboard instead of an empty list. Once any board exists, the app opens on the board list.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collaborative Excalidraw whiteboard inside Splunk for architecture and workshop diagrams. Splunk shapes, templates, KV Store persistence — no external infrastructure.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Whiteboard App brings Excalidraw — the open-source infinite canvas — into Splunk Web. Create boards from scratch or start from built-in architecture templates, add Splunk infrastructure shapes and tintable SVG icons, and auto-save to KV Store on your Splunk deployment. No separate whiteboard service, database, or login.
-
-Export PNG, PDF, or board JSON; import JSON to move diagrams between instances; share a direct board link; or walk through designs step-by-step in Present mode with progressive reveal. Built for architects, sales engineers, and facilitators who sketch where their audience already works.
-
-Requires Splunk Enterprise or Splunk Cloud (Victoria) 9.0.0 or later. Source: https://github.com/bautt/splunk-whiteboard-app&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/1f5f5124-7c51-11f1-b6e0-0a2c5905d900.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Tomas Baublys</dc:creator>
-      <pubDate>Fri, 10 Jul 2026 11:21:48 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8908/#v0.3.63</guid>
     </item>
     <item>
       <title>Postfix Mail Add-on for Splunk - v1.0.0 [New App Release]</title>
