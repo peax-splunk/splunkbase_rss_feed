@@ -6,7 +6,63 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Fri, 10 Jul 2026 06:34:09 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 10 Jul 2026 10:15:23 +0000</lastBuildDate>
+    <item>
+      <title>Splunk Add-on for ServiceNow - v11.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/1928/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;fix: Updated index field validation to accept MDL-like index names using the UCC &lt;code&gt;index_name&lt;/code&gt; validator&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Add-on for ServiceNow allows a Splunk software administrator to collect data from ServiceNow and create incidents and events in ServiceNow.
+
+The add-on collects incident, event, change, user, user group, location, and CMDB CI information from ServiceNow via ServiceNow REST APIs. The add-on also provides workflow actions that allow users to link directly from events in the Splunk platform search results to relevant ServiceNow incidents, events, and Knowledge Base articles.
+
+The Splunk Add-on for ServiceNow allows Splunk software administrators to use custom commands, alert actions, and scripts to create new incidents and events in your ServiceNow instance, as well as update the incidents created from the Splunk platform.
+
+This add-on provides the inputs and CIM-compatible knowledge to use with other Splunk apps, such as Splunk Enterprise Security and the Splunk App for PCI Compliance.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/3ee8c1be-7c2f-11f1-b039-6a050a22ea2a.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk</dc:creator>
+      <pubDate>Fri, 10 Jul 2026 10:14:07 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/1928/#v11.0.1</guid>
+    </item>
+    <item>
+      <title>Whiteboard App - v0.3.61 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8908/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;RBAC hardening&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Grant &lt;code&gt;write&lt;/code&gt; on the &lt;code&gt;whiteboard_revisions&lt;/code&gt; KV collection — fixes silent autosave-history failures for non-privileged users on shared boards.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;shareBoard&lt;/code&gt; is now failure-safe/idempotent (key-preserving upsert, best-effort history migration, surfaced warnings).&lt;/li&gt;
+&lt;li&gt;Optimistic &lt;code&gt;updated_at&lt;/code&gt; conflict check on board writes and autosave, with a reload/overwrite banner; autosave pauses on conflict to avoid clobbering another user's changes.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;UI polish&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Visibility toggle and filter tabs now use Splunk &lt;code&gt;RadioBar&lt;/code&gt;/&lt;code&gt;TabBar&lt;/code&gt; (theme-aware, accessible).&lt;/li&gt;
+&lt;li&gt;Share and delete confirmations use Splunk &lt;code&gt;Modal&lt;/code&gt; instead of native &lt;code&gt;confirm()&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Template fixes&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Templates apply their intended theme/background on load (fixes Splunk Platform loading in light mode).&lt;/li&gt;
+&lt;li&gt;Splunk Platform now ships as &lt;strong&gt;light&lt;/strong&gt; and &lt;strong&gt;dark&lt;/strong&gt; variants; Cisco Data Fabric templates default to dark.&lt;/li&gt;
+&lt;li&gt;Reordered Platform build steps so the Correlate/Analyze pillar reveals fully before Act/Automate.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Navigation&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Opening a board pushes a history entry, so the browser Back button returns to the board list instead of exiting to the About tab.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Libraries&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Wired up Excalidraw &lt;code&gt;useHandleLibrary&lt;/code&gt; + &lt;code&gt;libraryReturnUrl&lt;/code&gt; so libraries can be installed from libraries.excalidraw.com and persist across reloads.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Docs&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Documented the admin &lt;code&gt;admin_all_objects&lt;/code&gt; visibility caveat for private boards.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Upgrade&lt;/h2&gt;
+&lt;p&gt;Upload the package and restart Splunk (&lt;code&gt;state_change_requires_restart = true&lt;/code&gt;). Existing shared boards remain shared.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collaborative Excalidraw whiteboard inside Splunk for architecture and workshop diagrams. Splunk shapes, templates, KV Store persistence — no external infrastructure.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Whiteboard App brings Excalidraw — the open-source infinite canvas — into Splunk Web. Create boards from scratch or start from built-in architecture templates, add Splunk infrastructure shapes and tintable SVG icons, and auto-save to KV Store on your Splunk deployment. No separate whiteboard service, database, or login.
+
+Export PNG, PDF, or board JSON; import JSON to move diagrams between instances; share a direct board link; or walk through designs step-by-step in Present mode with progressive reveal. Built for architects, sales engineers, and facilitators who sketch where their audience already works.
+
+Requires Splunk Enterprise or Splunk Cloud (Victoria) 9.0.0 or later. Source: https://github.com/bautt/splunk-whiteboard-app&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e12f4a6c-7c46-11f1-ba33-e6a79855faf5.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Tomas Baublys</dc:creator>
+      <pubDate>Fri, 10 Jul 2026 10:10:52 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8908/#v0.3.61</guid>
+    </item>
     <item>
       <title>Cisco Catalyst Add-on for Splunk - v3.2.36 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7538/</link>
@@ -62,7 +118,7 @@ Cisco Network Infrastructure Devices which include the below platform series:
 * Cisco Access Points
 * Cisco WLC - WLAN Controller&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/32f67c58-7c29-11f1-a6e8-5ac67eae4ded.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco</dc:creator>
-      <pubDate>Fri, 10 Jul 2026 06:33:06 +0000</pubDate>
+      <pubDate>Fri, 10 Jul 2026 06:48:42 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7538/#v3.2.36</guid>
     </item>
     <item>
@@ -1685,27 +1741,6 @@ Get started today with our quickstart guide at https://www.alertmanager.app/docs
       <guid>https://splunkbase.splunk.com/app/6730/#v3.9.1</guid>
     </item>
     <item>
-      <title>WeAre RSS For Splunk - v0.0.4 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8928/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Initial public release of&amp;nbsp;WeAre RSS App For Splunk&amp;nbsp;by&amp;nbsp;WeAre Solutions.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Features&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;RSS Feed Input&amp;nbsp;modular input for RSS 2.0 and ATOM feeds&lt;/li&gt;
-&lt;li&gt;UCC management UI&amp;nbsp;for inputs and logging&lt;/li&gt;
-&lt;li&gt;Configurable&amp;nbsp;polling interval&amp;nbsp;(10 seconds to 24 hours)&lt;/li&gt;
-&lt;li&gt;Per-input&amp;nbsp;index,&amp;nbsp;sourcetype,&amp;nbsp;SSL verification, and&amp;nbsp;HTTP timeout&lt;/li&gt;
-&lt;li&gt;Checkpoint deduplication&amp;nbsp;— only new feed entries are indexed&lt;/li&gt;
-&lt;li&gt;Event timestamp&amp;nbsp;options: indexing time or feed field (&lt;code&gt;published&lt;/code&gt;,&amp;nbsp;&lt;code&gt;updated&lt;/code&gt;,&amp;nbsp;&lt;code&gt;created&lt;/code&gt;)&lt;/li&gt;
-&lt;li&gt;JSON events&amp;nbsp;with title, link, summary, content, authors, tags, and feed format&lt;/li&gt;
-&lt;li&gt;Splunk Enterprise&amp;nbsp;and&amp;nbsp;Splunk Cloud&amp;nbsp;(Victoria) support&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;WeAre RSS App For Splunk brings RSS and ATOM syndication feeds into Splunk as searchable, alertable events.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;WeAre RSS App For Splunk provides a supported modular input that polls RSS 2.0 and ATOM feeds on a schedule, indexes only new entries (checkpoint deduplication), and lets you configure index, sourcetype, SSL verification, polling interval, and event timestamp behavior (indexing time or feed date fields).
-
-Typical uses: Monitoring vendor security bulletins, tracking regulatory or industry news, and ingesting syndicated operational content for dashboards, correlation searches, and alerting.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/fd31751e-6f99-11f1-a5fc-2e0230f9ff26.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">WeAre Solutions Oy</dc:creator>
-      <pubDate>Thu, 02 Jul 2026 10:12:40 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8928/#v0.0.4</guid>
-    </item>
-    <item>
       <title>Splunk MCP Server - v1.2.1 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/7931/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Splunk MCP Server App 1.2.1 introduces a new MCP Telemetry Dashboard for monitoring MCP usage, authentication, consumption, and errors. This release also moves MCP tool execution limits and rate controls into a new Guardrails section in the UI, adds a new Splunk AI Assistant timeout setting, improves configuration validation, and includes telemetry and permissions-related fixes.&lt;/p&gt;
@@ -1805,24 +1840,6 @@ All of the components of InfoSec app can be easily expanded using free security 
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk</dc:creator>
       <pubDate>Wed, 01 Jul 2026 20:08:14 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/4240/#v1.7.2</guid>
-    </item>
-    <item>
-      <title>Splunk Add-on for ServiceNow - v11.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/1928/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
-&lt;li&gt;Added support for default values in the ServiceNow Incident Integration alert action through the new ServiceNow Incident Alert Defaults configuration tab&lt;/li&gt;
-&lt;li&gt;Added three new fields to the ServiceNow Incident Integration alert action: Assigned To, Comments, and Work Notes.&lt;/li&gt;
-&lt;li&gt;Added support for Python 3.13 alongside Python 3.9.&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Add-on for ServiceNow allows a Splunk software administrator to collect data from ServiceNow and create incidents and events in ServiceNow.
-
-The add-on collects incident, event, change, user, user group, location, and CMDB CI information from ServiceNow via ServiceNow REST APIs. The add-on also provides workflow actions that allow users to link directly from events in the Splunk platform search results to relevant ServiceNow incidents, events, and Knowledge Base articles.
-
-The Splunk Add-on for ServiceNow allows Splunk software administrators to use custom commands, alert actions, and scripts to create new incidents and events in your ServiceNow instance, as well as update the incidents created from the Splunk platform.
-
-This add-on provides the inputs and CIM-compatible knowledge to use with other Splunk apps, such as Splunk Enterprise Security and the Splunk App for PCI Compliance.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/cf777e9c-7553-11f1-90f9-4e17982ef84b.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk</dc:creator>
-      <pubDate>Wed, 01 Jul 2026 14:06:16 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/1928/#v11.0.0</guid>
     </item>
     <item>
       <title>Splunk Add-on for Salesforce - v6.0.3 [New App Release]</title>
