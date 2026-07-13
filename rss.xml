@@ -6,36 +6,14 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Mon, 13 Jul 2026 01:55:12 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 13 Jul 2026 05:28:55 +0000</lastBuildDate>
     <item>
-      <title>Ensign ElasticSearch Data Integrator - v1.5.0 [Version Update]</title>
+      <title>Ensign ElasticSearch Data Integrator - v1.5.3 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8645/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;v1.5.0 — 2026-07-09&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Elasticsearch 9.x Native Client — Now Fully Functional&lt;/strong&gt;&lt;/p&gt;
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Compatibility:&lt;/strong&gt; Splunk Enterprise 9.4 (Python 3.9) and Splunk 10 (Python 3.13); Elasticsearch 8.x and 9.x.&lt;/p&gt;
+&lt;h3&gt;v1.5.3 — Fixes&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Fixed: The vendored&amp;nbsp;&lt;code&gt;elasticsearch9&lt;/code&gt;&amp;nbsp;package previously imported the 8.x&amp;nbsp;&lt;code&gt;elastic_transport&lt;/code&gt;&amp;nbsp;(version guard mismatch), causing silent fallback to the 8.x client on every run. Rewired all internal imports (122 statements across 104 files) to bind to isolated&amp;nbsp;&lt;code&gt;elastic_transport9&lt;/code&gt;&amp;nbsp;(9.4.1). The ES 9.x native client now imports and coexists correctly with the 8.19.3 client in the same process.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Runtime Capability Gating&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;New: Smart runtime detection selects the ES 9.x native client on Splunk 10 (Python 3.10+ / OpenSSL 1.1.1+) and the 8.19.3 client with REST API compatibility mode on Splunk 9.4 — never a hard failure.&lt;/li&gt;
-&lt;li&gt;New: Selecting &quot;Elasticsearch 9.x&quot; on an incompatible runtime is now rejected at save time with an actionable error message.&amp;nbsp;&lt;code&gt;escheck_config&lt;/code&gt;&amp;nbsp;and&amp;nbsp;&lt;code&gt;escheck_connection&lt;/code&gt;&amp;nbsp;report&amp;nbsp;&lt;code&gt;es9_native_capable&lt;/code&gt;&amp;nbsp;status.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;KVStore Checkpoint Backend Restored&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Fixed: Internal REST calls to splunkd hard-coded&amp;nbsp;&lt;code&gt;verify=True&lt;/code&gt;, which always failed against splunkd's self-signed certificate. Now verifies against the auto-discovered Splunk CA, with loopback fallback.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Security Hardening&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;proxy_password&lt;/code&gt;&amp;nbsp;is now stored encrypted via&amp;nbsp;&lt;code&gt;storage/passwords&lt;/code&gt;&amp;nbsp;instead of plaintext.&lt;/li&gt;
-&lt;li&gt;Single-term custom filter validates the filter key against Elasticsearch field-name grammar; rejects control characters and over-length values (fails closed).&lt;/li&gt;
-&lt;li&gt;ES version probe verifies TLS by default; warns loudly when run with verification disabled.&lt;/li&gt;
-&lt;li&gt;Removed global suppression of&amp;nbsp;&lt;code&gt;urllib3 InsecureRequestWarning&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Packaging &amp;amp; Framework&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Removed Linux-only CPython 3.7 binaries (PyYAML, MarkupSafe); pure-Python fallbacks used on all platforms — fully cross-platform.&lt;/li&gt;
-&lt;li&gt;Updated&amp;nbsp;&lt;code&gt;splunktaucclib&lt;/code&gt;&amp;nbsp;8.1.0 → 8.2.0.&lt;/li&gt;
-&lt;li&gt;Removed vestigial advanced-filter UI fields from the public build.&lt;/li&gt;
+&lt;li&gt;Corrected several runtime and UI messages that were displayed in a non-English language (for example, the &quot;Elasticsearch 9.x&quot; version-selection message); all user-facing text is now English. No functional change.&lt;/li&gt;
 &lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Splunk modular input for ingesting data from Elasticsearch 8.x and 9.x clusters. Dual ES client (auto-selected by runtime), multi-cluster profiles, DSL query filters, scroll-based pagination with crash recovery, document-level deduplication, KVStore checkpoints, SSL/TLS, proxy, and custom SPL diagnostic commands. Full GUI configuration.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Ensign ElasticSearch Data Integrator is a Splunk modular input add-on for ingesting data from Elasticsearch 8.x and 9.x clusters into Splunk via the Elasticsearch REST API.
 
 Built on the Splunk UCC Framework (Add-on Builder), it provides a full GUI-driven configuration experience through Splunk Web — no manual file editing required.
@@ -65,10 +43,10 @@ Key Features:
 Compatibility:
 • Elasticsearch: 8.x and 9.x (NOT compatible with 7.x or earlier)
 • Splunk Enterprise: 9.4+ (Python 3.9) and 10.x (Python 3.13)
-• Network: HTTPS access to target Elasticsearch cluster(s)&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f021b1f8-7e59-11f1-8733-a6bc4046ee8a.png&quot;&gt;</description>
+• Network: HTTPS access to target Elasticsearch cluster(s)&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/60d0652c-7e67-11f1-89f8-562861d36ada.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Muhammad Rafdi Aufar Ahmad</dc:creator>
-      <pubDate>Mon, 13 Jul 2026 01:34:32 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8645/#v1.5.0</guid>
+      <pubDate>Mon, 13 Jul 2026 03:12:23 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8645/#v1.5.3</guid>
     </item>
     <item>
       <title>Apprise Alert Action - v2.0.6 [Version Update]</title>
