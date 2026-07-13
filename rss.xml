@@ -6,7 +6,72 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Mon, 13 Jul 2026 20:50:40 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 13 Jul 2026 21:46:01 +0000</lastBuildDate>
+    <item>
+      <title>Cisco Catalyst Add-on for Splunk - v3.2.38 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7538/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h3&gt;New features&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;CIM normalization for Catalyst Center data&lt;/strong&gt; — the Catalyst Center (&lt;code&gt;cisco:dnac&lt;/code&gt;) sourcetypes now populate the Splunk Common Information Model (CIM 8.5): client → Network Sessions, audit logs → Change, issues → Alerts, security advisories → Vulnerabilities, device health → Performance and Inventory, compliance → Inventory, and software images (SWIM) → Updates. Ships the field aliases, tags, and eventtypes; requires the Splunk Common Information Model add-on for the data models.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;New Cisco Cyber Vision generic API input&lt;/strong&gt; — collect from any allow-listed Cisco Cyber Vision Classic API (&lt;code&gt;/api/3.0/&lt;/code&gt;) endpoint via a curated catalog, with a per-endpoint sourcetype under &lt;code&gt;cisco:cybervision:custom&lt;/code&gt;. Mirrors the existing generic Catalyst Center, SD-WAN, and ISE API inputs; disabled by default.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Fixes&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Restored the original &lt;code&gt;cisco:dnac:client&lt;/code&gt; event structure&lt;/strong&gt; — a change in v3.2.10 had flattened and renamed the client fields (for example &lt;code&gt;type&lt;/code&gt; became &lt;code&gt;ClientType&lt;/code&gt;) and dropped whole sections of the payload, including &lt;code&gt;health&lt;/code&gt;, &lt;code&gt;onboarding&lt;/code&gt;, and &lt;code&gt;latency&lt;/code&gt;. The input now emits the raw Catalyst Center client payload again, so events match the pre-v3.2.10 schema and existing searches and dashboards work without modification. The per-device host assignment added in v3.2.10 is retained.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;SD-WAN audit before/after config fields now populate reliably&lt;/strong&gt; — for &lt;code&gt;cisco:sdwan:audit:logs&lt;/code&gt;, the &lt;code&gt;audit_config_before&lt;/code&gt; and &lt;code&gt;audit_config_after&lt;/code&gt; fields (and the decoded &lt;code&gt;audit_log_details&lt;/code&gt;) are now produced by the modular input in Python instead of a fragile search-time extraction that could leave them blank. The config snapshots are normalized and canonicalized so identical configurations no longer show a false difference, and the raw double-encoded &lt;code&gt;auditdetails&lt;/code&gt; blob and a redundant &lt;code&gt;config_differences&lt;/code&gt; field are removed from the event. Enable &lt;strong&gt;Config Difference&lt;/strong&gt; (and optionally &lt;strong&gt;Audit Log Details&lt;/strong&gt;) on the SD-WAN Audit Logs input to populate these fields.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Enhancements&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Improved generic API endpoint catalogs and selection UX&lt;/strong&gt; — refreshed the ISE and SD-WAN endpoint catalogs (including Cisco DevNet documentation links) and the endpoint-selection UI shared by the generic API inputs.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Maintenance&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;ISE Analytics Reports collection updated&lt;/strong&gt; — refreshed the ISE report-generation and disk-to-repository transfer logic (posture report export handling, and cleaner detection and reporting of a failed repository copy) to the latest version.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Platform &amp;amp; Compatibility&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;ISE Analytics Reports module now loads on all platforms&lt;/strong&gt; — the SSH/SFTP client library is imported lazily, so the input loads and its input-scheme introspection works even where the packaged crypto libraries are not present. No change in behavior on Linux or Windows.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Upgrade notes&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;No reconfiguration required. Checkpointing is unchanged (KV Store) — upgrades are seamless.&lt;/li&gt;
+  &lt;li&gt;Client events return to the original field names and nested structure. Any content built against the interim &lt;code&gt;Client&lt;/code&gt;-prefixed field names (v3.2.10–v3.2.37) should be pointed back at the original field names.&lt;/li&gt;
+  &lt;li&gt;CIM data models for Catalyst Center data require the Splunk Common Information Model add-on (&lt;code&gt;Splunk_SA_CIM&lt;/code&gt;) on the search head. No change to existing searches; the CIM fields are additive.&lt;/li&gt;
+  &lt;li&gt;To populate the SD-WAN audit before/after config-diff fields, enable &lt;strong&gt;Config Difference&lt;/strong&gt; (and optionally &lt;strong&gt;Audit Log Details&lt;/strong&gt;) on the SD-WAN &lt;strong&gt;Audit Logs&lt;/strong&gt; input. The fields are written at collection time, so they appear on newly collected audit events, not on previously indexed ones.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Cisco Catalyst Add-on for Splunk collects and normalizes API telemetry from Cisco Catalyst Center, SD-WAN (vManage), ISE, and Cyber Vision through modular inputs. It includes CIM-aligned knowledge objects, backward-compatible DNAC/Catalyst sourcetype coverage, and built-in health monitoring for input status, errors, and API load.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Author - Cisco Systems
+Prerequisites - This Technical Add-on is dependent on &amp;#x27;Splunk Add-on for Stream Forwarders&amp;#x27; and &amp;#x27;Splunk App for Stream&amp;#x27;
+
+Supported Cisco Products:
+Cisco Catalyst SD-WAN
+Cisco Identity Services Engine
+Cisco Catalyst Center
+Cyber Vision
+Cisco Network Infrastructure Devices which include the below platform series:
+* Cisco Catalyst series switches (1000, 1200, 1300, 2960, 3650, 3750, 4500, 6500, 6800, 7600, 9000 etc.)
+* Cisco ASR - Aggregation Services Routers (900, 1000, 5000, 9000 etc.)
+* Cisco ISR - Integrated Services Routers (800, 1900, 2900, 3900, 4451 etc.)
+* Cisco Nexus Data Center switches (1000V, 2000, 3000, 4000, 5000, 6000, 7000, 9000 etc.)
+* Cisco Carrier Routing System
+* Other Cisco IOS based devices (Metro Ethernet, Industrial Ethernet, Blade Switches, Connected Grid etc.)
+* Cisco Access Points
+* Cisco WLC - WLAN Controller&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/bcfbdfd0-7f01-11f1-9916-5ac430f44672.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco</dc:creator>
+      <pubDate>Mon, 13 Jul 2026 21:44:43 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7538/#v3.2.38</guid>
+    </item>
+    <item>
+      <title>Cyera TA - v4.1.35 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7330/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This add-on allows Splunk admins to see audit trail and event data for the Cyera application. It also allows them to see when issues discovered by Cyera&amp;#x27;s classification and DSPM capabilities are added or updated in the platform. If users wish to see datastore and classification information in Splunk, that is also available. OCSF data models for use with CIM are available. In the latest release, all events in the platform are available, and the current Cyera API endpoints are used.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/1cbfe9a4-7ef6-11f1-9ed2-7630a0a66aed.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Hampton</dc:creator>
+      <pubDate>Mon, 13 Jul 2026 20:56:01 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7330/#v4.1.35</guid>
+    </item>
     <item>
       <title>DomainTools App For Splunk and Splunk ES - v5.6.3 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5226/</link>
@@ -47,14 +112,6 @@ The DomainTools App works in parallel with Splunk Enterprise Security (ES) but d
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">DomainTools Integrations Team</dc:creator>
       <pubDate>Mon, 13 Jul 2026 20:47:58 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5226/#v5.6.3</guid>
-    </item>
-    <item>
-      <title>Cyera TA - v4.1.34 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7330/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This add-on allows Splunk admins to see audit trail and event data for the Cyera application. It also allows them to see when issues discovered by Cyera&amp;#x27;s classification and DSPM capabilities are added or updated in the platform. If users wish to see datastore and classification information in Splunk, that is also available. OCSF data models for use with CIM are available. In the latest release, all events in the platform are available, and the current Cyera API endpoints are used.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/1cbfe9a4-7ef6-11f1-9ed2-7630a0a66aed.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Hampton</dc:creator>
-      <pubDate>Mon, 13 Jul 2026 20:08:28 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7330/#v4.1.34</guid>
     </item>
     <item>
       <title>Splunk Infrastructure Monitoring Add-on - v1.3.1 [Version Update]</title>
@@ -548,61 +605,6 @@ This Splunk app integrates with USTA’s threat intelligence API, enabling seaml
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">PRODAFT Intelligence</dc:creator>
       <pubDate>Fri, 10 Jul 2026 14:30:44 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7558/#v1.0.7</guid>
-    </item>
-    <item>
-      <title>Cisco Catalyst Add-on for Splunk - v3.2.37 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7538/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h3&gt;New features&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;CIM normalization for Catalyst Center data&lt;/strong&gt; — the Catalyst Center (&lt;code&gt;cisco:dnac&lt;/code&gt;) sourcetypes now populate the Splunk Common Information Model (CIM 8.5): client → Network Sessions, audit logs → Change, issues → Alerts, security advisories → Vulnerabilities, device health → Performance and Inventory, compliance → Inventory, and software images (SWIM) → Updates. Ships the field aliases, tags, and eventtypes; requires the Splunk Common Information Model add-on for the data models.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;New Cisco Cyber Vision generic API input&lt;/strong&gt; — collect from any allow-listed Cisco Cyber Vision Classic API (&lt;code&gt;/api/3.0/&lt;/code&gt;) endpoint via a curated catalog, with a per-endpoint sourcetype under &lt;code&gt;cisco:cybervision:custom&lt;/code&gt;. Mirrors the existing generic Catalyst Center, SD-WAN, and ISE API inputs; disabled by default.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Fixes&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Restored the original &lt;code&gt;cisco:dnac:client&lt;/code&gt; event structure&lt;/strong&gt; — a change in v3.2.10 had flattened and renamed the client fields (for example &lt;code&gt;type&lt;/code&gt; became &lt;code&gt;ClientType&lt;/code&gt;) and dropped whole sections of the payload, including &lt;code&gt;health&lt;/code&gt;, &lt;code&gt;onboarding&lt;/code&gt;, and &lt;code&gt;latency&lt;/code&gt;. The input now emits the raw Catalyst Center client payload again, so events match the pre-v3.2.10 schema and existing searches and dashboards work without modification. The per-device host assignment added in v3.2.10 is retained.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Enhancements&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Improved generic API endpoint catalogs and selection UX&lt;/strong&gt; — refreshed the ISE and SD-WAN endpoint catalogs (including Cisco DevNet documentation links) and the endpoint-selection UI shared by the generic API inputs.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Maintenance&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;ISE Analytics Reports collection updated&lt;/strong&gt; — refreshed the ISE report-generation and disk-to-repository transfer logic (posture report export handling, and cleaner detection and reporting of a failed repository copy) to the latest version.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Platform &amp;amp; Compatibility&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;ISE Analytics Reports module now loads on all platforms&lt;/strong&gt; — the SSH/SFTP client library is imported lazily, so the input loads and its input-scheme introspection works even where the packaged crypto libraries are not present. No change in behavior on Linux or Windows.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Upgrade notes&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;No reconfiguration required. Checkpointing is unchanged (KV Store) — upgrades are seamless.&lt;/li&gt;
-  &lt;li&gt;Client events return to the original field names and nested structure. Any content built against the interim &lt;code&gt;Client&lt;/code&gt;-prefixed field names (v3.2.10–v3.2.37) should be pointed back at the original field names.&lt;/li&gt;
-  &lt;li&gt;CIM data models for Catalyst Center data require the Splunk Common Information Model add-on (&lt;code&gt;Splunk_SA_CIM&lt;/code&gt;) on the search head. No change to existing searches; the CIM fields are additive.&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Cisco Catalyst Add-on for Splunk collects and normalizes API telemetry from Cisco Catalyst Center, SD-WAN (vManage), ISE, and Cyber Vision through modular inputs. It includes CIM-aligned knowledge objects, backward-compatible DNAC/Catalyst sourcetype coverage, and built-in health monitoring for input status, errors, and API load.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Author - Cisco Systems
-Prerequisites - This Technical Add-on is dependent on &amp;#x27;Splunk Add-on for Stream Forwarders&amp;#x27; and &amp;#x27;Splunk App for Stream&amp;#x27;
-
-Supported Cisco Products:
-Cisco Catalyst SD-WAN
-Cisco Identity Services Engine
-Cisco Catalyst Center
-Cyber Vision
-Cisco Network Infrastructure Devices which include the below platform series:
-* Cisco Catalyst series switches (1000, 1200, 1300, 2960, 3650, 3750, 4500, 6500, 6800, 7600, 9000 etc.)
-* Cisco ASR - Aggregation Services Routers (900, 1000, 5000, 9000 etc.)
-* Cisco ISR - Integrated Services Routers (800, 1900, 2900, 3900, 4451 etc.)
-* Cisco Nexus Data Center switches (1000V, 2000, 3000, 4000, 5000, 6000, 7000, 9000 etc.)
-* Cisco Carrier Routing System
-* Other Cisco IOS based devices (Metro Ethernet, Industrial Ethernet, Blade Switches, Connected Grid etc.)
-* Cisco Access Points
-* Cisco WLC - WLAN Controller&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/32f67c58-7c29-11f1-a6e8-5ac67eae4ded.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco</dc:creator>
-      <pubDate>Fri, 10 Jul 2026 13:46:21 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7538/#v3.2.37</guid>
     </item>
     <item>
       <title>NordPass Business for Splunk - v1.3.1 [Version Update]</title>
