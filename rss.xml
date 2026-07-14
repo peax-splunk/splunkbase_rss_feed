@@ -6,7 +6,188 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Tue, 14 Jul 2026 07:04:05 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 14 Jul 2026 09:47:50 +0000</lastBuildDate>
+    <item>
+      <title>Recorded Future App for Splunk - v3.2.3 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4920/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;[3.2.3] (2026-07-10)&lt;/p&gt;
+&lt;h4&gt;Bugfixes&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Fixed data loss in classic-alert and playbook-alert retention: the purge now uses the KV-store REST API instead of SPL inputlookup/outputlookup, which silently dropped nested fields (e.g. api_response) on Splunk Cloud.&lt;/li&gt;
+&lt;li&gt;Fixed failing Threat Hunt jobs: the Sigma field-existence check built a search without a leading search command, which Splunk rejected with 400 Bad Request (&quot;Unknown search command 'index'&quot;).&lt;/li&gt;
+&lt;li&gt;Fixed an error when finalizing a failed Threat Hunt: Splunk job messages were joined as strings, raising a TypeError that masked the original failure.&lt;/li&gt;
+&lt;li&gt;Fixed Sigma rule titles showing as &quot;unknown&quot; on the Sigma Rule Detections tab while a Threat Hunt is still fetching rules.&lt;/li&gt;
+&lt;li&gt;Fixed rf_evidence_* fields no longer populating in Findings/Notables on Splunk Enterprise 10.&lt;/li&gt;
+&lt;li&gt;Fixed overriding the Sigma index of an Autonomous Threat Operations hunt on instances without Detection Targets configured.&lt;/li&gt;
+&lt;li&gt;Fixed failed Sigma rules being hard to notice on the Threat Hunt Runs page: failed rules are now listed first, and sorting of rules by detections was improved.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Documentation&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Added a &quot;Multiple Environments&quot; section to the Autonomous Threat Operations documentation, explaining that independent Splunk deployments sharing a Recorded Future Portal account should each use a separate integration user to avoid hunt-job race conditions.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Recorded Future app for Splunk
+
+Make fast and informed incident verdicts, expand detection incidents in your network and monitoring of emerging external threats to your organization. See the power of Recorded Future and Splunk together. 
+
+Current version of Enterprise Security in-support: 8.0.x, 7.3.x, 7.2.x
+
+Start a free 30-day trial: https://go.recordedfuture.com/splunk-integration-trial
+
+Configure Guide for Splunk Enterprise &amp;amp; Enterprise Security: https://assets.recordedfuture.com/Install%20Guides/Splunk-v2-Installation-Guide.pdf
+
+Known issues:
+- After upgrading the application on Splunk 10, two versions of the app run simultaneously for approximately 10 minutes. During this period, the UI is served from the new version, while the backend processes from both the old and new versions are active in parallel. This can lead to unexpected frontend behavior.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c1e4a3cc-7e9a-11f1-9916-5ac430f44672.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Recorded Future</dc:creator>
+      <pubDate>Tue, 14 Jul 2026 09:40:48 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4920/#v3.2.3</guid>
+    </item>
+    <item>
+      <title>TrackMe - v2.4.7 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4621/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;TrackMe 2.4.7 — AI Routines: your standing instructions to TrackMe, plus a full Configuration Guardian management experience.&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;AI Routines — describe a monitoring task in plain English, and TrackMe watches for it.&lt;/strong&gt;&amp;nbsp;Write a sentence like&amp;nbsp;&lt;em&gt;“tell me if 4 or more high-priority feeds turn red within 15 minutes, correlate what they have in common, and add a note to each entity” — or “every morning at 08:00, send me a plain-English digest of the tenant’s health: what is red, what changed since yesterday, and what deserves attention”&lt;/em&gt;&amp;nbsp;— TrackMe compiles it into a structured instruction, runs it on the schedule you choose, and delivers the outcome as an email or a Splunk event, with&amp;nbsp;&lt;strong&gt;real, audited actions&lt;/strong&gt;&amp;nbsp;if (and only if) you granted them. Three evaluation strategies put you in control of AI cost:&amp;nbsp;&lt;strong&gt;Agentic&lt;/strong&gt;&amp;nbsp;(the LLM reasons on every cycle),&amp;nbsp;&lt;strong&gt;Hybrid&lt;/strong&gt;&amp;nbsp;(a cheap SPL trigger gates the LLM — zero tokens when nothing is happening), and&amp;nbsp;&lt;strong&gt;Deterministic&lt;/strong&gt;&amp;nbsp;(SPL computes the condition, the LLM formats the outcome). Start from a template or a blank intent, preview the exact workflow before anything is created, and dry-run it with&amp;nbsp;&lt;strong&gt;Evaluate&lt;/strong&gt;. Opt-in by construction, with a kill switch, a creator-roles policy, consent pinned to the exact permissions you approved, per-routine AI provider and timeout, full token-cost visibility and a dedicated activity audit dashboard. See&amp;nbsp;&lt;a href=&quot;https://docs.trackme-solutions.com/latest/ai_routines.html#ai-routines&quot; rel=&quot;noopener noreferrer&quot;&gt;AI Routines&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Configuration Guardian — now a full management experience.&lt;/strong&gt;&amp;nbsp;A new Check Catalog lets administrators enable/disable and tune every check, snooze alerts, and review severities with clear escalation ladders; a new degraded-tenant check detects tenants whose operations are impaired; and&amp;nbsp;&lt;strong&gt;email notifications&lt;/strong&gt;&amp;nbsp;can be configured on alert lifecycle transitions — so Guardian findings reach you even outside the UI. An Ask-AI panel brings the AI Assistant directly to the Guardian page.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;AI Advisors — stability.&lt;/strong&gt;&amp;nbsp;Advisors now start reliably on OpenAI providers (strict-mode tool schemas), and search-hosted interactive execution gains automatic resume of orphaned runs.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Faster and more resilient at scale.&lt;/strong&gt;&amp;nbsp;The Virtual Tenants page now loads its cached data in a single batched request (dramatically smaller responses, no more intermittent errors under heavy concurrent search load), and the global Support Diagnostic gains checkpoint/resume resilience with live step-by-step progress — it no longer gets stuck silently on large environments.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Fixes &amp;amp; polish.&lt;/strong&gt;&amp;nbsp;The AI Assistant now knows bulk actions accept wildcards, refreshed Google Gemini model suggestions, quieter logs on deployments without remote accounts, and a batch of minor hardening fixes from the previous cycle.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;See: &lt;a href=&quot;https://docs.trackme-solutions.com/latest/releasenotes.html#version-2-4-7-build-1783461509-08-07-2026&quot; rel=&quot;noopener noreferrer&quot;&gt;https://docs.trackme-solutions.com/latest/releasenotes.html#version-2-4-7-build-1783461509-08-07-2026&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TrackMe for Splunk provides visibility and operational excellence to monitor at scale your Splunk data sources availability and quality, and many more. 
+
+With a rich set of features and a powerful workflow, TrackMe empowers you day after day to get the most from your Splunk investments and deliver the five stars quality of service your users deserve.
+
+Discover TrackMe: https://trackme-solutions.com/discover
+
+Documentation: https://docs.trackme-solutions.com
+
+You can subscribe to our newsletter, and receive important communications from us.
+We will send notifications for instance when publishing new releases, so we can you let you know the cool and powerful things we&amp;#x27;ve been working on!
+
+https://trackme-solutions.com/subscribe/
+
+TrackMe has transitioned to a new licensing model.
+The Free Community Edition has been discontinued.
+
+What this means for you:
+
+- Existing licensed customers are not impacted. Your current license continues unchanged.
+- Community users are automatically upgraded to a Foundation Edition trial for 90 days, with full functionality enabled.
+
+After the trial period:
+
+- TrackMe remains active and fully usable for monitoring
+- The platform enters read-only mode
+
+You can continue to view data, dashboards, alerts, and history
+Creation of new tenants, trackers, or entities will be disabled
+
+To continue using TrackMe with full capabilities after the trial, a Foundation license is required.
+
+Buy Foundation Edition: https://trackme-solutions.com/get-foundation/
+
+See all plans: https://trackme-solutions.com/pricing/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c05eef56-7f64-11f1-ace6-fa4a573e67f3.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Trackme Limited</dc:creator>
+      <pubDate>Tue, 14 Jul 2026 09:17:04 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4621/#v2.4.7</guid>
+    </item>
+    <item>
+      <title>Microsoft OneDrive - v3.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5815/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
+&lt;li&gt;Migrated Microsoft OneDrive to the Splunk SOAR SDK app layout&lt;/li&gt;
+&lt;li&gt;Raised the minimum supported Splunk SOAR version to 7.0.0&lt;/li&gt;
+&lt;li&gt;Added Client Credentials authentication for non-interactive Microsoft Graph access&lt;/li&gt;
+&lt;li&gt;Added target user support for Client Credentials assets&lt;/li&gt;
+&lt;li&gt;Added make request action for arbitrary Microsoft Graph API requests&lt;/li&gt;
+&lt;li&gt;Restored custom widgets for get file, list items, and list drive&lt;/li&gt;
+&lt;li&gt;Added list items output fields for drive ID, folder ID, and folder path to support SDK-native custom view rendering&lt;/li&gt;
+&lt;li&gt;Fixed get file vault duplicate checking when SOAR cannot retrieve existing attachment metadata&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with Microsoft OneDrive to execute various generic actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/5480a79a-7f62-11f1-b6e0-0a2c5905d900.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk</dc:creator>
+      <pubDate>Tue, 14 Jul 2026 08:59:33 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5815/#v3.0.0</guid>
+    </item>
+    <item>
+      <title>KELA IoCs - v1.5.4 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7488/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;- Splunk Cloud / Splunk 10 support: Updated API token storage to meet Splunk Cloud credential-handling requirements.&lt;/p&gt;
+&lt;p&gt;- No action required: Existing tokens are preserved; settings carry over on upgrade.&lt;/p&gt;
+&lt;p&gt;- Note: A Splunk restart is required after upgrade.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;As a leading global cyber threat intelligence firm, KELA delivers actionable insights from cybercrime sources into emerging threats targeting organizations. Its technology penetrates hidden places to monitor, analyze, and provide contextualized intelligence from attackers&amp;#x27; perspectives. KELA&amp;#x27;s IOC feed includes indicators coming from various events and insights around the world.
+
+Use this app to get the IOCs from the KELA platform to Splunk directly.
+
+* A subscription to the KELA Platform is required. API Key can be found in the portal.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a66862f6-7f61-11f1-8733-a6bc4046ee8a.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Itsik Kesler</dc:creator>
+      <pubDate>Tue, 14 Jul 2026 08:55:14 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7488/#v1.5.4</guid>
+    </item>
+    <item>
+      <title>Ensign ElasticSearch Data Integrator - v2.0.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8645/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Ensign ElasticSearch Data Integrator — v2.0.1&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Compatibility:&lt;/strong&gt; Splunk Enterprise 9.4 (Python 3.9) and Splunk 10 (Python 3.13); Elasticsearch 8.x and 9.x. Upgrading in place preserves your Elasticsearch cluster profiles, data inputs and checkpoints.&lt;/p&gt;
+
+&lt;p&gt;Version 2.0 is a major-architecture release. The add-on has been fully rebuilt on the modern Splunk add-on (UCC) framework, and the checkpoint engine now supports reliable KVStore storage with lossless backend migration.&lt;/p&gt;
+
+&lt;h3&gt;v2.0.1 — KVStore checkpoint fix &amp;amp; migration&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Fix:&lt;/strong&gt; KVStore checkpoint storage. The first checkpoint write to KVStore previously failed silently, so the collection appeared empty. Writes now insert correctly, and any KVStore read/write failure is logged instead of being swallowed.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;New:&lt;/strong&gt; Checkpoint backend migration. Switching &lt;em&gt;Configuration &amp;gt; Checkpoint&lt;/em&gt; between File and KVStore now moves the existing checkpoint state (timestamp bookmark, deduplication guard and scroll state) to the newly selected backend and clears the old one. The copy is verified before the source is deleted, so no checkpoint data is lost if the target backend is unavailable.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;New:&lt;/strong&gt; The KVStore checkpoint collections are now viewable for inspection: &lt;code&gt;| inputlookup es_checkpoint_store&lt;/code&gt; and &lt;code&gt;| inputlookup es_seen_ids_store&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;v2.0.0 — Rebuilt on the modern Splunk add-on framework&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;The add-on has been fully rebuilt on the current Splunk Universal Configuration Console (UCC) framework. The legacy Add-on Builder runtime has been removed entirely: the modular input now runs on the standard Splunk modular-input SDK and solnlib, and the configuration REST handlers use splunktaucclib.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;100% pure-Python and platform-independent&lt;/strong&gt; — no compiled or OS-specific binaries are bundled.&lt;/li&gt;
+  &lt;li&gt;The configuration UI has been regenerated on the current UCC (React) framework.&lt;/li&gt;
+  &lt;li&gt;Functionally equivalent to the 1.5.x line: automatic Elasticsearch 8.x / 9.x client selection, KVStore checkpoints with smart bidirectional fallback, a single-term DSL query filter, multi-node cluster topology and health monitoring, and the diagnostic search commands (&lt;code&gt;escheck_connection&lt;/code&gt;, &lt;code&gt;escheck_config&lt;/code&gt;, &lt;code&gt;escheck_indexes&lt;/code&gt;).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Also fixed since the previously published release (1.5.2)&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Corrected several runtime and UI messages that were displayed in a non-English language; all user-facing text is now English (for example, the &quot;Elasticsearch 9.x&quot; version-selection message). No functional change.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Runtime notes&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;On Splunk 10 (Python 3.10+) the Elasticsearch 9.x native client is used; on Splunk 9.4 the Elasticsearch 8.19.3 client is used, which remains fully compatible with Elasticsearch 9.x servers via REST API compatibility mode.&lt;/li&gt;
+  &lt;li&gt;Selecting &lt;strong&gt;Elasticsearch 9.x&lt;/strong&gt; on a runtime that cannot support it (for example Splunk 9.4) is rejected on save with an actionable message; choose &lt;strong&gt;Auto-Detect&lt;/strong&gt; or &lt;strong&gt;Elasticsearch 8.x&lt;/strong&gt; instead.&lt;/li&gt;
+  &lt;li&gt;After upgrading, hard-refresh the browser (Ctrl+F5) or use a private window so the regenerated configuration UI is not hidden by a cached copy.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Splunk modular input for ingesting data from Elasticsearch 8.x and 9.x clusters. Dual ES client (auto-selected by runtime), multi-cluster profiles, DSL query filters, scroll-based pagination with crash recovery, document-level deduplication, KVStore checkpoints, SSL/TLS, proxy, and custom SPL diagnostic commands. Full GUI configuration.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Ensign ElasticSearch Data Integrator is a Splunk modular input add-on for ingesting data from Elasticsearch 8.x and 9.x clusters into Splunk via the Elasticsearch REST API.
+
+Built on the Splunk UCC Framework (Add-on Builder), it provides a full GUI-driven configuration experience through Splunk Web — no manual file editing required.
+
+Key Features:
+• Multi-cluster Elasticsearch profile management via Splunk UI
+• Multi-node cluster support with comma-separated hosts and node sniffing/auto-discovery
+• Dual ES client library: automatically selects elasticsearch-py 9.4.1 (native) on Splunk 10 or elasticsearch-py 8.19.3 (REST API compatibility mode) on Splunk 9.4
+• Per-cluster ES version override (Auto-Detect / 8.x / 9.x) with runtime capability gating
+• Time-based data fetching with configurable date field and ES Scroll API pagination
+• Single-term DSL query filter with input validation (fail-closed)
+• Crash-resilient scroll recovery with dedicated checkpoint directory
+• KVStore checkpoint storage with smart bidirectional fallback — enables SHC-native replication
+• Document-level deduplication guard (rolling 50,000 IDs per stanza)
+• SSL/TLS certificate verification enabled by default with custom CA support
+• Splunk CA auto-discovery for secure internal REST communication
+• Global proxy support with Splunk-native credential encryption
+• Custom sourcetype override per input stanza
+• Custom SPL diagnostic commands: escheck_connection, escheck_config, escheck_indexes
+• Comprehensive internal log parsing for taensignelasticsearchaddon:log
+• Preflight cluster health check before every collection run
+• 5W1H audit logging on all administrative operations
+• Minimum polling interval enforcement (15 seconds)
+• Adjustable log level (DEBUG/INFO/WARN/ERROR)
+• No pre-compiled binaries — pure Python, runs on any platform
+
+Compatibility:
+• Elasticsearch: 8.x and 9.x (NOT compatible with 7.x or earlier)
+• Splunk Enterprise: 9.4+ (Python 3.9) and 10.x (Python 3.13)
+• Network: HTTPS access to target Elasticsearch cluster(s)&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2091a750-7f5c-11f1-8b6e-4e4f4139ada3.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Muhammad Rafdi Aufar Ahmad</dc:creator>
+      <pubDate>Tue, 14 Jul 2026 08:25:50 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8645/#v2.0.1</guid>
+    </item>
     <item>
       <title>DEPRECATED Deloitte Essential 8 Maturity Assessment and Management - v1.0.0 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/6394/</link>
@@ -222,47 +403,6 @@ LATEST UPDATES
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
       <pubDate>Mon, 13 Jul 2026 09:35:33 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5987/#v2.2.0</guid>
-    </item>
-    <item>
-      <title>Ensign ElasticSearch Data Integrator - v1.5.3 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8645/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Compatibility:&lt;/strong&gt; Splunk Enterprise 9.4 (Python 3.9) and Splunk 10 (Python 3.13); Elasticsearch 8.x and 9.x.&lt;/p&gt;
-&lt;h3&gt;v1.5.3 — Fixes&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Corrected several runtime and UI messages that were displayed in a non-English language (for example, the &quot;Elasticsearch 9.x&quot; version-selection message); all user-facing text is now English. No functional change.&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Splunk modular input for ingesting data from Elasticsearch 8.x and 9.x clusters. Dual ES client (auto-selected by runtime), multi-cluster profiles, DSL query filters, scroll-based pagination with crash recovery, document-level deduplication, KVStore checkpoints, SSL/TLS, proxy, and custom SPL diagnostic commands. Full GUI configuration.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Ensign ElasticSearch Data Integrator is a Splunk modular input add-on for ingesting data from Elasticsearch 8.x and 9.x clusters into Splunk via the Elasticsearch REST API.
-
-Built on the Splunk UCC Framework (Add-on Builder), it provides a full GUI-driven configuration experience through Splunk Web — no manual file editing required.
-
-Key Features:
-• Multi-cluster Elasticsearch profile management via Splunk UI
-• Multi-node cluster support with comma-separated hosts and node sniffing/auto-discovery
-• Dual ES client library: automatically selects elasticsearch-py 9.4.1 (native) on Splunk 10 or elasticsearch-py 8.19.3 (REST API compatibility mode) on Splunk 9.4
-• Per-cluster ES version override (Auto-Detect / 8.x / 9.x) with runtime capability gating
-• Time-based data fetching with configurable date field and ES Scroll API pagination
-• Single-term DSL query filter with input validation (fail-closed)
-• Crash-resilient scroll recovery with dedicated checkpoint directory
-• KVStore checkpoint storage with smart bidirectional fallback — enables SHC-native replication
-• Document-level deduplication guard (rolling 50,000 IDs per stanza)
-• SSL/TLS certificate verification enabled by default with custom CA support
-• Splunk CA auto-discovery for secure internal REST communication
-• Global proxy support with Splunk-native credential encryption
-• Custom sourcetype override per input stanza
-• Custom SPL diagnostic commands: escheck_connection, escheck_config, escheck_indexes
-• Comprehensive internal log parsing for taensignelasticsearchaddon:log
-• Preflight cluster health check before every collection run
-• 5W1H audit logging on all administrative operations
-• Minimum polling interval enforcement (15 seconds)
-• Adjustable log level (DEBUG/INFO/WARN/ERROR)
-• No pre-compiled binaries — pure Python, runs on any platform
-
-Compatibility:
-• Elasticsearch: 8.x and 9.x (NOT compatible with 7.x or earlier)
-• Splunk Enterprise: 9.4+ (Python 3.9) and 10.x (Python 3.13)
-• Network: HTTPS access to target Elasticsearch cluster(s)&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/60d0652c-7e67-11f1-89f8-562861d36ada.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Muhammad Rafdi Aufar Ahmad</dc:creator>
-      <pubDate>Mon, 13 Jul 2026 03:12:23 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8645/#v1.5.3</guid>
     </item>
     <item>
       <title>Apprise Alert Action - v2.0.6 [Version Update]</title>
@@ -1369,55 +1509,6 @@ This add-on is designed to work with the companion CryptView CBOM Overview dashb
       <guid>https://splunkbase.splunk.com/app/4872/#v1.9.4</guid>
     </item>
     <item>
-      <title>TrackMe - v2.4.7 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4621/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;TrackMe 2.4.7 — AI Routines: your standing instructions to TrackMe, plus a full Configuration Guardian management experience.&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;AI Routines — describe a monitoring task in plain English, and TrackMe watches for it.&lt;/strong&gt;&amp;nbsp;Write a sentence like&amp;nbsp;&lt;em&gt;“tell me if 4 or more high-priority feeds turn red within 15 minutes, correlate what they have in common, and add a note to each entity” — or “every morning at 08:00, send me a plain-English digest of the tenant’s health: what is red, what changed since yesterday, and what deserves attention”&lt;/em&gt;&amp;nbsp;— TrackMe compiles it into a structured instruction, runs it on the schedule you choose, and delivers the outcome as an email or a Splunk event, with&amp;nbsp;&lt;strong&gt;real, audited actions&lt;/strong&gt;&amp;nbsp;if (and only if) you granted them. Three evaluation strategies put you in control of AI cost:&amp;nbsp;&lt;strong&gt;Agentic&lt;/strong&gt;&amp;nbsp;(the LLM reasons on every cycle),&amp;nbsp;&lt;strong&gt;Hybrid&lt;/strong&gt;&amp;nbsp;(a cheap SPL trigger gates the LLM — zero tokens when nothing is happening), and&amp;nbsp;&lt;strong&gt;Deterministic&lt;/strong&gt;&amp;nbsp;(SPL computes the condition, the LLM formats the outcome). Start from a template or a blank intent, preview the exact workflow before anything is created, and dry-run it with&amp;nbsp;&lt;strong&gt;Evaluate&lt;/strong&gt;. Opt-in by construction, with a kill switch, a creator-roles policy, consent pinned to the exact permissions you approved, per-routine AI provider and timeout, full token-cost visibility and a dedicated activity audit dashboard. See&amp;nbsp;&lt;a href=&quot;https://docs.trackme-solutions.com/latest/ai_routines.html#ai-routines&quot; rel=&quot;noopener noreferrer&quot;&gt;AI Routines&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Configuration Guardian — now a full management experience.&lt;/strong&gt;&amp;nbsp;A new Check Catalog lets administrators enable/disable and tune every check, snooze alerts, and review severities with clear escalation ladders; a new degraded-tenant check detects tenants whose operations are impaired; and&amp;nbsp;&lt;strong&gt;email notifications&lt;/strong&gt;&amp;nbsp;can be configured on alert lifecycle transitions — so Guardian findings reach you even outside the UI. An Ask-AI panel brings the AI Assistant directly to the Guardian page.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;AI Advisors — stability.&lt;/strong&gt;&amp;nbsp;Advisors now start reliably on OpenAI providers (strict-mode tool schemas), and search-hosted interactive execution gains automatic resume of orphaned runs.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Faster and more resilient at scale.&lt;/strong&gt;&amp;nbsp;The Virtual Tenants page now loads its cached data in a single batched request (dramatically smaller responses, no more intermittent errors under heavy concurrent search load), and the global Support Diagnostic gains checkpoint/resume resilience with live step-by-step progress — it no longer gets stuck silently on large environments.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Fixes &amp;amp; polish.&lt;/strong&gt;&amp;nbsp;The AI Assistant now knows bulk actions accept wildcards, refreshed Google Gemini model suggestions, quieter logs on deployments without remote accounts, and a batch of minor hardening fixes from the previous cycle.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;See: &lt;a href=&quot;https://docs.trackme-solutions.com/latest/releasenotes.html#version-2-4-7-build-1783461509-08-07-2026&quot; rel=&quot;noopener noreferrer&quot;&gt;https://docs.trackme-solutions.com/latest/releasenotes.html#version-2-4-7-build-1783461509-08-07-2026&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TrackMe for Splunk provides visibility and operational excellence to monitor at scale your Splunk data sources availability and quality, and many more. 
-
-With a rich set of features and a powerful workflow, TrackMe empowers you day after day to get the most from your Splunk investments and deliver the five stars quality of service your users deserve.
-
-Discover TrackMe: https://trackme-solutions.com/discover
-
-Documentation: https://docs.trackme-solutions.com
-
-You can subscribe to our newsletter, and receive important communications from us.
-We will send notifications for instance when publishing new releases, so we can you let you know the cool and powerful things we&amp;#x27;ve been working on!
-
-https://trackme-solutions.com/subscribe/
-
-TrackMe has transitioned to a new licensing model.
-The Free Community Edition has been discontinued.
-
-What this means for you:
-
-- Existing licensed customers are not impacted. Your current license continues unchanged.
-- Community users are automatically upgraded to a Foundation Edition trial for 90 days, with full functionality enabled.
-
-After the trial period:
-
-- TrackMe remains active and fully usable for monitoring
-- The platform enters read-only mode
-
-You can continue to view data, dashboards, alerts, and history
-Creation of new tenants, trackers, or entities will be disabled
-
-To continue using TrackMe with full capabilities after the trial, a Foundation license is required.
-
-Buy Foundation Edition: https://trackme-solutions.com/get-foundation/
-
-See all plans: https://trackme-solutions.com/pricing/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/bb1460d8-7a5c-11f1-bc8e-86cb28f9f693.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Trackme Limited</dc:creator>
-      <pubDate>Wed, 08 Jul 2026 07:50:02 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4621/#v2.4.7</guid>
-    </item>
-    <item>
       <title>Vectra XDR Splunk SOAR - v1.0.3 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7072/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
@@ -1640,20 +1731,6 @@ The Splunk Add-on for Sysmon provides the inputs and CIM-compatible knowledge to
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOCRadar Cyber Intelligence</dc:creator>
       <pubDate>Mon, 06 Jul 2026 04:23:59 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7871/#v1.9.28</guid>
-    </item>
-    <item>
-      <title>KELA IoCs - v1.5.4 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7488/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;- Splunk Cloud / Splunk 10 support: Updated API token storage to meet Splunk Cloud credential-handling requirements.&lt;/p&gt;
-&lt;p&gt;- No action required: Existing tokens are preserved; settings carry over on upgrade.&lt;/p&gt;
-&lt;p&gt;- Note: A Splunk restart is required after upgrade.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;As a leading global cyber threat intelligence firm, KELA delivers actionable insights from cybercrime sources into emerging threats targeting organizations. Its technology penetrates hidden places to monitor, analyze, and provide contextualized intelligence from attackers&amp;#x27; perspectives. KELA&amp;#x27;s IOC feed includes indicators coming from various events and insights around the world.
-
-Use this app to get the IOCs from the KELA platform to Splunk directly.
-
-* A subscription to the KELA Platform is required. API Key can be found in the portal.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/57e25006-7809-11f1-9969-eadacc2dc252.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Itsik Kesler</dc:creator>
-      <pubDate>Sun, 05 Jul 2026 12:00:39 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7488/#v1.5.4</guid>
     </item>
     <item>
       <title>Icon Library - v1.6.3 [New App Release]</title>
@@ -2184,24 +2261,6 @@ Differentiator
       <guid>https://splunkbase.splunk.com/app/7177/#v26.6.26</guid>
     </item>
     <item>
-      <title>Admins Little Helper for Splunk - v1.7.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6368/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Updates for appinspect and updates to dependencies. &lt;br&gt;
-Updates to computing bundlefiles based on new features (specific files feature of distsearch.conf added in Splunk 10.2).  &lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;A collection of utilities to help make Splunk Cloud and Splunk Enterprise Admin&amp;#x27;s lives easier.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Admin&amp;#x27;s Little Helper for Splunk is a collection of utilities to help make Splunk Cloud and Splunk Enterprise Admin&amp;#x27;s lives easier.
-
----------
-On the new Splunkbase website, see the Installation tab for dependencies and setup instructions, the Details tab for usage information, and the Troubleshooting tab for common issues.
-
----------
-Privacy Note: These search commands make it easier to pull data about the local and remote search peers, and if deployed on a Search Head Cluster, can communicate across the search heads in the same cluster. No communication will go beyond the boundary of deployed Splunk environment. These commands are marked as risky out of the box because they are python and can expose system information.
-
----------
-Help Note: While this app is not formally supported, the developer can be reached at teddybear@splunk.com / chuggard@cisco.com OR in splunk-community slack, @teddybfez. Responses are made on a best effort basis. Feedback is always welcome and appreciated! Learn more about splunk-community slack here: https://docs.splunk.com/Documentation/Community/current/community/AboutCommunity&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c48546ec-70dd-11f1-844d-026f4a74d0cf.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
-      <pubDate>Tue, 30 Jun 2026 15:26:18 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6368/#v1.7.0</guid>
-    </item>
-    <item>
       <title>lookup-editor-ax - v1.1.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8873/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Field types (String/Number) with soft numeric validation, auto-loaded columns, and go-to-row navigation.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Safely edit CSV lookups in the browser — schema enforcement, Excel-style grid, automatic backups.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Safely edit CSV lookups in the browser — schema enforcement, Excel-style grid, automatic backups.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8c781b86-7492-11f1-b684-da9d459f9d63.png&quot;&gt;</description>
@@ -2370,16 +2429,6 @@ TianJi Partners Threat Intelligence Center(https://redqueen.tj-un.com/InterHome.
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Annie guo</dc:creator>
       <pubDate>Fri, 26 Jun 2026 09:38:11 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7269/#v1.0.7</guid>
-    </item>
-    <item>
-      <title>FireAMP - v2.1.15 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5897/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
-&lt;li&gt;Fix &lt;code&gt;add listitem&lt;/code&gt; action incorrectly marked as &lt;code&gt;read_only&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This App allows for querying endpoints connected to Cisco FireAMP while also providing investigative hunting capabilities&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/106fb556-70d9-11f1-9425-4e1a230ef105.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk</dc:creator>
-      <pubDate>Thu, 25 Jun 2026 21:01:41 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5897/#v2.1.15</guid>
     </item>
   </channel>
 </rss>
