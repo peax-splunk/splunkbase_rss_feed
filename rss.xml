@@ -6,19 +6,80 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Tue, 14 Jul 2026 20:50:48 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 14 Jul 2026 21:48:35 +0000</lastBuildDate>
     <item>
-      <title>Cisco Catalyst Add-on for Splunk - v3.2.38 [Version Update]</title>
+      <title>Cisco Enterprise Networking for Splunk Platform - v3.2.10 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7539/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h3&gt;Dashboards &amp;amp; Usability&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;SD-WAN Change Audit dashboard refreshed&lt;/strong&gt;: Added clearer setup guidance, collapsible prerequisites, better panel descriptions, summary metrics, and a focused change explorer for reviewing vManage administrative changes from &lt;code&gt;cisco:sdwan:audit:logs&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;SD-WAN before/after configuration review improved&lt;/strong&gt;: The dashboard now uses the collector-provided &lt;code&gt;audit_config_before&lt;/code&gt; and &lt;code&gt;audit_config_after&lt;/code&gt; fields directly, so config comparison panels no longer rely on fragile position-based audit detail reconstruction.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;SD-WAN audit setup guidance added&lt;/strong&gt;: The dashboard now explains that customers need Cisco Catalyst Add-on for Splunk version 3.2.38 or later, an SD-WAN &lt;strong&gt;Audit Logs&lt;/strong&gt; input, and both &lt;strong&gt;Audit Log Details&lt;/strong&gt; and &lt;strong&gt;Config Difference&lt;/strong&gt; enabled to populate the detail and config-diff views.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Overview setup guidance added&lt;/strong&gt;: The Overview dashboard now links to the required Cisco Catalyst Add-on for Splunk and provides a concise setup checklist for production deployments: scope index macros first, enable data model acceleration second, then set &lt;code&gt;summariesonly&lt;/code&gt; to &lt;code&gt;true&lt;/code&gt; after acceleration reaches &lt;strong&gt;100.00% Completed&lt;/strong&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Index macro setup improved&lt;/strong&gt;: &lt;code&gt;cisco_catalyst_app_index&lt;/code&gt; and &lt;code&gt;cisco_catalyst_sdwan_index&lt;/code&gt; now default to all indexes so first-run dashboards can find data before local macro configuration. The Overview dashboard includes helper searches that return paste-ready macro values for production scoping.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Step Reports access cleanup&lt;/strong&gt;: Removed stale metadata that referenced an undefined &lt;code&gt;cisco_catalyst_step_reports&lt;/code&gt; role, so Step Reports inherit the normal app view permissions.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;App metadata cleanup&lt;/strong&gt;: Declared light and dark theme support and removed stale install/runtime metadata from the packaged app configuration.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Cyber Vision vulnerability overview corrected&lt;/strong&gt;: Updated the vulnerability dashboard so it uses the correct app index macro and aligns with the dedicated &lt;code&gt;cisco:cybervision:vulnerabilities&lt;/code&gt; sourcetype.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Data Models &amp;amp; Fields&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Expanded Cisco Catalyst data model coverage&lt;/strong&gt;: Added child datasets for Catalyst Center interface health (&lt;code&gt;cisco:dnac:devicehealth:interface&lt;/code&gt;), Cyber Vision vulnerabilities (&lt;code&gt;cisco:cybervision:vulnerabilities&lt;/code&gt;), Cyber Vision components (&lt;code&gt;cisco:cybervision:components&lt;/code&gt;), Cyber Vision flows (&lt;code&gt;cisco:cybervision:flows&lt;/code&gt;), and SD-WAN SSE tunnel health (&lt;code&gt;cisco:sdwan:ssetunnelhealth&lt;/code&gt;).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Data model acceleration defaults clarified&lt;/strong&gt;: The packaged Cisco Catalyst data model now defines a 7-day acceleration summary range and staggered 5-minute schedule for admins who enable acceleration. The Hunk-only DFS block-size setting was removed.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;SD-WAN audit data model fields added&lt;/strong&gt;: Added the new SD-WAN audit detail and before/after config fields produced by Cisco Catalyst Add-on for Splunk 3.2.38 to the SD-WAN audit child dataset, including &lt;code&gt;audit_log_details&lt;/code&gt;, &lt;code&gt;audit_config_before&lt;/code&gt;, &lt;code&gt;audit_config_after&lt;/code&gt;, and related summary fields.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;SD-WAN audit user field corrected&lt;/strong&gt;: Added the correctly spelled &lt;code&gt;audit_log_user&lt;/code&gt; field and updated app content to use it while preserving the previous &lt;code&gt;audti_log_user&lt;/code&gt; field for backward compatibility.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Cross-app data model searches fixed&lt;/strong&gt;: Exported the Cisco Catalyst data model together with its required base-search macros, &lt;code&gt;cisco_catalyst_app_index&lt;/code&gt; and &lt;code&gt;cisco_catalyst_app_sourcetypes&lt;/code&gt;, so external apps can run &lt;code&gt;tstats&lt;/code&gt; searches against &lt;code&gt;Cisco_Catalyst_App&lt;/code&gt; without data model root-object cache errors.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Packaged metadata export handling fixed&lt;/strong&gt;: Updated the packaging scrub step to keep app-wide metadata private while preserving explicit per-object exports required by shared knowledge objects.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Upgrade notes&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Upgrade the Cisco Catalyst Add-on for Splunk from Splunkbase to &lt;strong&gt;version 3.2.38 or later&lt;/strong&gt; to populate the newest sourcetypes and SD-WAN audit config-diff fields used by this app.&lt;/li&gt;
+  &lt;li&gt;For the SD-WAN Change Audit dashboard, create an &lt;strong&gt;Audit Logs&lt;/strong&gt; input in the Cisco Catalyst Add-on for Splunk and enable both &lt;strong&gt;Audit Log Details&lt;/strong&gt; and &lt;strong&gt;Config Difference&lt;/strong&gt;. Without that input, no &lt;code&gt;cisco:sdwan:audit:logs&lt;/code&gt; data is collected; without those checkboxes, the detail and before/after config panels remain empty.&lt;/li&gt;
+  &lt;li&gt;Before enabling data model acceleration, use the Overview dashboard helper searches to populate &lt;code&gt;cisco_catalyst_app_index&lt;/code&gt; and &lt;code&gt;cisco_catalyst_sdwan_index&lt;/code&gt;. The defaults search all indexes to avoid empty first-run dashboards, but scoped macros are strongly recommended for production performance and data boundaries.&lt;/li&gt;
+  &lt;li&gt;If data model acceleration is enabled, use at least a 7-day summary range, or increase to 30 days or more if users search longer windows and the environment can support it. When acceleration status reaches &lt;strong&gt;100.00% Completed&lt;/strong&gt;, set the &lt;code&gt;summariesonly&lt;/code&gt; macro to &lt;code&gt;summariesonly=true&lt;/code&gt; for best dashboard performance.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;This application provides a dashboard component to visualize data collected by the 2 Technical Add-ons: Cisco Catalyst Add-on for Splunk and Cisco Catalyst Enhanced Netflow Add-on for Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Author -  Cisco Systems
+Prerequisites - This application is dependent on the &amp;#x27;Cisco Catalyst Add-on for Splunk&amp;#x27;  and &amp;#x27;Cisco Catalyst Enhanced Netflow Add-on for Splunk&amp;#x27;
+
+Supported Products:
+Cisco Catalyst SD-WAN
+Cisco Identity Services Engine
+Cisco Catalyst Center
+ThousandEyes --&amp;gt; Requires installation of the ThousandEyes TA (https://splunkbase.splunk.com/app/7719)
+Meraki --&amp;gt; Requires installation of the Meraki TA (https://splunkbase.splunk.com/app/5580)
+Cyber Vision
+Cisco Network Infrastructure Devices which include the below platform series:
+* Cisco Catalyst series switches (1000, 1200, 1300, 2960, 3650, 3750, 4500, 6500, 6800, 7600, 9000 etc.)
+* Cisco ASR - Aggregation Services Routers (900, 1000, 5000, 9000 etc.)
+* Cisco ISR - Integrated Services Routers (800, 1900, 2900, 3900, 4451 etc.)
+* Cisco Nexus Data Center switches (1000V, 2000, 3000, 4000, 5000, 6000, 7000, 9000 etc.)
+* Cisco Carrier Routing System
+* Other Cisco IOS based devices (Metro Ethernet, Industrial Ethernet, Blade Switches, Connected Grid etc.)
+* Cisco Access Points
+* Cisco WLC - WLAN Controller&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/65a96de0-7f99-11f1-b11c-42dad9cfb368.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco</dc:creator>
+      <pubDate>Tue, 14 Jul 2026 21:05:45 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7539/#v3.2.10</guid>
+    </item>
+    <item>
+      <title>Cisco Catalyst Add-on for Splunk - v3.2.39 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7538/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h3&gt;Fixes&lt;/h3&gt;
 &lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;SD-WAN audit before/after config fields now populate reliably&lt;/strong&gt; — for &lt;code&gt;cisco:sdwan:audit:logs&lt;/code&gt;, the &lt;code&gt;audit_config_before&lt;/code&gt; and &lt;code&gt;audit_config_after&lt;/code&gt; fields (and the decoded &lt;code&gt;audit_log_details&lt;/code&gt;) are now produced by the modular input in Python instead of a fragile search-time extraction that could leave them blank. The config snapshots are normalized and canonicalized so identical configurations no longer show a false difference, and the raw double-encoded &lt;code&gt;auditdetails&lt;/code&gt; blob and a redundant &lt;code&gt;config_differences&lt;/code&gt; field are removed from the event.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;ISE posture reports are ingested again&lt;/strong&gt; — the Cisco ISE Analytics Reports input again copies the Posture reports (&lt;code&gt;cisco:ise:analytics:registry&lt;/code&gt;, &lt;code&gt;cisco:ise:analytics:hardware&lt;/code&gt;, and &lt;code&gt;cisco:ise:analytics:applications&lt;/code&gt;) from ISE local disk into the SFTP repository before ingestion. A prior change skipped that copy for posture reports on the incorrect assumption that they were written directly to the repository, which left them stranded on disk so those sourcetypes produced no events. All report types are now transferred consistently.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Cyber Vision generic API input configuration no longer flagged invalid&lt;/strong&gt; — the &lt;code&gt;cisco_catalyst_cybervision_api&lt;/code&gt; input's &lt;code&gt;logging_level&lt;/code&gt; setting is now declared in the input specification, so Splunk no longer logs an &quot;Invalid key in stanza [cisco_catalyst_cybervision_api] … logging_level&quot; error when validating &lt;code&gt;inputs.conf&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Enhancements&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;ISE Analytics Reports pipeline health in the Data Collection Health dashboard&lt;/strong&gt; — the ISE tab gains an &lt;em&gt;Analytics Reports Pipeline&lt;/em&gt; section that tracks collection end to end: reports generated on ISE, transferred to the repository, ingested, and (for FullReports) cleaned off the ISE local disk. It shows a per-input pipeline funnel, pipeline runs over time, and a &lt;strong&gt;FullReports Left on ISE Disk&lt;/strong&gt; indicator. Because ISE does not remove previous FullReport runs on its own, a FullReport left behind after a failed transfer accumulates on the ISE disk; this indicator is an early warning for disk fill-up. The signal is derived entirely from the add-on's own internal logs, so it works when the add-on runs on-premises and the dashboard is viewed in Splunk Cloud. The ISE Analytics Reports input now emits structured pipeline and report-cleanup telemetry to support these panels.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3&gt;Upgrade notes&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;No reconfiguration required; upgrades are seamless.&lt;/li&gt;
-  &lt;li&gt;To populate the SD-WAN audit before/after config-diff fields, enable &lt;strong&gt;Config Difference&lt;/strong&gt; (and optionally &lt;strong&gt;Audit Log Details&lt;/strong&gt;) on the SD-WAN &lt;strong&gt;Audit Logs&lt;/strong&gt; input. The fields are written at collection time, so they appear on newly collected audit events, not on previously indexed ones.&lt;/li&gt;
+  &lt;li&gt;Posture report events resume on the next collection run of the ISE Analytics Reports input; no change to inputs or repository settings is needed.&lt;/li&gt;
+  &lt;li&gt;The new ISE Analytics Reports pipeline panels populate when that input's logging level is set to &lt;strong&gt;INFO&lt;/strong&gt;; the FullReports-left-on-disk warning is emitted at WARNING and appears regardless. Panels and telemetry appear on the next collection run.&lt;/li&gt;
 &lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Cisco Catalyst Add-on for Splunk collects and normalizes API telemetry from Cisco Catalyst Center, SD-WAN (vManage), ISE, and Cyber Vision through modular inputs. It includes CIM-aligned knowledge objects, backward-compatible DNAC/Catalyst sourcetype coverage, and built-in health monitoring for input status, errors, and API load.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Author - Cisco Systems
 Prerequisites - This Technical Add-on is dependent on &amp;#x27;Splunk Add-on for Stream Forwarders&amp;#x27; and &amp;#x27;Splunk App for Stream&amp;#x27;
 
@@ -37,8 +98,8 @@ Cisco Network Infrastructure Devices which include the below platform series:
 * Cisco Access Points
 * Cisco WLC - WLAN Controller&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e9383394-7fad-11f1-b2ee-66c724434693.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco</dc:creator>
-      <pubDate>Tue, 14 Jul 2026 18:37:54 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7538/#v3.2.38</guid>
+      <pubDate>Tue, 14 Jul 2026 21:05:41 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7538/#v3.2.39</guid>
     </item>
     <item>
       <title>Atlas Software Platform for Splunk - v5.0.8 [Version Update]</title>
@@ -771,33 +832,6 @@ https://www.mongodb.com/docs/atlas/reference/api-resources-spec/v2/&lt;/p&gt;&lt
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Rotimi Akinbobola</dc:creator>
       <pubDate>Sat, 11 Jul 2026 03:05:32 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7026/#v1.1.1</guid>
-    </item>
-    <item>
-      <title>Log Continuity Manager for Splunk - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8958/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;## Version 1.0.0&lt;/p&gt;
-&lt;p&gt;Initial public release of Log Continuity Manager for Splunk.&lt;/p&gt;
-&lt;p&gt;### Included in this release&lt;/p&gt;
-&lt;p&gt;- Log continuity health dashboard&lt;/p&gt;
-&lt;p&gt;- Current violations view&lt;/p&gt;
-&lt;p&gt;- Monitoring targets view&lt;/p&gt;
-&lt;p&gt;- Manage targets workflow&lt;/p&gt;
-&lt;p&gt;- Discovery workflow for candidate monitoring targets&lt;/p&gt;
-&lt;p&gt;- Monitoring coverage gaps view&lt;/p&gt;
-&lt;p&gt;- Quick Add Target workflow&lt;/p&gt;
-&lt;p&gt;- Recovery history tracking&lt;/p&gt;
-&lt;p&gt;- Lookup-backed monitoring status model&lt;/p&gt;
-&lt;p&gt;- Redundancy-aware interruption handling&lt;/p&gt;
-&lt;p&gt;- Target update and operational management functions&lt;/p&gt;
-&lt;p&gt;### Purpose&lt;/p&gt;
-&lt;p&gt;This release provides an operational workflow for monitoring expected log continuity, identifying interrupted targets, discovering untracked sources, and tracking recovery events in Splunk environments.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;A Splunk app for monitoring log continuity, detecting interruptions, managing monitoring targets, tracking recoveries, and improving visibility into ingestion health.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Log Continuity Manager for Splunk helps security and operations teams monitor whether expected log sources continue sending data on time. It provides a practical workflow to define monitoring targets, detect log interruptions, identify untracked sources, manage monitored targets, and review recovery history from a single app.
-
-The app is designed for teams that need visibility into log continuity health without building custom searches and dashboards from scratch. It supports target-based monitoring using host, index, source, and sourcetype combinations, and helps reduce false positives in redundant environments through redundancy-aware interruption handling.
-
-With its operational views, users can discover live data sources, compare discovered sources against configured monitoring targets, add new targets quickly, manage target settings, review current interruptions, and track when interrupted sources recover. This makes it easier to maintain monitoring coverage, reduce blind spots, and improve confidence in Splunk data ingestion health.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Furkan KILINC</dc:creator>
-      <pubDate>Fri, 10 Jul 2026 21:59:27 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8958/#v1.0.0</guid>
     </item>
     <item>
       <title>Whiteboard App - v0.3.71 [New App Release]</title>
