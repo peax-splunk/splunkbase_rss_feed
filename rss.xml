@@ -6,7 +6,58 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Thu, 16 Jul 2026 18:57:07 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 16 Jul 2026 20:00:12 +0000</lastBuildDate>
+    <item>
+      <title>Data Heartbeat - v1.4.2 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8833/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;Clear Never-Seen — bulk-remove stale sourcetypes&lt;/h2&gt;
+&lt;p&gt;A new &lt;strong&gt;Clear Never-Seen&lt;/strong&gt; button on the Monitor toolbar removes every sourcetype whose Last Seen is Never in one operation — no more deleting stale discovery rows one at a time.&lt;/p&gt;
+&lt;p&gt;Deleting is deliberately hard to do by accident (triple verification):&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The dialog lists every row in scope — review it, then tick the confirmation checkbox&lt;/li&gt;
+&lt;li&gt;Type the exact row count to arm the Delete button&lt;/li&gt;
+&lt;li&gt;The armed button still asks one final confirmation&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;And easy to undo:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;One-click Restore&lt;/strong&gt; — the rows are snapshotted to a recycle bin before deletion; if the snapshot can't be written, nothing is deleted. Thresholds, importance, and notes restore exactly.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Download CSV copy&lt;/strong&gt; — keep an offline copy of what you removed; names can be re-added anytime via Add Sourcetype → paste list.&lt;/li&gt;
+&lt;li&gt;Every bulk delete and restore is recorded in the Audit log.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; per-row alert targets (webhook URLs / recipients) are securely deleted with their rows and are not restorable — the dialog warns you before you confirm.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;Detection now keys off receive time — live feeds can't look dead&lt;/h2&gt;
+&lt;p&gt;The detection search now measures freshness by when Splunk ingested the data (&lt;code&gt;_indextime&lt;/code&gt;), not the timestamps inside the events:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Fixed:&lt;/strong&gt; a feed with badly-parsed timestamps (device clock skew, timezone mis-parse, backfill, or the classic year-less syslog date that rolls back a full year) could show as silent or &quot;Never&quot; while actively sending data. Verified live: an event ingested seconds earlier with a 3-day-old timestamp went from &quot;never seen&quot; to its true age.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Improved:&lt;/strong&gt; the ingest lookback is now 7 days, so sources silent up to a week report their real age — including sources whose last data arrived before you started monitoring them.&lt;/li&gt;
+&lt;li&gt;Sources silent longer than 7 days keep their last-known timestamp (no regression to &quot;Never&quot;).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Upgrade notes&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;No configuration migration required. The recycle bin (&lt;code&gt;heartbeat_recycle_bin&lt;/code&gt; KV collection, admin-only) is created automatically; existing monitored sourcetypes, thresholds, and alert settings are untouched.&lt;/li&gt;
+&lt;li&gt;The dashboard JS is renamed (&lt;code&gt;heartbeat-v17.js&lt;/code&gt;) so browsers pick up the new UI without a cache clear.&lt;/li&gt;
+&lt;li&gt;If you've overridden the &quot;Data Heartbeat - Source Type Monitor&quot; search in local/, your override will shadow the new detection logic — remove the local search/dispatch.* override to get the receive-time fix.&lt;/li&gt;
+&lt;li&gt;Search Head Cluster ready: all new state lives in KV store (replicates cluster-wide).&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Know the moment a data source goes silent. Data Heartbeat monitors every source type in your Splunk environment and fires Slack, Teams, webhook, or email alerts the instant data stops flowing — before gaps turn into blind spots.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Data Heartbeat monitors your Splunk environment for source types that have stopped sending data. When a data source goes silent — whether from a misconfigured forwarder, a failed log shipper, or a broken integration — Data Heartbeat detects the gap and alerts you before the silence becomes a blind spot.
+
+Every monitored source type has a configurable threshold, measured in minutes. When no data arrives within that window, the app flags the source type and fires your chosen alert action: Slack, Microsoft Teams, a generic webhook, or email via Splunk&amp;#x27;s built-in SMTP relay.
+
+Key features:
+• Monitor dashboard — a live status table showing every tracked source type, the minutes since its last event, its threshold, and its importance level, with color-coded severity (green, yellow, red, and critical).
+• Per-row alert actions — each source type can use its own notification target, independent of the global default.
+• Auto Discovery — a nightly scan that surfaces new source types appearing in your environment and queues them for review.
+• Importance tagging — mark business-critical sources as High, Medium, or Low importance. When a high-importance source goes silent, the app raises a red-alert banner.
+• Settings page — configure global defaults (threshold, alert action, and notification target), enable or disable the monitoring pipeline, and test alert actions without waiting for a real outage.
+• Audit log — a full history of every configuration change, with timestamps and user attribution.
+• No index footprint — all configuration is stored in KV Store, so no custom indexes are required.
+
+Data Heartbeat is compatible with Splunk Enterprise 8.2+, Splunk Cloud Classic, and Splunk Cloud Victoria.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8691ed7a-814c-11f1-b432-96ac49d00421.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Steve Koelpin</dc:creator>
+      <pubDate>Thu, 16 Jul 2026 19:50:52 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8833/#v1.4.2</guid>
+    </item>
     <item>
       <title>Cisco Meraki Add-on for Splunk - v3.3.10 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5580/</link>
@@ -2358,28 +2409,6 @@ Main features include:
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Uzair Ahmed Gilani</dc:creator>
       <pubDate>Tue, 07 Jul 2026 05:40:44 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7696/#v1.0.5</guid>
-    </item>
-    <item>
-      <title>Code42 Insider Risk - v3.0.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5106/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;v3.0.2&lt;/p&gt;
-&lt;ul&gt;&lt;li&gt;Updates to improve efficiency of fetching Sessions&lt;/li&gt;&lt;li&gt;Sessions now include the rule name for triggered alerts.&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Correlate actionable risk insights to speed insider threat response.
-
-Code42 integrates with Splunk to deliver valuable file exfiltration events to custom dashboards for correlation and triage within the Splunk Security Operations Suite.
-
-Code42’s insider risk detection lenses surface insights for subsets of users more likely to put data at risk, such as users with access to proprietary information or departing employees. Extracting this data into dashboards within Splunk provides actionable insights that can be applied to existing SOC workflows to substantiate insider threat investigations and speed response.
-
-Overview
-https://www.code42.com/insider-threat-ecosystem/splunk/
-
-Support Documentation
-https://code42.com/r/support/splunk-insider-threat
-
-Code42 Incydr Trial
-https://www.code42.com/trial/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d254921e-7948-11f1-bc8e-86cb28f9f693.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Code42 Partners</dc:creator>
-      <pubDate>Mon, 06 Jul 2026 20:55:30 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5106/#v3.0.2</guid>
     </item>
     <item>
       <title>Citrix Analytics Add-on for Splunk - v2.1.7 [Version Update]</title>
