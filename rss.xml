@@ -6,7 +6,78 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Fri, 17 Jul 2026 15:06:21 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 17 Jul 2026 17:01:26 +0000</lastBuildDate>
+    <item>
+      <title>Data Heartbeat - v1.4.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8833/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;Clear Never-Seen — bulk-remove stale sourcetypes&lt;/h2&gt;
+&lt;p&gt;A new &lt;strong&gt;Clear Never-Seen&lt;/strong&gt; button on the Monitor toolbar removes every sourcetype whose Last Seen is Never in one operation — no more deleting stale discovery rows one at a time.&lt;/p&gt;
+&lt;p&gt;Deleting is deliberately hard to do by accident (triple verification):&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The dialog lists every row in scope — review it, then tick the confirmation checkbox&lt;/li&gt;
+&lt;li&gt;Type the exact row count to arm the Delete button&lt;/li&gt;
+&lt;li&gt;The armed button still asks one final confirmation&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;And easy to undo:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;One-click Restore&lt;/strong&gt; — the rows are snapshotted to a recycle bin before deletion; if the snapshot can't be written, nothing is deleted. Thresholds, importance, and notes restore exactly.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Download CSV copy&lt;/strong&gt; — keep an offline copy of what you removed; names can be re-added anytime via Add Sourcetype → paste list.&lt;/li&gt;
+&lt;li&gt;Every bulk delete and restore is recorded in the Audit log.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; per-row alert targets (webhook URLs / recipients) are securely deleted with their rows and are not restorable — the dialog warns you before you confirm.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;Detection now keys off receive time — live feeds can't look dead&lt;/h2&gt;
+&lt;p&gt;The detection search now measures freshness by when Splunk ingested the data (&lt;code&gt;_indextime&lt;/code&gt;), not the timestamps inside the events:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Fixed:&lt;/strong&gt; a feed with badly-parsed timestamps (device clock skew, timezone mis-parse, backfill, or the classic year-less syslog date that rolls back a full year) could show as silent or &quot;Never&quot; while actively sending data. Verified live: an event ingested seconds earlier with a 3-day-old timestamp went from &quot;never seen&quot; to its true age.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Improved:&lt;/strong&gt; the ingest lookback is now 7 days, so sources silent up to a week report their real age — including sources whose last data arrived before you started monitoring them.&lt;/li&gt;
+&lt;li&gt;Sources silent longer than 7 days keep their last-known timestamp (no regression to &quot;Never&quot;).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Upgrade notes&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;No configuration migration required. The recycle bin (&lt;code&gt;heartbeat_recycle_bin&lt;/code&gt; KV collection, admin-only) is created automatically; existing monitored sourcetypes, thresholds, and alert settings are untouched.&lt;/li&gt;
+&lt;li&gt;The dashboard JS is renamed (&lt;code&gt;heartbeat-v17.js&lt;/code&gt;) so browsers pick up the new UI without a cache clear.&lt;/li&gt;
+&lt;li&gt;If you've overridden the &quot;Data Heartbeat - Source Type Monitor&quot; search in local/, your override will shadow the new detection logic — remove the local search/dispatch.* override to get the receive-time fix.&lt;/li&gt;
+&lt;li&gt;Search Head Cluster ready: all new state lives in KV store (replicates cluster-wide).&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Know the moment a data source goes silent. Data Heartbeat monitors every source type in your Splunk environment and fires Slack, Teams, webhook, or email alerts the instant data stops flowing — before gaps turn into blind spots.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Data Heartbeat monitors your Splunk environment for source types that have stopped sending data. When a data source goes silent — whether from a misconfigured forwarder, a failed log shipper, or a broken integration — Data Heartbeat detects the gap and alerts you before the silence becomes a blind spot.
+
+Every monitored source type has a configurable threshold, measured in minutes. When no data arrives within that window, the app flags the source type and fires your chosen alert action: Slack, Microsoft Teams, a generic webhook, or email via Splunk&amp;#x27;s built-in SMTP relay.
+
+Key features:
+• Monitor dashboard — a live status table showing every tracked source type, the minutes since its last event, its threshold, and its importance level, with color-coded severity (green, yellow, red, and critical).
+• Per-row alert actions — each source type can use its own notification target, independent of the global default.
+• Auto Discovery — a nightly scan that surfaces new source types appearing in your environment and queues them for review.
+• Importance tagging — mark business-critical sources as High, Medium, or Low importance. When a high-importance source goes silent, the app raises a red-alert banner.
+• Settings page — configure global defaults (threshold, alert action, and notification target), enable or disable the monitoring pipeline, and test alert actions without waiting for a real outage.
+• Audit log — a full history of every configuration change, with timestamps and user attribution.
+• No index footprint — all configuration is stored in KV Store, so no custom indexes are required.
+
+Data Heartbeat is compatible with Splunk Enterprise 8.2+, Splunk Cloud Classic, and Splunk Cloud Victoria.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e1a7867a-8200-11f1-be5a-32ed48a47f18.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Steve Koelpin</dc:creator>
+      <pubDate>Fri, 17 Jul 2026 17:00:05 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8833/#v1.4.2</guid>
+    </item>
+    <item>
+      <title>Arbor APS - v3.0.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5757/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
+&lt;li&gt;Enabled TLS certificate verification by default for Arbor APS connections.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with Arbor Networks APS to execute containment and corrective actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/77d6e402-81f1-11f1-be5a-32ed48a47f18.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
+      <pubDate>Fri, 17 Jul 2026 15:09:12 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5757/#v3.0.2</guid>
+    </item>
+    <item>
+      <title>APIvoid - v2.0.8 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5879/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
+&lt;li&gt;Prevent API keys from appearing in transport error messages.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app supports executing investigative and reputation actions on the URLVoid service&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/163eea78-81f1-11f1-8d5d-8276d2c4ac74.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Fri, 17 Jul 2026 15:06:29 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5879/#v2.0.8</guid>
+    </item>
     <item>
       <title>ANY.RUN - v1.5.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7474/</link>
@@ -429,57 +500,6 @@ License: Beta/community preview license. See LICENSE included in the package.&lt
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
       <pubDate>Thu, 16 Jul 2026 20:36:06 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7144/#v1.0.2</guid>
-    </item>
-    <item>
-      <title>Data Heartbeat - v1.4.2 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8833/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;Clear Never-Seen — bulk-remove stale sourcetypes&lt;/h2&gt;
-&lt;p&gt;A new &lt;strong&gt;Clear Never-Seen&lt;/strong&gt; button on the Monitor toolbar removes every sourcetype whose Last Seen is Never in one operation — no more deleting stale discovery rows one at a time.&lt;/p&gt;
-&lt;p&gt;Deleting is deliberately hard to do by accident (triple verification):&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;The dialog lists every row in scope — review it, then tick the confirmation checkbox&lt;/li&gt;
-&lt;li&gt;Type the exact row count to arm the Delete button&lt;/li&gt;
-&lt;li&gt;The armed button still asks one final confirmation&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;And easy to undo:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;One-click Restore&lt;/strong&gt; — the rows are snapshotted to a recycle bin before deletion; if the snapshot can't be written, nothing is deleted. Thresholds, importance, and notes restore exactly.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Download CSV copy&lt;/strong&gt; — keep an offline copy of what you removed; names can be re-added anytime via Add Sourcetype → paste list.&lt;/li&gt;
-&lt;li&gt;Every bulk delete and restore is recorded in the Audit log.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; per-row alert targets (webhook URLs / recipients) are securely deleted with their rows and are not restorable — the dialog warns you before you confirm.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2&gt;Detection now keys off receive time — live feeds can't look dead&lt;/h2&gt;
-&lt;p&gt;The detection search now measures freshness by when Splunk ingested the data (&lt;code&gt;_indextime&lt;/code&gt;), not the timestamps inside the events:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Fixed:&lt;/strong&gt; a feed with badly-parsed timestamps (device clock skew, timezone mis-parse, backfill, or the classic year-less syslog date that rolls back a full year) could show as silent or &quot;Never&quot; while actively sending data. Verified live: an event ingested seconds earlier with a 3-day-old timestamp went from &quot;never seen&quot; to its true age.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Improved:&lt;/strong&gt; the ingest lookback is now 7 days, so sources silent up to a week report their real age — including sources whose last data arrived before you started monitoring them.&lt;/li&gt;
-&lt;li&gt;Sources silent longer than 7 days keep their last-known timestamp (no regression to &quot;Never&quot;).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Upgrade notes&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;No configuration migration required. The recycle bin (&lt;code&gt;heartbeat_recycle_bin&lt;/code&gt; KV collection, admin-only) is created automatically; existing monitored sourcetypes, thresholds, and alert settings are untouched.&lt;/li&gt;
-&lt;li&gt;The dashboard JS is renamed (&lt;code&gt;heartbeat-v17.js&lt;/code&gt;) so browsers pick up the new UI without a cache clear.&lt;/li&gt;
-&lt;li&gt;If you've overridden the &quot;Data Heartbeat - Source Type Monitor&quot; search in local/, your override will shadow the new detection logic — remove the local search/dispatch.* override to get the receive-time fix.&lt;/li&gt;
-&lt;li&gt;Search Head Cluster ready: all new state lives in KV store (replicates cluster-wide).&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Know the moment a data source goes silent. Data Heartbeat monitors every source type in your Splunk environment and fires Slack, Teams, webhook, or email alerts the instant data stops flowing — before gaps turn into blind spots.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Data Heartbeat monitors your Splunk environment for source types that have stopped sending data. When a data source goes silent — whether from a misconfigured forwarder, a failed log shipper, or a broken integration — Data Heartbeat detects the gap and alerts you before the silence becomes a blind spot.
-
-Every monitored source type has a configurable threshold, measured in minutes. When no data arrives within that window, the app flags the source type and fires your chosen alert action: Slack, Microsoft Teams, a generic webhook, or email via Splunk&amp;#x27;s built-in SMTP relay.
-
-Key features:
-• Monitor dashboard — a live status table showing every tracked source type, the minutes since its last event, its threshold, and its importance level, with color-coded severity (green, yellow, red, and critical).
-• Per-row alert actions — each source type can use its own notification target, independent of the global default.
-• Auto Discovery — a nightly scan that surfaces new source types appearing in your environment and queues them for review.
-• Importance tagging — mark business-critical sources as High, Medium, or Low importance. When a high-importance source goes silent, the app raises a red-alert banner.
-• Settings page — configure global defaults (threshold, alert action, and notification target), enable or disable the monitoring pipeline, and test alert actions without waiting for a real outage.
-• Audit log — a full history of every configuration change, with timestamps and user attribution.
-• No index footprint — all configuration is stored in KV Store, so no custom indexes are required.
-
-Data Heartbeat is compatible with Splunk Enterprise 8.2+, Splunk Cloud Classic, and Splunk Cloud Victoria.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8691ed7a-814c-11f1-b432-96ac49d00421.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Steve Koelpin</dc:creator>
-      <pubDate>Thu, 16 Jul 2026 19:50:52 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8833/#v1.4.2</guid>
     </item>
     <item>
       <title>Cisco Meraki Add-on for Splunk - v3.3.10 [Version Update]</title>
@@ -1060,14 +1080,6 @@ https://help.splunk.com/en/splunk-cloud-platform/ingest-data-from-cloud-services
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">ClickHouse, Inc</dc:creator>
       <pubDate>Wed, 15 Jul 2026 12:53:22 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7709/#v1.0.6</guid>
-    </item>
-    <item>
-      <title>ITOC360 - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/9079/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;code&gt;Initial release. Adds the ITOC360 custom alert action for sending triggered Splunk alerts to ITOC360.&lt;/code&gt;&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Send triggered Splunk alerts to ITOC360 for on-call alert routing, deduplication, and incident management.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;ITOC360 Alert Action sends triggered Splunk alerts to ITOC360, an on-call alert routing and incident management platform. When a saved search or alert fires, this action forwards it to ITOC360 with the search name as the title, the host from the triggering result, and the severity you select. ITOC360 maps severity to alert priority, deduplicates repeated triggers into a single alert, and routes incidents to the right on-call engineer through escalation policies and schedules — via voice call, SMS, email, or push notification.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/bd088be2-7bc1-11f1-89f8-562861d36ada.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">talha bektas</dc:creator>
-      <pubDate>Wed, 15 Jul 2026 12:46:55 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9079/#v1.0.0</guid>
     </item>
     <item>
       <title>Vali Cyber ZeroLock App - v1.0.0 [New App Release]</title>
@@ -2297,64 +2309,6 @@ Bring your own LLM: Anthropic, OpenAI, Azure OpenAI, Groq, Google Gemini, AWS Be
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Eduard Lekanne</dc:creator>
       <pubDate>Thu, 09 Jul 2026 19:39:39 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8747/#v1.8.4</guid>
-    </item>
-    <item>
-      <title>TheHive/Cortex - v4.2.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5329/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;# Release Notes - v4.2.1: &quot;The Honey Keeper&quot; 🍯&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;## Summary&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Version 4.2.1 is a &lt;strong&gt;**hotfix release**&lt;/strong&gt; addressing a data-loss regression&lt;/p&gt;
-&lt;p&gt;introduced in v4.1.0: the `thehive_datatypes.csv` lookup could be periodically&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;**overwritten with default values**&lt;/strong&gt;, wiping out user-defined custom field&lt;/p&gt;
-&lt;p&gt;mappings and causing observables to go missing from TheHive alerts and cases.&lt;/p&gt;
-&lt;p&gt;No new feature is introduced and no configuration change is required — this is&lt;/p&gt;
-&lt;p&gt;a safe, drop-in update from v4.2.0.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;## Improvements &amp;amp; Bug Fixes&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;### 🗂️ Alert Actions: custom datatype mappings are no longer lost&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;- &lt;strong&gt;**Root cause**&lt;/strong&gt;: since v4.1.0, alert actions refresh the&lt;/p&gt;
-&lt;p&gt;`thehive_datatypes.csv` lookup from the TheHive API whenever the file is&lt;/p&gt;
-&lt;p&gt;older than 24 hours. The refresh rebuilt the file &lt;strong&gt;**from scratch**&lt;/strong&gt; with only&lt;/p&gt;
-&lt;p&gt;the native observable types returned by TheHive, silently destroying every&lt;/p&gt;
-&lt;p&gt;custom row (e.g. `src_ip → ip`, `dest_domain → domain`) that detections rely&lt;/p&gt;
-&lt;p&gt;on to map Splunk fields to observables. In practice the lookup was reset&lt;/p&gt;
-&lt;p&gt;every 24-72 hours, depending on when the next alert action fired.&lt;/p&gt;
-&lt;p&gt;- &lt;strong&gt;**Fix — non-destructive merge**&lt;/strong&gt;: the periodic refresh is kept (it still&lt;/p&gt;
-&lt;p&gt;picks up new observable types created in TheHive), but it now **preserves&lt;/p&gt;
-&lt;p&gt;every existing row** of the lookup, custom mappings included. Only datatypes&lt;/p&gt;
-&lt;p&gt;not already listed are appended. A full regeneration never happens once the&lt;/p&gt;
-&lt;p&gt;file exists.&lt;/p&gt;
-&lt;p&gt;- &lt;strong&gt;**Atomic writes**&lt;/strong&gt;: the lookup is now written to a uniquely-named temporary&lt;/p&gt;
-&lt;p&gt;file and moved into place atomically, so a crash or two concurrent alert&lt;/p&gt;
-&lt;p&gt;actions can no longer leave a truncated or half-written lookup behind.&lt;/p&gt;
-&lt;p&gt;- &lt;strong&gt;**Safety guard**&lt;/strong&gt;: if the existing lookup cannot be read (locked, malformed&lt;/p&gt;
-&lt;p&gt;encoding, permissions), the refresh is &lt;strong&gt;**aborted**&lt;/strong&gt; instead of overwriting&lt;/p&gt;
-&lt;p&gt;content that could not be preserved (logged as `THC-4`).&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;### 🧹 Minor&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;- Fixed a file-handle leak in the datatype lookup reader (the file was opened&lt;/p&gt;
-&lt;p&gt;on every alert action run but never closed).&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;## Deployment Notes&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;- &lt;strong&gt;**Prerequisite**&lt;/strong&gt;: Python 3.9 (matches Splunk's bundled interpreter).&lt;/p&gt;
-&lt;p&gt;- &lt;strong&gt;**After upgrading**&lt;/strong&gt;: if your custom `thehive_datatypes.csv` was recently&lt;/p&gt;
-&lt;p&gt;reset, restore it once from your backup — it will no longer be overwritten.&lt;/p&gt;
-&lt;p&gt;- &lt;strong&gt;**Migration Path**&lt;/strong&gt;:&lt;/p&gt;
-&lt;p&gt;- &lt;strong&gt;**From v4.2.0 / v4.1.0 / v4.0.0**&lt;/strong&gt;: non-breaking update. Existing&lt;/p&gt;
-&lt;p&gt;configuration, accounts, instances and certificates are preserved.&lt;/p&gt;
-&lt;p&gt;- &lt;strong&gt;**From v3.9.0 (Direct Upgrade)**&lt;/strong&gt;: you can upgrade directly to v4.2.1.&lt;/p&gt;
-&lt;p&gt;- &lt;strong&gt;**⚠️ CRITICAL**&lt;/strong&gt;: if upgrading from v3.x, the&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;**[v4.0.0 migration instructions](&lt;/strong&gt;&lt;u&gt;./v4.0.0.md&lt;/u&gt;&lt;strong&gt;) are mandatory**&lt;/strong&gt; and remain&lt;/p&gt;
-&lt;p&gt;valid for this version (UCC architecture migration, breaking configuration&lt;/p&gt;
-&lt;p&gt;changes, and new credential storage). Please read them carefully before&lt;/p&gt;
-&lt;p&gt;proceeding.&lt;/p&gt;
-&lt;p&gt;- &lt;strong&gt;**Upgrade tip (Windows / on-prem)**&lt;/strong&gt;: never delete the app's `local/` folder.&lt;/p&gt;
-&lt;p&gt;Stop Splunk, back up `local/`, deploy the new build, restore `local/`, then&lt;/p&gt;
-&lt;p&gt;start Splunk.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This TA allows to add interaction features between TheHive or Cortex (https://www.strangebee.com/) and Splunk. It allows to retrieve all kind of information from TheHive/Cortex and to perform actions on these instances using Splunk, from a search or from a predefined dashboard.
-
-This TA is supporting only TheHive 5. For having an app supporting TheHive 3 or 4, please check the oldest releases. It&amp;#x27;s also supporting the Cortex 3 version.
-
-More information here: https://github.com/LetMeR00t/TA-thehive-cortex&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/250b4fc6-7bb9-11f1-890e-1ef256ec2553.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Alexandre Demeyer</dc:creator>
-      <pubDate>Thu, 09 Jul 2026 17:21:15 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5329/#v4.2.1</guid>
     </item>
   </channel>
 </rss>
