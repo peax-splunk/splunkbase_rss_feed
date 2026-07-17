@@ -6,26 +6,71 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Fri, 17 Jul 2026 20:57:52 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 17 Jul 2026 21:52:15 +0000</lastBuildDate>
     <item>
-      <title>Cisco Catalyst Add-on for Splunk - v3.2.39 [Version Update]</title>
+      <title>Tufin SecureTrack - v3.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5859/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
+&lt;li&gt;Enable TLS certificate verification by default while retaining an explicit opt-out. [PSAAS-30761]&lt;/li&gt;
+&lt;li&gt;Escape action parameters before embedding them in display-view JavaScript. [PSAAS-30871]&lt;/li&gt;
+&lt;li&gt;Bound API response sizes and reject unsafe XML declarations before parsing. [PSAAS-31983]&lt;/li&gt;
+&lt;li&gt;Bound network-object pagination and fail when the API stops making progress. [PSAAS-32146]&lt;/li&gt;
+&lt;li&gt;Evaluate connectivity from each device's first matching rule and recognize explicit permit and block actions. [PSAAS-32113]&lt;/li&gt;
+&lt;li&gt;Report an IP as blocked only when every device's first matching rule blocks it. [PSAAS-32307]&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app supports investigative actions on Tufin SecureTrack&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/6a206814-8229-11f1-be5a-32ed48a47f18.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Fri, 17 Jul 2026 21:49:41 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5859/#v3.0.0</guid>
+    </item>
+    <item>
+      <title>Cisco Catalyst Add-on for Splunk - v3.2.41 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7538/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h3&gt;Fixes&lt;/h3&gt;
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h3&gt;Highlights&lt;/h3&gt;
+
 &lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;ISE posture reports are ingested again&lt;/strong&gt; — the Cisco ISE Analytics Reports input again copies the Posture reports (&lt;code&gt;cisco:ise:analytics:registry&lt;/code&gt;, &lt;code&gt;cisco:ise:analytics:hardware&lt;/code&gt;, and &lt;code&gt;cisco:ise:analytics:applications&lt;/code&gt;) from ISE local disk into the SFTP repository before ingestion. A prior change skipped that copy for posture reports on the incorrect assumption that they were written directly to the repository, which left them stranded on disk so those sourcetypes produced no events. All report types are now transferred consistently.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Cyber Vision generic API input configuration no longer flagged invalid&lt;/strong&gt; — the &lt;code&gt;cisco_catalyst_cybervision_api&lt;/code&gt; input's &lt;code&gt;logging_level&lt;/code&gt; setting is now declared in the input specification, so Splunk no longer logs an &quot;Invalid key in stanza [cisco_catalyst_cybervision_api] … logging_level&quot; error when validating &lt;code&gt;inputs.conf&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Data Collection Health rebuilt as a native React dashboard&lt;/strong&gt; — replaces the Dashboard Studio implementation to avoid schema compatibility issues across Splunk Enterprise versions while preserving the same operational health coverage.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;In-product User Guide is now the source of truth&lt;/strong&gt; — the TA now ships a searchable, Markdown-driven user guide with navigation, collapsible examples, syntax-highlighted SPL/config blocks, screenshots, and direct “Open in Search” actions.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3&gt;Enhancements&lt;/h3&gt;
+&lt;h3&gt;Dashboards &amp;amp; Usability&lt;/h3&gt;
+
 &lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;ISE Analytics Reports pipeline health in the Data Collection Health dashboard&lt;/strong&gt; — the ISE tab gains an &lt;em&gt;Analytics Reports Pipeline&lt;/em&gt; section that tracks collection end to end: reports generated on ISE, transferred to the repository, ingested, and (for FullReports) cleaned off the ISE local disk. It shows a per-input pipeline funnel, pipeline runs over time, and a &lt;strong&gt;FullReports Left on ISE Disk&lt;/strong&gt; indicator. Because ISE does not remove previous FullReport runs on its own, a FullReport left behind after a failed transfer accumulates on the ISE disk; this indicator is an early warning for disk fill-up. The signal is derived entirely from the add-on's own internal logs, so it works when the add-on runs on-premises and the dashboard is viewed in Splunk Cloud. The ISE Analytics Reports input now emits structured pipeline and report-cleanup telemetry to support these panels.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Data Collection Health usability improvements&lt;/strong&gt; — added sortable and paginated tables, improved tab organization, sticky controls, cleaner exports, better panel titles/descriptions, severity coloring, and product-specific TA internal log panels.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Improved troubleshooting drilldowns&lt;/strong&gt; — dashboard panels now provide clearer info modals and direct links into Splunk Search with the relevant SPL and dashboard time range applied.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Resource Utilization guidance clarified&lt;/strong&gt; — the dashboard now explains that resource panels depend on the Cisco Catalyst data model from the Cisco Enterprise Networking for Splunk Platform app and require data model acceleration.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Chart rendering improved&lt;/strong&gt; — refreshed chart axes, hover behavior, min/max context, and color consistency for a more readable operational view.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3&gt;Upgrade notes&lt;/h3&gt;
+&lt;h3&gt;User Guide &amp;amp; Documentation&lt;/h3&gt;
+
 &lt;ul&gt;
-  &lt;li&gt;No reconfiguration required; upgrades are seamless.&lt;/li&gt;
-  &lt;li&gt;Posture report events resume on the next collection run of the ISE Analytics Reports input; no change to inputs or repository settings is needed.&lt;/li&gt;
-  &lt;li&gt;The new ISE Analytics Reports pipeline panels populate when that input's logging level is set to &lt;strong&gt;INFO&lt;/strong&gt;; the FullReports-left-on-disk warning is emitted at WARNING and appears regardless. Panels and telemetry appear on the next collection run.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;New in-product guide workflow&lt;/strong&gt; — user guide content is maintained from a single Markdown source and rendered inside Splunk, reducing duplicate documentation across Splunkbase files.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Expanded deployment guidance&lt;/strong&gt; — added clearer setup guidance for Catalyst Center, SD-WAN, ISE, Cyber Vision, NetFlow/Splunk Stream, SC4S, index planning, app macros, data model acceleration, and validation searches.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Release notes consolidated&lt;/strong&gt; — the in-product guide now includes release history for the Cisco Catalyst Add-on, Cisco Enterprise Networking for Splunk Platform, and Cisco Catalyst Enhanced NetFlow Add-on.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Splunkbase documentation simplified&lt;/strong&gt; — Splunkbase detail, installation, troubleshooting, and release-note documents now point customers to the in-product guide as the maintained documentation source.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Fixes&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Cisco IOS syslog extraction hardened&lt;/strong&gt; — improved the &lt;code&gt;extract_cisco_ios-general-xe&lt;/code&gt; extraction to better handle syslog forwarding preambles while preserving Cisco IOS/XE field extraction behavior.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Dashboard test compatibility restored&lt;/strong&gt; — adjusted Data Collection Health dashboard definition formatting so repository drift tests can continue validating dashboard search behavior.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Build metadata alignment improved&lt;/strong&gt; — corrected build metadata handling so packaged build information is consistent between the build output and Splunk UI.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Platform &amp;amp; Compatibility&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Splunk 10.4 / Python 3.13 readiness&lt;/strong&gt; — continued compatibility work for newer Splunk Enterprise runtimes, including cleanup around packaged runtime dependencies and modular input execution.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Packaging cleanup&lt;/strong&gt; — reduced stale generated assets and clarified packaged documentation ownership.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Upgrade Notes&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;No reconfiguration is required. Existing accounts, inputs, and KV Store checkpoints are preserved.&lt;/li&gt;
+  &lt;li&gt;For best dashboard performance, install the Cisco Enterprise Networking for Splunk Platform app on the same search head and accelerate the Cisco Catalyst data model.&lt;/li&gt;
+  &lt;li&gt;Use &lt;strong&gt;Data Collection Health&lt;/strong&gt; after upgrade to confirm sourcetype freshness, TA internal logs, API pressure, data quality, and resource utilization.&lt;/li&gt;
 &lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Cisco Catalyst Add-on for Splunk collects and normalizes API telemetry from Cisco Catalyst Center, SD-WAN (vManage), ISE, and Cyber Vision through modular inputs. It includes CIM-aligned knowledge objects, backward-compatible DNAC/Catalyst sourcetype coverage, and built-in health monitoring for input status, errors, and API load.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Author - Cisco Systems
 
 Supported Cisco Products:
@@ -43,8 +88,8 @@ Cisco Network Infrastructure Devices which include the below platform series:
 * Cisco Access Points
 * Cisco WLC - WLAN Controller&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/fca725ce-821f-11f1-b432-96ac49d00421.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco</dc:creator>
-      <pubDate>Fri, 17 Jul 2026 20:49:51 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7538/#v3.2.39</guid>
+      <pubDate>Fri, 17 Jul 2026 21:09:51 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7538/#v3.2.41</guid>
     </item>
     <item>
       <title>OCSF TA for Linux - v2.3.3 [Version Update] (Archived)</title>
@@ -297,35 +342,6 @@ This add-on provides the inputs and CIM-compatible knowledge to use with other S
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Fri, 17 Jul 2026 07:19:23 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/3110/#v6.3.0</guid>
-    </item>
-    <item>
-      <title>CryptView for Splunk - v0.1.4 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8786/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;Hotfix release. Fixes dashboard default token initialization so panels run correctly on first load without requiring URL parameters or manual filter changes. No sourcetypes, event schema, collector logic, or data model behavior changed.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Visualize CryptView-generated CBOM, certificate lifecycle, risk, and post-quantum readiness evidence in Splunk.
-Beta feedback, pilot access, and Collector/CLI waitlist: https://forms.gle/qJRaDb1sXaMo2yqA7&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;CryptView for Splunk (package id: TA-cryptview) provides visibility in Splunk into CryptView-generated cryptographic asset inventory, certificate lifecycle risk, and post-quantum cryptography readiness evidence.
-
-The app helps security, PKI, identity, infrastructure, and SIEM teams review Cryptographic Bill of Materials (CBOM) data directly in Splunk. It visualizes TLS endpoints, certificate expiry pressure, key type and key size signals, issuer concentration, migration priorities, filesystem crypto inventory, and layered Post-Quantum Cryptography (PQC) readiness evidence.
-
-CryptView separates certificate identity, transport/key-exchange evidence, and evidence confidence so standard TLS-only scans do not overclaim PQC readiness. Where active PQC transport evidence is not available, the dashboard reports transport status as “not tested” rather than assuming support or lack of support.
-
-This beta/community preview does not perform active scanning from Splunk. CryptView Collector, CryptView CLI, or external CryptView workflows generate normalized NDJSON data separately, and this Splunk app ingests and visualizes that output. Optional CycloneDX CBOM JSON can also be indexed as a standards/audit artifact.
-
-For endpoint filesystem certificate, private-key-file indicator, and keystore inventory, install the companion CryptView Collector app from Splunkbase:
-https://splunkbase.splunk.com/app/9012
-
-The collector is metadata-only and is designed to work with this CryptView dashboard app.
-
-For managed assessments, executive reporting, connector onboarding, PQC migration prioritization, support, feedback, or pilot participation, complete the feedback form or contact hello@qwocks.com.
-
-Beta feedback, pilot access, and product enquiries:
-https://forms.gle/qJRaDb1sXaMo2yqA7
-
-Compatibility: Splunk Enterprise 9.x. Splunk Cloud deployment may require separate validation/review.
-
-License: Beta/community preview license. See LICENSE included in the package.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Qwocks Admin</dc:creator>
-      <pubDate>Fri, 17 Jul 2026 03:05:17 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8786/#v0.1.4</guid>
     </item>
     <item>
       <title>SQLite - v2.2.4 [Version Update]</title>
