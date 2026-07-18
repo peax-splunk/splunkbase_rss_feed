@@ -6,7 +6,119 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sat, 18 Jul 2026 22:39:38 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 18 Jul 2026 23:43:21 +0000</lastBuildDate>
+    <item>
+      <title>WireGuard Log Parser - v1.0.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6129/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;v1.0.1&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Bumped version to avoid archiving on Splunkbase. No new features.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TA-wg provides field extraction for dozens of different WireGuard debug events for Linux systems using IPv4 or IPv6.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0c09b2cc-82ff-11f1-b432-96ac49d00421.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Frank Wayne</dc:creator>
+      <pubDate>Sat, 18 Jul 2026 23:22:23 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6129/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>Supply Chain and AI Threat Intelligence Platform - v1.1.11 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8814/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;This is the first update since the initial release (v1.0.0). It includes the following changes.&lt;/p&gt;
+&lt;h2&gt;Compatibility&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Splunk Enterprise 9.2+ and Splunk Cloud&lt;/li&gt;
+  &lt;li&gt;Standalone and distributed deployments (indexer cluster + search head cluster)&lt;/li&gt;
+  &lt;li&gt;Splunk Enterprise Security is not required — ES integration is an optional enhancement (Professional tier includes native Risk-Based Alerting integration when ES is present)&lt;/li&gt;
+  &lt;li&gt;The Federal Plus POA\&amp;amp;M Generator custom search command targets on-prem and air-gapped Splunk Enterprise only; all other features, including everything below, run on Splunk Cloud&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;New Capabilities&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Critical &amp;amp; High-Risk Exposure (all tiers)&lt;/strong&gt; — home dashboard now shows a real-time count of critical and high-severity vulnerabilities in your ingested SBOMs, calculated from your actual component data. Adjacent to it, an actively-exploited-vulnerability awareness indicator references CISA's Known Exploited Vulnerabilities (KEV) catalog — on Community tier this flags that active exploitation may be present without a specific count; on Professional and above, the full KEV-matched count and remediation tracking are available.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Compliance Gap Visibility (all tiers)&lt;/strong&gt; — home dashboard now shows your real, personalized compliance gap percentage for your configured primary framework (e.g., &quot;38% of your in-scope PCI DSS 4.0 controls have gaps&quot;) — a genuine calculation from your own data, not a placeholder. Control-by-control evidence, remediation tracking, and exportable reports remain Professional and above.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Long-Unpatched Critical Exposure (all tiers)&lt;/strong&gt; — new home dashboard panel identifies critical/high-severity vulnerabilities unpatched 180+ days, surfacing negligence/audit-finding risk distinct from active-exploitation alerts. Available at every tier including free Community; remediation tracking to act on findings is Professional and above.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Compound Risk Correlation (Enterprise, Federal Plus)&lt;/strong&gt; — new dedicated dashboard view identifies applications with both an active MITRE ATLAS AI-threat detection and one or more critical or actively-exploited vulnerable components, correlating two previously-separate risk signals into one view. Requires a one-time setup step: map your AI/LLM application hosts to their SBOM products in Setup Section 1d (AI Application Mapping).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;AI/ML Bill of Materials (Professional and above; risk classification on Enterprise and Federal Plus)&lt;/strong&gt; — catalogs AI/ML model components from your SBOMs (architecture, training data sources, full lineage/pedigree) on Professional tier and above. Additionally flags models using known-insecure serialization formats versus safer alternatives, correlated into the same risk-scoring context as your CVE/KEV findings — available on Enterprise and Federal Plus.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Licensing&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;License enforcement rebuilt on Ed25519 asymmetric digital signatures (RFC 8032).&lt;/strong&gt; The app now ships only a public verification key — no secret of any kind is present in the package, and license keys can be created only by GIC Engineering Consultants. Validation remains fully offline and air-gap compatible: no phone-home, no key-server lookup.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Breaking change:&lt;/strong&gt; license keys issued for versions prior to 1.1.0 use a retired format and will not validate. Contact contact@gicengineeringconsultants.com for replacement keys.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Correctness Fixes&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Version comparison&lt;/strong&gt; now handles prerelease and qualifier identifiers with numeric-aware ordering, correctly ranks Java/Maven release qualifiers, and ignores build metadata.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;OSV vulnerability correlation is now version-aware&lt;/strong&gt; at every correlation site: CVE matches are checked against the fixed version, so patched components no longer report already-remediated CVEs as still open.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;NVD version-range correlation fix:&lt;/strong&gt; each CVE now stays correctly paired with its own version bounds (previously a silent cap could desync CVEs from their ranges on high-CVE components), and results now correctly reach POA\&amp;amp;M population.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Severity classification corrected:&lt;/strong&gt; CVSS vector strings and score data are now parsed into proper severity levels instead of collapsing to &quot;unknown&quot;; the bundled vulnerability data was regenerated accordingly.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Multi-license component handling fixed end-to-end:&lt;/strong&gt; every SBOM ingestion path now produces one consistent, canonical representation of multi-license components. License Risk classification now correctly evaluates each license in a multi-license component individually, so a component isn't missed just because its risky license is bundled with a safe one. Affects License Risk and Compliance reporting.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Security Hardening&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Hardened role-based access controls&lt;/strong&gt; — search access for each role (Viewer, Analyst, Admin) is now scoped more precisely to only the data indexes each role actually requires.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Browser-based license activation transport hardened&lt;/strong&gt; so keys are no longer at risk of corruption in transit through the Splunk Web proxy.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Path-traversal protection&lt;/strong&gt; added to CSV export.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;SBOM XML parsing hardened against entity-expansion (XML bomb) denial-of-service payloads.&lt;/strong&gt; Valid SBOMs are unaffected.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;File-read paths for SBOM ingestion are now strictly contained&lt;/strong&gt; to the app's own spool directory.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Privileged configuration commands are now access-gated&lt;/strong&gt; to admin-tier roles, closing a path where they were reachable more broadly than intended.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;License keys, API keys, and tokens no longer pass through search strings&lt;/strong&gt;, removing them from audit/job-history visibility. All credential entry now goes through the Setup page's single gated path.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Duplicate vulnerability-correlation events eliminated&lt;/strong&gt; — CVE matches are now indexed exactly once per unique match instead of being re-collected on every run.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Platform &amp;amp; Documentation&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Corrected the home dashboard's vulnerability drill-down navigation&lt;/strong&gt; so it lands on the pre-filtered, relevant detail view rather than a generic unfiltered list.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Corrected a configuration comment describing MITRE ATLAS detection rule scheduling&lt;/strong&gt; — documentation-only, no change to detection behavior; AI-threat detection has been running as expected all along.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Removed version number display from in-app surfaces&lt;/strong&gt; (About page, dashboard footers) in favor of the Splunkbase listing as the single, always-current source for version and release history.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Unifies software supply chain risk (SBOM/SCA), MITRE ATLAS AI-threat detection, and nine-framework compliance in one Splunk app — with FedRAMP-ready audit exports and no external security product required.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;SCIP unifies software composition analysis (SCA), supply chain risk monitoring, and AI threat detection in one Splunk app. Ingest SBOMs, correlate components against live vulnerability intelligence (OSV, NVD, CISA KEV, EPSS), detect adversarial AI/ML threats with MITRE ATLAS, and assess compliance posture across nine global frameworks — with detection logic written as transparent SPL you can open and read, and no external security product required.
+
+CAPABILITIES
+- SBOM ingestion — file-drop or HEC, supporting CycloneDX (JSON/XML) and SPDX (JSON)
+
+- Vulnerability correlation — daily OSV feed (264,944+ records across 5 ecosystems) with PURL-based correlation; NVD CPE-based correlation; CISA KEV matching with due-date tracking; EPSS exploit-probability scoring
+
+- Supply Chain Risk Score — 0–100 global and per-application risk scoring weighted by severity, KEV status, and EPSS
+
+- Vendor Risk — per-vendor risk aggregation and letter-grading across your SBOM portfolio
+
+- SBOM Drift Detection — baseline-vs-current component change tracking
+
+- License Compliance — GPL/AGPL/copyleft detection and license-risk classification
+
+- MITRE ATLAS Detection — 66 detection rules for adversarial AI/ML threats
+
+- Silent-Source Detection — alerts when an enrolled AI/LLM telemetry source goes quiet, so a dead pipe is never mistaken for a clean one (Enterprise and Federal Plus)
+
+- Compliance Gap Assessment — nine frameworks: PCI DSS 4.0, NIST CSF 2.0, SOC 2 Type II, HIPAA Security Rule, EU Cyber Resilience Act, FedRAMP / RMF / CISA, DORA, FDA 524B Premarket Cybersecurity, SEBI CSCRF
+
+- Long-Unpatched Critical Exposure — flags critical/high-severity vulnerabilities unpatched 180+ days (all tiers)
+
+- POA&amp;amp;M &amp;amp; FedRAMP Workflow — POA&amp;amp;M dashboard, monthly ConMon package builder, CISA KEV due-date tracking, deviation request workflow. Dashboards always available; automated POA&amp;amp;M generation is opt-in from Setup
+
+- Coverage-Evidence Manifest — AU-12-aligned attestation of unbroken AI-monitoring coverage (Federal Plus)
+
+- Audit-ready exports — FedRAMP POA&amp;amp;M Workbook (R3.0 and R2.1), SSP Appendix M Integrated Inventory, Deviation Request Form (Template 2.1 / Aug 2024)
+
+- Component Search — instant cross-SBOM component lookup (available in the free Community tier)
+
+- Compound Risk — correlates active MITRE ATLAS AI-threat detections with vulnerable components on the same application, surfacing compounding risk neither signal shows alone (Enterprise and Federal Plus)
+
+- AI/ML Bill of Materials — catalogs AI/ML model components from your SBOMs (architecture, training data, lineage) with insecure-serialization-format flagging (Professional and above; risk classification on Enterprise and Federal Plus)
+
+TIERS
+Community (free), Professional, Federal, Enterprise, Federal Plus. Feature availability gated by license tier; contact us for tier comparison.
+
+SUPPORT
+GIC Engineering Consultants — contact@gicengineeringconsultants.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2d6bb91a-7f85-11f1-adb4-26de3214d12b.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">GIC Engineering Consultants, Inc.</dc:creator>
+      <pubDate>Sat, 18 Jul 2026 23:07:14 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8814/#v1.1.11</guid>
+    </item>
     <item>
       <title>WTI OOB for Splunk - v1.1.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7891/</link>
@@ -1454,106 +1566,6 @@ By integrating Druva Cloud Platform with your existing Splunk platform, this sol
       <guid>https://splunkbase.splunk.com/app/6027/#v1.2.0</guid>
     </item>
     <item>
-      <title>Supply Chain and AI Threat Intelligence Platform - v1.1.11 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8814/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;This is the first update since the initial release (v1.0.0). It includes the following changes.&lt;/p&gt;
-&lt;h2&gt;Compatibility&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Splunk Enterprise 9.2+ and Splunk Cloud&lt;/li&gt;
-  &lt;li&gt;Standalone and distributed deployments (indexer cluster + search head cluster)&lt;/li&gt;
-  &lt;li&gt;Splunk Enterprise Security is not required — ES integration is an optional enhancement (Professional tier includes native Risk-Based Alerting integration when ES is present)&lt;/li&gt;
-  &lt;li&gt;The Federal Plus POA\&amp;amp;M Generator custom search command targets on-prem and air-gapped Splunk Enterprise only; all other features, including everything below, run on Splunk Cloud&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;New Capabilities&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Critical &amp;amp; High-Risk Exposure (all tiers)&lt;/strong&gt; — home dashboard now shows a real-time count of critical and high-severity vulnerabilities in your ingested SBOMs, calculated from your actual component data. Adjacent to it, an actively-exploited-vulnerability awareness indicator references CISA's Known Exploited Vulnerabilities (KEV) catalog — on Community tier this flags that active exploitation may be present without a specific count; on Professional and above, the full KEV-matched count and remediation tracking are available.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Compliance Gap Visibility (all tiers)&lt;/strong&gt; — home dashboard now shows your real, personalized compliance gap percentage for your configured primary framework (e.g., &quot;38% of your in-scope PCI DSS 4.0 controls have gaps&quot;) — a genuine calculation from your own data, not a placeholder. Control-by-control evidence, remediation tracking, and exportable reports remain Professional and above.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Long-Unpatched Critical Exposure (all tiers)&lt;/strong&gt; — new home dashboard panel identifies critical/high-severity vulnerabilities unpatched 180+ days, surfacing negligence/audit-finding risk distinct from active-exploitation alerts. Available at every tier including free Community; remediation tracking to act on findings is Professional and above.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Compound Risk Correlation (Enterprise, Federal Plus)&lt;/strong&gt; — new dedicated dashboard view identifies applications with both an active MITRE ATLAS AI-threat detection and one or more critical or actively-exploited vulnerable components, correlating two previously-separate risk signals into one view. Requires a one-time setup step: map your AI/LLM application hosts to their SBOM products in Setup Section 1d (AI Application Mapping).&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;AI/ML Bill of Materials (Professional and above; risk classification on Enterprise and Federal Plus)&lt;/strong&gt; — catalogs AI/ML model components from your SBOMs (architecture, training data sources, full lineage/pedigree) on Professional tier and above. Additionally flags models using known-insecure serialization formats versus safer alternatives, correlated into the same risk-scoring context as your CVE/KEV findings — available on Enterprise and Federal Plus.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;Licensing&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;License enforcement rebuilt on Ed25519 asymmetric digital signatures (RFC 8032).&lt;/strong&gt; The app now ships only a public verification key — no secret of any kind is present in the package, and license keys can be created only by GIC Engineering Consultants. Validation remains fully offline and air-gap compatible: no phone-home, no key-server lookup.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Breaking change:&lt;/strong&gt; license keys issued for versions prior to 1.1.0 use a retired format and will not validate. Contact contact@gicengineeringconsultants.com for replacement keys.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;Correctness Fixes&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Version comparison&lt;/strong&gt; now handles prerelease and qualifier identifiers with numeric-aware ordering, correctly ranks Java/Maven release qualifiers, and ignores build metadata.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;OSV vulnerability correlation is now version-aware&lt;/strong&gt; at every correlation site: CVE matches are checked against the fixed version, so patched components no longer report already-remediated CVEs as still open.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;NVD version-range correlation fix:&lt;/strong&gt; each CVE now stays correctly paired with its own version bounds (previously a silent cap could desync CVEs from their ranges on high-CVE components), and results now correctly reach POA\&amp;amp;M population.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Severity classification corrected:&lt;/strong&gt; CVSS vector strings and score data are now parsed into proper severity levels instead of collapsing to &quot;unknown&quot;; the bundled vulnerability data was regenerated accordingly.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Multi-license component handling fixed end-to-end:&lt;/strong&gt; every SBOM ingestion path now produces one consistent, canonical representation of multi-license components. License Risk classification now correctly evaluates each license in a multi-license component individually, so a component isn't missed just because its risky license is bundled with a safe one. Affects License Risk and Compliance reporting.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;Security Hardening&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Hardened role-based access controls&lt;/strong&gt; — search access for each role (Viewer, Analyst, Admin) is now scoped more precisely to only the data indexes each role actually requires.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Browser-based license activation transport hardened&lt;/strong&gt; so keys are no longer at risk of corruption in transit through the Splunk Web proxy.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Path-traversal protection&lt;/strong&gt; added to CSV export.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;SBOM XML parsing hardened against entity-expansion (XML bomb) denial-of-service payloads.&lt;/strong&gt; Valid SBOMs are unaffected.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;File-read paths for SBOM ingestion are now strictly contained&lt;/strong&gt; to the app's own spool directory.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Privileged configuration commands are now access-gated&lt;/strong&gt; to admin-tier roles, closing a path where they were reachable more broadly than intended.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;License keys, API keys, and tokens no longer pass through search strings&lt;/strong&gt;, removing them from audit/job-history visibility. All credential entry now goes through the Setup page's single gated path.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Duplicate vulnerability-correlation events eliminated&lt;/strong&gt; — CVE matches are now indexed exactly once per unique match instead of being re-collected on every run.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;Platform &amp;amp; Documentation&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Corrected the home dashboard's vulnerability drill-down navigation&lt;/strong&gt; so it lands on the pre-filtered, relevant detail view rather than a generic unfiltered list.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Corrected a configuration comment describing MITRE ATLAS detection rule scheduling&lt;/strong&gt; — documentation-only, no change to detection behavior; AI-threat detection has been running as expected all along.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Removed version number display from in-app surfaces&lt;/strong&gt; (About page, dashboard footers) in favor of the Splunkbase listing as the single, always-current source for version and release history.&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Unifies software supply chain risk (SBOM/SCA), MITRE ATLAS AI-threat detection, and nine-framework compliance in one Splunk app — with FedRAMP-ready audit exports and no external security product required.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;SCIP unifies software composition analysis (SCA), supply chain risk monitoring, and AI threat detection in one Splunk app. Ingest SBOMs, correlate components against live vulnerability intelligence (OSV, NVD, CISA KEV, EPSS), detect adversarial AI/ML threats with MITRE ATLAS, and assess compliance posture across nine global frameworks — with detection logic written as transparent SPL you can open and read, and no external security product required.
-
-CAPABILITIES
-
-- SBOM ingestion — file-drop or HEC, supporting CycloneDX (JSON/XML) and SPDX (JSON)
-
-- Vulnerability correlation — daily OSV feed (264,944+ records across 5 ecosystems) with PURL-based correlation; NVD CPE-based correlation; CISA KEV matching with BOD 22-01 SLA tracking; EPSS exploit-probability scoring
-
-- Supply Chain Risk Score — 0–100 global and per-application risk scoring weighted by severity, KEV status, and EPSS
-
-- Vendor Risk — per-vendor risk aggregation and letter-grading across your SBOM portfolio
-
-- SBOM Drift Detection — baseline-vs-current component change tracking
-
-- License Compliance — GPL/AGPL/copyleft detection and license-risk classification
-
-- MITRE ATLAS Detection — 66 detection rules for adversarial AI/ML threats
-
-- Compliance Gap Assessment — nine frameworks: PCI DSS 4.0, NIST CSF 2.0, SOC 2 Type II, HIPAA Security Rule, EU Cyber Resilience Act, FedRAMP / RMF / CISA, DORA, FDA 524B Premarket Cybersecurity, SEBI CSCRF
-
-- POA&amp;amp;M &amp;amp; FedRAMP Workflow — POA&amp;amp;M dashboard, monthly ConMon package builder, BOD 22-01 SLA tracking, deviation request workflow. Dashboards always available; automated POA&amp;amp;M generation is opt-in from Setup
-
-- Audit-ready exports — FedRAMP POA&amp;amp;M Workbook (R3.0 and R2.1), SSP Appendix M Integrated Inventory, Deviation Request Form (Template 2.1 / Aug 2024)
-
-- Component Search — instant cross-SBOM component lookup (available in the free Community tier)
-
-- Compound Risk — correlates active MITRE ATLAS AI-threat detections with vulnerable components on the same application, surfacing compounding risk neither signal shows alone (Enterprise and Federal Plus)
-
-- AI/ML Bill of Materials — catalogs AI/ML model components from your SBOMs (architecture, training data, lineage) with insecure-serialization-format risk flagging (Professional and above; risk classification detail on Enterprise and Federal Plus)
-
-TIERS
-
-Community (free), Professional, Federal, Enterprise, Federal Plus. Feature availability gated by license tier; contact us for tier comparison.
-
-SUPPORT
-
-GIC Engineering Consultants — contact@gicengineeringconsultants.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2d6bb91a-7f85-11f1-adb4-26de3214d12b.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">GIC Engineering Consultants, Inc.</dc:creator>
-      <pubDate>Tue, 14 Jul 2026 13:52:29 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8814/#v1.1.11</guid>
-    </item>
-    <item>
       <title>Infigo SOC Content - v4.3.120260714130440 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8057/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;pre&gt;&lt;code&gt;## macros.conf
@@ -1672,57 +1684,6 @@ The BitSight Security Performance Management for Splunk Add-On Terms and Conditi
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Brian Mulligan</dc:creator>
       <pubDate>Tue, 14 Jul 2026 10:39:31 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6354/#v1.3.1</guid>
-    </item>
-    <item>
-      <title>TrackMe - v2.4.8 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4621/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;TrackMe 2.4.8 — configuration management, reinvented: the Splunk UCC configuration page is replaced by native TrackMe UIs, and lookups become first-class citizens of DSM.&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;A brand-new configuration experience.&lt;/strong&gt;&amp;nbsp;Every configuration surface that used to live on the Splunk-generated (UCC) setup page is now a native TrackMe interface:&amp;nbsp;&lt;strong&gt;Email delivery accounts&lt;/strong&gt;,&amp;nbsp;&lt;strong&gt;Remote deployment accounts&lt;/strong&gt;,&amp;nbsp;&lt;strong&gt;S3 export accounts&lt;/strong&gt;, and a completely redesigned&amp;nbsp;&lt;strong&gt;System settings&lt;/strong&gt;&amp;nbsp;page — docs-style sidebar navigation, built-in documentation for every one of the&amp;nbsp;&lt;strong&gt;122 settings&lt;/strong&gt;, connectivity tests at your fingertips, insufficient-permissions detection, and the AI Assistant available in context. Faster, clearer, and consistent with the rest of TrackMe.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;DSM lookup monitoring, first-class.&lt;/strong&gt;&amp;nbsp;Alert when a lookup runs&amp;nbsp;&lt;strong&gt;empty&lt;/strong&gt;&amp;nbsp;(configurable minimum record count), see the last-known record count as a KPI tile, and enjoy a fully normalised experience for lookup entities — status messages, charts, overview tabs and alert emails now speak “records and update frequency” instead of feed metrics. Creating lookup trackers is easier too, with dynamic pickers for application namespaces and lookups.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Alerting UX.&lt;/strong&gt;&amp;nbsp;The alert wizard gains theme-aware, zoomable diagrams of the stateful lifecycle and the legacy alerting architecture, a recipients multi-select with address validation, and resizable full-width command editors.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Built for very large scale.&lt;/strong&gt;&amp;nbsp;The Virtual Tenants overview and Virtual Group views now load slim entity payloads and fetch details on demand — no more browser-tab exhaustion on very large environments — and a reliability fix ensures background summary/KV updates in search commands can no longer be silently dropped.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Remote accounts.&lt;/strong&gt;&amp;nbsp;Rotate a deployment’s bearer token on demand with a per-row&amp;nbsp;&lt;strong&gt;Rotate token now&lt;/strong&gt;&amp;nbsp;action.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Flex Objects — richer insight.&lt;/strong&gt;&amp;nbsp;A new rich&amp;nbsp;&lt;strong&gt;Last-metrics charts modal&lt;/strong&gt;&amp;nbsp;replaces the raw-JSON inspector, converging trackers gain a wider tracked-entities view with colour-coded availability tiles, and the tracker simulation now lists the covered sub-objects — so you can see exactly what a tracker covers before you create it.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;And more.&lt;/strong&gt;&amp;nbsp;Configurable tstats time span for Elastic trackers, explicit Unlock action for DSM/DHM threshold locks, resizable data-preview tables, a licensing safety fix so a transient KV read error can never downgrade a valid license to a Foundation trial, and a batch of fixes.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;See: &lt;a href=&quot;https://docs.trackme-solutions.com/latest/releasenotes.html#version-2-4-8-build-1784017070-14-07-2026&quot; rel=&quot;noopener noreferrer&quot;&gt;https://docs.trackme-solutions.com/latest/releasenotes.html#version-2-4-8-build-1784017070-14-07-2026&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TrackMe for Splunk provides visibility and operational excellence to monitor at scale your Splunk data sources availability and quality, and many more. 
-
-With a rich set of features and a powerful workflow, TrackMe empowers you day after day to get the most from your Splunk investments and deliver the five stars quality of service your users deserve.
-
-Discover TrackMe: https://trackme-solutions.com/discover
-
-Documentation: https://docs.trackme-solutions.com
-
-You can subscribe to our newsletter, and receive important communications from us.
-We will send notifications for instance when publishing new releases, so we can you let you know the cool and powerful things we&amp;#x27;ve been working on!
-
-https://trackme-solutions.com/subscribe/
-
-TrackMe has transitioned to a new licensing model.
-The Free Community Edition has been discontinued.
-
-What this means for you:
-
-- Existing licensed customers are not impacted. Your current license continues unchanged.
-- Community users are automatically upgraded to a Foundation Edition trial for 90 days, with full functionality enabled.
-
-After the trial period:
-
-- TrackMe remains active and fully usable for monitoring
-- The platform enters read-only mode
-
-You can continue to view data, dashboards, alerts, and history
-Creation of new tenants, trackers, or entities will be disabled
-
-To continue using TrackMe with full capabilities after the trial, a Foundation license is required.
-
-Buy Foundation Edition: https://trackme-solutions.com/get-foundation/
-
-See all plans: https://trackme-solutions.com/pricing/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c05eef56-7f64-11f1-ace6-fa4a573e67f3.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Trackme Limited</dc:creator>
-      <pubDate>Tue, 14 Jul 2026 09:53:35 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4621/#v2.4.8</guid>
     </item>
   </channel>
 </rss>
