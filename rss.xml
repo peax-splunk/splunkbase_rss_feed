@@ -6,7 +6,33 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sat, 18 Jul 2026 16:44:50 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 18 Jul 2026 17:47:38 +0000</lastBuildDate>
+    <item>
+      <title>Data Heartbeat - v1.7.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8833/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Changed — detection performance for large-scale deployments&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Detection now scans only your monitored sourcetypes, instead of computing a last-seen for every sourcetype in every index (including internal indexes) on each run and discarding the rest. Cost now scales with what you monitor, not your total sourcetype count — the biggest win on busy environments.&lt;/li&gt;
+&lt;li&gt;Removed the 2-year search window that forced each run to open years of buckets. Detection now uses a single narrow lookback window while still measuring true receipt (index) time, with long-silent sources aged via the carried last-seen value.&lt;/li&gt;
+&lt;li&gt;New &quot;Detection Lookback&quot; setting (Settings, default 60 min): tune how far back each run scans — tighten it on very large deployments, widen it if forwarders lag.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Know the moment a data source goes silent. Data Heartbeat monitors every source type in your Splunk environment and fires Slack, Teams, webhook, or email alerts the instant data stops flowing — before gaps turn into blind spots.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Data Heartbeat monitors your Splunk environment for source types that have stopped sending data. When a data source goes silent — whether from a misconfigured forwarder, a failed log shipper, or a broken integration — Data Heartbeat detects the gap and alerts you before the silence becomes a blind spot.
+
+Every monitored source type has a configurable threshold, measured in minutes. When no data arrives within that window, the app flags the source type and fires your chosen alert action: Slack, Microsoft Teams, a generic webhook, or email via Splunk&amp;#x27;s built-in SMTP relay.
+
+Key features:
+• Monitor dashboard — a live status table showing every tracked source type, the minutes since its last event, its threshold, and its importance level, with color-coded severity (green, yellow, red, and critical).
+• Per-row alert actions — each source type can use its own notification target, independent of the global default.
+• Auto Discovery — a nightly scan that surfaces new source types appearing in your environment and queues them for review.
+• Importance tagging — mark business-critical sources as High, Medium, or Low importance. When a high-importance source goes silent, the app raises a red-alert banner.
+• Settings page — configure global defaults (threshold, alert action, and notification target), enable or disable the monitoring pipeline, and test alert actions without waiting for a real outage.
+• Audit log — a full history of every configuration change, with timestamps and user attribution.
+• No index footprint — all configuration is stored in KV Store, so no custom indexes are required.
+
+Data Heartbeat is compatible with Splunk Enterprise 8.2+, Splunk Cloud Classic, and Splunk Cloud Victoria.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/08d3052a-82ca-11f1-be5a-32ed48a47f18.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Steve Koelpin</dc:creator>
+      <pubDate>Sat, 18 Jul 2026 17:06:25 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8833/#v1.7.0</guid>
+    </item>
     <item>
       <title>Threat Hunting Essentials - v1.3.49 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7633/</link>
@@ -157,38 +183,6 @@ Key Capabilities:
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
       <pubDate>Fri, 17 Jul 2026 23:28:14 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6637/#v1.2.1</guid>
-    </item>
-    <item>
-      <title>Data Heartbeat - v1.6.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8833/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;Bug fixes&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Deleted sourcetypes can no longer be silently resurrected by a concurrent detection run.&lt;/li&gt;
-&lt;li&gt;Previously, detection would read the monitored lookup, recompute, and write it back. A sourcetype deleted (via single Remove or Clear Never-Seen) in the brief window while a detection run was in flight could reappear permanently, because the browser couldn't coordinate with the every-5-minute scheduled search.&lt;/li&gt;
-&lt;li&gt;Deletions now record a lightweight tombstone, and both the detection and alert searches skip any row that was deleted after it was added.&lt;/li&gt;
-&lt;li&gt;A genuine re-add works normally, and a new nightly maintenance search cleans up old tombstones.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Upgrade notes&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Adds one KV collection (heartbeat_deleted) and one scheduled search (Prune Deletion Tombstones), enabled automatically alongside detection via Settings → Enable Monitoring.&lt;/li&gt;
-&lt;li&gt;No action required, and no data migration is needed.&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Know the moment a data source goes silent. Data Heartbeat monitors every source type in your Splunk environment and fires Slack, Teams, webhook, or email alerts the instant data stops flowing — before gaps turn into blind spots.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Data Heartbeat monitors your Splunk environment for source types that have stopped sending data. When a data source goes silent — whether from a misconfigured forwarder, a failed log shipper, or a broken integration — Data Heartbeat detects the gap and alerts you before the silence becomes a blind spot.
-
-Every monitored source type has a configurable threshold, measured in minutes. When no data arrives within that window, the app flags the source type and fires your chosen alert action: Slack, Microsoft Teams, a generic webhook, or email via Splunk&amp;#x27;s built-in SMTP relay.
-
-Key features:
-• Monitor dashboard — a live status table showing every tracked source type, the minutes since its last event, its threshold, and its importance level, with color-coded severity (green, yellow, red, and critical).
-• Per-row alert actions — each source type can use its own notification target, independent of the global default.
-• Auto Discovery — a nightly scan that surfaces new source types appearing in your environment and queues them for review.
-• Importance tagging — mark business-critical sources as High, Medium, or Low importance. When a high-importance source goes silent, the app raises a red-alert banner.
-• Settings page — configure global defaults (threshold, alert action, and notification target), enable or disable the monitoring pipeline, and test alert actions without waiting for a real outage.
-• Audit log — a full history of every configuration change, with timestamps and user attribution.
-• No index footprint — all configuration is stored in KV Store, so no custom indexes are required.
-
-Data Heartbeat is compatible with Splunk Enterprise 8.2+, Splunk Cloud Classic, and Splunk Cloud Victoria.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/18f1f0a4-8236-11f1-9a0e-8e8850f53d6d.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Steve Koelpin</dc:creator>
-      <pubDate>Fri, 17 Jul 2026 23:26:11 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8833/#v1.6.0</guid>
     </item>
     <item>
       <title>vSphere - v4.0.0 [Version Update]</title>
