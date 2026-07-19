@@ -6,9 +6,33 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sun, 19 Jul 2026 14:21:37 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 19 Jul 2026 15:48:32 +0000</lastBuildDate>
     <item>
-      <title>Threat Hunting Essentials - v1.3.49 [Version Update]</title>
+      <title>Data Heartbeat - v1.7.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8833/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
+&lt;li&gt;Detection Lookback default is now 24 hours (was 1 hour). A shorter window could falsely flag a healthy source as stopped when its event timestamps trailed ingest by more than the window — common with timezone misconfigurations, DST, or batch/latent feeds. 24 h absorbs those everyday skews out of the box.&lt;/li&gt;
+&lt;li&gt;Still fully tunable in Settings → Detection Lookback: tighten to 15–60 min for maximum performance on very large, clean-timestamp deployments, or widen up to 7 days for laggier feeds. Keep it ≥ your detection frequency.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Know the moment a data source goes silent. Data Heartbeat monitors every source type in your Splunk environment and fires Slack, Teams, webhook, or email alerts the instant data stops flowing — before gaps turn into blind spots.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Data Heartbeat monitors your Splunk environment for source types that have stopped sending data. When a data source goes silent — whether from a misconfigured forwarder, a failed log shipper, or a broken integration — Data Heartbeat detects the gap and alerts you before the silence becomes a blind spot.
+
+Every monitored source type has a configurable threshold, measured in minutes. When no data arrives within that window, the app flags the source type and fires your chosen alert action: Slack, Microsoft Teams, a generic webhook, or email via Splunk&amp;#x27;s built-in SMTP relay.
+
+Key features:
+• Monitor dashboard — a live status table showing every tracked source type, the minutes since its last event, its threshold, and its importance level, with color-coded severity (green, yellow, red, and critical).
+• Per-row alert actions — each source type can use its own notification target, independent of the global default.
+• Auto Discovery — a nightly scan that surfaces new source types appearing in your environment and queues them for review.
+• Importance tagging — mark business-critical sources as High, Medium, or Low importance. When a high-importance source goes silent, the app raises a red-alert banner.
+• Settings page — configure global defaults (threshold, alert action, and notification target), enable or disable the monitoring pipeline, and test alert actions without waiting for a real outage.
+• Audit log — a full history of every configuration change, with timestamps and user attribution.
+• No index footprint — all configuration is stored in KV Store, so no custom indexes are required.
+
+Data Heartbeat is compatible with Splunk Enterprise 8.2+, Splunk Cloud Classic, and Splunk Cloud Victoria.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0b61264c-8387-11f1-9547-c25cecc95540.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Steve Koelpin</dc:creator>
+      <pubDate>Sun, 19 Jul 2026 15:36:00 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8833/#v1.7.1</guid>
+    </item>
+    <item>
+      <title>Threat Hunting Essentials - v1.3.52 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7633/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
 
@@ -42,8 +66,8 @@ You can easily configure the scan interval in the app’s settings. The real-tim
 
 Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/30c0e0fc-8365-11f1-9791-a29bf4ece08a.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
-      <pubDate>Sun, 19 Jul 2026 11:31:22 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.49</guid>
+      <pubDate>Sun, 19 Jul 2026 15:16:27 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.52</guid>
     </item>
     <item>
       <title>WireGuard Log Parser - v1.0.1 [Version Update]</title>
@@ -167,32 +191,6 @@ GIC Engineering Consultants — contact@gicengineeringconsultants.com&lt;/p&gt;&
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Matoula Senethavong</dc:creator>
       <pubDate>Sat, 18 Jul 2026 18:59:09 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7891/#v1.1.1</guid>
-    </item>
-    <item>
-      <title>Data Heartbeat - v1.7.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8833/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Changed — detection performance for large-scale deployments&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Detection now scans only your monitored sourcetypes, instead of computing a last-seen for every sourcetype in every index (including internal indexes) on each run and discarding the rest. Cost now scales with what you monitor, not your total sourcetype count — the biggest win on busy environments.&lt;/li&gt;
-&lt;li&gt;Removed the 2-year search window that forced each run to open years of buckets. Detection now uses a single narrow lookback window while still measuring true receipt (index) time, with long-silent sources aged via the carried last-seen value.&lt;/li&gt;
-&lt;li&gt;New &quot;Detection Lookback&quot; setting (Settings, default 60 min): tune how far back each run scans — tighten it on very large deployments, widen it if forwarders lag.&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Know the moment a data source goes silent. Data Heartbeat monitors every source type in your Splunk environment and fires Slack, Teams, webhook, or email alerts the instant data stops flowing — before gaps turn into blind spots.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Data Heartbeat monitors your Splunk environment for source types that have stopped sending data. When a data source goes silent — whether from a misconfigured forwarder, a failed log shipper, or a broken integration — Data Heartbeat detects the gap and alerts you before the silence becomes a blind spot.
-
-Every monitored source type has a configurable threshold, measured in minutes. When no data arrives within that window, the app flags the source type and fires your chosen alert action: Slack, Microsoft Teams, a generic webhook, or email via Splunk&amp;#x27;s built-in SMTP relay.
-
-Key features:
-• Monitor dashboard — a live status table showing every tracked source type, the minutes since its last event, its threshold, and its importance level, with color-coded severity (green, yellow, red, and critical).
-• Per-row alert actions — each source type can use its own notification target, independent of the global default.
-• Auto Discovery — a nightly scan that surfaces new source types appearing in your environment and queues them for review.
-• Importance tagging — mark business-critical sources as High, Medium, or Low importance. When a high-importance source goes silent, the app raises a red-alert banner.
-• Settings page — configure global defaults (threshold, alert action, and notification target), enable or disable the monitoring pipeline, and test alert actions without waiting for a real outage.
-• Audit log — a full history of every configuration change, with timestamps and user attribution.
-• No index footprint — all configuration is stored in KV Store, so no custom indexes are required.
-
-Data Heartbeat is compatible with Splunk Enterprise 8.2+, Splunk Cloud Classic, and Splunk Cloud Victoria.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/08d3052a-82ca-11f1-be5a-32ed48a47f18.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Steve Koelpin</dc:creator>
-      <pubDate>Sat, 18 Jul 2026 17:06:25 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8833/#v1.7.0</guid>
     </item>
     <item>
       <title>Appbase version catalogue - v1.5.1 [Version Update]</title>
