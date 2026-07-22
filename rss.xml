@@ -6,7 +6,87 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Wed, 22 Jul 2026 14:57:06 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 22 Jul 2026 16:17:40 +0000</lastBuildDate>
+    <item>
+      <title>NetKit Add-on - v1.1.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9165/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Added
+
+\- netkit:tls now emits certificate key\_usage, sig\_algorithm, pubkey\_type, and pubkey\_bits as raw values (named in the NetKit App at search time).
+
+\- The TLS probe emits a per-target error event when the bundled cryptography module is unavailable, instead of silently producing no output.
+
+Fixed
+
+\- Probe events now omit empty fields rather than emitting JSON null (which Splunk had extracted as the literal string &quot;null&quot;).
+
+\- netkit:tls reports ca\=certifi (not &quot;system&quot;) when no private CA is configured, matching the bundled CA list actually used for verification.
+
+\- netkit:tls eku now reports exact certificate usage OIDs (parsed via cryptography) instead of a meaningless bitmask integer; is\_ca now reflects the certificate's actual CA flag.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects network probe telemetry from TCP latency tests, Cloudflare-based throughput measurements, and TLS certificate inspections, generating JSON events for network monitoring.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The NetKit Add-on collects network probe telemetry - TCP connect latency, internet throughput, and TLS certificate health - from full Splunk Enterprise instances, emitting the results as JSON events ready for network monitoring. It runs three probes, all implemented in pure Python on the standard library with no external binaries or third-party dependencies. Ping probes measure TCP connect latency by timing the handshake to each host:port target, never using ICMP. Speedtest probes measure download and upload throughput plus latency against Cloudflare endpoints over verified HTTPS connections. TLS probes connect to each target, verify the presented certificate against the system CA store or a configured private CA, and record certificate identity, validity periods, and verification status. Events are written with the sourcetypes netkit:ping, netkit:speedtest, and netkit:tls, while probe execution logs are captured to the _internal index as netkit_log. Configuration and input management are available through dashboards in the Splunk Web UI.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b32eb188-85e3-11f1-937a-5adaa7e1b112.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">David Twersky</dc:creator>
+      <pubDate>Wed, 22 Jul 2026 15:55:45 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9165/#v1.1.0</guid>
+    </item>
+    <item>
+      <title>WithSecure Elements Add-on - v1.0.6 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8820/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**⚠️ Critical bug fix. Recommended upgrade for anyone running v1.0.2 through v1.0.5.**
+
+## The bug
+
+`advance_ts` used a `strptime` call with a hard-coded `.%f` format directive, which raises `ValueError` when the WithSecure Elements API returns a timestamp without fractional seconds. Both forms are valid ISO 8601 and both are returned by the API depending on the event:
+
+```
+2026-07-22T11:19:08.804Z   ← parsed correctly
+2026-07-22T11:19:08Z       ← ValueError !
+
+```
+
+The exception was raised inside `_set_checkpoint`, so the polling cursor never advanced past that timestamp. Every subsequent polling cycle re-fetched the same window and re-indexed the same events, producing an ever-growing pile of duplicates in the target index.
+
+## Who is affected
+
+* The bug has existed since **v1.0.2 (June 2026)**. Every version from v1.0.2 to v1.0.5 is affected.
+* It only manifests when the **last event of a fetched batch** happens to have no fractional seconds — which is why it was not caught earlier in testing. About one third of the events in the reporter's environment turned out to be in that form.
+* **Symptom**: continuously growing duplicate ingestion for `withsecure:epp:security_event`, `withsecure:epp:bcd_incident`, and/or `withsecure:epp:bcd_detection`.
+
+## The fix
+
+* New helper `parse_iso_utc` in `withsecure_api.py` uses `datetime.fromisoformat` after rewriting the trailing `Z` as `+00:00`. Handles both timestamp forms natively on Python 3.9+.
+* `parse_iso_utc` also normalises the result to a **timezone-aware UTC** datetime, so any downstream arithmetic or formatting is unambiguous even if a future API revision were to return a non-UTC offset.
+* `utc_iso` now converts a tz-aware input to UTC before formatting, so the trailing literal `Z` always reflects the actual UTC instant.
+* `advance_ts` (`withsecure_api.py`) and `_parse_iso` (`withsecure_locks.py`) both use the new helper — a single source of truth for ISO 8601 parsing across the add-on.
+
+## What to do after upgrading
+
+If you were affected by duplicates on a previous version, the duplicates already in the index remain (Splunk does not rewrite past events). New events indexed after v1.0.6 will be clean. To de-duplicate at search time until historical events roll off retention:
+
+```
+index=main sourcetype=&quot;withsecure:epp:security_event&quot;
+| dedup id sortby -_time
+
+```
+
+Similar patterns for `withsecure:epp:bcd_incident` (`dedup incidentId,updatedTimestamp`) and `withsecure:epp:bcd_detection` (`dedup detectionId`).
+
+## Upgrade safety
+
+Non-destructive in-place upgrade when installed via Splunk's standard &quot;Install app from file → Upgrade app&quot; workflow (or `splunk install app -update 1`):
+
+* existing KV Store checkpoints are preserved → polling picks up right where it left off, no historical re-fetch
+* existing input configuration in `local/inputs.conf` (credentials, intervals, filters, proxy settings) is preserved
+* no scheme or config changes → no user action required
+
+## Compatibility
+
+* Splunk Enterprise / Cloud: **9.0, 9.1, 9.2, 9.3, 9.4, 10.0, 10.1, 10.2, 10.3, 10.4, 10.5**
+* CIM: 4.x, 5.x, 6.x, 8.x
+* Python: 3.9+
+* Splunk KV Store: enabled&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects EPP Security Events and EDR Broad Context Detections from WithSecure Elements via OAuth2-authenticated API, with CIM-compliant field extractions for endpoint, malware, intrusion detection, and process data.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The WithSecure Elements Add-on collects endpoint protection and detection data from the WithSecure Elements API. It ingests EPP Security Events and EDR Broad Context Detections through OAuth2-authenticated modular inputs, enabling centralized security event analysis in Splunk. The add-on maps collected events to CIM endpoint, malware, intrusion detection, and process tags, facilitating correlation with other security data sources. Two modular inputs handle data collection: withsecure_epp_input retrieves endpoint protection events, while withsecure_bcd_input collects EDR broad context detection incidents. Events are indexed under source types withsecure:epp:security_event, withsecure:epp:bcd_incident, and withsecure:epp:bcd_detection. The add-on includes a custom search command for retrieving specific detection details and provides a workflow action to fetch incident detections directly from the Splunk interface.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d685bece-85de-11f1-b5c6-e6b114cfb20d.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Flo Flo</dc:creator>
+      <pubDate>Wed, 22 Jul 2026 15:09:18 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8820/#v1.0.6</guid>
+    </item>
     <item>
       <title>Threat Hunting Essentials - v1.3.54 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7633/</link>
@@ -1075,25 +1155,6 @@ Microsoft Defender for Endpoint Alerts
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
       <pubDate>Tue, 21 Jul 2026 07:13:01 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6382/#v2.0.2</guid>
-    </item>
-    <item>
-      <title>Reversinglabs TitaniumCloud v2 - v1.4.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6879/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Escaped connector widget values before embedding them in inline JavaScript contexts.
-* Escaped uploaded file names before embedding them in TitaniumCloud XML metadata.
-* Restricted dynamic-analysis download links to absolute HTTP and HTTPS URLs.
-* Validated dynamic-analysis identifiers before using them in TitaniumCloud request paths.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;App integrates with ReversingLabs TitaniumCloud APIs delivering targeted file and malware intelligence for threat identification, analysis, intelligence development, and threat hunting services&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/75b3e2e4-84d3-11f1-b61e-0a429cb401e7.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 07:11:57 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6879/#v1.4.2</guid>
-    </item>
-    <item>
-      <title>Proofpoint TAP - v2.1.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6049/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Encode campaign IDs as a single URL path segment before calling the Proofpoint TAP campaign endpoint.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This App integrates with Proofpoint to implement ingestion and investigative actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/1325df88-84d3-11f1-997d-a60acdb97139.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 07:09:12 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6049/#v2.1.2</guid>
     </item>
   </channel>
 </rss>
