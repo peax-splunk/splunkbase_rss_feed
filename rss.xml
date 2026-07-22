@@ -6,7 +6,175 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Wed, 22 Jul 2026 18:02:21 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 22 Jul 2026 20:07:03 +0000</lastBuildDate>
+    <item>
+      <title>Splunk AI Assistant - v2.2.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7245/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;See what the Splunk AI Assistant can do for you https://youtu.be/ynRBiepXVw4?si=eua38GwP0nwuvk3m&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk AI Assistant is your AI-powered Agentic companion for getting answers from your data in Splunk. Whether you&amp;#x27;re a seasoned expert or just starting out, it helps you discover, analyze, and act on your data through natural conversation — going far beyond writing and explaining SPL. https://youtu.be/ynRBiepXVw4?si=eua38GwP0nwuvk3m
+
+With Agent Mode, the assistant reasons through your requests, takes actions on your behalf, and leverages a growing set of tools and skills from a single chat window. It decomposes complex questions into parallel steps, exposes its reasoning to build trust, and asks clarifying questions when prompts are ambiguous.
+
+What it can do for you:
+
+🚀 SPL Generation, Editing &amp;amp; Optimization: Describe your search in plain English and get accurate SPL — or modify existing queries without rewriting, while making them faster.
+
+📖 SPL Explanation: Understand any search in plain English, with a detailed breakdown of its logic.
+
+🔍 Data Discovery: Don&amp;#x27;t know where your data lives? The assistant scans your environment to find the right sources.
+
+⚡ Search Execution &amp;amp; Analysis: With your permission, it runs searches and summarizes results in chat — so you get answers, not just queries.
+
+📊 Content Discovery: Semantically search across dashboards, saved searches, reports, and lookups — the assistant finds and reuses the best-matching content through natural language.
+
+📚 Knowledge Retrieval: Get answers about Splunk documentation, platform terms, and products.
+
+🎯 ITSI Integration (Read-Only): Bring IT Service Intelligence into the conversation — retrieve service health, KPIs, episodes, and related insights without leaving chat.
+
+🌐 SPL2 &amp;amp; Federated Search (Beta): The assistant now supports SPL2 and Federated Search, including the Machine Data Lake, so you can query data across multiple sources and tiers.
+
+🧰 More Tools in Agent Mode: This release expands Agent Mode with additional tools and skills, so the assistant can handle more of your workflows end to end.
+
+Teach AI (Beta): Admins can provide custom instructions via a markdown file to teach the assistant their org&amp;#x27;s best practices, data catalog, and guardrails — for smarter, more relevant results.
+
+Context Settings: Formerly Personalization, this generates more contextual results using non-personal metadata while honoring role-based access controls. Admins have full visibility into data collected.
+
+Model Runtime Choices: The assistant leverages Azure OpenAI models alongside Splunk-hosted LLMs for the best response quality.
+
+Availability: Splunk Cloud customers in AWS and Azure commercial regions, FedRAMP IL2, and Enterprise customers via Cloud Connected. Agent Mode is available to AWS commercial Splunk Cloud customers with this release.
+
+(c) Splunk 2026. All rights reserved.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/63105d6a-8600-11f1-a78a-b28dad8e6d1b.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Wed, 22 Jul 2026 19:52:04 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7245/#v2.2.0</guid>
+    </item>
+    <item>
+      <title>NetFlow and SNMP Analytics for Splunk (Preview) - v0.1.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9133/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## Initial Preview release
+
+This is the first public release of the NetFlow and SNMP Analytics for Splunk (Preview) app: a ground-up redesign of NetFlow Logic's Splunk app, rebuilt on Dashboard Studio in dark mode. It is published alongside the current [NetFlow and SNMP Analytics for Splunk](https://splunkbase.splunk.com/app/489) app so teams can evaluate the redesign side by side on the same instance. This Preview will eventually be merged into app 489 as its next major release.
+
+## What's included
+
+* **Rebuilt on Dashboard Studio, dark mode.** Every dashboard uses Splunk's modern dashboarding framework.
+* **19 focused dashboards** replacing roughly 80 fragmented legacy dashboards, organized into a streamlined navigation: a default Overview plus Network Conversations, Infrastructure Health, and Configuration sections.
+* **Redesigned Network Conversations.** A single consolidated conversation view with a Sankey group-by flow map and a unified detail table, replacing several legacy per-dimension dashboards.
+* **New interactive Network Topology.** Walk-the-graph exploration built on Splunk 10.4's native `networkgraph` visualization: start from a device and expand its neighbours incrementally.
+* **Unified Device Health and TCP Health.** SNMP CPU, memory, and interface health consolidated into single dashboards.
+* **Multi-cloud and flow-format coverage** carried over from the current app: NetFlow v5/v9, sFlow, IPFIX, plus AWS, Azure, GCP, and OCI flow logs, with NFO enrichment (DNS, VM names, GeoIP, IP reputation, application ID, user identity).
+* **Standardised filters and terminology** across every dashboard.
+
+## Requirements
+
+* NetFlow Optimizer (NFO) 2.12.1 or later
+* Technology Add-on for NetFlow (TA-netflow), installed before this app
+* Splunk Common Information Model (CIM) 5.x or 6.x
+* Splunk Enterprise or Splunk Cloud. Splunk 10.4 is required for full functionality; all dashboards except Network Topology also run on Splunk 9.4.1+.
+
+## Known limitations
+
+* **Network Topology requires Splunk 10.4.** On Splunk 9.4.1 the topology dashboard is unavailable; every other dashboard functions normally.
+* **Preview status.** This release is intended for evaluation. Interfaces, dashboard layouts, and the internal app context may change before the redesign is merged into app 489.
+
+## Feedback
+
+Please send feedback and issues from the preview period to [team\_splunk@netflowlogic.com](mailto:team_splunk@netflowlogic.com).&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Get the network traffic and device health data Splunk can&amp;#x27;t see on its own. NetFlow Optimizer turns raw NetFlow, IPFIX, sFlow, and SNMP telemetry into enriched, analysis-ready data in Splunk across on-premises and multi-cloud, closing blind spots in network, security, and device-health monitoring.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;NetFlow and SNMP Analytics for Splunk (Preview), built by NetFlow Logic, an official Splunk Partner, is the next-generation redesign of our network and security analytics app, rebuilt on Splunk Dashboard Studio. It gives network and security teams the network traffic and device health data Splunk can&amp;#x27;t see on its own, with real-time visibility across on-premises and multi-cloud environments.
+
+Powered by NetFlow Optimizer (NFO), the app processes all major flow formats (NetFlow v5/v9, sFlow, IPFIX) and cloud flow logs from AWS, Microsoft Azure, Google Cloud Platform, and Oracle Cloud Infrastructure. NFO enriches and filters this telemetry before it reaches Splunk, turning raw flow and SNMP data into analysis-ready intelligence and doing it efficiently, so you close the blind spots in your monitoring without a spike in ingest.
+
+What&amp;#x27;s new in this Preview:
+
+- Rebuilt on Dashboard Studio:  a modern, faster, dark-mode interface
+- Streamlined navigation: consolidated from ~80 legacy dashboards into 19 focused, production-quality dashboards
+- Interactive network topology: walk-the-graph exploration built on Splunk 10.4&amp;#x27;s native network graph visualization
+- Unified device health and TCP health views
+- Same NFO-powered enrichment and multi-cloud coverage you rely on today
+
+What you can do with this app:
+
+- Monitor your entire network in one place — unified visibility across on-premises infrastructure and all major cloud platforms
+- Detect threats faster — correlate flow data with IP reputation, GeoIP, user identity, and application context to surface anomalies and suspicious activity
+- Reduce Splunk ingest costs — filter and aggregate flows upstream in NFO so only enriched, relevant data reaches Splunk
+- Optimize network performance — identify overloaded interfaces, bandwidth hogs, and congestion before they impact users
+- Monitor device health with SNMP — poll devices and receive traps (SNMPv2c and v3) for real-time CPU, memory, and interface monitoring
+- Enrich your data automatically — DNS names, VM names, GeoIP, application identification, and user identity added at ingest
+
+Solution areas: Traffic overview and executive dashboards · NetFlow and flow analysis (v5/v9, sFlow, IPFIX) · Cloud flow analytics (AWS, Azure, GCP, OCI) · SNMP device and interface health · Security and threat detection · Administration and configuration
+
+Requirements: NetFlow Optimizer (NFO) 2.12.1 or later is required. Compatible with Splunk Enterprise and Splunk Cloud, Splunk ES, and Splunk ITSI (via the Content Pack for SNMP and NetFlow).
+
+Start a free 60-day trial at netflowlogic.com/free-trial — or request a demo to see the app running against live network data.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8eedd7d2-85f1-11f1-a33f-da14409a3036.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">NetFlow Logic</dc:creator>
+      <pubDate>Wed, 22 Jul 2026 19:42:09 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9133/#v0.1.1</guid>
+    </item>
+    <item>
+      <title>Data Heartbeat - v1.9.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8833/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Know the moment a data source goes silent. Data Heartbeat monitors every source type in your Splunk environment and fires Slack, Teams, webhook, or email alerts the instant data stops flowing — before gaps turn into blind spots.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Data Heartbeat monitors your Splunk environment for source types that have stopped sending data. When a data source goes silent — whether from a misconfigured forwarder, a failed log shipper, or a broken integration — Data Heartbeat detects the gap and alerts you before the silence becomes a blind spot.
+
+Every monitored source type has a configurable threshold, measured in minutes. When no data arrives within that window, the app flags the source type and fires your chosen alert action: Slack, Microsoft Teams, a generic webhook, or email via Splunk&amp;#x27;s built-in SMTP relay.
+
+Key features:
+• Monitor dashboard — a live status table showing every tracked source type, the minutes since its last event, its threshold, and its importance level, with color-coded severity (green, yellow, red, and critical).
+• Per-row alert actions — each source type can use its own notification target, independent of the global default.
+• Auto Discovery — a nightly scan that surfaces new source types appearing in your environment and queues them for review.
+• Importance tagging — mark business-critical sources as High, Medium, or Low importance. When a high-importance source goes silent, the app raises a red-alert banner.
+• Settings page — configure global defaults (threshold, alert action, and notification target), enable or disable the monitoring pipeline, and test alert actions without waiting for a real outage.
+• Audit log — a full history of every configuration change, with timestamps and user attribution.
+• No index footprint — all configuration is stored in KV Store, so no custom indexes are required.
+
+Data Heartbeat is compatible with Splunk Enterprise 8.2+, Splunk Cloud Classic, and Splunk Cloud Victoria.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e1fc65a0-85e8-11f1-a33f-da14409a3036.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Steve Koelpin</dc:creator>
+      <pubDate>Wed, 22 Jul 2026 19:33:17 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8833/#v1.9.0</guid>
+    </item>
+    <item>
+      <title>Snowflake - v1.1.9 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6763/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Preserved all values from query results that contain duplicate column names.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app supports investigative and data manipulation actions on Snowflake&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/3f224886-8601-11f1-a78a-b28dad8e6d1b.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Wed, 22 Jul 2026 19:12:15 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6763/#v1.1.9</guid>
+    </item>
+    <item>
+      <title>SMTP - v3.3.5 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5847/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Restricted SMTP authentication dispatch to the supported authentication types.
+* Added certificate validation for SMTP TLS connections and made STARTTLS fail closed.
+* Reported partially refused email recipients as delivery errors.
+* Preserved HTML sanitization when sending HTML email.
+* Marked test connectivity as non-read-only because it sends a test email.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app provides the ability to send email using SMTP&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f2756180-8600-11f1-937a-5adaa7e1b112.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Wed, 22 Jul 2026 19:10:05 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5847/#v3.3.5</guid>
+    </item>
+    <item>
+      <title>SSH - v3.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5850/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Execute program now reads script files only from vault attachments in the current container.
+* Block IP rejects invalid directions instead of silently creating an outbound firewall rule.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app supports executing various endpoint-based investigative and containment actions on an SSH endpoint&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e78340c6-8600-11f1-be4a-6ab37c164e28.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Wed, 22 Jul 2026 19:09:47 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5850/#v3.0.0</guid>
+    </item>
+    <item>
+      <title>REST Data Source - v2.0.17 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5927/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Allow stock REST Data Source parser alerts to trigger configured SOAR automation.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app implements custom REST handlers for external implementations to push ingest data such as events and artifacts into Phantom&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d727b306-8600-11f1-b5c6-e6b114cfb20d.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Wed, 22 Jul 2026 19:09:20 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5927/#v2.0.17</guid>
+    </item>
+    <item>
+      <title>RSA Security Analytics - v3.0.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5843/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Handle RSA Security Analytics event responses without file metadata. [PSAAS-32821]
+* Remove Unicode format controls from ingested RSA Security Analytics text. [PSAAS-33223]&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This App supports ingestion and investigative actions on RSA Security Analytics&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/cab409bc-8600-11f1-9684-5206dafe6f8e.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Wed, 22 Jul 2026 19:08:59 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5843/#v3.0.1</guid>
+    </item>
     <item>
       <title>Threat Hunting Essentials - v1.3.55 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7633/</link>
@@ -124,18 +292,6 @@ Non-destructive in-place upgrade when installed via Splunk's standard &quot;Inst
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Flo Flo</dc:creator>
       <pubDate>Wed, 22 Jul 2026 15:09:18 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8820/#v1.0.6</guid>
-    </item>
-    <item>
-      <title>Splunk On-Call (VictorOps) - v1.0.43 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/3546/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Bug fixes&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk On-Call extends the alerting and messaging from all Splunk products. This allows you to leverage your existing team contact, scheduling, and escalation policies for your Splunk alerts.
-
-Splunk On-Call is a hub for centralizing the flow of information throughout the incident lifecycle. Driven by IT and DevOps system data, Splunk On-Call provides a unified platform for real-time alerting, collaboration, and documentation.
-
-Using Splunk On-Call, teams resolve incidents faster to help minimize the impact of downtime and speed innovation.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9d8eec9c-84d7-11f1-aad1-7e31e67d8cbb.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Wed, 22 Jul 2026 07:05:09 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/3546/#v1.0.43</guid>
     </item>
     <item>
       <title>TA Studio - v1.6.0 [Version Update]</title>
@@ -724,14 +880,6 @@ Version 1.1.2 introduces a comprehensive refresh of the WTI dashboards, providin
       <guid>https://splunkbase.splunk.com/app/7950/#v1.0.4</guid>
     </item>
     <item>
-      <title>SSH - v2.4.12 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5850/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Report failed remote process-list commands instead of returning an empty successful result. [PSAAS-32501]&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app supports executing various endpoint-based investigative and containment actions on an SSH endpoint&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/6aad15a8-850c-11f1-9c61-d65f0efbd473.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 13:59:41 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5850/#v2.4.12</guid>
-    </item>
-    <item>
       <title>Tanium REST - v3.0.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5937/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Use Tanium completion state instead of sensor text when waiting for question results. [PSAAS-32590]
@@ -1097,64 +1245,6 @@ Microsoft Defender for Endpoint Alerts
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
       <pubDate>Tue, 21 Jul 2026 07:52:08 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7213/#v2.0.0</guid>
-    </item>
-    <item>
-      <title>Symantec Security Analytics - v3.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5935/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Enabled TLS certificate verification by default for Symantec Security Analytics assets.
-* Kept downloaded PCAP filenames within the vault temporary directory.
-* Rejected failed HTTP PCAP downloads before writing them to the vault.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app allows querying network traffic details on Symantec Security Analytics (formerly known as BlueCoat Solera)&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/09129648-84d9-11f1-85de-0204ae4ca7de.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 07:51:52 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5935/#v3.0.0</guid>
-    </item>
-    <item>
-      <title>Tehtris - v1.0.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8035/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Enables TLS certificate verification by default for Tehtris XDR connections.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with Tehtris XDR platform endpoints&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ce831b38-84d8-11f1-997d-a60acdb97139.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 07:50:14 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8035/#v1.0.1</guid>
-    </item>
-    <item>
-      <title>RSA Security Analytics - v3.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5843/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Encode alert identifiers before placing them in list-events request paths. [PSAAS-30642]
-* Enable TLS certificate verification by default while retaining an explicit opt-out. [PSAAS-30786]
-* Bound alert and event pagination and stop safely on empty or overshooting pages. [PSAAS-32089]
-* Isolate malformed incident records and defensively parse adversary-influenced event fields. [PSAAS-32368]
-* Advance ingestion checkpoints only after every fetched incident and artifact is durably saved. [PSAAS-32186]&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This App supports ingestion and investigative actions on RSA Security Analytics&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e2ad73ec-84d3-11f1-997d-a60acdb97139.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 07:15:00 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5843/#v3.0.0</guid>
-    </item>
-    <item>
-      <title>RSA SecureID Authentication Manager - v1.0.6 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7046/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Restricted token serial parameters to ASCII decimal digits before creating AMBulkAdmin batch rows.
-* Required RSA appliance SSH host keys to be present in the SOAR system known-hosts store.
-* Sent the RSA super-admin password through the interactive prompt instead of remote process arguments.
-* Failed token actions when AMBulkAdmin reports rejected rows and cleaned up their result files.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;RSA SucureID Authentication Manager app to enable and revoke RSA token&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e1ce10d0-84d3-11f1-aad1-7e31e67d8cbb.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 07:14:59 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7046/#v1.0.6</guid>
-    </item>
-    <item>
-      <title>RIPE - v2.1.6 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5842/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Escaped RIPE widget values embedded in JavaScript handlers. (PAPP-38036)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with RIPE to support investigative actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/cf6d6ea4-84d3-11f1-85de-0204ae4ca7de.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 07:14:28 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5842/#v2.1.6</guid>
-    </item>
-    <item>
-      <title>Resilient - v2.0.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6382/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Fixed URL path construction so caller-supplied resource identifiers cannot escape their intended path segment.
-* Enabled TLS certificate verification by default for new and existing asset configurations that omit the setting.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Resilient Ticket System&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9b68876a-84d3-11f1-a624-0e1307df0330.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 07:13:01 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6382/#v2.0.2</guid>
     </item>
   </channel>
 </rss>
