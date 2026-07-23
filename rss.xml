@@ -6,7 +6,64 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 Jul 2026 19:00:32 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 23 Jul 2026 20:51:26 +0000</lastBuildDate>
+    <item>
+      <title>Federal AI LookupOps - v1.0.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9162/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Version 1.0.1 - reliability and compatibility fixes.
+
+
+
+Forward compatibility: restmap.conf now declares python.required (3.9, 3.13) alongside python.version, clearing the Splunk 10.2+ deprecation of python.version. No change to supported versions - the app still targets Splunk Enterprise 9.1 through 10.x, search heads only, and python.required is ignored below 10.2.
+
+
+
+Write path fixes:
+
+* Settings and record writes now use the correct splunkd request transport and KV Store upsert semantics, so first-time writes (including the initial settings save on a fresh install) succeed.
+* \- The app REST endpoint is now exposed at all nested route depths, so the full change workflow (validate, approve, publish, roll back) resolves through Splunk Web.
+* \- Request bodies are delivered reliably through Splunk Web's proxy.
+* \- The audit hash-chain tip is resolved deterministically, independent of KV Store sort ordering.
+
+Install and first-use fixes:
+
+* Removed a setup gate that could leave a fresh install unable to reach the app views. The Setup page remains available from the navigation bar.
+* \- A brand-new lookup with no existing baseline now diffs cleanly instead of surfacing a raw splunkd error.
+
+Validated on Splunk Enterprise 9.4 with KV Store; AppInspect clean. Requires a Splunk restart after install to register the REST handler and KV Store collections.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Air-gap-first governance for Splunk lookup changes: inventory, deterministic validation, semantic diff, approvals with separation of duties, verified publication and rollback, audit evidence export, offline transfer bundles, and optional behind-the-firewall AI review with zero authority. No cloud dependencies. No telemetry.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Federal AI LookupOps turns Splunk lookup edits into governed changes. It is built air-gap-first: no cloud dependencies, no external services, and no telemetry.
+
+Analysts propose candidate changes by uploading a CSV, pasting records, or cloning the current lookup. A deterministic policy engine validates schemas, unique and composite keys, field types (IPv4, IPv6, CIDR, hostname, URL, email, date, boolean, number), enumerations, patterns, blank values, duplicates, and expirations. A key-aware semantic diff shows exactly what will change - additions, removals, field-level modifications, normalization-only changes, and schema changes - each with a stable evidence ID.
+
+Approvers act under enforced separation of duties; self-approval is blocked server-side. Publication captures the production content hash at submission, re-verifies it immediately before the write, publishes only through documented Splunk interfaces, verifies the resulting hash after the write, and preserves the previous version for one-action verified rollback. Every step lands in a hash-chained audit trail with an exportable JSON evidence report. Deterministic offline bundles with SHA-256 manifests move changes safely between enclaves.
+
+Optionally, connect a customer-approved, behind-the-firewall LLM (OpenAI-compatible, Ollama, or custom JSON). AI review runs server-side only with TLS verification always enforced, and provides risk assessment, justification-vs-diff contradiction detection, reviewer questions, policy proposals, normalization patches, dependency impact, and release narratives. Every material AI finding must cite deterministic evidence IDs, and the model has zero authority - it can never approve, publish, or roll back.
+
+Works with your existing SAML login through Splunk&amp;#x27;s own authentication. Includes role-based capabilities (view, submit, approve, publish, rollback, AI use, AI admin), KV Store-backed state that replicates across search-head clusters, and full documentation.
+
+Support: LC@federal.ai | www.federal.ai&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/5d1e4976-8632-11f1-a78a-b28dad8e6d1b.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Lloyd Clark</dc:creator>
+      <pubDate>Thu, 23 Jul 2026 20:43:17 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9162/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>Datasource Validator - v1.0.3 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9171/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Validates that user-defined data sources grouped under platforms currently return at least one event, recording PASS/FAIL/ERROR/STALE status per source.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Data Source Validator app validates that user-defined data sources are currently returning at least one event in Splunk. Administrators define platforms such as Firewall or EDR, and under each platform create one or more data sources with an SPL search that should return events. A single sequential validation worker executes each data source&amp;#x27;s search on a schedule or on demand using a dedicated service account with minimal privileges. The app records PASS, FAIL, ERROR, or STALE status for each data source, and platform status rolls up from the status of its enabled child data sources. This provides visibility into which integrations have stopped receiving data. The app targets Splunk Cloud Platform and Splunk Enterprise 9.3 and later.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Adam Liquorish</dc:creator>
+      <pubDate>Thu, 23 Jul 2026 20:41:03 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9171/#v1.0.3</guid>
+    </item>
+    <item>
+      <title>CrowdStrike OAuth API - v6.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5786/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Converted app to the SOAR SDK framework [PAPP-37876]
+* Added make request action [PAPP-37876]
+* Restricted downloaded report filenames to the vault staging directory [PSAAS-30563]
+* Marked report downloads as non-read-only because they add files to the SOAR vault [PSAAS-31543]&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with CrowdStrike OAuth2 authentication standard to implement querying of endpoint security data&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c0c73558-86ca-11f1-984b-e275dc4a3cb5.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Thu, 23 Jul 2026 19:14:41 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5786/#v6.0.0</guid>
+    </item>
     <item>
       <title>Log Continuity Manager for Splunk - v1.0.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8958/</link>
@@ -97,58 +154,12 @@ APT Falconer is built for security teams that want to reduce context switching, 
       <guid>https://splunkbase.splunk.com/app/7469/#v3.2.6</guid>
     </item>
     <item>
-      <title>Federal AI LookupOps - v1.0.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/9162/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Version 1.0.1 - reliability and compatibility fixes.
-
-
-
-Forward compatibility: restmap.conf now declares python.required (3.9, 3.13) alongside python.version, clearing the Splunk 10.2+ deprecation of python.version. No change to supported versions - the app still targets Splunk Enterprise 9.1 through 10.x, search heads only, and python.required is ignored below 10.2.
-
-
-
-Write path fixes:
-
-* Settings and record writes now use the correct splunkd request transport and KV Store upsert semantics, so first-time writes (including the initial settings save on a fresh install) succeed.
-* \- The app REST endpoint is now exposed at all nested route depths, so the full change workflow (validate, approve, publish, roll back) resolves through Splunk Web.
-* \- Request bodies are delivered reliably through Splunk Web's proxy.
-* \- The audit hash-chain tip is resolved deterministically, independent of KV Store sort ordering.
-
-Install and first-use fixes:
-
-* Removed a setup gate that could leave a fresh install unable to reach the app views. The Setup page remains available from the navigation bar.
-* \- A brand-new lookup with no existing baseline now diffs cleanly instead of surfacing a raw splunkd error.
-
-Validated on Splunk Enterprise 9.4 with KV Store; AppInspect clean. Requires a Splunk restart after install to register the REST handler and KV Store collections.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Air-gap-first governance for Splunk lookup changes: inventory, deterministic validation, semantic diff, approvals with separation of duties, verified publication and rollback, audit evidence export, offline transfer bundles, and optional behind-the-firewall AI review with zero authority. No cloud dependencies. No telemetry.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Federal AI LookupOps turns Splunk lookup edits into governed changes. It is built air-gap-first: no cloud dependencies, no external services, and no telemetry.
-
-Analysts propose candidate changes by uploading a CSV, pasting records, or cloning the current lookup. A deterministic policy engine validates schemas, unique and composite keys, field types (IPv4, IPv6, CIDR, hostname, URL, email, date, boolean, number), enumerations, patterns, blank values, duplicates, and expirations. A key-aware semantic diff shows exactly what will change - additions, removals, field-level modifications, normalization-only changes, and schema changes - each with a stable evidence ID.
-
-Approvers act under enforced separation of duties; self-approval is blocked server-side. Publication captures the production content hash at submission, re-verifies it immediately before the write, publishes only through documented Splunk interfaces, verifies the resulting hash after the write, and preserves the previous version for one-action verified rollback. Every step lands in a hash-chained audit trail with an exportable JSON evidence report. Deterministic offline bundles with SHA-256 manifests move changes safely between enclaves.
-
-Optionally, connect a customer-approved, behind-the-firewall LLM (OpenAI-compatible, Ollama, or custom JSON). AI review runs server-side only with TLS verification always enforced, and provides risk assessment, justification-vs-diff contradiction detection, reviewer questions, policy proposals, normalization patches, dependency impact, and release narratives. Every material AI finding must cite deterministic evidence IDs, and the model has zero authority - it can never approve, publish, or roll back.
-
-Works with your existing SAML login through Splunk&amp;#x27;s own authentication. Includes role-based capabilities (view, submit, approve, publish, rollback, AI use, AI admin), KV Store-backed state that replicates across search-head clusters, and full documentation.
-
-Support: LC@federal.ai | www.federal.ai&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/5d1e4976-8632-11f1-a78a-b28dad8e6d1b.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Lloyd Clark</dc:creator>
-      <pubDate>Thu, 23 Jul 2026 13:48:09 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9162/#v1.0.1</guid>
-    </item>
-    <item>
       <title>Bitdefender GravityZone Data Collector - v1.0.3 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8267/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This application pulls various data from the Bitdefender GravityZone platform. For example, it can pull user activity logs or incidents.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e3703d2c-8696-11f1-a33f-da14409a3036.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Bitdefender LLC</dc:creator>
       <pubDate>Thu, 23 Jul 2026 13:08:19 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8267/#v1.0.3</guid>
-    </item>
-    <item>
-      <title>Datasource Validator - v1.0.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/9171/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Validates that user-defined data sources grouped under platforms currently return at least one event, recording PASS/FAIL/ERROR/STALE status per source.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Data Source Validator app validates that user-defined data sources are currently returning at least one event in Splunk. Administrators define platforms such as Firewall or EDR, and under each platform create one or more data sources with an SPL search that should return events. A single sequential validation worker executes each data source&amp;#x27;s search on a schedule or on demand using a dedicated service account with minimal privileges. The app records PASS, FAIL, ERROR, or STALE status for each data source, and platform status rolls up from the status of its enabled child data sources. This provides visibility into which integrations have stopped receiving data. The app targets Splunk Cloud Platform and Splunk Enterprise 9.3 and later.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Adam Liquorish</dc:creator>
-      <pubDate>Thu, 23 Jul 2026 12:29:23 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9171/#v1.0.2</guid>
     </item>
     <item>
       <title>Threat Hunting Essentials - v1.3.55 [Version Update]</title>
@@ -1433,14 +1444,6 @@ This add-on enables Cato telemetry to integrate seamlessly with CIM-based applic
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
       <pubDate>Tue, 21 Jul 2026 09:59:44 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6036/#v2.3.1</guid>
-    </item>
-    <item>
-      <title>Tabular Report Generator - v1.0.4 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6478/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Escapes report values before rendering them in generated HTML email.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app (TRG) provides actions to generate a tabular report that can be sent via email or stored as HTML to vault&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a415396e-84ea-11f1-ad89-86542b4e8349.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 09:57:54 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6478/#v1.0.4</guid>
     </item>
   </channel>
 </rss>
