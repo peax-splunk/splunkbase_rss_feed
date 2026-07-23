@@ -6,7 +6,107 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Wed, 22 Jul 2026 23:01:14 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 23 Jul 2026 01:56:32 +0000</lastBuildDate>
+    <item>
+      <title>Federal AI LookupOps - v1.0.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9162/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Version 1.0.1 - reliability and compatibility fixes.
+
+
+
+Forward compatibility: restmap.conf now declares python.required (3.9, 3.13) alongside python.version, clearing the Splunk 10.2+ deprecation of python.version. No change to supported versions - the app still targets Splunk Enterprise 9.1 through 10.x, search heads only, and python.required is ignored below 10.2.
+
+
+
+Write path fixes:
+
+* Settings and record writes now use the correct splunkd request transport and KV Store upsert semantics, so first-time writes (including the initial settings save on a fresh install) succeed.
+* \- The app REST endpoint is now exposed at all nested route depths, so the full change workflow (validate, approve, publish, roll back) resolves through Splunk Web.
+* \- Request bodies are delivered reliably through Splunk Web's proxy.
+* \- The audit hash-chain tip is resolved deterministically, independent of KV Store sort ordering.
+
+Install and first-use fixes:
+
+* Removed a setup gate that could leave a fresh install unable to reach the app views. The Setup page remains available from the navigation bar.
+* \- A brand-new lookup with no existing baseline now diffs cleanly instead of surfacing a raw splunkd error.
+
+Validated on Splunk Enterprise 9.4 with KV Store; AppInspect clean. Requires a Splunk restart after install to register the REST handler and KV Store collections.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Air-gap-first governance for Splunk lookup changes: inventory, deterministic validation, semantic diff, approvals with separation of duties, verified publication and rollback, audit evidence export, offline transfer bundles, and optional behind-the-firewall AI review with zero authority. No cloud dependencies. No telemetry.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Federal AI LookupOps turns Splunk lookup edits into governed changes. It is built air-gap-first: no cloud dependencies, no external services, and no telemetry.
+
+Analysts propose candidate changes by uploading a CSV, pasting records, or cloning the current lookup. A deterministic policy engine validates schemas, unique and composite keys, field types (IPv4, IPv6, CIDR, hostname, URL, email, date, boolean, number), enumerations, patterns, blank values, duplicates, and expirations. A key-aware semantic diff shows exactly what will change - additions, removals, field-level modifications, normalization-only changes, and schema changes - each with a stable evidence ID.
+
+Approvers act under enforced separation of duties; self-approval is blocked server-side. Publication captures the production content hash at submission, re-verifies it immediately before the write, publishes only through documented Splunk interfaces, verifies the resulting hash after the write, and preserves the previous version for one-action verified rollback. Every step lands in a hash-chained audit trail with an exportable JSON evidence report. Deterministic offline bundles with SHA-256 manifests move changes safely between enclaves.
+
+Optionally, connect a customer-approved, behind-the-firewall LLM (OpenAI-compatible, Ollama, or custom JSON). AI review runs server-side only with TLS verification always enforced, and provides risk assessment, justification-vs-diff contradiction detection, reviewer questions, policy proposals, normalization patches, dependency impact, and release narratives. Every material AI finding must cite deterministic evidence IDs, and the model has zero authority - it can never approve, publish, or roll back.
+
+Works with your existing SAML login through Splunk&amp;#x27;s own authentication. Includes role-based capabilities (view, submit, approve, publish, rollback, AI use, AI admin), KV Store-backed state that replicates across search-head clusters, and full documentation.
+
+Support: LC@federal.ai | www.federal.ai&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/5d1e4976-8632-11f1-a78a-b28dad8e6d1b.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Lloyd Clark</dc:creator>
+      <pubDate>Thu, 23 Jul 2026 01:17:32 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9162/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>2Steps - v15.0.85 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4546/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;2 Steps Splunk front end integration, for back end version 15.x&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;2 Steps produces automated customer journeys with video replay across any platform (Windows, Web, mobile, etc) in minutes without writing any code.
+
+This app provides a graphical user interface for test creation, scheduling and results analysis all without leaving Splunk. 2 Steps is designed to allow any user to build end to end synthetic tests for any graphical application in minutes without specialist training. Please visit us at https://www.2steps.io/ for more information.
+
+
+Note that this app provides the front end interface and dashboard for 2 Steps. The 2 Steps back end are available from  https://www.2steps.io/ and are not on Splunkbase. The app is not functional without a correctly installed and configured back end. Please contact us to get the back end.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f9f35578-862a-11f1-a33f-da14409a3036.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">2Steps Development</dc:creator>
+      <pubDate>Thu, 23 Jul 2026 00:11:58 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4546/#v15.0.85</guid>
+    </item>
+    <item>
+      <title>2Steps - Cloud - v15.0.85 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4807/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;2 Steps Splunk integration - for backend version 15.x&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;2 Steps produces automated customer journeys with video replay across any platform (Windows, Web, mobile, etc) in minutes without writing any code.
+
+This app provides a graphical user interface for test creation, scheduling and results analysis all without leaving Splunk. 2 Steps is designed to allow any user to build end to end synthetic tests for any graphical application in minutes without specialist training. Please visit us at https://www.2steps.io/ for more information.
+
+ 
+
+Note that this app provides the front end interface and dashboard for 2 Steps. The 2 Steps back end is available from  https://www.2steps.io/ and is not on Splunkbase. The app is not functional without a correctly installed and configured back end. Please contact us to enquire about installation of the 2 Steps server.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/adc53fcc-862a-11f1-a33f-da14409a3036.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">2Steps Development</dc:creator>
+      <pubDate>Thu, 23 Jul 2026 00:10:13 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4807/#v15.0.85</guid>
+    </item>
+    <item>
+      <title>Supporting App for Oracle SBC CDR - v0.9.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7051/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**Version 0.9.0 (July 22nd, 2026)**
+
+- **IMPORTANT / BREAKING CHANGE:** The Oracle SBC media-flow fields have been renamed to align with Oracle's own terminology. The old &quot;west&quot;, &quot;east&quot;, &quot;extra_west&quot; and &quot;extra_east&quot; field-name prefixes were a nonstandard naming scheme that did not appear anywhere in Oracle's documentation. The new names map to Oracle's flow-set and flow-direction concepts — Flow-Set 1 or 2 (fs1 / fs2), and Forward or Reverse (fwd / rev). For the media flow and quality-of-service fields the mapping is:
+
+    - `west_*` → `fs1_fwd_*` (Flow-Set 1, Forward direction)
+    - `east_*` → `fs1_rev_*` (Flow-Set 1, Reverse direction)
+    - `extra_*` → `fs2_fwd_*` / `fs2_rev_*` (Flow-Set 2, Forward / Reverse)
+
+    A few groups of fields do not follow that prefix pattern exactly: the media-stop-time and RTP transmitted-byte/packet counters are indexed by flow-set and calling/called party, and the session R-Factor and MOS values are now simply `calling_r_factor`, `calling_mos`, `called_r_factor` and `called_mos` (they are session-level, not per-flow). If you have built any of your own saved searches, dashboards, or reports that reference the old field names, you will need to update them when you upgrade.
+- Added a new search command, `| checksbcflowfieldnames`, to make that migration easy and exact. Run it (as an admin, or as a user with the `admin_all_objects` capability, for a complete picture) and it will itemize every place in your Splunk knowledge objects, ie saved searches, dashboards, macros, event types, data models, etc, that still reference any old field name, giving you the precise new name to use for each one.
+- Call detail view for Oracle SBC calls now includes a single-row summary table at the top echoing top level details like ingress/egress realm, time, disposition and duration etc.
+- Call detail view for Oracle SBC calls now includes a CallFlowGraph module that presents a DAG visualization of the various ip addresses and ingress/egress realms involved in the B2BUA signaling and media flow.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app provides the Splunk configuration to ingest the CDR data from Oracle SBC.     It is intended to work for both Oracle Session Router CDR and Oracle SBC CDR, although some unknowns remain as of this writing. 
+
+It is also designed to work as a Supporting App alongside Sideview&amp;#x27;s commercial &amp;quot;Cisco CDR Reporting and Analytics&amp;quot; app.  
+When used in conjunction with the Cisco CDR app, the Oracle SBC data can be used in that app alongside the CUCM data.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/4473ad6c-8623-11f1-b938-fa67bb79bec7.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview LLC</dc:creator>
+      <pubDate>Wed, 22 Jul 2026 23:18:32 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7051/#v0.9.0</guid>
+    </item>
+    <item>
+      <title>Sideview Supporting App for Webex - v0.7.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8429/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
+  &lt;li&gt;Substantial fixes to the &quot;calls&quot; side, on which many aspects of the field extractions were problematic.&lt;/li&gt;
+  &lt;li&gt;Fixed a bug where non-admin users could hit a stack trace while clicking around the app. The check for whether the Canary app is installed was hitting an endpoint that only admin users have access to; it now degrades gracefully for any user.&lt;/li&gt;
+  &lt;li&gt;The Webex call detail view now has a search field that lets you filter down the list of fields and values shown for a call.&lt;/li&gt;
+  &lt;li&gt;Added the new key required by Splunk, &quot;python.required&quot; to restmap.conf.  No code change was required - the app was already compatible with Python 3.9.  The app is now also tested under Python 3.13 (the default on Splunk Enterprise 10.4).&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This Supporting App adapts data indexed via Splunk&amp;#x27;s &amp;quot;Cisco Webex Add-on for Splunk&amp;quot; allowing users to leverage that data within Sideview&amp;#x27;s commercial app &amp;quot;Cisco CDR Reporting and Analytics&amp;quot;.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ca0852bc-8622-11f1-a78a-b28dad8e6d1b.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
+      <pubDate>Wed, 22 Jul 2026 23:13:28 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8429/#v0.7.0</guid>
+    </item>
     <item>
       <title>G Suite for GMail - v3.2.4 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5795/</link>
@@ -1214,53 +1314,6 @@ Microsoft Defender for Endpoint Alerts
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Tue, 21 Jul 2026 08:18:34 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/9057/#v1.0.1</guid>
-    </item>
-    <item>
-      <title>Axonius Cybersecurity Asset Management - v2.2.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5955/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Recover missed publication after the 2.2.1 collision.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with the Axonius Cybersecurity Asset Management Platform to enrich asset data for investigations&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b9c940ba-84dc-11f1-b8af-6aca3f5f8d87.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 08:18:17 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5955/#v2.2.2</guid>
-    </item>
-    <item>
-      <title>BigFix - v2.0.17 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5772/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Enabled TLS certificate verification by default for BigFix API requests.
-* Validated site types and encoded site names before constructing BigFix request paths.
-* Rejected XML document type declarations and bounded streamed response bodies to 5 MiB.
-* Rejected quote characters in hostnames and encoded the complete relevance query parameter.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app supports several investigative actions on IBM Big Fix&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/97ed3dfc-84dc-11f1-b49e-4659230ee41a.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 08:17:21 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5772/#v2.0.17</guid>
-    </item>
-    <item>
-      <title>WHOIS RDAP - v2.1.9 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5945/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Fixed `whois ip` to fail when RDAP cannot query reserved IP addresses.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app implements investigative actions using RDAP&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/3e44aff2-84db-11f1-9581-f293060bffc7.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 08:07:40 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5945/#v2.1.9</guid>
-    </item>
-    <item>
-      <title>WildFire - v4.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5869/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Verify WildFire server certificates by default.
-* Escape dynamic-analysis values in the detonation report context menu.
-* Keep downloaded WildFire files inside connector-controlled vault staging paths.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app supports file detonation for forensic file analysis on the Palo Alto Networks WildFire sandbox&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/3c1862b4-84db-11f1-a624-0e1307df0330.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 08:07:37 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5869/#v4.0.0</guid>
-    </item>
-    <item>
-      <title>WHOIS - v2.2.13 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5867/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Escape WHOIS values rendered in context-menu JavaScript.
-* Limit and time out WHOIS server responses.
-* Report reserved-IP WHOIS lookup failures as errors.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app implements investigative actions that query the whois database&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/353b2800-84db-11f1-9581-f293060bffc7.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 08:07:25 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5867/#v2.2.13</guid>
     </item>
   </channel>
 </rss>
