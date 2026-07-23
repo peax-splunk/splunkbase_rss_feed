@@ -6,7 +6,68 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 Jul 2026 21:57:27 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 23 Jul 2026 22:52:55 +0000</lastBuildDate>
+    <item>
+      <title>Sideview UI - v0.8.6 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6449/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;Version 0.8.6 (July 23rd, 2026)&lt;/strong&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Fixed an issue with the Sideview logo in dark mode.&lt;/li&gt;
+  &lt;li&gt;Added a new &quot;Installed apps&quot; page&lt;/li&gt;
+  &lt;li&gt;Added the new key required by Splunk, &quot;python.required&quot; to commands.conf and restmap.conf.  The app is now declared and tested as compatible with both Python 3.9 and Python 3.13.&lt;/li&gt;
+  &lt;li&gt;Updated the bundled Splunk Python SDK from 2.1.0 to 2.1.1.  The 2.1.0 copy had an invalid regular expression escape sequence in client.py, which Python 3.12 and later log as a SyntaxWarning every time the &quot;checkyourself&quot; command runs.&lt;/li&gt;
+  &lt;li&gt;Fixed a bug where every line written to sideview\_ui.log would be duplicated, because two different modules were each attaching a file handler to the same logger.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app contains some useful tools for Splunk Administrators. 
+
+In its initial launch state it contains two tools aimed at admins who are trying to track down and eliminate wildly inefficient ad-hoc searches that users are running on their deployment.
+
+Note to run this app you must also install the Canary app from Splunkbase.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9788ee0c-86e8-11f1-a391-bef798d78bec.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview LLC</dc:creator>
+      <pubDate>Thu, 23 Jul 2026 22:49:07 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6449/#v0.8.6</guid>
+    </item>
+    <item>
+      <title>Cisco CDR Reporting and Analytics - v8.4.3 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/669/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Important&lt;/strong&gt; - This release requires Canary 2.3.0 or higher.  A number of the app's pages now rely on Canary's new &quot;.escaped&quot; tokens as well as it's CallFlowGraph module. If you upgrade this app without upgrading Canary, the searches and drilldowns on many Detail pages will not work. &lt;/li&gt;
+  &lt;li&gt;Completed a pass of hardening around the app's views, with respect to certain SPL-injection scenarios. Wherever a user-supplied value was being interpolated into SPL, it now uses Canary 2.3.0's new &quot;.escaped&quot; token key, which backslash-escapes the value for the search language. &lt;/li&gt;
+  &lt;li&gt;Closed some SPL-injection cases around the &quot;Create dashboard panel&quot; logic.&lt;/li&gt;
+  &lt;li&gt;Updated the bundled Splunk Python SDK from 2.1.0 to 2.1.1.&lt;/li&gt;
+  &lt;li&gt;Fixed some minor timestamp formatting bugs on the main call_detail page for CUCM calls. The raw call leg and CMR results tables were listing the dateTime* fields in epochtime instead of string-formatted times.&lt;/li&gt;
+  &lt;li&gt;Added better support for field names with spaces in them, as long as you're running Canary 2.3.0 or higher. This was important for the new Webex data types.&lt;/li&gt;
+  &lt;li&gt;Pulled new NANPA data into the &quot;npa-nxx-lata-clli-ocn-location&quot; lookup.&lt;/li&gt;
+  &lt;li&gt;The app now ships with a complete record of the documentation from the Sideview website, embedded as simple local HTML that is accessible from the &quot;help&quot; menu.&lt;/li&gt;
+  &lt;li&gt;Added a batch of newer CUCM CDR fields to the app's field gallery, so they now appear with proper descriptions in the field pickers and on the &quot;Explore Fields&quot; page. These include the IMS charging identifiers (IncomingICID, OutgoingICID and the originating/terminating IOI fields), the directory-URI forms of the party numbers (callingPartyNumber_ahem.uri, originalCalledPartyNumber_uri, finalCalledPartyNumber_uri and lastRedirectDn_uri), the outpulsedOriginalCalledPartyNumber and outpulsedLastRedirectingNumber fields, and the origDeviceType/destDeviceType and origDeviceSessionID/destDeviceSessionID fields.&lt;/li&gt;
+  &lt;li&gt;Likewise added a batch of newer CUCM CMR (call quality) fields to the gallery, including videoAverageJitter, videoRoundTripTime and videoOneWayDelay, the second video channel metrics (videoContentType_channel2, videoDuration_channel2 and the numberVideo*_channel2 counters, plus the channel-2 jitter/round-trip/one-way-delay fields), and the localSessionID and remoteSessionID fields.&lt;/li&gt;
+  &lt;li&gt;Improved the search-time extraction of the CMR video quality metrics. The codec and resolution values (RxCodec/TxCodec and RxReso/TxReso) carried inside the videoReceptionMetrics and videoTransmissionMetrics fields are now extracted correctly - previously the codec was dropped entirely and the resolution was truncated at the &quot;x&quot; - and a new RxFramesLost field is now available.&lt;/li&gt;
+  &lt;li&gt;The second video channel's quality metrics are now extracted too, as TxCodec_Channel2, RxReso_Channel2 and so on. Formerly the channel-2 metrics collided with the channel-1 ones and there was no way to tell which stream a given value came from. Relatedly, all of these video quality fields (both channels) are now correctly identified internally as CMR fields - previously they could be selected in the field pickers but would come back empty.&lt;/li&gt;
+  &lt;li&gt;Fixed a bug where roughly 50 of the fields in the field gallery - including all of the newer CDR and CMR fields listed above - were missing from the app's internal list of field data types. The effect was that the UI didn't know whether they were numeric or categorical, so charts and field pickers treated them all as categorical, and CMR fields wouldn't necessarily trigger inclusion of that sourcetype. This list is now generated automatically at build time so it can no longer fall behind the field gallery.&lt;/li&gt;
+  &lt;li&gt;When some health checks are pulled in from other Sideview-authored supporting addons,  the app-context is now set to that app dynamically as each health check is run.&lt;/li&gt;
+  &lt;li&gt;Fixed a bug in Investigate Calls where the action menu drilldown on the &quot;type&quot; column didn't work if you were working with a datatype other than CUCM that also had a &quot;type&quot; field (for example Webex). Formerly these clicks were silently swallowed. Now clicking such a value adds it as a normal search term instead.&lt;/li&gt;
+  &lt;li&gt;Fixed logging and exception handling problems in our app setup and first-time-run script.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This commercial app is available as a 60 day trial and is compatible with both Splunk Enterprise and Splunk Cloud.  The app gives your team greatly increased visibility, monitoring, and reporting functionality around Cisco Unified Communications (aka CUCM / CallManager), whether you&amp;#x27;re a small organization with a hundred phones or one of the largest companies in the world. 
+
+Whether troubleshooting individual calls or building high level reporting, it helps you visualize and understand in all areas: agents, users, and huntgroups; concurrency and utilization; call flow; call quality; call volume; devices; failed calls; locations and sites; and audits and compliance.
+
+Your team can trust it as their day-to-day tool for navigating call data from your Cisco CallManager deployment, and it can also become their main tool for building custom reports, alerts and dashboards around that data. This is true whether it’s a standard report you’d expect or a custom report that nothing else has been able to provide.
+
+Note that this isn&amp;#x27;t a package of content, but more a tank that allows you to drive around in your data.  You won’t find a leftnav full of canned CDR reports to click on (that &amp;quot;don&amp;#x27;t quite fit&amp;quot;).  Instead, you get an open flexible framework to investigate anything, drill down into anything, report on anything, over anything, by anything (occasionally with hands-on help from Sideview Support =).
+
+It is available as a free 60-day trial, and you can download and set it up today in less than 30 minutes.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/dcb34416-86e6-11f1-9f3b-96e7b47cf262.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
+      <pubDate>Thu, 23 Jul 2026 22:39:28 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/669/#v8.4.3</guid>
+    </item>
+    <item>
+      <title>TA LLM Gateway - v0.3.7 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9027/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Bifrost model refuse field fixes&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Technology Add-on for normalizing LLM gateway traffic from Bifrost and LiteLLM into Splunk. Provides consistent field extractions (model, provider, tokens, cost, latency, tool calls) and pre-built eventtypes across both gateways, enabling usage auditing, cost tracking, and OWASP LLM Top 10 / MITRE ATLAS detection.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Organizations routing LLM traffic through gateways like Bifrost and LiteLLM lack unified visibility into that traffic — prompts, provider routing, token spend, tool calls, and failures are scattered across each gateway&amp;#x27;s own logs in inconsistent formats. TA-llmgateway normalizes telemetry from both gateways into two Splunk sourcetypes (llmgateway:bifrost, llmgateway:litellm) with a shared field taxonomy — model, provider, latency, token usage, cost, tool calls, retries — regardless of which gateway or upstream LLM handled the request. Pre-built eventtypes flag errors, high-token-usage requests, off-hours activity, and retries out of the box, letting security and platform teams audit AI request activity, monitor usage and cost, and detect jailbreak or prompt-injection attempts (OWASP LLM Top 10 / MITRE ATLAS) through standard Splunk searches.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Rod Soto</dc:creator>
+      <pubDate>Thu, 23 Jul 2026 21:58:44 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9027/#v0.3.7</guid>
+    </item>
     <item>
       <title>Pstree nodaliser - v2.0.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/9169/</link>
@@ -1418,32 +1479,6 @@ This add-on enables Cato telemetry to integrate seamlessly with CIM-based applic
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
       <pubDate>Tue, 21 Jul 2026 10:51:08 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5973/#v1.0.3</guid>
-    </item>
-    <item>
-      <title>Redmine - v1.0.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5975/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Enabled Redmine server certificate verification by default.
-* Encoded Redmine issue identifiers before using them in request paths.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with Redmine to perform several ticket management actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d930c1de-84f1-11f1-b784-9aca13fdf88c.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 10:49:29 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5975/#v1.0.1</guid>
-    </item>
-    <item>
-      <title>Slack Bot - v1.0.6 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6749/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Fixed SOAR REST query construction to encode filter values safely.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Integrate with Slack using a custom Slack App&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c626c442-84ee-11f1-9e65-a62201b5393d.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 10:27:29 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6749/#v1.0.6</guid>
-    </item>
-    <item>
-      <title>Trend Vision One for Splunk SOAR - v3.2.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6569/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Clarified that Start Analysis retrieves the supplied file URL from the SOAR host before submitting it to Vision One.
-* Safely encode Vision One API path identifiers.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TrendAI Vision One™ is a purpose-built threat defense platform that provides added value and new benefits beyond XDR solutions, allowing you to see more and respond faster. Providing deep and broad extended detection and response (XDR) capabilities that collect and automatically correlate data across multiple security layers—email, endpoints, servers, cloud workloads, and networks—TrendAI Vision One™ prevents the majority of attacks with automated protection&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b936abba-84eb-11f1-9d6c-1ec8d624ba6d.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 10:05:39 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6569/#v3.2.1</guid>
     </item>
   </channel>
 </rss>
