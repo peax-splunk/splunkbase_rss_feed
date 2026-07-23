@@ -6,7 +6,138 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 Jul 2026 05:20:27 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 23 Jul 2026 08:13:05 +0000</lastBuildDate>
+    <item>
+      <title>Datasource Validator - v1.0.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9171/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Validates that user-defined data sources grouped under platforms currently return at least one event, recording PASS/FAIL/ERROR/STALE status per source.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Data Source Validator app validates that user-defined data sources are currently returning at least one event in Splunk. Administrators define platforms such as Firewall or EDR, and under each platform create one or more data sources with an SPL search that should return events. A single sequential validation worker executes each data source&amp;#x27;s search on a schedule or on demand using a dedicated service account with minimal privileges. The app records PASS, FAIL, ERROR, or STALE status for each data source, and platform status rolls up from the status of its enabled child data sources. This provides visibility into which integrations have stopped receiving data. The app targets Splunk Cloud Platform and Splunk Enterprise 9.3 and later.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Adam Liquorish</dc:creator>
+      <pubDate>Thu, 23 Jul 2026 08:10:43 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9171/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>O11y (Splunk Observability) TA - v1.2.4 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7249/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;1.2.4 adds functionality to pull Audit events from the Splunk Observability Cloud api.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This TA brings in data from the Splunk Observability API&amp;#x27;s: https://dev.splunk.com/observability/reference/ .
+
+This TA empowers administrators by providing access to critical platform insights that were previously only accessible via the Splunk Observability APIs. Easily navigate through previously hard-to-find configuration information with our TA. Enjoy the convenience of searchable data, allowing you to pinpoint specific details and streamline your troubleshooting process.
+
+Since v1.2.4, the app now supports pulling Audit events from the Splunk Observability API. This includes events like Session creation/deletion and user actions within the O11y platform.
+
+Inbuilt dashboards are available for monitoring TA Health, understanding O11y platform health and summarizing TA data
+
+Github: https://github.com/brodytedesco/observability_admin_ta&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a1ede3f6-8667-11f1-b5c6-e6b114cfb20d.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Brody Tedesco</dc:creator>
+      <pubDate>Thu, 23 Jul 2026 07:48:24 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7249/#v1.2.4</guid>
+    </item>
+    <item>
+      <title>Splunk MCP Server - v1.3.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7931/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Splunk MCP Server App 1.3 introduces Allowed SPL Commands management, a Custom Tools UI for creating and managing user-defined tools, Role-Based Access Control for MCP tools, and multiple UI and dashboard improvements.
+
+**What's New**
+
+Allowed SPL Commands Management
+
+Added a new Allowed SPL Commands section within the Guardrails tab. Administrators can add or remove SPL commands that are permitted for MCP tool execution. Non-admin users see a read-only view of Splunk Native, Custom, and Builtin commands.
+
+
+
+**Custom Tools UI**
+
+Administrators can now create, update, enable, disable, and delete custom MCP tools directly from the UI. Supports both SPL-type and API-type custom tools. Custom tools are grouped by app for easier navigation. Users without the mcp\_tool\_admin capability see the Create tool button disabled.
+
+
+
+**Role-Based Access Control for MCP Tools**
+
+MCP tools now support role-based access control, ensuring tools are only accessible to users with the appropriate roles and permissions.
+
+
+
+**App Parameter in run\_splunk\_query**
+
+Added an app parameter to run\_splunk\_query tool arguments, allowing users to specify the app context for query execution.
+
+
+
+**Saved Search Descriptions in Knowledge Objects**
+
+The get\_knowledge\_objects tool now returns saved search descriptions when querying saved searches.
+
+
+
+**Workload Management Support for run\_splunk\_query**
+
+MCP tool run\_splunk\_query now supports Splunk workload pool assignment for better resource management.
+
+
+
+**SAIA Data Discovery Tool**
+
+Added a new SAIA data discovery tool. This tool requires Splunk AI Assistant version 2.2.0 or later.
+
+
+
+**MCP Dashboard Updates**
+
+Added a new tools and roles panel in the Governance tab to show tool access by role.&amp;#x20;
+
+
+
+**UI Updates**
+
+MCP version is now displayed on the Configuration page.
+
+Added MCP Tool Annotations to identify read-only and write-capable tools.
+
+Row limit and Time range rows are no longer shown per tool.
+
+Users cannot set a per-tool rate limit beyond the global rate limit.
+
+Users cannot set the global rate limit below an existing per-tool rate limit.
+
+Added an MCP Server heartbeat modular input to prevent Splunk from recycling the MCP handler process.
+
+
+
+**Issues Fixed**
+
+Fixed an issue where custom \`mcp.conf\` settings were not replicated correctly across search head cluster members.
+
+
+
+**Notes and Considerations**
+
+Administrators who previously managed SPL command restrictions through manual configuration should review the new Allowed SPL Commands section in the Guardrails tab.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;MCP Server for Splunk Platform
+The Model Context Protocol (MCP) is an open standard and framework that enables seamless, secure, and standardized two-way communication between AI applications (like large language models) and external data sources or tools. It acts as a universal adapter allowing AI systems to access, execute, and integrate functionalities from diverse systems through a common protocol, simplifying data sharing and tool interoperability without custom coding for each integration.
+
+Splunk&amp;#x27;s Model Context Protocol (MCP) server leverages this to provide a standardized, secure, and scalable interface to connect AI assistants, agents, and other intelligent systems with data in the Splunk platform for both Enterprise &amp;amp; Cloud customers in beta.
+
+🔑 Key Features
+
+- Universal Connectivity
+Seamlessly connects AI agents and tools to Splunk data resources in a secure and efficient manner.
+- Enterprise-Grade Security
+Includes built-in authentication, authorization, and Role-Based Access Control (RBAC).
+- Rapid Deployment
+Offers a plug-and-play solution, eliminating the need for custom integrations.
+
+⚙️ Core Capabilities
+
+- Explore the Data
+Navigate and interact with Splunk data effortlessly.
+- Discover Knowledge Objects
+Identify and access relevant saved searches, lookups, and other knowledge assets.
+- Execute Searches
+Run powerful Splunk queries to extract insights and drive intelligent workflows.
+- Leverage AI capabilities from Splunk’s AI Assistant for SPL &amp;amp; MLTK
+SPL search generation from natural language, search optimization, search explanation, retrieve MLTK models and algorithms.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9a066492-8658-11f1-8dc9-aa8b10ed8e76.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Thu, 23 Jul 2026 06:11:23 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7931/#v1.3.0</guid>
+    </item>
     <item>
       <title>Supporting App for AXL - v1.2.10 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/4640/</link>
@@ -1300,36 +1431,6 @@ Microsoft Defender for Endpoint Alerts
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Tue, 21 Jul 2026 09:17:57 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5807/#v2.0.22</guid>
-    </item>
-    <item>
-      <title>Ixia Network Packet Broker - v3.0.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5805/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Escaped filter identifiers before embedding them in widget JavaScript (PSAAS-30773).
-* Encoded filter identifiers before using them as REST URL path segments (PSAAS-31264).
-* Encrypted cached access tokens in connector state (PSAAS-31355).
-* Enabled TLS certificate verification by default for new assets (PSAAS-31376).&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This ixia NPB App supports a variety of actions on the network packet broker platform. This App has been tested with Vision One&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8a2ea928-84e4-11f1-9d6c-1ec8d624ba6d.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 09:14:14 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5805/#v3.0.2</guid>
-    </item>
-    <item>
-      <title>HackerTarget - v2.0.10 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5796/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Removed captured cookie headers and raw HTTP responses from get-headers action results.
-* Reported HackerTarget quota, input, query, and result errors as action failures.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app supports executing investigative actions to analyze a host&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/58038324-84e4-11f1-9c61-d65f0efbd473.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 09:12:50 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5796/#v2.0.10</guid>
-    </item>
-    <item>
-      <title>GitHub - v3.0.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5792/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Contain caller-controlled values within their intended GitHub API path segments
-* Bound GitHub API pagination to prevent unending requests and response accumulation
-* Report remove collaborator as failed when team or organization access remains&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with GitHub to support various investigative and issue-based actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2eeb3ff4-84e4-11f1-b5c1-a601a19cf042.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 09:11:41 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5792/#v3.0.1</guid>
     </item>
   </channel>
 </rss>
