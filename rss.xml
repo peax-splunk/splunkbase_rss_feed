@@ -6,7 +6,255 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Fri, 24 Jul 2026 14:45:49 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 24 Jul 2026 18:11:41 +0000</lastBuildDate>
+    <item>
+      <title>Axur Data Connector - v2.1.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7622/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Added support for Credit Card event ingestion via a new modular input (Axur Credit Card Integration), alongside the existing Ticket and Credential integrations.
+
+
+
+\- New input type: Axur Credit Card Integration
+
+\- New sourcetype: axur-card
+
+\- New event type: card\_event&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Axur Data Connector for Splunk ingests events from Axur platform data sources and maps them to the Splunk Common Information Model (CIM). By integrating this add-on, you can enhance operational efficiency, improve incident response capabilities, and gain greater visibility into your IT infrastructure.
+
+To enable data ingestion, the add-on should be installed on your IDM or Heavy Forwarder.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/78a3c898-86ae-11f1-97b6-d2790ef490e1.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Dev Axur</dc:creator>
+      <pubDate>Fri, 24 Jul 2026 17:33:04 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7622/#v2.1.0</guid>
+    </item>
+    <item>
+      <title>Reco - v2.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7673/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;# reco-splunk-TA 2.0 — Field &amp; Behavior Changes
+
+Full property diff between 1.x (internal table API) and 2.0 (Reco External API), for release notes. Old &quot;field&quot; \= the base64-cell `key` in the 1.x table-API response; new &quot;field&quot; \= the JSON key in the 2.0 External API response. Everything here was confirmed directly against source (Go mappers, proto/OpenAPI spec, and the ClickHouse/Postgres view definitions backing each endpoint) — nothing is guessed.
+
+## Cross-cutting changes (all 6 inputs)
+
+* **Transport**: `PUT` with a JSON `getTableRequest` body → `GET` with query params (`startIndex`, `count`, `filters`, `sortBy`, `sortOrder`).
+* **Response envelope**: `getTableResponse.data.rows[].cells[{key,value}]` (base64-encoded values, decode required) → plain JSON objects, camelCase keys, no encoding. `totalNumberOfResults` (separate `/count` call, only on accounts/discovery/identities/system\_logs) → `totalResults`/`itemsPerPage` returned inline on every page (no separate count call needed).
+* **Pagination**: posture/alerts previously fetched a single page capped at `limit` with no next-page handling — results beyond `limit` in one poll were silently dropped. accounts/discovery/identities/system\_logs already paginated fully. **2.0 pages through all results on every input** — this is a behavior change for posture/alerts specifically (fixes a latent data loss bug; `limit` now controls page size, not a hard cap).
+* **Enums**: raw integer codes (e.g. `status=5`, `risk_level=30`) → string enum names (e.g. `checkStatus=&quot;ALERT_STATUS_TO_REVIEW&quot;`, `severity=&quot;HIGH&quot;`). Any saved search/dashboard filtering on the old numeric codes will need updating.
+* **Auth**: unchanged — `Authorization: Bearer &lt;api_key&gt;`, same tenant host.
+
+## Posture Issues (`reco_posture`)
+
+Old: `POSTURE_CHECKLIST` via `alert-inbox/table`. New: `GET /api/v1/external-api/posture-issues/list`.
+
+**Incremental filter changed**: `created_at` (1.x, but disabled by a bug — see below) → `currentStatusSince` (2.0). `updated_at`/`created_at` are both re-stamped by Reco's hourly posture rescan even when nothing changed, so they cause duplicate re-sends; `currentStatusSince` only advances on a real status transition. **Known limitation**: a finding whose score/risk/other fields change without a status transition won't be re-sent under this filter.
+
+| 1.x field                                                                                                                                                                                                                                                     | 2.0 field                     | Change                                                                            |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- | --------------------------------------------------------------------------------- |
+| alert\_id                                                                                                                                                                                                                                                     | id                            | renamed; no longer double-base64-encoded                                          |
+| title                                                                                                                                                                                                                                                         | name                          | renamed                                                                           |
+| alert\_description                                                                                                                                                                                                                                            | description                   | renamed                                                                           |
+| how\_to\_remediate                                                                                                                                                                                                                                            | remediationInstructions       | renamed                                                                           |
+| tags                                                                                                                                                                                                                                                          | securityDomains               | renamed                                                                           |
+| creation\_source (&quot;Sanity&quot;/&quot;Github&quot;/&quot;UI&quot; strings)                                                                                                                                                                                                             | type                          | renamed + revalued to enum (POSTURE\_ISSUE\_TYPE\_BUILTIN/\_CUSTOM/\_UNSPECIFIED) |
+| compliance\_frameworks\_text                                                                                                                                                                                                                                  | relatedComplianceFrameworks   | renamed                                                                           |
+| compliance\_framework\_ids                                                                                                                                                                                                                                    | relatedComplianceFrameworkIds | renamed                                                                           |
+| score                                                                                                                                                                                                                                                         | score                         | unchanged                                                                         |
+| risk\_level\_table (as computed &quot;maxScore&quot;)                                                                                                                                                                                                                   | maxScore                      | renamed                                                                           |
+| score\_percentage                                                                                                                                                                                                                                             | scorePercentage               | renamed                                                                           |
+| risk\_level\_table (int 10/20/30/40)                                                                                                                                                                                                                          | severity                      | now enum string LOW/MEDIUM/HIGH/CRITICAL                                          |
+| status (int 5/6/7/8/9/11/12/13)                                                                                                                                                                                                                               | checkStatus                   | now enum string (ALERT\_STATUS\_TO\_REVIEW, etc.)                                 |
+| policy\_id                                                                                                                                                                                                                                                    | postureCheckId                | renamed                                                                           |
+| instance\_id                                                                                                                                                                                                                                                  | checkedInstance.id            | renamed + nested                                                                  |
+| instance\_name                                                                                                                                                                                                                                                | checkedInstance.appName       | renamed + nested                                                                  |
+| updated\_at                                                                                                                                                                                                                                                   | updatedAt                     | renamed only — still unsafe for incremental use                                   |
+| last\_scanned\_time                                                                                                                                                                                                                                           | lastScanned                   | renamed                                                                           |
+| —                                                                                                                                                                                                                                                             | url                           | new — direct link to the check in the Reco UI                                     |
+| comments                                                                                                                                                                                                                                                      | commentsCount                 | renamed                                                                           |
+| has\_ticket                                                                                                                                                                                                                                                   | hasTicket                     | unchanged                                                                         |
+| status\_override\_filter                                                                                                                                                                                                                                      | statusOverrideFilter          | renamed                                                                           |
+| business\_unit\_names                                                                                                                                                                                                                                         | businessUnits                 | renamed                                                                           |
+| rescan\_status                                                                                                                                                                                                                                                | rescanStatus                  | renamed                                                                           |
+| severity\_source                                                                                                                                                                                                                                              | severitySource                | renamed                                                                           |
+| extraction\_sources                                                                                                                                                                                                                                           | extractionSources             | renamed                                                                           |
+| —                                                                                                                                                                                                                                                             | currentStatusSince            | new — the 2.0 incremental filter target                                           |
+| all\_policy (TA-injected, always null in 1.x)                                                                                                                                                                                                                 | —                             | removed (was dead weight)                                                         |
+| ticket\_id, ticket\_url, tickets, has\_notifications, policy\_status, alert\_status\_alt, checklist\_status, label\_ids, labels\_json, related\_policies, risk\_accepted, status\_override, pre\_disable\_notification\_time, status\_override\_disable\_time | —                             | dropped — no External API equivalent yet                                          |
+
+## Alerts (`reco_alerts`)
+
+Old: `ALERT_VIEW_WITH_SHARED_STATUS` (list) + `alert-inbox/{id}` (detail). New: `GET /api/v1/external-api/alerts/list` (list) + `GET /api/v1/external-api/alert-details/{id}` (detail).
+
+**Incremental filter changed**: `updated_at` (1.x) → `createdAt` (2.0), per request — alerts are event-driven (one row per detected violation, not a periodically-rescanned checklist), so `createdAt` is stable here; confirmed structurally (DB-default set once at insert, no upsert path that resets it), not yet independently measured live.
+
+The 1.x list-stub fields were mostly discarded client-side (only `id` was extracted before fetching detail), so the meaningful diff is on the detail object actually sent to Splunk:
+
+| 1.x field                                                              | 2.0 field                                                     | Change                                                                                                                                                                                                                                                        |
+| ---------------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id                                                                     | id                                                            | unchanged                                                                                                                                                                                                                                                     |
+| aggregationRulesToKeys (top-level; TA dropped it if present)           | —                                                             | field no longer exists on ThreatAlertDetail at all (dropped server-side)                                                                                                                                                                                      |
+| policyViolations\[].jsonData (base64-encoded JSON string)              | policyViolations\[].jsonData (plain JSON string)              | base64 layer removed — TA no longer base64-decodes; it now just json.loads()s directly                                                                                                                                                                        |
+| policyViolations\[].aggregationRuleToKey (base64)                      | policyViolations\[].aggregationRuleToKey (plain string)       | base64 removed; TA continues to strip this field before sending, matching 1.x's intent of never surfacing it                                                                                                                                                  |
+| status, riskLevel, createdAt, updatedAt, instanceId, extractionSources | same names                                                    | unchanged (this detail endpoint was already camelCase JSON in 1.x, not a table-cell response)                                                                                                                                                                 |
+| —                                                                      | riskType, alertType, triggeringViolationId, alertPostureScore | present on the 2.0 detail shape; not independently confirmed whether 1.x's detail response already had these (that endpoint wasn't table-cell based, so it wasn't covered by this migration's table-API research) — verify empirically if these matter to you |
+
+Structural note: `ListThreatAlerts` (the list endpoint) now returns enough fields for most purposes without a per-alert detail fetch — the 2-call pattern is no longer *required*, but it's kept in 2.0 to preserve the full `policyViolations` detail 1.x always sent.
+
+## Accounts (`reco_accounts`)
+
+Old: raw `enriched_account_view` columns (95 columns) via `asset-management/query`. New: `GET /api/v1/external-api/accounts/list` → `Account` (34 fields). **Incremental filter added in 2.0**: `lastSeen` (1.x's checkpoint code here was dead/unreachable, so 1.x always did a full re-pull). `lastSeen` is `GREATEST(last_seen_time, last_activity_time, last_login_time)`, all sourced from real vendor/event data with no periodic re-stamping found in the enrichment pipeline -- verified safe the same way `currentStatusSince` was verified for posture. `updatedAt`/`createdAt` are *not* safe here -- they are unconditionally re-stamped by the periodic account-insight recompute, the same trap posture's `updatedAt` was.
+
+| 1.x column                                | 2.0 field                               |
+| ----------------------------------------- | --------------------------------------- |
+| account\_id                               | id                                      |
+| full\_name                                | name                                    |
+| instance\_id (+ separate app-name lookup) | instance.id / instance.appName (nested) |
+| primary\_email\_address                   | accountEmail                            |
+| last\_seen\_time                          | lastSeen                                |
+| has\_mfa                                  | hasMfa                                  |
+| roles                                     | roles                                   |
+| user\_type\_display                       | permissions                             |
+| alerts\_count                             | openAlerts                              |
+| last\_extraction\_time                    | lastExtractionTime                      |
+| identity\_departments                     | departmentName                          |
+| business\_unit\_names                     | businessUnit                            |
+| related\_emails                           | relatedEmails                           |
+| profiles                                  | profiles                                |
+| permission\_sets                          | permissionSets                          |
+| auth\_type                                | authType                                |
+| creation\_time                            | createTime                              |
+| identity\_id                              | identityId                              |
+| is\_admin                                 | isAdmin                                 |
+| is\_former\_user                          | isFormerUser                            |
+| is\_inactive                              | isInactive                              |
+| is\_risky\_user                           | isRiskyUser                             |
+| is\_new                                   | isNew                                   |
+| is\_deactivated                           | isDeactivated                           |
+| is\_orphaned                              | isOrphaned                              |
+| is\_internal                              | isInternal                              |
+| is\_provisioned                           | isProvisioned                           |
+| is\_guest\_insight                        | isGuest                                 |
+| analysis\_account\_type                   | analysisAccountType                     |
+| label\_ids                                | labelNames (resolved to display names)  |
+| analysis\_account\_location               | analysisAccountLocation                 |
+| domain\_type                              | domainType                              |
+| cannot\_determine\_permissions            | cannotDeterminePermissions              |
+| has\_reco\_defined\_labels                | hasRecoDefinedLabels                    |
+| has\_user\_added\_soft\_labels            | hasUserAddedSoftLabels                  |
+| has\_user\_removed\_soft\_labels          | hasUserRemovedSoftLabels                |
+| last\_login\_time                         | lastLoginTime                           |
+| last\_activity\_time                      | lastActivityTime                        |
+| job\_title                                | jobTitle                                |
+
+**Dropped (present in the 1.x raw view, no 2.0 field)**: `is_standard`, `analysis`, `last_activity_time_by_event` (this was 1.x's *intended* incremental field, but the checkpoint code that would've used it was dead), `account_name`, `personal_emails`, `provisioned_app_ids`, every `orig_is_*` shadow column, `is_never_logged_in`, `analysis_export`, `user_type`, `has_mfa_insight`, `deactivation_time`, `last_api_message_id`, `display_full_name`, `analysis_workforce`, `analysis_account_state`, `analysis_account_status`, `last_extraction_details`, `last_extraction_source`, `provisioning_explanation`, `photo_url`, `is_service_account`, `login_type`, `location`, `workspace_id`, `account_type`, `is_guest_display`, `has_identity`, `identity_primary_email`, `identity_departments_str`, `admin_label_name`, `admin_label_update_at`, `is_privileged`, `alerts_30_days`, `num_groups`, `is_last_login_known`, `is_valid`, `is_federated_and_local`, `labels_json`, `soft_labels_added`, `soft_labels_removed`, `business_unit_ids`, `is_sso_verified`, `is_idp_managed`, `is_federated_manual`, `is_sso_enforced`.
+
+## App Discovery (`reco_discovery`)
+
+Old: `app_discovery` (48 columns, deleted from the codebase in favor of v4 — recovered from git history) via `asset-management/query`. New: `GET /api/v1/external-api/apps/list` → `App`, backed by `app_discovery_v4` (a newer generation of the same view; same join skeleton, several fields only exist starting in v4). **Incremental filter added in 2.0**: `lastSeen` (←`last_use_time`), a MAX() aggregate of real login/authorization event timestamps -- verified safe (not `now()`-stamped). **Known limitation**: `app_discovery_v4` is a ClickHouse materialized view refreshed wholesale every 3 hours, so nothing new will appear between refreshes regardless of poll interval or filter -- a freshness ceiling, not a duplicate-event risk.
+
+| 1.x column                    | 2.0 field                                                  | Note                                                                                                           |
+| ----------------------------- | ---------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| generic\_app\_id              | id                                                         |                                                                                                                |
+| application\_name             | name                                                       |                                                                                                                |
+| category                      | category                                                   | source column changed: old view's category, new view's category2 — same JSON name, different underlying column |
+| application\_instances\_ids   | instances                                                  |                                                                                                                |
+| users\_num                    | accounts                                                   |                                                                                                                |
+| —                             | usersCount (←current\_enriched\_identity\_count)           | new column, v4-only                                                                                            |
+| first\_use\_time              | firstSeen                                                  |                                                                                                                |
+| last\_use\_time               | lastSeen                                                   |                                                                                                                |
+| —                             | lastAppActivity (←last\_app\_activity)                     | new column, v4-only                                                                                            |
+| authorization\_status         | authorization                                              |                                                                                                                |
+| auth\_types                   | authType                                                   |                                                                                                                |
+| app\_owner                    | appOwner                                                   |                                                                                                                |
+| —                             | analysis                                                   | new column, v4-only                                                                                            |
+| type\_usage                   | usage                                                      |                                                                                                                |
+| shadow\_app                   | isShadowApp                                                |                                                                                                                |
+| integrated                    | isIntegrated                                               | source column changed: old generic integrated, new is\_integrated (v4-only)                                    |
+| is\_using\_ai                 | isUsingAi                                                  |                                                                                                                |
+| security\_score               | vendorScore                                                |                                                                                                                |
+| bk\_grade\_letter             | vendorGrade                                                |                                                                                                                |
+| —                             | discoveryMethod (←discovery\_method)                       | new column, v4-only                                                                                            |
+| description                   | description                                                |                                                                                                                |
+| —                             | businessCriticality (←business\_criticality)               | new column, v4-only                                                                                            |
+| system\_authorization\_status | systemAuthorizationStatus                                  |                                                                                                                |
+| —                             | aiCapability (←ai\_capability)                             | new column, v4-only                                                                                            |
+| —                             | isShadowBusinessDualInsight (filter-only, not in response) | new, v4-only                                                                                                   |
+
+**Dropped**: `application_instances_names`, `genric_app_id` (a duplicate/typo column, not a real loss), `last_thirty_days_score`, `company_size`, `security_score_url`, `last_refresh`, `label_ids`, `labels_json`, `logo`, `web_link`, `app_groups`, `sso_not_enabled`, `overrode_usage`, `app_created_at`, `found_in_msft_cas_network_traffic`, `found_in_zscaler_network_traffic`, `found_in_google_network_traffic`, `bk_cyber_rating`, `bk_breach_index`, `bk_ransomware_index`, `bk_cyber_rating_last_updated_at`, `bk_breach_index_last_updated_at`, `bk_ransomware_index_last_updated_at`, `instance_types`, `application_instances`, `application_instances_str`, `unused_app`, `vendor`.
+
+## Identities (`reco_identities`)
+
+Old: `enriched_identity_view` (27 columns) via `asset-management/query`. New: `GET /api/v1/external-api/users/list` (note: URL path says &quot;users&quot;; the response array key is also `users`, not `identities`) → `Identity` (16 fields). **Incremental filter added in 2.0**: `lastSeen` (`GREATEST(last_login_time, last_activity_time)`, aggregated from the identity's mapped accounts' real vendor/event timestamps) -- verified safe. `updatedAt`/`createdAt` are not safe here for the same reason as accounts.
+
+| 1.x column                | 2.0 field      |
+| ------------------------- | -------------- |
+| identity\_id              | id             |
+| full\_name                | name           |
+| primary\_email\_address   | email          |
+| departments               | departments    |
+| job\_titles               | jobTitles      |
+| private\_emails           | personalEmails |
+| related\_emails           | relatedEmails  |
+| filtered\_label\_json     | analysis       |
+| num\_admin\_instance\_ids | adminAccounts  |
+| num\_accounts             | accounts       |
+| alerts\_count             | openAlerts     |
+| is\_former                | isFormer       |
+| has\_access               | hasAccess      |
+| last\_seen\_time          | lastSeen       |
+| last\_login\_time         | lastLogin      |
+| is\_internal              | isInternal     |
+
+**Dropped**: `application_instances_ids`, `admin_instance_types`, `profile_photo_url`, `is_admin`, `system_labels_removed`, `label_names`, `soft_labels_removed`, `departments_str`, `labels_json`, `label_ids`.
+
+## System / Audit Logs (`reco_system_logs`)
+
+Old: `system_logs_view` (24 columns) via `asset-management/query`. New: `GET /api/v1/external-api/audit-logs/list` → `AuditLog` (13 fields). **Incremental filter unchanged**: `timestamp` in both versions — this was already the one working 1.x incremental input.
+
+| 1.x column      | 2.0 field            |
+| --------------- | -------------------- |
+| id              | id                   |
+| timestamp       | timestamp            |
+| instance\_id    | instance.id (nested) |
+| user\_email     | userEmail            |
+| user\_roles     | userRoles            |
+| user\_type      | userType             |
+| module          | module               |
+| action          | action               |
+| object\_name    | objectName           |
+| object\_id      | objectId             |
+| previous\_value | previousValue        |
+| current\_value  | currentValue         |
+| remote\_addr    | remoteAddr           |
+
+**Dropped**: `user_identity`, `user_name`, `object_type`, `object_email`, `value_key`, `body`, `additional_info`, `user_identity_primary_email`, `object_identity_primary_email`, `object_id_identity_primary_email`.
+
+## Removed in this release
+
+* The bundled 1.x dashboards (`reco__posture`, `reco__posture__details`, `reco__alerts`, `reco__alert__history`, `reco__accounts`, `reco__discovery`, `reco__users`) referenced 1.x field names and would not have rendered correctly against 2.0 data, so they were removed rather than updated. The app's nav now only shows Inputs, Configuration, and Search. Rebuild any of these as a custom dashboard against the 2.0 field names above if you relied on them.
+
+## Not addressed in this release (follow-up needed)
+
+* `status` (posture) / `alert_status` (alerts) input args remain unapplied — unchanged from 1.x, not part of this migration's scope.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Reco&amp;#x27;s SaaS &amp;amp; AI Security platform closes the SaaS Security Gap — between what you can protect and what&amp;#x27;s actually running. This add-on brings Reco&amp;#x27;s posture findings, threat alerts, accounts, discovered apps, identities, and audit logs into Splunk.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Reco is the leader in SaaS &amp;amp; AI Security — the only platform built to close the SaaS Security Gap, the growing distance between what you can protect and what&amp;#x27;s actually running in your environment. That gap is driven by five kinds of sprawl: apps that multiply and connect to each other faster than teams can track; AI tools and agents woven into everyday SaaS; configurations that drift out of compliance; identities — human and machine — that keep proliferating; and data moving through more pathways than ever, making breaches and insider threats harder to catch. Reco gives security teams complete visibility and control across their SaaS ecosystem, from core applications to the latest AI agents, so they can keep pace with AI adoption without loosening security.
+
+This Technology Add-on brings that visibility into Splunk. It pulls posture findings, threat alerts, enriched accounts, discovered apps (including shadow IT and shadow AI), identities, and audit/system logs directly from your Reco tenant — so you can correlate SaaS and AI risk signals alongside the rest of your security telemetry, build searches and dashboards in the SIEM you already run, and route Reco&amp;#x27;s detections into your existing alerting and response workflows.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0bef44fa-8778-11f1-a391-bef798d78bec.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Gal Nakash</dc:creator>
+      <pubDate>Fri, 24 Jul 2026 16:09:09 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7673/#v2.0.0</guid>
+    </item>
+    <item>
+      <title>Orion Malware (OMW) App for Splunk - v1.0.1 [New App Release] (Archived)</title>
+      <link>https://splunkbase.splunk.com/app/5476/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;This version is compatible with version 10.4 and earlier&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This is an example of Dashboard for Orion Malware analysis platform provided by Airbus Cybersecurity SAS.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0629d34e-8775-11f1-984b-e275dc4a3cb5.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Orion Malware Team</dc:creator>
+      <pubDate>Fri, 24 Jul 2026 15:52:46 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5476/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>Bitdefender GravityZone Data Collector - v1.0.3 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8267/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This application pulls various data from the Bitdefender GravityZone platform. For example, it can pull user activity logs or incidents.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e3703d2c-8696-11f1-a33f-da14409a3036.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Bitdefender LLC</dc:creator>
+      <pubDate>Fri, 24 Jul 2026 15:43:58 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8267/#v1.0.3</guid>
+    </item>
     <item>
       <title>Splunk Add-on for Salesforce Streaming API - v2.1.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5689/</link>
@@ -511,14 +759,6 @@ APT Falconer is built for security teams that want to reduce context switching, 
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
       <pubDate>Thu, 23 Jul 2026 14:12:36 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7469/#v3.2.6</guid>
-    </item>
-    <item>
-      <title>Bitdefender GravityZone Data Collector - v1.0.3 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8267/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This application pulls various data from the Bitdefender GravityZone platform. For example, it can pull user activity logs or incidents.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e3703d2c-8696-11f1-a33f-da14409a3036.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Bitdefender LLC</dc:creator>
-      <pubDate>Thu, 23 Jul 2026 13:08:19 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8267/#v1.0.3</guid>
     </item>
     <item>
       <title>Python for Scientific Computing (for Mac Apple Silicon) - v4.3.4 [Version Update]</title>
@@ -1661,32 +1901,6 @@ Version 1.1.2 introduces a comprehensive refresh of the WTI dashboards, providin
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Tue, 21 Jul 2026 13:59:40 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5937/#v3.0.1</guid>
-    </item>
-    <item>
-      <title>Symantec Messaging Gateway - v3.0.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5852/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Normalize blocklist domains to IDNA A-labels before storing or matching them. [PSAAS-33510]&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with an instance of Symantec Messaging Gateway to perform containment and corrective actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/641cc0a8-850c-11f1-b5c1-a601a19cf042.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 13:59:29 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5852/#v3.0.1</guid>
-    </item>
-    <item>
-      <title>ProtectWise - v2.1.5 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5838/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Render ingested ProtectWise event timestamps as true UTC instants.
-* Remove Unicode format controls and NULs from ingested display and CEF values.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with the ProtectWise cloud platform to implement ingestion and investigative actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/37fdb040-850c-11f1-9e65-a62201b5393d.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 13:58:15 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5838/#v2.1.5</guid>
-    </item>
-    <item>
-      <title>Splunk Attack Analyzer Connector for Splunk SOAR - v2.2.3 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6783/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Stripped Unicode format controls from Attack Analyzer job data before persistence. [PSAAS-33118]
-* Rejected invalid PDF reports and screenshots before adding them to the vault. [PSAAS-33443]&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This connector integrates with the Splunk Attack Analyzer platform to reduce the friction of repetitive manual tasks typically associated with investigating threats&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/35bcda22-850c-11f1-9d6c-1ec8d624ba6d.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 13:58:12 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6783/#v2.2.3</guid>
     </item>
   </channel>
 </rss>
