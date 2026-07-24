@@ -6,7 +6,231 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Fri, 24 Jul 2026 08:09:28 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 24 Jul 2026 10:54:38 +0000</lastBuildDate>
+    <item>
+      <title>Supply Chain and AI Threat Intelligence Platform - v1.1.31 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8814/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;This release covers all changes since v1.1.18.&lt;/p&gt;
+
+&lt;h2&gt;New — AI/LLM Gateway and Platform Detection Coverage&lt;/h2&gt;
+&lt;p&gt;MITRE ATLAS content-inspection rules now correctly extract and analyze prompt content from five additional AI/LLM platforms: LiteLLM, Portkey, Kong AI Gateway, Helicone, and AWS Bedrock. Previously, telemetry from these platforms could be ingested but was not parsed into the fields the detection rules read, so the rules were effectively blind to that traffic.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Structural, not pattern-based, extraction.&lt;/strong&gt; Prompt content is located by its position in the event's JSON, which means model response text is correctly excluded from request-side analysis rather than being scanned alongside the user's input.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Verified per platform.&lt;/strong&gt; Tested against real-world payload shapes specific to each platform's actual data format — including multi-turn conversations, streaming responses, escaped quotes, OpenAI-native message formats, and version-to-version layout differences, as applicable to each platform's architecture.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;AWS Bedrock coverage&lt;/strong&gt; works from model invocation logging via CloudWatch and handles the Anthropic Claude Messages API (both plain-text and structured content-block forms), Meta Llama, and Amazon Titan request formats.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;New — ATLAS App Transition Parity&lt;/h2&gt;
+&lt;p&gt;A guided discovery scan and a full provider ingestion guide bring the onboarding experience for AI/LLM telemetry configuration in line with what a standalone MITRE ATLAS detection tool already offered, so getting your data flowing is no longer a manual, undocumented step.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Discovery scan&lt;/strong&gt; identifies which known AI/LLM sourcetypes are present in your environment and where. SCIP recognizes telemetry across eleven categories: LLM Gateway/API, Agentic Framework, RAG/Vector DB, ML Pipeline/Training, Model Supply Chain/Registry, Identity/Access, Storage/Infrastructure, Content Safety, CI/CD &amp; Code, Web/Network Access, Communication.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Ingestion guide&lt;/strong&gt; walks through configuration for 12 major LLM platforms and gateways: LiteLLM, Azure OpenAI, AWS Bedrock, OpenAI Direct API, GCP Vertex AI, Kong AI Gateway, Portkey, Helicone, Cloudflare AI Gateway, Anthropic Direct, self-hosted models, and custom API gateways.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Fixed — Detection Blind Spot on Existing Telemetry Sources&lt;/h2&gt;
+&lt;p&gt;AI-threat detection could be completely blind to correctly-formatted AI/LLM requests on the platform's original telemetry sources, depending on the exact structure of the incoming data. Requests carrying their prompt content in a structured message array produced no usable content field, so content-inspection rules never evaluated them. This was found and resolved during the gateway coverage work above. Detection is now verified working across the original telemetry sources and the newly added platforms alike.&lt;/p&gt;
+
+&lt;h2&gt;Fixed — KEV Components Indicator on the Compound Risk Dashboard&lt;/h2&gt;
+&lt;p&gt;The known-exploited-vulnerability count could render in a reassuring color under certain data conditions. Coloring is now driven by an absolute severity threshold rather than a value's rank relative to whatever else happens to be on screen, so a nonzero KEV count is never displayed as low-risk regardless of the rest of the table.&lt;/p&gt;
+
+&lt;h2&gt;Corrected — Helicone Integration Guidance&lt;/h2&gt;
+&lt;p&gt;The Helicone section of the ingestion guide previously recommended using Helicone's webhook as a single-step forward of request and response content to Splunk. That was inaccurate: the webhook payload contains only a request ID and a URL, and retrieving the actual content requires a second call.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The guidance now recommends logging directly from your own application as the primary path — Helicone is a transparent proxy, so your application already has the full request and response — and documents the webhook and REST Query API accurately as alternatives, including the two-step requirement.&lt;/li&gt;
+&lt;li&gt;Client IP forwarding guidance is now specific to the path you choose. &lt;strong&gt;If you configured Helicone ingestion using the previous guidance, review this section.&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;The guide also notes that Helicone was acquired by Mintlify in March 2026 and is now in maintenance mode.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Coverage Notes&lt;/h2&gt;
+&lt;p&gt;On AWS Bedrock, the Claude, Llama, and Titan model families are covered. Cohere, AI21 Labs, Stability AI, and Mistral use different native request formats and are not currently extracted; no content-inspection detection will fire for those model families.&lt;/p&gt;
+&lt;p&gt;No licensing or crypto surface was modified in this release. &lt;code&gt;bin/scip_license_core.py&lt;/code&gt; and &lt;code&gt;bin/scip_ed25519_verify.py&lt;/code&gt; are byte-identical to the prior release.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Unifies software supply chain risk (SBOM/SCA), MITRE ATLAS AI-threat detection, and nine-framework compliance in one Splunk app — with FedRAMP-ready audit exports and no external security product required.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;SCIP unifies software composition analysis (SCA), supply chain risk monitoring, and AI threat detection in one Splunk app. Ingest SBOMs, correlate components against live vulnerability intelligence (OSV, NVD, CISA KEV, EPSS), detect adversarial AI/ML threats with MITRE ATLAS, and assess compliance posture across nine global frameworks — with detection logic written as transparent SPL you can open and read, and no external security product required.
+
+CAPABILITIES
+- SBOM ingestion — file-drop or HEC, supporting CycloneDX (JSON/XML) and SPDX (JSON)
+
+- Vulnerability correlation — daily OSV feed (264,944+ records across 5 ecosystems) with PURL-based correlation; NVD CPE-based correlation; CISA KEV matching; EPSS exploit-probability scoring
+
+- Supply Chain Risk Score — 0–100 global and per-application risk scoring weighted by severity, KEV status, and EPSS
+
+- Vendor Risk — per-vendor risk aggregation and letter-grading across your SBOM portfolio
+
+- SBOM Drift Detection — baseline-vs-current component change tracking
+
+- License Compliance — GPL/AGPL/copyleft detection and license-risk classification
+
+- MITRE ATLAS Detection — 66 detection rules for adversarial AI/ML threats
+
+- Silent-Source Detection — alerts when an enrolled AI/LLM telemetry source goes quiet, so a dead pipe is never mistaken for a clean one (Enterprise and Federal Plus)
+
+- Compliance Gap Assessment — nine frameworks: PCI DSS 4.0, NIST CSF 2.0, SOC 2 Type II, HIPAA Security Rule, EU Cyber Resilience Act, FedRAMP / RMF / CISA, DORA, FDA 524B Premarket Cybersecurity, SEBI CSCRF
+
+- Long-Unpatched Critical Exposure — flags critical/high-severity vulnerabilities unpatched 180+ days (all tiers)
+
+- POA&amp;amp;M &amp;amp; FedRAMP Workflow — POA&amp;amp;M dashboard, monthly ConMon package builder, BOD 26-04 risk-tier classification (CISA&amp;#x27;s four-variable model with computed deadlines), deviation request workflow. Dashboards always available; automated POA&amp;amp;M generation is opt-in from Setup
+
+- Coverage-Evidence Manifest — AU-12-aligned attestation of unbroken AI-monitoring coverage (Federal Plus)
+
+- Audit-ready exports — FedRAMP POA&amp;amp;M Workbook (R3.0 and R2.1), SSP Appendix M Integrated Inventory, Deviation Request Form (Template 2.1 / Aug 2024)
+
+- Component Search — instant cross-SBOM component lookup (available in the free Community tier)
+
+- Compound Risk — correlates active MITRE ATLAS AI-threat detections with vulnerable components on the same application, surfacing compounding risk neither signal shows alone (Enterprise and Federal Plus)
+
+- AI/ML Bill of Materials — catalogs AI/ML model components from your SBOMs (architecture, training data, lineage) with insecure-serialization-format flagging (Professional and above; risk classification on Enterprise and Federal Plus)
+
+TIERS
+Community (free), Professional, Federal, Enterprise, Federal Plus. Feature availability gated by license tier; contact us for tier comparison.
+
+SUPPORT
+GIC Engineering Consultants — contact@gicengineeringconsultants.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/5cda1930-874b-11f1-b54e-1e2ab65f0245.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">GIC Engineering Consultants, Inc.</dc:creator>
+      <pubDate>Fri, 24 Jul 2026 10:52:21 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8814/#v1.1.31</guid>
+    </item>
+    <item>
+      <title>Inno S3 Streaming Add-on for AWS S3 - v1.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9154/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;1.0.0 — First general-availability release
+
+Deploy an AWS Lambda into your own AWS account, entirely from the Splunk UI,
+
+that streams S3 objects into Splunk over HEC:
+
+S3 ObjectCreated -&gt; Lambda -&gt; HEC -&gt; index.
+
+Deployment runs in-process against the AWS API (boto3) - no AWS console, no AWS
+
+CLI. AWS credentials are stored encrypted in Splunk and can be wiped
+
+automatically once the Lambda is created. Nothing in the add-on or the deployed
+
+Lambda ever calls the vendor: license verification is fully offline.
+
+WHAT'S INCLUDED
+
+\- One-click deploy of the ingest Lambda (IAM role, function, reserved
+
+&amp;#x20; concurrency, S3 ObjectCreated notification). Preview shows the exact AWS calls
+
+&amp;#x20; before anything is created.
+
+\- Compression auto-detected from content, not from the file name: gzip, zstd,
+
+&amp;#x20; bzip2 or uncompressed. Everything is streamed, so memory does not grow with
+
+&amp;#x20; object size.
+
+\- Object layout auto-detected:
+
+&amp;#x20; \* line-oriented - NDJSON, syslog, CSV, ALB / CloudFront / VPC Flow Logs,
+
+&amp;#x20;   S3 access logs. One line per event; no line is dropped.
+
+&amp;#x20; \* JSON envelope {&quot;Records&quot;:\[...]} - CloudTrail, AWS Config, GuardDuty - and
+
+&amp;#x20;   bare JSON arrays. One event per element, streamed element by element.
+
+\- Routing table: map key prefixes to their own index and sourcetype (longest
+
+&amp;#x20; prefix wins), so one deployment feeds many log types. A route can post to HEC
+
+&amp;#x20; /raw so the sourcetypes the Splunk Add-on for AWS already ships do the line
+
+&amp;#x20; breaking and field extraction, and can skip a header line (VPC Flow Logs).
+
+\- Recovery from a lapsed subscription: objects refused while the license is
+
+&amp;#x20; expired are recorded, and &quot;Recover missed objects&quot; replays exactly those
+
+&amp;#x20; objects after renewal - no duplicates.
+
+\- Air-gapped support: corporate proxy for AWS API egress, and an exportable
+
+&amp;#x20; self-contained deploy script (Lambda binary embedded) for Splunk hosts with no
+
+&amp;#x20; AWS connectivity.
+
+\- Hourly license\_status events (sourcetype s3\_lambda\_deployer:license) so you
+
+&amp;#x20; can alert on expiry with your own saved searches.
+
+REQUIREMENTS
+
+\- A valid license key (this is a paid add-on). Enter it on the Licensing tab.
+
+&amp;#x20; Keys are node-locked to your AWS account id.
+
+\- Splunk Enterprise / Splunk Cloud with an enabled HEC endpoint reachable from
+
+&amp;#x20; AWS Lambda, and a token whose allowed indexes cover your target index.
+
+\- AWS credentials with permission to create the IAM role, Lambda function and
+
+&amp;#x20; bucket notification. They are needed only at deploy time - the deployed Lambda
+
+&amp;#x20; runs on its own IAM role.
+
+KNOWN LIMITATION
+
+\- If the license stays expired longer than your S3 bucket's retention /
+
+&amp;#x20; lifecycle period, AWS deletes those objects and that data cannot be recovered
+
+&amp;#x20; into Splunk. Align your renewal with the bucket lifecycle.
+
+Support: [support@innosw.net](mailto:support@innosw.net)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Deploy a serverless S3-to-Splunk pipeline into your own AWS account, right from the
+Splunk UI. An event-driven Go Lambda streams and gunzips new S3 objects to your HEC
+endpoint in real time — no Heavy Forwarder, no polling, no idle infrastructure. Works on
+Splunk Cloud and Enterprise.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Inno Streaming Add-on for AWS S3 lets a Splunk administrator deploy a serverless
+ingestion pipeline into their own AWS account directly from the Splunk UI — no AWS
+console, no aws CLI, and no forwarder in the data path.
+
+The problem: getting S3 data into Splunk usually means standing up and maintaining
+polling-based inputs or Heavy Forwarders, granting broad AWS access, and paying for
+idle infrastructure. This add-on replaces that with an event-driven, in-account design.
+
+How it works: you enter your AWS credentials (stored encrypted in Splunk), your HEC
+endpoint, target index, and S3 bucket, then click Deploy. Using the AWS API (boto3),
+the add-on provisions a least-privilege IAM role, a compiled Go Lambda, and an S3
+ObjectCreated notification. From then on, every object that lands in the bucket triggers
+the Lambda, which streams and decompresses the object and forwards the records to your
+Splunk HEC endpoint in real time. Data flows S3 → Lambda → HEC entirely inside your AWS
+account; it never passes through the vendor.
+
+Highlights:
+- Deploy from the Splunk UI in minutes; idempotent re-deploys.
+- Event-driven and serverless — the Lambda scales with your data and back to zero when idle.
+- Installs on Splunk Cloud search heads and on Splunk Enterprise / Heavy Forwarders.
+- AWS keys are only needed at deploy time and are auto-wiped after a successful deploy;
+  the Lambda runs on its own IAM role.
+- Compression auto-detected from the content, not the file name: gzip, zstd, bzip2 or
+  uncompressed — all streamed, so memory does not grow with object size.
+- Two object layouts, auto-detected:
+  * line-oriented — NDJSON / JSON Lines and plain-text logs (syslog, CSV, key=value,
+    ALB / CloudFront access logs, VPC Flow Logs, S3 access logs). One line, one event.
+  * JSON envelope {&amp;quot;Records&amp;quot;:[...]} and bare JSON arrays — CloudTrail, AWS Config,
+    GuardDuty. One event per element, streamed element by element, so a CloudTrail file
+    with 100k records never lands in memory at once.
+- Routing table: map key prefixes to their own index and sourcetype, so one deployment
+  feeds many log types. A route can post to HEC /raw and reuse the sourcetypes the
+  Splunk Add-on for AWS already ships for line breaking and field extraction.
+- Compiled Go Lambda binary, corporate-proxy support, and an air-gapped export option
+  for Splunk hosts with no AWS connectivity.
+
+Requires an HEC endpoint reachable from AWS Lambda and a token whose allowed indexes
+cover your target index.
+
+The add-on is free to install. A license key is required to preview, export or deploy;
+keys are node-locked to your AWS account id and verified entirely offline.
+
+See detailed performance-benchmark results (measured S3-to-HEC throughput and tuning),
+step-by-step usage guides, full documentation, and licensing at https://innosw.net
+- 11 USD / month
+- 110 USD / year&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/46220b88-8743-11f1-984b-e275dc4a3cb5.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Inho Jung</dc:creator>
+      <pubDate>Fri, 24 Jul 2026 09:53:29 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9154/#v1.0.0</guid>
+    </item>
     <item>
       <title>Qualys Technology Add-on (TA) for Splunk - v1.12.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/2964/</link>
@@ -15,7 +239,7 @@
 * Upgraded **PCRS Integration APIs** from **v1.0** to **v2.0.**
 * Minor Bug Fixes and Enhancement&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Qualys Technology Add-on (TA) for Splunk is a Technology Add-On for Qualys Cloud Platform data. It fetches Vulnerability Management (VM), Web Application Scanning (WAS), Policy Compliance (PC),  Container Security(CS), File Integrity Monitoring(FIM), Endpoint Detection &amp;amp; Response (EDR), Security Enterprise Mobility (SEM), Activity Log, KnowledgeBase (KB), Policy Compliance Reporting Services (PCRS), Cyber Security Asset Management(CSAM) and Certview data using modular input and indexes it which then can be searched using the Search app, Splunk Enterprise Security app or the Qualys VM App, WAS App or PC App, EDR App, FIM App, CS App , Policy Compliance Reporting Services (PCRS) App, Cyber Security Asset Management(CSAM) App , Certview App and TotalCloud for Splunk Enterprise.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/032518fe-872d-11f1-8e61-3e269cac58d7.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Qualys Inc.</dc:creator>
-      <pubDate>Fri, 24 Jul 2026 07:21:31 +0000</pubDate>
+      <pubDate>Fri, 24 Jul 2026 09:28:49 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/2964/#v1.12.1</guid>
     </item>
     <item>
@@ -1464,24 +1688,6 @@ This add-on enables Cato telemetry to integrate seamlessly with CIM-based applic
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cato Networks</dc:creator>
       <pubDate>Tue, 21 Jul 2026 13:25:35 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8563/#v1.0.35</guid>
-    </item>
-    <item>
-      <title>Red Canary - v1.1.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5974/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Added standard connector build, validation, and packaging configuration.
-* Added certificate verification controls for Red Canary API requests.
-* Restricted detection enrichment requests to the configured Red Canary instance.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Integrates with Red Canary&amp;#x27;s MDR platform&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2c18c8ba-84f2-11f1-b784-9aca13fdf88c.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 10:51:48 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5974/#v1.1.1</guid>
-    </item>
-    <item>
-      <title>visualping - v2.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6142/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Security hardening: verify Visualping server certificates by default and URL-encode job IDs in result requests.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The visualping app is a convenient tool to monitor websites changes&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/1513a6c6-84f2-11f1-ac38-5e7c2b2beed8.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 10:51:09 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6142/#v2.0.0</guid>
     </item>
   </channel>
 </rss>
