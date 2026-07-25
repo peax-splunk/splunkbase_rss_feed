@@ -6,7 +6,68 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sat, 25 Jul 2026 02:52:44 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 25 Jul 2026 05:35:58 +0000</lastBuildDate>
+    <item>
+      <title>Supply Chain and AI Threat Intelligence Platform - v1.2.3 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8814/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;New — Portfolio-Scale Analysis Visibility&lt;/h2&gt;
+&lt;p&gt;Customers evaluating SCIP without a license key now see full analysis on their first 5 applications, with clear, real-time visibility into how many more applications are in their environment. Ingestion is never limited — every application you monitor is fully ingested and searchable regardless of scale. Analysis coverage beyond the first 5 unlocks with any paid license.&lt;/p&gt;
+&lt;p&gt;If your environment has more than 5 distinct applications, you'll see exactly how many are currently analyzed and how many aren't, everywhere that figure appears — dashboards, the Executive Summary, and a downloadable summary you can share internally to evaluate licensing options. See &lt;a href=&quot;https://www.gicengineeringconsultants.com/upgrade.html&quot; target=&quot;_blank&quot;&gt;upgrade.html&lt;/a&gt; for tier details.&lt;/p&gt;
+
+&lt;h2&gt;Fixed — &lt;code&gt;scipingest&lt;/code&gt; Documentation Could Cause Silently Unindexed Data&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;scipingest&lt;/code&gt; command's documented usage pattern could result in ingested SBOM data landing with a generic default sourcetype rather than the one SCIP's analysis searches read — meaning data indexed successfully, with no error, but never appeared in any dashboard or report. This affected any custom ingestion pipeline built using the documented example, for both CycloneDX and SPDX input.&lt;/p&gt;
+&lt;p&gt;The documentation has been corrected with the proper usage pattern. &lt;strong&gt;If you've built a custom ingestion pipeline using &lt;code&gt;scipingest&lt;/code&gt;, verify your data is indexing with &lt;code&gt;sourcetype=cyclonedx:component&lt;/code&gt;&lt;/strong&gt; — search &lt;code&gt;| eventcount summarize=false index=sbom_inventory&lt;/code&gt; and confirm the sourcetype breakdown matches what you expect, or update your pipeline to match the corrected example in the command's documentation.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Unifies software supply chain risk (SBOM/SCA), MITRE ATLAS AI-threat detection, and nine-framework compliance in one Splunk app — with FedRAMP-ready audit exports and no external security product required.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;SCIP unifies software composition analysis (SCA), supply chain risk monitoring, and AI threat detection in one Splunk app. Ingest SBOMs, correlate components against live vulnerability intelligence (OSV, NVD, CISA KEV, EPSS), detect adversarial AI/ML threats with MITRE ATLAS, and assess compliance posture across nine global frameworks — with detection logic written as transparent SPL you can open and read, and no external security product required.
+
+CAPABILITIES
+- SBOM ingestion — file-drop or HEC, supporting CycloneDX (JSON/XML) and SPDX (JSON)
+
+- Vulnerability correlation — daily OSV feed (264,944+ records across 5 ecosystems) with PURL-based correlation; NVD CPE-based correlation; CISA KEV matching; EPSS exploit-probability scoring
+
+- Supply Chain Risk Score — 0–100 global and per-application risk scoring weighted by severity, KEV status, and EPSS
+
+- Vendor Risk — per-vendor risk aggregation and letter-grading across your SBOM portfolio
+
+- SBOM Drift Detection — baseline-vs-current component change tracking
+
+- License Compliance — GPL/AGPL/copyleft detection and license-risk classification
+
+- MITRE ATLAS Detection — 66 detection rules for adversarial AI/ML threats
+
+- Silent-Source Detection — alerts when an enrolled AI/LLM telemetry source goes quiet, so a dead pipe is never mistaken for a clean one (Enterprise and Federal Plus)
+
+- Compliance Gap Assessment — nine frameworks: PCI DSS 4.0, NIST CSF 2.0, SOC 2 Type II, HIPAA Security Rule, EU Cyber Resilience Act, FedRAMP / RMF / CISA, DORA, FDA 524B Premarket Cybersecurity, SEBI CSCRF
+
+- Long-Unpatched Critical Exposure — flags critical/high-severity vulnerabilities unpatched 180+ days (all tiers)
+
+- POA&amp;amp;M &amp;amp; FedRAMP Workflow — POA&amp;amp;M dashboard, monthly ConMon package builder, BOD 26-04 risk-tier classification (CISA&amp;#x27;s four-variable model with computed deadlines), deviation request workflow. Dashboards always available; automated POA&amp;amp;M generation is opt-in from Setup
+
+- Coverage-Evidence Manifest — AU-12-aligned attestation of unbroken AI-monitoring coverage (Federal Plus)
+
+- Audit-ready exports — FedRAMP POA&amp;amp;M Workbook (R3.0 and R2.1), SSP Appendix M Integrated Inventory, Deviation Request Form (Template 2.1 / Aug 2024)
+
+- Component Search — instant cross-SBOM component lookup (available in the free Community tier)
+
+- Compound Risk — correlates active MITRE ATLAS AI-threat detections with vulnerable components on the same application, surfacing compounding risk neither signal shows alone (Enterprise and Federal Plus)
+
+- AI/ML Bill of Materials — catalogs AI/ML model components from your SBOMs (architecture, training data, lineage) with insecure-serialization-format flagging (Professional and above; risk classification on Enterprise and Federal Plus)
+
+TIERS
+Community (free), Professional, Federal, Enterprise, Federal Plus. Feature availability gated by license tier; contact us for tier comparison.
+
+SUPPORT
+GIC Engineering Consultants — contact@gicengineeringconsultants.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/3c6c3e6a-87d9-11f1-9f3b-96e7b47cf262.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">GIC Engineering Consultants, Inc.</dc:creator>
+      <pubDate>Sat, 25 Jul 2026 03:41:00 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8814/#v1.2.3</guid>
+    </item>
+    <item>
+      <title>Orion Malware (OMW) App for Splunk - v1.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/5476/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;This version is compatible with version 10.4 and earlier&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This is an example of Dashboard for Orion Malware analysis platform provided by Airbus Cybersecurity SAS.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0629d34e-8775-11f1-984b-e275dc4a3cb5.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Orion Malware Team</dc:creator>
+      <pubDate>Sat, 25 Jul 2026 03:01:48 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5476/#v1.0.1</guid>
+    </item>
     <item>
       <title>SSL Certificate expiry collection - v1.0.8 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/6475/</link>
@@ -291,14 +352,6 @@ This Technology Add-on brings that visibility into Splunk. It pulls posture find
       <guid>https://splunkbase.splunk.com/app/7673/#v2.0.0</guid>
     </item>
     <item>
-      <title>Orion Malware (OMW) App for Splunk - v1.0.1 [New App Release] (Archived)</title>
-      <link>https://splunkbase.splunk.com/app/5476/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;This version is compatible with version 10.4 and earlier&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This is an example of Dashboard for Orion Malware analysis platform provided by Airbus Cybersecurity SAS.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0629d34e-8775-11f1-984b-e275dc4a3cb5.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Orion Malware Team</dc:creator>
-      <pubDate>Fri, 24 Jul 2026 15:52:46 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5476/#v1.0.1</guid>
-    </item>
-    <item>
       <title>Bitdefender GravityZone Data Collector - v1.0.3 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8267/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This application pulls various data from the Bitdefender GravityZone platform. For example, it can pull user activity logs or incidents.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e3703d2c-8696-11f1-a33f-da14409a3036.png&quot;&gt;</description>
@@ -321,86 +374,6 @@ Please see Release notes of version 2.0.1 for more details&lt;/p&gt;&lt;br&gt;&l
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
       <pubDate>Fri, 24 Jul 2026 14:16:25 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5689/#v2.1.0</guid>
-    </item>
-    <item>
-      <title>Supply Chain and AI Threat Intelligence Platform - v1.1.31 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8814/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;p&gt;This release covers all changes since v1.1.18.&lt;/p&gt;
-
-&lt;h2&gt;New — AI/LLM Gateway and Platform Detection Coverage&lt;/h2&gt;
-&lt;p&gt;MITRE ATLAS content-inspection rules now correctly extract and analyze prompt content from five additional AI/LLM platforms: LiteLLM, Portkey, Kong AI Gateway, Helicone, and AWS Bedrock. Previously, telemetry from these platforms could be ingested but was not parsed into the fields the detection rules read, so the rules were effectively blind to that traffic.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Structural, not pattern-based, extraction.&lt;/strong&gt; Prompt content is located by its position in the event's JSON, which means model response text is correctly excluded from request-side analysis rather than being scanned alongside the user's input.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Verified per platform.&lt;/strong&gt; Tested against real-world payload shapes specific to each platform's actual data format — including multi-turn conversations, streaming responses, escaped quotes, OpenAI-native message formats, and version-to-version layout differences, as applicable to each platform's architecture.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;AWS Bedrock coverage&lt;/strong&gt; works from model invocation logging via CloudWatch and handles the Anthropic Claude Messages API (both plain-text and structured content-block forms), Meta Llama, and Amazon Titan request formats.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;New — ATLAS App Transition Parity&lt;/h2&gt;
-&lt;p&gt;A guided discovery scan and a full provider ingestion guide bring the onboarding experience for AI/LLM telemetry configuration in line with what a standalone MITRE ATLAS detection tool already offered, so getting your data flowing is no longer a manual, undocumented step.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Discovery scan&lt;/strong&gt; identifies which known AI/LLM sourcetypes are present in your environment and where. SCIP recognizes telemetry across eleven categories: LLM Gateway/API, Agentic Framework, RAG/Vector DB, ML Pipeline/Training, Model Supply Chain/Registry, Identity/Access, Storage/Infrastructure, Content Safety, CI/CD &amp; Code, Web/Network Access, Communication.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Ingestion guide&lt;/strong&gt; walks through configuration for 12 major LLM platforms and gateways: LiteLLM, Azure OpenAI, AWS Bedrock, OpenAI Direct API, GCP Vertex AI, Kong AI Gateway, Portkey, Helicone, Cloudflare AI Gateway, Anthropic Direct, self-hosted models, and custom API gateways.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;Fixed — Detection Blind Spot on Existing Telemetry Sources&lt;/h2&gt;
-&lt;p&gt;AI-threat detection could be completely blind to correctly-formatted AI/LLM requests on the platform's original telemetry sources, depending on the exact structure of the incoming data. Requests carrying their prompt content in a structured message array produced no usable content field, so content-inspection rules never evaluated them. This was found and resolved during the gateway coverage work above. Detection is now verified working across the original telemetry sources and the newly added platforms alike.&lt;/p&gt;
-
-&lt;h2&gt;Fixed — KEV Components Indicator on the Compound Risk Dashboard&lt;/h2&gt;
-&lt;p&gt;The known-exploited-vulnerability count could render in a reassuring color under certain data conditions. Coloring is now driven by an absolute severity threshold rather than a value's rank relative to whatever else happens to be on screen, so a nonzero KEV count is never displayed as low-risk regardless of the rest of the table.&lt;/p&gt;
-
-&lt;h2&gt;Corrected — Helicone Integration Guidance&lt;/h2&gt;
-&lt;p&gt;The Helicone section of the ingestion guide previously recommended using Helicone's webhook as a single-step forward of request and response content to Splunk. That was inaccurate: the webhook payload contains only a request ID and a URL, and retrieving the actual content requires a second call.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The guidance now recommends logging directly from your own application as the primary path — Helicone is a transparent proxy, so your application already has the full request and response — and documents the webhook and REST Query API accurately as alternatives, including the two-step requirement.&lt;/li&gt;
-&lt;li&gt;Client IP forwarding guidance is now specific to the path you choose. &lt;strong&gt;If you configured Helicone ingestion using the previous guidance, review this section.&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;The guide also notes that Helicone was acquired by Mintlify in March 2026 and is now in maintenance mode.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;Coverage Notes&lt;/h2&gt;
-&lt;p&gt;On AWS Bedrock, the Claude, Llama, and Titan model families are covered. Cohere, AI21 Labs, Stability AI, and Mistral use different native request formats and are not currently extracted; no content-inspection detection will fire for those model families.&lt;/p&gt;
-&lt;p&gt;No licensing or crypto surface was modified in this release. &lt;code&gt;bin/scip_license_core.py&lt;/code&gt; and &lt;code&gt;bin/scip_ed25519_verify.py&lt;/code&gt; are byte-identical to the prior release.&lt;/p&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Unifies software supply chain risk (SBOM/SCA), MITRE ATLAS AI-threat detection, and nine-framework compliance in one Splunk app — with FedRAMP-ready audit exports and no external security product required.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;SCIP unifies software composition analysis (SCA), supply chain risk monitoring, and AI threat detection in one Splunk app. Ingest SBOMs, correlate components against live vulnerability intelligence (OSV, NVD, CISA KEV, EPSS), detect adversarial AI/ML threats with MITRE ATLAS, and assess compliance posture across nine global frameworks — with detection logic written as transparent SPL you can open and read, and no external security product required.
-
-CAPABILITIES
-- SBOM ingestion — file-drop or HEC, supporting CycloneDX (JSON/XML) and SPDX (JSON)
-
-- Vulnerability correlation — daily OSV feed (264,944+ records across 5 ecosystems) with PURL-based correlation; NVD CPE-based correlation; CISA KEV matching; EPSS exploit-probability scoring
-
-- Supply Chain Risk Score — 0–100 global and per-application risk scoring weighted by severity, KEV status, and EPSS
-
-- Vendor Risk — per-vendor risk aggregation and letter-grading across your SBOM portfolio
-
-- SBOM Drift Detection — baseline-vs-current component change tracking
-
-- License Compliance — GPL/AGPL/copyleft detection and license-risk classification
-
-- MITRE ATLAS Detection — 66 detection rules for adversarial AI/ML threats
-
-- Silent-Source Detection — alerts when an enrolled AI/LLM telemetry source goes quiet, so a dead pipe is never mistaken for a clean one (Enterprise and Federal Plus)
-
-- Compliance Gap Assessment — nine frameworks: PCI DSS 4.0, NIST CSF 2.0, SOC 2 Type II, HIPAA Security Rule, EU Cyber Resilience Act, FedRAMP / RMF / CISA, DORA, FDA 524B Premarket Cybersecurity, SEBI CSCRF
-
-- Long-Unpatched Critical Exposure — flags critical/high-severity vulnerabilities unpatched 180+ days (all tiers)
-
-- POA&amp;amp;M &amp;amp; FedRAMP Workflow — POA&amp;amp;M dashboard, monthly ConMon package builder, BOD 26-04 risk-tier classification (CISA&amp;#x27;s four-variable model with computed deadlines), deviation request workflow. Dashboards always available; automated POA&amp;amp;M generation is opt-in from Setup
-
-- Coverage-Evidence Manifest — AU-12-aligned attestation of unbroken AI-monitoring coverage (Federal Plus)
-
-- Audit-ready exports — FedRAMP POA&amp;amp;M Workbook (R3.0 and R2.1), SSP Appendix M Integrated Inventory, Deviation Request Form (Template 2.1 / Aug 2024)
-
-- Component Search — instant cross-SBOM component lookup (available in the free Community tier)
-
-- Compound Risk — correlates active MITRE ATLAS AI-threat detections with vulnerable components on the same application, surfacing compounding risk neither signal shows alone (Enterprise and Federal Plus)
-
-- AI/ML Bill of Materials — catalogs AI/ML model components from your SBOMs (architecture, training data, lineage) with insecure-serialization-format flagging (Professional and above; risk classification on Enterprise and Federal Plus)
-
-TIERS
-Community (free), Professional, Federal, Enterprise, Federal Plus. Feature availability gated by license tier; contact us for tier comparison.
-
-SUPPORT
-GIC Engineering Consultants — contact@gicengineeringconsultants.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/5cda1930-874b-11f1-b54e-1e2ab65f0245.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">GIC Engineering Consultants, Inc.</dc:creator>
-      <pubDate>Fri, 24 Jul 2026 11:59:56 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8814/#v1.1.31</guid>
     </item>
     <item>
       <title>Qualys Technology Add-on (TA) for Splunk - v1.12.1 [Version Update]</title>
