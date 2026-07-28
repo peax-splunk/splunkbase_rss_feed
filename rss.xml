@@ -6,7 +6,67 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Tue, 28 Jul 2026 19:09:32 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 28 Jul 2026 20:59:23 +0000</lastBuildDate>
+    <item>
+      <title>ShieldWorkz NDR Add-on - v2.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8763/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Version 2.0.0 release. Six modular input types: Assets, Alerts (Heuristic, Signature, Process Anomaly, Vulnerability), Asset Alerts, Syslog Alerts, Health Logs, and Audit Logs. Per-account configuration with reusable credentials and dynamic, account-scoped Site ID selection. Server-side filtering on all inputs. Checkpointing via Splunk's KV Store so collection resumes from the last successful run.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;ShieldWorkz NDR Add-on for Splunk enables secure API-based integration with the ShieldWorkz Network Detection and Response platform, allowing ingestion of asset inventory, heuristic alerts, signature alerts, and vulnerability intelligence into Splunk for centralized security monitoring, threat analysis, and faster incident investigation.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;ShieldWorkz NDR Add-on for Splunk Enterprise enables seamless integration between the ShieldWorkz Network Detection and Response (NDR) platform and Splunk, allowing security teams to centrally collect, monitor, and analyze critical security telemetry within their existing Splunk environment. The add-on provides secure API-based connectivity to the ShieldWorkz platform, simplifying the ingestion of security data and eliminating the need for manual extraction or fragmented monitoring across multiple tools. Through configurable modular inputs, users can securely authenticate using API credentials, define site-specific data collection, and ingest key datasets such as asset inventory, heuristic alerts, signature alerts, and vulnerability intelligence into Splunk for centralized visibility and analysis.
+
+This add-on is designed to address a common operational challenge faced by security teams: fragmented security visibility across multiple platforms. When asset information, detection alerts, and vulnerability findings remain isolated in separate systems, threat investigation and incident response become slower and less efficient. By bringing ShieldWorkz NDR telemetry directly into Splunk, the add-on enables security analysts to correlate ShieldWorkz data with other enterprise logs and security events, improving detection accuracy, accelerating investigations, and enhancing overall security operations efficiency. The integration supports streamlined monitoring, improved situational awareness, and better decision-making for organizations leveraging both ShieldWorkz NDR and Splunk Enterprise as part of their security monitoring strategy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Amit Sharma</dc:creator>
+      <pubDate>Tue, 28 Jul 2026 19:36:25 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8763/#v2.0.0</guid>
+    </item>
+    <item>
+      <title>Cisco CDR Reporting and Analytics - v8.4.4 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/669/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
+  &lt;li&gt;Advance notice - all CUBE configuration will be removed from this app in the next release.  If you index CUBE data, deploy the TA\_cube add-on to your forwarders and the SA\_cube app to your search heads, forwarders first, since index-time extractions cannot be applied retroactively.  Today this app's copy shadows the one in SA\_cube, so fixes shipped there never reach you.&lt;/li&gt;
+  &lt;li&gt;Added a health check, &quot;Check whether you have CUBE data but are missing the SA\_cube app&quot;, so you are warned before that removal lands.&lt;/li&gt;
+  &lt;li&gt;The &quot;cube\_cdr\_compact&quot; sourcetype no longer accepts new data.  Its FIELD\_NAMES was wrong - Cisco's compact format is attributes 0-22 plus the 12-field feature block, not attributes 0-32 - so every column from 23 on was mislabeled.  Send compact CDRs to the &quot;cube\_cdr&quot; sourcetype instead; attributes 0-22 are identical.  The search-time keys are retained so data already indexed under the old sourcetype keeps rendering.&lt;/li&gt;
+  &lt;li&gt;Fixed three bugs in how &quot;duration&quot; is calculated for CUBE data, along with cube\_duration, duration\_total, duration\_in\_minutes and dateTimeDisconnect.  Durations will change for existing customers, because they were previously wrong.  The digits were taken from tx\_duration with substr(x,0,len(x)-3), which drops the last digit rather than the &quot;ms&quot; suffix; we checked only that tx\_duration was non-empty, not that it looked like a duration, so on some routers it read an unrelated column; and the timestamp fallback required a leading &quot;\*&quot; that not all gateways emit.  All three are fixed at index time and search time.&lt;/li&gt;
+  &lt;li&gt;Added a health check, &quot;Check that the CUBE CDR columns line up with the field names we give them&quot;.  A CUBE CDR file has no header row, so names map to columns by position, and a router using &quot;cdr-format compact&quot; or a custom acct-template produces wrong values with no error.  The check samples recent data and tests three columns with recognisable shapes.&lt;/li&gt;
+  &lt;li&gt;Removed the &quot;AutoHeader-ios-gateway-detailed&quot; transform and the REPORT-AutoHeader keys that referenced it.  It re-parsed the raw CSV line at search time to supply fields for CUBE data indexed before 7.7.1 (November 2024), which is redundant now that FIELD\_NAMES is in effect, and it was a second copy of the field list that had drifted out of step.  If you still hold CUBE data indexed before November 2024, that data will lose its fields - contact us before upgrading.&lt;/li&gt;
+  &lt;li&gt;FIELD\_NAMES for CUBE now covers all 133 Cisco attributes.  Attributes 130-132 - mos\_qe, packet\_loss\_rate and out\_of\_order\_rate - are new; attributes 124-129 were wrongly named feature\_param11 through feature\_param16 and now carry their real names, ip\_phone\_info, ip\_pbx\_mode, in\_lpcor\_group, out\_lpcor\_group, fac\_digit and fac\_status.&lt;/li&gt;
+  &lt;li&gt;Fixed the &quot;activity&quot; field for CUBE data, which keyed on a field name that only existed by way of the AutoHeader transform above.&lt;/li&gt;
+  &lt;li&gt;Fixed gapfill\_with\_prediction, gapfill\_with\_redundancy and gapfill\_with\_silence, which through a copy-paste error were all calculated from gapfill\_with\_interpolation.&lt;/li&gt;
+  &lt;li&gt;Removed the dead &quot;AutoHeader-ios-gateway-compact&quot; transform, which was defined but never referenced by anything.&lt;/li&gt;
+  &lt;li&gt;Fixed three lookups that could never match CUBE data.  &quot;h323\_disconnect\_description&quot; keyed on the decimal cause code where the router writes hex left-aligned in four characters; &quot;info\_type\_description&quot; keyed on the numeric information transfer capability where the router writes the word; and the codec lookup had no entry for opus, ilbc, isac, g722-64, gsmamrnb, t38 or the pre-ietf G.729 variants.  The first of these is a column on the CUBE call detail page that was always blank.  These are kept in step with SA\_cube, which owns them.&lt;/li&gt;
+  &lt;li&gt;receive\_delay, round\_trip\_delay, hiwater\_playout\_delay and lowater\_playout\_delay in CUBE data are now numbers rather than strings such as &quot;45 ms&quot;, so they can be averaged and charted.  Values are milliseconds.&lt;/li&gt;
+  &lt;li&gt;Removed bin/timeshifter\_and\_anonymizer.py from the package.  It is one of our internal tools for building demo data and was never intended to ship; it has no effect on the app and nothing references it.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This commercial app is available as a 60 day trial and is compatible with both Splunk Enterprise and Splunk Cloud.  The app gives your team greatly increased visibility, monitoring, and reporting functionality around Cisco Unified Communications (aka CUCM / CallManager), whether you&amp;#x27;re a small organization with a hundred phones or one of the largest companies in the world. 
+
+Whether troubleshooting individual calls or building high level reporting, it helps you visualize and understand in all areas: agents, users, and huntgroups; concurrency and utilization; call flow; call quality; call volume; devices; failed calls; locations and sites; and audits and compliance.
+
+Your team can trust it as their day-to-day tool for navigating call data from your Cisco CallManager deployment, and it can also become their main tool for building custom reports, alerts and dashboards around that data. This is true whether it’s a standard report you’d expect or a custom report that nothing else has been able to provide.
+
+Note that this isn&amp;#x27;t a package of content, but more a tank that allows you to drive around in your data.  You won’t find a leftnav full of canned CDR reports to click on (that &amp;quot;don&amp;#x27;t quite fit&amp;quot;).  Instead, you get an open flexible framework to investigate anything, drill down into anything, report on anything, over anything, by anything (occasionally with hands-on help from Sideview Support =).
+
+It is available as a free 60-day trial, and you can download and set it up today in less than 30 minutes.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/7461491e-8ab8-11f1-848e-9e5e0bff436e.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
+      <pubDate>Tue, 28 Jul 2026 19:17:20 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/669/#v8.4.4</guid>
+    </item>
+    <item>
+      <title>TA for Cisco CDR Reporting and Analytics - v8.4.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4434/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;\* Advance notice - all CUBE configuration will be removed from this add-on in the next release, affecting the &quot;cube\_cdr&quot; and &quot;cube\_syslog&quot; sourcetypes.  If you index CUBE data, deploy TA\_cube to your forwarders first, since index-time extractions cannot be applied retroactively.  This add-on's copy currently takes precedence over TA\_cube on any forwarder carrying both, which is the reason for the removal.
+
+\* FIELD\_NAMES for cube\_cdr now covers all 133 Cisco file-accounting attributes and is identical to the copy in TA\_cube.  Attributes 130-132 (mos\_qe, packet\_loss\_rate, out\_of\_order\_rate) are new, and 124-129 now carry their real names rather than feature\_param11 through feature\_param16.
+
+\* The &quot;cube\_cdr\_compact&quot; sourcetype has been removed.  Its FIELD\_NAMES was wrong: Cisco's compact format is attributes 0-22 followed by the 12-field feature block, not attributes 0-32, so every column from 23 onward was silently mislabeled.  If you are sending compact CDRs, point the input at the &quot;cube\_cdr&quot; sourcetype instead - attributes 0-22 are identical between the two formats.
+
+\* Fixed three bugs in how the index-time &quot;duration&quot; field is calculated for CUBE data: the digits were taken from tx\_duration in a way that dropped the last digit (making durations \~10x too short), we did not check that tx\_duration actually looked like a duration before using it, and the fallback that subtracts the h323 timestamps failed outright on gateways whose timestamps do not start with a literal &quot;\*&quot;.  Durations will change, because they were previously wrong.  See the TA\_cube release notes for the full explanation.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This TA provides index-time settings to index and timestamp CDR and CMR data from Cisco CallManager and Cisco CUBE.
+
+This app is designed for use in conjunction with Sideview&amp;#x27;s commercial app for Splunk -- &amp;quot;Cisco CDR Reporting and Analytics&amp;quot; which is available as a free 90 day trial.  Although it may be some use to other admins as a standalone TA.
+
+Note that this app is very simple because almost all of the complexity in onboarding Cisco CallManager CDR data is on the Search-head side and thus inside the larger &amp;quot;Cisco CDR Reporting and Analytics&amp;quot; app.
+
+This TA should be installed only on Splunk forwarders, both UF&amp;#x27;s and HF&amp;#x27;s.   If you are tempted to install it on a standalone indexer,  you should instead install the full cisco_cdr app there, and it has all the same index-time config that the TA has.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e9288eb6-8ab7-11f1-9253-e6b009c23f44.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview LLC</dc:creator>
+      <pubDate>Tue, 28 Jul 2026 19:11:32 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4434/#v8.4.0</guid>
+    </item>
     <item>
       <title>Supporting App for CUBE - v0.7.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8614/</link>
@@ -1394,39 +1454,6 @@ Note to run this app you must also install the Canary app from Splunkbase.&lt;/p
       <guid>https://splunkbase.splunk.com/app/6449/#v0.8.6</guid>
     </item>
     <item>
-      <title>Cisco CDR Reporting and Analytics - v8.4.3 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/669/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Important&lt;/strong&gt; - This release requires Canary 2.3.0 or higher.  A number of the app's pages now rely on Canary's new &quot;.escaped&quot; tokens as well as it's CallFlowGraph module. If you upgrade this app without upgrading Canary, the searches and drilldowns on many Detail pages will not work. &lt;/li&gt;
-  &lt;li&gt;Completed a pass of hardening around the app's views, with respect to certain SPL-injection scenarios. Wherever a user-supplied value was being interpolated into SPL, it now uses Canary 2.3.0's new &quot;.escaped&quot; token key, which backslash-escapes the value for the search language. &lt;/li&gt;
-  &lt;li&gt;Closed some SPL-injection cases around the &quot;Create dashboard panel&quot; logic.&lt;/li&gt;
-  &lt;li&gt;Updated the bundled Splunk Python SDK from 2.1.0 to 2.1.1.&lt;/li&gt;
-  &lt;li&gt;Fixed some minor timestamp formatting bugs on the main call_detail page for CUCM calls. The raw call leg and CMR results tables were listing the dateTime* fields in epochtime instead of string-formatted times.&lt;/li&gt;
-  &lt;li&gt;Added better support for field names with spaces in them, as long as you're running Canary 2.3.0 or higher. This was important for the new Webex data types.&lt;/li&gt;
-  &lt;li&gt;Pulled new NANPA data into the &quot;npa-nxx-lata-clli-ocn-location&quot; lookup.&lt;/li&gt;
-  &lt;li&gt;The app now ships with a complete record of the documentation from the Sideview website, embedded as simple local HTML that is accessible from the &quot;help&quot; menu.&lt;/li&gt;
-  &lt;li&gt;Added a batch of newer CUCM CDR fields to the app's field gallery, so they now appear with proper descriptions in the field pickers and on the &quot;Explore Fields&quot; page. These include the IMS charging identifiers (IncomingICID, OutgoingICID and the originating/terminating IOI fields), the directory-URI forms of the party numbers (callingPartyNumber_ahem.uri, originalCalledPartyNumber_uri, finalCalledPartyNumber_uri and lastRedirectDn_uri), the outpulsedOriginalCalledPartyNumber and outpulsedLastRedirectingNumber fields, and the origDeviceType/destDeviceType and origDeviceSessionID/destDeviceSessionID fields.&lt;/li&gt;
-  &lt;li&gt;Likewise added a batch of newer CUCM CMR (call quality) fields to the gallery, including videoAverageJitter, videoRoundTripTime and videoOneWayDelay, the second video channel metrics (videoContentType_channel2, videoDuration_channel2 and the numberVideo*_channel2 counters, plus the channel-2 jitter/round-trip/one-way-delay fields), and the localSessionID and remoteSessionID fields.&lt;/li&gt;
-  &lt;li&gt;Improved the search-time extraction of the CMR video quality metrics. The codec and resolution values (RxCodec/TxCodec and RxReso/TxReso) carried inside the videoReceptionMetrics and videoTransmissionMetrics fields are now extracted correctly - previously the codec was dropped entirely and the resolution was truncated at the &quot;x&quot; - and a new RxFramesLost field is now available.&lt;/li&gt;
-  &lt;li&gt;The second video channel's quality metrics are now extracted too, as TxCodec_Channel2, RxReso_Channel2 and so on. Formerly the channel-2 metrics collided with the channel-1 ones and there was no way to tell which stream a given value came from. Relatedly, all of these video quality fields (both channels) are now correctly identified internally as CMR fields - previously they could be selected in the field pickers but would come back empty.&lt;/li&gt;
-  &lt;li&gt;Fixed a bug where roughly 50 of the fields in the field gallery - including all of the newer CDR and CMR fields listed above - were missing from the app's internal list of field data types. The effect was that the UI didn't know whether they were numeric or categorical, so charts and field pickers treated them all as categorical, and CMR fields wouldn't necessarily trigger inclusion of that sourcetype. This list is now generated automatically at build time so it can no longer fall behind the field gallery.&lt;/li&gt;
-  &lt;li&gt;When some health checks are pulled in from other Sideview-authored supporting addons,  the app-context is now set to that app dynamically as each health check is run.&lt;/li&gt;
-  &lt;li&gt;Fixed a bug in Investigate Calls where the action menu drilldown on the &quot;type&quot; column didn't work if you were working with a datatype other than CUCM that also had a &quot;type&quot; field (for example Webex). Formerly these clicks were silently swallowed. Now clicking such a value adds it as a normal search term instead.&lt;/li&gt;
-  &lt;li&gt;Fixed logging and exception handling problems in our app setup and first-time-run script.&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This commercial app is available as a 60 day trial and is compatible with both Splunk Enterprise and Splunk Cloud.  The app gives your team greatly increased visibility, monitoring, and reporting functionality around Cisco Unified Communications (aka CUCM / CallManager), whether you&amp;#x27;re a small organization with a hundred phones or one of the largest companies in the world. 
-
-Whether troubleshooting individual calls or building high level reporting, it helps you visualize and understand in all areas: agents, users, and huntgroups; concurrency and utilization; call flow; call quality; call volume; devices; failed calls; locations and sites; and audits and compliance.
-
-Your team can trust it as their day-to-day tool for navigating call data from your Cisco CallManager deployment, and it can also become their main tool for building custom reports, alerts and dashboards around that data. This is true whether it’s a standard report you’d expect or a custom report that nothing else has been able to provide.
-
-Note that this isn&amp;#x27;t a package of content, but more a tank that allows you to drive around in your data.  You won’t find a leftnav full of canned CDR reports to click on (that &amp;quot;don&amp;#x27;t quite fit&amp;quot;).  Instead, you get an open flexible framework to investigate anything, drill down into anything, report on anything, over anything, by anything (occasionally with hands-on help from Sideview Support =).
-
-It is available as a free 60-day trial, and you can download and set it up today in less than 30 minutes.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/dcb34416-86e6-11f1-9f3b-96e7b47cf262.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
-      <pubDate>Thu, 23 Jul 2026 22:39:28 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/669/#v8.4.3</guid>
-    </item>
-    <item>
       <title>TA LLM Gateway - v0.3.7 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/9027/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Bifrost model refuse field fixes&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Technology Add-on for normalizing LLM gateway traffic from Bifrost and LiteLLM into Splunk. Provides consistent field extractions (model, provider, tokens, cost, latency, tool calls) and pre-built eventtypes across both gateways, enabling usage auditing, cost tracking, and OWASP LLM Top 10 / MITRE ATLAS detection.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Organizations routing LLM traffic through gateways like Bifrost and LiteLLM lack unified visibility into that traffic — prompts, provider routing, token spend, tool calls, and failures are scattered across each gateway&amp;#x27;s own logs in inconsistent formats. TA-llmgateway normalizes telemetry from both gateways into two Splunk sourcetypes (llmgateway:bifrost, llmgateway:litellm) with a shared field taxonomy — model, provider, latency, token usage, cost, tool calls, retries — regardless of which gateway or upstream LLM handled the request. Pre-built eventtypes flag errors, high-token-usage requests, off-hours activity, and retries out of the box, letting security and platform teams audit AI request activity, monitor usage and cost, and detect jailbreak or prompt-injection attempts (OWASP LLM Top 10 / MITRE ATLAS) through standard Splunk searches.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
@@ -2444,24 +2471,6 @@ Version 1.1.2 introduces a comprehensive refresh of the WTI dashboards, providin
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Tue, 21 Jul 2026 15:28:54 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6047/#v4.0.0</guid>
-    </item>
-    <item>
-      <title>Phantom - v4.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5834/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Match artifact and custom-list values exactly unless substring matching is requested.
-* Verify remote SOAR certificates by default while retaining an explicit opt-out.
-* Return action results from every page up to the requested result limit.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This App exposes various Phantom APIs as actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b8a8f054-8518-11f1-b30e-8e01d7cd9886.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 15:27:45 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5834/#v4.0.0</guid>
-    </item>
-    <item>
-      <title>unshorten.me - v2.0.8 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5860/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Preserve URL query-string destinations when sending lookups to the resolution API.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with the unshorten.me service to expand shortened URLs&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ad27d8c6-8518-11f1-b8d1-8a59cb0e58eb.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 15:27:26 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5860/#v2.0.8</guid>
     </item>
   </channel>
 </rss>
