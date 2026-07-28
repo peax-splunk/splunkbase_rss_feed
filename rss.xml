@@ -6,7 +6,176 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Tue, 28 Jul 2026 08:16:12 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 28 Jul 2026 11:09:32 +0000</lastBuildDate>
+    <item>
+      <title>Ensign Akamai Web Security Add-on - v2.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8652/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## Version 2.0.0
+
+A major release. The add-on has been rebuilt on the current Splunk UCC framework
+(6.5.3), with substantial reliability, logging and security work. Upgrading from
+1.0.9 is might supported and preserves your existing accounts, proxies and inputs. Let me know if it is not supported or you might encounter a problem for migrate into this new Version.
+
+### Upgrade notes
+
+* **Restart Splunk after installing.** The add-on registers REST handlers and a
+  modular input.
+* **Hard-refresh your browser** (Ctrl+Shift+R) after the restart so the new
+  Configuration UI loads.
+* **New &quot;Sourcetype&quot; input field**, defaulting to `ensign_akamaisiem`. Earlier
+  releases wrote events under `akamaisiem`, which did not match the bundled
+  `props.conf`. If you built searches, dashboards or CIM mappings against
+  `akamaisiem`, either point them at `ensign_akamaisiem` or set the Sourcetype
+  field back to `akamaisiem` per input.
+* **Default index is now `main`** for newly created inputs. Existing inputs keep
+  their configured index.
+* **First run collects history.** The new *Initial Lookback (hours)* setting
+  defaults to 1 hour, so a newly created input backfills the last hour instead of
+  starting at &quot;now&quot;. Set it to 0 to keep the previous behaviour.
+* **Checkpoints now live in the KV Store** instead of a file inside the add-on
+  directory. Existing file-based cursors are not read; each input resumes from its
+  Initial Lookback window on the first run after upgrade.
+
+### New
+
+* **Monitoring Dashboard** — overview, data ingestion, errors, and resource
+  consumption panels for the add-on.
+* **Configurable sourcetype** per input.
+* **Initial Lookback (hours)** — seeds the first collection from Akamai's
+  time-based mode (0–12 hours; Akamai retains 12).
+* **Gap recovery on an expired cursor.** An expired offset (HTTP 416) now replays
+  the lookback window using time-based mode and then resumes offset mode, instead
+  of silently skipping the gap.
+* **Full configuration reference** — every configuration file ships a detailed
+  `.spec` plus a worked `.conf.example`, and `README/LOG-REFERENCE.txt` documents
+  the internal logging in full.
+
+### Reliability
+
+* **Bounded retry with exponential backoff** for connection errors, timeouts and
+  5xx responses, honouring `Retry-After` on HTTP 429 rate limits.
+* **Explicit request timeouts** (10s connect, 120s read) so a stalled Akamai edge
+  can no longer hang the modular input indefinitely.
+* **Multi-page drain** — a single run collects up to 20 pages. Reaching that cap is
+  logged rather than passing silently.
+* **Akamai's trailing summary record** (`{&quot;total&quot;: N, &quot;offset&quot;: &quot;...&quot;}`) is now
+  recognised and dropped at the source, taking its cursor, instead of being
+  indexed as an event.
+* **Proxy enforcement is fail-closed.** If a proxy is selected but disabled or
+  unreadable, the run aborts and says why, rather than quietly connecting direct.
+* **Remote DNS Resolution now works.** The setting previously had no effect; it now
+  selects the remote-resolving SOCKS scheme (`socks5h` / `socks4a`).
+* **Checkpoints in the KV Store**, replicated across a Search Head Cluster (if you installed this add-ons on Search Head Cluster, might try this). Implementation on Search Head Cluster is doable for now, but it is recommended if you put this at Ingestion Tier or Forwarder Tier.&amp;#x20;
+
+### Logging
+
+* Internal logging is now one **5W1H `AUDIT key=value` record per event**, in a
+  consistent field order (what / who / when / where / why / how / summary), so a
+  single search works across every input.
+* **Log level takes effect on the next interval** — no Splunk restart required.
+* **DEBUG adds `stage=` dumps** for troubleshooting: resolved configuration, the
+  outgoing request, a truncated response body, a transformed sample record, and
+  cursor activity. These never appear above DEBUG.
+* **Fields are extracted at index time**, so they are searchable from a Search Head
+  that does not have this add-on installed — the usual forwarder/indexer layout.
+
+### Security
+
+* EdgeGrid tokens, proxy passwords, `Authorization` headers, `EG1-HMAC-SHA256`
+  signatures and Splunk session keys are **redacted from every log line**. Where an
+  operator needs to identify which key is in use, only `first4...last4` is written.
+* Credentials are read through **solnlib's ConfManager** rather than an
+  undocumented REST parameter, and a value that reads back masked is refused.
+* Log values are sanitised, so a crafted HTTP header cannot forge audit fields.
+* **No architecture-specific binaries** are shipped: the package contains no
+  compiled extensions and runs identically on Linux and Windows.
+
+### Fixed
+
+* Events were written under a sourcetype the bundled `props.conf` did not target,
+  so JSON parsing, timestamp extraction, field aliases, the geo lookup and the
+  summary-record filter all silently did nothing.
+* The account and proxy configuration files were missing from `default/`, so the
+  REST handlers had nothing to read on a fresh install and the Configuration page
+  failed to load.
+* The default index was `default`, which is not a valid index name.
+* `README` documented a configuration file that does not exist, while the two real
+  ones had no specification at all.
+* The `VERSION` file contained the version twice.
+* Version metadata is now generated from a single source, so `app.conf`,
+  `app.manifest`, `VERSION`, `globalConfig.json` and `openapi.json` cannot disagree.
+
+### Dependencies
+
+Built on **UCC framework 6.5.3**. Updated: `edgegrid-python` 2.0.7,
+`splunk-sdk` 3.0.0, `splunktaucclib` 8.2.0, `solnlib` 8.1.0,
+`charset-normalizer` 3.4.9 (pure-Python), `requests` 2.32.4, `idna` 3.16,
+`certifi` 2026.5.20. `urllib3` is pinned to 1.26.20 for Splunk 9.x compatibility.
+
+### Compatibility
+
+Splunk Enterprise 9.x and 10.x, Splunk Cloud. Python 3.9 and 3.13
+(`python.required = 3.9, 3.13`).&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Captures Akamai security events via SIEM Integration API v1. Built on Splunk UCC with multi-account, multi-proxy, and encrypted credential support.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Ensign Akamai Web Security Add-on for Splunk
+
+An enterprise-grade alternative to the official Akamai SIEM app, rebuilt by adopt Splunk UCC Framework.
+
+WHY THIS ADD-ON?
+The official Akamai app (refer to : https://splunkbase.splunk.com/app/4310) uses legacy way for enabled the input (via Settings =&amp;gt; Data Input) and several parsing is not key-value-pair based after coming ingested in Splunk, rather than using spath and makes easier for analyst to choose the fields, this add-ons are one to solve that. This add-on provides:
+- Full UI-driven configuration based on your usual for inputs based on Add-ons (just directly configured under the add-ons like the other Splunk Supported Add-ons).
+- Multi-account management with encrypted credential storage via Splunk&amp;#x27;s native password vault
+- Multi-proxy support (HTTP, HTTPS, SOCKS4, SOCKS5) with per-input proxy assignment
+- Offset-based checkpointing for reliable data continuity across restarts.
+- Custom sourcetype override per input for seamless migration.
+- Deployment Server compatible.
+
+DATA SOURCE:
+Captures security events from Akamai SIEM Integration API v1, supporting:
+- App &amp;amp; API Protector
+- Kona Site Defender
+- Web Application Protector
+- Client Reputation
+- Bot Manager
+- Account Protector
+
+EVENT PROCESSING:
+- URL-decodes all fields recursively
+- Parses HTTP headers into structured key-value pairs
+- Decodes base64-encoded attackData rule fields into structured objects
+- Drops summary/offset metadata events (nullQueue)
+
+Ref: https://techdocs.akamai.com/siem-integration/docs
+
+Built by Ensign Infosecurity Indonesia.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ec47a0f8-8a6e-11f1-9902-5a88a1d1aa8f.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Muhammad Rafdi Aufar Ahmad</dc:creator>
+      <pubDate>Tue, 28 Jul 2026 10:54:10 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8652/#v2.0.0</guid>
+    </item>
+    <item>
+      <title>TA Studio - v1.6.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8932/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**What's new in TA Studio 1.6.0**
+- Open any packaged add-on (AOB/UCC/plain-conf) by uploading it straight from your browser — no server paths or permissions to configure
+- Imported add-ons open editable, with View source for any externally-written handler
+- New Code Files editor with AI assist for custom collectors and alert helpers
+- Dashboard Studio support, alongside Classic Simple XML
+- Reconciliation for opened add-ons that contradict their own configuration
+- Managed, pinned build toolchain (ucc-gen + AppInspect), with optional version overrides and offline/manual install guidance
+- Redesigned Settings page
+- Pre-build problem detection — catches build blockers in seconds, not minutes
+- Many Splunk-vendor add-ons (AWS, Microsoft) now import, build, and run
+- Date fields no longer show &quot;Invalid date&quot;; Help Links can now be clickable links
+- New inputs appear in &quot;Create New Input&quot; for add-ons with a curated menu; file-upload fields on setup pages now build
+- …and many more bug fixes and small feature additions&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Build, import, validate, and package Splunk add-ons through a visual browser UI — no CLI. Create inputs (REST/shell/Python), alert actions, source types, field extractions, CIM mappings, lookups, and setup pages on the UCC Framework, run inputs and alerts in the browser to inspect their output, validate with AppInspect, and package for Splunkbase in one click.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TA Studio is a browser-based visual workbench for building Splunk® add-ons (TAs) on the Universal Configuration Console (UCC) Framework — without touching the command line.
+
+Authoring a quality add-on normally means working with the ucc-gen CLI, hand-editing globalConfig.json and a web of .conf files, and running AppInspect and packaging from a terminal. TA Studio replaces that workflow with a guided, point-and-click interface that runs entirely inside your own Splunk instance.
+
+From one UI you can create and manage data inputs (REST API, shell command, or Python modular inputs), alert actions (including Enterprise Security adaptive response), source types, field extractions with a live regex builder, CIM data model mappings, setup pages (accounts, proxy, logging), CSV lookups, and event types. You can import existing Splunk Add-on Builder and conf-based add-ons to modernize them, run inputs and alert actions right in the browser to inspect the events and output they produce, validate with AppInspect (including cloud checks) and review the results, then package a Splunkbase-ready archive in one click.
+
+TA Studio also includes built-in AI assistance to help you generate and refine input and alert-action code as you work. It otherwise runs entirely within your local Splunk environment: your add-on projects are not collected, transmitted, or stored outside your instance, and AI features send only the content you choose to submit to your selected AI provider.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/45731594-855c-11f1-b30e-8e01d7cd9886.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Joshua Specht</dc:creator>
+      <pubDate>Tue, 28 Jul 2026 10:46:47 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8932/#v1.6.0</guid>
+    </item>
     <item>
       <title>watchTowr for Splunk - v1.0.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7081/</link>
@@ -1692,32 +1861,6 @@ Non-destructive in-place upgrade when installed via Splunk's standard &quot;Inst
       <guid>https://splunkbase.splunk.com/app/8820/#v1.0.6</guid>
     </item>
     <item>
-      <title>TA Studio - v1.6.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8932/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**What's new in TA Studio 1.6.0**
-- Open any packaged add-on (AOB/UCC/plain-conf) by uploading it straight from your browser — no server paths or permissions to configure
-- Imported add-ons open editable, with View source for any externally-written handler
-- New Code Files editor with AI assist for custom collectors and alert helpers
-- Dashboard Studio support, alongside Classic Simple XML
-- Reconciliation for opened add-ons that contradict their own configuration
-- Managed, pinned build toolchain (ucc-gen + AppInspect), with optional version overrides and offline/manual install guidance
-- Redesigned Settings page
-- Pre-build problem detection — catches build blockers in seconds, not minutes
-- Many Splunk-vendor add-ons (AWS, Microsoft) now import, build, and run
-- Date fields no longer show &quot;Invalid date&quot;; Help Links can now be clickable links
-- New inputs appear in &quot;Create New Input&quot; for add-ons with a curated menu; file-upload fields on setup pages now build
-- …and many more bug fixes and small feature additions&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Build, import, validate, and package Splunk add-ons through a visual browser UI — no CLI. Create inputs (REST/shell/Python), alert actions, source types, field extractions, CIM mappings, lookups, and setup pages on the UCC Framework, run inputs and alerts in the browser to inspect their output, validate with AppInspect, and package for Splunkbase in one click.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TA Studio is a browser-based visual workbench for building Splunk® add-ons (TAs) on the Universal Configuration Console (UCC) Framework — without touching the command line.
-
-Authoring a quality add-on normally means working with the ucc-gen CLI, hand-editing globalConfig.json and a web of .conf files, and running AppInspect and packaging from a terminal. TA Studio replaces that workflow with a guided, point-and-click interface that runs entirely inside your own Splunk instance.
-
-From one UI you can create and manage data inputs (REST API, shell command, or Python modular inputs), alert actions (including Enterprise Security adaptive response), source types, field extractions with a live regex builder, CIM data model mappings, setup pages (accounts, proxy, logging), CSV lookups, and event types. You can import existing Splunk Add-on Builder and conf-based add-ons to modernize them, run inputs and alert actions right in the browser to inspect the events and output they produce, validate with AppInspect (including cloud checks) and review the results, then package a Splunkbase-ready archive in one click.
-
-TA Studio also includes built-in AI assistance to help you generate and refine input and alert-action code as you work. It otherwise runs entirely within your local Splunk environment: your add-on projects are not collected, transmitted, or stored outside your instance, and AI features send only the content you choose to submit to your selected AI provider.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/45731594-855c-11f1-b30e-8e01d7cd9886.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Joshua Specht</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 23:37:48 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8932/#v1.6.0</guid>
-    </item>
-    <item>
       <title>MS Graph for SharePoint - v1.5.5 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/6351/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* fix: parse non-finite float tokens (Infinity/-Infinity/NaN) in MS Graph responses so 'get list' no longer fails on unbounded number columns&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app connects to SharePoint using the MS Graph API to support investigate and generic actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/5b70e094-8555-11f1-9075-12aab1d3d17b.svg&quot;&gt;</description>
@@ -2086,14 +2229,6 @@ Version 1.1.2 introduces a comprehensive refresh of the WTI dashboards, providin
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Tue, 21 Jul 2026 15:00:00 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5929/#v2.0.10</guid>
-    </item>
-    <item>
-      <title>Splunk On-Call - v2.2.6 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5863/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Marks test connectivity as mutating when it posts an event to a configured integration URL.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Formerly known as VictorOps. This app implements various investigative actions using Splunk On-Call&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d333a6fc-8514-11f1-9ff6-623432d1cd12.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 14:59:51 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5863/#v2.2.6</guid>
     </item>
   </channel>
 </rss>
