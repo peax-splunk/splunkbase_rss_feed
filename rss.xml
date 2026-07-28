@@ -6,7 +6,43 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Tue, 28 Jul 2026 17:27:01 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 28 Jul 2026 19:09:32 +0000</lastBuildDate>
+    <item>
+      <title>Supporting App for CUBE - v0.7.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8614/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Important&lt;/strong&gt; - Fixed three separate bugs in the search-time &quot;cube_duration&quot;, &quot;duration_total&quot;, &quot;duration_in_minutes&quot; and &quot;dateTimeDisconnect&quot; fields.  Values will change, because they were previously wrong.  The digits were taken from tx_duration using substr(x,0,len(x)-3), which drops the last digit rather than the trailing &quot;ms&quot;, making durations roughly ten times too short; we did not check that tx_duration actually looked like a duration before using it; and the fallback that subtracts the h323 connect and disconnect timestamps failed outright for gateways whose timestamps do not begin with a literal &quot;*&quot;.  See the Cisco CDR app's release notes for the full explanation.&lt;/li&gt;
+  &lt;li&gt;The &quot;cube_cdr_compact&quot; sourcetype has been deprecated and no longer accepts new data - see the Cisco CDR app's release notes for the details.  The search-time keys for it are deliberately retained here so that data you have already indexed under that sourcetype keeps rendering, in particular EVAL-data_type, without which those events would disappear from every view.&lt;/li&gt;
+  &lt;li&gt;Removed the &quot;AutoHeader-ios-gateway-detailed&quot; transform and the REPORT-AutoHeader keys that referenced it.  It re-parsed the raw CSV line at search time to supply fields for CUBE data indexed before Cisco CDR 7.7.1 (November 2024), which is no longer necessary now that FIELD_NAMES is in effect, and it was a second copy of the field list that had already drifted out of step with the first.  If you still hold CUBE data indexed before November 2024, that data will lose its fields - contact us before upgrading.&lt;/li&gt;
+  &lt;li&gt;Fixed the &quot;activity&quot; field, which is looked up from the CUBE feature name.  The lookup keyed on &quot;feature_id_field1&quot;, a name that only ever existed because the AutoHeader transform above created it; it now keys on the indexed field &quot;feature_name&quot; directly.&lt;/li&gt;
+  &lt;li&gt;Fixed gapfill_with_prediction, gapfill_with_redundancy and gapfill_with_silence, which through a copy-paste error were all calculated from gapfill_with_interpolation and so returned its value rather than their own.&lt;/li&gt;
+  &lt;li&gt;Removed the dead &quot;AutoHeader-ios-gateway-compact&quot; transform, which was defined but never referenced by anything.&lt;/li&gt;
+  &lt;li&gt;Fixed the &quot;h323_disconnect_description&quot; field, which was empty on every CUBE event due to a mismatch in field format around decimal/hex and the inclusion of space characters in the raw values.&lt;/li&gt;
+  &lt;li&gt;Fixed the &quot;info_type_description&quot; field.  Prior to this release the lookup keyed on the numeric H.323 information transfer capability, which routers stopped writing long ago in favour of the word - &quot;speech&quot;, &quot;fax&quot;.  Both encodings now resolve.&lt;/li&gt;
+  &lt;li&gt;Added opus, ilbc, isac, g722-64, gsmamrnb, t38 and the pre-ietf G.729 variants to the codec lookup, so the &quot;call_type&quot; field is populated for calls using them.  &lt;/li&gt;
+  &lt;li&gt;receive_delay, round_trip_delay, hiwater_playout_delay and lowater_playout_delay fields are now integer-valued rather than strings such as &quot;45 ms&quot;, so they can be averaged, charted and compared.  Values are milliseconds.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app implements various field extraction configuration and Sideview conventions so as to allow CDR and also syslog data from CUBE to be not only searched in Splunk effectively, but also to be pulled into Sideview&amp;#x27;s commercial &amp;quot;Cisco CDR Reporting and Analytics&amp;quot; solution and investigated and analyzed there.
+
+NOTE that this Supporting App is designed to be always deployed with Sideview&amp;#x27;s &amp;quot;Supporting Add-on for CUBE&amp;quot; ALSO deployed on the Indexing and/or Forwarding tiers. That &amp;quot;Add-on&amp;quot; component contains crucial index-time configuration to index the data into Splunk correctly, and the index-time configuration in that TA is NOT duplicated in this app here.  Therefore if you intend to set up a standalone deployment you will need both the TA and the SA.
+
+These two apps are furthermore designed to work with Sideview&amp;#x27;s commercial &amp;quot;Cisco CDR Reporting and Analytics&amp;quot; app. When all three components are present and deployed to the right tiers, users can navigate, troubleshoot and build ad-hoc charts and reports around your CUBE data, within the the Cisco CDR app&amp;#x27;s complex user interfaces.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b6187356-8ab7-11f1-ad38-4222115b74b1.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
+      <pubDate>Tue, 28 Jul 2026 19:09:08 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8614/#v0.7.0</guid>
+    </item>
+    <item>
+      <title>Supporting Add-on for CUBE - v0.7.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8613/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* The &quot;cube_cdr_compact&quot; sourcetype has been removed.  Its FIELD_NAMES was  wrong - Cisco's compact format is attributes 0-22 plus the 12-field feature block, not attributes 0-32 - so every column from 23 on was mislabeled.  Send compact CDRs to the &quot;cube_cdr&quot; sourcetype instead; attributes 0-22 are identical.  We only support &quot;cdr-format detailed&quot; with no acct-template.
+* Fixed three bugs in the index-time &quot;duration&quot; field for CUBE data.  Durations will change for existing customers, because they were previously wrong.  The digits were taken from tx_duration with substr(x,0,len(x)-3), which drops the last digit rather than the &quot;ms&quot; suffix, making durations roughly ten times too short; we checked only that tx_duration was non-empty, not that it looked like a duration, so on some routers it read an unrelated column; and the timestamp fallback required a leading &quot;*&quot; that not all gateways emit.
+* FIELD_NAMES now covers all 133 Cisco file-accounting attributes, up from 130. Attributes 130-132 are new fields - mos_qe, packet_loss_rate and out_of_order_rate - which current IOS-XE releases emit and which we were
+  discarding.
+* Attributes 124-129 were wrongly named feature_param11 through feature_param16. They are not part of the feature block at all, and now carry their real names: ip_phone_info, ip_pbx_mode, in_lpcor_group, out_lpcor_group, fac_digit and fac_status.  If you built anything on the old names you will need to update it.
+* Added a field reference above the [cube_cdr] stanza in props.conf: all 133 Cisco file-accounting attributes in order, our names for them, and the router commands to verify your own boxes send this column set.  A CUBE CDR file has no header row, so the mapping is positional and cannot be checked from the data alone.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app provides the index-time configuration to ingest the CDR data from Cisco Unified Border Element aka &amp;quot;CUBE&amp;quot;.       It is designed to be used in conjunction with Sideview&amp;#x27;s &amp;quot;SA_cube&amp;quot; app, aka &amp;quot;Supporting App for CUBE&amp;quot;, deployed on your Search Head tier.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/4b3767cc-8ab7-11f1-8727-ce543112b5b9.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
+      <pubDate>Tue, 28 Jul 2026 19:08:07 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8613/#v0.7.0</guid>
+    </item>
     <item>
       <title>TrackMe - v2.4.9 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/4621/</link>
@@ -2426,22 +2462,6 @@ Version 1.1.2 introduces a comprehensive refresh of the WTI dashboards, providin
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Tue, 21 Jul 2026 15:27:26 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5860/#v2.0.8</guid>
-    </item>
-    <item>
-      <title>Twilio - v2.0.7 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5941/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Fixed test connectivity to validate Twilio account access without sending an SMS message.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with Twilio for sending messages&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/81ed83c2-8518-11f1-9075-12aab1d3d17b.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 15:26:13 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5941/#v2.0.7</guid>
-    </item>
-    <item>
-      <title>ThreatCrowd - v2.1.5 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5854/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Lookup actions now fail when ThreatCrowd has no information for the requested indicator.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app provides free investigative actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8193a0f0-8518-11f1-9a4d-82fabe4198dd.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 15:26:13 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5854/#v2.1.5</guid>
     </item>
   </channel>
 </rss>
