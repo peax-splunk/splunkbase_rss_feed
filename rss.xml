@@ -6,7 +6,163 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Tue, 28 Jul 2026 11:09:32 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 28 Jul 2026 13:41:53 +0000</lastBuildDate>
+    <item>
+      <title>UXM - Digital Employee Experience Monitoring  DEX DEM Web SaaS VDI Workplace - v26.7.27 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7177/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**Major changes:**
+
+* **Top filters:** Updated top filter behavior to require clicking the Submit button before charts and tables refresh. This change improves dashboard performance and provides smoother interactions when adjusting multiple filters.
+* **Deployment Packaging:** Added unified package and setup page for Search Head, Heavy Forwarder, Standalone deployments which improves Splunkbase distribution support.
+* **Platform Support Changes:** Dropped Splunk 9.2 support and Python 3.7.17 support, Upgraded libraries to Python 3.9-compatible versions
+* **Consumer:** Migrated consumer services from Python to Go to supports 150,000 endpoints sending data (40.000 per Heavy Forwarder) and supports Splunk 10.x that deprecated using Python libraries with binary dependencies
+
+**Deprecations and removed features:**
+
+* \[Teams Rooms Summary] and \[Teams Rooms Device Details] Dashboard removed due to Microsoft dropping support for the required Graph API integration. Teams Rooms must now be managed exclusively through the Teams Rooms Pro Management Portal (PMP) on the official portal: [https://portal.rooms.microsoft.com/](https://portal.rooms.microsoft.com/)
+
+**Dashboards:**
+
+* \[Enterprise Dashboard] Split Real-User table into Desktop Applications and Web Applications
+* \[Web Applications] \[Web Application Requests] \[Web Application Request Details] Improved UI with full-width charts, Added Core Web Vitals
+* \[Secure Boot Status] Added dashboard for Microsoft Windows UEFI CA 2023 certificate update status
+* \[RemoteFX] Sessions is always 1 and only include AVD sessions with ResourceGroup set. (#1676)
+* \[UI] Citrix - End User Experience Scorecard dashboard thrown JavaScript error (#1671)
+* \[Process Analysis] Searching for Process in Multi Select causes JS error (#1657)
+* \[Endpoint Health Overview] Include needed EventLogs out of the box (#1605)
+* Add Endpoint Health Overview dashboard and issue saved searches with region/ad dimensions. (#1545)
+* \[Citrix] Citrix - End User Experience Scorecard shows incorrect mean values in worst experience scorecard (#1494)
+* \[LogonSessions] Missing logons in and slow performance on large KVStores (#1401)
+* \[Endpoints List] Setting Tag via Endpoints admin GUI causes endpoint to disappear from Endpoints LIst dashboard (#1641)
+
+**Monitors:**
+
+* \[Visualization] Add customize event-timeline-viz to git, ansible scripts, frappe and docs (#1658)
+* \[Process Monitor] Get CPU Time, Page Faults and IOPS since process started (#1619)
+* \[Process Monitor] GPU Usage and User Input Delay per process and overall per session (#1618)
+* \[Process Monitor] Add monitor GPU config (#1645)
+* \[EventLog Monitor] Remove Source and Event ID suggestions (#1644)
+
+**Bugs:**
+
+* \[Desktop Transaction] Key is empty on first desktop transaction storage, causing filters to fail (#1579)
+* \[Setup] Setup page fails to store password if not found in local/passwords.conf (#1653)
+* Handle single-element arrays converted to strings by outputlookup (#1650)
+* \[Endpoints] Tags are intermiddient lowercased when editing them (#1649)
+
+**Features:**
+
+* \[AlertManager] Add context\_name and type to ux\_alert\_event\_summary (#1533)
+* \[Splunk] Support Splunk installed under custom path (#1460)
+* \[UI] Show SplunkBar and remove confusing icons (#1651)
+* \[Endpoints] Change help text in admin page and remove default store-20 option (#1646)
+* Validate that Heavy Forwarder and Search Head can have metric\_rollups.conf file (#1635)
+
+**Vulnerabilities fixes:**
+
+* \[Security] Fix 1x High vulnerability in Python httplib2 (CVE-2026-59939) (#1675)
+* \[Security] Fix 2x Critical and 20x High vulnerabilities in Go packages (#1668)
+* \[Security] Fix 15x High and 5x Medium vulnerabilities in Go golang.org/x/crypt and golang.org/x/net (#1662)
+* \[Security] Fix 1x High severity in python cryptography (GHSA-537c-gmf6-5ccf) (#1660)
+* \[Security] 1x medium severity in idna python library (CVE-2026-45409) (#1638)
+* \[Security] 1x high vulnerability in js-cookie (CVE-2026-46625) (#1636)
+
+**Go consumer**
+
+* \[Go Consumer] Failed to flush batch: Event length is too long (#1669)
+* \[Go Consumer] Restarts trigger by GetXmlXpathText Nil Pointer Dereference when parsing EventLogs XML (#1664)
+* \[Go Consumer] Error in handling indexed fields (#1655)
+* \[Go Consumer] Web Browser Extension data - browsers are unknown (#1642)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Native Splunk app for Digital workplace observability platform providing Digital Employee Experience (DEX) and Digital Experience Monitoring (DEM), with visibility into endpoint performance, applications, and network connectivity across SaaS, web, desktop, VDI, and terminal environments.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Overview
+
+UXM is a Splunk-integrated digital workplace observability platform for Digital Employee Experience (DEX) and Digital Experience Monitoring (DEM). It provides visibility into how users experience applications, endpoints, and network connectivity across modern and legacy environments.
+
+Monitoring Coverage
+
+UXM monitors SaaS, web, desktop, terminal, and collaboration applications such as Microsoft Teams. It provides visibility into application performance, endpoint health, user activity, and network conditions, helping IT teams detect issues, reduce downtime, and improve digital employee productivity.
+
+Key Use Cases
+
+- Digital Employee Experience (DEX) monitoring
+- Digital Experience Monitoring (DEM)
+- Real User Monitoring (RUM)
+- Digital workplace performance monitoring and endpoint troubleshooting
+- Network experience monitoring (Wi-Fi, LAN, WAN)
+- VDI and terminal session performance analysis
+- Software usage analytics and license optimization
+- Collaboration experience monitoring
+
+Pricing
+
+€10 per endpoint per year (starting price)
+~€5 per endpoint per year for environments above 10,000 endpoints
+€1 per endpoint per year (UXM SaaS) for infrastructure and processing
+On-premises: ~1 MB data ingestion per endpoint per day using existing Splunk licenses
+
+Supported Environments
+
+Supports Windows, macOS, Linux, and UNIX across physical endpoints, virtual desktops, and cloud workspaces. Compatible with Citrix, Microsoft AVD, RDS, Horizon, and enterprise applications including Microsoft 365, SAP, Oracle applications, Salesforce, ServiceNow, and Adobe. Also supports terminal environments such as TN3270 and TN5250.
+
+AI and Integration
+
+Supports AI-driven analytics, anomaly detection, and automation workflows. Compatible with Model Context Protocol (MCP) for integration with AI assistants and modern automation systems.
+
+Deployment and Scalability
+
+Available as SaaS and on-premises. Lightweight agent with minimal system impact, scaling to 100,000+ endpoints. Includes dashboards, reports, alerts, and integrations with IT operations tools.
+
+Target Users
+
+Built for IT operations, EUC, and digital workplace teams. UXM improves user experience, increases productivity, and optimizes IT investments by combining endpoint, application, and network observability in one platform.
+
+Differentiator
+-  All-in-one observability across endpoint, application, and network layers
+-  Real user behavior insights for cost reduction and productivity improvement
+- Built natively on Splunk with no additional data platform required
+- Leverages the full Splunk ecosystem for observability, security, and automation use cases
+- Lean architecture with simple deployment and minimal overhead
+- Typically 3–5× lower total cost than comparable DEX/DEM platforms&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/397f8386-89ca-11f1-b542-3aa429ca9a21.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Systemslab ApS</dc:creator>
+      <pubDate>Tue, 28 Jul 2026 13:14:41 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7177/#v26.7.27</guid>
+    </item>
+    <item>
+      <title>Threat Hunting Essentials - v1.3.61 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7633/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
+
+For Premium Version - Contact sales https://www.avertpoint.com/contactus.html
+
+It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
+
+Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
+
+1. Backdoor.
+2. Worms.
+3. Ransomware.
+4. Bots.
+5. Trojan horses.
+6. Keyloggers.
+7. Rootkits.
+8. Spyware.
+9. Fileless malware.
+10. Cryptojacking.
+11. Wiper malware.
+12. Adware.
+14. Viruses
+15. P2P-Worm
+16. Internet Worms
+17. Net-worm
+18. Clickjacking
+19. Cryptominer
+20. Fileless malware
+
+You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
+
+Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/aef89a00-8a77-11f1-9ff3-42232f92b11b.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
+      <pubDate>Tue, 28 Jul 2026 13:13:16 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.61</guid>
+    </item>
     <item>
       <title>Ensign Akamai Web Security Add-on - v2.0.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8652/</link>
@@ -279,44 +435,6 @@ Create a free account at: https://www.ipqualityscore.com/create-account/splunk&l
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Christopher Caldwell</dc:creator>
       <pubDate>Mon, 27 Jul 2026 15:03:25 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6740/#v3.2.0</guid>
-    </item>
-    <item>
-      <title>Threat Hunting Essentials - v1.3.60 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7633/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
-
-For Premium Version - Contact sales https://www.avertpoint.com/contactus.html
-
-It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
-
-Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
-
-1. Backdoor.
-2. Worms.
-3. Ransomware.
-4. Bots.
-5. Trojan horses.
-6. Keyloggers.
-7. Rootkits.
-8. Spyware.
-9. Fileless malware.
-10. Cryptojacking.
-11. Wiper malware.
-12. Adware.
-14. Viruses
-15. P2P-Worm
-16. Internet Worms
-17. Net-worm
-18. Clickjacking
-19. Cryptominer
-20. Fileless malware
-
-You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
-
-Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/84756ab6-89ae-11f1-bf98-eee9bee3a749.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
-      <pubDate>Mon, 27 Jul 2026 14:32:12 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.60</guid>
     </item>
     <item>
       <title>Splunk Add-on for F5 BIG-IP - v7.0.0 [Version Update]</title>
@@ -2221,14 +2339,6 @@ Version 1.1.2 introduces a comprehensive refresh of the WTI dashboards, providin
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Tue, 21 Jul 2026 15:26:04 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5841/#v2.3.4</guid>
-    </item>
-    <item>
-      <title>Safe Browsing - v2.0.10 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5929/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Moved the Google Safe Browsing API key from the request URL to the `X-Goog-Api-Key` header.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app Integrate with Google Safe Browsing to execute reputation-based actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d83adf12-8514-11f1-9bc3-a6ea41560532.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 15:00:00 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5929/#v2.0.10</guid>
     </item>
   </channel>
 </rss>
