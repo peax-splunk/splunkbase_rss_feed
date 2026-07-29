@@ -6,7 +6,56 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Wed, 29 Jul 2026 15:44:23 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 29 Jul 2026 17:04:58 +0000</lastBuildDate>
+    <item>
+      <title>Microsoft 365 Defender - v2.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6563/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Migrated to SDK, dropped BaseConnector [PAPP-37950]&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with Microsoft 365 Defender to execute various generic and investigative actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/fa5ca904-8b6d-11f1-afad-02640afd9b8c.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Wed, 29 Jul 2026 16:53:10 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6563/#v2.0.0</guid>
+    </item>
+    <item>
+      <title>Splunk Executive Insights - v1.0.31 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9257/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Splunk Executive Insights provides configurable executive, IT operations, and secure-networking dashboards for Cisco environments, bringing network health, identity, security, infrastructure, application experience, building, and topology data into a unified Splunk experience.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk Executive Insights helps organizations turn fragmented Cisco infrastructure, networking, identity, security, application-experience, and building telemetry into clear executive and operational insights within Splunk.
+Cisco environments often produce data across multiple products, add-ons, indexes, sourcetypes, and data models. Building a consolidated view normally requires teams to create and maintain separate searches, dashboards, index mappings, and visualizations. This app provides a reusable foundation that brings those signals together through configurable dashboards, shared search definitions, index-mapping macros, health indicators, drilldowns, and interactive topology views.
+The app includes Secure Networking Posture dashboards covering Zero Trust Access, Secure Infrastructure, Scalable Network Segmentation, Hybrid Mesh Firewalling, and Agentic Operations. It also provides executive briefing, IT health, security, asset inventory, network readiness, building intelligence, Cisco Spaces, and network-topology experiences.
+Searches use configurable index macros instead of hardcoded index names, allowing the app to adapt to different Splunk environments. Administrators can use the included Macro Index Tuning utility to discover relevant data and map the dashboards to their indexes.
+Splunk Executive Insights does not collect Cisco data directly. It visualizes data already ingested into Splunk through the applicable Cisco add-ons, integrations, and data models. The dashboards displayed and populated in each environment depend on the available data sources.
+The app is intended for network operations, security operations, IT operations, Splunk administrators, architects, customer-success teams, and executives who need a consolidated view of the health, security, availability, and performance of their Cisco environment.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ecd95f70-86bd-11f1-9f3b-96e7b47cf262.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Amir (AK) Khamis</dc:creator>
+      <pubDate>Wed, 29 Jul 2026 16:38:51 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9257/#v1.0.31</guid>
+    </item>
+    <item>
+      <title>NetKit Add-on - v1.1.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9165/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Added
+
+\- netkit:tls now emits certificate key\_usage, sig\_algorithm, pubkey\_type, and pubkey\_bits as raw values (named in the NetKit App at search time).
+
+\- The TLS probe emits a per-target error event when the bundled cryptography module is unavailable, instead of silently producing no output.
+
+Fixed
+
+\- Probe events now omit empty fields rather than emitting JSON null (which Splunk had extracted as the literal string &quot;null&quot;).
+
+\- netkit:tls reports ca\=certifi (not &quot;system&quot;) when no private CA is configured, matching the bundled CA list actually used for verification.
+
+\- netkit:tls eku now reports exact certificate usage OIDs (parsed via cryptography) instead of a meaningless bitmask integer; is\_ca now reflects the certificate's actual CA flag.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects network probe telemetry from TCP latency tests, Cloudflare-based throughput measurements, and TLS certificate inspections, generating JSON events for network monitoring.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The NetKit Add-on collects network probe telemetry - TCP connect latency, internet throughput, and TLS certificate health - from full Splunk Enterprise instances, emitting the results as JSON events ready for network monitoring. It runs three probes, all implemented in pure Python on the standard library with no external binaries or third-party dependencies. Ping probes measure TCP connect latency by timing the handshake to each host:port target, never using ICMP. Speedtest probes measure download and upload throughput plus latency against Cloudflare endpoints over verified HTTPS connections. TLS probes connect to each target, verify the presented certificate against the system CA store or a configured private CA, and record certificate identity, validity periods, and verification status. Events are written with the sourcetypes netkit:ping, netkit:speedtest, and netkit:tls, while probe execution logs are captured to the _internal index as netkit_log. Configuration and input management are available through dashboards in the Splunk Web UI.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b32eb188-85e3-11f1-937a-5adaa7e1b112.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">David Twersky</dc:creator>
+      <pubDate>Wed, 29 Jul 2026 16:09:22 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9165/#v1.1.0</guid>
+    </item>
+    <item>
+      <title>FULLSTACKS Add-on for Exoscale - v1.8.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8616/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This Add-on provides an Input which fetches Audit Logs from the Exoscale API into Splunk. It also provides CIM Normalization for said Audit logs so that they can be integrated into both Change and Authentication Data Model.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/bc38eb2e-8b31-11f1-98f5-caa422279b2b.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">FULLSTACKS GmbH</dc:creator>
+      <pubDate>Wed, 29 Jul 2026 16:04:53 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8616/#v1.8.0</guid>
+    </item>
     <item>
       <title>Cisco Catalyst Add-on for Splunk - v3.2.42 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7538/</link>
@@ -2514,26 +2563,6 @@ Data Heartbeat is compatible with Splunk Enterprise 8.2+, Splunk Cloud Classic, 
       <guid>https://splunkbase.splunk.com/app/5843/#v3.0.1</guid>
     </item>
     <item>
-      <title>NetKit Add-on - v1.1.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/9165/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Added
-
-\- netkit:tls now emits certificate key\_usage, sig\_algorithm, pubkey\_type, and pubkey\_bits as raw values (named in the NetKit App at search time).
-
-\- The TLS probe emits a per-target error event when the bundled cryptography module is unavailable, instead of silently producing no output.
-
-Fixed
-
-\- Probe events now omit empty fields rather than emitting JSON null (which Splunk had extracted as the literal string &quot;null&quot;).
-
-\- netkit:tls reports ca\=certifi (not &quot;system&quot;) when no private CA is configured, matching the bundled CA list actually used for verification.
-
-\- netkit:tls eku now reports exact certificate usage OIDs (parsed via cryptography) instead of a meaningless bitmask integer; is\_ca now reflects the certificate's actual CA flag.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects network probe telemetry from TCP latency tests, Cloudflare-based throughput measurements, and TLS certificate inspections, generating JSON events for network monitoring.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The NetKit Add-on collects network probe telemetry - TCP connect latency, internet throughput, and TLS certificate health - from full Splunk Enterprise instances, emitting the results as JSON events ready for network monitoring. It runs three probes, all implemented in pure Python on the standard library with no external binaries or third-party dependencies. Ping probes measure TCP connect latency by timing the handshake to each host:port target, never using ICMP. Speedtest probes measure download and upload throughput plus latency against Cloudflare endpoints over verified HTTPS connections. TLS probes connect to each target, verify the presented certificate against the system CA store or a configured private CA, and record certificate identity, validity periods, and verification status. Events are written with the sourcetypes netkit:ping, netkit:speedtest, and netkit:tls, while probe execution logs are captured to the _internal index as netkit_log. Configuration and input management are available through dashboards in the Splunk Web UI.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b32eb188-85e3-11f1-937a-5adaa7e1b112.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">David Twersky</dc:creator>
-      <pubDate>Wed, 22 Jul 2026 15:55:45 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9165/#v1.1.0</guid>
-    </item>
-    <item>
       <title>WithSecure Elements Add-on - v1.0.6 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8820/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**⚠️ Critical bug fix. Recommended upgrade for anyone running v1.0.2 through v1.0.5.**
@@ -2694,31 +2723,6 @@ Version 1.1.2 introduces a comprehensive refresh of the WTI dashboards, providin
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Matoula Senethavong</dc:creator>
       <pubDate>Tue, 21 Jul 2026 22:31:39 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7891/#v1.1.2</guid>
-    </item>
-    <item>
-      <title>Mcontrol Catalogue - v1.3.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/9058/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Lookup-driven interface for querying local Mission Control and SOAR inventory endpoints via Splunkd REST API in Splunk Cloud environments.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Mission Control Inventory app provides a lookup-driven interface for querying local Mission Control and SOAR inventory endpoints within Splunk Cloud environments. The app enables administrators to collect and monitor SOAR applications, assets, playbooks, and automation configurations through the Splunkd REST API. It includes a custom generating search command that queries endpoints registered in a CSV lookup table, along with pre-configured saved searches for capturing current inventory state and creating daily snapshots. The app is designed specifically for Splunk Cloud deployments where Mission Control functionality is available, and does not require stored credentials or external HTTP connections. All queries are executed against local Splunkd paths using the context of the running user&amp;#x27;s permissions.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e56e21e4-8541-11f1-865c-cabd7c8abff5.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Adam Liquorish</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 20:25:01 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9058/#v1.3.2</guid>
-    </item>
-    <item>
-      <title>Zscaler - v3.0.4 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5872/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Updated documentation with Zscaler's new Public API Base URL guidance, replacing admin.&lt;Zscaler Cloud Name&gt; with zsapi.&lt;Zscaler Cloud Name&gt; ahead of the September deprecation.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app implements containment and investigative actions on Zscaler&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/7c073ee4-8522-11f1-9a4d-82fabe4198dd.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 16:37:38 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5872/#v3.0.4</guid>
-    </item>
-    <item>
-      <title>Watson - Language Translator V3 - v1.0.6 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5866/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Updated connector development tooling.
-* Enabled TLS certificate verification by default for Watson API requests. Existing assets retain their saved setting and should be reviewed after upgrade.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Leverage IBM Watson for language translation using API version V3&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/45d60946-8521-11f1-a156-16e44e0618d4.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 16:28:58 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5866/#v1.0.6</guid>
     </item>
   </channel>
 </rss>
