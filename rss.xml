@@ -6,7 +6,75 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Wed, 29 Jul 2026 20:13:12 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 29 Jul 2026 21:51:07 +0000</lastBuildDate>
+    <item>
+      <title>MaxMind GeoIP App - v1.2.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8554/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Revert the scripted-input experiment from 1.1.3. The scripted input did
+  not run on every search head cluster member in Splunk Cloud either, so
+  the `geoipupdate_input` modular input's default instance is re-enabled,
+  and the `[script://...]` stanza and its `geoipupdate_script.py` wrapper
+  are removed.
+* Fix the `geoip` command being distributed to indexers, where it fails
+  because the databases are not there. Under SCP2 (`chunked = true`),
+  Splunk decides distribution from the SDK's getinfo response, not
+  `commands.conf`, so the `local = true` setting added in 1.1.0 was
+  ignored. The command now reports itself search-head-only by default,
+  so prepending `| localop` is no longer needed.
+* Store MaxMind databases in the app's `databases/` directory instead of
+  `local/data/`. A directory of the app's own is outside search head
+  cluster replication summaries and outside Splunk's default knowledge
+  bundle allowlist, so replication of the databases is controlled entirely
+  by the app, and the new path is resolved relative to the app root so it
+  also works when the command runs from a knowledge bundle on an indexer.
+  Databases found in the old location are moved to the new one
+  automatically - by the updater's next run or by the first `geoip`
+  search that would otherwise miss them - so upgrades keep working
+  without waiting for a re-download.
+* Add opt-in support for running the `geoip` command on indexers. A new
+  &quot;Distributed Search&quot; configuration tab provides a &quot;Run on indexers&quot;
+  checkbox, off by default because large databases increase the knowledge
+  bundle size and replication can exceed bundle size limits. Enabling it
+  requires restarting the search head (every member, in a search head
+  cluster), because Splunk only reads the replication rules that put the
+  databases into the knowledge bundle at startup.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;MaxMind GeoIP database lookups for Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This is a Splunk app for MaxMind GeoIP database lookups. It provides IP geolocation and enrichment using MaxMind&amp;#x27;s GeoIP and GeoLite databases, including country, city, anonymous IP detection, ISP, and more.
+
+The app provides a streaming search command (geoip) that enriches events with data from one or more MaxMind databases.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/80b76b76-8b94-11f1-afad-02640afd9b8c.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">William Storey</dc:creator>
+      <pubDate>Wed, 29 Jul 2026 21:43:14 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8554/#v1.2.0</guid>
+    </item>
+    <item>
+      <title>Splunk App for Secure Networking - v1.0.31 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9257/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Splunk Executive Insights provides configurable executive, IT operations, and secure-networking dashboards for Cisco environments, bringing network health, identity, security, infrastructure, application experience, building, and topology data into a unified Splunk experience.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Restricted Availability: This app is currently available only to approved users and is not yet generally available on Splunkbase. Broader availability is planned for a future release.
+---------------------------
+Splunk Executive Insights helps organizations turn fragmented Cisco infrastructure, networking, identity, security, application-experience, and building telemetry into clear executive and operational insights within Splunk.
+Cisco environments often produce data across multiple products, add-ons, indexes, sourcetypes, and data models. Building a consolidated view normally requires teams to create and maintain separate searches, dashboards, index mappings, and visualizations. This app provides a reusable foundation that brings those signals together through configurable dashboards, shared search definitions, index-mapping macros, health indicators, drilldowns, and interactive topology views.
+The app includes Secure Networking Posture dashboards covering Zero Trust Access, Secure Infrastructure, Scalable Network Segmentation, Hybrid Mesh Firewalling, and Agentic Operations. It also provides executive briefing, IT health, security, asset inventory, network readiness, building intelligence, Cisco Spaces, and network-topology experiences.
+Searches use configurable index macros instead of hardcoded index names, allowing the app to adapt to different Splunk environments. Administrators can use the included Macro Index Tuning utility to discover relevant data and map the dashboards to their indexes.
+Splunk Executive Insights does not collect Cisco data directly. It visualizes data already ingested into Splunk through the applicable Cisco add-ons, integrations, and data models. The dashboards displayed and populated in each environment depend on the available data sources.
+The app is intended for network operations, security operations, IT operations, Splunk administrators, architects, customer-success teams, and executives who need a consolidated view of the health, security, availability, and performance of their Cisco environment.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ecd95f70-86bd-11f1-9f3b-96e7b47cf262.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Amir (AK) Khamis</dc:creator>
+      <pubDate>Wed, 29 Jul 2026 20:38:43 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9257/#v1.0.31</guid>
+    </item>
+    <item>
+      <title>Canary - v2.3.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4697/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
+        &lt;li&gt;Fixed a bug in the AppNav module, introduced in Canary 2.2.0, where root-relative links in an app's navigation file - for example &lt;code&gt;&amp;lt;a href=&quot;/manager/cisco_cdr/saved/searches&quot;&amp;gt;&lt;/code&gt; - could be rendered with a doubled leading slash. Browsers read a leading &quot;//&quot; as a protocol-relative URL, so clicking such a link sent the user off to an external host instead of to the Splunk Manager page. This only affected Splunk instances whose web.conf &lt;code&gt;root_endpoint&lt;/code&gt; was set to the default of &quot;/&quot;.&lt;/li&gt;
+        &lt;li&gt;Fixed a class of bugs that affected Splunk deployments using Splunk's legacy (and largely unused in 2026) &quot;root_endpoint&quot; config to put Splunk behind a reverse-proxy. For example in cases where root_endpoint was set, the 'create dashboard panel' and 'save report' functionality as well as several links to manager pages were leading only to errors.&lt;/li&gt;
+      &lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Canary is essentially an alternate User Interface framework for Splunk.  It implements its own extensible view creation slash dashboarding system that other apps can use.   
+  
+It is a descendant of the old Sideview Utils (defunct for years now) but whereas Sideview Utils ran on top of Splunk’s “Advanced XML” systems, Canary does not.
+For a great deal more information about Canary, see our website ( https://sideviewapps.com/documentation/canary )
+
+NOTE: This app runs in python3 without any problems and without any changes required.  Splunk&amp;#x27;s &amp;quot;Upgrade Readiness App&amp;quot; may erroneously state that our apps do not run in python3 but it is wrong and please contact us if you have any questions about this.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c3337e94-8b8b-11f1-bc8b-9688965be9f9.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview LLC</dc:creator>
+      <pubDate>Wed, 29 Jul 2026 20:27:55 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4697/#v2.3.2</guid>
+    </item>
     <item>
       <title>Amazon S3 Sink Alert Action For Splunk - v3.5.0 [Version Update] (Archived)</title>
       <link>https://splunkbase.splunk.com/app/5197/</link>
@@ -14,19 +82,6 @@
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
       <pubDate>Wed, 29 Jul 2026 20:01:59 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5197/#v3.5.0</guid>
-    </item>
-    <item>
-      <title>Splunk Executive Insights - v1.0.31 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/9257/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Splunk Executive Insights provides configurable executive, IT operations, and secure-networking dashboards for Cisco environments, bringing network health, identity, security, infrastructure, application experience, building, and topology data into a unified Splunk experience.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk Executive Insights helps organizations turn fragmented Cisco infrastructure, networking, identity, security, application-experience, and building telemetry into clear executive and operational insights within Splunk.
-Cisco environments often produce data across multiple products, add-ons, indexes, sourcetypes, and data models. Building a consolidated view normally requires teams to create and maintain separate searches, dashboards, index mappings, and visualizations. This app provides a reusable foundation that brings those signals together through configurable dashboards, shared search definitions, index-mapping macros, health indicators, drilldowns, and interactive topology views.
-The app includes Secure Networking Posture dashboards covering Zero Trust Access, Secure Infrastructure, Scalable Network Segmentation, Hybrid Mesh Firewalling, and Agentic Operations. It also provides executive briefing, IT health, security, asset inventory, network readiness, building intelligence, Cisco Spaces, and network-topology experiences.
-Searches use configurable index macros instead of hardcoded index names, allowing the app to adapt to different Splunk environments. Administrators can use the included Macro Index Tuning utility to discover relevant data and map the dashboards to their indexes.
-Splunk Executive Insights does not collect Cisco data directly. It visualizes data already ingested into Splunk through the applicable Cisco add-ons, integrations, and data models. The dashboards displayed and populated in each environment depend on the available data sources.
-The app is intended for network operations, security operations, IT operations, Splunk administrators, architects, customer-success teams, and executives who need a consolidated view of the health, security, availability, and performance of their Cisco environment.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ecd95f70-86bd-11f1-9f3b-96e7b47cf262.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Amir (AK) Khamis</dc:creator>
-      <pubDate>Wed, 29 Jul 2026 19:49:04 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9257/#v1.0.31</guid>
     </item>
     <item>
       <title>NetKit App - v1.2.0 [Version Update]</title>
@@ -2291,24 +2346,6 @@ Contact us with any questions!&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&q
       <guid>https://splunkbase.splunk.com/app/4640/#v1.2.10</guid>
     </item>
     <item>
-      <title>Canary - v2.3.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4697/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
-        &lt;li&gt;(removed $.ajax calls and replaced with fetch..)&lt;/li&gt;
-        &lt;li&gt;Fixed a minor bug where the sort arrows in the Table module didn't change appropriate for the &quot;time&quot; field.&lt;/li&gt;
-        &lt;li&gt;CallFlowGraph (prototype): a result row can now contribute a media edge even when it has no signaling edge, which lets a call flow draw media flowing in both directions.&lt;/li&gt;
-        &lt;li&gt;CallFlowGraph (prototype): whether media is drawn as its own line is now decided for the whole graph at once. If any leg's media path differs from its signaling path, media is shown on every leg; if none differ, the two planes are combined into one line and the legend reads &quot;Signaling and Media&quot;.&lt;/li&gt;
-      &lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Canary is essentially an alternate User Interface framework for Splunk.  It implements its own extensible view creation slash dashboarding system that other apps can use.   
-  
-It is a descendant of the old Sideview Utils (defunct for years now) but whereas Sideview Utils ran on top of Splunk’s “Advanced XML” systems, Canary does not.
-For a great deal more information about Canary, see our website ( https://sideviewapps.com/documentation/canary )
-
-NOTE: This app runs in python3 without any problems and without any changes required.  Splunk&amp;#x27;s &amp;quot;Upgrade Readiness App&amp;quot; may erroneously state that our apps do not run in python3 but it is wrong and please contact us if you have any questions about this.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d9285770-863f-11f1-8dc9-aa8b10ed8e76.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview LLC</dc:creator>
-      <pubDate>Thu, 23 Jul 2026 02:41:55 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4697/#v2.3.1</guid>
-    </item>
-    <item>
       <title>2Steps - v15.0.85 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/4546/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;2 Steps Splunk front end integration, for back end version 15.x&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;2 Steps produces automated customer journeys with video replay across any platform (Windows, Web, mobile, etc) in minutes without writing any code.
@@ -2625,14 +2662,6 @@ Non-destructive in-place upgrade when installed via Splunk's standard &quot;Inst
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Flo Flo</dc:creator>
       <pubDate>Wed, 22 Jul 2026 15:09:18 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8820/#v1.0.6</guid>
-    </item>
-    <item>
-      <title>MS Graph for SharePoint - v1.5.5 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6351/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* fix: parse non-finite float tokens (Infinity/-Infinity/NaN) in MS Graph responses so 'get list' no longer fails on unbounded number columns&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app connects to SharePoint using the MS Graph API to support investigate and generic actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/5b70e094-8555-11f1-9075-12aab1d3d17b.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 22:41:48 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6351/#v1.5.5</guid>
     </item>
   </channel>
 </rss>
