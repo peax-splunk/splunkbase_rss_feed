@@ -6,19 +6,18 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Wed, 29 Jul 2026 11:14:33 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 29 Jul 2026 13:47:38 +0000</lastBuildDate>
     <item>
-      <title>TrackMe - v2.4.10 [Version Update]</title>
+      <title>TrackMe - v2.4.11 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/4621/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**TrackMe 2.4.10 — hotfix: chart images in alert emails on Splunk Cloud 10.x.**
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**TrackMe 2.4.11 — hotfix: AI Advisors fail to start on recent builds due to MCP 2.0.0 publication.**
 
-* This hotfix release addresses a chart-rendering problem affecting **Splunk Cloud 10.x only** — on-premise deployments and Splunk Cloud 9.x are unaffected.
-* On Splunk Cloud 10.x, chart images embedded in alert emails were delivered as **SVG instead of PNG**; because most email clients refuse to render inline SVG, recipients effectively received their alert emails **without chart images**. The alert text, links and all other content were unaffected — alerts continued to fire and be delivered on time.
-* For **stateful alerts**, this is a **regression** introduced by the Splunk Cloud 10.x platform environment (Python 3.13): chart images worked on Splunk Cloud 9.x and stopped working on 10.x. For **Topology Alerts**, the embedded topology image was affected as a **known issue in the initial release** of the feature (Topology Studio shipped in 2.4.9, so there is no prior behaviour to regress from).
-* The PNG rendering backend is now fully self-contained (it no longer depends on system libraries that minimal Splunk Cloud hosts do not provide) and is resolved deterministically, so chart images render as PNG again on every supported platform.
-* The release also carries the cycle’s dependency refresh, with a **clean security audit**.
+* This hotfix release restores the **AI Advisors**, which fail to start on affected builds. **Only the AI layer is impacted** — data monitoring, tracking, alerting, notable events and every other TrackMe capability continue to operate normally, and deployments that do not use the AI features see no functional difference.
+* **Which builds are affected:** any TrackMe package built on or after **28/07/2026** — this includes the publicly released **2.4.10** build. Builds produced before that date are not affected. On an affected build, every advisor surface fails to start: the interactive AI Advisors, the Flex Objects tracker-generation wizard, the AI Assistant’s advisor actions, and the scheduled advisor batches.
+* **Cause:** a third-party library bundled with TrackMe (`mcp`, used by the Splunk Agent SDK that powers the advisors) published a new **major version** on 28/07/2026 which removed part of the API the SDK depends on. TrackMe’s dependency declaration had no upper bound, so builds produced from that date automatically picked the new major version up. The dependency is now pinned to the supported 1.x line, and will only move in step with a Splunk SDK release that supports the new API.
+* **Upgrading is enough — no manual cleanup is required.** Splunk application upgrades never delete files that the new version no longer ships. An installation that has run an affected build therefore keeps incompatible leftovers from that library, which would continue to break the advisors even after upgrading to a fixed build. TrackMe now detects and removes those leftovers automatically, logging what it removed. This matters in particular for Splunk Cloud, where operators cannot clean the application directory by hand.
 
-See: [https://docs.trackme-solutions.com/latest/releasenotes.html#version-2-4-10-build-1785285034-29-07-2026](https://docs.trackme-solutions.com/latest/releasenotes.html#version-2-4-10-build-1785285034-29-07-2026)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TrackMe for Splunk provides visibility and operational excellence to monitor at scale your Splunk data sources availability and quality, and many more. 
+See: [https://docs.trackme-solutions.com/2.4.11/releasenotes.html#version-2-4-11-build-1785321072-29-07-2026](https://docs.trackme-solutions.com/2.4.11/releasenotes.html#version-2-4-11-build-1785321072-29-07-2026)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TrackMe for Splunk provides visibility and operational excellence to monitor at scale your Splunk data sources availability and quality, and many more. 
 
 With a rich set of features and a powerful workflow, TrackMe empowers you day after day to get the most from your Splunk investments and deliver the five stars quality of service your users deserve.
 
@@ -51,10 +50,320 @@ To continue using TrackMe with full capabilities after the trial, a Foundation l
 
 Buy Foundation Edition: https://trackme-solutions.com/get-foundation/
 
-See all plans: https://trackme-solutions.com/pricing/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/135fe716-8b3e-11f1-a68e-fe75020f3215.png&quot;&gt;</description>
+See all plans: https://trackme-solutions.com/pricing/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/72aeac6c-8b4c-11f1-b89b-a20c771dcf52.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Trackme Limited</dc:creator>
-      <pubDate>Wed, 29 Jul 2026 11:10:25 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4621/#v2.4.10</guid>
+      <pubDate>Wed, 29 Jul 2026 13:34:14 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4621/#v2.4.11</guid>
+    </item>
+    <item>
+      <title>NetKit App - v1.1.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9230/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Initial Splunkbase release of the NetKit App.
+
+Dashboards
+
+\- Ping Trends: connect latency and jitter by target.
+
+\- Speedtest Trends: download, upload, and latency over time.
+
+\- Certificate Monitoring: certificate expiry, validation status, and chain trust by target.
+
+\- Availability: outage KPIs, outage timeline, and per-target status.
+
+\- App Health: NetKit's own probe execution logs.
+
+Alerts (scheduled, no action configured)
+
+\- NetKit - Certificate expiring soon.
+
+\- NetKit - Certificate validation failed.
+
+\- NetKit - Certificate changed.
+
+Knowledge
+
+\- Search-time JSON field extraction for netkit:ping, netkit:speedtest, and netkit:tls events.
+
+\- Search-time naming for netkit:tls certificate fields (eku, key usage, signature algorithm) via lookups.
+
+\- CIM normalization: Network Traffic (all sourcetypes) and Certificates (netkit:tls).
+
+\- netkit\_index macro for targeting the destination index.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Visualizes network latency, throughput, and TLS certificate health data collected by the NetKit Add-on, with CIM-compliant dashboards and certificate alerts.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The NetKit App provides visualization dashboards and alerting for network performance and TLS certificate monitoring in Splunk Cloud and Enterprise environments. It displays ping latency trends, internet speedtest throughput measurements, and TLS certificate expiry and validation status collected by the companion NetKit Add-on. The app ships five Dashboard Studio views covering ping trends, speedtest trends, certificate monitoring, availability KPIs, and add-on health metrics. Three saved searches monitor certificate expiration, validation failures, and certificate changes. The app performs search-time field extraction and CIM normalization for netkit:ping, netkit:speedtest, and netkit:tls sourcetypes, mapping them to the Network Traffic and Certificates data models. It does not collect data; the NetKit Add-on must run on a full Splunk Enterprise instance to produce the events these dashboards consume.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9b9c9454-861a-11f1-a78a-b28dad8e6d1b.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">David Twersky</dc:creator>
+      <pubDate>Wed, 29 Jul 2026 12:55:04 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9230/#v1.1.0</guid>
+    </item>
+    <item>
+      <title>Federal AI Agent Assurance - v1.0.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9239/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Air-gap-first authorization, TEVV, runtime conformity, and audit evidence for AI agents and MCP tools. Integrity-sealed release manifests, semantic authority diffs, deterministic policy and TEVV checks, enforced separation of duties, expiring authorizations, drift detection, and verifiable offline evidence bundles. No cloud. No telemetry.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Federal AI Agent Assurance turns AI-agent and MCP changes into governed releases. It inventories agents and tools, creates integrity-sealed release manifests, identifies semantic configuration and authority changes, runs deterministic policy and TEVV checks, enforces independent review and risk acceptance, records precise authorization decisions, and compares observable runtime activity with the approved boundary.
+
+It works air-gap-first, requires no cloud service, has no telemetry, and can operate entirely through imported manifests, test evidence, runtime snapshots, and offline transfer bundles. Optional behind-the-firewall AI provides evidence-citing advisory review with zero decision authority.
+
+Pairs with Federal AI LookupOps: LookupOps governs what the agent depends on; Agent Assurance governs what the agent is permitted to do with it.
+
+It does not grant an ATO, certify compliance, or replace human authorizing officials.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/4db5eb5a-8610-11f1-9684-5206dafe6f8e.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Lloyd Clark</dc:creator>
+      <pubDate>Wed, 29 Jul 2026 12:52:53 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9239/#v1.0.0</guid>
+    </item>
+    <item>
+      <title>Eventgen Manager - v1.0.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9245/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;\## Version 1.0.0
+
+
+
+First release.
+
+
+
+\*\*Features\*\*
+
+
+
+\- Guided editor covering the full \`eventgen.conf\` setting surface, with
+
+&amp;#x20; fields shown conditionally by generation mode and output mode
+
+\- Live event preview with per-value highlighting, running read-only — see
+
+&amp;#x20; what a stanza produces without starting a generator
+
+\- Token editor with ordering, and index renumbering so eventgen never sees a
+
+&amp;#x20; gap in the sequence
+
+\- Bucket editors for hour-of-day and day-of-week rate curves
+
+\- Sample file upload, editing and deletion from the browser
+
+\- Generator control with health checks and one-click remediation
+
+\- Throughput dashboard measuring what actually reached an index, filterable
+
+&amp;#x20; by sample and time, comparing measured against configured rates
+
+\- Four starter configurations and six sample files, shipped turned off
+
+\- Platform detection, so an instance that cannot run SA-Eventgen is told so
+
+&amp;#x20; plainly instead of being told the app is missing
+
+
+
+\*\*Behaviour worth knowing\*\*
+
+
+
+\- Pausing or starting a configuration takes effect immediately. SA-Eventgen
+
+&amp;#x20; reads \`eventgen.conf\` only when it launches, so the app restarts the
+
+&amp;#x20; modular input after a change rather than leaving the new setting to be
+
+&amp;#x20; picked up whenever someone next restarts it by hand. No Splunk restart is
+
+&amp;#x20; involved. Because SA-Eventgen runs every sample in a single process, that
+
+&amp;#x20; restart briefly interrupts other running samples and resets \`integerid\`
+
+&amp;#x20; counters.
+
+\- Configuration is written through Splunk's own \`configs/conf-eventgen\`
+
+&amp;#x20; endpoint. Search head cluster replication for \`eventgen.conf\` is enabled
+
+&amp;#x20; by this app.
+
+
+
+\*\*Compatibility\*\*
+
+
+
+\- Requires SA-Eventgen on the same instance
+
+\- Requires the admin or sc\_admin role
+
+\- Event generation requires Linux or macOS on x86\_64. SA-Eventgen 8.2.1
+
+&amp;#x20; ships compiled binaries for \`linux\_x86\_64\` and \`darwin\_x86\_64\` only —
+
+&amp;#x20; there is no Windows build and none for arm64. The editor, preview and
+
+&amp;#x20; sample management work on any platform.
+
+
+
+\*\*Known issues\*\*
+
+
+
+\- The Rated replacement type is broken in SA-Eventgen 8.2.1. The generator
+
+&amp;#x20; rejects the value and substitutes nothing, which on a JSON sourcetype
+
+&amp;#x20; produces invalid JSON and the event is discarded before it reaches the
+
+&amp;#x20; index, while the generator reports success. The starter configurations use
+
+&amp;#x20; Random instead, and the editor warns beside the setting. Event counts still
+
+&amp;#x20; follow the Rate curves; only per-token rating is affected.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Browser-based configuration interface for SA-Eventgen with live event preview, guided editor for all eventgen.conf settings, rate curve visualization, sample file management, and throughput monitoring.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Eventgen Manager app provides a browser-based configuration interface for SA-Eventgen, the standard Splunk utility for generating realistic test and demonstration data. SA-Eventgen generates events from sample files using powerful configuration directives defined in eventgen.conf, supporting interval-based replay, token substitution, rate curves, and multiple output modes including indexing, HTTP Event Collector, and syslog. Eventgen Manager eliminates the need to hand-edit configuration files by providing a guided editor that exposes every SA-Eventgen setting through labeled form fields. The app includes a live preview feature that renders generated events in the browser without indexing them, allowing administrators to validate token replacements, timestamps, and event structure before activating a configuration. Rate curves for hour-of-day and day-of-week event distribution are edited as numeric values per time bucket rather than raw JSON arrays. The app also provides sample file management capabilities, allowing users to upload, review, and delete sample files directly from the browser without requiring shell access to the Splunk server. Generator control features include the ability to start and stop the SA-Eventgen modular input, view configuration status, and monitor throughput metrics from the _internal index. The app requires the SA-Eventgen add-on to be installed on the same Splunk instance and requires admin or sc_admin role privileges to create or modify configurations.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/3fa8d53c-8a0b-11f1-99f6-5e35296ebe5c.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">kamal singh bisht</dc:creator>
+      <pubDate>Wed, 29 Jul 2026 12:51:56 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9245/#v1.0.0</guid>
+    </item>
+    <item>
+      <title>Aruba Central API APP - v1.1.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9246/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects network monitoring data from Aruba Central via REST API and provides dashboards for monitoring access points and network infrastructure.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Aruba Central App for Splunk collects network monitoring data from Aruba Central via REST API and ingests it into Splunk for analysis and visualization. The app uses OAuth2 authentication to securely connect to Aruba Central&amp;#x27;s API endpoints and retrieve telemetry from access points and network infrastructure. Data is collected through a Python-based modular input script and indexed under the aruba_central:json source type. The app provides pre-built dashboards for monitoring Aruba Central access points and network infrastructure health. OAuth2 token management is handled automatically, including token refresh with a built-in expiration buffer. Configuration is performed through a web-based Setup page where administrators provide API credentials. The app securely stores authentication information using Splunk&amp;#x27;s native password storage mechanism and creates local configuration files to maintain API endpoint settings.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Lanzo MARSON</dc:creator>
+      <pubDate>Wed, 29 Jul 2026 12:50:42 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9246/#v1.1.0</guid>
+    </item>
+    <item>
+      <title>V2 Punchcard vis - v1.5.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9251/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Provides a custom Punchcard visualization for displaying metric density across two intersecting dimensions using proportionally sized circles.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The v2-Punchcard-visualisation app provides a custom visualization for Splunk that enables users to display metric density across two intersecting dimensions. The Punchcard visualization represents data points as circles sized proportionally to aggregated metric values, making it particularly effective for displaying cyclical patterns and trends. Common use cases include visualizing activity patterns across hours of the day and days of the week, identifying peak usage times, and analyzing temporal distribution of events. The visualization excels at revealing patterns in time-series data where both horizontal and vertical dimensions have significance, such as monitoring system load patterns, user activity trends, or incident occurrence across time periods. The app includes a gallery dashboard demonstrating the visualization&amp;#x27;s capabilities and typical configuration patterns.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e614195c-868e-11f1-b938-fa67bb79bec7.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Adam Liquorish</dc:creator>
+      <pubDate>Wed, 29 Jul 2026 12:48:08 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9251/#v1.5.0</guid>
+    </item>
+    <item>
+      <title>Data Dictionary app for Splunk - v1.1.3 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9255/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Initial Public release. Please report any issues.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Data Dictionary catalogs your Splunk indexes and sourcetypes and attaches governance metadata to them.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Catalogs your Splunk indexes and sourcetypes with governance metadata (data owner, PII status, export classification, security owner) and exposes it to AI agents as MCP tools.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Will Searle</dc:creator>
+      <pubDate>Wed, 29 Jul 2026 12:46:58 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9255/#v1.1.3</guid>
+    </item>
+    <item>
+      <title>BXTI Add-on for Global Relay - v1.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9263/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Initial public release of BXTI Add-on for Global Relay.
+
+• Collects audit and activity events from the Global Relay Event Log API.
+
+• Provides secure Splunk-managed credential storage.
+
+• Supports configurable API endpoints, destination indexes, and polling intervals.
+
+• Uses continuation URL checkpointing for reliable incremental collection.
+
+• Stores individual API records as JSON using the globalrelay:eventlog sourcetype.
+
+• Includes automatic JSON field extraction.
+
+• Provides initial CIM mappings for Authentication, Data Access, and Change activity.
+
+• Includes the globalrelay\_index macro for environment-independent search scoping.
+
+• Supports Python 3 and Python 3.13 REST handlers.
+
+• Validated with Splunk Enterprise 10.4.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collect Global Relay Event Log API audit events in Splunk with secure credential storage, configurable polling, checkpointing, JSON extraction, and initial CIM mappings.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;BXTI Add-on for Global Relay collects audit and activity events from the Global Relay Event Log API and indexes them in Splunk using the globalrelay:eventlog sourcetype. It provides secure credential management, configurable collection intervals, continuation checkpointing, JSON field extraction, and initial CIM mappings for authentication, data access, and change activity.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/47ae2e2a-8714-11f1-bf98-eee9bee3a749.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benedict Tawiah</dc:creator>
+      <pubDate>Wed, 29 Jul 2026 12:41:55 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9263/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>Agentic UCC add-on builder for Splunk - v1.0.3+3add881 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9277/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;An agentic Splunk add-on builder: describe it in chat, and a tool-calling AI agent authors it, builds with ucc-gen, runs AppInspect and self-corrects until the package is clean.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Building a Splunk add-on that actually passes **AppInspect** is normally a
+slow, expert-only loop: scaffold with `ucc-gen`, package it, run
+`splunk-appinspect`, read the findings, hand-fix the source, rebuild,
+re-inspect — repeat. UCC App Builder closes that loop with a tool-calling AI
+agent: you describe the add-on in chat, the agent edits the source files,
+grounds the design in your **live Splunk** (real indexes/sourcetypes/SPL, via
+read-only MCP tools you approve), then **builds → runs AppInspect →
+self-corrects → repeats until the package is AppInspect-clean**, showing the
+whole trace inline as it goes.
+
+It ships as a fully self-contained native Splunk app — no Node sidecar.
+Everything the embedded IDE needs (build, AppInspect, the LLM proxy, an input
+emulator) runs in Splunk&amp;#x27;s own Python via persistent REST handlers, with
+`ucc-gen` and AppInspect vendored into the app itself.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/21f10618-8a06-11f1-93e6-fae5e84d2619.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Will Searle</dc:creator>
+      <pubDate>Wed, 29 Jul 2026 12:38:07 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9277/#v1.0.3+3add881</guid>
+    </item>
+    <item>
+      <title>Incident Managemnet for Splunk - v1.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9281/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Lightweight, native Incident Management app for Splunk Core. Consolidates alert spikes into 24-hour episode clusters, tracks incident triage states via KV Store, and provides SOC analysts with interactive review drawers, audit logs, and SLA response analytics.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk Incident Management (`splunkIM`) provides a lightweight, enterprise-grade incident response framework built natively for Splunk Core. Designed as an efficient alternative to heavy enterprise suites, `splunkIM` solves the critical challenge of alert fatigue by grouping disparate search alerts into actionable incident episodes.
+Key Features &amp;amp; Capabilities:
+• Smart Incident Aggregation: Consolidates raw summary alerts by entity host and category using a rolling 24-hour aggregation window.
+• KV Store State Persistence: Stores and tracks incident states (New, Active, In Progress, Pending, Resolved) with full user attribution and edit history.
+• Dynamic Incident Review Console: Feature-rich triage drawer allows SOC analysts to update severity, assign owners, add notes, and drill down into underlying summary events without leaving the console.
+• SLA &amp;amp; Operational Analytics: Out-of-the-box dashboards tracking Mean Time to Acknowledge (MTTA), Mean Time to Resolve (MTTR), severity distribution, and workload per analyst.
+• Automatic Episode Re-opening: Re-triggers existing resolved incidents if a matching alert fires within 24 hours of resolution.
+• Turnkey Alert Integration: Easily route custom saved searches into `splunkIM` using standard summary indexing.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Venkatesh Geriti</dc:creator>
+      <pubDate>Wed, 29 Jul 2026 12:37:00 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9281/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>Kemp WAF - v1.0.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9283/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Kemp WAF Splunk App addresses is built for  parsing, extracting, and visualizing Kemp Web Application Firewall (WAF) logs in Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">belal khaleel</dc:creator>
+      <pubDate>Wed, 29 Jul 2026 12:36:15 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9283/#v1.0.0</guid>
+    </item>
+    <item>
+      <title>Claude Desktop Monitor - v0.1.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9286/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;This app monitors Claude Desktop by collecting local application logs, MCP server logs, session transcripts, and Cowork virtual machine logs.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app monitors Claude Desktop by collecting local application logs, MCP server logs, session transcripts, and Cowork virtual machine logs. It applies field extractions at index time and includes dashboards for operational analysis.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/be91a842-8b00-11f1-9ff3-42232f92b11b.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Koichi Kuranami</dc:creator>
+      <pubDate>Wed, 29 Jul 2026 12:35:23 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9286/#v0.1.0</guid>
+    </item>
+    <item>
+      <title>AirSpace Watch TA (tar1090 / dump1090) - v1.0.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9301/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Initial public release&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Splunk modular input that polls a local tar1090 / dump1090-fa receiver and emits one Splunk event per aircraft on every poll cycle. It is the production data source for our AirspaceWatch dashboard but could be used for a variety of logging/monitoring of Air traffic with an external ADS-B device &amp;amp; tar1090 and/or Vessel traffic if integrated with AIS.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk modular input that polls a local tar1090 / dump1090-fa receiver and emits one Splunk event per aircraft on every poll cycle. It is the production data source for our AirspaceWatch dashboard but could be used for a variety of logging/monitoring of Air traffic with an external ADS-B device &amp;amp; tar1090 and/or Vessel traffic if integrated with AIS.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Will Searle</dc:creator>
+      <pubDate>Wed, 29 Jul 2026 12:34:52 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9301/#v1.0.0</guid>
+    </item>
+    <item>
+      <title>Threat Hunting Essentials - v1.3.61 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7633/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
+
+For Premium Version - Contact sales https://www.avertpoint.com/contactus.html
+
+It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
+
+Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
+
+1. Backdoor.
+2. Worms.
+3. Ransomware.
+4. Bots.
+5. Trojan horses.
+6. Keyloggers.
+7. Rootkits.
+8. Spyware.
+9. Fileless malware.
+10. Cryptojacking.
+11. Wiper malware.
+12. Adware.
+14. Viruses
+15. P2P-Worm
+16. Internet Worms
+17. Net-worm
+18. Clickjacking
+19. Cryptominer
+20. Fileless malware
+
+You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
+
+Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d9581af4-8b40-11f1-b89b-a20c771dcf52.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
+      <pubDate>Wed, 29 Jul 2026 11:31:41 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.61</guid>
     </item>
     <item>
       <title>Auto Update MaxMind Database - v4.2.0 [Version Update]</title>
@@ -376,44 +685,6 @@ Differentiator
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Systemslab ApS</dc:creator>
       <pubDate>Tue, 28 Jul 2026 13:14:41 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7177/#v26.7.27</guid>
-    </item>
-    <item>
-      <title>Threat Hunting Essentials - v1.3.61 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7633/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
-
-For Premium Version - Contact sales https://www.avertpoint.com/contactus.html
-
-It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
-
-Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
-
-1. Backdoor.
-2. Worms.
-3. Ransomware.
-4. Bots.
-5. Trojan horses.
-6. Keyloggers.
-7. Rootkits.
-8. Spyware.
-9. Fileless malware.
-10. Cryptojacking.
-11. Wiper malware.
-12. Adware.
-14. Viruses
-15. P2P-Worm
-16. Internet Worms
-17. Net-worm
-18. Clickjacking
-19. Cryptominer
-20. Fileless malware
-
-You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
-
-Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/aef89a00-8a77-11f1-9ff3-42232f92b11b.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
-      <pubDate>Tue, 28 Jul 2026 13:13:16 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.61</guid>
     </item>
     <item>
       <title>Ensign Akamai Web Security Add-on - v2.0.0 [Version Update]</title>
@@ -2353,124 +2624,6 @@ Version 1.1.2 introduces a comprehensive refresh of the WTI dashboards, providin
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
       <pubDate>Tue, 21 Jul 2026 16:26:06 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6027/#v1.2.1</guid>
-    </item>
-    <item>
-      <title>Flashpoint - v3.0.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6019/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Escape dynamic widget values before embedding them in JavaScript contexts.
-* Encode report identifiers before including them in request paths.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app implements the investigative actions for the Flashpoint on the Phantom Platform&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ddf78534-8520-11f1-b30e-8e01d7cd9886.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 16:26:04 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6019/#v3.0.2</guid>
-    </item>
-    <item>
-      <title>CSC DomainManager - v1.2.3 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6767/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Encode domain names before inserting them into CSC API URL paths.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Connects to CSC Domain manager platform using CSC Domain manager API services&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/88a8f8e8-851f-11f1-a5ef-f633efeda95e.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 16:16:31 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6767/#v1.2.3</guid>
-    </item>
-    <item>
-      <title>ThreatStream - v4.0.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5856/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Make exact-value reputation searches use an encoded exact filter and discard mismatched intelligence records.
-* Fail reputation actions when requested external-reference enrichment fails and preserve well-formed result rows.
-* Reuse only connector-tracked incident containers and reject unrecognized or duplicate container matches.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Integrates a variety of generic, reputation, and investigative actions from the Anomali ThreatStream threat intelligence platform&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/5188640e-851d-11f1-b30e-8e01d7cd9886.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 16:00:40 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5856/#v4.0.2</guid>
-    </item>
-    <item>
-      <title>Git - v5.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5791/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Prevent asset credentials from being sent to a caller-selected repository endpoint.
-* Constrain repository names and clone destinations to the connector state directory.
-* Reject out-of-repository file paths before add, update, or delete operations.
-* Reject Git commit identities that could inject configuration sections.
-* Require a pinned server host key for SSH repository connections.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with git and supports common git actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/33d9f346-851d-11f1-b30e-8e01d7cd9886.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 15:59:50 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5791/#v5.0.0</guid>
-    </item>
-    <item>
-      <title>Fidelis Network - v1.0.6 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6414/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Validate alert identifiers as positive integers before using them in Fidelis API requests
-* Exclude Fidelis token endpoint responses from action debug data&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with Fidelis Network to execute various investigate and generic actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2ebdd7e2-851d-11f1-863c-ca9ca0d23b5d.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 15:59:41 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6414/#v1.0.6</guid>
-    </item>
-    <item>
-      <title>Cisco Meraki - v1.0.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7960/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Encode network, organization, and device identifiers before using them in API paths.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with Cisco Meraki to provide management and monitoring capabilities for Meraki networks and devices&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/294f3c10-851d-11f1-9075-12aab1d3d17b.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 15:59:32 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7960/#v1.0.2</guid>
-    </item>
-    <item>
-      <title>F5 BIG-IP LTM - v2.1.4 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5948/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Encode user-controlled F5 REST path components before building request URLs
-* Enable TLS certificate verification by default
-* Place disabled nodes in Forced Offline state and verify node state changes
-* Bound F5 list-action pagination to prevent unbounded request loops&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app implements investigate and generic actions to integrate with an F5 BIG-IP LTM instance to manage pools and nodes&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/267fa272-851d-11f1-863c-ca9ca0d23b5d.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 15:59:27 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5948/#v2.1.4</guid>
-    </item>
-    <item>
-      <title>Venafi - v2.1.5 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5862/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Stream certificate downloads to a temporary file before adding them to the SOAR vault.
-* Report an error when Venafi does not confirm certificate enrollment.
-* Reject unsuccessful certificate downloads before adding them to the SOAR vault.
-* Report an error when Venafi does not confirm certificate renewal or revocation.
-* Keep certificate-export passwords out of action results.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with an instance of Venafi to perform generic and investigative actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/209ade62-851d-11f1-9075-12aab1d3d17b.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 15:59:17 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5862/#v2.1.5</guid>
-    </item>
-    <item>
-      <title>Palo Alto Networks Firewall - v2.1.6 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5830/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Block bare URL hosts and their subdomains while warning when a pathful URL remains exact.
-* Use service any for connector-created IP and application containment deny rules.
-* Migrate the connector URL policy to a top-priority category-scoped deny rule that remains inert when empty.
-* Reject CIDR /0 and IP wildcard masks while continuing to support valid IP addresses, ranges, and CIDRs.
-* Commit only the candidate configuration changes made by the configured connector administrator.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with the Palo Alto Networks Firewall to support containment and investigative actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/1c6dd498-851d-11f1-9075-12aab1d3d17b.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 15:59:11 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5830/#v2.1.6</guid>
-    </item>
-    <item>
-      <title>NetWitness Endpoint - v2.0.14 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5828/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Fix domain blocklisting for malformed URLs and internationalized domain names.
-* Preserve every requested API result from short response pages.
-* Remove invisible Unicode format controls from ingested IOC data.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app supports executing various endpoint-based investigative and containment actions on RSA NetWitness Endpoint&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/fb786ac8-851c-11f1-9a4d-82fabe4198dd.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 15:58:15 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5828/#v2.0.14</guid>
-    </item>
-    <item>
-      <title>ThreatConnect - v4.0.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5853/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Remove Unicode format controls from ingested indicator values.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with the ThreatConnect platform to provide various hunting actions in addition to threat ingestion&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/fa08a4f0-851c-11f1-a5ef-f633efeda95e.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 15:58:14 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5853/#v4.0.1</guid>
-    </item>
-    <item>
-      <title>urlscan.io - v4.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5861/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Verify urlscan.io TLS certificates by default while retaining an explicit opt-out. (PSAAS-32252)
-* Stream screenshots through a bounded vault temporary file. (PSAAS-33424)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app supports investigative actions on urlscan.io&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/1ea69712-8519-11f1-b8d1-8a59cb0e58eb.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 21 Jul 2026 15:30:37 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5861/#v4.0.0</guid>
     </item>
   </channel>
 </rss>
