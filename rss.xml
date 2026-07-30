@@ -6,7 +6,129 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Thu, 30 Jul 2026 15:03:07 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 30 Jul 2026 17:16:00 +0000</lastBuildDate>
+    <item>
+      <title>Cisco Catalyst Add-on for Splunk - v3.2.42 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7538/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;##### Catalyst Center Reports
+
+* **Compliance report sourcetype routing fixed:** Some Catalyst Center compliance reports, including `NetworkDeviceComplianceDaily`, were incorrectly indexed as the generic `cisco:catalyst:center:report` sourcetype because their broad `dataCategory` was `Network`. Classification now evaluates specific report/view names and IDs before broad category metadata. Compliance reports route to `cisco:catalyst:center:compliance:report`, inventory reports route to `cisco:catalyst:center:inventory:report`, and all other report categories route to `cisco:catalyst:center:report` with `report_category`. This restores the expected data source for Network Compliance dashboards and searches.
+* **Automatic discovery added and highly recommended:** The Reports input can now enumerate Catalyst Center on every poll and collect all current reports plus reports created later. Enable **Automatically collect all reports (Recommended)** for most deployments. The older **Select all** action remains a fixed snapshot and does not automatically include reports created after the input is saved.
+* **Report configuration and flow are visible in Data Collection Health:** The Catalyst Center tab now shows each configured Reports input, enabled state, automatic/fixed/legacy mode, configured scope, observed report names and categories, resulting sourcetypes, event count, and latest event in the selected window.
+
+##### Platform and compatibility
+
+* **Splunk 10.6 / Python 3.13 readiness:** Added `python.required = 3.13` on all 28 modular inputs and 42 REST handler stanzas so Splunk 10.2+ can select the Python 3.13 runtime. Retained `python.version = python3` on all stanzas for Splunk 10.0/10.1 compatibility (`python.required` is ignored on those releases).
+
+##### Custom API endpoint catalogs
+
+* **Recommended-by-default endpoint picker:** SD-WAN and Catalyst Center Custom API inputs now open with **Recommended only** enabled. This keeps routine observability reads focused while allowing administrators to turn the filter off and browse the broader safe GET catalog. **Show live-checked only** remains off by default so valid endpoints are not hidden merely because they were not part of the representative live-check sample.
+* **SD-WAN catalog expanded safely:** Expanded the catalog to the full allow-listed set of safe, parameter-free vManage GET endpoints, tiered into Recommended and Advanced views. The picker displays the current Recommended and total available endpoint counts from the installed catalog. Certificate status (`/dataservice/certificate/list/status`), certificate detail (`/dataservice/certificate/stats/detail`), and certificate expiration status (`/dataservice/certificate/stats/summary`) are included in the Recommended view.
+* **SD-WAN operational safeguards:** Excluded request-body, path-templated, deprecated, API-introspection, heavy duplicate, dedicated-input overlap, `/dataservice/device/action/*`, and action-like GET operations. The expanded view remains an allow-list and never becomes an arbitrary-URL collector.
+* **Catalyst Center catalog expanded and tiered:** The catalog now includes the full allow-listed safe GET surface from the installed OpenAPI catalog, tiered into Recommended observability reads and Advanced configuration or operational reads. The picker displays the current Recommended and total available endpoint counts. Credential-configuration, count-only, deprecated, path-templated, and dedicated-input overlap endpoints remain excluded.
+* **Live-check behavior scaled for larger catalogs:** REST handlers live-check a representative sample of Recommended endpoints instead of probing every catalog entry. Selecting an untested endpoint runs a targeted check, and the handlers report current Recommended and total available counts to the UI.
+* **Existing inputs remain editable:** When an existing input uses an Advanced endpoint, the picker automatically reveals the broader catalog so the saved selection is not hidden.
+
+##### Dashboards and usability
+
+* **User Guide package-version SPL hardened for Splunk 10.6:** Updated the live package-version REST search to use Splunk 10.6-compatible `if()` boolean logic, rename dotted REST fields to `current_version` and `latest_version`, and compute `update_status` with nested `if()` instead of `case()`.
+* **Custom API guidance expanded:** Added operator guidance for Recommended and Advanced endpoint tiers, certificate monitoring, targeted live checks, load review, safe starting intervals, and the exclusions that protect controllers from operational actions.
+* **Duplicate-input detection across all API products:** Data Collection Health now correlates product, normalized remote-system identity, sourcetype, input stanza, account, destination index, and collector host. Overview provides a consolidated detector, while Catalyst Center, Cyber Vision, SD-WAN, and ISE each provide a focused panel. This detects both duplicate stanzas on one heavy forwarder and the same collection path configured on multiple heavy forwarders, including inputs that use different account labels or destination indexes.
+* **Collector hosts and installed TA releases are visible without REST:** Overview and every product tab, including Network Syslog, now identify the Splunk hosts onboarding or processing Cisco data. Forwarded structured poll logs report the locally installed TA version/build and authoritative modular-input owner; sampled `per_sourcetype_thruput` metrics add processed event, KB/s, EPS, event-age, and pipeline-latency evidence. Passive syslog rows identify the receiving indexer and explicitly note that an intermediate heavy-forwarder identity is not preserved in the events.
+* **Operational tables are easier to scan:** Repeated TA internal-log events collapse into one row per input with an occurrence count and latest diagnostics. Onboarding-host tables use larger text, stable column widths, horizontal scrolling, numeric alignment, and trimmed long evidence lists with hover text instead of producing extremely tall rows.
+* **Dashboard reliability and information dialogs improved:** Fixed the shared duplicate-detector query so Dashboard Studio token parsing cannot corrupt regular-expression anchors, eliminating the related search failures across all tabs. Information dialogs no longer show a duplicate divider above their first section while retaining separators between later sections.
+
+##### Collector telemetry
+
+* **Local release metadata on structured TA logs:** Canonical TA log events now include `ta_version` and `ta_build`, read from the add-on installation on the collector itself. Search-time extractions make those fields available to Data Collection Health, allowing a search head to reveal heavy-forwarder release drift without calling Splunk REST.
+* **SD-WAN remote-system identity preserved:** SD-WAN energy-stat events now retain `vmanage_host` independently from the managed-device `host` field so duplicate detection can identify the actual vManage collection target.
+* **Evidence boundaries are explicit:** A processing-only `metrics.log` host may be a heavy forwarder or an indexer, and `per_sourcetype_thruput` is top-N sampled. An installed but idle host that emits no TA telemetry still requires deployment inventory or authenticated REST to prove.
+
+##### Maintenance
+
+* **Input spec consistency test updated:** Added `python.required` to the standard `inputs.conf` keys validated by `test_inputs_spec_consistency.py`.
+* **Endpoint catalog regression coverage:** Added catalog-builder and REST-handler tests for recommendation counts, sensitive and operational exclusions, representative probing, targeted probing, and response metadata. The full modular-input smoke suite continues to validate all Cisco product inputs.
+* **Health-dashboard regression coverage expanded:** Added tests for cross-product duplicate identity, collector/version evidence, processing metrics, per-input log aggregation, table readability, and the first-section information-dialog divider behavior.
+
+##### Upgrade notes
+
+* No reconfiguration required; existing accounts, inputs, and KV Store checkpoints are preserved.
+* Existing Reports input stanzas are preserved and do not need to be deleted or recreated. Legacy named-report fields and fixed multi-select configurations continue to work.
+* For ongoing report coverage, edit the Reports input and enable **Automatically collect all reports (Recommended)**. Saved fixed selections remain stored and are restored if automatic mode is later disabled.
+* Corrected sourcetype routing applies to newly collected events. Events already indexed under `cisco:catalyst:center:report` are not rewritten; account for the historical generic sourcetype in temporary searches until corrected compliance events arrive.
+* Use **Data Collection Health &gt; Catalyst Center &gt; Scheduled Reports - Configuration vs Observed Data** to confirm the configured mode, observed `report_name`, assigned sourcetype, event count, and last event.
+* Existing Custom API inputs that use an Advanced endpoint continue to work and remain visible when edited.
+* Forward `_internal` logs from heavy forwarders to the search tier to populate collector ownership and locally installed TA version/build fields in Data Collection Health.
+* Recommended for Splunk Enterprise 10.6 deployments or any environment planning a Python 3.13 runtime upgrade. On Splunk 10.0/10.1, runtime selection continues to use `python.version = python3`; `python.required` takes effect only on Splunk 10.2+.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Cisco Catalyst Add-on for Splunk collects and normalizes API telemetry from Cisco Catalyst Center, SD-WAN (vManage), ISE, and Cyber Vision through modular inputs. It includes CIM-aligned knowledge objects, backward-compatible DNAC/Catalyst sourcetype coverage, and built-in health monitoring for input status, errors, and API load.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Author - Cisco Systems
+
+Supported Cisco Products:
+Cisco Catalyst SD-WAN
+Cisco Identity Services Engine
+Cisco Catalyst Center
+Cyber Vision
+Cisco Network Infrastructure Devices which include the below platform series:
+* Cisco Catalyst series switches (1000, 1200, 1300, 2960, 3650, 3750, 4500, 6500, 6800, 7600, 9000 etc.)
+* Cisco ASR - Aggregation Services Routers (900, 1000, 5000, 9000 etc.)
+* Cisco ISR - Integrated Services Routers (800, 1900, 2900, 3900, 4451 etc.)
+* Cisco Nexus Data Center switches (1000V, 2000, 3000, 4000, 5000, 6000, 7000, 9000 etc.)
+* Cisco Carrier Routing System
+* Other Cisco IOS based devices (Metro Ethernet, Industrial Ethernet, Blade Switches, Connected Grid etc.)
+* Cisco Access Points
+* Cisco WLC - WLAN Controller&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco Systems, Inc.</dc:creator>
+      <pubDate>Thu, 30 Jul 2026 16:14:38 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7538/#v3.2.42</guid>
+    </item>
+    <item>
+      <title>Threat Hunting Essentials - v1.3.63 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7633/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
+
+For Premium Version - Contact sales https://www.avertpoint.com/contactus.html
+
+It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
+
+Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
+
+1. Backdoor.
+2. Worms.
+3. Ransomware.
+4. Bots.
+5. Trojan horses.
+6. Keyloggers.
+7. Rootkits.
+8. Spyware.
+9. Fileless malware.
+10. Cryptojacking.
+11. Wiper malware.
+12. Adware.
+14. Viruses
+15. P2P-Worm
+16. Internet Worms
+17. Net-worm
+18. Clickjacking
+19. Cryptominer
+20. Fileless malware
+
+You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
+
+Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/03c17c08-8c0a-11f1-ab90-b2de66a2433c.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
+      <pubDate>Thu, 30 Jul 2026 15:58:41 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.63</guid>
+    </item>
+    <item>
+      <title>Splunk Add-on for Unix and Linux - v10.3.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/833/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* removed spl2 content&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;*** Important: Read upgrade Instructions and test add-on update before deploying to production ***
+There are changes to default indexes and .conf changes in version 6.0 of Splunk Add-on for Unix and Linux that can break an existing installation if upgrade instructions are not followed in detail. If an existing Splunk Add-on for Unix and Linux is being upgraded, please test in a non-production environment first.
+
+
+The Splunk Add-on for Unix and Linux works with the Splunk App for Unix and Linux to provide rapid insights and operational visibility into large-scale Unix and Linux environments.  With its new pre-packaged alerting capability, flexible service-based hosts grouping, and easy management of many data sources, it arms administrators with a powerful ability to quickly identify performance and capacity bottlenecks and outliers in Unix and Linux environments.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d6a944bc-8c2c-11f1-a47c-ba8ed13b06cf.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Thu, 30 Jul 2026 15:41:28 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/833/#v10.3.2</guid>
+    </item>
     <item>
       <title>Splunk Add-on for Amazon Web Services (AWS) - v8.2.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/1876/</link>
@@ -139,44 +261,6 @@ OktaIM2:appUser&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; 
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Thu, 30 Jul 2026 12:48:26 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6553/#v5.1.0</guid>
-    </item>
-    <item>
-      <title>Threat Hunting Essentials - v1.3.62 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7633/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
-
-For Premium Version - Contact sales https://www.avertpoint.com/contactus.html
-
-It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
-
-Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
-
-1. Backdoor.
-2. Worms.
-3. Ransomware.
-4. Bots.
-5. Trojan horses.
-6. Keyloggers.
-7. Rootkits.
-8. Spyware.
-9. Fileless malware.
-10. Cryptojacking.
-11. Wiper malware.
-12. Adware.
-14. Viruses
-15. P2P-Worm
-16. Internet Worms
-17. Net-worm
-18. Clickjacking
-19. Cryptominer
-20. Fileless malware
-
-You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
-
-Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/03c17c08-8c0a-11f1-ab90-b2de66a2433c.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
-      <pubDate>Thu, 30 Jul 2026 11:31:40 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.62</guid>
     </item>
     <item>
       <title>IPInfo App for Splunk - v9.6.0 [Version Update]</title>
@@ -564,78 +648,6 @@ Please see Release notes of version 2.0.1 for more details&lt;/p&gt;&lt;br&gt;&l
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
       <pubDate>Thu, 30 Jul 2026 08:18:21 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5689/#v2.1.0</guid>
-    </item>
-    <item>
-      <title>Cisco Catalyst Add-on for Splunk - v3.2.42 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7538/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;##### Catalyst Center Reports
-
-* **Compliance report sourcetype routing fixed:** Some Catalyst Center compliance reports, including `NetworkDeviceComplianceDaily`, were incorrectly indexed as the generic `cisco:catalyst:center:report` sourcetype because their broad `dataCategory` was `Network`. Classification now evaluates specific report/view names and IDs before broad category metadata. Compliance reports route to `cisco:catalyst:center:compliance:report`, inventory reports route to `cisco:catalyst:center:inventory:report`, and all other report categories route to `cisco:catalyst:center:report` with `report_category`. This restores the expected data source for Network Compliance dashboards and searches.
-* **Automatic discovery added and highly recommended:** The Reports input can now enumerate Catalyst Center on every poll and collect all current reports plus reports created later. Enable **Automatically collect all reports (Recommended)** for most deployments. The older **Select all** action remains a fixed snapshot and does not automatically include reports created after the input is saved.
-* **Report configuration and flow are visible in Data Collection Health:** The Catalyst Center tab now shows each configured Reports input, enabled state, automatic/fixed/legacy mode, configured scope, observed report names and categories, resulting sourcetypes, event count, and latest event in the selected window.
-
-##### Platform and compatibility
-
-* **Splunk 10.6 / Python 3.13 readiness:** Added `python.required = 3.13` on all 28 modular inputs and 42 REST handler stanzas so Splunk 10.2+ can select the Python 3.13 runtime. Retained `python.version = python3` on all stanzas for Splunk 10.0/10.1 compatibility (`python.required` is ignored on those releases).
-
-##### Custom API endpoint catalogs
-
-* **Recommended-by-default endpoint picker:** SD-WAN and Catalyst Center Custom API inputs now open with **Recommended only** enabled. This keeps routine observability reads focused while allowing administrators to turn the filter off and browse the broader safe GET catalog. **Show live-checked only** remains off by default so valid endpoints are not hidden merely because they were not part of the representative live-check sample.
-* **SD-WAN catalog expanded safely:** Expanded the catalog to the full allow-listed set of safe, parameter-free vManage GET endpoints, tiered into Recommended and Advanced views. The picker displays the current Recommended and total available endpoint counts from the installed catalog. Certificate status (`/dataservice/certificate/list/status`), certificate detail (`/dataservice/certificate/stats/detail`), and certificate expiration status (`/dataservice/certificate/stats/summary`) are included in the Recommended view.
-* **SD-WAN operational safeguards:** Excluded request-body, path-templated, deprecated, API-introspection, heavy duplicate, dedicated-input overlap, `/dataservice/device/action/*`, and action-like GET operations. The expanded view remains an allow-list and never becomes an arbitrary-URL collector.
-* **Catalyst Center catalog expanded and tiered:** The catalog now includes the full allow-listed safe GET surface from the installed OpenAPI catalog, tiered into Recommended observability reads and Advanced configuration or operational reads. The picker displays the current Recommended and total available endpoint counts. Credential-configuration, count-only, deprecated, path-templated, and dedicated-input overlap endpoints remain excluded.
-* **Live-check behavior scaled for larger catalogs:** REST handlers live-check a representative sample of Recommended endpoints instead of probing every catalog entry. Selecting an untested endpoint runs a targeted check, and the handlers report current Recommended and total available counts to the UI.
-* **Existing inputs remain editable:** When an existing input uses an Advanced endpoint, the picker automatically reveals the broader catalog so the saved selection is not hidden.
-
-##### Dashboards and usability
-
-* **User Guide package-version SPL hardened for Splunk 10.6:** Updated the live package-version REST search to use Splunk 10.6-compatible `if()` boolean logic, rename dotted REST fields to `current_version` and `latest_version`, and compute `update_status` with nested `if()` instead of `case()`.
-* **Custom API guidance expanded:** Added operator guidance for Recommended and Advanced endpoint tiers, certificate monitoring, targeted live checks, load review, safe starting intervals, and the exclusions that protect controllers from operational actions.
-* **Duplicate-input detection across all API products:** Data Collection Health now correlates product, normalized remote-system identity, sourcetype, input stanza, account, destination index, and collector host. Overview provides a consolidated detector, while Catalyst Center, Cyber Vision, SD-WAN, and ISE each provide a focused panel. This detects both duplicate stanzas on one heavy forwarder and the same collection path configured on multiple heavy forwarders, including inputs that use different account labels or destination indexes.
-* **Collector hosts and installed TA releases are visible without REST:** Overview and every product tab, including Network Syslog, now identify the Splunk hosts onboarding or processing Cisco data. Forwarded structured poll logs report the locally installed TA version/build and authoritative modular-input owner; sampled `per_sourcetype_thruput` metrics add processed event, KB/s, EPS, event-age, and pipeline-latency evidence. Passive syslog rows identify the receiving indexer and explicitly note that an intermediate heavy-forwarder identity is not preserved in the events.
-* **Operational tables are easier to scan:** Repeated TA internal-log events collapse into one row per input with an occurrence count and latest diagnostics. Onboarding-host tables use larger text, stable column widths, horizontal scrolling, numeric alignment, and trimmed long evidence lists with hover text instead of producing extremely tall rows.
-* **Dashboard reliability and information dialogs improved:** Fixed the shared duplicate-detector query so Dashboard Studio token parsing cannot corrupt regular-expression anchors, eliminating the related search failures across all tabs. Information dialogs no longer show a duplicate divider above their first section while retaining separators between later sections.
-
-##### Collector telemetry
-
-* **Local release metadata on structured TA logs:** Canonical TA log events now include `ta_version` and `ta_build`, read from the add-on installation on the collector itself. Search-time extractions make those fields available to Data Collection Health, allowing a search head to reveal heavy-forwarder release drift without calling Splunk REST.
-* **SD-WAN remote-system identity preserved:** SD-WAN energy-stat events now retain `vmanage_host` independently from the managed-device `host` field so duplicate detection can identify the actual vManage collection target.
-* **Evidence boundaries are explicit:** A processing-only `metrics.log` host may be a heavy forwarder or an indexer, and `per_sourcetype_thruput` is top-N sampled. An installed but idle host that emits no TA telemetry still requires deployment inventory or authenticated REST to prove.
-
-##### Maintenance
-
-* **Input spec consistency test updated:** Added `python.required` to the standard `inputs.conf` keys validated by `test_inputs_spec_consistency.py`.
-* **Endpoint catalog regression coverage:** Added catalog-builder and REST-handler tests for recommendation counts, sensitive and operational exclusions, representative probing, targeted probing, and response metadata. The full modular-input smoke suite continues to validate all Cisco product inputs.
-* **Health-dashboard regression coverage expanded:** Added tests for cross-product duplicate identity, collector/version evidence, processing metrics, per-input log aggregation, table readability, and the first-section information-dialog divider behavior.
-
-##### Upgrade notes
-
-* No reconfiguration required; existing accounts, inputs, and KV Store checkpoints are preserved.
-* Existing Reports input stanzas are preserved and do not need to be deleted or recreated. Legacy named-report fields and fixed multi-select configurations continue to work.
-* For ongoing report coverage, edit the Reports input and enable **Automatically collect all reports (Recommended)**. Saved fixed selections remain stored and are restored if automatic mode is later disabled.
-* Corrected sourcetype routing applies to newly collected events. Events already indexed under `cisco:catalyst:center:report` are not rewritten; account for the historical generic sourcetype in temporary searches until corrected compliance events arrive.
-* Use **Data Collection Health &gt; Catalyst Center &gt; Scheduled Reports - Configuration vs Observed Data** to confirm the configured mode, observed `report_name`, assigned sourcetype, event count, and last event.
-* Existing Custom API inputs that use an Advanced endpoint continue to work and remain visible when edited.
-* Forward `_internal` logs from heavy forwarders to the search tier to populate collector ownership and locally installed TA version/build fields in Data Collection Health.
-* Recommended for Splunk Enterprise 10.6 deployments or any environment planning a Python 3.13 runtime upgrade. On Splunk 10.0/10.1, runtime selection continues to use `python.version = python3`; `python.required` takes effect only on Splunk 10.2+.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Cisco Catalyst Add-on for Splunk collects and normalizes API telemetry from Cisco Catalyst Center, SD-WAN (vManage), ISE, and Cyber Vision through modular inputs. It includes CIM-aligned knowledge objects, backward-compatible DNAC/Catalyst sourcetype coverage, and built-in health monitoring for input status, errors, and API load.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Author - Cisco Systems
-
-Supported Cisco Products:
-Cisco Catalyst SD-WAN
-Cisco Identity Services Engine
-Cisco Catalyst Center
-Cyber Vision
-Cisco Network Infrastructure Devices which include the below platform series:
-* Cisco Catalyst series switches (1000, 1200, 1300, 2960, 3650, 3750, 4500, 6500, 6800, 7600, 9000 etc.)
-* Cisco ASR - Aggregation Services Routers (900, 1000, 5000, 9000 etc.)
-* Cisco ISR - Integrated Services Routers (800, 1900, 2900, 3900, 4451 etc.)
-* Cisco Nexus Data Center switches (1000V, 2000, 3000, 4000, 5000, 6000, 7000, 9000 etc.)
-* Cisco Carrier Routing System
-* Other Cisco IOS based devices (Metro Ethernet, Industrial Ethernet, Blade Switches, Connected Grid etc.)
-* Cisco Access Points
-* Cisco WLC - WLAN Controller&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a1664f5c-8ba0-11f1-862d-5ae126861cec.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco Systems, Inc.</dc:creator>
-      <pubDate>Thu, 30 Jul 2026 07:33:51 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7538/#v3.2.42</guid>
     </item>
     <item>
       <title>Splunk App for Secure Networking - v1.0.31 [New App Release]</title>
@@ -1537,7 +1549,7 @@ Create a free account at: https://www.ipqualityscore.com/create-account/splunk&l
       <guid>https://splunkbase.splunk.com/app/5423/#v1.2.5</guid>
     </item>
     <item>
-      <title>Flare Splunk App - v1.0.0 [New App Release] (Archived)</title>
+      <title>Flare Splunk App - v1.0.0 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/9219/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects cyber threat intelligence from Flare&amp;#x27;s CTEM platform, including ransom leaks, stealer logs, compromised credentials, and dark web activity, with CIM-compliant field extractions and dashboards.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Flare integrates Splunk with Flare&amp;#x27;s Continuous Threat Exposure Management (CTEM) platform to collect cyber threat intelligence events via API. The app ingests ransom leaks, stealer logs, compromised credentials, lookalike domains, and dark web activity, enabling security teams to monitor external threats targeting their organization. Events are normalized to the Common Information Model (CIM) and mapped to the Alerts, Malware, Network Resolution (DNS), and Threat Intelligence data models. The app includes dashboards for threat visualization, saved searches for reporting on leaked credentials and severity distributions, and configuration options for filtering events by tenant, severity, and source type. Security operations teams can use Flare to assess risk posture, track credential exposure, and respond to emerging threats discovered through dark web monitoring and external attack surface analysis.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c00ab9a8-854b-11f1-9075-12aab1d3d17b.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Flare Inc</dc:creator>
@@ -2633,15 +2645,6 @@ Contact us with any questions!&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&q
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Wed, 22 Jul 2026 19:12:15 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6763/#v1.1.9</guid>
-    </item>
-    <item>
-      <title>SSH - v3.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5850/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Execute program now reads script files only from vault attachments in the current container.
-* Block IP rejects invalid directions instead of silently creating an outbound firewall rule.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app supports executing various endpoint-based investigative and containment actions on an SSH endpoint&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e78340c6-8600-11f1-be4a-6ab37c164e28.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Wed, 22 Jul 2026 19:09:47 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5850/#v3.0.0</guid>
     </item>
   </channel>
 </rss>
