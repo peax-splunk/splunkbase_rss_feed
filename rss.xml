@@ -6,7 +6,405 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Thu, 30 Jul 2026 07:28:04 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 30 Jul 2026 10:13:40 +0000</lastBuildDate>
+    <item>
+      <title>Ensign Akamai Web Security Add-on - v2.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8652/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## Version 2.0.0
+
+A major release. The add-on has been rebuilt on the current Splunk UCC framework
+(6.5.3), with substantial reliability, logging and security work. Upgrading from
+1.0.9 is might supported and preserves your existing accounts, proxies and inputs. Let me know if it is not supported or you might encounter a problem for migrate into this new Version.
+
+### Upgrade notes
+
+* **Restart Splunk after installing.** The add-on registers REST handlers and a
+  modular input.
+* **Hard-refresh your browser** (Ctrl+Shift+R) after the restart so the new
+  Configuration UI loads.
+* **New &quot;Sourcetype&quot; input field**, defaulting to `ensign_akamaisiem`. Earlier
+  releases wrote events under `akamaisiem`, which did not match the bundled
+  `props.conf`. If you built searches, dashboards or CIM mappings against
+  `akamaisiem`, either point them at `ensign_akamaisiem` or set the Sourcetype
+  field back to `akamaisiem` per input.
+* **Default index is now `main`** for newly created inputs. Existing inputs keep
+  their configured index.
+* **First run collects history.** The new *Initial Lookback (hours)* setting
+  defaults to 1 hour, so a newly created input backfills the last hour instead of
+  starting at &quot;now&quot;. Set it to 0 to keep the previous behaviour.
+* **Checkpoints now live in the KV Store** instead of a file inside the add-on
+  directory. Existing file-based cursors are not read; each input resumes from its
+  Initial Lookback window on the first run after upgrade.
+
+### New
+
+* **Monitoring Dashboard** — overview, data ingestion, errors, and resource
+  consumption panels for the add-on.
+* **Configurable sourcetype** per input.
+* **Initial Lookback (hours)** — seeds the first collection from Akamai's
+  time-based mode (0–12 hours; Akamai retains 12).
+* **Gap recovery on an expired cursor.** An expired offset (HTTP 416) now replays
+  the lookback window using time-based mode and then resumes offset mode, instead
+  of silently skipping the gap.
+* **Full configuration reference** — every configuration file ships a detailed
+  `.spec` plus a worked `.conf.example`, and `README/LOG-REFERENCE.txt` documents
+  the internal logging in full.
+
+### Reliability
+
+* **Bounded retry with exponential backoff** for connection errors, timeouts and
+  5xx responses, honouring `Retry-After` on HTTP 429 rate limits.
+* **Explicit request timeouts** (10s connect, 120s read) so a stalled Akamai edge
+  can no longer hang the modular input indefinitely.
+* **Multi-page drain** — a single run collects up to 20 pages. Reaching that cap is
+  logged rather than passing silently.
+* **Akamai's trailing summary record** (`{&quot;total&quot;: N, &quot;offset&quot;: &quot;...&quot;}`) is now
+  recognised and dropped at the source, taking its cursor, instead of being
+  indexed as an event.
+* **Proxy enforcement is fail-closed.** If a proxy is selected but disabled or
+  unreadable, the run aborts and says why, rather than quietly connecting direct.
+* **Remote DNS Resolution now works.** The setting previously had no effect; it now
+  selects the remote-resolving SOCKS scheme (`socks5h` / `socks4a`).
+* **Checkpoints in the KV Store**, replicated across a Search Head Cluster (if you installed this add-ons on Search Head Cluster, might try this). Implementation on Search Head Cluster is doable for now, but it is recommended if you put this at Ingestion Tier or Forwarder Tier.&amp;#x20;
+
+### Logging
+
+* Internal logging is now one **5W1H `AUDIT key=value` record per event**, in a
+  consistent field order (what / who / when / where / why / how / summary), so a
+  single search works across every input.
+* **Log level takes effect on the next interval** — no Splunk restart required.
+* **DEBUG adds `stage=` dumps** for troubleshooting: resolved configuration, the
+  outgoing request, a truncated response body, a transformed sample record, and
+  cursor activity. These never appear above DEBUG.
+* **Fields are extracted at index time**, so they are searchable from a Search Head
+  that does not have this add-on installed — the usual forwarder/indexer layout.
+
+### Security
+
+* EdgeGrid tokens, proxy passwords, `Authorization` headers, `EG1-HMAC-SHA256`
+  signatures and Splunk session keys are **redacted from every log line**. Where an
+  operator needs to identify which key is in use, only `first4...last4` is written.
+* Credentials are read through **solnlib's ConfManager** rather than an
+  undocumented REST parameter, and a value that reads back masked is refused.
+* Log values are sanitised, so a crafted HTTP header cannot forge audit fields.
+* **No architecture-specific binaries** are shipped: the package contains no
+  compiled extensions and runs identically on Linux and Windows.
+
+### Fixed
+
+* Events were written under a sourcetype the bundled `props.conf` did not target,
+  so JSON parsing, timestamp extraction, field aliases, the geo lookup and the
+  summary-record filter all silently did nothing.
+* The account and proxy configuration files were missing from `default/`, so the
+  REST handlers had nothing to read on a fresh install and the Configuration page
+  failed to load.
+* The default index was `default`, which is not a valid index name.
+* `README` documented a configuration file that does not exist, while the two real
+  ones had no specification at all.
+* The `VERSION` file contained the version twice.
+* Version metadata is now generated from a single source, so `app.conf`,
+  `app.manifest`, `VERSION`, `globalConfig.json` and `openapi.json` cannot disagree.
+
+### Dependencies
+
+Built on **UCC framework 6.5.3**. Updated: `edgegrid-python` 2.0.7,
+`splunk-sdk` 3.0.0, `splunktaucclib` 8.2.0, `solnlib` 8.1.0,
+`charset-normalizer` 3.4.9 (pure-Python), `requests` 2.32.4, `idna` 3.16,
+`certifi` 2026.5.20. `urllib3` is pinned to 1.26.20 for Splunk 9.x compatibility.
+
+### Compatibility
+
+Splunk Enterprise 9.x and 10.x, Splunk Cloud. Python 3.9 and 3.13
+(`python.required = 3.9, 3.13`).&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Captures Akamai security events via SIEM Integration API v1. Built on Splunk UCC with multi-account, multi-proxy, and encrypted credential support.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Ensign Akamai Web Security Add-on for Splunk
+
+An enterprise-grade alternative to the official Akamai SIEM app, rebuilt by adopt Splunk UCC Framework.
+
+WHY THIS ADD-ON?
+The official Akamai app (refer to : https://splunkbase.splunk.com/app/4310) uses legacy way for enabled the input (via Settings =&amp;gt; Data Input) and several parsing is not key-value-pair based after coming ingested in Splunk, rather than using spath and makes easier for analyst to choose the fields, this add-ons are one to solve that. This add-on provides:
+- Full UI-driven configuration based on your usual for inputs based on Add-ons (just directly configured under the add-ons like the other Splunk Supported Add-ons).
+- Multi-account management with encrypted credential storage via Splunk&amp;#x27;s native password vault
+- Multi-proxy support (HTTP, HTTPS, SOCKS4, SOCKS5) with per-input proxy assignment
+- Offset-based checkpointing for reliable data continuity across restarts.
+- Custom sourcetype override per input for seamless migration.
+- Deployment Server compatible.
+
+DATA SOURCE:
+Captures security events from Akamai SIEM Integration API v1, supporting:
+- App &amp;amp; API Protector
+- Kona Site Defender
+- Web Application Protector
+- Client Reputation
+- Bot Manager
+- Account Protector
+
+EVENT PROCESSING:
+- URL-decodes all fields recursively
+- Parses HTTP headers into structured key-value pairs
+- Decodes base64-encoded attackData rule fields into structured objects
+- Drops summary/offset metadata events (nullQueue)
+
+Ref: https://techdocs.akamai.com/siem-integration/docs
+
+Built by Ensign Infosecurity Indonesia.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/35d80c74-8bfc-11f1-a053-725e29a6f74b.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Muhammad Rafdi Aufar Ahmad</dc:creator>
+      <pubDate>Thu, 30 Jul 2026 09:52:51 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8652/#v2.0.0</guid>
+    </item>
+    <item>
+      <title>Visualization Toolbox - v0.4.9 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6675/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Added additional documentation
+* Upgrade to echarts version 6.1
+* Bugfixes in a couple of visualizations like timeline and boxplots
+* Enhancements for eCharts properties, bandHeight and bandGap params&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Visualization Toolbox is a free and powerful visualization app that allows you to create highly customizable charts. It is built upon the Apache ECharts library. The Visualization Toolbox supports most of the chart types that are available in ECharts.
+
+How to build your first EChart dashboard? Have a look at the Docs/Tutorial of the Visualization Toolbox start page in Splunk.
+
+Code is available on Github -&amp;gt; https://github.com/hman-78/visualization_toolbox&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/acfc166c-8bf5-11f1-872a-b22c1f8111a7.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Björn Hamann</dc:creator>
+      <pubDate>Thu, 30 Jul 2026 09:34:47 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6675/#v0.4.9</guid>
+    </item>
+    <item>
+      <title>2Steps - v15.0.85 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4546/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;2 Steps Splunk front end integration, for back end version 15.x&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;2 Steps produces automated customer journeys with video replay across any platform (Windows, Web, mobile, etc) in minutes without writing any code.
+
+This app provides a graphical user interface for test creation, scheduling and results analysis all without leaving Splunk. 2 Steps is designed to allow any user to build end to end synthetic tests for any graphical application in minutes without specialist training. Please visit us at https://www.2steps.io/ for more information.
+
+
+Note that this app provides the front end interface and dashboard for 2 Steps. The 2 Steps back end are available from  https://www.2steps.io/ and are not on Splunkbase. The app is not functional without a correctly installed and configured back end. Please contact us to get the back end.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f9f35578-862a-11f1-a33f-da14409a3036.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">2Steps Development</dc:creator>
+      <pubDate>Thu, 30 Jul 2026 08:18:55 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4546/#v15.0.85</guid>
+    </item>
+    <item>
+      <title>2Steps - Cloud - v15.0.85 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4807/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;2 Steps Splunk integration - for backend version 15.x&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;2 Steps produces automated customer journeys with video replay across any platform (Windows, Web, mobile, etc) in minutes without writing any code.
+
+This app provides a graphical user interface for test creation, scheduling and results analysis all without leaving Splunk. 2 Steps is designed to allow any user to build end to end synthetic tests for any graphical application in minutes without specialist training. Please visit us at https://www.2steps.io/ for more information.
+
+ 
+
+Note that this app provides the front end interface and dashboard for 2 Steps. The 2 Steps back end is available from  https://www.2steps.io/ and is not on Splunkbase. The app is not functional without a correctly installed and configured back end. Please contact us to enquire about installation of the 2 Steps server.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/adc53fcc-862a-11f1-a33f-da14409a3036.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">2Steps Development</dc:creator>
+      <pubDate>Thu, 30 Jul 2026 08:18:54 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4807/#v15.0.85</guid>
+    </item>
+    <item>
+      <title>Technical Add-on for ThreatDown - v3.0.12 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4165/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Restored compatibility with Python 3.13 in Splunk Enterprise and Splunk Cloud 10.4.x.
+* Resolved HTTP 500 errors on the Inputs and Configuration pages caused by the removed Python `imp` module.
+* Updated the bundled Python compatibility dependency used by REST handlers.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;ThreatDown, powered by Malwarebytes
+
+The Add-on for ThreatDown provides custom Splunk configuration to understand ThreatDown event data. This app is a requirements for all ThreatDown apps for Splunk. The app includes Common Information Compliant (CIM) field extractions and pre-defined source types for multiple ThreatDown products making it compatible with all CIM based Splunk apps including Splunk Enterprise Security. It is a pre-requisite for all other ThreatDown Splunk apps.
+
+ThreatDown makes endpoints resilient through adaptive cyber protection, active threat response and orchestrated endpoint control that quickly restores workforce productivity when a compromise occurs. Our adaptive cyber protection predicts and detects attacks with multi-layer detection across the kill chain. We enable active threat response where machine learning is actionable and automated allowing for full recovery when a compromise occurs. We orchestrate command and control across siloed IT and Security organizations simplifying security management and making response effective. ThreatDown makes endpoints resilient, so that you can protect, remediate, and regain control of your digital business.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2f59232c-8992-11f1-9f3b-96e7b47cf262.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Malwarebytes Corp</dc:creator>
+      <pubDate>Thu, 30 Jul 2026 08:18:47 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4165/#v3.0.12</guid>
+    </item>
+    <item>
+      <title>ServiceNow Security Operations Addon - v1.40.5 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/3921/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Fixed OAuth token expiry check for hosts where timezone differs from UTC.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The ServiceNow Security Operations add-on allows Splunk to create security related incidents and events in ServiceNow.
+It features:
+On demand single ServiceNow event or incident creation from Splunk Event
+Scheduled Alert to create single and multiple ServiceNow events and incidents&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/18a0fd5e-8b03-11f1-9484-1e01bcc98ad6.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">ServiceNow SecOps Applications</dc:creator>
+      <pubDate>Thu, 30 Jul 2026 08:18:41 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/3921/#v1.40.5</guid>
+    </item>
+    <item>
+      <title>NVD CVE Fetcher Add-on - v1.1.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7121/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* **Proxy Support:** Added proxy configuration support for proxy servers.
+* **UCC Framework Migration:** Migrated the add-on to the Splunk Unified Configuration Console (UCC) Framework, providing a modern, standardized, and easier-to-use configuration interface.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;A specialized integration tool designed to incorporate National Vulnerability Database (NVD) data into Splunk Enterprise&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk NVD CVE Fetcher Add-on is a specialized integration tool designed to incorporate National Vulnerability Database (NVD) data into Splunk environments. This application bridges the gap between external vulnerability intelligence and Splunk&amp;#x27;s analytics capabilities, enabling security teams to maintain awareness of emerging threats and vulnerabilities.
+
+The app automates the entire vulnerability data lifecycle - from acquisition through normalization to analysis - eliminating manual processes that are typically time-consuming and error-prone. By leveraging the NVD&amp;#x27;s repository of Common Vulnerabilities and Exposures (CVEs), the app provides security teams with timely access to standardized vulnerability information directly within their Splunk environment.
+
+A key strength of this application is its integration with Splunk&amp;#x27;s Vulnerabilities Data Model, which transforms raw vulnerability data into a structured format optimized for security monitoring, reporting, and incident response workflows. This normalization process ensures that critical vulnerability attributes such as CVSS scores, severity ratings, affected products, and remediation information are consistently formatted and readily accessible.
+
+Compatible with Splunk Enterprise 9.0.1 and later versions, the app offers flexible configuration options including customizable polling intervals, historical data retrieval parameters, and optional API key integration to enhance data retrieval rates. The application stores all fetched vulnerability data in a dedicated index, making it easily searchable through standard Splunk queries or through the provided convenience macro.
+
+For Security Operations Centers (SOCs) and vulnerability management teams, this application serves as an essential tool for maintaining situational awareness, prioritizing patching efforts, correlating vulnerabilities with existing assets, and enhancing overall security posture through data-driven decision-making.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8c22c66c-899c-11f1-a1c4-bad67b9a21a6.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Metron Consulting LLC</dc:creator>
+      <pubDate>Thu, 30 Jul 2026 08:18:29 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7121/#v1.1.0</guid>
+    </item>
+    <item>
+      <title>Supporting App for Oracle SBC CDR - v0.9.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7051/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**Version 0.9.0 (July 22nd, 2026)**
+
+- **IMPORTANT / BREAKING CHANGE:** The Oracle SBC media-flow fields have been renamed to align with Oracle's own terminology. The old &quot;west&quot;, &quot;east&quot;, &quot;extra_west&quot; and &quot;extra_east&quot; field-name prefixes were a nonstandard naming scheme that did not appear anywhere in Oracle's documentation. The new names map to Oracle's flow-set and flow-direction concepts — Flow-Set 1 or 2 (fs1 / fs2), and Forward or Reverse (fwd / rev). For the media flow and quality-of-service fields the mapping is:
+
+    - `west_*` → `fs1_fwd_*` (Flow-Set 1, Forward direction)
+    - `east_*` → `fs1_rev_*` (Flow-Set 1, Reverse direction)
+    - `extra_*` → `fs2_fwd_*` / `fs2_rev_*` (Flow-Set 2, Forward / Reverse)
+
+    A few groups of fields do not follow that prefix pattern exactly: the media-stop-time and RTP transmitted-byte/packet counters are indexed by flow-set and calling/called party, and the session R-Factor and MOS values are now simply `calling_r_factor`, `calling_mos`, `called_r_factor` and `called_mos` (they are session-level, not per-flow). If you have built any of your own saved searches, dashboards, or reports that reference the old field names, you will need to update them when you upgrade.
+- Added a new search command, `| checksbcflowfieldnames`, to make that migration easy and exact. Run it (as an admin, or as a user with the `admin_all_objects` capability, for a complete picture) and it will itemize every place in your Splunk knowledge objects, ie saved searches, dashboards, macros, event types, data models, etc, that still reference any old field name, giving you the precise new name to use for each one.
+- Call detail view for Oracle SBC calls now includes a single-row summary table at the top echoing top level details like ingress/egress realm, time, disposition and duration etc.
+- Call detail view for Oracle SBC calls now includes a CallFlowGraph module that presents a DAG visualization of the various ip addresses and ingress/egress realms involved in the B2BUA signaling and media flow.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app provides the Splunk configuration to ingest the CDR data from Oracle SBC.     It is intended to work for both Oracle Session Router CDR and Oracle SBC CDR, although some unknowns remain as of this writing. 
+
+It is also designed to work as a Supporting App alongside Sideview&amp;#x27;s commercial &amp;quot;Cisco CDR Reporting and Analytics&amp;quot; app.  
+When used in conjunction with the Cisco CDR app, the Oracle SBC data can be used in that app alongside the CUCM data.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/4473ad6c-8623-11f1-b938-fa67bb79bec7.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview LLC</dc:creator>
+      <pubDate>Thu, 30 Jul 2026 08:18:28 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7051/#v0.9.0</guid>
+    </item>
+    <item>
+      <title>Analyst1 - v1.6.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6816/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## New Features
+
+* **Hit Stats &quot;Outputs&quot; management UI:** a dedicated dashboard to create, edit, preview, run, and copy Hit Stats outputs without hand-editing saved searches. Includes inline Validate/Preview, an Actions menu, support for data-model / `tstats` (leading-pipe) base searches, a configurable Dimension 1 *Source Field*, and an optional Dimension 3 context field.
+* **Hit Stats historical backfill:** a new `analyst1hitstatsbackfill` command backfills past Hit Stats using memory-safe streaming reads and per-day uploads, so a newly configured output can populate history rather than only going forward.
+* **Analyst1 Monitoring dashboard:** a unified view of all three sync pipelines (API to KV, API to Index, Index to KV) with recent-run health, lineage, reconciliation counts, per-run error drill-down, and four built-in alerts.
+* **New operator commands:**
+  * `analyst1forcesync`: trigger an on-demand full indicator sync.
+  * `analyst1indexcutover`: migrate an index-mode deployment to KV mode and retire the legacy lookup-update searches.
+  * `analyst1clearindicators`: clear synced indicators from KV/ES (replaces the prior `analyst1clearesthreatintel`).
+* **Remote Splunk KV support:** indicator sync can write to a remote Splunk KV store (with TLS verification and proxy support), enabling deployments where the collecting node and the KV store are separate.
+
+***
+
+## Bug Fixes
+
+* **Configured ES push could silently no-op.** When an ES lookup was configured but the target ES collection was missing, the sync reported success even though nothing was written to ES. That condition now fails loudly so it is visible instead of silently skipped.
+* **Validating or saving an account could interrupt a running sync.** Saving or validating an Analyst1 account revoked the account's active token; if a sync was in flight it would be 401'd mid-fetch. Validation now uses a separate concurrent token and no longer revokes the live one.
+* **Hit Stats &quot;Summary&quot; mode mis-counted.** Summary mode de-duplicated to one arbitrary row per indicator instead of summing by day, so multi-row or multi-day searches under-reported or mis-reported counts. Summary mode now sums counts per day (matching Basic mode).
+
+***
+
+## Improvements &amp; Updates
+
+* **Indicator sync engine hardening:** a re-architected stage, route, prove, apply pipeline with per-type isolation and full-read completeness gating. Deletes are skipped when a read is incomplete, preventing accidental removal of indicators after a partial fetch.
+* **Observability overhaul:** unified sync lifecycle telemetry across all three pipelines, correlation IDs, and accurate write counters (index-mode writes are no longer reported as KV writes). This data feeds the new Monitoring dashboard.
+* **OAuth streamlining:** proactive token refresh with bounded retry, a guaranteed fresh token before large (&gt;100 MB) streaming Hit Stats uploads, and removal of obsolete single-token machinery.
+* **Hit Stats upload reliability:** scheduled outputs are spread out (schedule skew) to avoid burst-induced 503s when many fire at once, with retry and backoff hardening and idempotent per-day replace semantics.
+* **Fail-loud on storage errors:** KV batch write and delete failures now fail the run visibly instead of being silently swallowed.
+* **Search Head Cluster hardening:** more reliable captain detection and mutual-exclusion locking for the upgrade migration.
+* Configuration and documentation cleanups and consistent dashboard theming.
+
+***
+
+## Test Coverage
+
+1.6.0 was validated with an automated unit suite plus an Ansible-driven integration harness exercised on disposable Splunk labs.
+
+**Unit tests:** 1,000+ automated unit tests (58 modules) covering sync strategies, KV and index targets, IOC transformation, OAuth token lifecycle, locking, and migrations.
+
+**Platform matrix:** Splunk **9.4.12** and **10.2**, on both **single-instance** and **Search Head Cluster** topologies (plus Heavy-Forwarder collection).
+
+**Scenarios exercised:**
+
+* **Fresh install** and **in-place 1.5.9 to 1.6.0 upgrade**, on a standalone instance and on a dedicated ephemeral Search Head Cluster (with aged pre-upgrade state and the account migration).
+* **Sync modes:** KV mode and index mode; the API to KV, API to Index, and Index to KV (relay) pipelines; incremental (DIFF) and full (FULL) syncs; a standalone 2x2 sync matrix.
+* **Data-integrity and parity gates:** exact match of ES `*_intel` value-sets against KV after sync; index-to-KV relay verified against the API-sync &quot;gold standard&quot;; ingestion route-map consistency; a regression guard that a failed sync must not advance its cursor.
+* **Remote Splunk:** a REST-only remote-Splunk suite (install, configure, verify, diff) and remote-KV write mode (TLS verify, proxy, plus negative and scoped-role permission cases).
+* **Search Head Cluster specifics:** config replication, captain-gated migration, rolling-restart drain, and single-execution behavior.
+* **Hit Stats:** upload path via proxy, resilience (skew and retry), and preview and validation.
+* **On-demand Analyst1 sensor config change** (diff-trigger) end-to-end.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Analyst1 App for Splunk is an add-on designed for use by existing Analyst1 customers. 
+
+This add-on has two main functions:
+1. Brings enrichment data around observables/indicators of compromise from Analyst1 into Splunk, providing lookup tables for correlation data.
+2. Sends network/host log data from Splunk to Analyst1, correlating syslogs into hits against IOCs&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/89e13d78-89c1-11f1-9e51-4e089f2ff7ec.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Analyst1 Team</dc:creator>
+      <pubDate>Thu, 30 Jul 2026 08:18:27 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6816/#v1.6.0</guid>
+    </item>
+    <item>
+      <title>Splunk Add-on for Salesforce Streaming API - v2.1.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5689/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Recommended for Splunk 10.4 and other deployments running Python 3.10 or later.
+
+Updates
+
+\- Fix streaming inputs failing on Splunk 10.4 and other Python 3.10+ environments
+
+\- Resolves errors such as: Semaphore.\_\_init\_\_() got an unexpected keyword argument 'loop'
+
+Please see Release notes of version 2.0.1 for more details&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Salesforce Streaming API enables streaming of events using push technology and provides a subscription mechanism for receiving events in near real-time. The Streaming API subscription mechanism supports multiple types of events, including PushTopic events, generic events, platform events, and Change Data Capture events. This add-on helps ingest all the above-mentioned streaming events into Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/dddcf6c0-8768-11f1-97b6-d2790ef490e1.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
+      <pubDate>Thu, 30 Jul 2026 08:18:21 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5689/#v2.1.0</guid>
+    </item>
+    <item>
+      <title>Cisco Catalyst Add-on for Splunk - v3.2.42 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7538/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;##### Catalyst Center Reports
+
+* **Compliance report sourcetype routing fixed:** Some Catalyst Center compliance reports, including `NetworkDeviceComplianceDaily`, were incorrectly indexed as the generic `cisco:catalyst:center:report` sourcetype because their broad `dataCategory` was `Network`. Classification now evaluates specific report/view names and IDs before broad category metadata. Compliance reports route to `cisco:catalyst:center:compliance:report`, inventory reports route to `cisco:catalyst:center:inventory:report`, and all other report categories route to `cisco:catalyst:center:report` with `report_category`. This restores the expected data source for Network Compliance dashboards and searches.
+* **Automatic discovery added and highly recommended:** The Reports input can now enumerate Catalyst Center on every poll and collect all current reports plus reports created later. Enable **Automatically collect all reports (Recommended)** for most deployments. The older **Select all** action remains a fixed snapshot and does not automatically include reports created after the input is saved.
+* **Report configuration and flow are visible in Data Collection Health:** The Catalyst Center tab now shows each configured Reports input, enabled state, automatic/fixed/legacy mode, configured scope, observed report names and categories, resulting sourcetypes, event count, and latest event in the selected window.
+
+##### Platform and compatibility
+
+* **Splunk 10.6 / Python 3.13 readiness:** Added `python.required = 3.13` on all 28 modular inputs and 42 REST handler stanzas so Splunk 10.2+ can select the Python 3.13 runtime. Retained `python.version = python3` on all stanzas for Splunk 10.0/10.1 compatibility (`python.required` is ignored on those releases).
+
+##### Custom API endpoint catalogs
+
+* **Recommended-by-default endpoint picker:** SD-WAN and Catalyst Center Custom API inputs now open with **Recommended only** enabled. This keeps routine observability reads focused while allowing administrators to turn the filter off and browse the broader safe GET catalog. **Show live-checked only** remains off by default so valid endpoints are not hidden merely because they were not part of the representative live-check sample.
+* **SD-WAN catalog expanded safely:** Expanded the catalog to the full allow-listed set of safe, parameter-free vManage GET endpoints, tiered into Recommended and Advanced views. The picker displays the current Recommended and total available endpoint counts from the installed catalog. Certificate status (`/dataservice/certificate/list/status`), certificate detail (`/dataservice/certificate/stats/detail`), and certificate expiration status (`/dataservice/certificate/stats/summary`) are included in the Recommended view.
+* **SD-WAN operational safeguards:** Excluded request-body, path-templated, deprecated, API-introspection, heavy duplicate, dedicated-input overlap, `/dataservice/device/action/*`, and action-like GET operations. The expanded view remains an allow-list and never becomes an arbitrary-URL collector.
+* **Catalyst Center catalog expanded and tiered:** The catalog now includes the full allow-listed safe GET surface from the installed OpenAPI catalog, tiered into Recommended observability reads and Advanced configuration or operational reads. The picker displays the current Recommended and total available endpoint counts. Credential-configuration, count-only, deprecated, path-templated, and dedicated-input overlap endpoints remain excluded.
+* **Live-check behavior scaled for larger catalogs:** REST handlers live-check a representative sample of Recommended endpoints instead of probing every catalog entry. Selecting an untested endpoint runs a targeted check, and the handlers report current Recommended and total available counts to the UI.
+* **Existing inputs remain editable:** When an existing input uses an Advanced endpoint, the picker automatically reveals the broader catalog so the saved selection is not hidden.
+
+##### Dashboards and usability
+
+* **User Guide package-version SPL hardened for Splunk 10.6:** Updated the live package-version REST search to use Splunk 10.6-compatible `if()` boolean logic, rename dotted REST fields to `current_version` and `latest_version`, and compute `update_status` with nested `if()` instead of `case()`.
+* **Custom API guidance expanded:** Added operator guidance for Recommended and Advanced endpoint tiers, certificate monitoring, targeted live checks, load review, safe starting intervals, and the exclusions that protect controllers from operational actions.
+* **Duplicate-input detection across all API products:** Data Collection Health now correlates product, normalized remote-system identity, sourcetype, input stanza, account, destination index, and collector host. Overview provides a consolidated detector, while Catalyst Center, Cyber Vision, SD-WAN, and ISE each provide a focused panel. This detects both duplicate stanzas on one heavy forwarder and the same collection path configured on multiple heavy forwarders, including inputs that use different account labels or destination indexes.
+* **Collector hosts and installed TA releases are visible without REST:** Overview and every product tab, including Network Syslog, now identify the Splunk hosts onboarding or processing Cisco data. Forwarded structured poll logs report the locally installed TA version/build and authoritative modular-input owner; sampled `per_sourcetype_thruput` metrics add processed event, KB/s, EPS, event-age, and pipeline-latency evidence. Passive syslog rows identify the receiving indexer and explicitly note that an intermediate heavy-forwarder identity is not preserved in the events.
+* **Operational tables are easier to scan:** Repeated TA internal-log events collapse into one row per input with an occurrence count and latest diagnostics. Onboarding-host tables use larger text, stable column widths, horizontal scrolling, numeric alignment, and trimmed long evidence lists with hover text instead of producing extremely tall rows.
+* **Dashboard reliability and information dialogs improved:** Fixed the shared duplicate-detector query so Dashboard Studio token parsing cannot corrupt regular-expression anchors, eliminating the related search failures across all tabs. Information dialogs no longer show a duplicate divider above their first section while retaining separators between later sections.
+
+##### Collector telemetry
+
+* **Local release metadata on structured TA logs:** Canonical TA log events now include `ta_version` and `ta_build`, read from the add-on installation on the collector itself. Search-time extractions make those fields available to Data Collection Health, allowing a search head to reveal heavy-forwarder release drift without calling Splunk REST.
+* **SD-WAN remote-system identity preserved:** SD-WAN energy-stat events now retain `vmanage_host` independently from the managed-device `host` field so duplicate detection can identify the actual vManage collection target.
+* **Evidence boundaries are explicit:** A processing-only `metrics.log` host may be a heavy forwarder or an indexer, and `per_sourcetype_thruput` is top-N sampled. An installed but idle host that emits no TA telemetry still requires deployment inventory or authenticated REST to prove.
+
+##### Maintenance
+
+* **Input spec consistency test updated:** Added `python.required` to the standard `inputs.conf` keys validated by `test_inputs_spec_consistency.py`.
+* **Endpoint catalog regression coverage:** Added catalog-builder and REST-handler tests for recommendation counts, sensitive and operational exclusions, representative probing, targeted probing, and response metadata. The full modular-input smoke suite continues to validate all Cisco product inputs.
+* **Health-dashboard regression coverage expanded:** Added tests for cross-product duplicate identity, collector/version evidence, processing metrics, per-input log aggregation, table readability, and the first-section information-dialog divider behavior.
+
+##### Upgrade notes
+
+* No reconfiguration required; existing accounts, inputs, and KV Store checkpoints are preserved.
+* Existing Reports input stanzas are preserved and do not need to be deleted or recreated. Legacy named-report fields and fixed multi-select configurations continue to work.
+* For ongoing report coverage, edit the Reports input and enable **Automatically collect all reports (Recommended)**. Saved fixed selections remain stored and are restored if automatic mode is later disabled.
+* Corrected sourcetype routing applies to newly collected events. Events already indexed under `cisco:catalyst:center:report` are not rewritten; account for the historical generic sourcetype in temporary searches until corrected compliance events arrive.
+* Use **Data Collection Health &gt; Catalyst Center &gt; Scheduled Reports - Configuration vs Observed Data** to confirm the configured mode, observed `report_name`, assigned sourcetype, event count, and last event.
+* Existing Custom API inputs that use an Advanced endpoint continue to work and remain visible when edited.
+* Forward `_internal` logs from heavy forwarders to the search tier to populate collector ownership and locally installed TA version/build fields in Data Collection Health.
+* Recommended for Splunk Enterprise 10.6 deployments or any environment planning a Python 3.13 runtime upgrade. On Splunk 10.0/10.1, runtime selection continues to use `python.version = python3`; `python.required` takes effect only on Splunk 10.2+.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Cisco Catalyst Add-on for Splunk collects and normalizes API telemetry from Cisco Catalyst Center, SD-WAN (vManage), ISE, and Cyber Vision through modular inputs. It includes CIM-aligned knowledge objects, backward-compatible DNAC/Catalyst sourcetype coverage, and built-in health monitoring for input status, errors, and API load.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Author - Cisco Systems
+
+Supported Cisco Products:
+Cisco Catalyst SD-WAN
+Cisco Identity Services Engine
+Cisco Catalyst Center
+Cyber Vision
+Cisco Network Infrastructure Devices which include the below platform series:
+* Cisco Catalyst series switches (1000, 1200, 1300, 2960, 3650, 3750, 4500, 6500, 6800, 7600, 9000 etc.)
+* Cisco ASR - Aggregation Services Routers (900, 1000, 5000, 9000 etc.)
+* Cisco ISR - Integrated Services Routers (800, 1900, 2900, 3900, 4451 etc.)
+* Cisco Nexus Data Center switches (1000V, 2000, 3000, 4000, 5000, 6000, 7000, 9000 etc.)
+* Cisco Carrier Routing System
+* Other Cisco IOS based devices (Metro Ethernet, Industrial Ethernet, Blade Switches, Connected Grid etc.)
+* Cisco Access Points
+* Cisco WLC - WLAN Controller&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a1664f5c-8ba0-11f1-862d-5ae126861cec.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco Systems, Inc.</dc:creator>
+      <pubDate>Thu, 30 Jul 2026 07:33:51 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7538/#v3.2.42</guid>
+    </item>
     <item>
       <title>Splunk App for Secure Networking - v1.0.31 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/9257/</link>
@@ -89,78 +487,6 @@ The app is intended for network operations, security operations, IT operations, 
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
       <pubDate>Wed, 29 Jul 2026 23:20:23 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6732/#v2.0.2</guid>
-    </item>
-    <item>
-      <title>Cisco Catalyst Add-on for Splunk - v3.2.42 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7538/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;##### Catalyst Center Reports
-
-* **Compliance report sourcetype routing fixed:** Some Catalyst Center compliance reports, including `NetworkDeviceComplianceDaily`, were incorrectly indexed as the generic `cisco:catalyst:center:report` sourcetype because their broad `dataCategory` was `Network`. Classification now evaluates specific report/view names and IDs before broad category metadata. Compliance reports route to `cisco:catalyst:center:compliance:report`, inventory reports route to `cisco:catalyst:center:inventory:report`, and all other report categories route to `cisco:catalyst:center:report` with `report_category`. This restores the expected data source for Network Compliance dashboards and searches.
-* **Automatic discovery added and highly recommended:** The Reports input can now enumerate Catalyst Center on every poll and collect all current reports plus reports created later. Enable **Automatically collect all reports (Recommended)** for most deployments. The older **Select all** action remains a fixed snapshot and does not automatically include reports created after the input is saved.
-* **Report configuration and flow are visible in Data Collection Health:** The Catalyst Center tab now shows each configured Reports input, enabled state, automatic/fixed/legacy mode, configured scope, observed report names and categories, resulting sourcetypes, event count, and latest event in the selected window.
-
-##### Platform and compatibility
-
-* **Splunk 10.6 / Python 3.13 readiness:** Added `python.required = 3.13` on all 28 modular inputs and 42 REST handler stanzas so Splunk 10.2+ can select the Python 3.13 runtime. Retained `python.version = python3` on all stanzas for Splunk 10.0/10.1 compatibility (`python.required` is ignored on those releases).
-
-##### Custom API endpoint catalogs
-
-* **Recommended-by-default endpoint picker:** SD-WAN and Catalyst Center Custom API inputs now open with **Recommended only** enabled. This keeps routine observability reads focused while allowing administrators to turn the filter off and browse the broader safe GET catalog. **Show live-checked only** remains off by default so valid endpoints are not hidden merely because they were not part of the representative live-check sample.
-* **SD-WAN catalog expanded safely:** Expanded the catalog to the full allow-listed set of safe, parameter-free vManage GET endpoints, tiered into Recommended and Advanced views. The picker displays the current Recommended and total available endpoint counts from the installed catalog. Certificate status (`/dataservice/certificate/list/status`), certificate detail (`/dataservice/certificate/stats/detail`), and certificate expiration status (`/dataservice/certificate/stats/summary`) are included in the Recommended view.
-* **SD-WAN operational safeguards:** Excluded request-body, path-templated, deprecated, API-introspection, heavy duplicate, dedicated-input overlap, `/dataservice/device/action/*`, and action-like GET operations. The expanded view remains an allow-list and never becomes an arbitrary-URL collector.
-* **Catalyst Center catalog expanded and tiered:** The catalog now includes the full allow-listed safe GET surface from the installed OpenAPI catalog, tiered into Recommended observability reads and Advanced configuration or operational reads. The picker displays the current Recommended and total available endpoint counts. Credential-configuration, count-only, deprecated, path-templated, and dedicated-input overlap endpoints remain excluded.
-* **Live-check behavior scaled for larger catalogs:** REST handlers live-check a representative sample of Recommended endpoints instead of probing every catalog entry. Selecting an untested endpoint runs a targeted check, and the handlers report current Recommended and total available counts to the UI.
-* **Existing inputs remain editable:** When an existing input uses an Advanced endpoint, the picker automatically reveals the broader catalog so the saved selection is not hidden.
-
-##### Dashboards and usability
-
-* **User Guide package-version SPL hardened for Splunk 10.6:** Updated the live package-version REST search to use Splunk 10.6-compatible `if()` boolean logic, rename dotted REST fields to `current_version` and `latest_version`, and compute `update_status` with nested `if()` instead of `case()`.
-* **Custom API guidance expanded:** Added operator guidance for Recommended and Advanced endpoint tiers, certificate monitoring, targeted live checks, load review, safe starting intervals, and the exclusions that protect controllers from operational actions.
-* **Duplicate-input detection across all API products:** Data Collection Health now correlates product, normalized remote-system identity, sourcetype, input stanza, account, destination index, and collector host. Overview provides a consolidated detector, while Catalyst Center, Cyber Vision, SD-WAN, and ISE each provide a focused panel. This detects both duplicate stanzas on one heavy forwarder and the same collection path configured on multiple heavy forwarders, including inputs that use different account labels or destination indexes.
-* **Collector hosts and installed TA releases are visible without REST:** Overview and every product tab, including Network Syslog, now identify the Splunk hosts onboarding or processing Cisco data. Forwarded structured poll logs report the locally installed TA version/build and authoritative modular-input owner; sampled `per_sourcetype_thruput` metrics add processed event, KB/s, EPS, event-age, and pipeline-latency evidence. Passive syslog rows identify the receiving indexer and explicitly note that an intermediate heavy-forwarder identity is not preserved in the events.
-* **Operational tables are easier to scan:** Repeated TA internal-log events collapse into one row per input with an occurrence count and latest diagnostics. Onboarding-host tables use larger text, stable column widths, horizontal scrolling, numeric alignment, and trimmed long evidence lists with hover text instead of producing extremely tall rows.
-* **Dashboard reliability and information dialogs improved:** Fixed the shared duplicate-detector query so Dashboard Studio token parsing cannot corrupt regular-expression anchors, eliminating the related search failures across all tabs. Information dialogs no longer show a duplicate divider above their first section while retaining separators between later sections.
-
-##### Collector telemetry
-
-* **Local release metadata on structured TA logs:** Canonical TA log events now include `ta_version` and `ta_build`, read from the add-on installation on the collector itself. Search-time extractions make those fields available to Data Collection Health, allowing a search head to reveal heavy-forwarder release drift without calling Splunk REST.
-* **SD-WAN remote-system identity preserved:** SD-WAN energy-stat events now retain `vmanage_host` independently from the managed-device `host` field so duplicate detection can identify the actual vManage collection target.
-* **Evidence boundaries are explicit:** A processing-only `metrics.log` host may be a heavy forwarder or an indexer, and `per_sourcetype_thruput` is top-N sampled. An installed but idle host that emits no TA telemetry still requires deployment inventory or authenticated REST to prove.
-
-##### Maintenance
-
-* **Input spec consistency test updated:** Added `python.required` to the standard `inputs.conf` keys validated by `test_inputs_spec_consistency.py`.
-* **Endpoint catalog regression coverage:** Added catalog-builder and REST-handler tests for recommendation counts, sensitive and operational exclusions, representative probing, targeted probing, and response metadata. The full modular-input smoke suite continues to validate all Cisco product inputs.
-* **Health-dashboard regression coverage expanded:** Added tests for cross-product duplicate identity, collector/version evidence, processing metrics, per-input log aggregation, table readability, and the first-section information-dialog divider behavior.
-
-##### Upgrade notes
-
-* No reconfiguration required; existing accounts, inputs, and KV Store checkpoints are preserved.
-* Existing Reports input stanzas are preserved and do not need to be deleted or recreated. Legacy named-report fields and fixed multi-select configurations continue to work.
-* For ongoing report coverage, edit the Reports input and enable **Automatically collect all reports (Recommended)**. Saved fixed selections remain stored and are restored if automatic mode is later disabled.
-* Corrected sourcetype routing applies to newly collected events. Events already indexed under `cisco:catalyst:center:report` are not rewritten; account for the historical generic sourcetype in temporary searches until corrected compliance events arrive.
-* Use **Data Collection Health &gt; Catalyst Center &gt; Scheduled Reports - Configuration vs Observed Data** to confirm the configured mode, observed `report_name`, assigned sourcetype, event count, and last event.
-* Existing Custom API inputs that use an Advanced endpoint continue to work and remain visible when edited.
-* Forward `_internal` logs from heavy forwarders to the search tier to populate collector ownership and locally installed TA version/build fields in Data Collection Health.
-* Recommended for Splunk Enterprise 10.6 deployments or any environment planning a Python 3.13 runtime upgrade. On Splunk 10.0/10.1, runtime selection continues to use `python.version = python3`; `python.required` takes effect only on Splunk 10.2+.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Cisco Catalyst Add-on for Splunk collects and normalizes API telemetry from Cisco Catalyst Center, SD-WAN (vManage), ISE, and Cyber Vision through modular inputs. It includes CIM-aligned knowledge objects, backward-compatible DNAC/Catalyst sourcetype coverage, and built-in health monitoring for input status, errors, and API load.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Author - Cisco Systems
-
-Supported Cisco Products:
-Cisco Catalyst SD-WAN
-Cisco Identity Services Engine
-Cisco Catalyst Center
-Cyber Vision
-Cisco Network Infrastructure Devices which include the below platform series:
-* Cisco Catalyst series switches (1000, 1200, 1300, 2960, 3650, 3750, 4500, 6500, 6800, 7600, 9000 etc.)
-* Cisco ASR - Aggregation Services Routers (900, 1000, 5000, 9000 etc.)
-* Cisco ISR - Integrated Services Routers (800, 1900, 2900, 3900, 4451 etc.)
-* Cisco Nexus Data Center switches (1000V, 2000, 3000, 4000, 5000, 6000, 7000, 9000 etc.)
-* Cisco Carrier Routing System
-* Other Cisco IOS based devices (Metro Ethernet, Industrial Ethernet, Blade Switches, Connected Grid etc.)
-* Cisco Access Points
-* Cisco WLC - WLAN Controller&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a1664f5c-8ba0-11f1-862d-5ae126861cec.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco Systems, Inc.</dc:creator>
-      <pubDate>Wed, 29 Jul 2026 23:03:23 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7538/#v3.2.42</guid>
     </item>
     <item>
       <title>MaxMind GeoIP App - v1.2.0 [Version Update]</title>
@@ -681,17 +1007,6 @@ Key Features &amp;amp; Capabilities:
       <guid>https://splunkbase.splunk.com/app/5482/#v4.2.0</guid>
     </item>
     <item>
-      <title>ServiceNow Security Operations Addon - v1.40.5 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/3921/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Fixed OAuth token expiry check for hosts where timezone differs from UTC.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The ServiceNow Security Operations add-on allows Splunk to create security related incidents and events in ServiceNow.
-It features:
-On demand single ServiceNow event or incident creation from Splunk Event
-Scheduled Alert to create single and multiple ServiceNow events and incidents&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/18a0fd5e-8b03-11f1-9484-1e01bcc98ad6.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">ServiceNow SecOps Applications</dc:creator>
-      <pubDate>Wed, 29 Jul 2026 08:39:41 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/3921/#v1.40.5</guid>
-    </item>
-    <item>
       <title>Cisco CDR Reporting and Analytics - v8.4.4 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/669/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
@@ -988,149 +1303,6 @@ Differentiator
       <guid>https://splunkbase.splunk.com/app/7177/#v26.7.27</guid>
     </item>
     <item>
-      <title>Ensign Akamai Web Security Add-on - v2.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8652/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## Version 2.0.0
-
-A major release. The add-on has been rebuilt on the current Splunk UCC framework
-(6.5.3), with substantial reliability, logging and security work. Upgrading from
-1.0.9 is might supported and preserves your existing accounts, proxies and inputs. Let me know if it is not supported or you might encounter a problem for migrate into this new Version.
-
-### Upgrade notes
-
-* **Restart Splunk after installing.** The add-on registers REST handlers and a
-  modular input.
-* **Hard-refresh your browser** (Ctrl+Shift+R) after the restart so the new
-  Configuration UI loads.
-* **New &quot;Sourcetype&quot; input field**, defaulting to `ensign_akamaisiem`. Earlier
-  releases wrote events under `akamaisiem`, which did not match the bundled
-  `props.conf`. If you built searches, dashboards or CIM mappings against
-  `akamaisiem`, either point them at `ensign_akamaisiem` or set the Sourcetype
-  field back to `akamaisiem` per input.
-* **Default index is now `main`** for newly created inputs. Existing inputs keep
-  their configured index.
-* **First run collects history.** The new *Initial Lookback (hours)* setting
-  defaults to 1 hour, so a newly created input backfills the last hour instead of
-  starting at &quot;now&quot;. Set it to 0 to keep the previous behaviour.
-* **Checkpoints now live in the KV Store** instead of a file inside the add-on
-  directory. Existing file-based cursors are not read; each input resumes from its
-  Initial Lookback window on the first run after upgrade.
-
-### New
-
-* **Monitoring Dashboard** — overview, data ingestion, errors, and resource
-  consumption panels for the add-on.
-* **Configurable sourcetype** per input.
-* **Initial Lookback (hours)** — seeds the first collection from Akamai's
-  time-based mode (0–12 hours; Akamai retains 12).
-* **Gap recovery on an expired cursor.** An expired offset (HTTP 416) now replays
-  the lookback window using time-based mode and then resumes offset mode, instead
-  of silently skipping the gap.
-* **Full configuration reference** — every configuration file ships a detailed
-  `.spec` plus a worked `.conf.example`, and `README/LOG-REFERENCE.txt` documents
-  the internal logging in full.
-
-### Reliability
-
-* **Bounded retry with exponential backoff** for connection errors, timeouts and
-  5xx responses, honouring `Retry-After` on HTTP 429 rate limits.
-* **Explicit request timeouts** (10s connect, 120s read) so a stalled Akamai edge
-  can no longer hang the modular input indefinitely.
-* **Multi-page drain** — a single run collects up to 20 pages. Reaching that cap is
-  logged rather than passing silently.
-* **Akamai's trailing summary record** (`{&quot;total&quot;: N, &quot;offset&quot;: &quot;...&quot;}`) is now
-  recognised and dropped at the source, taking its cursor, instead of being
-  indexed as an event.
-* **Proxy enforcement is fail-closed.** If a proxy is selected but disabled or
-  unreadable, the run aborts and says why, rather than quietly connecting direct.
-* **Remote DNS Resolution now works.** The setting previously had no effect; it now
-  selects the remote-resolving SOCKS scheme (`socks5h` / `socks4a`).
-* **Checkpoints in the KV Store**, replicated across a Search Head Cluster (if you installed this add-ons on Search Head Cluster, might try this). Implementation on Search Head Cluster is doable for now, but it is recommended if you put this at Ingestion Tier or Forwarder Tier.&amp;#x20;
-
-### Logging
-
-* Internal logging is now one **5W1H `AUDIT key=value` record per event**, in a
-  consistent field order (what / who / when / where / why / how / summary), so a
-  single search works across every input.
-* **Log level takes effect on the next interval** — no Splunk restart required.
-* **DEBUG adds `stage=` dumps** for troubleshooting: resolved configuration, the
-  outgoing request, a truncated response body, a transformed sample record, and
-  cursor activity. These never appear above DEBUG.
-* **Fields are extracted at index time**, so they are searchable from a Search Head
-  that does not have this add-on installed — the usual forwarder/indexer layout.
-
-### Security
-
-* EdgeGrid tokens, proxy passwords, `Authorization` headers, `EG1-HMAC-SHA256`
-  signatures and Splunk session keys are **redacted from every log line**. Where an
-  operator needs to identify which key is in use, only `first4...last4` is written.
-* Credentials are read through **solnlib's ConfManager** rather than an
-  undocumented REST parameter, and a value that reads back masked is refused.
-* Log values are sanitised, so a crafted HTTP header cannot forge audit fields.
-* **No architecture-specific binaries** are shipped: the package contains no
-  compiled extensions and runs identically on Linux and Windows.
-
-### Fixed
-
-* Events were written under a sourcetype the bundled `props.conf` did not target,
-  so JSON parsing, timestamp extraction, field aliases, the geo lookup and the
-  summary-record filter all silently did nothing.
-* The account and proxy configuration files were missing from `default/`, so the
-  REST handlers had nothing to read on a fresh install and the Configuration page
-  failed to load.
-* The default index was `default`, which is not a valid index name.
-* `README` documented a configuration file that does not exist, while the two real
-  ones had no specification at all.
-* The `VERSION` file contained the version twice.
-* Version metadata is now generated from a single source, so `app.conf`,
-  `app.manifest`, `VERSION`, `globalConfig.json` and `openapi.json` cannot disagree.
-
-### Dependencies
-
-Built on **UCC framework 6.5.3**. Updated: `edgegrid-python` 2.0.7,
-`splunk-sdk` 3.0.0, `splunktaucclib` 8.2.0, `solnlib` 8.1.0,
-`charset-normalizer` 3.4.9 (pure-Python), `requests` 2.32.4, `idna` 3.16,
-`certifi` 2026.5.20. `urllib3` is pinned to 1.26.20 for Splunk 9.x compatibility.
-
-### Compatibility
-
-Splunk Enterprise 9.x and 10.x, Splunk Cloud. Python 3.9 and 3.13
-(`python.required = 3.9, 3.13`).&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Captures Akamai security events via SIEM Integration API v1. Built on Splunk UCC with multi-account, multi-proxy, and encrypted credential support.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Ensign Akamai Web Security Add-on for Splunk
-
-An enterprise-grade alternative to the official Akamai SIEM app, rebuilt by adopt Splunk UCC Framework.
-
-WHY THIS ADD-ON?
-The official Akamai app (refer to : https://splunkbase.splunk.com/app/4310) uses legacy way for enabled the input (via Settings =&amp;gt; Data Input) and several parsing is not key-value-pair based after coming ingested in Splunk, rather than using spath and makes easier for analyst to choose the fields, this add-ons are one to solve that. This add-on provides:
-- Full UI-driven configuration based on your usual for inputs based on Add-ons (just directly configured under the add-ons like the other Splunk Supported Add-ons).
-- Multi-account management with encrypted credential storage via Splunk&amp;#x27;s native password vault
-- Multi-proxy support (HTTP, HTTPS, SOCKS4, SOCKS5) with per-input proxy assignment
-- Offset-based checkpointing for reliable data continuity across restarts.
-- Custom sourcetype override per input for seamless migration.
-- Deployment Server compatible.
-
-DATA SOURCE:
-Captures security events from Akamai SIEM Integration API v1, supporting:
-- App &amp;amp; API Protector
-- Kona Site Defender
-- Web Application Protector
-- Client Reputation
-- Bot Manager
-- Account Protector
-
-EVENT PROCESSING:
-- URL-decodes all fields recursively
-- Parses HTTP headers into structured key-value pairs
-- Decodes base64-encoded attackData rule fields into structured objects
-- Drops summary/offset metadata events (nullQueue)
-
-Ref: https://techdocs.akamai.com/siem-integration/docs
-
-Built by Ensign Infosecurity Indonesia.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ec47a0f8-8a6e-11f1-9902-5a88a1d1aa8f.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Muhammad Rafdi Aufar Ahmad</dc:creator>
-      <pubDate>Tue, 28 Jul 2026 10:54:10 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8652/#v2.0.0</guid>
-    </item>
-    <item>
       <title>watchTowr for Splunk - v1.0.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7081/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Sync validated exposure data and attack surface intelligence from the watchTowr Preemptive Exposure Management platform into Splunk.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The watchTowr Platform is a Preemptive Exposure Management platform that combines proactive threat intelligence, real-world attacker telemetry, and automated red teaming to tell organizations with confidence and speed how they could be breached today.
@@ -1250,83 +1422,6 @@ Create a free account at: https://www.ipqualityscore.com/create-account/splunk&l
       <guid>https://splunkbase.splunk.com/app/2680/#v7.0.0</guid>
     </item>
     <item>
-      <title>Analyst1 - v1.6.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6816/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## New Features
-
-* **Hit Stats &quot;Outputs&quot; management UI:** a dedicated dashboard to create, edit, preview, run, and copy Hit Stats outputs without hand-editing saved searches. Includes inline Validate/Preview, an Actions menu, support for data-model / `tstats` (leading-pipe) base searches, a configurable Dimension 1 *Source Field*, and an optional Dimension 3 context field.
-* **Hit Stats historical backfill:** a new `analyst1hitstatsbackfill` command backfills past Hit Stats using memory-safe streaming reads and per-day uploads, so a newly configured output can populate history rather than only going forward.
-* **Analyst1 Monitoring dashboard:** a unified view of all three sync pipelines (API to KV, API to Index, Index to KV) with recent-run health, lineage, reconciliation counts, per-run error drill-down, and four built-in alerts.
-* **New operator commands:**
-  * `analyst1forcesync`: trigger an on-demand full indicator sync.
-  * `analyst1indexcutover`: migrate an index-mode deployment to KV mode and retire the legacy lookup-update searches.
-  * `analyst1clearindicators`: clear synced indicators from KV/ES (replaces the prior `analyst1clearesthreatintel`).
-* **Remote Splunk KV support:** indicator sync can write to a remote Splunk KV store (with TLS verification and proxy support), enabling deployments where the collecting node and the KV store are separate.
-
-***
-
-## Bug Fixes
-
-* **Configured ES push could silently no-op.** When an ES lookup was configured but the target ES collection was missing, the sync reported success even though nothing was written to ES. That condition now fails loudly so it is visible instead of silently skipped.
-* **Validating or saving an account could interrupt a running sync.** Saving or validating an Analyst1 account revoked the account's active token; if a sync was in flight it would be 401'd mid-fetch. Validation now uses a separate concurrent token and no longer revokes the live one.
-* **Hit Stats &quot;Summary&quot; mode mis-counted.** Summary mode de-duplicated to one arbitrary row per indicator instead of summing by day, so multi-row or multi-day searches under-reported or mis-reported counts. Summary mode now sums counts per day (matching Basic mode).
-
-***
-
-## Improvements &amp; Updates
-
-* **Indicator sync engine hardening:** a re-architected stage, route, prove, apply pipeline with per-type isolation and full-read completeness gating. Deletes are skipped when a read is incomplete, preventing accidental removal of indicators after a partial fetch.
-* **Observability overhaul:** unified sync lifecycle telemetry across all three pipelines, correlation IDs, and accurate write counters (index-mode writes are no longer reported as KV writes). This data feeds the new Monitoring dashboard.
-* **OAuth streamlining:** proactive token refresh with bounded retry, a guaranteed fresh token before large (&gt;100 MB) streaming Hit Stats uploads, and removal of obsolete single-token machinery.
-* **Hit Stats upload reliability:** scheduled outputs are spread out (schedule skew) to avoid burst-induced 503s when many fire at once, with retry and backoff hardening and idempotent per-day replace semantics.
-* **Fail-loud on storage errors:** KV batch write and delete failures now fail the run visibly instead of being silently swallowed.
-* **Search Head Cluster hardening:** more reliable captain detection and mutual-exclusion locking for the upgrade migration.
-* Configuration and documentation cleanups and consistent dashboard theming.
-
-***
-
-## Test Coverage
-
-1.6.0 was validated with an automated unit suite plus an Ansible-driven integration harness exercised on disposable Splunk labs.
-
-**Unit tests:** 1,000+ automated unit tests (58 modules) covering sync strategies, KV and index targets, IOC transformation, OAuth token lifecycle, locking, and migrations.
-
-**Platform matrix:** Splunk **9.4.12** and **10.2**, on both **single-instance** and **Search Head Cluster** topologies (plus Heavy-Forwarder collection).
-
-**Scenarios exercised:**
-
-* **Fresh install** and **in-place 1.5.9 to 1.6.0 upgrade**, on a standalone instance and on a dedicated ephemeral Search Head Cluster (with aged pre-upgrade state and the account migration).
-* **Sync modes:** KV mode and index mode; the API to KV, API to Index, and Index to KV (relay) pipelines; incremental (DIFF) and full (FULL) syncs; a standalone 2x2 sync matrix.
-* **Data-integrity and parity gates:** exact match of ES `*_intel` value-sets against KV after sync; index-to-KV relay verified against the API-sync &quot;gold standard&quot;; ingestion route-map consistency; a regression guard that a failed sync must not advance its cursor.
-* **Remote Splunk:** a REST-only remote-Splunk suite (install, configure, verify, diff) and remote-KV write mode (TLS verify, proxy, plus negative and scoped-role permission cases).
-* **Search Head Cluster specifics:** config replication, captain-gated migration, rolling-restart drain, and single-execution behavior.
-* **Hit Stats:** upload path via proxy, resilience (skew and retry), and preview and validation.
-* **On-demand Analyst1 sensor config change** (diff-trigger) end-to-end.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Analyst1 App for Splunk is an add-on designed for use by existing Analyst1 customers. 
-
-This add-on has two main functions:
-1. Brings enrichment data around observables/indicators of compromise from Analyst1 into Splunk, providing lookup tables for correlation data.
-2. Sends network/host log data from Splunk to Analyst1, correlating syslogs into hits against IOCs&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/89e13d78-89c1-11f1-9e51-4e089f2ff7ec.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Analyst1 Team</dc:creator>
-      <pubDate>Mon, 27 Jul 2026 13:54:42 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6816/#v1.6.0</guid>
-    </item>
-    <item>
-      <title>Splunk Add-on for Salesforce Streaming API - v2.1.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5689/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Recommended for Splunk 10.4 and other deployments running Python 3.10 or later.
-
-Updates
-
-\- Fix streaming inputs failing on Splunk 10.4 and other Python 3.10+ environments
-
-\- Resolves errors such as: Semaphore.\_\_init\_\_() got an unexpected keyword argument 'loop'
-
-Please see Release notes of version 2.0.1 for more details&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Salesforce Streaming API enables streaming of events using push technology and provides a subscription mechanism for receiving events in near real-time. The Streaming API subscription mechanism supports multiple types of events, including PushTopic events, generic events, platform events, and Change Data Capture events. This add-on helps ingest all the above-mentioned streaming events into Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/dddcf6c0-8768-11f1-97b6-d2790ef490e1.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
-      <pubDate>Mon, 27 Jul 2026 12:28:00 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5689/#v2.1.0</guid>
-    </item>
-    <item>
       <title>Recorded Future App for Splunk - v3.3.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/4920/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;\[3.3.0] (2026-07-24)
@@ -1378,37 +1473,6 @@ https://github.com/ChrisYounger/git_for_splunk&lt;/p&gt;&lt;img height=&quot;36p
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Chris Younger</dc:creator>
       <pubDate>Mon, 27 Jul 2026 10:52:53 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/4182/#v1.4.4</guid>
-    </item>
-    <item>
-      <title>NVD CVE Fetcher Add-on - v1.1.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7121/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* **Proxy Support:** Added proxy configuration support for proxy servers.
-* **UCC Framework Migration:** Migrated the add-on to the Splunk Unified Configuration Console (UCC) Framework, providing a modern, standardized, and easier-to-use configuration interface.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;A specialized integration tool designed to incorporate National Vulnerability Database (NVD) data into Splunk Enterprise&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk NVD CVE Fetcher Add-on is a specialized integration tool designed to incorporate National Vulnerability Database (NVD) data into Splunk environments. This application bridges the gap between external vulnerability intelligence and Splunk&amp;#x27;s analytics capabilities, enabling security teams to maintain awareness of emerging threats and vulnerabilities.
-
-The app automates the entire vulnerability data lifecycle - from acquisition through normalization to analysis - eliminating manual processes that are typically time-consuming and error-prone. By leveraging the NVD&amp;#x27;s repository of Common Vulnerabilities and Exposures (CVEs), the app provides security teams with timely access to standardized vulnerability information directly within their Splunk environment.
-
-A key strength of this application is its integration with Splunk&amp;#x27;s Vulnerabilities Data Model, which transforms raw vulnerability data into a structured format optimized for security monitoring, reporting, and incident response workflows. This normalization process ensures that critical vulnerability attributes such as CVSS scores, severity ratings, affected products, and remediation information are consistently formatted and readily accessible.
-
-Compatible with Splunk Enterprise 9.0.1 and later versions, the app offers flexible configuration options including customizable polling intervals, historical data retrieval parameters, and optional API key integration to enhance data retrieval rates. The application stores all fetched vulnerability data in a dedicated index, making it easily searchable through standard Splunk queries or through the provided convenience macro.
-
-For Security Operations Centers (SOCs) and vulnerability management teams, this application serves as an essential tool for maintaining situational awareness, prioritizing patching efforts, correlating vulnerabilities with existing assets, and enhancing overall security posture through data-driven decision-making.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8c22c66c-899c-11f1-a1c4-bad67b9a21a6.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Metron Consulting LLC</dc:creator>
-      <pubDate>Mon, 27 Jul 2026 09:27:21 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7121/#v1.1.0</guid>
-    </item>
-    <item>
-      <title>Technical Add-on for ThreatDown - v3.0.12 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4165/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Restored compatibility with Python 3.13 in Splunk Enterprise and Splunk Cloud 10.4.x.
-* Resolved HTTP 500 errors on the Inputs and Configuration pages caused by the removed Python `imp` module.
-* Updated the bundled Python compatibility dependency used by REST handlers.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;ThreatDown, powered by Malwarebytes
-
-The Add-on for ThreatDown provides custom Splunk configuration to understand ThreatDown event data. This app is a requirements for all ThreatDown apps for Splunk. The app includes Common Information Compliant (CIM) field extractions and pre-defined source types for multiple ThreatDown products making it compatible with all CIM based Splunk apps including Splunk Enterprise Security. It is a pre-requisite for all other ThreatDown Splunk apps.
-
-ThreatDown makes endpoints resilient through adaptive cyber protection, active threat response and orchestrated endpoint control that quickly restores workforce productivity when a compromise occurs. Our adaptive cyber protection predicts and detects attacks with multi-layer detection across the kill chain. We enable active threat response where machine learning is actionable and automated allowing for full recovery when a compromise occurs. We orchestrate command and control across siloed IT and Security organizations simplifying security management and making response effective. ThreatDown makes endpoints resilient, so that you can protect, remediate, and regain control of your digital business.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2f59232c-8992-11f1-9f3b-96e7b47cf262.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Malwarebytes Corp</dc:creator>
-      <pubDate>Mon, 27 Jul 2026 08:17:18 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4165/#v3.0.12</guid>
     </item>
     <item>
       <title>EasySMF for z/OS - v0.9.2 [Version Update]</title>
@@ -2175,16 +2239,6 @@ This add-on is available for Linux (64-bit), Windows (64-bit) and Mac. Make sure
       <guid>https://splunkbase.splunk.com/app/6785/#v4.3.4</guid>
     </item>
     <item>
-      <title>Python for Scientific Computing (for Mac Intel) - v4.3.4 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/2881/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This add-on contains a Python interpreter bundled with the following scientific and machine learning libraries: numpy, scipy, pandas, scikit-learn, and statsmodels. With this add-on, you can import these powerful libraries in your own custom search commands, custom rest endpoints, modular inputs, and so forth.
-
-This add-on is available for Linux (64-bit and 32-bit), Windows (64-bit) and Mac. Make sure you install the appropriate one for your Splunk deployment.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Thu, 23 Jul 2026 11:05:46 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/2881/#v4.3.4</guid>
-    </item>
-    <item>
       <title>Graphlens - v1.0.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/9168/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Provides interactive, Neo4j-like relationship-graph exploration for data stored in Splunk, enabling visual entity relationship discovery with node expansion, filtering, path finding, and event drill-down.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;GraphLens provides interactive, Neo4j-like relationship-graph exploration for data already stored in Splunk. The app enables visual entity relationship discovery through an interactive graph interface with node expansion, filtering, path finding, and drill-down to supporting events. GraphLens is an independent, third-party Splunk application that does not require, embed, or connect to Neo4j or any other external graph database. Splunk itself serves as the data store, search engine, security boundary, and application platform. GraphLens adds browser-side rendering and state management along with a small set of bounded, pre-approved searches. The app supports use cases including security investigation, Splunk knowledge-object lineage, logging and detection-use-case catalogues, application dependency mapping, and identity relationship exploration. It functions as a generic graph explorer rather than a single hard-coded use case.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/37d6ea32-866f-11f1-be4a-6ab37c164e28.png&quot;&gt;</description>
@@ -2334,55 +2388,6 @@ Contact us with any questions!&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&q
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview LLC</dc:creator>
       <pubDate>Thu, 23 Jul 2026 04:34:04 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/4640/#v1.2.10</guid>
-    </item>
-    <item>
-      <title>2Steps - v15.0.85 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4546/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;2 Steps Splunk front end integration, for back end version 15.x&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;2 Steps produces automated customer journeys with video replay across any platform (Windows, Web, mobile, etc) in minutes without writing any code.
-
-This app provides a graphical user interface for test creation, scheduling and results analysis all without leaving Splunk. 2 Steps is designed to allow any user to build end to end synthetic tests for any graphical application in minutes without specialist training. Please visit us at https://www.2steps.io/ for more information.
-
-
-Note that this app provides the front end interface and dashboard for 2 Steps. The 2 Steps back end are available from  https://www.2steps.io/ and are not on Splunkbase. The app is not functional without a correctly installed and configured back end. Please contact us to get the back end.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f9f35578-862a-11f1-a33f-da14409a3036.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">2Steps Development</dc:creator>
-      <pubDate>Thu, 23 Jul 2026 00:11:58 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4546/#v15.0.85</guid>
-    </item>
-    <item>
-      <title>2Steps - Cloud - v15.0.85 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4807/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;2 Steps Splunk integration - for backend version 15.x&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;2 Steps produces automated customer journeys with video replay across any platform (Windows, Web, mobile, etc) in minutes without writing any code.
-
-This app provides a graphical user interface for test creation, scheduling and results analysis all without leaving Splunk. 2 Steps is designed to allow any user to build end to end synthetic tests for any graphical application in minutes without specialist training. Please visit us at https://www.2steps.io/ for more information.
-
- 
-
-Note that this app provides the front end interface and dashboard for 2 Steps. The 2 Steps back end is available from  https://www.2steps.io/ and is not on Splunkbase. The app is not functional without a correctly installed and configured back end. Please contact us to enquire about installation of the 2 Steps server.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/adc53fcc-862a-11f1-a33f-da14409a3036.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">2Steps Development</dc:creator>
-      <pubDate>Thu, 23 Jul 2026 00:10:13 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4807/#v15.0.85</guid>
-    </item>
-    <item>
-      <title>Supporting App for Oracle SBC CDR - v0.9.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7051/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**Version 0.9.0 (July 22nd, 2026)**
-
-- **IMPORTANT / BREAKING CHANGE:** The Oracle SBC media-flow fields have been renamed to align with Oracle's own terminology. The old &quot;west&quot;, &quot;east&quot;, &quot;extra_west&quot; and &quot;extra_east&quot; field-name prefixes were a nonstandard naming scheme that did not appear anywhere in Oracle's documentation. The new names map to Oracle's flow-set and flow-direction concepts — Flow-Set 1 or 2 (fs1 / fs2), and Forward or Reverse (fwd / rev). For the media flow and quality-of-service fields the mapping is:
-
-    - `west_*` → `fs1_fwd_*` (Flow-Set 1, Forward direction)
-    - `east_*` → `fs1_rev_*` (Flow-Set 1, Reverse direction)
-    - `extra_*` → `fs2_fwd_*` / `fs2_rev_*` (Flow-Set 2, Forward / Reverse)
-
-    A few groups of fields do not follow that prefix pattern exactly: the media-stop-time and RTP transmitted-byte/packet counters are indexed by flow-set and calling/called party, and the session R-Factor and MOS values are now simply `calling_r_factor`, `calling_mos`, `called_r_factor` and `called_mos` (they are session-level, not per-flow). If you have built any of your own saved searches, dashboards, or reports that reference the old field names, you will need to update them when you upgrade.
-- Added a new search command, `| checksbcflowfieldnames`, to make that migration easy and exact. Run it (as an admin, or as a user with the `admin_all_objects` capability, for a complete picture) and it will itemize every place in your Splunk knowledge objects, ie saved searches, dashboards, macros, event types, data models, etc, that still reference any old field name, giving you the precise new name to use for each one.
-- Call detail view for Oracle SBC calls now includes a single-row summary table at the top echoing top level details like ingress/egress realm, time, disposition and duration etc.
-- Call detail view for Oracle SBC calls now includes a CallFlowGraph module that presents a DAG visualization of the various ip addresses and ingress/egress realms involved in the B2BUA signaling and media flow.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app provides the Splunk configuration to ingest the CDR data from Oracle SBC.     It is intended to work for both Oracle Session Router CDR and Oracle SBC CDR, although some unknowns remain as of this writing. 
-
-It is also designed to work as a Supporting App alongside Sideview&amp;#x27;s commercial &amp;quot;Cisco CDR Reporting and Analytics&amp;quot; app.  
-When used in conjunction with the Cisco CDR app, the Oracle SBC data can be used in that app alongside the CUCM data.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/4473ad6c-8623-11f1-b938-fa67bb79bec7.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview LLC</dc:creator>
-      <pubDate>Wed, 22 Jul 2026 23:18:32 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7051/#v0.9.0</guid>
     </item>
     <item>
       <title>Sideview Supporting App for Webex - v0.7.0 [Version Update]</title>
