@@ -6,7 +6,62 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sun, 02 Aug 2026 21:45:13 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 02 Aug 2026 22:45:58 +0000</lastBuildDate>
+    <item>
+      <title>TrackMe - v2.4.12 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4621/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**TrackMe 2.4.12 — Topology Studio opens to Foundation Edition, with critical stability hardening for large logical-group deployments.**
+
+* **Topology Studio is now open to Foundation Edition.** The feature was introduced in TrackMe 2.4.9 but was mistakenly restricted to Enterprise and Unlimited customers. Foundation customers can now use the complete authoring experience and manage Topology Alerts. Existing security boundaries and the normal licence read-only state are unchanged.
+* **Critical memory-stability fix for large logical-group deployments.** In versions 2.4.6 through 2.4.11, logical-group processing could trigger a repeating cycle of overlapping background refreshes. At scale, this could put severe memory pressure on `splunkd` and cause an out-of-memory termination. TrackMe 2.4.12 prevents the cycle and limits duplicate refresh work while retaining automatic updates. Customers with large numbers of logical groups should treat this as a critical upgrade and prioritise deployment of 2.4.12.
+* **No external machine-learning application dependency.** TrackMe no longer requires the Splunk Machine Learning Toolkit or the Splunk Scientific Python add-on because outlier detection runs on TrackMe’s native engine. Outdated checks for those applications could report missing requirements and interfere with Virtual Tenant creation when they were absent; the checks are now removed.
+* **Incremental outlier baselines.** Supported native KV Store models can retain representative historical observations within a configured bound across training cycles. Full retraining remains the default; incremental learning can be inherited from the system setting or selected per model, and switching back to full performs the established full refit.
+* **Median and better guidance for outlier analysis.** Median is available as an outlier calculation method, making models less sensitive to occasional volume spikes than an average. The Outliers page now includes an accessible visual explanation of learning, detection, qualification and impact-based scoring, and its settings guidance reflects the shipped defaults.
+* **More expressive and securely shared Topology Studio views.** Authors can select a saved link, inspect its source and target, edit its label, choose one-way, bidirectional or hidden arrows, reverse a one-way relationship and decide which relationships carry impact propagation. Bidirectional links carry impact in both directions immediately. The two-step connection workflow is also more prominent and easier to follow. Tenant visibility is enforced consistently when opening saved views, previewing their history and creating or importing portable archives.
+* **More precise aggregates and propagation.** An aggregate can optionally be constrained to an exact subset of the entities matching its scope and filter. Generated members, live status, alerts and rendered emails all use the same membership. Red, orange and informational blue states propagate consistently, aggregate-member arrows remain visible, and member KPI choices reflect the generated entity set.
+* **Complete policy and coverage results at scale.** Priority, tag and SLA policies based on SPL searches or lookups now evaluate the complete result set instead of stopping at 50,000 rows. Exceptionally large policy sources stop explicitly before partial results can be applied. Host and data-source coverage analysis and expected-entity injection now read the complete tracked inventory, expose duplicate reference rows separately and fail clearly if that complete inventory cannot be loaded.
+* **Median volume KPIs for DSM and DHM.** The median five-minute event count is available in Performance Metrics, stateful-alert charts and ML Outliers KPI selection. Existing defaults are unchanged and history starts after upgrade; earlier values are not backfilled.
+* **Cleaner fresh installations.** Hybrid tracker creation now tolerates the short configuration-refresh window that can follow creation of a search macro. A deployment with no AI provider or no Virtual Tenant configured also no longer records a misleading error for that normal state.
+* **Dependency maintenance.** Third-party JavaScript dependencies were refreshed for the release cycle, with no known vulnerabilities reported by the release audit.
+
+[https://docs.trackme-solutions.com/latest/releasenotes.html#version-2-4-12-build-1785703548-03-08-2026](https://docs.trackme-solutions.com/latest/releasenotes.html#version-2-4-12-build-1785703548-03-08-2026)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TrackMe for Splunk provides visibility and operational excellence to monitor at scale your Splunk data sources availability and quality, and many more. 
+
+With a rich set of features and a powerful workflow, TrackMe empowers you day after day to get the most from your Splunk investments and deliver the five stars quality of service your users deserve.
+
+Discover TrackMe: https://trackme-solutions.com/discover
+
+Documentation: https://docs.trackme-solutions.com
+
+You can subscribe to our newsletter, and receive important communications from us.
+We will send notifications for instance when publishing new releases, so we can you let you know the cool and powerful things we&amp;#x27;ve been working on!
+
+https://trackme-solutions.com/subscribe/
+
+TrackMe has transitioned to a new licensing model.
+The Free Community Edition has been discontinued.
+
+What this means for you:
+
+- Existing licensed customers are not impacted. Your current license continues unchanged.
+- Community users are automatically upgraded to a Foundation Edition trial for 90 days, with full functionality enabled.
+
+After the trial period:
+
+- TrackMe remains active and fully usable for monitoring
+- The platform enters read-only mode
+
+You can continue to view data, dashboards, alerts, and history
+Creation of new tenants, trackers, or entities will be disabled
+
+To continue using TrackMe with full capabilities after the trial, a Foundation license is required.
+
+Buy Foundation Edition: https://trackme-solutions.com/get-foundation/
+
+See all plans: https://trackme-solutions.com/pricing/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/63d912c0-8eb9-11f1-aa7f-5ab563f2cf65.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Trackme Limited</dc:creator>
+      <pubDate>Sun, 02 Aug 2026 22:07:46 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4621/#v2.4.12</guid>
+    </item>
     <item>
       <title>SecureLink App for Syslog - v1.2.2 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/6334/</link>
@@ -1423,22 +1478,6 @@ The app provides a streaming search command (geoip) that enriches events with da
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">William Storey</dc:creator>
       <pubDate>Wed, 29 Jul 2026 21:43:14 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8554/#v1.2.0</guid>
-    </item>
-    <item>
-      <title>Canary - v2.3.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4697/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;ul&gt;
-        &lt;li&gt;Fixed a bug in the AppNav module, introduced in Canary 2.2.0, where root-relative links in an app's navigation file - for example &lt;code&gt;&amp;lt;a href=&quot;/manager/cisco_cdr/saved/searches&quot;&amp;gt;&lt;/code&gt; - could be rendered with a doubled leading slash. Browsers read a leading &quot;//&quot; as a protocol-relative URL, so clicking such a link sent the user off to an external host instead of to the Splunk Manager page. This only affected Splunk instances whose web.conf &lt;code&gt;root_endpoint&lt;/code&gt; was set to the default of &quot;/&quot;.&lt;/li&gt;
-        &lt;li&gt;Fixed a class of bugs that affected Splunk deployments using Splunk's legacy (and largely unused in 2026) &quot;root_endpoint&quot; config to put Splunk behind a reverse-proxy. For example in cases where root_endpoint was set, the 'create dashboard panel' and 'save report' functionality as well as several links to manager pages were leading only to errors.&lt;/li&gt;
-      &lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Canary is essentially an alternate User Interface framework for Splunk.  It implements its own extensible view creation slash dashboarding system that other apps can use.   
-  
-It is a descendant of the old Sideview Utils (defunct for years now) but whereas Sideview Utils ran on top of Splunk’s “Advanced XML” systems, Canary does not.
-For a great deal more information about Canary, see our website ( https://sideviewapps.com/documentation/canary )
-
-NOTE: This app runs in python3 without any problems and without any changes required.  Splunk&amp;#x27;s &amp;quot;Upgrade Readiness App&amp;quot; may erroneously state that our apps do not run in python3 but it is wrong and please contact us if you have any questions about this.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c3337e94-8b8b-11f1-bc8b-9688965be9f9.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview LLC</dc:creator>
-      <pubDate>Wed, 29 Jul 2026 20:27:55 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4697/#v2.3.2</guid>
     </item>
   </channel>
 </rss>
