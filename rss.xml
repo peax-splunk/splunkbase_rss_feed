@@ -6,7 +6,704 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Mon, 03 Aug 2026 09:24:25 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 03 Aug 2026 12:50:17 +0000</lastBuildDate>
+    <item>
+      <title>Adjutant AI (AI Workbench) - v2.1.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8747/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;# Adjutant AI (formerly AI Workbench) — Release notes
+
+What's new, improved, and fixed in each release, in plain language. This is the
+**customer-facing** summary used for the Splunkbase release-notes section; the
+full technical changelog lives in the project's detailed release notes.
+
+**Last updated:** 2026-07-29
+
+&gt; **About version numbers.** Releases once numbered 0.10–0.13 were renumbered to
+&gt; 1.0–1.3 to reflect production maturity — no behaviour changed. The current release is
+&gt; **2.1.0** — the **Fraud capability**, built on the **2.0 line** (the deterministic **ITSI Root
+&gt; Cause Analysis** engine, **resource-consumption monitoring**, and **2.0.7**'s durable memory,
+&gt; Scheduled Ask and governed integrations), which in turn built on
+&gt; **1.8.5** (the **CIM Coverage Audit**), **1.8.4** (async playbook execution over MCP
+&gt; plus the **Outcome Ledger** executive/audit dashboard), **1.8.3**
+&gt; (a security‑hardening release: OWASP + dependency + anti‑ransomware audit), **1.8.2** (Splunk
+&gt; Edge Processor data‑quality awareness and keyless Azure OpenAI authentication), **1.8.1**
+&gt; (support‑diagnosis fixes) and **1.8.0** (agent telemetry &amp; OCSF export, content packs,
+&gt; all‑tiers data‑quality checks, Splunk 10.x readiness, Dashboard Studio version‑awareness). The
+&gt; **1.7.0** ServiceNow integration and the **1.5.0 &quot;Data Foundation &amp; MCP OAuth&quot;** themes are
+&gt; included below.
+
+---
+
+## 2.1.0 &quot;Fraud&quot;
+
+Splunk's own App for Fraud Analytics reaches end of life on 1 May 2027, and it is
+not alone: the App for Anomaly Detection retired in 2025, standalone UBA ends in
+January 2027, and the App for Behavioral Profiling froze at Splunk 9.4. Four
+packaged analytics apps retiring on one path, and their customers have no answer
+today. This release is that answer.
+
+- **Find out what your data can actually support, in about a minute.** The Fraud
+  Data Coverage Audit reads your real events and tells you which fraud use cases
+  you can run today, which are partial and why, and which are blocked with the
+  feed that is missing named. It works out which of your sources is which by
+  looking at what they CONTAIN, not what they are called, because real
+  sourcetypes never match the documentation. Today this answer takes a workshop
+  and three weeks of a consultant.
+- **The check nobody else makes.** It measures whether your entity keys actually
+  survive from one feed to the next. Ring detection is the payoff use case and it
+  is the one most often declared ready on the strength of the fields being
+  present, then failing because an account or device cannot be followed across
+  the boundary. It also tells you when a feed carries every field perfectly but
+  only knows about a fraction of your customers, which is a different problem
+  with a different fix.
+- **Count actors, not accounts.** One person can open many accounts using the
+  fact that Gmail ignores dots, and to your signup system they look like many
+  different people. Adjutant knows to collapse those, and knows NOT to do it for
+  other providers, where merging two customers would invent a fraud ring that
+  does not exist. When it links entities it always shows you how rare the shared
+  attribute is, because a shared IP address means nothing behind a mobile network
+  and a great deal on a home line.
+- **Scoring that fits where you already are.** If you run Enterprise Security,
+  everything goes into your existing risk framework and nothing parallel is
+  built. If you do not, it uses the same field names anyway, so the day you buy
+  ES you change a destination rather than rewrite your detections.
+- **Behavioural profiling that outlives the app it replaces.** Describe the
+  behaviour in a sentence and get a working indicator, anomaly rule and ranked
+  entity list. It compares an entity against its own history, or against its peer
+  group, which the retiring app could not do. It also watches for a feed dying
+  behind a profile: when that happens the scores simply fade, and fading looks
+  exactly like everyone behaving better.
+- **Nothing here needs those retiring apps.** Every playbook, tool and piece of
+  knowledge works on a plain Splunk estate. What we took from the retiring apps
+  is their METHOD, not a dependency on them: the risk-contribution model, the
+  behavioural profiling pattern, the entity pivots and the fraud use case
+  catalogue are all reimplemented here and improved. If you do still run either
+  app, importers can lift what you built into the native form, but that is a
+  convenience rather than the point.
+- **The fraud patterns it now knows.** Signup fraud (many accounts sharing an
+  email, IP, phone, password or bank account), account takeover (brute force
+  against credential stuffing, one address against many accounts, impossible
+  travel, and the profile-change-then-money-movement chain), money laundering
+  (funds converging then dispersing, amounts kept just under a reporting
+  threshold, sanctioned-country exposure), and two narrow verticals in
+  unemployment-insurance claims and controlled-substance diversion. All of it
+  reworded into our own framing, with nothing copied from Splunk's
+  documentation.
+- **Eight playbooks**, including triage for both public sector claims and
+  financial fraud. Both start by checking the data is actually flowing before
+  offering any verdict, because a quiet fraud queue is either good news or a dead
+  feed, and you should know which.
+
+Fraud features need Splunk Enterprise and the fraud licence feature. Where either
+is missing they stay visible and explain what is needed rather than disappearing.
+The demonstration dataset has no licence requirement at all, so a trial
+environment always works.
+
+One thing said plainly: Adjutant AI is not a fraud detection engine and does not
+try to be. It will not decline a card payment in a hundred milliseconds; that is
+what the dedicated engines are for. It is the layer above them that finds what
+they miss across channels, connects the entities they cannot, and turns three
+weeks of investigation into an afternoon with a trail you can hand to an auditor.
+
+## 2.0.7 &quot;Memory, Scheduled Ask &amp; Integrations&quot;
+
+Adjutant AI gains a durable memory, a scheduled/unattended surface, and a governed data-integration
+subsystem — so it stops re-asking, can run on a clock, and can sync a system of record into Splunk
+under a contract two humans have reviewed.
+
+- **Memory — it stops re-asking.** A small, durable, per-tenant memory: **learned facts** (the index
+  a report uses, what &quot;the Cribl search&quot; means for a team) captured the moment they're learned, and
+  **integration watermarks**. Two new Knowledge tabs — **Learned Knowledge** (a confirm queue;
+  promote a fact to the whole Org) and **Integration State** (force a watermark to replay or skip).
+  Unattended runs use **confirmed facts only**; a captured-but-unconfirmed fact can't silently steer
+  a run that writes to a target. Backed up per Org with the daily KV Store backup; a content-pack
+  upload never overwrites it.
+- **&quot;Templates&quot; are now &quot;Playbooks.&quot;** A presentation rename that finishes an inconsistency the engine
+  already had (the alert action was always &quot;Run Investigation Playbook&quot;). No data migration. Explicit
+  **run-mode tags** (`triggered` / `scheduled` / `integration`) replace the old bare `playbook` tag.
+- **Scheduled Ask.** A new admin tab to run a Playbook on a cron schedule — a **Scheduled Job**
+  (run and deliver a result; Professional+) or a **Scheduled Integration** (read a source, write a
+  target, keep watermarks; `ai-integration` feature). Each is a private, service-account-owned saved
+  search that just *triggers* a governed, single-flighted, bounded run — no per-member scheduler
+  racing over shared state (the DB-Connect-on-search-head-cluster lesson applied).
+- **Governed integrations.** A **mapping spec** is the contract: a versioned, declarative, lint-checked
+  `source → transforms → destination` record the runner executes deterministically — the model never
+  transforms rows. Author it in the new **Mappings** tab (a visual three-pane pipeline editor with a
+  live sample rail, or JSON), promote it **4-eyes**, and **earn** unattended clearance after a verified
+  run. Schema **drift** is detected deterministically, diagnosed by the assistant, and decided by a
+  human — never a silent rewrite. Records land via **`splunk_writer`** (KV Store / CSV / HEC / spool,
+  per-record routing, a fail-closed destination allowlist from the contract). Two ServiceNow example
+  mappings and a standard mapping-driven integration Playbook ship to clone and parameterize.
+
+See `docs/ADJUTANT_MEMORY_AND_SCHEDULED_ASK.md` for the operator guide.
+
+## 2.0.6 &quot;ITSI RCA — Industrialise&quot;
+
+The Root Cause Analysis engine reaches its industrialise milestone, and the smaller items deferred
+from earlier trains are completed. All analysis-only and off by default.
+
+- **Recovery verification** — after RCA names a cause, re-check whether the service actually recovered
+  (which corroborates the cause) or is still degraded / newly regressed elsewhere.
+- **Calibrated confidence** — where enough analyst feedback exists, the engine shows a genuinely
+  calibrated likelihood for a candidate instead of a raw internal score; until then it keeps the
+  existing strength wording (never a made-up number).
+- **Draft, recommend-only remediations** — RCA can produce reviewable draft fixes routed by cause
+  (restore the feed on the culprit host, fix onboarding/timestamp config, restart a stalled input,
+  correct the monitoring, look upstream, add a KPI). Always a suggestion — never executed.
+- **Data-driven playbook** — the RCA phase sequence is now a validated, dependency-checked contract
+  rather than a hardcoded list (same order, now extensible).
+- **Sharper feed diagnosis** — names which forwarder/HEC/pipeline host is the culprit, and adds
+  dedicated Cribl and Edge Processor pipeline-health checks.
+- **Better lineage &amp; safety** — resolves raw host/IP to canonical ITSI entities via declared aliases;
+  follows saved-search/eventtype references inside subsearches; and hardens the unattended template so
+  it can only follow the unattended procedure.
+
+---
+
+## 2.0.5 &quot;Resource-consumption monitoring&quot;
+
+A clear, per-tenant answer to *&quot;how much does Adjutant AI cost to run?&quot;*
+
+- **New &quot;Resource Consumption&quot; dashboard** shows the CPU, memory, threads and Splunk search-slots
+  Adjutant AI uses — broken down **by Org and by Org/Business-Unit** and by workload (interactive
+  Ask, unattended RCA, unattended runs, and — soon — scheduled Asks).
+- **Real per-run measurements.** Unattended work runs in its own process, so the app now records
+  actual CPU-seconds, peak memory and thread counts for each RCA cycle and each automation run,
+  tagged with the Org/BU it ran for. The numbers are content-free (counters only) and always on.
+- **Honest by design.** Interactive Ask runs inside Splunk's shared handler, where memory can't be
+  pinned to one tenant — so for Ask the dashboard reports search CPU/slots (from Splunk's own audit
+  log, mapped to Org/BU) and token/cost usage, and says so plainly, instead of inventing a figure.
+
+Additive and safe; no change to how analyses behave.
+
+---
+
+## 2.0.4 &quot;ITSI RCA — discovery &amp; external fold-in&quot;
+
+The ITSI Root Cause Analysis engine completes its discovery train:
+
+- **Latent-dependency discovery** surfaces a likely service dependency that isn't declared in your
+  ITSI topology but shows up in the data (shared inputs/entities, at-the-same-moment degradation) —
+  proposed as a ready-to-review suggestion, never created automatically.
+- **External-AI fold-in** can consult an external AI provider's read of the incident and weigh it in
+  as corroborating evidence — it can strengthen or temper a finding, but never overrides the
+  engine's own deterministic verdict.
+
+Analysis-only and off by default.
+
+---
+
+## 2.0.3 &quot;ITSI RCA — data-supply legs&quot;
+
+The ITSI Root Cause Analysis engine learns to read a KPI's **data supply chain as distinct legs**:
+
+- It classifies where a KPI's data actually comes from — a DB Connect input, a universal forwarder,
+  HEC, an Edge Processor / Cribl pipeline, syslog, or a scripted input — and shows which leg carries
+  the most data (&quot;the largest bar&quot;).
+- When a feed problem occurs, it can point at the **specific leg** that failed (for example &quot;the DB
+  Connect leg stalled&quot;) instead of just flagging the whole index.
+- Behaviour-drift baselines can now be **seasonal** (same time last week) as well as the 7-days-prior
+  default, so normal weekly patterns aren't mistaken for problems.
+
+Analysis-only; changes nothing about how the engine behaves until you opt in.
+
+---
+
+## 2.0.2 &quot;ITSI RCA — KPI Behaviour Analysis&quot;
+
+The ITSI Root Cause Analysis engine learns to read **how your KPIs are behaving**, not just
+whether they are red:
+
+- **Every KPI, including healthy ones, is profiled for behaviour drift** — a meaningful shift in
+  a KPI's value that its own red/green threshold may miss (for example, response time slowly
+  creeping up after debug logging was accidentally left on).
+- **Entity-level behaviour** pinpoints *which* entities are driving a service's degradation, not
+  just that the service is unhealthy.
+- **Suggested-KPI recommendations**: where the analysis finds a blind spot the current KPIs don't
+  measure, it proposes a monitoring improvement — always a suggestion, never a root-cause claim.
+
+All of this is analysis-only and off by default; it changes nothing about how the engine behaves
+until you opt in.
+
+---
+
+## 2.0.1 &quot;Unattended engine hardening&quot;
+
+The unattended investigation engine (the part of Adjutant AI that can investigate an alert with
+no human watching) is designed to hand the alert back to Splunk immediately and do the work in
+the background. That is what keeps your alerts fast — but it also means nobody is watching if a
+background run misbehaves. This release makes sure a misbehaving run always stops, and that you
+can see it when one does.
+
+The engine still ships **switched off**. If you have never enabled it, nothing changes for you.
+
+**Fixed**
+
+- **A run that keeps failing now gives up instead of restarting forever.** If a background run
+  died, it was put back in the queue and started again — without counting how many times it had
+  already failed. A run that failed every time (a bad playbook, a bug) could restart
+  indefinitely and keep occupying a worker. Runs are now retried a set number of times and then
+  parked as &quot;given up&quot;, where they stop consuming anything and wait for a person.
+- **The per-run time limit now actually applies.** The &quot;maximum time for one run&quot; setting was
+  shown in the configuration, charted on the dashboard and alerted on — but nothing enforced it.
+  Runs now stop when they reach it.
+- **A stuck run is stopped, not just forgotten.** Previously the engine handed the work to a new
+  run but left the stuck one alive, so two runs could work on the same alert and both spend
+  money. The stuck one is now stopped first.
+- **Long, healthy runs are no longer interrupted.** A slow-but-fine run could be mistaken for a
+  dead one and restarted underneath itself. Runs now report that they are alive continuously
+  rather than only between steps.
+
+**New**
+
+- **Limits that protect Splunk itself.** A background run now caps its own memory, CPU and
+  priority, so a runaway run degrades into one failed investigation instead of putting the
+  Splunk platform under pressure. Sensible defaults are set for you; all are adjustable, and
+  each can be switched off.
+- **You can now see stuck and given-up runs.** A run only reports on itself when it finishes,
+  so runs that got stuck were invisible on every dashboard. The *Pipeline Knobs* dashboard has a
+  new run-health section (stuck runs, given-up runs, runs being retried, and what each worker is
+  doing), and two new optional alerts — **Runner stuck** and **Runs dead-lettered** — tell you
+  without anyone having to look. Both are off by default.
+
+**Changed**
+
+- The retry setting is now called **`runner_max_attempts`** (it covers every kind of failure,
+  not only runaway runs). The unused `retain_completed_hours` setting has been removed — run
+  history retention is controlled by `queue_retention`. If you set either in a local override,
+  update it.
+
+---
+
+## 1.8.5 &quot;CIM Coverage Audit&quot;
+
+When a data source is onboarded but a correlation search in Enterprise Security still comes back
+empty, or an ITSI KPI never fills, the cause is almost always that the source is not properly
+mapped to the CIM data model the search depends on. Finding out why is normally a slow, manual
+walk through the layers. The CIM Coverage Audit does it for you, from your real events and your
+real search head configuration.
+
+**New**
+
+- **Audit a sourcetype against a CIM dataset.** Ask, for example, audit cisco:asa against the
+  Network Traffic All_Traffic dataset. You get back how much of the dataset the source covers,
+  and if it does not, which layer is broken: the source is not tagged so the model cannot see
+  it, its index is not on the model's allowlist, a field is missing or under the wrong name, a
+  value needs normalizing, or the accelerated summaries the correlation searches read have not
+  caught up. That last one is the confusing case where CIM works when you test it by hand but
+  your correlation searches fire nothing, and the audit calls it out plainly.
+- **A fix you can read and deploy.** For each gap the audit produces the exact configuration,
+  checked for validity, shown as your current stanza next to the proposed one, with a note on
+  where it belongs. It never deploys anything itself. You review and apply it, which is what lets
+  you run this where an automatic write to production would never pass change control.
+- **Honest about what a search head can see.** Adjutant AI runs on the search head, so it reads
+  your search time configuration and the real events, and it is upfront that it cannot read the
+  index time configuration on your indexers. It runs its searches as you, so it can never read
+  data from an index you could not otherwise search.
+- Three read only helpers to read a sourcetype's search head props and transforms and check
+  where a sourcetype has data.
+
+The diagnosis is available on Professional so any platform team can see which layer is broken.
+Generating the validated fix is an Enterprise feature. It grades against the CIM add on actually
+installed on your search head. Restart Splunk after upgrading.
+
+**Fixed**
+
+- **The app opens on the Ask tab again.** If your LLM runs entirely on the search head, with the
+  key held server side (the Splunk proxy mode, an Azure managed identity, or a Bedrock role), the
+  browser never receives an API key. The app used to read that as nothing being configured and
+  jumped to the Settings tab on every launch. It now opens on Ask as intended, and only sends you
+  to Settings when a key really is needed and missing.
+- **Clearer license status.** When a license is installed but the app cannot confirm it is active
+  on this environment, it now tells you that directly instead of quietly dropping to the free
+  Personal tier. Admins get a pointer to the License page to re-activate.
+
+---
+
+## 1.8.4 &quot;Async playbooks over MCP&quot;
+
+Run Adjutant AI playbooks from an AI agent over the Model Context Protocol with a reliable
+**start → poll → fetch** pattern. A playbook can take several minutes, but AI tool calls are
+subject to short timeouts you don't control (the MCP server, the client, proxies), so trying to
+wait for the answer in one call is fragile. Now every call returns in seconds.
+
+**New / Improved**
+
+- **Start returns immediately.** `adjutantai_start_playbook` (the old `adjutantai_run_playbook`
+  name is removed) hands back a run id at once with a hint on how to poll.
+- **Check progress** with `adjutantai_get_playbook_status` — queued, running, completed, or
+  failed (a run that hit a recoverable error and is auto‑retrying is reported as still running,
+  not failed), with guidance to stop polling after ~15 minutes.
+- **Fetch the verdict** with `adjutantai_get_playbook_results` once completed — condensed by
+  default, or the full result on request; a partial result is clearly labelled.
+- **Tenant‑safe.** One team can't read another team's run; unknown or expired run ids simply
+  return &quot;not found.&quot; Run records are kept for 7 days by default.
+- **Try it out of the box:** start `MCP Example: Read-only Health Check` under Org/BU
+  `DFLT/DFLT` (the read‑only reference playbook shipped on every install), then poll and fetch.
+
+Requires the inbound MCP server and the Backend Ask Service to be enabled. No configuration
+changes. Restart Splunk after upgrading.
+
+### Also in 1.8.4 — the Outcome Ledger (Enterprise)
+
+A single screen that answers what a CEO, CISO or auditor actually asks: *what did agentic AI do
+for us this period, was it any good, what did it save, what did it cost — and can I see the
+evidence for one run?* It assembles data the app already records (unattended‑run history,
+analyst agreement, run telemetry, LLM spend) into one executive/audit view. It adds **no new
+data collection and sends nothing to any external service.**
+
+**New**
+
+- **The dashboard** (`Adjutant AI ▸ Outcome Ledger`): headline tiles (investigations run
+  without a human, how often analysts agreed with the AI — with the sample size and coverage
+  shown, benign/false‑positive runs auto‑closed, analyst hours saved, LLM spend, typical time to
+  a verdict), the mix of AI conclusions over time, agreement by case type, a weekly ledger, and
+  an **evidence** table you can click through to the full detail of any single run. A footer
+  spells out every assumption so a number is never quoted out of context.
+- **Safe to hand to an auditor.** What each viewer may see is decided on the server from their
+  own identity — never from the page — and fails closed. In this release the dashboard is for
+  Splunk administrators; scoped, delegated auditor access is the next step.
+- **Is the AI real, or just performing?** An Efficacy Trend panel puts run volume against how
+  often analysts agreed, over time. If the agent runs more while analysts increasingly override
+  it, the panel says so (&quot;scaling faster than trust&quot;) instead of hiding it behind a healthy‑looking
+  headline — and on too little feedback it honestly says the sample is too thin to judge.
+- **Honest numbers.** Effort saved is shown as time (with the per‑case assumption stated), spend
+  is the real logged cost, and the per‑investigation efficiency signal is token usage — never an
+  invented cost estimate.
+
+Enterprise feature. No effect on any existing behaviour. Restart Splunk after upgrading.
+
+---
+
+## 1.8.3 &quot;Security hardening&quot;
+
+A security‑focused release. Adjutant AI was put through an independent OWASP Top 10 (web **and**
+LLM), dependency‑vulnerability, and &quot;AI‑driven ransomware&quot; review. The headline: **no critical
+issues, no default passwords or keys, no vulnerable components that ship to you, and the
+assistant cannot be turned into an attack tool.** Confirmed issues are fixed; a plain‑language,
+reviewer‑ready write‑up ships in the app as `SECURITY_AUDIT.md`.
+
+**Improved / Fixed**
+
+- **Credentials stay server‑side.** Provider API keys and keyless Azure sign‑in secrets are
+  never sent to the browser or to other users in your tenant. (The free‑tier browser API‑key
+  path is unchanged.)
+- **Prompts stay in your audit index**, not Splunk's internal logs.
+- **Stronger multi‑tenant isolation** for investigation results and knowledge sources.
+- **You confirm every change.** Closing a notable, setting a disposition, an
+  ITSI/TrackMe/ServiceNow write, or overwriting a saved dashboard now asks for explicit
+  confirmation first. Read‑only questions and new private dashboards are unaffected.
+- **General hardening:** cleaner errors, tighter sign‑in redirects, safer content‑pack imports,
+  email TLS verification on by default.
+
+No new features or config changes. Restart Splunk after upgrading.
+
+---
+
+## 1.8.2 &quot;Edge Processor data-quality + keyless Azure OpenAI auth&quot;
+
+**Keyless Azure OpenAI (Microsoft Entra ID / managed identity).** Connect Azure OpenAI **without a
+static API key** — using a Microsoft Entra ID service principal or a managed identity, governed by
+your Entra tenant. Runs entirely server-side (no token reaches the browser), supports Public and
+US Gov clouds, and adds a one-click **Test connection** that names exactly what to fix if something
+is off. Connecting Azure with a plain **API key** still works on every tier; the keyless Entra path
+is an **Enterprise** capability.
+
+---
+
+### Edge Processor data-quality
+
+If your data passes through **Splunk Edge Processor** before it reaches Splunk, some parsing,
+timestamping, dropping and routing happens *upstream* — where Splunk's own internal logs and
+feed-health tools can't see it. This release teaches the assistant to look at that hop.
+
+- **New &quot;Edge Processor → Splunk data-quality check&quot;.** Ask the assistant to check an Edge
+  Processor feed and it reads Edge Processor's own operational metrics (throughput, dropped
+  events, failed destination sends, and queue backpressure) and tells you, in plain language,
+  whether data is being silently lost or delayed before it lands — with a proof dashboard.
+- **Honest by design.** If Edge Processor telemetry isn't reaching your Splunk yet, the
+  assistant says so and gives you the exact setup steps (on-premises vs Splunk Cloud) instead of
+  inventing a clean bill of health. It reports at the pipeline level and is clear that per-event
+  checks need a small addition to your Edge Processor pipeline.
+- **Folds into the readiness verdict.** Edge Processor joins Splunk parsing, feed-health, and
+  Cribl as another &quot;is this data actually good?&quot; signal, and can cap the Data Quality Score when
+  it finds upstream loss.
+- Read-only and available on every tier, exactly like the existing Cribl check.
+
+---
+
+## 1.8.1 &quot;Cleaner support diagnosis&quot;
+
+A small maintenance update over 1.8.0 (front-end only).
+
+- **More accurate &quot;Report an issue&quot; diagnosis.** The automated issue classifier no longer
+  mislabels a session that finished normally — one that completed and produced its dashboard — as
+  having &quot;run out of tool steps.&quot; The suspected-issue summary in your support bundle is now cleaner
+  for healthy, tool-heavy sessions.
+
+---
+
+## 1.8.0 &quot;Agent telemetry &amp; OCSF export, content packs &amp; all-tiers data quality&quot;
+
+**New — your SOC can watch the agent (OCSF telemetry).**
+
+- **Adjutant AI emits its own activity as OCSF.** Every LLM call, tool / MCP / ServiceNow call,
+  configuration change, unattended run verdict, and **policy refusal** (the proof the controls
+  actually fire) can be written as open-standard **OCSF** events to a Splunk index your Enterprise
+  Security / SOC already watches — mapped to CIM via the community **OCSF-CIM Add-On**. Your SOC
+  monitors our agent the same way it monitors everything else: on-prem, with no cloud egress.
+- **You stay in control.** It is **off by default** and Enterprise-gated. **You provision and name
+  the index** (the app ships no `indexes.conf`). Routing and content are resolved **per Organisation
+  / Business Unit**; content export is denied by default and never exceeds your audit (DPIA) ceiling,
+  with a server-side redaction check before anything is written.
+- **See it immediately.** A shipped admin dashboard — *Adjutant AI — Behaviour (OCSF)* — shows the
+  token trend, model mix, tool/MCP egress with identity, the refusal and finding feeds, and a per-run
+  drilldown, all on raw OCSF (no CIM Add-On required).
+
+**New — update Adjutant's content without waiting for a whole new app release.**
+
+- **Content packs.** Almost everything Adjutant does well lives in its **content** — the
+  skills, knowledge, and playbooks. A **content pack** is a single, versioned
+  file that lets us ship a corrected or improved content set straight to your install, and
+  lets your admin apply it safely — no Splunkbase re-vetting cycle for a content fix.
+- **Your changes are protected.** Applying a pack **upgrades only the items you haven't
+  changed**. Anything your team has customised is left exactly as-is and clearly listed,
+  never silently overwritten — and your Org/BU scoping is always preserved. After an
+  import you get a per-item report, and the list of items that need manual reconciliation
+  is downloadable as a CSV.
+- **Safe by design.** Every pack carries an integrity check, so a tampered or truncated
+  file is refused. Imports live on the **Backups** page, which also shows which content
+  version you're currently on — run a backup first and you can roll back in one click.
+- **Retire without deleting.** A pack can mark an item **retired** — it stays installed but
+  is hidden and switched off everywhere (it can't be picked, run, or used by the
+  assistant). An admin can re-enable it at any time by removing the tag.
+
+**Improved — data-quality checks for everyone, and Splunk 10.x readiness.**
+
+- **Data-quality ingestion checks are now available on every edition, including the free
+  tier.** Checking whether a feed is actually landing and parsing correctly — on
+  `index=_internal`, through **TrackMe**, and through **Cribl Stream** — is a baseline
+  capability now, not a Professional add-on.
+- **Ready for Splunk Enterprise 10.2 and 10.4.** The app declares Python 3.9 **and** 3.13
+  compatibility and has been audited against the 10.x platform changes (dashboards, the web
+  framework, KV Store). Your admin still completes the standard KV Store engine migration as
+  part of any 10.x upgrade.
+- **Smarter Dashboard Studio building.** The assistant now works from a single,
+  version-aware map of what Dashboard Studio supports on **your** Splunk version — it won't
+  reach for a chart type your version can't render, and when your Splunk is newer than what
+  we've documented it builds conservatively and verifies the result.
+
+**Fixed.**
+
+- **Fewer false &quot;the dashboard is blank&quot; errors.** A heavy Dashboard Studio dashboard that
+  renders fine but slowly is no longer wrongly reported as blank — the assistant confirms the
+  panels actually returned data before deciding, so it stops wasting a retry on a dashboard
+  that was already correct. A genuinely blank dashboard is still caught.
+- **TrackMe panels only when they belong.** Fixed a rule that pushed a TrackMe feed-health
+  panel onto every generated dashboard (and used a lookup that fails outside the TrackMe
+  app). The assistant now adds a feed-health panel only when it's actually relevant, using a
+  method that works in your app.
+
+---
+
+## 1.7.0 &quot;ServiceNow integration&quot; (included in the 1.8.0 release)
+
+&gt; **Renamed to Adjutant AI.** The app is now **Adjutant AI** (formerly &quot;AI Workbench&quot;).
+&gt; This is a **display-name change only** — the in-app title (the easter egg now lives on
+&gt; the dot of the &quot;i&quot; in **Adjutant Ai**), the app label, the documentation, and the
+&gt; assistant's own self-description all say **Adjutant AI**. Nothing functional changed:
+&gt; the Splunk app id, your saved searches/dashboards/models, KVStore data, and generated
+&gt; artifact names are unchanged, so the upgrade is seamless.
+
+**New — run playbooks automatically, and from other Splunk apps.**
+
+- **On a schedule or on an event.** A playbook can run **unattended** on a schedule
+  (a &quot;morning health check&quot;) or in response to a Splunk event — an alert, an ES
+  correlation search, or an ITSI episode. When an event triggers it, the affected
+  thing (the host, user, or entity in the alert) is handed to the playbook
+  automatically, so it investigates exactly what fired. Two ready-made (disabled)
+  examples are included to copy.
+- **Adjutant AI as a building block for other apps.** Other Splunk AI agents can now
+  ask Adjutant AI to **list** and **run** your playbooks through a small, safe
+  interface (an MCP server). Only playbooks you mark **MCPready** are exposed, every
+  call must name the Org/BU it is for (which must be a business unit you have set up)
+  as a safeguard, and runs go through the same governed, bounded service — never an
+  open door. This interface is **off by default** — turn it on with one setting. When
+  on, the tools can also appear inside **Splunk's own MCP Server**, reachable on the
+  normal Splunk web address (no special port needed); you authenticate with a standard
+  Splunk token. A ready-made, read-only **example playbook** ships enabled so there is
+  always something to see the moment you switch the interface on.
+
+**New — &quot;Report an issue&quot; support packaging (all editions).**
+
+- One click on any conversation (per-turn 🐞, the Ask panel, or the new **Help tab**)
+  packages exactly what happened — versions, the resolved prompt, the tools and model used,
+  the generated dashboards/searches, and every error and warning — into a single file.
+- **Safe by construction:** secrets are stripped before anything leaves the browser, and the
+  file is **encrypted** to the support key, so it's safe to send over any channel.
+- It even **tells you what kind of problem it looks like** and matches known issues, so
+  simple cases are solved without a back-and-forth.
+- **Send it your way:** download it and attach it to your own ticket, use the built-in
+  support form, or email it. The **Help tab** (Report + Documentation + About) is always
+  reachable — even if the app is locked by licensing.
+
+**New — ServiceNow, done properly** (Professional + the `servicenow` feature). Read incidents,
+changes, problems and the **CMDB/CSDM** in plain English — with bounded blast-radius / dependency
+traversals (&quot;what's the blast radius if this CI fails?&quot;). Turn a Splunk alert, ITSI episode or ES
+notable into a rich, deterministically rendered ServiceNow incident and **write the number back** to
+the originating object (a re-fire updates, never duplicates; the closed-incident policy is
+configurable). **Security incidents (SIR)** with MITRE ATT&amp;CK, off until an admin enables them. Two
+transports (REST **or** a ServiceNow MCP server), plus TISC threat-intel enrichment — all server-side
+and allowlisted, so ServiceNow can never block the assistant. *(Verified against the documented APIs
+and unit-tested; final certification is on a live ServiceNow.)*
+
+**New — run playbooks automatically, and from other apps.** Playbooks can run **unattended** on a
+schedule, or from a Splunk alert / ES correlation search / ITSI episode (the triggering entity is
+handed to the run). Adjutant AI can also expose **list / run** over an inbound **MCP server** (off by
+default, MCPready-only, Org/BU-scoped) — reachable inside Splunk's own MCP Server on the normal web
+address, with a standard Splunk token.
+
+**New — &quot;Report an issue&quot; support packaging (all editions).** One click packages a failing
+conversation — secret-stripped and **encrypted client-side** — with an automatic problem
+classification, plus an always-reachable **Help tab** even when the app is licence-locked.
+
+**New — Cribl Stream data-quality awareness** (Professional+). Reads Cribl's own forwarded logs and
+metrics to surface the timestamp / parse / dropped-event problems that happen *inside Cribl, before
+Splunk can see them* — the &quot;green in Splunk but timestamped wrong&quot; blind spot — folded into one
+readiness verdict. No Cribl Lake or Search required.
+
+**New — LLM reliability: retry, fallback &amp; circuit breaker** (Enterprise). A brief provider hiccup
+(503 / 529 / rate-limit) auto-retries within a time budget; a per-config **circuit breaker** stops
+hammering a provider that's down, then probes for recovery; and an ordered **fallback** transparently
+switches to your next provider (and tells you which it used). Two new admin dashboards — **LLM
+Health** and **AI Activity** — plus per-user / BU / org concurrency caps, all conservative and off
+the critical path.
+
+**New — live model &amp; cost catalogue (all editions).** Models and prices come from a runtime catalogue
+that updates without an app rebuild; **automatic model discovery** (Professional+) keeps it current
+without ever logging your keys; an Enterprise admin screen adds price overrides and manual model
+registration for private gateways.
+
+**Fixed.** Generated Simple XML dashboards now share a single base search across panels (faster) and
+get a top data-ingestion health panel; corrected a 3× Opus price over-charge (now server-side
+authoritative, with Opus 4.8 and Fable 5 included).
+
+---
+
+## 1.5.0 &quot;Data Foundation &amp; MCP OAuth&quot;
+
+**New:** connect to **OAuth 2.1‑protected MCP servers** (authorization‑code + PKCE for
+interactive, client‑credentials for unattended; tokens held server‑side, never in the browser
+— see [MCP_OAUTH.md](MCP_OAUTH.md)); **onboard new data sources** — describe a source or attach a
+sample file and get a deployment‑ready add‑on package; a **&quot;is my data parsed correctly?&quot;**
+ingestion/timestamp check that reads Splunk's own internal logs; generated config **validated
+against your instance** and given a **0–100 Data Quality Score** (A–F); and attach a local
+sample file in Ask (only the file name is audited, never contents).
+
+**Improved:** works with the newest OpenAI &quot;reasoning&quot; models incl. Azure GPT‑5.4 /
+GPT‑5.4‑mini (auto‑detects the request format); more reliable generated dashboards; generated
+objects use the **`aiworkbench`** name tag; and Audit‑tab improvements (Business Unit
+column/filter, local‑timezone timestamps, reliable token/outcome capture).
+
+---
+
+## Earlier releases (1.0.0 – 1.4.3)
+
+- **1.4.3** — Clearer guidance and plain-language fixes when a free-tier LLM key hits its
+  provider limits (e.g. Groq token-per-minute caps, Gemini zero-quota keys); the LLM config
+  screen flags these up front.
+- **1.4.1** — Per-feature capability licensing with edition badges (Professional / Enterprise /
+  MSP); gated features show a padlock, and nothing you created is ever deleted when a tier changes.
+  Turn-level audit logging made reliable; more robust dashboard generation.
+- **1.4.0** — The assistant reads your own Splunk **live** (real search commands + installed
+  visualizations) instead of guessing; Splunk Security Essentials detection content integrated.
+- **1.3.3** — TrackMe integration end-to-end (feed-health awareness + actions) with richer
+  built-in platform knowledge.
+- **1.3.2** — First Splunkbase 1.x release: packaging and permissions hardening.
+- **1.3.1** — Fixed Org/BU edits dropping fields; safeguard to keep bundled playbooks correct
+  after upgrades.
+- **1.3.0** — Real, per-Organisation audit logging of every AI interaction (Professional+).
+- **1.2.0** — Splunk Security Essentials content tools for playbooks.
+- **1.1.1** — Cisco Deep Time Series Model (CDTSM) playbooks: pre-trained anomaly detection and
+  forecasting via the AI Toolkit, each with a proof dashboard.
+- **1.1.0** — Multi-tenancy and the Organisation / Business-Unit editor overhauled for clearer,
+  safer tenant scoping.
+- **1.0.0** — The knowledge layer: ground answers in your organisation's own conventions.
+
+*(Releases before 1.0 are early pre-release history and are omitted here.)*
+
+---
+
+## Known issues
+
+- **Open the assistant from inside another app.** Adjutant AI is a &quot;host shell&quot;:
+  reach it from a navigation-menu entry inside Search, Enterprise Security, ITSI,
+  or your own apps — not by clicking the app tile directly. Everything it creates
+  lands in the namespace of the app you opened it from.
+- **Some Data Foundation features need self-hosted Splunk.** The
+  configuration-reference grounding and config-package generation (1.5.0) read
+  files on the Splunk server, so they are unavailable on Splunk Cloud; the
+  assistant says so and continues with what it can.
+
+---
+
+*When a published fix resolves a tracked GitHub issue, it is summarised here with
+its issue number — for example: &quot;Fixed: a dashboard panel could display raw HTML
+markup as text instead of formatting it (#123).&quot;*&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;A workbench for Splunk, not just a chatbot. Analyse, correlate and build across SPL, dashboards, alerts, AI Toolkit / MLTK, ES, ITSI and TrackMe through tools that understand each one — plus any MCP server you add. Pick your LLM: Anthropic, OpenAI, Azure, Groq, Gemini, Bedrock, Ollama, OpenRouter. Multi-tenant, multi-tier (Free, Pro, Enterprise, MSP).&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Adjutant AI (formerly AI Workbench) is a generative workspace for Splunk — not a chatbot bolted onto search, but a real workbench where you investigate, analyse and build with tools that understand Splunk.
+
+It is a host shell: it has no use-cases of its own, deriving everything from the Splunk app a user opens it from and their roles. Install once on the Search Head, then embed it in the apps your users already live in — Search, ITSI, Enterprise Security, your SOC and MSP customer apps. The same engine renders a different experience per app and writes outputs into that app&amp;#x27;s namespace. Users never leave the app they came from.
+
+Ask in plain English. Get back validated SPL searches, Simple XML and Dashboard Studio dashboards, alerts, lookups, reports and Splunk AI Toolkit (MLTK) machine-learning pipelines — grounded in your running Splunk (your knowledge objects, live command syntax, CIM models), run for real before they are saved, as normal Splunk knowledge objects owned by the calling user.
+
+The depth is the difference. Where a generic MCP-only assistant talks to Splunk through one broad door, Adjutant AI ships fine-grained, Splunk-aware tools across Core, Enterprise Security, ITSI, TrackMe, ServiceNow and the AI Toolkit, each scoped to one job and run under your existing Splunk ACLs. Extend it with HTTP tools or any MCP server.
+
+New in 1.8.0 — your SOC can watch the agent. Adjutant AI emits its own activity — LLM calls, tool/MCP/ServiceNow calls, config changes, unattended run verdicts and policy refusals (the proof the controls fire) — as open-standard OCSF events to a Splunk index Enterprise Security already watches, mapped to CIM via the OCSF-CIM Add-On. On-prem, no cloud egress, off by default, resolved per Org/BU, with a shipped Behaviour dashboard. Control is the product; now it is observable.
+
+Also included: a first-class ServiceNow integration (read incidents, changes, problems and the CMDB/CSDM; turn a Splunk alert, ITSI episode or ES notable into a rich ServiceNow or SIR security incident with the number written back), governed unattended playbooks, and a Data Foundation add-on package builder.
+
+Bring your own LLM: Anthropic, OpenAI, Azure OpenAI, Groq, Google Gemini, AWS Bedrock, Ollama (local, fully offline) or OpenRouter — server-side so API keys never leave the search head. Connecting Azure OpenAI with an API key works on every tier (Free is single-user); keyless Microsoft Entra ID / managed-identity auth for Azure OpenAI — no static secret, governed by your Entra tenant — is an Enterprise capability (new in 1.8.2). Multi-tenant by design: Organisations and Business Units resolve automatically from the calling app and roles. Free, Professional, Enterprise and MSP tiers, self-serve and air-gap-friendly.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/00d59ba8-8f36-11f1-b35c-a68dcfbf578a.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Eduard Lekanne</dc:creator>
+      <pubDate>Mon, 03 Aug 2026 12:28:09 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8747/#v2.1.0</guid>
+    </item>
+    <item>
+      <title>Threat Hunting Essentials - v1.3.67 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7633/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
+
+For Premium Version - Contact sales https://www.avertpoint.com/contactus.html
+
+It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
+
+Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
+
+1. Backdoor.
+2. Worms.
+3. Ransomware.
+4. Bots.
+5. Trojan horses.
+6. Keyloggers.
+7. Rootkits.
+8. Spyware.
+9. Fileless malware.
+10. Cryptojacking.
+11. Wiper malware.
+12. Adware.
+14. Viruses
+15. P2P-Worm
+16. Internet Worms
+17. Net-worm
+18. Clickjacking
+19. Cryptominer
+20. Fileless malware
+
+You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
+
+Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ad0f9dea-8f2e-11f1-ada3-2ae32447700e.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
+      <pubDate>Mon, 03 Aug 2026 12:28:07 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.67</guid>
+    </item>
     <item>
       <title>Venafi - v2.2.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5862/</link>
@@ -208,44 +905,6 @@ See all plans: https://trackme-solutions.com/pricing/&lt;/p&gt;&lt;img height=&q
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">TekStream Solutions</dc:creator>
       <pubDate>Sun, 02 Aug 2026 17:48:21 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6334/#v1.2.2</guid>
-    </item>
-    <item>
-      <title>Threat Hunting Essentials - v1.3.66 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7633/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
-
-For Premium Version - Contact sales https://www.avertpoint.com/contactus.html
-
-It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
-
-Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
-
-1. Backdoor.
-2. Worms.
-3. Ransomware.
-4. Bots.
-5. Trojan horses.
-6. Keyloggers.
-7. Rootkits.
-8. Spyware.
-9. Fileless malware.
-10. Cryptojacking.
-11. Wiper malware.
-12. Adware.
-14. Viruses
-15. P2P-Worm
-16. Internet Worms
-17. Net-worm
-18. Clickjacking
-19. Cryptominer
-20. Fileless malware
-
-You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
-
-Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/82953bde-8e65-11f1-9b67-92c4ab03fff9.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
-      <pubDate>Sun, 02 Aug 2026 14:37:20 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.66</guid>
     </item>
     <item>
       <title>Claude Desktop Monitor - v0.2.0 [Version Update]</title>
@@ -1483,21 +2142,6 @@ IP geolocation, IP enrichment, proxy detection, VPN detection, residential proxy
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">IPinfo Support</dc:creator>
       <pubDate>Thu, 30 Jul 2026 10:37:49 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/4070/#v9.6.0</guid>
-    </item>
-    <item>
-      <title>Visualization Toolbox - v0.4.9 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6675/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Added additional documentation
-* Upgrade to echarts version 6.1
-* Bugfixes in a couple of visualizations like timeline and boxplots
-* Enhancements for eCharts properties, bandHeight and bandGap params&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Visualization Toolbox is a free and powerful visualization app that allows you to create highly customizable charts. It is built upon the Apache ECharts library. The Visualization Toolbox supports most of the chart types that are available in ECharts.
-
-How to build your first EChart dashboard? Have a look at the Docs/Tutorial of the Visualization Toolbox start page in Splunk.
-
-Code is available on Github -&amp;gt; https://github.com/hman-78/visualization_toolbox&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/acfc166c-8bf5-11f1-872a-b22c1f8111a7.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Björn Hamann</dc:creator>
-      <pubDate>Thu, 30 Jul 2026 09:34:47 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6675/#v0.4.9</guid>
     </item>
   </channel>
 </rss>
