@@ -6,7 +6,73 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Wed, 05 Aug 2026 19:15:55 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 05 Aug 2026 20:57:57 +0000</lastBuildDate>
+    <item>
+      <title>Microsoft 365 - v1.2.5 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8612/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Fixed `get email` and `on poll` failing to add downloaded attachments and EML files to the SOAR Vault.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app enables MS Graph API-based email ingestion and investigative actions on Microsoft 365, replacing the Microsoft Graph for Office 365 app.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/22810a74-910e-11f1-aaf8-ee0ec426490b.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Wed, 05 Aug 2026 20:42:13 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8612/#v1.2.5</guid>
+    </item>
+    <item>
+      <title>MITRE ATLAS AI Threat Detection for Splunk - v1.0.3 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8527/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## v1.0.3 — August 5, 2026
+
+This app is being sunset on January 27, 2027. The detection coverage here (10 rules) has been fully superseded by the [GIC Supply Chain &amp; AI Threat Intelligence Platform (SCIP)](https://splunkbase.splunk.com/app/8814). SCIP's free tier includes 10 comparable AI/agentic threat rules (9 MITRE ATLAS-mapped) at no cost. Paid tiers include 66 AI/agentic threat rules (57 MITRE ATLAS-mapped), plus additional capabilities for teams that need broader coverage.
+
+**What's in this release:**
+
+- Corrected technique names to match current MITRE ATLAS canonical values: AML.T0048 (External Harms), AML.T0012 (Valid Accounts), AML.T0014 (Discover AI Model Family), AML.T0007 (Discover AI Artifacts), AML.T0024 (Exfiltration via AI Inference API), AML.T0020 (Training Data Poisoning)
+- Corrected AML.T0020 tactic from Impact to Persistence, reflecting the July 2026 MITRE ATLAS restructuring
+- Reclassified the bulk content generation detection from AML.T0047 to vendor-defined GIC-VD-001; AML.T0047 is an unrelated technique with no connection to this detection's logic
+- Updated all in-app references to SCIP's detection coverage to reflect current accurate figures
+
+No detection logic was changed. Existing rules continue to function as before.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;10 free AI/agentic threat detection rules for AI/LLM threats (9 MITRE ATLAS-mapped). Guided setup with auto-discovery and platform-specific configuration for 12 LLM providers. Detects prompt injection, jailbreak, exfiltration, training data poisoning, model reconnaissance, and more. For broader AI/LLM security coverage see: splunkbase.splunk.com/app/8814.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;MITRE ATLAS is the adversarial threat matrix for AI/ML systems — the AI equivalent of MITRE ATT&amp;amp;CK. As organizations deploy LLMs, RAG pipelines, and ML APIs into production, they create an attack surface that most Splunk deployments have zero detection coverage for.
+
+This app provides 10 detection rules for AI and LLM threats — 9 mapped to specific MITRE ATLAS technique IDs, plus 1 vendor-defined rule where no canonical ATLAS technique covers the detection concept. Each rule is a Splunk saved search that monitors your AI/LLM logs for known attack patterns including prompt injection, jailbreak attempts, data exfiltration via inference APIs, training data poisoning, model reconnaissance, and AI abuse.
+
+The app includes a guided Setup dashboard that auto-discovers AI/LLM data in your environment, validates required fields, and shows which rules your data supports. A Configuration Guide provides platform-specific instructions for 12 LLM providers including LiteLLM, Azure OpenAI, AWS Bedrock, OpenAI, GCP Vertex AI, Kong AI Gateway, Portkey, Helicone, Cloudflare AI Gateway, Anthropic, self-hosted models (Ollama, vLLM, TGI), and custom API gateways.
+
+Rules are organized into two tiers:
+Tier 1 (Operational) — works with standard telemetry: token counts, API call volumes, storage access logs. Available from most platforms with default logging.
+Tier 2 (Content Inspection) — requires actual prompt/response text in log events. Requires explicit opt-in on all major platforms. The Configuration Guide explains how to enable this for each provider.
+
+Detection Coverage:
+
+AML.T0051.000 Direct Prompt Injection (Tier 2)
+AML.T0051.001 Indirect Prompt Injection via Retrieved Content (Tier 2)
+AML.T0054 LLM Jailbreak (Tier 2)
+AML.T0024 Exfiltration via AI Inference API (Tier 1)
+AML.T0020 Training Data Poisoning (Tier 1)
+GIC-VD-001 AI-Enabled Bulk Content Generation — vendor-defined, no canonical MITRE ATLAS technique covers this concept (Tier 1)
+AML.T0048 External Harms (Tier 1)
+AML.T0012 Valid Accounts (Tier 1)
+AML.T0014 Discover AI Model Family (Tier 2)
+AML.T0007 Discover AI Artifacts (Tier 1)
+
+All rules ship disabled by default. No Python scripts, no external dependencies — pure SPL and CSV lookups. Detection results are written to the summary index for fast dashboard rendering.
+
+Built by a Splunk Enterprise Architect with 10+ years of hands-on experience. This app is a standalone community release from GIC Engineering Consultants.
+
+Looking for broader AI/LLM threat coverage alongside SBOM security and CVE correlation? I also published a Supply Chain &amp;amp; AI Threat Intelligence Platform (SCIP) app: splunkbase.splunk.com/app/8814. Its free tier includes 10 comparable AI/agentic threat rules (9 MITRE ATLAS-mapped) at no cost. Paid tiers include 66 AI/agentic threat rules (57 MITRE ATLAS-mapped), plus additional capabilities.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Marcus House</dc:creator>
+      <pubDate>Wed, 05 Aug 2026 20:00:31 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8527/#v1.0.3</guid>
+    </item>
+    <item>
+      <title>Ableversity 4 Splunk Training - v1.0.3 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9330/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;V.1.0.3 - Bug fixes and UI improvements&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Install Ableversity today and start learning for free&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Ableversity Splunk Training app delivers a comprehensive curriculum of Splunk training courses directly within the Splunk interface. It provides access to over twelve expert-led courses spanning core Splunk topics including fundamentals, administration, architecture, and development.
+
+The app features an interactive dashboard-based interface that organizes training content across multiple learning tracks. Users can access courses covering foundational concepts such as search fundamentals, field extractions, regular expressions, and data ingestion. Advanced topics include enterprise administration, system architecture, and developer-focused extension capabilities.
+
+The app includes exclusive enrollment coupons and certification preparation resources. The training content is structured across dedicated dashboards for each course topic, allowing users to navigate between different subject areas. A comparison dashboard helps users evaluate training options and select appropriate learning paths based on their skill level and objectives.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/1d714b7c-9102-11f1-85a5-66d50c9d55b1.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Wed, 05 Aug 2026 19:20:09 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9330/#v1.0.3</guid>
+    </item>
     <item>
       <title>Bitdefender GravityZone Data Collector - v1.0.4 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8267/</link>
@@ -2058,33 +2124,6 @@ Features:
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Tue, 04 Aug 2026 02:23:34 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7770/#v3.0.0</guid>
-    </item>
-    <item>
-      <title>Carbon Black Defense V2 - v2.0.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7571/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Redact response bodies, headers, and nested transport exception details from persisted error and debug output.
-* Validate policy and rule identifiers before constructing management request paths.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with an instance of Carbon Black defense to run investigative and generic actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/bfde0fb6-8faa-11f1-be9a-96eea511fff8.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 04 Aug 2026 02:18:15 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7571/#v2.0.1</guid>
-    </item>
-    <item>
-      <title>Cisco Secure Firewall - v2.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7745/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Require canonical UUIDs for caller-controlled FMC path identifiers.
-* Reject empty required FMC identifiers before request construction.
-* Validate network-object types and identifier lists before FMC lookups.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app interfaces with Cisco Firepower devices to add, update and delete network objects, network object groups, access policies and access rules&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0276c97c-8faa-11f1-b35c-a68dcfbf578a.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 04 Aug 2026 02:12:58 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7745/#v2.0.0</guid>
-    </item>
-    <item>
-      <title>BMC Remedy - v2.1.6 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5882/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Bound response bodies before JSON parsing and reject oversized ticket result pages before retention.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app supports ticket management functions on incidents in BMC Remedy&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/4577dbae-8fa9-11f1-b176-ce0e8d6809a8.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 04 Aug 2026 02:07:40 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5882/#v2.1.6</guid>
     </item>
   </channel>
 </rss>
