@@ -6,7 +6,165 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Wed, 05 Aug 2026 12:47:41 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 05 Aug 2026 15:08:19 +0000</lastBuildDate>
+    <item>
+      <title>Supply Chain and AI Threat Intelligence Platform - v1.2.5 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8814/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## Supply Chain and AI Threat Intelligence Platform (SCIP)
+**Version 1.2.5 (build 247)** — Released 2026-08-03
+
+### Fixed
+
+- **Corrected a display issue in the Community-tier AI/agentic threat detection dashboard.** A labeling mismatch introduced by the previous release's MITRE ATLAS technique update could cause a small number of detection categories to appear inactive in the Recent ATLAS Detections and Detection Summary panels, even when detections were firing correctly. Detection logic itself was not affected — this was a display-layer issue only. An automated consistency check now runs on every build to confirm dashboard displays stay in sync with detection labels going forward.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Unifies software supply chain risk (SBOM/SCA), MITRE ATLAS AI-threat detection, and nine-framework compliance in one Splunk app — with FedRAMP-ready audit exports and no external security product required.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;SCIP unifies software composition analysis (SCA), supply chain risk monitoring, and AI threat detection in one Splunk app. Ingest SBOMs, correlate components against live vulnerability intelligence (OSV, NVD, CISA KEV, EPSS), detect adversarial AI/ML threats with MITRE ATLAS, and assess compliance posture across nine global frameworks — with detection logic written as transparent SPL you can open and read, and no external security product required.
+
+CAPABILITIES
+- SBOM ingestion — file-drop or HEC, supporting CycloneDX (JSON/XML) and SPDX (JSON)
+
+- Vulnerability correlation — daily OSV feed (264,944+ records across 5 ecosystems) with PURL-based correlation; NVD CPE-based correlation; CISA KEV matching; EPSS exploit-probability scoring
+
+- Supply Chain Risk Score — 0–100 global and per-application risk scoring weighted by severity, KEV status, and EPSS
+
+- Vendor Risk — per-vendor risk aggregation and letter-grading across your SBOM portfolio
+
+- SBOM Drift Detection — baseline-vs-current component change tracking
+
+- License Compliance — GPL/AGPL/copyleft detection and license-risk classification
+
+- MITRE ATLAS Detection — 66 detection rules for adversarial AI/ML threats
+
+- Silent-Source Detection — alerts when an enrolled AI/LLM telemetry source goes quiet, so a dead pipe is never mistaken for a clean one (Enterprise and Federal Plus)
+
+- Compliance Gap Assessment — nine frameworks: PCI DSS 4.0, NIST CSF 2.0, SOC 2 Type II, HIPAA Security Rule, EU Cyber Resilience Act, FedRAMP / RMF / CISA, DORA, FDA 524B Premarket Cybersecurity, SEBI CSCRF
+
+- Long-Unpatched Critical Exposure — flags critical/high-severity vulnerabilities unpatched 180+ days (all tiers)
+
+- POA&amp;amp;M &amp;amp; FedRAMP Workflow — POA&amp;amp;M dashboard, monthly ConMon package builder, BOD 26-04 risk-tier classification (CISA&amp;#x27;s four-variable model with computed deadlines), deviation request workflow. Dashboards always available; automated POA&amp;amp;M generation is opt-in from Setup
+
+- Coverage-Evidence Manifest — AU-12-aligned attestation of unbroken AI-monitoring coverage (Federal Plus)
+
+- Audit-ready exports — FedRAMP POA&amp;amp;M Workbook (R3.0 and R2.1), SSP Appendix M Integrated Inventory, Deviation Request Form (Template 2.1 / Aug 2024)
+
+- Component Search — instant cross-SBOM component lookup (available in the free Community tier)
+
+- Compound Risk — correlates active MITRE ATLAS AI-threat detections with vulnerable components on the same application, surfacing compounding risk neither signal shows alone (Enterprise and Federal Plus)
+
+- AI/ML Bill of Materials — catalogs AI/ML model components from your SBOMs (architecture, training data, lineage) with insecure-serialization-format flagging (Professional and above; risk classification on Enterprise and Federal Plus)
+
+TIERS
+Community (free), Professional, Federal, Enterprise, Federal Plus. Feature availability gated by license tier; contact us for tier comparison.
+
+SUPPORT
+GIC Engineering Consultants — contact@gicengineeringconsultants.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/391ef636-90de-11f1-9018-2af1fcbf77e7.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">GIC Engineering Consultants, Inc.</dc:creator>
+      <pubDate>Wed, 05 Aug 2026 15:07:36 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8814/#v1.2.5</guid>
+    </item>
+    <item>
+      <title>Glass - v2.3.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8112/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;1. Added scalability using the glass\_catalog.
+2. Optimization in Restore process.
+3. Configurable Thawed DB cleanup with retention period.
+4. Using actual data time instead of archival time in archive/catalog/restore commands.
+5. Bug fixes.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Glass creates and manages a frozen tier on  low cost tape storage subsystems from Quantum, Spectralogic. Helping customers trip their index without losing the ability to search&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Glass is a Splunk-native archive and restore solution that helps organizations meet long-term data retention requirements for threat hunting and compliance while also improving Splunk performance. Delivered as a Splunk App, Glass integrates directly with Splunk’s indexing policies and archives data to any S3-compatible object store, including S3 Glacier.
+
+Key Benefits:
+
+Security: Enables threat hunting on historical log data, months or even years old, to uncover long-running or previously unnoticed malicious activity.
+
+Compliance: Supports retention requirements for regulatory or internal policies without overburdening your Splunk infrastructure.
+
+Performance: Improves overall Splunk performance by reducing index size through efficient log and metadata archiving.
+
+Flexible Architecture: Built to support additional SIEM and storage platforms beyond Splunk&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b76cf55a-8fc2-11f1-b35c-a68dcfbf578a.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Searchbak, Inc</dc:creator>
+      <pubDate>Wed, 05 Aug 2026 13:40:30 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8112/#v2.3.0</guid>
+    </item>
+    <item>
+      <title>Splunk Add-on for Google Workspace - v5.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5556/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Adds modular input observability metrics using `solnlib.observability`.
+* Adds dual support for renamed Google Admin and Drive log event names and types.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk Add-on for Google Workspace lets a Splunk administrator collect Google Workspace event data using Google Workspace APIs, and provides CIM-compatible knowledge to use with other Splunk apps.
+
+Version 2.8.1 of the Splunk Add-on for Google Workspace has the following new features:
+Fixed issues with gmail_logs_migrated input
+
+From version 2.8.0, Splunk Add-on for Google Workspace contains the following new sourcetypes:
+
+gws:reports:chat
+gws:reports:mobile
+gws:reports:chrome&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d9811fd6-90b2-11f1-866b-9680511b21a1.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Wed, 05 Aug 2026 13:08:23 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5556/#v5.0.0</guid>
+    </item>
+    <item>
+      <title>Threat Hunting Essentials - v1.3.69 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7633/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
+
+For Premium Version - Contact sales https://www.avertpoint.com/contactus.html
+
+It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
+
+Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
+
+1. Backdoor.
+2. Worms.
+3. Ransomware.
+4. Bots.
+5. Trojan horses.
+6. Keyloggers.
+7. Rootkits.
+8. Spyware.
+9. Fileless malware.
+10. Cryptojacking.
+11. Wiper malware.
+12. Adware.
+14. Viruses
+15. P2P-Worm
+16. Internet Worms
+17. Net-worm
+18. Clickjacking
+19. Cryptominer
+20. Fileless malware
+
+You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
+
+Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/01e14146-90c1-11f1-9018-2af1fcbf77e7.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
+      <pubDate>Wed, 05 Aug 2026 13:07:38 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.69</guid>
+    </item>
+    <item>
+      <title>Scaleway Add-on - v1.0.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9344/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Secure, configurable data collection from Scaleway infrastructure.
+Collect and ingest Scaleway Audit Trail logs into Splunk for centralized
+security monitoring, compliance reporting, and threat detection.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Scaleway Add-On for Splunk enables seamless integration between Scaleway Audit Trail and Splunk Enterprise/Cloud platforms. This technology add-on (TA) serves as the data collection layer, allowing Splunk administrators to securely ingest audit logs from Scaleway infrastructure into their Splunk deployment.
+The add-on addresses the critical need for centralized security monitoring and compliance reporting by providing a reliable, configurable bridge between Scaleway’s Audit Trail service and Splunk’s powerful analytics capabilities.
+It handles authentication, data retrieval, and log forwarding while maintaining security best practices through encrypted connection and credential management.
+
+Key Capabilities :
+- Secure authentication with Scaleway accounts via API credentials
+- Configurable audit log collection with filtering options
+- Support for multiple Scaleway organizations and projects
+- Automated log ingestion with configurable polling intervals
+- CIM-compatible field extractions for seamless integration with Splunk apps
+- Optimized data collection for Scaleway Audit Trail events
+
+This add-on is designed for security teams, DevOps engineers, and compliance
+officers who need to monitor Scaleway infrastructure activity, detect anomalies,
+and maintain audit trails for regulatory compliance.
+
+The Scaleway Add-On works in conjunction with the Scaleway App for Splunk
+(frontend visualization app) to provide end-to-end security monitoring and
+reporting capabilities.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/7f2cf2f0-8c14-11f1-8b66-3eeda6ce7cce.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Helpdesk IT Workplace</dc:creator>
+      <pubDate>Wed, 05 Aug 2026 12:54:00 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9344/#v1.0.0</guid>
+    </item>
     <item>
       <title>Check Point EM ThreatCloud Intelligence - v1.0.0 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/9411/</link>
@@ -52,24 +210,6 @@ Requires the Splunk Common Information Model (CIM) add-on. Compatible with Splun
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Tom Wise</dc:creator>
       <pubDate>Wed, 05 Aug 2026 12:35:03 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/9420/#v1.0.0</guid>
-    </item>
-    <item>
-      <title>Splunk Add-on for Google Workspace - v5.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5556/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Adds modular input observability metrics using `solnlib.observability`.
-* Adds dual support for renamed Google Admin and Drive log event names and types.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk Add-on for Google Workspace lets a Splunk administrator collect Google Workspace event data using Google Workspace APIs, and provides CIM-compatible knowledge to use with other Splunk apps.
-
-Version 2.8.1 of the Splunk Add-on for Google Workspace has the following new features:
-Fixed issues with gmail_logs_migrated input
-
-From version 2.8.0, Splunk Add-on for Google Workspace contains the following new sourcetypes:
-
-gws:reports:chat
-gws:reports:mobile
-gws:reports:chrome&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d9811fd6-90b2-11f1-866b-9680511b21a1.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Wed, 05 Aug 2026 12:06:16 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5556/#v5.0.0</guid>
     </item>
     <item>
       <title>lookup-editor-ax - v1.1.1 [Version Update]</title>
@@ -122,44 +262,6 @@ gws:reports:chrome&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quo
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">DataRunk</dc:creator>
       <pubDate>Wed, 05 Aug 2026 11:52:47 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8948/#v1.1.0</guid>
-    </item>
-    <item>
-      <title>Threat Hunting Essentials - v1.3.68 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7633/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
-
-For Premium Version - Contact sales https://www.avertpoint.com/contactus.html
-
-It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
-
-Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
-
-1. Backdoor.
-2. Worms.
-3. Ransomware.
-4. Bots.
-5. Trojan horses.
-6. Keyloggers.
-7. Rootkits.
-8. Spyware.
-9. Fileless malware.
-10. Cryptojacking.
-11. Wiper malware.
-12. Adware.
-14. Viruses
-15. P2P-Worm
-16. Internet Worms
-17. Net-worm
-18. Clickjacking
-19. Cryptominer
-20. Fileless malware
-
-You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
-
-Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/01e14146-90c1-11f1-9018-2af1fcbf77e7.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
-      <pubDate>Wed, 05 Aug 2026 11:30:40 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.68</guid>
     </item>
     <item>
       <title>ServiceNow - v2.6.9 [Version Update]</title>
@@ -1171,28 +1273,6 @@ The app is intended for network operations, security operations, IT operations, 
       <guid>https://splunkbase.splunk.com/app/9257/#v1.0.35</guid>
     </item>
     <item>
-      <title>Glass - v2.3.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8112/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;1. Added scalability using the glass\_catalog.
-2. Optimization in Restore process.
-3. Configurable Thawed DB cleanup with retention period.
-4. Using actual data time instead of archival time in archive/catalog/restore commands.
-5. Bug fixes.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Glass creates and manages a frozen tier on  low cost tape storage subsystems from Quantum, Spectralogic. Helping customers trip their index without losing the ability to search&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Glass is a Splunk-native archive and restore solution that helps organizations meet long-term data retention requirements for threat hunting and compliance while also improving Splunk performance. Delivered as a Splunk App, Glass integrates directly with Splunk’s indexing policies and archives data to any S3-compatible object store, including S3 Glacier.
-
-Key Benefits:
-
-Security: Enables threat hunting on historical log data, months or even years old, to uncover long-running or previously unnoticed malicious activity.
-
-Compliance: Supports retention requirements for regulatory or internal policies without overburdening your Splunk infrastructure.
-
-Performance: Improves overall Splunk performance by reducing index size through efficient log and metadata archiving.
-
-Flexible Architecture: Built to support additional SIEM and storage platforms beyond Splunk&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b76cf55a-8fc2-11f1-b35c-a68dcfbf578a.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Searchbak, Inc</dc:creator>
-      <pubDate>Tue, 04 Aug 2026 15:48:01 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8112/#v2.3.0</guid>
-    </item>
-    <item>
       <title>ZeroFox Data Connector - v4.0.4 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5041/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* **Restores Splunk Cloud Platform compatibility.** Python modular inputs (`inputs.conf`) and EAI REST handlers (`restmap.conf`) now declare `python.required = 3.9, 3.13`, resolving `check_modular_inputs_python_required` and `check_admin_external_restmap_conf_python_required`.
@@ -1980,27 +2060,6 @@ Features:
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Tue, 04 Aug 2026 01:37:15 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5763/#v3.0.1</guid>
-    </item>
-    <item>
-      <title>AWS WAF V2 - v2.1.12 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5770/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Reject malformed or oversized WAF result pages before retaining their items.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with AWS WAF to add and delete IP addresses using API version V2&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/1bf98dfe-8fa4-11f1-b5fe-32e0358a2812.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 04 Aug 2026 01:30:44 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5770/#v2.1.12</guid>
-    </item>
-    <item>
-      <title>Azure AD Graph - v2.5.5 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5771/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Reject dot-segment identifiers before constructing Microsoft Graph request paths.
-* Reject empty group identifiers before attempting to remove a user from a group.
-* Require the pending flow nonce before returning the OAuth authorization redirect.
-* Stop reading Graph responses that exceed the connector response-size limit.
-* Bound the cumulative response bytes retained by paginated Graph actions and reject redirects.
-* Bound individual paginated rows and continuation tokens before retaining them.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Connects to Azure AD Graph REST API services&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/25b04bb8-8fa3-11f1-96f2-7a9f17e83239.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 04 Aug 2026 01:23:50 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5771/#v2.5.5</guid>
     </item>
   </channel>
 </rss>
