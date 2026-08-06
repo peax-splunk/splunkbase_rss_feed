@@ -6,7 +6,71 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Wed, 05 Aug 2026 23:50:58 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 06 Aug 2026 01:45:49 +0000</lastBuildDate>
+    <item>
+      <title>Supporting App for Oracle SBC CDR - v0.9.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7051/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Added a ciscoguid field, extracted from accounting\_call\_id and normalised to match the ciscoguid in CUCM CDR, CUBE and CVP data, so SBC records can be rolled up with them. Whether two systems actually share values depends on the topology; the Cisco CDR app's hidden guid\_rollup page measures that.
+* Fixed a bug whereby a small percentage of outgoing\_call\_reference\_id and incoming\_call\_reference\_id values were extracted incorrectly, or not at all, due to an erroneous assumption about padding. Those values change with this release, and now match their CUCM counterpart.
+* Added two diagnostic fields, ciscoguid\_source and ciscoguid\_source\_shape. The second separates Cisco-minted Call-IDs from the undashed form some third-party SIP entities produce, which is correctly not treated as a Cisco guid.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app provides the Splunk configuration to ingest the CDR data from Oracle SBC.     It is intended to work for both Oracle Session Router CDR and Oracle SBC CDR, although some unknowns remain as of this writing. 
+
+It is also designed to work as a Supporting App alongside Sideview&amp;#x27;s commercial &amp;quot;Cisco CDR Reporting and Analytics&amp;quot; app.  
+When used in conjunction with the Cisco CDR app, the Oracle SBC data can be used in that app alongside the CUCM data.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/51f908f0-912d-11f1-aaf8-ee0ec426490b.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview LLC</dc:creator>
+      <pubDate>Thu, 06 Aug 2026 00:26:35 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7051/#v0.9.1</guid>
+    </item>
+    <item>
+      <title>Supporting App for CUBE - v0.7.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8614/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* **Important** - fixed the ciscoguid field, which rested on a bad assumption about zero padding and so could never match the equivalent CUCM value. Depending on the era of the data this affected anywhere from a few percent of records to all of them.
+* **Important** - fixed a bug whereby roughly one call in sixteen had no call\_reference\_id extracted, for the same reason. Those calls were silently absent from the CUBE to CUCM call rollup.
+* call\_reference\_id and ciscoguid are now extracted separately, so a malformed guid no longer takes call\_reference\_id out with it.
+* Added two diagnostic fields, ciscoguid\_source and ciscoguid\_source\_shape, recording where a guid came from and what the source field held when none came out.
+* Fixed the search-time duration fallback for CUBE data indexed before you upgraded TA\_cube. In 0.7.0 it silently produced nothing, so cube\_duration, duration\_total, duration\_in\_minutes and dateTimeDisconnect were empty on that data. Data indexed by the current TA was never affected.
+* Added an &quot;All fields&quot; panel to the call\_detail view for cube calls so the user can page through every value of every field. A search filter can filter against both names and values.
+* Added a &quot;call quality stats&quot; panel to the call\_detail view for cube calls.
+* The rows in the two &quot;Other calls to/from&quot; panels on the call\_detail view for cube calls are now clickable, and take you to that call. Those panels also show a progress indicator while their searches run.
+* The call\_detail view for cube calls no longer requires the Cisco CDR app to be installed alongside this one. It referenced two search macros, a stylesheet, a pattern and a custom behavior that only that app shipped.
+* The vg\_info\_types, vg\_q931\_cause\_codes and vg\_codec\_type\_rates lookups now carry this release's version in their filenames. Their contents changed in 0.7.0 without that rename, which on a search head cluster meant the deployer will not have pushed those changes to the peers.
+* Renamed the automatic lookup key LOOKUP-causeCode to LOOKUP-cubeCauseCode, matching the same rename in the Cisco CDR app. The old name was also used by that app for an unrelated CUCM lookup, which made errors naming it ambiguous.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app implements various field extraction configuration and Sideview conventions so as to allow CDR and also syslog data from CUBE to be not only searched in Splunk effectively, but also to be pulled into Sideview&amp;#x27;s commercial &amp;quot;Cisco CDR Reporting and Analytics&amp;quot; solution and investigated and analyzed there.
+
+NOTE that this Supporting App is designed to be always deployed with Sideview&amp;#x27;s &amp;quot;Supporting Add-on for CUBE&amp;quot; ALSO deployed on the Indexing and/or Forwarding tiers. That &amp;quot;Add-on&amp;quot; component contains crucial index-time configuration to index the data into Splunk correctly, and the index-time configuration in that TA is NOT duplicated in this app here.  Therefore if you intend to set up a standalone deployment you will need both the TA and the SA.
+
+These two apps are furthermore designed to work with Sideview&amp;#x27;s commercial &amp;quot;Cisco CDR Reporting and Analytics&amp;quot; app. When all three components are present and deployed to the right tiers, users can navigate, troubleshoot and build ad-hoc charts and reports around your CUBE data, within the the Cisco CDR app&amp;#x27;s complex user interfaces.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/68da2942-912c-11f1-995a-7a6e64ee13bc.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
+      <pubDate>Thu, 06 Aug 2026 00:21:03 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8614/#v0.7.1</guid>
+    </item>
+    <item>
+      <title>Cisco CDR Reporting and Analytics - v8.4.5 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/669/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* **Important** — all CVP configuration has moved out of this app. If you index CVP logs, install the new TA\_​cisco\_​cvp add-on on your forwarders and indexers, and SA\_​cisco\_​ucce on your search heads. Without both, the cvp and cvp\_​log sourcetypes lose their fields.
+* **Important** — the ciscoguid field for CUCM CDR no longer emits empty strings, nor the SCCP and other non-guid call references that share the ProtocolCallRef columns. On clusters with a lot of phone-to-phone calling those were a large share of legs, and were being rolled up across sourcetypes as though they were guids.
+* **Important** — fixed the ciscoguid field for CUBE data, which rested on a bad assumption about zero padding and so could never match the equivalent CUCM value. Depending on the era of the data this affected anywhere from a few percent of records to all of them.
+* Fixed a bug whereby roughly one CUBE call in sixteen had no call\_​reference\_​id extracted, again due to an erroneous assumption about padding. Those calls were silently absent from the CUBE to CUCM call rollup.
+* Added two diagnostic fields, ciscoguid\_​source and ciscoguid\_​source\_​shape, on every sourcetype that produces a ciscoguid. They record where the value came from, and what the source field held when no value came out.
+* Added a search macro, get\_​ciscoguid\_​family, which decodes a guid into its encoding family and the identity of the box that minted it.
+* Added ciscoguid to fields.conf with INDEXED\_VALUE \= false. Without it, a search for ciscoguid\=\&lt;value&gt; matched nothing on the sourcetypes where we calculate the value rather than read it verbatim.
+* Added two hidden diagnostic pages, guid\_​rollup and guid\_​diagnostics, reachable by URL only. The second displays counts and shapes only — no guids, party numbers or addresses — so it is safe to screenshot and send to us.
+* Fixed an off-by-one in the build\_​call\_​guid\_​words transform, which truncated the first guid word. Nothing references it, so this affects only installations that enabled it locally.
+* Fixed the search-time duration fallback for CUBE data indexed before you upgraded your TA. In 8.4.4 it silently produced nothing, so cube\_​duration, duration\_​total, duration\_​in\_​minutes and dateTimeDisconnect were empty on that data. Data indexed by the current TA was never affected.
+* Fixed the second video channel’s codec lookup which now writes destVideoCodec\_​Channel2 and origVideoCodec\_Channel2.
+* The ring\_​time field is now deprecated in favour of seconds\_​until\_​answered, which measures the same interval without claiming the time was spent ringing — it can just as easily be announcement audio. ring\_​time was also empty on every call that never connected, the one case that branch of it exists for, and that is fixed.
+* The field gallery and the vg\_​info\_​types, vg\_​q931\_​cause\_​codes and vg\_​codec\_​type\_​rates lookups now carry this release’s version in their filenames. Their contents changed in 8.4.3 and 8.4.4 without that rename, which on a search head cluster meant the deployer never pushed the new data to the peers.
+* Renamed the automatic lookup keys LOOKUP-causeCode to LOOKUP-cucmCauseCode on cucm\_​cdr and LOOKUP-cubeCauseCode on cube\_​cdr. One name meant two different lookups, and Splunk’s ​“Could not load lookup” error prints only the key, so the two could not be told apart.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This commercial app is available as a 60 day trial and is compatible with both Splunk Enterprise and Splunk Cloud.  The app gives your team greatly increased visibility, monitoring, and reporting functionality around Cisco Unified Communications (aka CUCM / CallManager), whether you&amp;#x27;re a small organization with a hundred phones or one of the largest companies in the world.
+
+Whether troubleshooting individual calls or building high level reporting, it helps you visualize and understand in all areas: agents, users, and huntgroups; concurrency and utilization; call flow; call quality; call volume; devices; failed calls; locations and sites; and audits and compliance.
+
+Your team can trust it as their day-to-day tool for navigating call data from your Cisco CallManager deployment, and it can also become their main tool for building custom reports, alerts and dashboards around that data. This is true whether it’s a standard report you’d expect or a custom report that nothing else has been able to provide.
+
+Note that this isn&amp;#x27;t a package of content, but more a tank that allows you to drive around in your data.  You won’t find a leftnav full of canned CDR reports to click on (that &amp;quot;don&amp;#x27;t quite fit&amp;quot;).  Instead, you get an open flexible framework to investigate anything, drill down into anything, report on anything, over anything, by anything (occasionally with hands-on help from Sideview Support =).
+
+It is available as a free 60-day trial, and you can download and set it up today in less than 30 minutes.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f3aa87ee-912a-11f1-995a-7a6e64ee13bc.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
+      <pubDate>Thu, 06 Aug 2026 00:12:04 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/669/#v8.4.5</guid>
+    </item>
     <item>
       <title>Axonius Add-On for Splunk - v1.3.21 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5740/</link>
@@ -2090,41 +2154,6 @@ Features:
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Tue, 04 Aug 2026 02:44:47 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5781/#v3.0.1</guid>
-    </item>
-    <item>
-      <title>Carbon Black Response - v3.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5947/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Fail closed on ambiguous endpoint identities and poll authoritative sensor state before confirming isolation changes.
-* Enforce cumulative alert row and response-byte budgets before retaining paginated results.
-* Isolate per-alert ingestion failures and derive durable checkpoints from successfully saved provider timestamps.
-* Require a unique sensor ID for IP-based containment to prevent stale adapter records from selecting an endpoint.
-* Stream alert responses through the remaining byte budget before JSON materialization.
-* Bound alert-page connection, read, and cumulative pagination time.
-* Read bounded alert bodies one network chunk at a time so cumulative deadlines remain observable.
-* Enforce the same wall-clock deadline while alert response status and headers are received.
-* Preserve the prior alert checkpoint whenever any row in a fetched batch fails to ingest.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app supports executing various endpoint-based investigative and containment actions on Carbon Black Response&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b744b8de-8fad-11f1-be9a-96eea511fff8.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 04 Aug 2026 02:39:29 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5947/#v3.0.0</guid>
-    </item>
-    <item>
-      <title>Cisco Meraki - v2.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7960/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Reject malformed Meraki identifiers before constructing API paths.
-* Require an expected firewall-rule baseline and verify L3/L7 full-list replacements after writing.
-* Accept Meraki round-trip values such as `Any`, comma-separated CIDRs, and hostnames in L3 rules.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with Cisco Meraki to provide management and monitoring capabilities for Meraki networks and devices&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f93221b0-8fac-11f1-864e-12f912b6265f.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 04 Aug 2026 02:34:11 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7960/#v2.0.0</guid>
-    </item>
-    <item>
-      <title>Cisco Umbrella - v2.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5887/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Bounded each domain response and the rows and bytes retained across pagination.
-* Confirmed that a submitted domain appears in the block list before reporting success.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app allows management of a domain list on the Cisco Umbrella Security platform&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/3c3dc9c4-8fac-11f1-a7f3-2e25d25ba84d.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 04 Aug 2026 02:28:54 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5887/#v2.0.0</guid>
     </item>
   </channel>
 </rss>
