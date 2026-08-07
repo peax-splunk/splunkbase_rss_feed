@@ -6,7 +6,127 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Fri, 07 Aug 2026 14:05:30 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 07 Aug 2026 15:44:37 +0000</lastBuildDate>
+    <item>
+      <title>Supply Chain and AI Threat Intelligence Platform - v1.2.10 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8814/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## SCIP v1.2.10 — FedRAMP VDR/VER Reporting and PCI DSS 4.0.1 Compliance Accuracy Remediation
+
+Cumulative release covering all changes since v1.2.5 (build 247). Adds FedRAMP Vulnerability Detection and Response (VDR) / Vulnerability Evaluation and Reporting (VER) support to the Monthly ConMon Package Builder, and remediates eleven compliance-accuracy defects identified by audits against the published PCI DSS v4.0.1 standard and FedRAMP's current continuous-monitoring rules.&amp;#x20;
+
+**SCIP-141 — FedRAMP VDR/VER reporting:**
+
+* New FedRAMP VDR/VER Vulnerability Report section in the Monthly ConMon Package Builder, reframing KEV-matched vulnerabilities from the BOD 26-04 classification engine into FedRAMP's VER language: exploitability (LEV/NLEV), internet reachability (IRV/NIRV), Potential Agency Impact N-rating (PAIN, N1-N5), and the mitigation/remediation timeframe (VDR-TFR-PVR). Implements the eleven required reporting items of VER-RPT-VDT and is exportable for monthly human-readable reporting (VER-TFR-MHR).
+* New lookups/fedramp\_vdr\_ver\_pain\_matrix.csv (16 rows) with a selectable FedRAMP certification class, open and auditable against FedRAMP's own published timeframe tables. Certification class materially changes remediation windows (for a PAIN-4 internet-reachable finding: 8 days at Class B, 2 days at Class D).
+* Applications with no public-exposure tag are treated as internet-reachable rather than silently assumed safe — the conservative posture FedRAMP's model requires. Panels include an explicit proxy disclosure stating which values are provisional proxies (IRV from the customer-declared exposure tag, PAIN from BOD 26-04 technical impact) and which require provider attestation, so the report cannot be mistaken for an assessment SCIP is not in a position to make.
+* Reportable-incident candidates (VER-TFR-IRI) and findings approaching the 192-day accepted-risk threshold (VER-TFR-MAV) are surfaced directly. Mandatory for FedRAMP-certified offerings by December 7, 2026, with the grace period ending March 7, 2027, per FedRAMP Public Notice NTC-0014.
+
+**SCIP-139 — PCI DSS 6.3.3 gap assessment corrected to be severity-aware:**
+
+* The 6.3.3 compliance-gap assessment previously reported a Gap on any confirmed open CVE regardless of severity, overstating non-compliance against a standard that does not require it. Gap now triggers only on critical severity or a CISA Known Exploited Vulnerability of any severity; other confirmed open vulnerabilities report as Needs Review rather than a compliance gap.
+* Version-unconfirmed matches no longer produce a Gap on their own — they report as Needs Review (unconfirmed version matches), so a finding SCIP cannot confirm applies to the deployed version is not presented to an assessor as a failure.
+
+**SCIP-143 through SCIP-149 — PCI DSS v4.0.1 control-mapping accuracy:**
+
+* 12.3.3 and 12.3.4 corrected. Both shipped rows previously described variants of 12.3.4's subject, leaving 12.3.3's real requirement (cryptographic cipher suites and protocols reviewed at least every 12 months) unrepresented while a result was still reported against its identifier. The technology-review check is now correctly identified as 12.3.4, and 12.3.3 is present and honestly marked not assessed rather than reported against the wrong control.
+* 10.2.1 corrected to 10.2.1.1 to match the content actually assessed (individual user access to cardholder data) rather than the broader parent requirement.
+* 11.3.2 now discloses that Approved Scanning Vendor status is not verified by the check, so a Pass cannot be read as confirmation that an ASV performed the scan.
+* 6.4.1 now discloses that its manual-review path was effectively sunset on March 31, 2025 and that an automated solution is required per 6.4.2.
+* 10.7.1 now discloses that the requirement applies to service providers only, with 10.7.2/10.7.3 identified as the equivalents for all other entities.
+* Requirement-family titles corrected to the official PCI DSS v4.0.1 wording for Requirement 6 (&quot;Develop and Maintain Secure Systems and Software&quot;) and Requirement 12 (&quot;Support Information Security with Organizational Policies and Programs&quot;).
+* Upgrade path: environments that ran an earlier build carry a stale compliance-status record for the previously mismapped 12.3.3 identifier. A scheduled cleanup removes exactly that one record on upgrade, then no-ops indefinitely. No customer action is required and nothing else in the collection is touched.
+
+**SCIP-140 — PCI DSS version labeling:**
+
+* Compliance framework labeling updated from &quot;PCI DSS 4.0&quot; to &quot;PCI DSS 4.0.1&quot; across all customer-facing and compliance-evidence surfaces, matching the current published standard. Internal framework identifiers are unchanged, so existing saved searches, lookups, and exports continue to work without modification.
+
+**SCIP-138 and SCIP-142 — bundled documentation:**
+
+* README detection-rule counts corrected to match the shipped rule set (10 AI/agentic threat detection rules, 9 MITRE ATLAS-mapped, in the summary; 66 rules, 57 ATLAS-mapped, in the detail section).
+* Stated minimum supported platform raised to Splunk Enterprise 9.4+ and Splunk Cloud. Splunk 9.2 and 9.3 have reached end of life; no functional change for environments already on a supported release.
+
+No licensing or crypto surface was modified. bin/scip\_license\_core.py and bin/scip\_ed25519\_verify.py are byte-identical to baseline.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Unifies software supply chain risk (SBOM/SCA), MITRE ATLAS AI-threat detection, and nine-framework compliance in one Splunk app — with FedRAMP-ready audit exports and no external security product required.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;SCIP unifies software composition analysis (SCA), supply chain risk monitoring, and AI threat detection in one Splunk app. Ingest SBOMs, correlate components against live vulnerability intelligence (OSV, NVD, CISA KEV, EPSS), detect adversarial AI/ML threats with MITRE ATLAS, and assess compliance posture across nine global frameworks — with detection logic written as transparent SPL you can open and read, and no external security product required.
+
+CAPABILITIES
+- SBOM ingestion — file-drop or HEC, supporting CycloneDX (JSON/XML) and SPDX (JSON)
+
+- Vulnerability correlation — daily OSV feed (264,944+ records across 5 ecosystems) with PURL-based correlation; NVD CPE-based correlation; CISA KEV matching; EPSS exploit-probability scoring
+
+- Supply Chain Risk Score — 0–100 global and per-application risk scoring weighted by severity, KEV status, and EPSS
+
+- Vendor Risk — per-vendor risk aggregation and letter-grading across your SBOM portfolio
+
+- SBOM Drift Detection — baseline-vs-current component change tracking
+
+- License Compliance — GPL/AGPL/copyleft detection and license-risk classification
+
+- MITRE ATLAS Detection — 66 AI/agentic threat detection rules (57 MITRE ATLAS-mapped)
+
+- Silent-Source Detection — alerts when an enrolled AI/LLM telemetry source goes quiet, so a dead pipe is never mistaken for a clean one (Enterprise and Federal Plus)
+
+- Compliance Gap Assessment — nine frameworks: PCI DSS 4.0, NIST CSF 2.0, SOC 2 Type II, HIPAA Security Rule, EU Cyber Resilience Act, FedRAMP / RMF / CISA, DORA, FDA 524B Premarket Cybersecurity, SEBI CSCRF
+
+- Long-Unpatched Critical Exposure — flags critical/high-severity vulnerabilities unpatched 180+ days (all tiers)
+
+- POA&amp;amp;M &amp;amp; FedRAMP Workflow — POA&amp;amp;M dashboard, monthly ConMon package builder, BOD 26-04 risk-tier classification (CISA&amp;#x27;s four-variable model with computed deadlines), deviation request workflow. Dashboards always available; automated POA&amp;amp;M generation is opt-in from Setup
+
+- Coverage-Evidence Manifest — AU-12-aligned attestation of unbroken AI-monitoring coverage (Federal Plus)
+
+- Audit-ready exports — FedRAMP POA&amp;amp;M Workbook (R3.0 and R2.1), SSP Appendix M Integrated Inventory, Deviation Request Form (Template 2.1 / Aug 2024)
+
+- Component Search — instant cross-SBOM component lookup (available in the free Community tier)
+
+- Compound Risk — correlates active MITRE ATLAS AI-threat detections with vulnerable components on the same application, surfacing compounding risk neither signal shows alone (Enterprise and Federal Plus)
+
+- AI/ML Bill of Materials — catalogs AI/ML model components from your SBOMs (architecture, training data, lineage) with insecure-serialization-format flagging (Professional and above; risk classification on Enterprise and Federal Plus)
+
+TIERS
+Community (free), Professional, Federal, Enterprise, Federal Plus. Feature availability gated by license tier; contact us for tier comparison.
+
+SUPPORT
+GIC Engineering Consultants — contact@gicengineeringconsultants.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9be51330-926f-11f1-9d7d-fa5860a031a9.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">GIC Engineering Consultants, Inc.</dc:creator>
+      <pubDate>Fri, 07 Aug 2026 15:16:10 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8814/#v1.2.10</guid>
+    </item>
+    <item>
+      <title>Threat Hunting Essentials - v1.3.71 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7633/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
+
+For Premium Version - Contact sales https://www.avertpoint.com/contactus.html
+
+It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
+
+Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
+
+1. Backdoor.
+2. Worms.
+3. Ransomware.
+4. Bots.
+5. Trojan horses.
+6. Keyloggers.
+7. Rootkits.
+8. Spyware.
+9. Fileless malware.
+10. Cryptojacking.
+11. Wiper malware.
+12. Adware.
+14. Viruses
+15. P2P-Worm
+16. Internet Worms
+17. Net-worm
+18. Clickjacking
+19. Cryptominer
+20. Fileless malware
+
+You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
+
+Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/569df6dc-9253-11f1-809d-ee2ccd3c403d.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
+      <pubDate>Fri, 07 Aug 2026 14:54:13 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.71</guid>
+    </item>
     <item>
       <title>Nuclea Alert Enhancer - v1.1.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8948/</link>
@@ -957,44 +1077,6 @@ With DeCYFIR in Splunk, security teams move from reactive monitoring to proactiv
       <guid>https://splunkbase.splunk.com/app/6189/#v2.0.4</guid>
     </item>
     <item>
-      <title>Threat Hunting Essentials - v1.3.69 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7633/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
-
-For Premium Version - Contact sales https://www.avertpoint.com/contactus.html
-
-It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
-
-Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
-
-1. Backdoor.
-2. Worms.
-3. Ransomware.
-4. Bots.
-5. Trojan horses.
-6. Keyloggers.
-7. Rootkits.
-8. Spyware.
-9. Fileless malware.
-10. Cryptojacking.
-11. Wiper malware.
-12. Adware.
-14. Viruses
-15. P2P-Worm
-16. Internet Worms
-17. Net-worm
-18. Clickjacking
-19. Cryptominer
-20. Fileless malware
-
-You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
-
-Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/569df6dc-9253-11f1-809d-ee2ccd3c403d.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
-      <pubDate>Fri, 07 Aug 2026 11:30:39 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.69</guid>
-    </item>
-    <item>
       <title>Language Entropy - v1.0.3 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/9192/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Scores text fields against bigram language models to detect strings atypical for a language — random names, DGA domains, hashes, and other machine-generated sequences.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Apius Language Entropy app measures how well any string matches the character patterns of a given language. Its custom search command computes bigram cross-entropy against trained language models: strings built from natural, language-typical character sequences receive low scores, while random-looking or machine-generated strings — hashes, tokens, encoded payloads, algorithmically generated names — stand out with high scores.
@@ -1484,58 +1566,6 @@ Atlas combines technology and expertise to transform your data into actionable i
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Presidio - Key Partner Acct</dc:creator>
       <pubDate>Wed, 05 Aug 2026 16:59:47 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5614/#v5.0.9</guid>
-    </item>
-    <item>
-      <title>Supply Chain and AI Threat Intelligence Platform - v1.2.5 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8814/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## Supply Chain and AI Threat Intelligence Platform (SCIP)
-**Version 1.2.5 (build 247)** — Released 2026-08-03
-
-### Fixed
-
-- **Corrected a display issue in the Community-tier AI/agentic threat detection dashboard.** A labeling mismatch introduced by the previous release's MITRE ATLAS technique update could cause a small number of detection categories to appear inactive in the Recent ATLAS Detections and Detection Summary panels, even when detections were firing correctly. Detection logic itself was not affected — this was a display-layer issue only. An automated consistency check now runs on every build to confirm dashboard displays stay in sync with detection labels going forward.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Unifies software supply chain risk (SBOM/SCA), MITRE ATLAS AI-threat detection, and nine-framework compliance in one Splunk app — with FedRAMP-ready audit exports and no external security product required.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;SCIP unifies software composition analysis (SCA), supply chain risk monitoring, and AI threat detection in one Splunk app. Ingest SBOMs, correlate components against live vulnerability intelligence (OSV, NVD, CISA KEV, EPSS), detect adversarial AI/ML threats with MITRE ATLAS, and assess compliance posture across nine global frameworks — with detection logic written as transparent SPL you can open and read, and no external security product required.
-
-CAPABILITIES
-- SBOM ingestion — file-drop or HEC, supporting CycloneDX (JSON/XML) and SPDX (JSON)
-
-- Vulnerability correlation — daily OSV feed (264,944+ records across 5 ecosystems) with PURL-based correlation; NVD CPE-based correlation; CISA KEV matching; EPSS exploit-probability scoring
-
-- Supply Chain Risk Score — 0–100 global and per-application risk scoring weighted by severity, KEV status, and EPSS
-
-- Vendor Risk — per-vendor risk aggregation and letter-grading across your SBOM portfolio
-
-- SBOM Drift Detection — baseline-vs-current component change tracking
-
-- License Compliance — GPL/AGPL/copyleft detection and license-risk classification
-
-- MITRE ATLAS Detection — 66 AI/agentic threat detection rules (57 MITRE ATLAS-mapped)
-
-- Silent-Source Detection — alerts when an enrolled AI/LLM telemetry source goes quiet, so a dead pipe is never mistaken for a clean one (Enterprise and Federal Plus)
-
-- Compliance Gap Assessment — nine frameworks: PCI DSS 4.0, NIST CSF 2.0, SOC 2 Type II, HIPAA Security Rule, EU Cyber Resilience Act, FedRAMP / RMF / CISA, DORA, FDA 524B Premarket Cybersecurity, SEBI CSCRF
-
-- Long-Unpatched Critical Exposure — flags critical/high-severity vulnerabilities unpatched 180+ days (all tiers)
-
-- POA&amp;amp;M &amp;amp; FedRAMP Workflow — POA&amp;amp;M dashboard, monthly ConMon package builder, BOD 26-04 risk-tier classification (CISA&amp;#x27;s four-variable model with computed deadlines), deviation request workflow. Dashboards always available; automated POA&amp;amp;M generation is opt-in from Setup
-
-- Coverage-Evidence Manifest — AU-12-aligned attestation of unbroken AI-monitoring coverage (Federal Plus)
-
-- Audit-ready exports — FedRAMP POA&amp;amp;M Workbook (R3.0 and R2.1), SSP Appendix M Integrated Inventory, Deviation Request Form (Template 2.1 / Aug 2024)
-
-- Component Search — instant cross-SBOM component lookup (available in the free Community tier)
-
-- Compound Risk — correlates active MITRE ATLAS AI-threat detections with vulnerable components on the same application, surfacing compounding risk neither signal shows alone (Enterprise and Federal Plus)
-
-- AI/ML Bill of Materials — catalogs AI/ML model components from your SBOMs (architecture, training data, lineage) with insecure-serialization-format flagging (Professional and above; risk classification on Enterprise and Federal Plus)
-
-TIERS
-Community (free), Professional, Federal, Enterprise, Federal Plus. Feature availability gated by license tier; contact us for tier comparison.
-
-SUPPORT
-GIC Engineering Consultants — contact@gicengineeringconsultants.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/391ef636-90de-11f1-9018-2af1fcbf77e7.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">GIC Engineering Consultants, Inc.</dc:creator>
-      <pubDate>Wed, 05 Aug 2026 15:17:25 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8814/#v1.2.5</guid>
     </item>
     <item>
       <title>Splunk Add-on for Google Workspace - v5.0.0 [Version Update]</title>
