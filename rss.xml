@@ -6,7 +6,35 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Fri, 07 Aug 2026 08:07:03 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 07 Aug 2026 09:51:51 +0000</lastBuildDate>
+    <item>
+      <title>HoneyLabs Intelligence - v1.1.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9360/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Adds | honeylabssearch, a generating command that queries the honeypot dataset directly.&amp;#x20;
+* Nine modes: raw sensor events with every recorded field, literal substring search over captured request payloads, CVE exploitation, ASN profiles, attacker rankings, attack volume over time, and TLS, JA4, JA4H and SSH fingerprint searches.&amp;#x20;
+* Adds a second dashboard, Explorer, covering the dataset on its own terms.&amp;#x20;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Threat intelligence from live honeypot sensors, in SPL. Enrich any IP field with a verdict, ASN, ports and first and last seen, or query the dataset directly: raw probes, request payloads, CVE exploitation, JA4 fingerprints, top attackers. Plus two hourly threat feeds. Free API key gives 500 lookups a day; no key gives 10.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;HoneyLabs runs open-source honeypot sensors on the public internet. Nothing reaches them by accident, so every connection they record is a scan, a probe, a brute-force attempt or an exploit. There are no false positives to filter out, because there is no legitimate traffic to confuse them with. This app puts that dataset inside Splunk.
+
+Two search commands.
+
+The first enriches addresses you already have. Point it at any field holding a public IPv4 address and it annotates every event:
+
+index=firewall | honeylabs field=src_ip | where honeylabs_events &amp;gt; 0
+
+It writes back verdict, verdict_key, network_type, events, first_seen, last_seen, country, asn, asn_org, rdns, top_port, ports, exploit_hits and reference, each prefixed honeylabs_ so nothing collides with your own fields. Addresses are de-duplicated per search, so an index carrying the same scanner across ten thousand events costs one lookup.
+
+The second queries the honeypot dataset directly, with no local data required. Nine modes cover raw events, captured request payloads, top attackers, timelines, ASN profiles, TLS and HTTP fingerprints, IOC and CIDR lookups, CVE exploitation, and fingerprint population counts. Use it to answer questions your own logs cannot: who else is exercising this CVE, what payload is being sent, which other sources share this JA4 fingerprint.
+
+Two modular inputs, shipped disabled, index active exploiter addresses and captured malware staging URLs on an hourly schedule. Neither needs credentials. Two dashboards ship with the app: an overview of what the feeds currently carry, and an explorer for querying the dataset without writing SPL by hand.
+
+About the API key. The app installs and runs with no account and no setup, but anonymous use is capped at 10 lookups a day, which is enough to try the commands and not enough to work with. A free key raises that to 500 a day and takes about a minute to create at https://honeylabs.net/dashboard. Paste it into the app&amp;#x27;s setup page; it is stored through Splunk&amp;#x27;s storage/passwords, encrypted at rest, and never written to a .conf file. Paid plans go to 50,000 a day.
+
+On privacy: a lookup sends only the public IP addresses in your search. Not your index, host, source or sourcetype names, not your Splunk version, not the search string. Private, loopback, link-local, multicast and reserved addresses are filtered out locally before the request is built. The feed inputs are ordinary HTTPS downloads of a public file and disclose nothing at all.
+
+Running Enterprise Security? Load the indicator feeds through its own threat intelligence framework so they reach correlation searches and risk scoring rather than only being searchable, and keep these commands for on-demand investigation. Walkthrough: https://honeylabs.net/integrations/splunk-es&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f999ee2e-9238-11f1-809d-ee2ccd3c403d.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Stefan Grimminck</dc:creator>
+      <pubDate>Fri, 07 Aug 2026 09:07:19 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9360/#v1.1.0</guid>
+    </item>
     <item>
       <title>IOC Search - v1.0.3 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7436/</link>
@@ -177,33 +205,6 @@ It also provides workflow actions that allow you to link back to entities in Jup
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">C B</dc:creator>
       <pubDate>Thu, 06 Aug 2026 22:11:54 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6138/#v2.1.4</guid>
-    </item>
-    <item>
-      <title>HoneyLabs App - v1.0.2 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/9360/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Installs ready to use, with no setup step. An API key remains optional and is added from the setup page whenever you want one.
-* Threat feed matching now checks your traffic against the complete indicator list, independent of the dashboard's time range.
-* The dashboard's live API panel is now opt-in, so no credits are spent unless you ask for a lookup.
-* Failed lookups report the reason in honeylabs\_error.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Enrich IPv4 addresses in your searches with honeypot telemetry: what an address actually did against internet-facing sensors, with verdict, first and last seen, ASN, and the ports it touched. Also ships two scheduled threat feeds of active exploiters and captured malware staging URLs, plus an overview dashboard.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;HoneyLabs runs open-source honeypot sensors on the public internet. Every connection they receive is unsolicited, so every observation is a scan, a probe, a brute-force attempt or an exploit. This app puts that telemetry in reach of your searches.
-
-A search command annotates any event that carries an IPv4 address:
-
-index=firewall | honeylabs field=src_ip
-| where honeylabs_events &amp;gt; 0
-| table _time src_ip honeylabs_verdict honeylabs_events honeylabs_asn_org
-
-It writes back verdict, verdict_key, network_type, events, first_seen, last_seen, country, asn, asn_org, rdns, top_port, ports, exploit_hits and reference. Every field is prefixed honeylabs_, and you can change that prefix with prefix=.
-
-Two modular inputs, shipped disabled, index active exploiter addresses and captured malware staging URLs on a schedule. They need no credentials. An overview dashboard summarises what the feeds are carrying, and includes a search that matches your own traffic against them without calling the API at all.
-
-What leaves your deployment is stated exactly. The search command sends the values of the one field you name, de-duplicated, over HTTPS. Nothing else goes with them: not the raw event, not any other field, not your index, host, source or sourcetype names, not your Splunk version, not the search string. Private, loopback, link-local, multicast and reserved addresses are filtered out locally before the request is built, so a search over an index full of RFC1918 traffic sends only the public addresses in it. The feed inputs are ordinary HTTPS downloads of a public file and disclose nothing about you.
-
-An account is optional. The command works anonymously at a lower daily cap, and a free API key raises it. The key is stored through Splunk&amp;#x27;s storage/passwords, encrypted at rest, and never written to a .conf file.
-
-If you run Enterprise Security, use its own threat intelligence framework for the indicator lists, so they reach correlation searches and risk scoring rather than only being searchable, and keep this command for on-demand enrichment. Walkthrough: https://honeylabs.net/integrations/splunk-es&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/476c96de-91cf-11f1-97ad-5e3ae45ca1a4.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Stefan Grimminck</dc:creator>
-      <pubDate>Thu, 06 Aug 2026 20:03:18 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9360/#v1.0.2</guid>
     </item>
     <item>
       <title>Searchbase App for Splunk - v1.1.8 [Version Update]</title>
