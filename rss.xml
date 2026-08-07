@@ -6,7 +6,116 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Fri, 07 Aug 2026 19:44:25 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 07 Aug 2026 20:30:28 +0000</lastBuildDate>
+    <item>
+      <title>RemedyForce - v2.0.8 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5840/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Restores RemedyForce actions by safely initializing request headers and preserving readable Salesforce login failures.
+* Routes RemedyForce API requests to the Salesforce endpoint returned during authentication instead of fixed instance URLs.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app allows ticket management on RemedyForce by implementing generic actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/edee47cc-929d-11f1-9d7d-fa5860a031a9.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Fri, 07 Aug 2026 20:24:03 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5840/#v2.0.8</guid>
+    </item>
+    <item>
+      <title>ProtectWise - v2.1.6 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5838/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Handle responses without a Content-Type header without raising a connector exception.
+* Report scalar JSON responses as unsupported response shapes instead of raising a connector exception.
+* Parse Z-suffixed hunt time parameters as UTC regardless of the SOAR host timezone.
+* Preserve polling retry coverage when ProtectWise event-detail retrieval fails.
+* Reject invalid or out-of-window ProtectWise event timestamps without advancing the polling checkpoint.
+* Use integer chunk sizes when downloading ProtectWise PCAP files larger than 20 MiB.
+* Validate downloaded tcpdump PCAP headers before adding capture data to the SOAR vault.
+* Bound streamed PCAP downloads by the SOAR platform configurable vault attachment limit.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with the ProtectWise cloud platform to implement ingestion and investigative actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/30b3c4fc-929d-11f1-a8a1-8613163b4622.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Fri, 07 Aug 2026 20:18:45 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5838/#v2.1.6</guid>
+    </item>
+    <item>
+      <title>Deslicer AI Insights Add-on - v1.0.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8558/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## 1.0.2
+
+Enrollment-issue visibility on the monitoring dashboard, hardened defaults, and
+a toolchain rebuild that maintains Splunk Cloud Platform compatibility.
+
+### Added
+
+* **Enrollment Issues (Action Required)** panel on the Node Health tab — surfaces
+  blocked enrollment, missing credentials, and revoked-token conditions with
+  recommended remediation steps
+
+### Changed
+
+* Rebuilt with splunk-add-on-ucc-framework 6.5.3 to maintain Splunk Cloud
+  Platform compatibility (removes legacy add-on Mako templates)
+* Add-on is now **visible in Splunk Web by default** (`is_visible = true`);
+  hide the UI where it is not wanted by pushing `local/app.conf` with
+  `is_visible = false` (e.g. via SH Deployer or Deployment Server)
+* Default Observer URL in the shipped conf is `https://dap-eu-s1t8vn.deslicer.ai`
+* Bundled insights node binary User-Agent is now `Deslicer-Insights-Node/&lt;version&gt;`
+
+### Fixed
+
+* btool conf spec documentation for `observer_api_url` and collection `interval`;
+  full `deslicer_ai_insights.conf.spec` ships in the package
+* CI workflow accepts DAP floating release tags (`insights-dev-latest`,
+  `insights-staging-latest`) when downloading collector binaries&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;The real-time configuration observation layer for the Deslicer Automation Platform. Every Splunk Enterprise host streams live, CIM-compliant configuration state — enabling drift detection, AI-driven recommendations, and safe audited deployments across your entire fleet.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Deslicer AI Insights Add-on is the real-time configuration observation layer for the Deslicer Automation Platform (DAP) — giving Splunk administrators live visibility into the configuration state of every host in their deployment, and unlocking AI-driven automation across the entire Splunk estate.
+
+The Insights Add-on runs on all Splunk Enterprise hosts — indexers, search heads, heavy forwarders, and cluster managers — continuously observing and reporting configuration state to the DAP Observer. This real-time stream of configuration intelligence is what enables DAP to detect drift the moment it happens, power AI-driven change recommendations, and safely execute audited deployments with human approval at every step.
+
+All events are indexed with CIM-compliant field extractions (sourcetype: deslicer:insights:node), mapped to the Change, Authentication, and Application State data models — ready for Enterprise Security, custom correlation searches, and CIM-based reporting out of the box.
+
+On search heads and SHC members, enable the add-on in Splunk Web to access the Insights Node Monitoring dashboard — visibility into the health, activity, and status of every collector node across your fleet.
+
+Deslicer AI connects directly to this live configuration data stream, giving purpose-built agents real Splunk context — not guesses. Agents automate daily health checks, GDI onboarding, deployment planning, and more. Every change requires explicit human approval with cryptographic signing and a full audit trail.
+
+Deslicer runs fully on-premises (Kubernetes, Docker, air-gapped) or as SaaS — your data stays inside your perimeter when required.
+
+Sign up at https://deslicer.ai to connect your Splunk deployment and unlock the full value of real-time configuration intelligence.
+
+Splunk EMEA Technology Innovation Partner 2025.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/4f656ee8-929b-11f1-9349-fa4200655410.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Deslicer AB</dc:creator>
+      <pubDate>Fri, 07 Aug 2026 20:15:37 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8558/#v1.0.2</guid>
+    </item>
+    <item>
+      <title>RSA Security Analytics - v3.0.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5843/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Prevents malformed RSA Security Analytics incident timestamps from stalling scheduled ingestion.
+* Validates and labels file hashes before adding them to ingested event artifacts.
+* Prevents stored credentials from being sent after the RSA Security Analytics server origin changes.
+* Returns a clear error when RSA Security Analytics does not provide a valid device list.
+* Adds finite timeouts to outbound RSA Security Analytics requests.
+* Returns a clear error when RSA Security Analytics responds with a non-object JSON value.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This App supports ingestion and investigative actions on RSA Security Analytics&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/730b896c-929c-11f1-9d7d-fa5860a031a9.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Fri, 07 Aug 2026 20:13:27 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5843/#v3.0.2</guid>
+    </item>
+    <item>
+      <title>PostgreSQL - v4.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6146/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Restrict the PostgreSQL other field to supported non-file libpq parameters and replace the ssl_root_cert host path with an uploaded PEM file, requiring affected assets to upload their trusted CA again.
+* Return generic PostgreSQL connection failures to action callers instead of exposing underlying driver exception details.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app supports investigative actions against a PostgreSQL database&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b60d5976-929b-11f1-9d7d-fa5860a031a9.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Fri, 07 Aug 2026 20:08:10 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6146/#v4.0.0</guid>
+    </item>
+    <item>
+      <title>Parser - v2.10.8 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5832/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Bounds RFC 2047 encoded-word recognition when parsing malformed email headers.
+* Limits parsed email attachments to 100 files under the supported 30 MB vault upload size.
+* Extracts URLs from HTML form actions, submit overrides, object data, and refresh metadata.
+* Decodes structured and unstructured CSV input consistently across supported character encodings.
+* Removes NUL and Unicode format controls from structured CSV CEF names and values.
+* Normalizes numeric IPv4 URL hosts before creating email IOC artifacts.
+* Preserves complete email URL paths containing browser-handled punctuation.
+* Maps CEF source and destination address aliases consistently to `src_ip` and `dest_ip`.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app extracts IOCs from various files such as PDFs, emails, or raw text&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f3cf8d84-929a-11f1-9349-fa4200655410.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Fri, 07 Aug 2026 20:02:44 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5832/#v2.10.8</guid>
+    </item>
     <item>
       <title>Splunk Add-On for OpenTelemetry Collector - v0.158.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7125/</link>
@@ -15,8 +124,36 @@
 [Release Notes](https://github.com/signalfx/splunk-otel-collector/releases/tag/v0.158.0)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Use the Splunk Add-on for OpenTelemetry Collector to collect traces and metrics for Splunk Observability Cloud.
 To learn more about how Splunk Observability Cloud works with your environment to provide data, see https://help.splunk.com/en/splunk-observability-cloud/get-started&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/3fff37a2-9298-11f1-9349-fa4200655410.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Fri, 07 Aug 2026 19:43:33 +0000</pubDate>
+      <pubDate>Fri, 07 Aug 2026 19:59:16 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7125/#v0.158.0</guid>
+    </item>
+    <item>
+      <title>QRadar - v3.0.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5874/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Validate and clamp scheduled ingestion checkpoints to the current poll boundary.
+* Propagate HTML response failures as scalar action errors during offense and event ingestion.
+* Skip malformed offense records without aborting the remaining ingestion batch or corrupting its checkpoint.
+* Allow successful reference-set and close-offense responses to omit the optional Content-Type header.
+* Bound QRadar API requests with the connector's existing 30-second network timeout.
+* Return a clean action error when QRadar sends a non-object JSON error response.
+* Stop Ariel result pagination when an additional page makes no forward progress.
+* Reject non-object Ariel search creation and status responses with a clean action error.
+* Preserve explicit requested and checkpointed event time bounds in alternate Ariel queries.
+* Process capped alternate-ingestion offense batches oldest first during scheduled polling.
+* Fail closed when an explicitly supplied alternate-ingestion offense ID list contains no valid IDs.
+* Process capped event queries oldest first during scheduled polling so checkpoints do not skip unfetched events.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app supports generic, investigative, and ingestion actions on an IBM QRadar device&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/24ca393a-929a-11f1-a8a1-8613163b4622.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Fri, 07 Aug 2026 19:56:57 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5874/#v3.0.2</guid>
+    </item>
+    <item>
+      <title>Phishing Initiative - v2.1.5 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5835/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Normalizes common defanged HTTP(S) URL forms before reputation lookups and rejects inputs that are not valid HTTP(S) URLs.
+* Returns a clean action error when a URL lookup response does not contain the expected JSON object.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Implements reputational capabilities for URL by querying the Phishing Initiative web API&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/66daf5c2-9299-11f1-9d7d-fa5860a031a9.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Fri, 07 Aug 2026 19:51:38 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5835/#v2.1.5</guid>
     </item>
     <item>
       <title>Splunk Add-On for OpenTelemetry Collector (for Windows x86_64) - v0.158.0 [Version Update]</title>
@@ -26,7 +163,7 @@ To learn more about how Splunk Observability Cloud works with your environment t
 [Release Notes](https://github.com/signalfx/splunk-otel-collector/releases/tag/v0.158.0)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Use the Splunk Add-on for OpenTelemetry Collector (for Windows x86_64)  to collect traces and metrics for Splunk Observability Cloud on Windows amd64  machines.
 To learn more about how Splunk Observability Cloud works with your environment to provide data, see https://help.splunk.com/en/splunk-observability-cloud/get-started&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/28cf0e72-9298-11f1-a8a1-8613163b4622.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Fri, 07 Aug 2026 19:42:51 +0000</pubDate>
+      <pubDate>Fri, 07 Aug 2026 19:50:24 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8699/#v0.158.0</guid>
     </item>
     <item>
@@ -37,8 +174,17 @@ To learn more about how Splunk Observability Cloud works with your environment t
 [Release Notes](https://github.com/signalfx/splunk-otel-collector/releases/tag/v0.158.0)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Use the Splunk Add-on for OpenTelemetry Collector (for Linux x86_64)  to collect traces and metrics for Splunk Observability Cloud on Linux amd64  machines.
 To learn more about how Splunk Observability Cloud works with your environment to provide data, see https://help.splunk.com/en/splunk-observability-cloud/get-started&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0eb1a09a-9298-11f1-a1ee-1653c1a47218.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Fri, 07 Aug 2026 19:42:08 +0000</pubDate>
+      <pubDate>Fri, 07 Aug 2026 19:47:07 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8698/#v0.158.0</guid>
+    </item>
+    <item>
+      <title>PhishTank - v3.0.5 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5925/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Normalize common defanged HTTP and HTTPS URLs before PhishTank reputation lookups.
+* Return a clean action error when PhishTank returns a non-object JSON response.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app implements URL investigative capabilities utilizing PhishTank&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a816fa64-9298-11f1-809d-ee2ccd3c403d.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Fri, 07 Aug 2026 19:46:18 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5925/#v3.0.5</guid>
     </item>
     <item>
       <title>PhishLabs - v2.0.9 [Version Update]</title>
@@ -1445,34 +1591,6 @@ The Splunk App for PCI Compliance requires a paid license. PCI DSS 3.2.1 is supp
       <guid>https://splunkbase.splunk.com/app/2897/#v8.6.1</guid>
     </item>
     <item>
-      <title>Splunk App for PCI Compliance - Splunk Enterprise - v8.6.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/1143/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;[https://help.splunk.com/en/splunk-enterprise-security-7/splunk-app-for-pci-compliance/release-notes/8.6/splunk-app-for-pci-compliance-release-notes/release-notes-for-the-splunk-app-for-pci-compliance](https://help.splunk.com/en/splunk-enterprise-security-7/splunk-app-for-pci-compliance/release-notes/8.6/splunk-app-for-pci-compliance-release-notes/release-notes-for-the-splunk-app-for-pci-compliance)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk App for PCI Compliance (for Splunk Enterprise) is a Splunk developed and supported App designed to help organizations meet PCI DSS 4.0 requirements.  It reviews and measures the effectiveness and status of PCI compliance technical controls in real time. It can also identify and prioritize any control areas that may need to be addressed and let you quickly address any auditor report or data request. 
-
-The App provides out-of-the-box searches, dashboards, reports, an incident response framework, and integration with employee and asset information to give you visibility into system, application, and device activity relevant to PCI compliance. 
-
-NOTE: There are two installer options for this App. If you are installing the App on Splunk Enterprise 6.4+ use the installer on this page. But if you are installing the App on Splunk Enterprise Security, use the installer at https://splunkbase.splunk.com/app/2897/
-
-The Splunk App for PCI Compliance requires a paid license. PCI DSS 3.2.1 is supported until version 5.2.0 of the app and later versions are updated to PCI DSS 4.0.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Thu, 06 Aug 2026 09:08:50 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/1143/#v8.6.1</guid>
-    </item>
-    <item>
-      <title>Splunk Enterprise Security - v8.6.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/263/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;[https://help.splunk.com/en/splunk-enterprise-security-8/release-notes-and-resources/8.6/splunk-enterprise-security-release-notes/release-notes-for-splunk-enterprise-security](https://help.splunk.com/en/splunk-enterprise-security-8/release-notes-and-resources/8.6/splunk-enterprise-security-release-notes/release-notes-for-splunk-enterprise-security)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk Enterprise Security (ES) solves a wide range of security analytics and operations use cases including continuous security monitoring, advanced threat detection, compliance, incident investigation, forensics and incident response. Splunk ES delivers an end-to-end view of organizations’ security postures with flexible investigations, unmatched performance, and the most flexible deployment options offered in the cloud, on-premises or hybrid deployment models. Splunk ES enables you to: 
-
-- Conquer alert fatigue with high-fidelity Risk-Based Alerting.
-- Bring visibility across your hybrid environment with multicloud security monitoring.
-- Conduct flexible investigations for effective threat hunting across security, IT and DevOps data sources.
-
-Splunk ES is a premium security solution requiring a paid license.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/518913ba-8ca0-11f1-9e59-cad90d7b8d38.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Thu, 06 Aug 2026 09:07:42 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/263/#v8.6.1</guid>
-    </item>
-    <item>
       <title>Package Apps for Splunk - v3.1.2 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/6686/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## SA-PackageApps 3.1.2 – High-Level Release Notes
@@ -2264,70 +2382,6 @@ Installation Guide: https://community.mimecast.com/s/article/api-and-integration
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Tue, 04 Aug 2026 09:10:29 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5866/#v2.0.0</guid>
-    </item>
-    <item>
-      <title>Check Point Exposure Management (Cyberint) - v1.2.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7117/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Upgraded the build to UCC 6.5.3&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Check Point Exposure Management Technology Add-on integrates enriched, intelligence-driven threat data into Splunk. Fetch and manage actionable alerts on attack tools, phishing, and fraud, track incident statuses with automatic sync, and investigate threats using pre-built dashboards and Splunk&amp;#x27;s powerful search capabilities.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/504cdb50-8fdc-11f1-96f2-7a9f17e83239.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">bensa bensa</dc:creator>
-      <pubDate>Tue, 04 Aug 2026 08:29:17 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7117/#v1.2.0</guid>
-    </item>
-    <item>
-      <title>Google Chat App - v1.0.3 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7550/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Canonicalize Google Chat resource components and reject exact dot segments before API requests.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrate services with Google Chat and manage Chat resources such as i.e messages. Remmeber that user will need authentication code, check Github or SplunkBase for information on how to obtain it&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/94882dee-8fda-11f1-afce-46dc990074c4.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
-      <pubDate>Tue, 04 Aug 2026 08:00:38 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7550/#v1.0.3</guid>
-    </item>
-    <item>
-      <title>FortiManager - v3.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7131/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Reject exact-dot and other noncanonical FortiManager path parameters before request dispatch.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app performs firewall configuration and security policy management actions in FortiManager&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d690a5be-8fd9-11f1-afce-46dc990074c4.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 04 Aug 2026 07:55:20 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7131/#v3.0.0</guid>
-    </item>
-    <item>
-      <title>IBM XForce - v1.2.3 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6078/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Validate and encode reputation lookup values as single API path segments.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app implements various &amp;#x27;investigative&amp;#x27; actions on the &amp;#x27;IBM X-Force Exchange&amp;#x27; device&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/18d39860-8fd9-11f1-a7f3-2e25d25ba84d.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 04 Aug 2026 07:50:01 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6078/#v1.2.3</guid>
-    </item>
-    <item>
-      <title>IMAP - v5.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5798/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Verify IMAP server certificates by default for implicit TLS and STARTTLS, with an explicit asset-level opt-out.
-* Restore plaintext URL and internationalized-domain extraction before artifact creation.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app supports email ingestion and various investigative actions over IMAP&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/5b355726-8fd8-11f1-b057-da5df5bf2b3f.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 04 Aug 2026 07:44:44 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5798/#v5.0.0</guid>
-    </item>
-    <item>
-      <title>Chronicle - v2.2.10 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5959/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Resolved app issues related to Python 3.13 upgrade
-* Escaped values embedded in widget JavaScript context (PSAAS-30709)
-* Validated and encoded Rule IDs before using them in Chronicle API paths (PSAAS-31072)
-* Bounded pagination and stopped when upstream cursors do not advance (PSAAS-32036, PSAAS-32084)
-* Returned an action error when the rules pagination safety cap is exhausted (PSAAS-32036)
-* Reused only ingestion containers recorded in the current asset's state (PSAAS-32005)
-* Preserved poll checkpoints and deduplication state when result ingestion fails (PSAAS-32349)
-* Used the User Alerts checkpoint window when fetching User Alerts (PSAAS-32349)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app enables the end-user to search, analyze, and ingest the enterprise security data stored in the Chronicle using investigative, reputation, and ingestion actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9b612a10-8fd7-11f1-96f2-7a9f17e83239.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Yuriy Landovskyy</dc:creator>
-      <pubDate>Tue, 04 Aug 2026 07:39:22 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5959/#v2.2.10</guid>
-    </item>
-    <item>
-      <title>FireEye Central Management - v1.1.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6297/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Rejected invalid quarantine queue identifiers before request and vault path handling (PSAAS-31444).&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app provides investigative actions for FireEye Central Management&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b94f2bcc-8fd6-11f1-b35c-a68dcfbf578a.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
-      <pubDate>Tue, 04 Aug 2026 07:33:02 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6297/#v1.1.2</guid>
     </item>
   </channel>
 </rss>
