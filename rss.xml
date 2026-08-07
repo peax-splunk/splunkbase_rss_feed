@@ -6,7 +6,35 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Fri, 07 Aug 2026 12:41:35 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 07 Aug 2026 14:05:30 +0000</lastBuildDate>
+    <item>
+      <title>Nuclea Alert Enhancer - v1.1.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8948/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;\# Release Notes - DA-ESS-NucleaAlertEnhancer
+
+\## \[1.1.1] - 2026-08-07
+
+\### 🚀 Enhancements &amp; Fixes
+
+\- \*\*Column Value Highlighting (\`send\_column\_values \= 1\`)\*\*:
+
+&amp;#x20; \- \*\*Issue\*\*: When \`send\_column\_values\` was set to \`true\` (\`1\`), raw event data was properly passed to the LLM context. However, Gemini only referenced generic column names in the output rendered in Splunk, omitting the actual values extracted from the log.
+
+&amp;#x20; \- \*\*Fix\*\*: Added a conditional formatting instruction inside the \*System Instruction\* (\`instrucao\_formato\`). When \`send\_column\_values\` is active and the output format is Markdown, the LLM is explicitly required to display and highlight the actual values alongside their respective fields (e.g., \`merchant\_name\`: \*\*Merchant X\*\* | \`conversion\_rate\`: \*\*0.12\*\*).
+
+&amp;#x20; \- \*\*Preserved Behavior\*\*: When set to \`0\` (\`false\`), the previous default behavior remains unchanged.
+
+\---
+
+\### 📝 Technical Details
+
+\- \*\*Impacted File\*\*: \`bin/enhance\_alert\_with\_gemini\_ai.py\`
+
+\- \*\*Modified Scope\*\*: \`instrucao\_formato\` logic block when \`output\_format \=\= &quot;md&quot;\`.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Enriches Splunk Enterprise Security alerts with AI-generated SOC playbooks and mitigation steps using Google Gemini, posting analysis as notes to ES findings.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Nuclea Alert Enhancer integrates Google Gemini AI with Splunk Enterprise Security to enrich security alerts and findings with AI-generated analysis. When an ES alert fires, the app generates contextual SOC playbooks, mitigation steps, and threat analysis using Google Gemini&amp;#x27;s large language model. The generated insights are automatically posted as notes to ES investigations, enabling security analysts to access AI-assisted triage and response guidance directly within their existing workflows. The app provides a custom alert action for enrichment and a streaming command for posting LLM responses to the ES investigations API. Configuration and ROI tracking dashboards allow administrators to manage API credentials, monitor enrichment activity, and measure the impact of AI-assisted analysis on security operations. The app requires a valid Google Gemini API key and an operational Splunk Enterprise Security deployment.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e59f38a2-9260-11f1-9349-fa4200655410.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">DataRunk</dc:creator>
+      <pubDate>Fri, 07 Aug 2026 13:31:15 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8948/#v1.1.1</guid>
+    </item>
     <item>
       <title>EC DIGIT CSIRC Add-on for Sysdiagnose Analysis Framework (SAF) - v1.0.3 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/8109/</link>
@@ -1073,64 +1101,6 @@ The app includes exclusive enrollment coupons and certification preparation reso
       <guid>https://splunkbase.splunk.com/app/9330/#v1.0.4</guid>
     </item>
     <item>
-      <title>Splunk App for Secure Networking (Alpha) - v1.0.35 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/9257/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;### Initial Alpha release
-
-This is the first Alpha release of Splunk App for Secure Networking. It provides Cisco-focused executive, network operations, security operations, infrastructure, and building-intelligence experiences within Splunk.
-
-#### Highlights
-
-- Introduces Secure Networking experiences organized around Zero Trust Access, Secure Infrastructure, Scalable Network Segmentation, Hybrid Mesh Firewalling, and Agentic Ops.
-- Includes 16 Cisco-themed Dashboard Studio views containing executive KPIs, operational trends, security findings, topology context, and investigation workflows.
-- Provides executive briefing, IT health, security, Asset Inventory, NetOps Readiness, Cisco Spaces, workplace, and building-intelligence views.
-- Adds configurable Insights Workspaces with selectable KPI tiles, layouts, signal rails, site-connectivity maps, presentation themes, and audience-specific views.
-- Includes Dashboard Manager tools for viewing, editing, cloning, exporting, and presenting supported dashboards.
-- Provides interactive customer-site topology and network-diagram tools.
-- Adds drilldowns and **Open in Search** actions for investigating dashboard results directly in Splunk Search.
-- Includes a searchable catalogue of shared search definitions for dashboard, workspace, and investigation workflows.
-
-#### Data configuration and readiness
-
-- Adds guided setup for validating supporting apps, discovering Cisco sourcetypes, and configuring index macros.
-- Provides Macro Index Tuning for mapping dashboard searches to indexes used by the local Splunk environment.
-- Supports separate discovery and configuration of Splunk Common Information Model index macros.
-- Reports required and recommended data-model acceleration readiness, with links to the applicable Splunk management pages.
-- Supports companion macro configuration for Cisco Enterprise Networking, Cisco Security Cloud, Cisco ThousandEyes, Cisco Meraki, Cisco Intersight, and Cisco Spaces integrations.
-- Includes an in-app User Guide covering setup, data dependencies, macro tuning, workspaces, site connectivity, performance readiness, and troubleshooting.
-
-#### Security and operational content
-
-- Includes authentication, policy-enforcement, user-activity, remote-access VPN, segmentation, infrastructure-health, firewall, and threat-detection dashboards.
-- Provides Palo Alto policy-outcome and Cisco ISE Security Group Tag correlation content where the required data is available.
-- Includes Cisco SD-WAN controller threat hunts for suspicious access, software downgrade, certificate failures, path traversal, privilege escalation, persistence, and multi-stage activity.
-- Provides Cisco Catalyst Center, Secure Firewall, ISE, Meraki, ThousandEyes, Spaces, Duo, Cyber Vision, UCS, Intersight, SD-WAN, data-center networking, Secure Access, and XDR content where supported telemetry is present.
-
-#### Alpha release considerations
-
-- This release is available only to approved Alpha participants.
-- Splunk App for Secure Networking visualizes data already ingested into Splunk; it does not collect Cisco data directly.
-- Dashboard availability and results depend on the supporting apps, sourcetypes, fields, data models, index mappings, permissions, and time ranges available in each environment.
-- Not every supporting integration is required for every dashboard.
-- Some features require accelerated data models or optional supporting apps.
-- Alpha functionality, content, and compatibility may change before a generally available release.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Alpha (invite only; access requests are not currently being accepted; general availability targeted for fall 2026) — configurable executive, IT operations, and secure networking dashboards unifying Cisco network health, identity, security, infrastructure, application, and topology data in Splunk.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Alpha release: Participation is by invitation only and limited to a small group of approved users. The app is not yet publicly downloadable on Splunkbase, and access requests are not currently being accepted. General availability is targeted for fall 2026.
-
-Splunk App for Secure Networking helps organizations turn fragmented Cisco infrastructure, networking, identity, security, application experience, and building telemetry into clear executive and operational insights in Splunk.
-
-Cisco environments often produce data across multiple products, add-ons, indexes, sourcetypes, and data models. Building a consolidated view normally requires teams to create and maintain separate searches, dashboards, index mappings, and visualizations. This app provides a reusable foundation that brings those signals together through configurable dashboards, shared search definitions, index-mapping macros, health indicators, drilldowns, and interactive topology views.
-
-The app includes Secure Networking Posture dashboards covering Zero Trust Access, Secure Infrastructure, Scalable Network Segmentation, Hybrid Mesh Firewalling, and Agentic Operations. It also provides executive briefing, IT health, security, asset inventory, network readiness, building intelligence, Cisco Spaces, and network topology experiences.
-
-Searches use configurable index macros instead of hardcoded index names, allowing the app to adapt to different Splunk environments. Administrators can use the included Macro Index Tuning utility to discover relevant data and map dashboards to their indexes.
-
-Splunk App for Secure Networking does not collect Cisco data directly. It visualizes data already ingested into Splunk through applicable Cisco add-ons, integrations, and data models. The dashboards displayed and populated in each environment depend on the available data sources.
-
-The app is intended for network operations, security operations, IT operations, Splunk administrators, architects, customer success teams, and executives who need a consolidated view of the health, security, availability, and performance of their Cisco environment.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ba89064e-9016-11f1-9dd6-6e4d5e9d4c58.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Amir (AK) Khamis</dc:creator>
-      <pubDate>Thu, 06 Aug 2026 22:43:10 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9257/#v1.0.35</guid>
-    </item>
-    <item>
       <title>Cyderes-Depot - v2026.8.6 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/9089/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Updated content for security outcomes.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Cyderes-Depot is a content pack of curated security detections for Splunk Enterprise environments, designed to accelerate threat detection, improve analyst efficiency, and help organizations quickly operationalize security monitoring. Working in conjunction with the Cyderes-Core Splunk app, Cyderes-Depot delivers detection content aligned to real-world adversary behaviors and modern security operations practices.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e97ea99c-91e5-11f1-a1ee-1653c1a47218.png&quot;&gt;</description>
@@ -1666,50 +1636,6 @@ Requires the Splunk Common Information Model (CIM) add-on. Compatible with Splun
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">HyunHo Noh</dc:creator>
       <pubDate>Wed, 05 Aug 2026 11:56:30 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8873/#v1.1.1</guid>
-    </item>
-    <item>
-      <title>Nuclea Alert Enhancer - v1.1.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8948/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;\## \[1.1.0] - 2026-07-21---
-
-
-
-\### Added
-
-\- \*\*Support for multiple personas:\*\* Inclusion of dedicated profiles for analysis (Blue Team SOC Analyst, Command-Center Analyst, and Anti-Fraud AML Analyst) with automatic adjustment of the meta prompt and \*System Instruction\*.
-
-\- \*\*Knowledge Base (Proto-RAG):\*\* Support for injecting operational playbooks and guidelines via text file upload (\`.txt\`, \`.md\`, \`.yaml\`).
-
-\- \*\*Column Values Extraction (\`send\_column\_values\`):\*\* New parameter (checkbox) to enable sending the content of filtered column data to the LLM, allowing deep analysis beyond field names.
-
-\- \*\*Findings Update (Splunk ES):\*\* New \*Update Finding\* functionality to autonomously change the \*Status\* and/or \*Disposition\* of an incident through the REST API, depending on the AI’s verdict.
-
-\- \*\*Documentation of the \`updatefinding\` command:\*\* Creation of corresponding stanzas in \`commands.conf\` and \`searchbnf.conf\`, following the same pattern as the \`postrecord\` command (syntax, description, example, and tags).
-
-\- \*\*Validation of required fields:\*\* The \`updatefinding\` command now validates the presence of \`finding\_id\` and the fields \`gemini\_status\`/\`gemini\_disposition\` before attempting the API call, marking the event as \`skipped\` with the reason in \`api\_error\` when something is missing.
-
-\- \*\*Addition of helper.log\_warning() methods via Splunk UCC\*\*
-
-
-
-\### Modified
-
-\- \*\*Manual Prompt Limit:\*\* The safety limit for the user’s manual prompt size was expanded from 500 to 800 characters.
-
-\- \*\*Prompt Injection (Jailbreak) Prevention:\*\* Restructuring of the \*payload\* architecture, isolating Knowledge Base content in specific tags (\`\&lt;BASE\_DE\_CONHECIMENTO&gt;\`) and implementing strict guidelines for the LLM to ignore malicious commands from external sources.
-
-\- \*\*File Path Resolution:\*\* Change in the logic for reading local files. The script now uses the absolute path referenced by the current execution directory (\`os.path.abspath(\_\_file\_\_)\`) to prevent \`FileNotFoundError\` in the Splunk ecosystem.
-
-
-
-\### Security and Fixes
-
-\- \*\*Defensive Programming in Event Context:\*\* Correction in the processing of \`send\_column\_values\` to clean empty keys and dictionaries if Splunk logs show formatting issues or lack the requested fields, preventing silent failures and sending empty \*arrays\* (\`\[]\`) to the API.
-
-\- \*\*Knowledge Base Overload Lock:\*\* Implementation of strict file size verification. Texts exceeding 1MB (1,048,576 bytes) in \`utf-8\` are discarded, generating a security log (\`helper.log\_warning()\`) to prevent token exhaustion and denial-of-service/abusive payload attacks.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Enriches Splunk Enterprise Security alerts with AI-generated SOC playbooks and mitigation steps using Google Gemini, posting analysis as notes to ES findings.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Nuclea Alert Enhancer integrates Google Gemini AI with Splunk Enterprise Security to enrich security alerts and findings with AI-generated analysis. When an ES alert fires, the app generates contextual SOC playbooks, mitigation steps, and threat analysis using Google Gemini&amp;#x27;s large language model. The generated insights are automatically posted as notes to ES investigations, enabling security analysts to access AI-assisted triage and response guidance directly within their existing workflows. The app provides a custom alert action for enrichment and a streaming command for posting LLM responses to the ES investigations API. Configuration and ROI tracking dashboards allow administrators to manage API credentials, monitor enrichment activity, and measure the impact of AI-assisted analysis on security operations. The app requires a valid Google Gemini API key and an operational Splunk Enterprise Security deployment.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c7352c6e-8ffe-11f1-a5c1-ce136026ae19.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">DataRunk</dc:creator>
-      <pubDate>Wed, 05 Aug 2026 11:52:47 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8948/#v1.1.0</guid>
     </item>
     <item>
       <title>ServiceNow - v2.6.9 [Version Update]</title>
@@ -2343,6 +2269,14 @@ Features:
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
       <pubDate>Tue, 04 Aug 2026 05:53:19 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7143/#v1.0.3</guid>
+    </item>
+    <item>
+      <title>Detection on Demand - v3.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6007/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Require canonical UUID report identifiers before constructing report paths.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with FireEye&amp;#x27;s Detection on Demand service to identify malicious files and hashes&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0e76c254-8fc8-11f1-b35c-a68dcfbf578a.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
+      <pubDate>Tue, 04 Aug 2026 05:48:03 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6007/#v3.0.0</guid>
     </item>
   </channel>
 </rss>
