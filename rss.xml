@@ -6,7 +6,94 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sat, 08 Aug 2026 00:57:54 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 08 Aug 2026 02:53:06 +0000</lastBuildDate>
+    <item>
+      <title>TA-suhlabs-eMASS - v1.0.6 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8253/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**# Release Notes: TA-suhlabs-eMASS v1.0.6**
+
+**\*\*Release Date:\*\*** 2026-08-07
+
+**\*\*UCC Framework Version:\*\*** 6.5.2
+
+**## Overview**
+
+Version 1.0.6 is a maintenance and compatibility release that upgrades the UCC framework to version 6.5.2, officially declares compatibility with Splunk 10.x (dropping 9.x), adds standard Splunk app icons, and cleans up deprecated custom Mako templates to ensure complete AppInspect compliance.
+
+
+**## New Features**
+
+\- **\*\*Splunk 10.x Compatibility\*\***: Official compatibility declared for Splunk 10.x. Docker and demo configurations have been updated to use the latest Splunk versions. Compatibility with Splunk 9.x has been dropped.
+
+\- **\*\*Splunk App Icons\*\***: Integrated standard Splunk application icons (\`appIcon.png\` and \`appIcon\_2x.png\`) under both \`package/appserver/static/\` and \`package/static/\` to ensure visual presence in launcher and apps lists.
+
+\- **\*\*GitHub Dependabot\*\***: Enabled automated dependency tracking and security alerts via Dependabot.
+
+
+
+**## Bug Fixes &amp; Hardening**
+
+\- **\*\*AppInspect Compliance (Mako Templates)\*\***: Deleted deprecated custom HTML template \`package/appserver/templates/base.html\` to guarantee clean AppInspect vetting with zero custom Mako templates.
+
+\- **\*\*Agent Rules Alignment\*\***: Standardized engineering constraints and project rules in \`.agents/rules/\` for developer tooling consistency.
+
+\- **\*\*zip\_ta.sh — Exclusion Hardening\*\***: Enhanced packaging exclusions to prevent packaging volume-mounted \`default.old.\*\` stanzas.
+
+**## Dependency Updates**
+
+\- Upgraded \`splunk-add-on-ucc-framework\` from \`6.1.0\` to \`6.5.2\`.
+
+**## Upgrade Notes**
+
+\- Rebuild and repackage required: \`make build &amp;&amp; make zip\`
+
+\- No configuration schema changes or migration steps are needed.
+
+
+
+**## Verified On**
+
+\- Splunk Enterprise: 10.x (Latest)
+
+\- UCC Framework: 6.5.2
+
+\- Python: 3.12 / 3.13
+
+\- AppInspect: 0 errors, 0 warnings&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;App Purpose
+
+  TA-suhlabs-eMASS is a Splunk Technology Add-on that ingests Plan of Action &amp;amp; Milestones (POA&amp;amp;M) data from the Enterprise Mission Assurance Support Service (eMASS) API into Splunk.
+
+  Problem/Situation Addressed
+
+  Organizations using eMASS for cybersecurity compliance and risk management face several challenges:
+
+  Data Silos: Security compliance data resides in eMASS while operational security data lives in Splunk, creating fragmented visibility across the security program.
+
+  Manual Reporting: Security teams must manually extract POA&amp;amp;M data from eMASS to create reports, analyze trends, or correlate vulnerabilities with other security events - a time-consuming and error-prone process.
+
+  Limited Analytics: eMASS provides compliance tracking, but lacks the advanced analytics, correlation, and visualization capabilities needed for comprehensive security operations and risk analysis.
+
+  Compliance Monitoring: Organizations need real-time monitoring of their security posture and remediation progress, but accessing this data requires switching between multiple systems.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/65673f38-92d1-11f1-809d-ee2ccd3c403d.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Young Suh</dc:creator>
+      <pubDate>Sat, 08 Aug 2026 02:43:15 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8253/#v1.0.6</guid>
+    </item>
+    <item>
+      <title>Inno Observability - v1.1.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9379/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;APM instrumentation can now be applied to individual applications instead of the whole host, without the app restarting anything on your behalf.
+
+Includes a critical fix for a regression that silently stopped trace export.
+
+Bug Fixed&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Inno Observability turns OpenTelemetry spans in your Splunk indexes into ready-made
+APM dashboards — service and endpoint response times, error rates, trace search and a
+span waterfall, plus Kubernetes and host context for the same time window. It reads
+data you already collect and runs entirely inside your own Splunk deployment.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Application observability inside Splunk — service health, trace analysis and
+Kubernetes context, built from the trace data in your own indexes.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2649a186-92c9-11f1-a5e4-52cd1fd079bf.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Inno Software</dc:creator>
+      <pubDate>Sat, 08 Aug 2026 01:47:51 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9379/#v1.1.0</guid>
+    </item>
     <item>
       <title>Cisco Firepower - v4.0.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5995/</link>
@@ -2399,25 +2486,6 @@ Installation Guide: https://community.mimecast.com/s/article/api-and-integration
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
       <pubDate>Tue, 04 Aug 2026 11:30:31 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6655/#v1.0.4</guid>
-    </item>
-    <item>
-      <title>Jira - v4.1.4 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5806/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Validate issue keys before requesting Jira ticket attachments.
-* Validate issue keys and numeric issue IDs before all issue-specific Jira SDK requests.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with JIRA to perform several ticket management actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/274dc6f4-8ff7-11f1-ac03-3689d005f61c.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 04 Aug 2026 11:25:11 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5806/#v4.1.4</guid>
-    </item>
-    <item>
-      <title>Microsoft Defender for Endpoint - v4.0.5 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5870/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Require the pending OAuth nonce before returning the Microsoft authorization redirect.
-* Keep previously decrypted connector tokens out of the temporary OAuth handshake file.
-* Keep temporary OAuth handshake files in the platform application-state directory and remove timed-out state.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with Microsoft Defender for Endpoint to execute various containment, corrective, generic, and investigative actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/5fe31c54-8ff6-11f1-88c0-369ea35f785d.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 04 Aug 2026 11:19:36 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5870/#v4.0.5</guid>
     </item>
   </channel>
 </rss>
