@@ -6,7 +6,15 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Tue, 11 Aug 2026 20:34:46 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 11 Aug 2026 21:36:10 +0000</lastBuildDate>
+    <item>
+      <title>Datasource Validator - v1.0.6 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9171/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Validates that user-defined data sources grouped under platforms currently return at least one event, recording PASS/FAIL/ERROR/STALE status per source.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Data Source Validator app validates that user-defined data sources are currently returning at least one event in Splunk. Administrators define platforms such as Firewall or EDR, and under each platform create one or more data sources with an SPL search that should return events. A single sequential validation worker executes each data source&amp;#x27;s search on a schedule or on demand using a dedicated service account with minimal privileges. The app records PASS, FAIL, ERROR, or STALE status for each data source, and platform status rolls up from the status of its enabled child data sources. This provides visibility into which integrations have stopped receiving data. The app targets Splunk Cloud Platform and Splunk Enterprise 9.3 and later.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Adam Liquorish</dc:creator>
+      <pubDate>Tue, 11 Aug 2026 20:41:14 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9171/#v1.0.6</guid>
+    </item>
     <item>
       <title>Query Federated Search - v3.3.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/4634/</link>
@@ -34,51 +42,6 @@ LATEST UPDATES
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Query AI</dc:creator>
       <pubDate>Tue, 11 Aug 2026 15:58:50 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/4634/#v3.3.0</guid>
-    </item>
-    <item>
-      <title>NetFlow and SNMP Analytics for Splunk (Preview) - v0.1.3 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/9133/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**Network Device Health**
-
-* Fixed interface packet-loss reporting (no longer stuck at 0 % / 100 %) using the current 64-bit counters.
-* Fixed load scoring so saturated links can reach Critical, and stopped double-counting utilization on full-duplex links.
-
-**Network Topology with Insights**
-
-* Fixed canvas clicks not expanding the walk.
-* Fixed external peers, undiscovered devices and hosts never rendering.
-* Fixed devices sharing a management IP across sites merging into one node; a device is now identified by site plus management IP.
-* Fixed tier classification: spines are detected in empty fabrics, a default route no longer promotes a router to Edge, and firewalls, load balancers and unclassified switches now anchor to their neighbors' tier.
-* Added Fabric, Hosts and External toggles that collapse crowded bands into &quot;+N more&quot; bubbles, keeping the canvas readable.
-* Added per device type icons, and a consistent six-field node tooltip showing how each device was discovered and whether it is in inventory.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Get the network traffic and device health data Splunk can&amp;#x27;t see on its own. NetFlow Optimizer turns raw NetFlow, IPFIX, sFlow, and SNMP telemetry into enriched, analysis-ready data in Splunk across on-premises and multi-cloud, closing blind spots in network, security, and device-health monitoring.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;NetFlow and SNMP Analytics for Splunk (Preview), built by NetFlow Logic, an official Splunk Partner, is the next-generation redesign of our network and security analytics app, rebuilt on Splunk Dashboard Studio. It gives network and security teams the network traffic and device health data Splunk can&amp;#x27;t see on its own, with real-time visibility across on-premises and multi-cloud environments.
-
-Powered by NetFlow Optimizer (NFO), the app processes all major flow formats (NetFlow v5/v9, sFlow, IPFIX) and cloud flow logs from AWS, Microsoft Azure, Google Cloud Platform, and Oracle Cloud Infrastructure. NFO enriches and filters this telemetry before it reaches Splunk, turning raw flow and SNMP data into analysis-ready intelligence and doing it efficiently, so you close the blind spots in your monitoring without a spike in ingest.
-
-What&amp;#x27;s new in this Preview:
-
-- Rebuilt on Dashboard Studio:  a modern, faster, dark-mode interface
-- Streamlined navigation: consolidated from ~80 legacy dashboards into 19 focused, production-quality dashboards
-- Interactive network topology: walk-the-graph exploration built on Splunk 10.4&amp;#x27;s native network graph visualization
-- Unified device health and TCP health views
-- Same NFO-powered enrichment and multi-cloud coverage you rely on today
-
-What you can do with this app:
-
-- Monitor your entire network in one place — unified visibility across on-premises infrastructure and all major cloud platforms
-- Detect threats faster — correlate flow data with IP reputation, GeoIP, user identity, and application context to surface anomalies and suspicious activity
-- Reduce Splunk ingest costs — filter and aggregate flows upstream in NFO so only enriched, relevant data reaches Splunk
-- Optimize network performance — identify overloaded interfaces, bandwidth hogs, and congestion before they impact users
-- Monitor device health with SNMP — poll devices and receive traps (SNMPv2c and v3) for real-time CPU, memory, and interface monitoring
-- Enrich your data automatically — DNS names, VM names, GeoIP, application identification, and user identity added at ingest
-
-Solution areas: Traffic overview and executive dashboards · NetFlow and flow analysis (v5/v9, sFlow, IPFIX) · Cloud flow analytics (AWS, Azure, GCP, OCI) · SNMP device and interface health · Security and threat detection · Administration and configuration
-
-Requirements: NetFlow Optimizer (NFO) 2.12.1 or later is required. Compatible with Splunk Enterprise and Splunk Cloud, Splunk ES, and Splunk ITSI (via the Content Pack for SNMP and NetFlow).
-
-Start a free 60-day trial at netflowlogic.com/free-trial — or request a demo to see the app running against live network data.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">NetFlow Logic</dc:creator>
-      <pubDate>Tue, 11 Aug 2026 15:15:50 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9133/#v0.1.3</guid>
     </item>
     <item>
       <title>Splunk Add-on for Unix and Linux - v10.3.3 [Version Update]</title>
@@ -157,14 +120,6 @@ This application provides compliance and triage dashboards for MITRE ATT&amp;amp
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Adam Liquorish</dc:creator>
       <pubDate>Tue, 11 Aug 2026 12:44:44 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8837/#v3.1.0</guid>
-    </item>
-    <item>
-      <title>Datasource Validator - v1.0.5 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/9171/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Validates that user-defined data sources grouped under platforms currently return at least one event, recording PASS/FAIL/ERROR/STALE status per source.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Data Source Validator app validates that user-defined data sources are currently returning at least one event in Splunk. Administrators define platforms such as Firewall or EDR, and under each platform create one or more data sources with an SPL search that should return events. A single sequential validation worker executes each data source&amp;#x27;s search on a schedule or on demand using a dedicated service account with minimal privileges. The app records PASS, FAIL, ERROR, or STALE status for each data source, and platform status rolls up from the status of its enabled child data sources. This provides visibility into which integrations have stopped receiving data. The app targets Splunk Cloud Platform and Splunk Enterprise 9.3 and later.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Adam Liquorish</dc:creator>
-      <pubDate>Tue, 11 Aug 2026 12:44:14 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9171/#v1.0.5</guid>
     </item>
     <item>
       <title>Red Hat Event Driven Ansible Add-on For Splunk - v1.1.0 [Version Update]</title>
@@ -2490,6 +2445,15 @@ reporting capabilities.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36p
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Helpdesk IT Workplace</dc:creator>
       <pubDate>Wed, 05 Aug 2026 12:54:00 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/9344/#v1.0.0</guid>
+    </item>
+    <item>
+      <title>OpenShift and Kubernetes Monitoring with OpenTelemetry - v1.0.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9418/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Kubernetes and OpenShift monitoring dashboards for data from the Splunk OpenTelemetry Collector.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Monitoring dashboards for Kubernetes and OpenShift clusters instrumented with the Splunk OpenTelemetry Collector. Nine linked Dashboard Studio dashboards cover cluster overview, workload health, control plane, nodes, pods, resource usage vs limits, application logs, Kubernetes events, and the API audit trail, with cross-dashboard drilldowns from cluster down to individual pod logs. Works over standard HEC ingestion; target indexes are set through two search macros, with no dashboard edits required.
+See Details  for the collector values file and setup steps.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/7c6cdd4e-9030-11f1-866b-9680511b21a1.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Waleed Abosree</dc:creator>
+      <pubDate>Wed, 05 Aug 2026 12:37:27 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9418/#v1.0.0</guid>
     </item>
     <item>
       <title>Data Intelligence and Governance  (DIG) - v1.0.0 [New App Release]</title>
