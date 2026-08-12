@@ -6,7 +6,79 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Wed, 12 Aug 2026 18:50:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 12 Aug 2026 19:55:58 +0000</lastBuildDate>
+    <item>
+      <title>Cisco Security Cloud - v3.6.10 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7404/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;We’re pleased to announce the latest Cisco Security Cloud release, which includes the following improvements:
+
+* Enhanced Cisco Duo processing logic.
+* Improved event processing for Cisco Secure Firewall, including more reliable handling of low-event-rate deployments.
+* Updated the Spam Filter dropdown in the Cisco Secure Email Threat Defense dashboard.
+* Streamlined JSON field extraction for improved performance and consistency.
+* Updated product documentation.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Cisco Security Cloud application offers seamless integration for connecting your Cisco devices with Splunk. It features a modular UX input design, built-in health checks, and constant monitoring to ensure operational integrity.
+
+Product(s) Enabled:
+    Cisco AI Defense
+    Cisco Duo
+    Cisco Email Threat Defense (ETD)
+    Cisco Endpoint Visibility Module (EVM) CIM Mappings (Beta)
+    Cisco Identity Intelligence (CII)
+    Cisco Multicloud Defense
+    Cisco NVM
+    Cisco Secure Endpoint
+    Cisco Secure Firewall (FTD/eStreamer/ASA)
+    Cisco Secure Workload
+    Cisco Isovalent
+    Cisco Isovalent Edge Processor **Alpha
+    Cisco Secure Malware Analytics (SMA)
+    Cisco Secure Network Analytics (SNA)
+    Cisco Vulnerability Intelligence
+    Cisco XDR (Incident Import &amp;amp; Promote to ES Notable)
+
+Here’s the revised version with the sourcetype list and stronger 3.x transition language.
+
+**MAJOR VERSION CHANGE:  CiscoSecurityCloud 4.0.0 Release Notes**
+
+CiscoSecurityCloud 4.0.0 introduces expanded Cisco Secure Firewall / FTD syslog and Advanced Logging support, with improved parsing, event routing, CIM/data model alignment, dashboard visibility, and ingestion reliability.
+
+This release adds a new FTD sourcetype routing model that separates FTD events by event family instead of keeping all events under a single generic `cisco:ftd:syslog` sourcetype. This improves field extraction accuracy, dashboard filtering, data model mapping, and long-term supportability for FTD syslog and Advanced Logging data.
+
+Because this changes how FTD events are categorized, **4.0.0 may be a breaking change for customers with custom Splunk content**.
+
+Content that may require review includes:
+
+- Saved searches, alerts, reports, and dashboards that filter only on `sourcetype=&amp;quot;cisco:ftd:syslog&amp;quot;`
+- Custom macros, eventtypes, tags, and CIM/data model constraints
+- Custom props/transforms or routing assumptions for FTD syslog
+- Data model acceleration searches scoped to the previous FTD sourcetype
+- External integrations or correlation searches that expect all FTD events in one sourcetype
+
+Customers should update broad FTD searches from &amp;quot;cisco:ftd:syslog&amp;quot; to
+
+cisco:ftd:intrusion
+cisco:ftd:connection
+cisco:ftd:connection:security
+cisco:ftd:file
+cisco:ftd:malware
+cisco:ftd:discovery
+cisco:ftd:useractivity
+cisco:ftd:correlation
+cisco:ftd:intrusionpacket
+cisco:ftd:adv:http
+cisco:ftd:adv:ftp
+cisco:ftd:adv:conn
+cisco:ftd:adv:dns
+cisco:ftd:adv:weird
+cisco:ftd:adv:notice
+
+CiscoSecurityCloud 4.0.0 is intended for customers who want the new FTD Advanced Logging model and are ready to validate custom content against the expanded sourcetypes.
+
+To ease the transition, the CiscoSecurityCloud 3.x branch will be actively maintained and should remain the recommended stable branch for customers who require the existing FTD sourcetype behavior. Customers can continue using 3.x while they assess 4.0.0, update custom SPL, and validate dashboards, alerts, and data model acceleration.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c4c605ba-9680-11f1-863f-8edf8358266e.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco Systems, Inc.</dc:creator>
+      <pubDate>Wed, 12 Aug 2026 19:16:45 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7404/#v3.6.10</guid>
+    </item>
     <item>
       <title>Splunk Add-on for Microsoft Windows - v11.0.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/742/</link>
@@ -2344,14 +2416,6 @@ Upgraded Add-On SDKs&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Axonius Inc</dc:creator>
       <pubDate>Wed, 05 Aug 2026 22:57:40 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5740/#v1.3.21</guid>
-    </item>
-    <item>
-      <title>Cyera TA - v4.1.39 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7330/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This add-on allows Splunk admins to see audit trail and event data for the Cyera application. It also allows them to see when issues discovered by Cyera&amp;#x27;s classification and DSPM capabilities are added or updated in the platform. If users wish to see datastore and classification information in Splunk, that is also available. OCSF data models for use with CIM are available. In the latest release, all events in the platform are available, and the current Cyera API endpoints are used.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/334cf074-9083-11f1-8c2c-6eee5bda9fc9.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Hampton</dc:creator>
-      <pubDate>Wed, 05 Aug 2026 22:10:55 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7330/#v4.1.39</guid>
     </item>
     <item>
       <title>Microsoft 365 - v1.2.5 [Version Update]</title>
