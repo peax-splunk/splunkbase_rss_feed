@@ -6,7 +6,20 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Wed, 12 Aug 2026 16:47:15 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 12 Aug 2026 17:51:31 +0000</lastBuildDate>
+    <item>
+      <title>Splunk Add-on for Microsoft Windows - v11.0.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/742/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;*** Important: Read upgrade instructions and test add-on update before deploying to production ***
+The Splunk Add-on for Windows 5.0.0 introduced breaking changes. If you are upgrading from a version of the Splunk Add-on for Windows that is earlier than 5.0.0, you must follow the documented upgrade instructions to avoid data loss. A best practice is to test the upgraded version in a non-production environment before deploying to production.
+
+Neither the Splunk Add-on for Windows DNS version 1.0.1 nor the Splunk Add-on for Windows Active Directory version 1.0.0 is supported when installed alongside the Splunk Add-on for Windows version 6.0.0. The Splunk Add-on for Windows version 6.0.0 includes the Splunk Add-on for Windows DNS and the Splunk Add-on for Microsoft Active Directory.
+
+The Splunk for Microsoft Windows add-on includes predefined inputs to collect data from Windows systems and maps to normalize the data to the Common Information Model.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/3de02d18-9672-11f1-a44d-ea15ad7a6800.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Wed, 12 Aug 2026 17:27:20 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/742/#v11.0.1</guid>
+    </item>
     <item>
       <title>Splunk ES Content Update - v6.4.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/3449/</link>
@@ -2503,31 +2516,6 @@ Features:
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Henrique Linsmeyer</dc:creator>
       <pubDate>Wed, 05 Aug 2026 05:16:37 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6820/#v1.0.8</guid>
-    </item>
-    <item>
-      <title>Data Heartbeat - v1.11.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8833/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Fixed: Sourcetypes could compute good in the scheduled search yet stay flagged in the dashboard/lookup. Cause: outputlookup append\=true upserts on \_key, not sourcetype, so a legacy row whose \_key wasn't the sourcetype string never got overwritten — each run added a duplicate and left the stale one.
-
-
-
-Added: Nightly Compact Sourcetype Keys self-heal that re-keys such rows so detection overwrites them in place. Guarded — a strict no-op on a healthy collection and can never wipe it.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Know the moment a data source goes silent. Data Heartbeat monitors every source type in your Splunk environment and fires Slack, Teams, webhook, or email alerts the instant data stops flowing — before gaps turn into blind spots.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Data Heartbeat monitors your Splunk environment for source types that have stopped sending data. When a data source goes silent — whether from a misconfigured forwarder, a failed log shipper, or a broken integration — Data Heartbeat detects the gap and alerts you before the silence becomes a blind spot.
-
-Every monitored source type has a configurable threshold, measured in minutes. When no data arrives within that window, the app flags the source type and fires your chosen alert action: Slack, Microsoft Teams, a generic webhook, or email via Splunk&amp;#x27;s built-in SMTP relay.
-
-Key features:
-• Monitor dashboard — a live status table showing every tracked source type, the minutes since its last event, its threshold, and its importance level, with color-coded severity (green, yellow, red, and critical).
-• Per-row alert actions — each source type can use its own notification target, independent of the global default.
-• Auto Discovery — a nightly scan that surfaces new source types appearing in your environment and queues them for review.
-• Importance tagging — mark business-critical sources as High, Medium, or Low importance. When a high-importance source goes silent, the app raises a red-alert banner.
-• Settings page — configure global defaults (threshold, alert action, and notification target), enable or disable the monitoring pipeline, and test alert actions without waiting for a real outage.
-• Audit log — a full history of every configuration change, with timestamps and user attribution.
-• No index footprint — all configuration is stored in KV Store, so no custom indexes are required.
-
-Data Heartbeat is compatible with Splunk Enterprise 8.2+, Splunk Cloud Classic, and Splunk Cloud Victoria.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d88dd280-9068-11f1-b8c2-fa62e8157a18.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Steve Koelpin</dc:creator>
-      <pubDate>Wed, 05 Aug 2026 01:07:47 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8833/#v1.11.0</guid>
     </item>
   </channel>
 </rss>
