@@ -6,41 +6,39 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Thu, 13 Aug 2026 12:48:31 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 13 Aug 2026 14:16:07 +0000</lastBuildDate>
+    <item>
+      <title>Mural Add-on - v2.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6789/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;fixed minor bugs in code.&amp;#x20;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Mural Add-on fetches audit events from mural.co&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/90003328-9716-11f1-ba70-5abdf298366c.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Rotimi Akinbobola</dc:creator>
+      <pubDate>Thu, 13 Aug 2026 12:59:12 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6789/#v2.0.0</guid>
+    </item>
     <item>
       <title>Insights Suite for Splunk (IS4S) - v1.3.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7186/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## \[1.3.0] - 2026-08-12
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## 1.3.0 — Release date: August 12, 2026
 
-### Added
+*New features &amp; improvements*
 
-* **Post-search visualizations** — Value Insights dashboard drilldowns can render Sankey, punchcard, scatter, marker-gauge, and parallel-coordinates charts.
+* **Post-search visualizations** — Value Insights dashboard drilldowns can now render Sankey, punchcard, scatter, marker-gauge, and parallel-coordinates charts.
+* **Improved collection navigation** — smoother navigation between collections and clearer dashboard selection.
 * **Efficiency Score Views menu** — Efficiency Score and EfS Tactical Insights are grouped under a single Views menu.
+* **Better diagnostic drilldowns** — refined diagnostic drilldowns and collection management workflows.
 
-### Changed
+*Performance &amp; reliability*
 
-* **Collection navigation &amp; dashboard selection** — smoother navigation between collections and clearer dashboard selection.
-* **Diagnostic drilldowns &amp; collection workflows** — refined diagnostic drilldowns and collection management flows.
-* **Setup &amp; manager hardening** — the first-run setup and manager workflows were hardened for reliability.
+* **Hardened setup &amp; manager workflows** — first-run setup and the manager pages are more resilient on large and cloud stacks. The setup wizard now remembers your step and selection across reloads, surfaces configuration save failures, and allows Back navigation from the final step, with fixes for a first-run reload loop and for activation status that could carry across collections.
+* **Search Collection Builder fixes** — restored the Add Checks template, persisted category renames and severity descriptions, and re-enabled save after legacy rule updates.
+* **Dashboard drilldowns** — drilldowns now run over the underlying search's configured time range and no longer run the search twice on open.
 
-### Fixed
+*Security &amp; hardening*
 
-* **Search Collection Builder** — restored the no-tabs Add Checks template, persisted category renames across saves, re-enabled save after legacy rule updates, and kept severity descriptions on save.
-* **Setup** — `is_configured` is read via a targeted conf-app/install lookup instead of a broad configuration scan.
-* **Setup** — broke a first-run reload loop that could occur when setup attempt memory was unavailable.
-* **Setup wizard** — remembers your step and collection selection across reloads, surfaces Initial Configuration save failures instead of failing silently, allows Back navigation from the final step, enables Next once the selected collections are fully scheduled, and corrects the app header icon on non-US locales.
-* **Setup wizard resilience** — kept the Verify Prerequisites and Select Collections steps from hanging on an endless spinner when a preflight search or supporting lookup briefly fails, and guarded a collection with no searches from breaking the Activate step.
-* **Activation** — stopped activation status from bleeding across collections, so each collection reflects its own state.
-* **Dashboard drilldowns** — a drilldown now runs over its saved search's configured time range instead of always defaulting to the picker window, and no longer dispatches the search twice on open.
-
-### Security
-
-* Hardened first-run setup by escaping reloadui error output before it is rendered.
-* Hardened Search Collection Builder by escaping severity-rule values and rendering severity descriptions safely.
-* Hardened dashboard publishing by escaping XML and CDATA in the generated view markup.
-* Updated dependencies for published advisories: brace-expansion 5.0.9, react-router-dom 7.5.2, dompurify 3.4.12, axios 1.18.0, protobufjs 7.6.5, fast-uri 3.1.5, and jsonata 2.2.2.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Understand and maximize the value of your Splunk investment. IS4S runs curated search collections on a schedule, delivering continuous visibility into usage, adoption, performance, and analytic-capability attainment through executive-ready dashboards and in-app guidance. Works standalone; pairs with the Searchbase App to build custom collections.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Insights Suite for Splunk (IS4S) helps you understand and maximize the value of your Splunk investment. Through curated search collections that run on a defined schedule, IS4S delivers continuous visibility into usage, adoption, system performance, and analytic-capability attainment — surfaced through executive-ready dashboards and actionable in-app guidance. It works standalone out of the box, and pairs with the companion Searchbase App for Splunk when you want to author or extend your own custom collections.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e78b962a-970f-11f1-91e0-9e7874664984.png&quot;&gt;</description>
+* Hardened first-run setup and Search Collection Builder against markup and SPL injection.
+* Updated bundled dependencies for published advisories (brace-expansion, react-router-dom, DOMPurify, axios, protobuf.js, fast-uri, jsonata).&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Understand and maximize the value of your Splunk investment. IS4S runs curated search collections on a schedule, delivering continuous visibility into usage, adoption, performance, and analytic-capability attainment through executive-ready dashboards and in-app guidance. Works standalone; pairs with the Searchbase App to build custom collections.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Insights Suite for Splunk (IS4S) helps you understand and maximize the value of your Splunk investment. Through curated search collections that run on a defined schedule, IS4S delivers continuous visibility into usage, adoption, system performance, and analytic-capability attainment — surfaced through executive-ready dashboards and actionable in-app guidance. It works standalone out of the box, and pairs with the companion Searchbase App for Splunk when you want to author or extend your own custom collections.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e78b962a-970f-11f1-91e0-9e7874664984.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
-      <pubDate>Thu, 13 Aug 2026 12:28:24 +0000</pubDate>
+      <pubDate>Thu, 13 Aug 2026 12:50:50 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7186/#v1.3.0</guid>
     </item>
     <item>
@@ -2517,52 +2515,6 @@ Upgraded Add-On SDKs&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Wed, 05 Aug 2026 20:42:13 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8612/#v1.2.5</guid>
-    </item>
-    <item>
-      <title>MITRE ATLAS AI Threat Detection for Splunk - v1.0.3 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8527/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## v1.0.3 — August 5, 2026
-
-This app is being sunset on January 27, 2027. The detection coverage here (10 rules) has been fully superseded by the [GIC Supply Chain &amp; AI Threat Intelligence Platform (SCIP)](https://splunkbase.splunk.com/app/8814). SCIP's free tier includes 10 comparable AI/agentic threat rules (9 MITRE ATLAS-mapped) at no cost. Paid tiers include 66 AI/agentic threat rules (57 MITRE ATLAS-mapped), plus additional capabilities for teams that need broader coverage.
-
-**What's in this release:**
-
-- Corrected technique names to match current MITRE ATLAS canonical values: AML.T0048 (External Harms), AML.T0012 (Valid Accounts), AML.T0014 (Discover AI Model Family), AML.T0007 (Discover AI Artifacts), AML.T0024 (Exfiltration via AI Inference API), AML.T0020 (Training Data Poisoning)
-- Corrected AML.T0020 tactic from Impact to Persistence, reflecting the July 2026 MITRE ATLAS restructuring
-- Reclassified the bulk content generation detection from AML.T0047 to vendor-defined GIC-VD-001; AML.T0047 is an unrelated technique with no connection to this detection's logic
-- Updated all in-app references to SCIP's detection coverage to reflect current accurate figures
-
-No detection logic was changed. Existing rules continue to function as before.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;10 free AI/agentic threat detection rules for AI/LLM threats (9 MITRE ATLAS-mapped). Guided setup with auto-discovery and platform-specific configuration for 12 LLM providers. Detects prompt injection, jailbreak, exfiltration, training data poisoning, model reconnaissance, and more. For broader AI/LLM security coverage see: splunkbase.splunk.com/app/8814.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;MITRE ATLAS is the adversarial threat matrix for AI/ML systems — the AI equivalent of MITRE ATT&amp;amp;CK. As organizations deploy LLMs, RAG pipelines, and ML APIs into production, they create an attack surface that most Splunk deployments have zero detection coverage for.
-
-This app provides 10 detection rules for AI and LLM threats — 9 mapped to specific MITRE ATLAS technique IDs, plus 1 vendor-defined rule where no canonical ATLAS technique covers the detection concept. Each rule is a Splunk saved search that monitors your AI/LLM logs for known attack patterns including prompt injection, jailbreak attempts, data exfiltration via inference APIs, training data poisoning, model reconnaissance, and AI abuse.
-
-The app includes a guided Setup dashboard that auto-discovers AI/LLM data in your environment, validates required fields, and shows which rules your data supports. A Configuration Guide provides platform-specific instructions for 12 LLM providers including LiteLLM, Azure OpenAI, AWS Bedrock, OpenAI, GCP Vertex AI, Kong AI Gateway, Portkey, Helicone, Cloudflare AI Gateway, Anthropic, self-hosted models (Ollama, vLLM, TGI), and custom API gateways.
-
-Rules are organized into two tiers:
-Tier 1 (Operational) — works with standard telemetry: token counts, API call volumes, storage access logs. Available from most platforms with default logging.
-Tier 2 (Content Inspection) — requires actual prompt/response text in log events. Requires explicit opt-in on all major platforms. The Configuration Guide explains how to enable this for each provider.
-
-Detection Coverage:
-
-AML.T0051.000 Direct Prompt Injection (Tier 2)
-AML.T0051.001 Indirect Prompt Injection via Retrieved Content (Tier 2)
-AML.T0054 LLM Jailbreak (Tier 2)
-AML.T0024 Exfiltration via AI Inference API (Tier 1)
-AML.T0020 Training Data Poisoning (Tier 1)
-GIC-VD-001 AI-Enabled Bulk Content Generation — vendor-defined, no canonical MITRE ATLAS technique covers this concept (Tier 1)
-AML.T0048 External Harms (Tier 1)
-AML.T0012 Valid Accounts (Tier 1)
-AML.T0014 Discover AI Model Family (Tier 2)
-AML.T0007 Discover AI Artifacts (Tier 1)
-
-All rules ship disabled by default. No Python scripts, no external dependencies — pure SPL and CSV lookups. Detection results are written to the summary index for fast dashboard rendering.
-
-Built by a Splunk Enterprise Architect with 10+ years of hands-on experience. This app is a standalone community release from GIC Engineering Consultants.
-
-Looking for broader AI/LLM threat coverage alongside SBOM security and CVE correlation? I also published a Supply Chain &amp;amp; AI Threat Intelligence Platform (SCIP) app: splunkbase.splunk.com/app/8814. Its free tier includes 10 comparable AI/agentic threat rules (9 MITRE ATLAS-mapped) at no cost. Paid tiers include 66 AI/agentic threat rules (57 MITRE ATLAS-mapped), plus additional capabilities.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Marcus House</dc:creator>
-      <pubDate>Wed, 05 Aug 2026 20:00:31 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8527/#v1.0.3</guid>
     </item>
   </channel>
 </rss>
