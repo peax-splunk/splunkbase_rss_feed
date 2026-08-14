@@ -6,7 +6,69 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Thu, 13 Aug 2026 23:31:52 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 14 Aug 2026 01:09:51 +0000</lastBuildDate>
+    <item>
+      <title>Incident Managemnet for Splunk - v1.0.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9281/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**# Release Notes - Incident Management for Splunk (v1.0.2)**
+
+**### 🚀 Features &amp; Functional Enhancements**
+
+• Raw-to-Target Severity Value Mapper: Built Section 7 in the Settings Console to dynamically translate custom raw alert string severities (e.g. P1\_EMERGENCY, FATAL\_99, AVAILABILITY) into standard severity levels (Critical, High, Medium, Low, Info).
+
+• Dynamic Splunk Users Integration: Updated the side-drawer triage controller to dynamically fetch real Splunk Enterprise user accounts via REST API (/services/authentication/users) for owner assignment.
+
+• Live SLA Metric Engine: Converted static KPI summary cards into real-time SPL SLA duration calculations (tracking acknowledged\_at and resolved\_at timestamps for MTTA and MTTR).
+
+• Universal Multi-Source Support: Consolidate alerts, anomalies, and problem signals from native Splunk Saved Searches, APM tools (Dynatrace®, Datadog®), and Cloud Monitors (AWS®, Azure®) into unified 24-hour incident episodes.
+
+**### 🐛 Bug Fixes &amp; Reliability Improvements**
+
+• SPL Syntax Fix in Aggregator: Replaced invalid evaluation function epoch() with standard Splunk function now() in savedsearches.conf (SplunkIM - Summary Event Aggregator).
+
+• 5-Token Filter Linkage: Connected Status, Severity, Owner, Host, and Search Keyword filter tokens directly to the main triage table SPL query in incident\_review.xml.
+
+• Search Parameter Escaping: Added string quote escaping (.replace(/&quot;/g, '\\\\&quot;')) for oneshot raw summary event preview queries in incident\_review.js.
+
+**### 🎨 UI/UX &amp; Aesthetics Refactoring**
+
+• Navigation Bar Streamlining: Streamlined navigation bar tabs to Incident Review Console, Analytics, and Settings.
+
+• Section 7 Table Layout Alignment: Refactored Section 7 in settings.xml and settings.js to render as an inline editable table matching Section 2 design standards 100%.
+
+• Select Box Baseline Fix: Updated splunkim\_theme.css to resolve WebKit select box font baseline text clipping (height: 40px, line-height: 22px).
+
+• Brand Asset Integration: Created official o11yworks dark-mode brand mark icons (appIcon.png and appIcon\_2x.png) in appserver/static/.
+
+**### 📖 Documentation &amp; Splunkbase Standards**
+
+• New User &amp; Operator Guide: Created a comprehensive 8-section User &amp; Operator Guide adhering to Splunkbase App Certification standards.
+
+• Centralized GitHub Docs: Hosted full technical specifications, architecture diagrams, and administration playbooks in the official repository: [https://github.com/o11yworks/SplunkIM.](https://github.com/o11yworks/SplunkIM.)
+
+**### 🛡️ AppInspect Compliance &amp; Code Cleanliness**
+
+• AppInspect Production Alignment: Configured is\_configured \= 0 in app.conf and aligned version 1.0.2 / build 102 across app.conf and app.manifest.
+
+• JS Loader Optimization: Updated RequireJS loaders in incident\_review.js and settings.js to clear AppInspect scanner telemetry notices.
+
+• Dead Asset Cleanup: Safely removed unreferenced leftover asset incident\_drawer.js.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Universal, lightweight Incident Management app for Splunk Core. Consolidates alerts &amp;amp; signals from Splunk, Dynatrace, Datadog, AWS &amp;amp; Azure into KV Store episode clusters with interactive triage drawers, audit logs &amp;amp; SLA response analytics at 0% extra license cost.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk Incident Management (`splunkIM`) is a lightweight, universal incident response platform built natively for Splunk Core and Splunk Cloud Platform. It acts as a central Incident Command Console that consolidates alert signals, anomalies, and problem notifications from diverse observability sources — including native Splunk Saved Searches, Dynatrace® Davis AI Problems, Datadog® Monitors, AWS® CloudWatch Alarms, Azure® Monitor, and Security Findings — into unified, actionable 24-hour incident episodes.
+
+### Key Capabilities &amp;amp; Highlights:
+• Universal Multi-Source Aggregation: Consolidates raw summary alerts and problem notifications across security, APM, and cloud infrastructure into a single unified incident queue.
+• 0% Additional License Impact: Leverages standard Splunk Summary Indexing (index=summary marker=&amp;quot;app=splunkIM&amp;quot;). Summary index events do NOT count against daily Splunk ingestion license limits.
+• Stateful KV Store Episode Tracking: Maintains real-time incident states (New, Acknowledged, Active, Blocked, Resolved, Closed) with full user attribution and edit history using high-performance KV Store collections.
+• Raw-to-Target Severity Value Mapper: Built-in matrix in the Settings console to translate custom raw alert string severities (e.g. P1_EMERGENCY, FATAL_99, AVAILABILITY) into standard severity levels (Critical, High, Medium, Low, Info).
+• Live SLA Response Metrics: Real-time executive dashboards tracking Mean Time to Acknowledge (MTTA) and Mean Time to Resolve (MTTR).
+• Interactive Triage Drawer: Analysts update status, assign team members (populated live from Splunk user accounts), add work notes, and inspect underlying raw summary events without leaving Splunk.
+• Automatic Episode Re-opening: Re-triggers existing resolved incidents if a matching alert fires within the 24-hour SLA window.
+
+---
+ℹ️ Disclaimer: All product names, logos, and trademarks (such as Dynatrace®, Datadog®, ServiceNow®, PagerDuty®, AWS®, Azure®) are property of their respective owners and used for identification and compatibility purposes only.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/5e7ad19a-9771-11f1-8832-a251be47410e.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Venkatesh Geriti</dc:creator>
+      <pubDate>Fri, 14 Aug 2026 00:16:28 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9281/#v1.0.2</guid>
+    </item>
     <item>
       <title>Sandfly Security Add-on for Splunk - v5.1.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5015/</link>
@@ -564,42 +626,6 @@ This add-on provides the inputs and CIM-compatible knowledge to use with other S
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Yuriy Landovskyy</dc:creator>
       <pubDate>Wed, 12 Aug 2026 08:03:31 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5010/#v4.3.0</guid>
-    </item>
-    <item>
-      <title>Package Apps for Splunk - v3.1.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6686/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## SA-PackageApps 3.1.2 – High-Level Release Notes
-
-1. **Release metadata updated**
-
-* App version aligned to **3.1.2** across packaging metadata.
-
-1. **Platform compatibility improvements**
-
-* Vendored Python binary dependencies were aligned for **Linux AArch64** compatibility.
-* Binary declarations were updated to reflect current AArch64 artifacts.
-
-1. **AppInspect compliance hardening**
-
-* Addressed packaging hygiene issues (including macOS metadata artifact prevention).
-* Removed/disabled the botocore CSM UDP code path that triggered cloud security findings.
-* Added explicit documentation for botocore compliance modifications.
-
-1. **AWS/Azure packaging workflow maintained**
-
-* Core package generation and cloud upload workflows remain intact.
-* S3 initialization path was smoke-validated after botocore changes.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Description:
-
-This project packages app content from the Search Head by creating tarballs from $SPLUNK_HOME/etc/apps, including local and lookups, and uploads the resulting archive to a customer-provided AWS S3 bucket or Azure Blob container.
-
-For non-Splunkbase apps:
-The package includes the full app directory, such as default, bin, local, lookups, and any other subfolders under the selected app.
-
-For Splunkbase apps and Splunk Cloud restricted apps:
-Only the local directory can be exported.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/735a49a4-915b-11f1-b53a-ce589b162ea1.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
-      <pubDate>Wed, 12 Aug 2026 04:43:43 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6686/#v3.1.2</guid>
     </item>
     <item>
       <title>Datasource Validator - v1.0.6 [Version Update]</title>
