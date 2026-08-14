@@ -6,7 +6,136 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Fri, 14 Aug 2026 14:09:05 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 14 Aug 2026 15:41:57 +0000</lastBuildDate>
+    <item>
+      <title>Cisco Meraki Add-on for Splunk - v3.3.11 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5580/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## Fixed issues
+
+* Prevents out-of-memory failures by streaming paginated Meraki events to Splunk Enterprise instead of retaining complete organization results in memory.
+* Preserves checkpoint integrity when API requests or event writes fail, preventing partially collected windows from being marked as complete.
+* Detects repeated pagination links and prevents collectors from looping indefinitely.
+* Improves recovery from Meraki API throttling with coordinated organization-level request pacing, retry jitter, and bounded retries.
+* Streams Sensor Reading History at the maximum supported page size instead of accumulating the complete seven-day result set.
+* Corrects License Subscriptions collection and handles unsupported licensing endpoints without reporting false collector failures.
+* Corrects automatic input names and supplies compatibility definitions for legacy inputs created by version 3.3.10.
+* Declares previously missing organization settings, eliminating related `btool` configuration errors.
+* Fixes Python 3.13 compatibility issues in modular inputs and generated OAuth REST handlers.
+* Fixes certificate handling when Splunk Enterprise supplies an invalid or missing `SSL_CERT_FILE`.
+* Corrects summary-collector query windows that could produce `timespan is too small` errors.
+* Fixes the Coterm Licenses dashboard organization filter.
+* Corrects diagnostic searches and scripted-input memory panels in the Data Collection Health dashboard.
+* Uses device names as the preferred Splunk host value and normalizes emitted host values to lowercase.
+* Replicates the correct organization configuration across search head cluster members.
+
+## New and improved functionality
+
+* Adds a Dashboard Studio Data Collection Health dashboard with:
+  * Data freshness and input coverage for all 42 canonical collectors
+  * Collector errors and warnings
+  * API throttling and out-of-memory detection
+  * Scripted-input memory telemetry
+  * Interval-aware health states
+* Updates the Configuration and Inputs pages to UCC Framework 6.5.3 and React Page 8.2.1.
+* Updates the Meraki Dashboard SDK, Splunk SDK for Python, solnlib, requests, packaging, and compatible supporting dependencies.
+* Adds modern Splunk navigation support while retaining the classic navigation fallback.
+* Improves navigation icons and cache handling for upgraded UI assets.
+* Updates third-party software notices to match the dependencies shipped in the add-on.
+
+## Upgrade notes
+
+* Existing input configurations and checkpoints remain compatible.
+* Version 3.3.11 supersedes version 3.3.10 for customers collecting Access Point, Switch, Security Appliance, Camera, or high-volume Sensor Reading History data.
+* Splunk Enterprise 10.2 and later must provide Python 3.13 for the add-on’s modular inputs and REST handlers.
+* Earlier supported Splunk Enterprise releases continue to use their configured `python3` runtime.
+* For best dashboard-search performance, configure the `meraki_index` macro to search only the indexes that contain Cisco Meraki data.
+
+## Known limitations
+
+* The current Linux native dependency bundle supports x86-64. Linux AArch64 support has not been qualified.
+* The add-on retains `urllib3` 1.26.20 because the current supported UCC helper requires `urllib3&lt;2`. Upgrade this dependency after a compatible UCC helper becomes available.
+* A production-scale soak with approximately 29,000 devices remains recommended before unrestricted customer rollout.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Add-on for Cisco Meraki provides comprehensive network observability and security monitoring across your Meraki organizations. This add-on collects rich data via Cisco Meraki REST APIs and webhooks to deliver insights into network performance, security, and device health. Sample visualizations are also provided to help explore the data and create custom dashboards.
+
+The add-on provides Common Information Model (CIM) compatible knowledge to integrate with other Splunk solutions, including Splunk Enterprise Security and Splunk App for PCI Compliance. Data collection can be customized through scheduled API polling and real-time webhooks to match your monitoring requirements.
+
+Security &amp;amp; Event Monitoring:
+• Organization-wide security event tracking
+• Air Marshal wireless threat detection
+• Network device logging and audit trails
+• Rapid network alerts via webhooks
+
+Infrastructure &amp;amp; Performance Insights:
+• Device availability and uptime monitoring
+• Wireless and switching performance metrics
+• Ethernet status and packet loss analytics
+• Environmental sensor data tracking
+• Top device rankings by usage and utilization
+• Energy consumption monitoring for switches
+
+Network Operations:
+• Configuration change tracking
+• SD-WAN and VPN performance monitoring
+• Cellular gateway uplink status
+• API usage analytics and optimization
+• License and firmware auditing
+
+Supported Cisco Meraki Devices:
+• Access Points
+• Security Appliances
+• Switches
+• Cameras
+• Environmental Sensors
+• Cellular Gateways&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/4947590a-96be-11f1-b7a7-aea19127419e.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco Systems, Inc.</dc:creator>
+      <pubDate>Fri, 14 Aug 2026 15:04:23 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5580/#v3.3.11</guid>
+    </item>
+    <item>
+      <title>Cyderes-Depot - v2026.8.12 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9089/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Updated content.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Cyderes-Depot is a content pack of curated security detections for Splunk Enterprise environments, designed to accelerate threat detection, improve analyst efficiency, and help organizations quickly operationalize security monitoring. Working in conjunction with the Cyderes-Core Splunk app, Cyderes-Depot delivers detection content aligned to real-world adversary behaviors and modern security operations practices.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/71e3c210-97ed-11f1-93c9-c205809834f1.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyderes Group LLC</dc:creator>
+      <pubDate>Fri, 14 Aug 2026 14:37:01 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9089/#v2026.8.12</guid>
+    </item>
+    <item>
+      <title>Threat Hunting Essentials - v1.3.78 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7633/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
+
+For Premium Version - Contact sales https://www.avertpoint.com/contactus.html
+
+It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
+
+Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
+
+1. Backdoor.
+2. Worms.
+3. Ransomware.
+4. Bots.
+5. Trojan horses.
+6. Keyloggers.
+7. Rootkits.
+8. Spyware.
+9. Fileless malware.
+10. Cryptojacking.
+11. Wiper malware.
+12. Adware.
+14. Viruses
+15. P2P-Worm
+16. Internet Worms
+17. Net-worm
+18. Clickjacking
+19. Cryptominer
+20. Fileless malware
+
+You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
+
+Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/7fecbd36-97d3-11f1-a44d-ea15ad7a6800.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
+      <pubDate>Fri, 14 Aug 2026 14:09:52 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.78</guid>
+    </item>
     <item>
       <title>Splunk Add-on for Tomcat - v4.0.3 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/2911/</link>
@@ -48,44 +177,6 @@ Documentation for this add-on is posted at [Splunk Docs](https://splunk.github.i
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Fri, 14 Aug 2026 11:39:35 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7523/#v4.0.0</guid>
-    </item>
-    <item>
-      <title>Threat Hunting Essentials - v1.3.77 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7633/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
-
-For Premium Version - Contact sales https://www.avertpoint.com/contactus.html
-
-It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
-
-Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
-
-1. Backdoor.
-2. Worms.
-3. Ransomware.
-4. Bots.
-5. Trojan horses.
-6. Keyloggers.
-7. Rootkits.
-8. Spyware.
-9. Fileless malware.
-10. Cryptojacking.
-11. Wiper malware.
-12. Adware.
-14. Viruses
-15. P2P-Worm
-16. Internet Worms
-17. Net-worm
-18. Clickjacking
-19. Cryptominer
-20. Fileless malware
-
-You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
-
-Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/7fecbd36-97d3-11f1-a44d-ea15ad7a6800.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
-      <pubDate>Fri, 14 Aug 2026 11:31:07 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.77</guid>
     </item>
     <item>
       <title>Google Threat Intelligence App for Splunk - v1.5.1 [Version Update]</title>
@@ -2524,14 +2615,6 @@ The app includes exclusive enrollment coupons and certification preparation reso
       <guid>https://splunkbase.splunk.com/app/9330/#v1.0.4</guid>
     </item>
     <item>
-      <title>Cyderes-Depot - v2026.8.6 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/9089/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Updated content for security outcomes.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Cyderes-Depot is a content pack of curated security detections for Splunk Enterprise environments, designed to accelerate threat detection, improve analyst efficiency, and help organizations quickly operationalize security monitoring. Working in conjunction with the Cyderes-Core Splunk app, Cyderes-Depot delivers detection content aligned to real-world adversary behaviors and modern security operations practices.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e97ea99c-91e5-11f1-a1ee-1653c1a47218.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyderes Group LLC</dc:creator>
-      <pubDate>Thu, 06 Aug 2026 22:28:32 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9089/#v2026.8.6</guid>
-    </item>
-    <item>
       <title>JupiterOne Add-on for Splunk - v2.1.4 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/6138/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**### Version 2.1.4**
@@ -2571,15 +2654,6 @@ It also provides workflow actions that allow you to link back to entities in Jup
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">C B</dc:creator>
       <pubDate>Thu, 06 Aug 2026 22:11:54 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6138/#v2.1.4</guid>
-    </item>
-    <item>
-      <title>Amazon S3 Sink Alert Action For Splunk - v3.6.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5197/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* UI improvements
-* Upgrade dependencies&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This alert action uploads the search results to S3 bucket&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/64f3f5da-91ac-11f1-97ad-5e3ae45ca1a4.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
-      <pubDate>Thu, 06 Aug 2026 15:41:45 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5197/#v3.6.0</guid>
     </item>
   </channel>
 </rss>
