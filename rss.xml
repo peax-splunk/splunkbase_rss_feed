@@ -6,53 +6,97 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Fri, 14 Aug 2026 01:09:51 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 14 Aug 2026 03:56:49 +0000</lastBuildDate>
     <item>
-      <title>Incident Managemnet for Splunk - v1.0.2 [Version Update]</title>
+      <title>Mural Add-on - v2.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6789/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;fixed minor bugs in code.&amp;#x20;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Mural Add-on fetches audit events from mural.co&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/90003328-9716-11f1-ba70-5abdf298366c.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Rotimi Akinbobola</dc:creator>
+      <pubDate>Fri, 14 Aug 2026 03:03:45 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6789/#v2.0.0</guid>
+    </item>
+    <item>
+      <title>Supply Chain and AI Threat Intelligence Platform - v1.2.14 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8814/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## SCIP v1.2.14 — Detection Restoration, Compliance Status Accuracy, and Correlation Dedup
+
+Cumulative release covering all changes since v1.2.10, the previous published release. It consolidates work validated as v1.2.11 through v1.2.13, none of which were published separately. The most significant item is a critical AI/agentic threat detection defect; the remainder are compliance-evidence correctness fixes, an indexing-efficiency correction, and documentation accuracy. No new capabilities in this release.
+
+**Critical — AI/agentic threat detection restored:**
+
+- AI/agentic threat detection rules could silently produce zero results, with no error anywhere to indicate a problem. This has been corrected so all 10 of the included detection rules function as intended. No other detection or reporting behavior in the app was affected by this fix.
+
+**Compliance evidence accuracy:**
+
+- PCI DSS 6.4.1 and 6.4.2 (public-facing web application protection): the Compliance Gap Assessment dashboard could independently compute and display &quot;Pass&quot; for these two controls while the authoritative nightly compliance assessment had determined &quot;Gap&quot; for the same environment at the same time — the two surfaces used different data scopes, time windows, and aggregations. The dashboard no longer computes its own answer for these controls; it now displays only what the nightly assessment recorded, and shows an explicit &quot;awaiting nightly compliance assessment&quot; state when no assessment has run yet. The two surfaces can no longer disagree.
+- The count of AI/agentic threat detections feeding the PCI DSS 6.4.1/6.4.2 evidence checks and the dashboard summary was including only 10 of the app's 66 detection rules, understating actual detection coverage in compliance evidence. All 66 are now counted.
+- NIST SA-11: the federal compliance exports and the IL deployment guide each used a different non-official wording for this control's title. Both now use the official NIST SP 800-53 Rev 5 title, &quot;Developer Testing and Evaluation.&quot; SA-10 (Developer Configuration Management) and SI-2 (Flaw Remediation) descriptions were corrected in the README in the same pass.
+
+**Indexing efficiency:**
+
+- The NVD Version Range Correlation search was re-collecting every current version-range vulnerability match on each 2-hour run rather than writing each unique match once, unlike the two sibling correlation searches which already deduplicate. It now participates in the same deduplication ledger, so repeat runs no longer add duplicate entries to the alerts index or to downstream POA&amp;M population. Genuinely new matches continue to be collected immediately. Existing installs will see index growth from this search level off; no customer action is required.
+
+**Dashboard consistency:**
+
+- Three dashboards (Supply Chain Risk Score, Compliance Gap Assessment, and SBOM Component Inventory) displayed their headline summary metrics inconsistently compared to the equivalent panels elsewhere in the app. All three now behave consistently with the rest of the product.
+
+**Documentation accuracy:**
+
+- The bundled OSV vulnerability lookup's ecosystem coverage was understated as 5 ecosystems; the bundled data actually covers 11 — PyPI, npm, Maven, Go, NuGet, crates.io, Packagist, RubyGems, SwiftURL, Pub, and Hex. The README and the About page now state the accurate count.
+- The About and Setup pages no longer imply that all 66 AI/agentic threat detection rules carry a MITRE ATLAS technique ID. Both now show the same breakdown used elsewhere in the app: 66 total, of which 57 are MITRE ATLAS-mapped and 9 are vendor-defined detections with no current ATLAS equivalent.
+- The set of 10 detection rules described in the README as 9 of 10 MITRE ATLAS-mapped is corrected — all 10 are ATLAS-mapped.
+- The FedRAMP POA&amp;M Excel export is now described consistently as 27 data columns (B through AB) plus the column-A row label, removing an ambiguity between two different framings of the same file.
+- The EPSS feed's batching constraint is now documented accurately against the upstream API's real character limit rather than an assumed record count, and the feed self-limits to that constraint.
+- The bundled release-notes file, which had fallen several versions behind, now covers every release back through v1.2.5.
+
+No security-critical or cryptographic code was modified in this release. Core integrity-verification components are byte-identical to baseline.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Unifies software supply chain risk (SBOM/SCA), MITRE ATLAS AI-threat detection, and nine-framework compliance in one Splunk app — with FedRAMP-ready audit exports and no external security product required.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;SCIP unifies software composition analysis (SCA), supply chain risk monitoring, and AI threat detection in one Splunk app. Ingest SBOMs, correlate components against live vulnerability intelligence (OSV, NVD, CISA KEV, EPSS), detect adversarial AI/ML threats with MITRE ATLAS, and assess compliance posture across nine global frameworks — with detection logic written as transparent SPL you can open and read, and no external security product required.
+
+CAPABILITIES
+- SBOM ingestion — file-drop or HEC, supporting CycloneDX (JSON/XML) and SPDX (JSON)
+
+- Vulnerability correlation — daily OSV feed (264,944+ records across 5 ecosystems) with PURL-based correlation; NVD CPE-based correlation; CISA KEV matching; EPSS exploit-probability scoring
+
+- Supply Chain Risk Score — 0–100 global and per-application risk scoring weighted by severity, KEV status, and EPSS
+
+- Vendor Risk — per-vendor risk aggregation and letter-grading across your SBOM portfolio
+
+- SBOM Drift Detection — baseline-vs-current component change tracking
+
+- License Compliance — GPL/AGPL/copyleft detection and license-risk classification
+
+- MITRE ATLAS Detection — 66 AI/agentic threat detection rules (57 MITRE ATLAS-mapped)
+
+- Silent-Source Detection — alerts when an enrolled AI/LLM telemetry source goes quiet, so a dead pipe is never mistaken for a clean one (Enterprise and Federal Plus)
+
+- Compliance Gap Assessment — nine frameworks: PCI DSS 4.0, NIST CSF 2.0, SOC 2 Type II, HIPAA Security Rule, EU Cyber Resilience Act, FedRAMP / RMF / CISA, DORA, FDA 524B Premarket Cybersecurity, SEBI CSCRF
+
+- Long-Unpatched Critical Exposure — flags critical/high-severity vulnerabilities unpatched 180+ days (all tiers)
+
+- POA&amp;amp;M &amp;amp; FedRAMP Workflow — POA&amp;amp;M dashboard, monthly ConMon package builder, BOD 26-04 risk-tier classification (CISA&amp;#x27;s four-variable model with computed deadlines), deviation request workflow. Dashboards always available; automated POA&amp;amp;M generation is opt-in from Setup
+
+- Coverage-Evidence Manifest — AU-12-aligned attestation of unbroken AI-monitoring coverage (Federal Plus)
+
+- Audit-ready exports — FedRAMP POA&amp;amp;M Workbook (R3.0 and R2.1), SSP Appendix M Integrated Inventory, Deviation Request Form (Template 2.1 / Aug 2024)
+
+- Component Search — instant cross-SBOM component lookup (available in the free Community tier)
+
+- Compound Risk — correlates active MITRE ATLAS AI-threat detections with vulnerable components on the same application, surfacing compounding risk neither signal shows alone (Enterprise and Federal Plus)
+
+- AI/ML Bill of Materials — catalogs AI/ML model components from your SBOMs (architecture, training data, lineage) with insecure-serialization-format flagging (Professional and above; risk classification on Enterprise and Federal Plus)
+
+TIERS
+Community (free), Professional, Federal, Enterprise, Federal Plus. Feature availability gated by license tier; contact us for tier comparison.
+
+SUPPORT
+GIC Engineering Consultants — contact@gicengineeringconsultants.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8e9edfb8-9782-11f1-b368-464ca62301ca.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">GIC Engineering Consultants, Inc.</dc:creator>
+      <pubDate>Fri, 14 Aug 2026 02:16:00 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8814/#v1.2.14</guid>
+    </item>
+    <item>
+      <title>Incident Managemnet for Splunk - v1.0.3 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/9281/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**# Release Notes - Incident Management for Splunk (v1.0.2)**
-
-**### 🚀 Features &amp; Functional Enhancements**
-
-• Raw-to-Target Severity Value Mapper: Built Section 7 in the Settings Console to dynamically translate custom raw alert string severities (e.g. P1\_EMERGENCY, FATAL\_99, AVAILABILITY) into standard severity levels (Critical, High, Medium, Low, Info).
-
-• Dynamic Splunk Users Integration: Updated the side-drawer triage controller to dynamically fetch real Splunk Enterprise user accounts via REST API (/services/authentication/users) for owner assignment.
-
-• Live SLA Metric Engine: Converted static KPI summary cards into real-time SPL SLA duration calculations (tracking acknowledged\_at and resolved\_at timestamps for MTTA and MTTR).
-
-• Universal Multi-Source Support: Consolidate alerts, anomalies, and problem signals from native Splunk Saved Searches, APM tools (Dynatrace®, Datadog®), and Cloud Monitors (AWS®, Azure®) into unified 24-hour incident episodes.
-
-**### 🐛 Bug Fixes &amp; Reliability Improvements**
-
-• SPL Syntax Fix in Aggregator: Replaced invalid evaluation function epoch() with standard Splunk function now() in savedsearches.conf (SplunkIM - Summary Event Aggregator).
-
-• 5-Token Filter Linkage: Connected Status, Severity, Owner, Host, and Search Keyword filter tokens directly to the main triage table SPL query in incident\_review.xml.
-
-• Search Parameter Escaping: Added string quote escaping (.replace(/&quot;/g, '\\\\&quot;')) for oneshot raw summary event preview queries in incident\_review.js.
-
-**### 🎨 UI/UX &amp; Aesthetics Refactoring**
-
-• Navigation Bar Streamlining: Streamlined navigation bar tabs to Incident Review Console, Analytics, and Settings.
-
-• Section 7 Table Layout Alignment: Refactored Section 7 in settings.xml and settings.js to render as an inline editable table matching Section 2 design standards 100%.
-
-• Select Box Baseline Fix: Updated splunkim\_theme.css to resolve WebKit select box font baseline text clipping (height: 40px, line-height: 22px).
-
-• Brand Asset Integration: Created official o11yworks dark-mode brand mark icons (appIcon.png and appIcon\_2x.png) in appserver/static/.
-
-**### 📖 Documentation &amp; Splunkbase Standards**
-
-• New User &amp; Operator Guide: Created a comprehensive 8-section User &amp; Operator Guide adhering to Splunkbase App Certification standards.
-
-• Centralized GitHub Docs: Hosted full technical specifications, architecture diagrams, and administration playbooks in the official repository: [https://github.com/o11yworks/SplunkIM.](https://github.com/o11yworks/SplunkIM.)
-
-**### 🛡️ AppInspect Compliance &amp; Code Cleanliness**
-
-• AppInspect Production Alignment: Configured is\_configured \= 0 in app.conf and aligned version 1.0.2 / build 102 across app.conf and app.manifest.
-
-• JS Loader Optimization: Updated RequireJS loaders in incident\_review.js and settings.js to clear AppInspect scanner telemetry notices.
-
-• Dead Asset Cleanup: Safely removed unreferenced leftover asset incident\_drawer.js.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Universal, lightweight Incident Management app for Splunk Core. Consolidates alerts &amp;amp; signals from Splunk, Dynatrace, Datadog, AWS &amp;amp; Azure into KV Store episode clusters with interactive triage drawers, audit logs &amp;amp; SLA response analytics at 0% extra license cost.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk Incident Management (`splunkIM`) is a lightweight, universal incident response platform built natively for Splunk Core and Splunk Cloud Platform. It acts as a central Incident Command Console that consolidates alert signals, anomalies, and problem notifications from diverse observability sources — including native Splunk Saved Searches, Dynatrace® Davis AI Problems, Datadog® Monitors, AWS® CloudWatch Alarms, Azure® Monitor, and Security Findings — into unified, actionable 24-hour incident episodes.
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&gt; `Fixed KV Store REST 404 configuration saving errors on fresh installs via dynamic app namespace resolution and automatic fallback upsert handlers.`&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Universal, lightweight Incident Management app for Splunk Core. Consolidates alerts &amp;amp; signals from Splunk, Dynatrace, Datadog, AWS &amp;amp; Azure into KV Store episode clusters with interactive triage drawers, audit logs &amp;amp; SLA response analytics at 0% extra license cost.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk Incident Management (`splunkIM`) is a lightweight, universal incident response platform built natively for Splunk Core and Splunk Cloud Platform. It acts as a central Incident Command Console that consolidates alert signals, anomalies, and problem notifications from diverse observability sources — including native Splunk Saved Searches, Dynatrace® Davis AI Problems, Datadog® Monitors, AWS® CloudWatch Alarms, Azure® Monitor, and Security Findings — into unified, actionable 24-hour incident episodes.
 
 ### Key Capabilities &amp;amp; Highlights:
 • Universal Multi-Source Aggregation: Consolidates raw summary alerts and problem notifications across security, APM, and cloud infrastructure into a single unified incident queue.
@@ -64,10 +108,10 @@
 • Automatic Episode Re-opening: Re-triggers existing resolved incidents if a matching alert fires within the 24-hour SLA window.
 
 ---
-ℹ️ Disclaimer: All product names, logos, and trademarks (such as Dynatrace®, Datadog®, ServiceNow®, PagerDuty®, AWS®, Azure®) are property of their respective owners and used for identification and compatibility purposes only.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/5e7ad19a-9771-11f1-8832-a251be47410e.png&quot;&gt;</description>
+ℹ️ Disclaimer: All product names, logos, and trademarks (such as Dynatrace®, Datadog®, ServiceNow®, PagerDuty®, AWS®, Azure®) are property of their respective owners and used for identification and compatibility purposes only.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/3ebb34c4-977d-11f1-8832-a251be47410e.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Venkatesh Geriti</dc:creator>
-      <pubDate>Fri, 14 Aug 2026 00:16:28 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9281/#v1.0.2</guid>
+      <pubDate>Fri, 14 Aug 2026 01:24:06 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9281/#v1.0.3</guid>
     </item>
     <item>
       <title>Sandfly Security Add-on for Splunk - v5.1.0 [Version Update]</title>
@@ -273,14 +317,6 @@ Start a free 60-day trial at netflowlogic.com/free-trial — or request a demo t
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Thu, 13 Aug 2026 15:14:21 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7920/#v1.0.6</guid>
-    </item>
-    <item>
-      <title>Mural Add-on - v2.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6789/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;fixed minor bugs in code.&amp;#x20;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Mural Add-on fetches audit events from mural.co&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/90003328-9716-11f1-ba70-5abdf298366c.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Rotimi Akinbobola</dc:creator>
-      <pubDate>Thu, 13 Aug 2026 12:59:12 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6789/#v2.0.0</guid>
     </item>
     <item>
       <title>Insights Suite for Splunk (IS4S) - v1.3.0 [Version Update]</title>
@@ -1396,88 +1432,6 @@ Check out the source code here: https://github.com/1Password/events-api-splunk&l
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Julien Devouassoud</dc:creator>
       <pubDate>Fri, 07 Aug 2026 15:51:37 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6800/#v1.2.7</guid>
-    </item>
-    <item>
-      <title>Supply Chain and AI Threat Intelligence Platform - v1.2.10 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8814/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## SCIP v1.2.10 — FedRAMP VDR/VER Reporting and PCI DSS 4.0.1 Compliance Accuracy Remediation
-
-Cumulative release covering all changes since v1.2.5 (build 247). Adds FedRAMP Vulnerability Detection and Response (VDR) / Vulnerability Evaluation and Reporting (VER) support to the Monthly ConMon Package Builder, and remediates eleven compliance-accuracy defects identified by audits against the published PCI DSS v4.0.1 standard and FedRAMP's current continuous-monitoring rules.&amp;#x20;
-
-**SCIP-141 — FedRAMP VDR/VER reporting:**
-
-* New FedRAMP VDR/VER Vulnerability Report section in the Monthly ConMon Package Builder, reframing KEV-matched vulnerabilities from the BOD 26-04 classification engine into FedRAMP's VER language: exploitability (LEV/NLEV), internet reachability (IRV/NIRV), Potential Agency Impact N-rating (PAIN, N1-N5), and the mitigation/remediation timeframe (VDR-TFR-PVR). Implements the eleven required reporting items of VER-RPT-VDT and is exportable for monthly human-readable reporting (VER-TFR-MHR).
-* New lookups/fedramp\_vdr\_ver\_pain\_matrix.csv (16 rows) with a selectable FedRAMP certification class, open and auditable against FedRAMP's own published timeframe tables. Certification class materially changes remediation windows (for a PAIN-4 internet-reachable finding: 8 days at Class B, 2 days at Class D).
-* Applications with no public-exposure tag are treated as internet-reachable rather than silently assumed safe — the conservative posture FedRAMP's model requires. Panels include an explicit proxy disclosure stating which values are provisional proxies (IRV from the customer-declared exposure tag, PAIN from BOD 26-04 technical impact) and which require provider attestation, so the report cannot be mistaken for an assessment SCIP is not in a position to make.
-* Reportable-incident candidates (VER-TFR-IRI) and findings approaching the 192-day accepted-risk threshold (VER-TFR-MAV) are surfaced directly. Mandatory for FedRAMP-certified offerings by December 7, 2026, with the grace period ending March 7, 2027, per FedRAMP Public Notice NTC-0014.
-
-**SCIP-139 — PCI DSS 6.3.3 gap assessment corrected to be severity-aware:**
-
-* The 6.3.3 compliance-gap assessment previously reported a Gap on any confirmed open CVE regardless of severity, overstating non-compliance against a standard that does not require it. Gap now triggers only on critical severity or a CISA Known Exploited Vulnerability of any severity; other confirmed open vulnerabilities report as Needs Review rather than a compliance gap.
-* Version-unconfirmed matches no longer produce a Gap on their own — they report as Needs Review (unconfirmed version matches), so a finding SCIP cannot confirm applies to the deployed version is not presented to an assessor as a failure.
-
-**SCIP-143 through SCIP-149 — PCI DSS v4.0.1 control-mapping accuracy:**
-
-* 12.3.3 and 12.3.4 corrected. Both shipped rows previously described variants of 12.3.4's subject, leaving 12.3.3's real requirement (cryptographic cipher suites and protocols reviewed at least every 12 months) unrepresented while a result was still reported against its identifier. The technology-review check is now correctly identified as 12.3.4, and 12.3.3 is present and honestly marked not assessed rather than reported against the wrong control.
-* 10.2.1 corrected to 10.2.1.1 to match the content actually assessed (individual user access to cardholder data) rather than the broader parent requirement.
-* 11.3.2 now discloses that Approved Scanning Vendor status is not verified by the check, so a Pass cannot be read as confirmation that an ASV performed the scan.
-* 6.4.1 now discloses that its manual-review path was effectively sunset on March 31, 2025 and that an automated solution is required per 6.4.2.
-* 10.7.1 now discloses that the requirement applies to service providers only, with 10.7.2/10.7.3 identified as the equivalents for all other entities.
-* Requirement-family titles corrected to the official PCI DSS v4.0.1 wording for Requirement 6 (&quot;Develop and Maintain Secure Systems and Software&quot;) and Requirement 12 (&quot;Support Information Security with Organizational Policies and Programs&quot;).
-* Upgrade path: environments that ran an earlier build carry a stale compliance-status record for the previously mismapped 12.3.3 identifier. A scheduled cleanup removes exactly that one record on upgrade, then no-ops indefinitely. No customer action is required and nothing else in the collection is touched.
-
-**SCIP-140 — PCI DSS version labeling:**
-
-* Compliance framework labeling updated from &quot;PCI DSS 4.0&quot; to &quot;PCI DSS 4.0.1&quot; across all customer-facing and compliance-evidence surfaces, matching the current published standard. Internal framework identifiers are unchanged, so existing saved searches, lookups, and exports continue to work without modification.
-
-**SCIP-138 and SCIP-142 — bundled documentation:**
-
-* README detection-rule counts corrected to match the shipped rule set (10 AI/agentic threat detection rules, 9 MITRE ATLAS-mapped, in the summary; 66 rules, 57 ATLAS-mapped, in the detail section).
-* Stated minimum supported platform raised to Splunk Enterprise 9.4+ and Splunk Cloud. Splunk 9.2 and 9.3 have reached end of life; no functional change for environments already on a supported release.
-
-No licensing or crypto surface was modified. bin/scip\_license\_core.py and bin/scip\_ed25519\_verify.py are byte-identical to baseline.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Unifies software supply chain risk (SBOM/SCA), MITRE ATLAS AI-threat detection, and nine-framework compliance in one Splunk app — with FedRAMP-ready audit exports and no external security product required.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;SCIP unifies software composition analysis (SCA), supply chain risk monitoring, and AI threat detection in one Splunk app. Ingest SBOMs, correlate components against live vulnerability intelligence (OSV, NVD, CISA KEV, EPSS), detect adversarial AI/ML threats with MITRE ATLAS, and assess compliance posture across nine global frameworks — with detection logic written as transparent SPL you can open and read, and no external security product required.
-
-CAPABILITIES
-- SBOM ingestion — file-drop or HEC, supporting CycloneDX (JSON/XML) and SPDX (JSON)
-
-- Vulnerability correlation — daily OSV feed (264,944+ records across 5 ecosystems) with PURL-based correlation; NVD CPE-based correlation; CISA KEV matching; EPSS exploit-probability scoring
-
-- Supply Chain Risk Score — 0–100 global and per-application risk scoring weighted by severity, KEV status, and EPSS
-
-- Vendor Risk — per-vendor risk aggregation and letter-grading across your SBOM portfolio
-
-- SBOM Drift Detection — baseline-vs-current component change tracking
-
-- License Compliance — GPL/AGPL/copyleft detection and license-risk classification
-
-- MITRE ATLAS Detection — 66 AI/agentic threat detection rules (57 MITRE ATLAS-mapped)
-
-- Silent-Source Detection — alerts when an enrolled AI/LLM telemetry source goes quiet, so a dead pipe is never mistaken for a clean one (Enterprise and Federal Plus)
-
-- Compliance Gap Assessment — nine frameworks: PCI DSS 4.0, NIST CSF 2.0, SOC 2 Type II, HIPAA Security Rule, EU Cyber Resilience Act, FedRAMP / RMF / CISA, DORA, FDA 524B Premarket Cybersecurity, SEBI CSCRF
-
-- Long-Unpatched Critical Exposure — flags critical/high-severity vulnerabilities unpatched 180+ days (all tiers)
-
-- POA&amp;amp;M &amp;amp; FedRAMP Workflow — POA&amp;amp;M dashboard, monthly ConMon package builder, BOD 26-04 risk-tier classification (CISA&amp;#x27;s four-variable model with computed deadlines), deviation request workflow. Dashboards always available; automated POA&amp;amp;M generation is opt-in from Setup
-
-- Coverage-Evidence Manifest — AU-12-aligned attestation of unbroken AI-monitoring coverage (Federal Plus)
-
-- Audit-ready exports — FedRAMP POA&amp;amp;M Workbook (R3.0 and R2.1), SSP Appendix M Integrated Inventory, Deviation Request Form (Template 2.1 / Aug 2024)
-
-- Component Search — instant cross-SBOM component lookup (available in the free Community tier)
-
-- Compound Risk — correlates active MITRE ATLAS AI-threat detections with vulnerable components on the same application, surfacing compounding risk neither signal shows alone (Enterprise and Federal Plus)
-
-- AI/ML Bill of Materials — catalogs AI/ML model components from your SBOMs (architecture, training data, lineage) with insecure-serialization-format flagging (Professional and above; risk classification on Enterprise and Federal Plus)
-
-TIERS
-Community (free), Professional, Federal, Enterprise, Federal Plus. Feature availability gated by license tier; contact us for tier comparison.
-
-SUPPORT
-GIC Engineering Consultants — contact@gicengineeringconsultants.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9be51330-926f-11f1-9d7d-fa5860a031a9.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">GIC Engineering Consultants, Inc.</dc:creator>
-      <pubDate>Fri, 07 Aug 2026 15:16:10 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8814/#v1.2.10</guid>
     </item>
     <item>
       <title>Nuclea Alert Enhancer - v1.1.1 [Version Update]</title>
