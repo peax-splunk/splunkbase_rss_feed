@@ -6,7 +6,188 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sat, 15 Aug 2026 03:30:53 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 15 Aug 2026 04:20:51 +0000</lastBuildDate>
+    <item>
+      <title>Cisco Catalyst Add-on for Splunk - v3.2.44 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7538/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**Important for upgrades:** Before migrating saved searches or alerts, review the legacy dynamic-sourcetype upgrade checks in the User Guide included with the TA.
+
+##### What's New modal
+
+* **Release notes surface automatically:** Each release now opens a polished What's New modal inside the add-on, with a compact section navigator and a direct link to the full User Guide.
+* **Explicit per-user suppression:** Closing the modal normally hides it only for the current page visit, so the release notes return the next time the add-on opens. Selecting **Do not show again** before closing stores the suppressed version for the signed-in Splunk user; a newer release appears automatically, and the modal can still be reopened from Application Setup.
+* **Restart-free, cluster-consistent preference updates:** The user-scoped `ta_cisco_catalyst_ui.conf` now has an explicit reload trigger and Search Head Cluster replication declaration, so saving **Do not show again** no longer requests a restart and remains consistent across cluster members.
+* **Single release-note source:** The modal renders the bounded **Current release at a glance** subsection from this User Guide Markdown, so its concise announcement and the full guide cannot drift into separately maintained release-note files.
+
+##### Application Setup release badges
+
+* **Current release callouts:** Input Type menus now show compact **New!** and **Enhanced!** badges beside this release's highlighted inputs across Catalyst Center, Cyber Vision, SD-WAN, and ISE. A selected highlighted input keeps its badge in the closed control.
+* **New NetFlow workspace:** The SD-WAN **NetFlow** tab now carries the same compact **New!** badge so operators can spot the new listener, dependency, and destination-index workflow immediately.
+* **Release-only metadata:** Badges come from one release-maintained index and are display-only. They do not rename input types, change saved values, issue API requests, or alter collection behavior, and can be updated or removed independently before a future release.
+
+##### Guided SD-WAN NetFlow workspace
+
+* **Requirements first:** Step 1 checks all four required Stream and Cisco packages before the operator changes a listener or SD-WAN Manager configuration. The live result is limited to the current Splunk Web node and tells the operator where remote collector and indexer placement must be verified.
+* **Five numbered steps:** The workflow continues through protocol choice, listener configuration, destination-index confirmation, and one-edge canary validation with explicit Back and Next actions.
+* **Visible prerequisite guard:** A live preflight now warns when App for Stream (1809) or Stream Wire Data (5234) is missing, disabled, or unverifiable. Destination-index requests and the Stream configuration link remain paused until App for Stream is ready, preventing an absent custom endpoint from appearing as a generic 500 error. The warning distinguishes the current-node check from Wire Data placement that must also be verified on every indexer.
+* **Progressive disclosure:** Only the active task is shown, and optional listener tuning, exporter allowlists, capacity guidance, and configuration-file details remain collapsed until needed.
+* **Saved forwarder identity explained:** A populated **Stream Forwarder ID** is loaded from the existing `stream_forwarder_id` value in `Splunk_TA_stream/local/inputs.conf`; the page neither generates nor hard-codes it, and a blank value continues to let Stream use the host name.
+* **Current product terminology:** Customer-facing UI and guide text now use **Cisco Catalyst SD-WAN Manager**; **vManage** remains only in explicit legacy labels, literal compatibility signals, fields, URLs, and old release names.
+
+##### UI build dependency security
+
+* **Dependabot remediation:** The React build and development toolchain now resolves the patched Babel, Webpack development server, WebSocket, proxy, YAML, CSS, URI, glob, and related transitive packages required by the repository's security advisories.
+* **Unused parser removed:** The unused `image-size` development dependency was removed, eliminating its unpatched image-parser paths without changing the shipped UI or runtime React/UCC libraries.
+* **Deterministic security floor:** Targeted npm overrides keep transitive packages above their fixed versions while preserving the existing Splunk React/UCC runtime contract and reproducible `npm ci` builds.
+
+##### Catalyst Center scheduled-report namespace
+
+* **Report sourcetypes aligned with Catalyst Center:** Newly collected scheduled reports now use `cisco:dnac:inventory:report`, `cisco:dnac:compliance:report`, and `cisco:dnac:report` instead of the older `cisco:catalyst:center:*` report namespace.
+* **Dual-read transition eventtypes:** `cisco_dnac_inventory_report`, `cisco_dnac_compliance_report`, and `cisco_dnac_report` each search the exact current and previous sourcetypes. `cisco_catalyst_center_reports` searches all three report families. Historical events are neither renamed nor reindexed.
+* **Visible migration contract:** Application Setup displays an amber migration warning plus **Current sourcetype**, **Previous sourcetype**, and **Transition eventtype** columns. Data Collection Health uses the umbrella eventtype so current and retained report data remain visible together.
+* **Readable migration table:** The report description now lives inside each row's expandable **More info** panel, leaving the three migration identifiers enough room to remain readable in the default split-panel layout.
+* **Report identity remains stable:** `report_name`, `report_type`, `report_category`, `cisco_catalyst_host`, and `collection_timestamp` continue to identify the report definition, family, controller, and snapshot time. Arbitrary report rows are not assigned a payload-specific CIM tag without a validated schema.
+
+##### Resizable Application Setup workspace
+
+* **Drag-resizable product and configuration panels:** Add Input pages now default to a 70/30 product-information/configuration layout and provide a center splitter that can be dragged directly with a mouse or pointer between bounded 30/70 and 70/30 layouts. Left/Right and Home/End keys provide an accessible alternative, double-click restores the 70/30 default, the current ratio remains visible, and narrow viewports continue to stack the panels automatically.
+
+##### Stable Generic Custom API sourcetypes
+
+* **One sourcetype per product family:** Generic Custom API events now use `cisco:dnac:custom`, `cisco:sdwan:custom`, `cisco:ise:custom`, or `cisco:cybervision:custom` instead of creating a sourcetype for every selected REST endpoint.
+* **Endpoint identity remains searchable:** Every custom event includes a normalized, bounded `endpoint_name` plus the cataloged `endpoint_path`, so searches and dashboards can select an endpoint without expanding sourcetype cardinality.
+* **Identity fields explained in context:** The expandable **More info** panel for every product's Generic Custom API sourcetype now explains how `endpoint_name` groups a selected operation, how `endpoint_path` preserves its configured catalog route, and when SD-WAN adds `target_device_id` for device-scoped collection.
+* **CIM-safe shared metadata:** The stable families retain the add-on's universal `vendor`, `product`, `vendor_product`, and `app` fields. Payload-specific CIM mappings remain with dedicated inputs because arbitrary endpoint JSON does not share one truthful data-model contract.
+
+##### Stable ISE policy and analytics sourcetypes
+
+* **One policy family:** Newly collected RADIUS and TACACS+ policy sets and authorization rules use `cisco:ise:policy`. The bounded `policy_protocol` field identifies `radius` or `tacacs`; `policy_record_type` identifies `policy_set` or `authorization_rule`; `endpoint_name` and `endpoint_path` preserve the originating Open API surface.
+* **One analytics family:** General, registry, hardware, applications, and full endpoint report rows now use `cisco:ise:analytics`. `report_type` identifies the bounded report family and `report_name` preserves the source filename.
+* **Dual-read transition eventtypes:** `cisco_ise_policy` and `cisco_ise_analytics_reports` search their current family plus retained history. The protocol/record and report-specific eventtypes shown in Application Setup provide exact old-and-new searches. Historical events are not renamed or reindexed.
+* **Visible migration contract:** The ISE product card displays an amber migration warning plus **Current sourcetype**, **Previous sourcetype**, and **Transition eventtype** columns. Descriptions and identity-field guidance remain available through each row's **More info** panel.
+* **CIM-safe scope:** Both current families expose universal `vendor`, `product`, `vendor_product`, and `app` fields. Policy snapshots are configuration state, not authentication transactions, and variable analytics report rows are not assigned a payload-specific CIM tag without representative schema validation.
+
+##### Data Collection Health sourcetype migration roll-up
+
+* **Current-family health:** Data Collection Health rolls retained Catalyst Center, endpoint-derived Custom API, SD-WAN firewall/access/syslog, and ISE policy/analytics sourcetypes into their current canonical families before calculating freshness, status, volume, and chart series. Historical events remain unchanged in the indexes.
+* **No false retired-feed outages:** Retained names no longer age into separate Critical rows after their current replacement is healthy. The retired ISE Security Group event feed is excluded because the current Security Group Tags workflow refreshes KV Store data rather than indexing a replacement event sourcetype.
+* **Physical evidence remains available:** Data Quality, scheduled-report evidence, and onboarding **Processed Sourcetypes** retain physical names for migration and routing diagnosis. The Cyber Vision catch-all `cisco:cybervision:custom` family is now included in Data Quality and uses the same 60-minute health expectation as the other Custom API families.
+* **NetFlow ingest health:** A fifth Overview status card and a dedicated NetFlow tab now track the Stream-owned `stream:netflow` path. The tab shows freshness and selected-window license volume, a 30-minute arrival trend, processing-host throughput and pipeline evidence, destination-index activity, and the top indexed host values without scanning raw high-volume flow events.
+* **Accurate SD-WAN text-syslog output list:** Application Setup now lists only the five current text-routing destinations. It excludes the separate REST Audit Logs sourcetype and retained per-message history, while explaining that firewall output is conditional and modern Unified Logging delivers covered security events as `stream:netflow`. Transition eventtypes continue to search historical names.
+
+##### SD-WAN NetFlow guidance
+
+* **Reproducible SD-WAN telemetry runbook:** Application Setup and the User Guide now distinguish the exact live-tested v9, v10, and syslog paths from conditional signal families, explain that the listener form manages receiver 0 only, and add a stop-on-drift Manager preview and canary gate.
+* **Production sourcetype contract:** Splunk Stream continues to index production NetFlow and IPFIX events as `stream:netflow`; this TA does not change that metadata and supplies bounded search-time CIM knowledge for the Stream-owned events.
+* **Four-step NetFlow setup:** The SD-WAN **NetFlow** tab now behaves as a compact setup flow instead of one long page: choose NetFlow v9/HSL or IPFIX v10/Unified Logging, configure the listener, confirm the destination index, and validate packages and packets. Back/Next controls keep only the current task visible, while optional listener restrictions remain behind a clearly labeled control.
+* **Corrected Unified Logging cutover:** The guidance no longer assumes that UTD text syslog remains available in parallel after Unified Logging is enabled. It directs operators to capture a bounded UTD syslog baseline before cutover and validate the corresponding IPFIX records afterward.
+* **Local Stream listener setup:** The tab can now read and save the local UDP NetFlow listener managed by Splunk Stream through native authenticated Splunk configuration endpoints. It detects up to 64 IPv4/IPv6 addresses assigned to the host so an operator can select one or enter a different valid bind address. It writes the owning app's `Splunk_TA_stream/local/inputs.conf` and `streamfwd.conf`, validates the app URL, bind IP, UDP port, sender filters, and a bounded 1–32 decoder-thread setting, and never changes `streamfwdlog.conf` or restarts Splunk. The form explains exactly what the save action changes and clearly marks the documented user-run restart required after saving.
+* **Inline destination-index editing:** Each Stream-owned NetFlow definition can now change its destination index directly in the Cisco add-on. **Edit index** stays beside the value it controls and opens a responsive full-width editor so the index, sourcetype, status, and actions remain aligned at narrower widths. The editor defaults unset definitions to `default`, reuses the same visible non-internal index choices as the other input forms, changes only the definition's `index`, and verifies the saved value without altering its fields, filters, mode, ownership, or Stream-managed sourcetype. Definitions owned by another app remain read-only here and link to Splunk App for Stream.
+* **Single production Stream definition:** The destination-index panel now promotes `cisco_hsl_cisco_hsl_netflow` as the authoritative Cisco HSL/IPFIX definition when it is installed and enabled. Disabled, generic, or comparison definitions remain available under **Other Stream definitions** for troubleshooting instead of appearing as equal production choices. If multiple definitions are enabled, the page warns that overlapping filters can duplicate indexed flow records and directs operators to keep exactly one intended production definition enabled.
+* **Stream HEC setup:** The same tab checks HTTP Event Collector readiness and, when authorized, creates or enables the managed `streamfwd` HEC input in one click. Splunk retains the generated token; the Cisco add-on does not display it, log it, or store it in browser state.
+* **Live deployment dependency checks:** The tab identifies the Stream Forwarder, App for Stream, Wire Data, and conditional Cisco Catalyst Enhanced NetFlow packages, shows live installed and latest-version status, and offers filtered **Install** or **Update** links alongside each Splunkbase listing. Missing, disabled, or unverifiable App for Stream status now pauses destination-index access instead of surfacing a generic endpoint error; missing Wire Data is called out for both search-head and indexer placement. It configures only the local listener and HEC readiness; SD-WAN Manager export and the applicable Stream definition remain separate deployment steps.
+* **Configured Inputs lifecycle:** A saved receiver now appears as **NetFlow Listener** in the SDWAN group on Application Setup. Operators can enable or disable it, jump directly back to the NetFlow editor, or delete both managed Stream stanzas from the same actions menu. Every listener mutation retains the explicit user-run restart boundary.
+* **Stream-owned NetFlow sourcetype:** The SD-WAN product card and NetFlow tab identify `stream:netflow` as the unchanged production sourcetype and direct operators to the stable `cisco_netflow` eventtype for CIM-scoped searches.
+* **Stable CIM eventtype:** `eventtype=cisco_netflow` searches `sourcetype=stream:netflow NOT event_name=netFlowOptions` and carries the `network` and `communicate` tags. Saved searches, alerts, dashboards, and data-model validation should use this contract.
+* **CIM 8.6 Network Traffic normalization:** Bounded search-time mappings cover production `stream:netflow` for NetFlow v9 and IPFIX v10. They normalize exporter identity, endpoints, interfaces, ports, IP/transport versions, direction, duration, actions, policy/rule identity, users, TCP flags, VLANs, and existing Stream byte/packet/application fields. Options metadata remains excluded from the Network Traffic eventtype.
+* **Reliable Stream configuration namespace:** Listener reads, creates, updates, toggles, and deletes now use the explicit `nobody/Splunk_TA_stream` REST namespace, so a missing stanza cannot be created accidentally under the signed-in user's current app namespace.
+* **Dedicated-index and clock-skew verification:** NetFlow validation now follows the configured `netflow` destination index, verifies Cisco decoding through enterprise fields rather than contradictory base searches, and includes an index-time canary for exporters whose clocks are wrong.
+* **Measurement-led capacity planning:** Removed the unsupported fixed per-device volume estimate and fixed ingest multiplier. The guide now derives daily volume and p95 collector load from a representative pilot and requires UDP-loss, template, CPU, queue, and indexing-lag evidence before production qualification.
+* **Manual fallback boundary:** Direct `streamfwd.conf` editing and App for Stream mode repair are now labeled advanced fallback procedures. Application Setup remains the primary listener and destination-index workflow.
+
+##### User guide navigation and search
+
+* **Readable Heavy Forwarder tuning table:** The tuning reference now fits the guide viewport without horizontal scrolling, keeps the 30-second load-balancing default as the starting value, and separates the single-pipeline baseline from a measured two-pipeline override that requires CPU, memory, network, and queue headroom.
+* **Descriptive browser tabs:** Application Setup, Add Input, Data Collection Health, and User Guide tabs now include the Cisco Catalyst Add-on name so they remain identifiable beside other Splunk pages. The guide sets its final browser title explicitly so Splunk does not append a platform-version suffix.
+* **Reliable search navigation:** Pressing Enter or **Next** immediately after changing a guide query applies the current query and navigates to the first visible document result, excluding the print-only contents list. **Clear** removes the query and returns the reader to the top of the guide.
+* **Compact navigation rails:** **Jump to a task** is collapsed by default, and the **On this page** rail no longer repeats the operator-directory links as duplicate headings.
+* **Executable sizing search:** The Device Health event-size example now opens with `index=main` instead of a literal index placeholder; administrators replace `main` with their Cisco data index.
+* **Executable SD-WAN upgrade check:** The legacy-sourcetype audit now opens with `index=main`; administrators are told to replace `main` with the index that holds their SD-WAN syslog.
+* **Copy-only migration example:** The SD-WAN before/after sourcetype example remains syntax-highlighted and copyable without presenting a misleading **Open in Search** action for its mutually exclusive alternatives.
+* **Customer-controlled time ranges:** Routine User Guide SPL examples rely on the Splunk time picker. The NetFlow clock-skew recovery canary is the documented exception: operators select **All time**, then use a bounded recent index-time window so bad exporter timestamps cannot hide fresh ingestion.
+* **Consistent index scope:** Customer-facing SPL examples use executable index names instead of wildcard or literal placeholder values. Most examples use `main`; the NetFlow workflow uses its dedicated `netflow` destination index. Operators replace either example with the index configured for their data.
+* **Persistent upgrade-check link:** Every Cisco Catalyst Add-on release panel now links directly to the legacy dynamic-sourcetype upgrade checks so the required pre-migration validation remains visible in current and future TA release notes. The separate NetFlow and Enterprise Networking app histories remain unchanged.
+
+##### SD-WAN RFC 5424 syslog routing
+
+* **Prominent legacy-sourcetype warnings:** The SD-WAN syslog routing reference now includes amber migration notices for the operational, firewall, and access-control consolidation boundaries. Historical data keeps its indexed sourcetype.
+* **Explicit firewall transition eventtypes:** The routing table shows each raw `%FW-*` signal, current sourcetype, previous sourcetype, and dual-read eventtype. Use `eventtype=cisco_sdwan_firewall` for the whole family or the per-message eventtype shown in the table while old data remains searchable.
+* **CIM-safe firewall families:** `eventtype=cisco_sdwan_firewall_traffic` carries `network` and `communicate` tags for session, pass, drop, and summary records. `eventtype=cisco_sdwan_firewall_alerts` carries the `alert` tag for threshold and host-protection messages. Unknown future `%FW-*` mnemonics still land in the stable firewall sourcetype with identity fields, but are not forced into an unsupported CIM data model.
+* **RFC 5424 operational messages restored:** Generic IOS-XE `%FACILITY-SEVERITY-MNEMONIC:` messages now route to `cisco:sdwan:syslog` regardless of whether the transport envelope uses the legacy numeric header, a month-name IOS header, RFC 5424, the literal `BOM` marker, or a Unicode BOM.
+* **Signal identity explained in context:** The `cisco:sdwan:syslog` **More info** panel now explains the canonical `event_id` and its `facility`, optional `subfacility`, `severity_id`, readable `severity`, and `mnemonic` components so operators can choose exact-signal or family-level field filters.
+* **ISO event time preserved:** RFC 5424 `&lt;PRI&gt;1 `envelopes now position timestamp parsing on the ISO timestamp instead of silently falling back to index time.
+* **Remaining fixed-route consolidation completed:** Smart Licensing and DMI errors now use `cisco:sdwan:syslog`. ACL and SGACL now share `cisco:sdwan:access:logs`, where their specialized parsers remain isolated from unrelated operational syslog. `eventtype=cisco_sdwan_access` carries CIM Network Traffic tags, while per-signal dual-read eventtypes preserve exact searches across new and historical data.
+* **Purpose-built routes preserved:** Both legacy `[**]`-delimited UTD payloads and native IOS-XE `%UTD-&lt;severity&gt;-&lt;mnemonic&gt;:` records use `cisco:sdwan:utd:logs`; SD-WAN Manager audit keeps its distinct sourcetype because its wire format and collection semantics remain different. Historical events are not rewritten.
+* **Bounded matching:** The generic rule requires a Cisco `%FACILITY-SEVERITY-MNEMONIC:` identifier and does not treat unrelated percentage text such as `95%:` as IOS-XE syslog.
+
+##### Catalyst Center Client query windows
+
+* **Complete Client query windows:** Client collection now supplies the explicit `startTime` and `endTime` required by affected Catalyst Center 2.3.7.x deployments. It reuses one stable window across every page, covers the configured polling interval plus a bounded overlap of up to five minutes, and initially queries the previous completed minute. When Catalyst Center returns error code `14006` on the first page, the collector validates the controller-suggested ready `endTime` and retries once with the same-duration window shifted backward by no more than five minutes. Generic, repeated, unsafe, and later-page failures abort the poll without publishing a partial snapshot.
+
+##### Catalyst Center ITSI large-fleet sizing guidance
+
+* **Scalable, fail-closed Device Health pagination:** The Device Health and network-device inventory REST walks now use one bounded paginator and request up to 500 records per page. A controller falls back to the legacy 20-record size only when the first request explicitly rejects the `limit`; timeouts, throttling, server errors, malformed data, generic request failures, and later-page failures abort the poll. Inventory count-before/count-after checks, duplicate UUID detection, and a 256 MiB response cap reject unstable or oversized walks. Events and heartbeats carry one collection ID plus expected/actual output counts for reconciliation.
+* **Scalable Assurance Issue collection:** Issue collection now prefers the count-aware `/dna/data/api/v1/assuranceIssues` API with a fixed 24-hour query window, 25-record pagination, five-request-per-second proactive pacing, duplicate/count/byte checks, and direct issue/site/device metadata mapping. Missing device identity uses deduplicated point lookups for up to 10 devices or one count-verified bulk inventory walk above that threshold. Only an explicit first-request endpoint-unavailable response selects the bounded legacy collector; other and later-page failures abort the poll. The legacy path shares caches and pacing across statuses, removes the fixed 15-second per-issue delay, and reports `status=recovering` because its unpaged list cannot prove completeness.
+* **Shared controller protection:** Every Catalyst Center API input now has an 80%-of-interval poll deadline, request timeouts clipped to the remaining budget, a 30-second maximum `Retry-After` with jitter, deterministic process-start staggering, and a controller-scoped request governor shared by modular-input processes on the same Heavy Forwarder. Device Health reserves its documented 20-requests/minute slots; Site and current Security Advisory calls reserve their documented 100-requests/minute slots. The controller identity is hashed in the local coordination filename; credentials and payloads are never stored there.
+* **Security Advisory and Compliance N+1 removal:** Both collectors take one bounded, count-verified device inventory snapshot and join device/site metadata in memory. Security Advisory uses the current 500-record paginated advisory and affected-device APIs, derives severity totals from the completed current snapshot instead of calling the sunset aggregate API, reconciles every relationship walk with `deviceCount`, caps advisory/device relationships and response bytes, and fails the whole cycle on an incomplete relationship. Older controllers use the bounded sunset API family and report `status=recovering`. Compliance now bounds both status/detail walks and no longer performs two enrichment calls per device.
+* **Bounded secondary snapshots:** Site Topology, Client, and Audit Logs now share repeated-page, page-count, record-count, response-byte, and fail-closed guards. Site Topology events include snapshot ID, sequence, and expected count; all three inputs report pagination and output completeness. Application Traffic, SWIM, and Network Health also reject malformed, oversized, or over-limit single responses and enforce the shared output deadline.
+* **Compact change checkpoints:** Issue, Security Advisory, and Client Health store SHA-256 content fingerprints in 16 batched KV Store ledger documents instead of reading and writing one full checkpoint document per record. A bounded compatibility migration preserves the first 1,000 legacy states; any excess is emitted at most once and then uses the ledger. Stale hashes are removed on a rotating 45-day schedule, and the ledger advances only after event output succeeds.
+* **Capacity-aware Device Health setup:** The production default and large-fleet baseline are now 900 seconds. A controller inventory above 1,000 devices at a shorter interval emits `capacity_warning=true`; Data Collection Health uses the same 15-minute freshness expectation, and the 900-second setting remains a coverage ceiling because the source query covers only the previous 15 minutes.
+* **Splunk Cloud-safe collection health:** The active React Data Collection Health dashboard now derives scheduled-report, process, and resource status exclusively from indexed events, structured poll heartbeats, and accelerated data. It no longer runs SPL `rest` searches for local server or input configuration, which also avoids incorrectly treating search-head configuration as the Heavy Forwarder collector configuration. Automated tests keep its expected intervals aligned with `default/inputs.conf`.
+* **Accurate duplicate and error diagnostics:** Dataset-specific SD-WAN Real-Time Monitoring source paths now collapse to their parent input stanza before duplicate detection, so one consolidated input is not mistaken for many inputs. SD-WAN Health device discovery treats a short final page as normal completion and fails closed on malformed, repeated, or oversized walks. TA internal-log parsing retains bounded 100 KB/1,000-line tracebacks, and oversized vendor bodies preserve both their opening context and final root-cause text.
+* **Workload-aware sizing chapter:** The operator guide now separates Catalyst Center API polling, syslog, NetFlow/IPFIX/HSL, and Splunk ingest/search capacity instead of routing the general sizing link to a NetFlow-only subsection.
+* **ITSI input planning example:** A worked five-cluster, 26,000–29,000-device example sizes Device Health, Issue, Security Advisory, and Site Topology separately, documents uneven regional distribution, and uses a measured regional-HF starting layout.
+* **Evidence boundary made explicit:** Heavy Forwarder tuning improves forwarding and queue reliability but does not accelerate serial Catalyst Center pagination or remove API rate limits. The preferred 500-record Device Health path cuts the five-cluster average from roughly 520–580 requests to 22–24 requests across both walks, and the Assurance Issue path removes the old N+1 enrichment design. These are still post-fix pilot configurations—not production capacity guarantees. Intervals above 900 seconds are not a general Device Health remedy because that input requests only the prior 15 minutes.
+
+##### API input polling intervals
+
+* **Editable SD-WAN intervals:** Administrators can change the polling interval when editing any of the five SD-WAN API inputs. Site/Tunnel Details now uses the same editable numeric interval control as the other SD-WAN inputs.
+* **Existing guardrails preserved:** A positive integer is still required. Saving a value below the recommended interval displays the existing **Interval below recommended value** warning with **Cancel** and **Save anyway** choices.
+* **Cyber Vision parity verified:** All seven Cyber Vision API input forms include an editable interval, send it in the edit payload, and use REST handlers that accept the update.
+
+##### SD-WAN Real-Time Monitoring
+
+* **REST-only consolidated input:** **SD-WAN Real-Time Monitoring** lets one stanza select several catalog dataset IDs and a device scope; authentication and collection stay on the SD-WAN Manager REST API with no device shell access.
+* **Stable event contract:** Every record uses `cisco:sdwan:realtime` and carries `dataset_id`, `dataset_label`, `monitoring_category`, `record_kind`, `endpoint_path`, `target_device_id`, `hostname`, `device_model`, `site_name`, `system_ip`, `tags`, `vmanage_host`, `collection_time`, and `schema_version`. Splunk `host` uses the lowercased device hostname when available. Dataset-aware eventtypes and tags map BFD sessions, routing sessions, hardware alerts, and performance records to appropriate CIM categories without creating hundreds of sourcetypes.
+* **One-call inventory enrichment:** One bounded `/dataservice/device` read per poll supplies the Devices-table identity fields for every selected dataset and powers the device selector. Enrichment is an in-memory system-IP lookup, not an API call per event or device.
+* **Category-filtered dataset selection:** Choosing a Real-Time Monitoring category narrows the dataset menu to that category. Existing selections from other categories remain visible only while selected so changing filters cannot silently remove them.
+* **Readable Cisco category names:** The category picker uses the catalog's human-readable Cisco domain labels instead of reconstructing names from machine slugs, preserving terms such as `DOT1x`, `IPv4 FIB`, `PPPoE`, `QoS`, and `SD-WAN`.
+* **Splunk-safe vendor fields:** Real-Time response keys cannot shadow Splunk metadata or TA-owned knowledge fields. Cisco's row-level `index` is emitted as `vendor_index`, leading `@` is removed from keys such as `@rid` (emitted as `rid`), and any future collision is retained with a `vendor_` prefix. The calculated `app=cisco_sdwan` field remains available for CIM and knowledge-object classification. This advances the Real-Time event envelope to schema version 2.
+* **Complete managed-device inventory:** Real-Time Monitoring lists and can target the full reachable Manager inventory, including SD-WAN Manager, SD-WAN Controller (formerly vSmart), and SD-WAN Validator (formerly vBond) controllers as well as WAN Edges. The generic API Endpoint Collection remains WAN Edge-only.
+* **Bulk first, bounded fan-out:** All-device collection uses documented bulk state APIs for BFD Sessions, BGP Neighbors, Control Connections, Control Local Properties, Control WAN Interfaces, and Hardware Alarms. Other selected datasets fan out with a shared ten-request-per-second pace, at most five workers, bounded pagination, bounded records, and three attempts for rate-limit or server failures.
+* **Workload qualification:** The runtime estimates initial requests before data collection and limits the plan to 80% of the interval's paced request capacity, with a hard cap of 10,000 initial targets. The six-dataset recommended selection plans 5,006 initial requests for 5,000 devices at 900 seconds: one inventory call, five bulk calls, and 5,000 BFD History calls. Larger selections must be split, narrowed, or given a longer interval.
+* **History and partial failures:** History datasets use a per-input, per-dataset/device checkpoint with a five-minute overlap window and bounded recent hashes, preserving late arrivals while suppressing repeat records. Successful devices are still indexed when other dataset/device requests fail; the poll heartbeat reports `recovering` with success/failure and request metrics.
+* **No duplicate endpoint path:** Every catalog entry classified as Real-Time Monitoring is hidden from the generic SD-WAN API Endpoint Collection picker and rejected by its modular input. Existing generic custom sourcetypes remain unchanged for compatibility, while this dedicated input intentionally uses one stable sourcetype.
+
+##### SD-WAN collection guidance
+
+* **Consolidated real-time collection:** **SD-WAN Real-Time Monitoring** selects several datasets in one stanza, supports one, selected, or all reachable managed devices including controllers, and emits one stable sourcetype with dataset identity fields.
+* **Bulk-first large-fleet behavior:** Six recommended datasets fit the 900-second admission guardrail for a representative 5,000-device fleet because five use documented controller-wide bulk state calls and BFD History uses bounded per-device fan-out.
+* **Scale and failure guardrails:** Shared request pacing, five workers, bounded retries, pagination and record caps, and an 80%-of-interval workload budget prevent an unbounded **Select all** pattern. Partial target failures preserve successful records and set the heartbeat to `recovering`.
+* **Checkpointed BFD history:** A per-input, per-dataset/device checkpoint with a five-minute overlap suppresses repeated history while preserving bounded late arrivals.
+* **Duplicate prevention:** Real-Time Monitoring paths are removed from the generic endpoint picker and rejected by the generic modular input. Both collectors enforce exact backend catalog IDs/paths, and neither exposes arbitrary URLs, device actions, or shell execution.
+* **Audit-log scope clarified:** The Audit Logs guidance now distinguishes SD-WAN Manager administrative and configuration activity from general device shell-command or operating-system process telemetry that the Manager does not expose through the audit-log API.
+* **ZBFW HSL recommendation clarified:** The guide now explicitly recommends High Speed Logging through NetFlow for production ZBFW pass/drop/inspect coverage because firewall text syslog is rate-limited and may not preserve every matching record under sustained load.
+* **HSL and syslog coexistence documented:** The guide now explains that HSL does not disable ordinary IOS-XE or UTD syslog, but becomes the primary export path for configured ZBFW event classes. Equivalent `%FW-*` duplicates must not be assumed, HSL pass notifications can still follow a configured rate limit, and Unified Logging changes pass/drop behavior on IOS XE SD-WAN 17.16.1a and later.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Cisco Catalyst Add-on for Splunk collects and normalizes API telemetry from Cisco Catalyst Center, SD-WAN (vManage), ISE, and Cyber Vision through modular inputs. It includes CIM-aligned knowledge objects, backward-compatible DNAC/Catalyst sourcetype coverage, and built-in health monitoring for input status, errors, and API load.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Author - Cisco Systems
+
+Supported Cisco Products:
+Cisco Catalyst SD-WAN
+Cisco Identity Services Engine
+Cisco Catalyst Center
+Cyber Vision
+Cisco Network Infrastructure Devices which include the below platform series:
+* Cisco Catalyst series switches (1000, 1200, 1300, 2960, 3650, 3750, 4500, 6500, 6800, 7600, 9000 etc.)
+* Cisco ASR - Aggregation Services Routers (900, 1000, 5000, 9000 etc.)
+* Cisco ISR - Integrated Services Routers (800, 1900, 2900, 3900, 4451 etc.)
+* Cisco Nexus Data Center switches (1000V, 2000, 3000, 4000, 5000, 6000, 7000, 9000 etc.)
+* Cisco Carrier Routing System
+* Other Cisco IOS based devices (Metro Ethernet, Industrial Ethernet, Blade Switches, Connected Grid etc.)
+* Cisco Access Points
+* Cisco WLC - WLAN Controller&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/1cdaec86-9846-11f1-a713-8eefeb85aa85.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco Systems, Inc.</dc:creator>
+      <pubDate>Sat, 15 Aug 2026 04:14:54 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7538/#v3.2.44</guid>
+    </item>
     <item>
       <title>Alert Manager Enterprise - v3.9.2 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/6730/</link>
@@ -15,8 +196,55 @@
 Add the Alert Manager Enterprise Alert Action to your existing searches and manage your alerts immediately.
 Get started today with our quickstart guide at https://www.alertmanager.app/docs/ame-quickstart !&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/3f316476-97d4-11f1-a44d-ea15ad7a6800.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Datapunctum AG</dc:creator>
-      <pubDate>Sat, 15 Aug 2026 03:01:36 +0000</pubDate>
+      <pubDate>Sat, 15 Aug 2026 04:11:52 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6730/#v3.9.2</guid>
+    </item>
+    <item>
+      <title>Cisco Enterprise Networking for Splunk Platform - v3.2.20 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7539/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;##### Compatibility and dashboards
+
+* **TA compatibility preflight:** Overview now confirms that Cisco Catalyst Add-on for Splunk 3.2.44 or later is installed and that the complete transition-eventtype contract is available. Missing, older, or incomplete TA deployments receive a persistent warning.
+* **NetFlow search compatibility:** NetFlow searches, drilldowns, React search links, and data-model constraints use `eventtype=cisco_netflow`, covering production `stream:netflow` while excluding options metadata from Network Traffic scope.
+* **SD-WAN access migration compatibility:** ACL and SGACL searches and data-model constraints use `cisco_sdwan_acl_logs` and `cisco_sdwan_sgacl_logs`, preserving current and retained sourcetype history without broadening unrelated data-model children.
+* **Catalyst Center report migration compatibility:** Scheduled-report datasets use `cisco_dnac_inventory_report`, `cisco_dnac_compliance_report`, and `cisco_dnac_report` while retaining the existing dataset and field names.
+* **Dashboard correctness:** Invalid data-model fields, an undeclared Cyber Vision host token, empty drilldown conditions, incorrect Security Insights filters, and SD-WAN/Meraki Security Events time-series selectors were corrected.
+* **Bounded dashboard work:** The Security Events timeline now uses two data-model scans instead of three, top-N panels use bounded sorts, and discarded sort or aggregation stages were removed from trend searches.
+* **Navigation and branding:** Supported Splunk 10.4 navigation icons replace collapsed-menu letter monograms, and the packaged app icon and logo set align with the Cisco Catalyst Add-on.
+* **Search contract audit:** Automated coverage now checks classic dashboards, Dashboard Studio definitions, and scheduled searches for macro, token, data-model field, index, acceleration, and bounded-search contracts.
+
+##### Security and build tooling
+
+* **Patched dependency graph:** The Yarn dependency graph resolves the repository's current security advisories, removes the unused Lerna/Nx/npm publication subtree, and upgrades the packaging toolchain without adding `node_modules` to the installable Splunk app.
+* **Smaller build surface:** The lockfile was reduced from 1,296 to 849 package resolutions while retaining the TypeScript, Tailwind, React, and Splunk packaging workflow. Node.js 20.9 or later is required only for building the app, not for running the packaged Splunk app.
+
+##### Upgrade notes
+
+* Install Cisco Catalyst Add-on for Splunk **3.2.44 or later** before App 3.2.20. The app depends on TA-owned transition eventtypes and does not bundle or redefine them.
+* Rebuild existing `Cisco_Catalyst_App` data-model acceleration summaries after upgrading both packages because the NetFlow, SD-WAN access, and Catalyst Center report constraints changed.
+* Keep `stream:netflow` in the app discovery macro and use `eventtype=cisco_netflow` in searches.
+* Generic Custom API data remains outside broad CIM children; select it by its stable product sourcetype plus `endpoint_name` or `endpoint_path`.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;This application provides a dashboard component to visualize data collected by the 2 Technical Add-ons: Cisco Catalyst Add-on for Splunk and Cisco Catalyst Enhanced Netflow Add-on for Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Author -  Cisco Systems
+Prerequisites - This application is dependent on the &amp;#x27;Cisco Catalyst Add-on for Splunk&amp;#x27;  and &amp;#x27;Cisco Catalyst Enhanced Netflow Add-on for Splunk&amp;#x27;
+
+Supported Products:
+Cisco Catalyst SD-WAN
+Cisco Identity Services Engine
+Cisco Catalyst Center
+ThousandEyes --&amp;gt; Requires installation of the ThousandEyes TA (https://splunkbase.splunk.com/app/7719)
+Meraki --&amp;gt; Requires installation of the Meraki TA (https://splunkbase.splunk.com/app/5580)
+Cyber Vision
+Cisco Network Infrastructure Devices which include the below platform series:
+* Cisco Catalyst series switches (1000, 1200, 1300, 2960, 3650, 3750, 4500, 6500, 6800, 7600, 9000 etc.)
+* Cisco ASR - Aggregation Services Routers (900, 1000, 5000, 9000 etc.)
+* Cisco ISR - Integrated Services Routers (800, 1900, 2900, 3900, 4451 etc.)
+* Cisco Nexus Data Center switches (1000V, 2000, 3000, 4000, 5000, 6000, 7000, 9000 etc.)
+* Cisco Carrier Routing System
+* Other Cisco IOS based devices (Metro Ethernet, Industrial Ethernet, Blade Switches, Connected Grid etc.)
+* Cisco Access Points
+* Cisco WLC - WLAN Controller&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ccbb82b6-9533-11f1-b864-ee1482d8a687.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco Systems, Inc.</dc:creator>
+      <pubDate>Sat, 15 Aug 2026 04:03:03 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7539/#v3.2.20</guid>
     </item>
     <item>
       <title>Phantom - v5.0.0 [Version Update]</title>
@@ -2662,26 +2890,6 @@ Running Enterprise Security? Load the indicator feeds through its own threat int
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Stefan Grimminck</dc:creator>
       <pubDate>Fri, 07 Aug 2026 09:07:19 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/9360/#v1.1.0</guid>
-    </item>
-    <item>
-      <title>Cyderes-Core - v2.0.3 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/9018/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Made updates to support the python requirement changes.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Cyderes-Core is a Splunk Enterprise application that streamlines the lifecycle of security detections, alerts, and response activities from a single operational workspace. Designed for Security Operations Centers (SOCs), threat hunters, detection engineers, and security leaders, the app provides centralized visibility into detection health, alert effectiveness, investigation workflows, and measurable security outcomes.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/66c053fa-9200-11f1-a5e4-52cd1fd079bf.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyderes Group LLC</dc:creator>
-      <pubDate>Fri, 07 Aug 2026 01:37:55 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9018/#v2.0.3</guid>
-    </item>
-    <item>
-      <title>Ableversity 4 Splunk Training - v1.0.4 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/9330/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.4 - Bug fixes and UI Improvements&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Install Ableversity today and start learning for free&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Ableversity Splunk Training app delivers a comprehensive curriculum of Splunk training courses directly within the Splunk interface. It provides access to over twelve expert-led courses spanning core Splunk topics including fundamentals, administration, architecture, and development.
-
-The app features an interactive dashboard-based interface that organizes training content across multiple learning tracks. Users can access courses covering foundational concepts such as search fundamentals, field extractions, regular expressions, and data ingestion. Advanced topics include enterprise administration, system architecture, and developer-focused extension capabilities.
-
-The app includes exclusive enrollment coupons and certification preparation resources. The training content is structured across dedicated dashboards for each course topic, allowing users to navigate between different subject areas. A comparison dashboard helps users evaluate training options and select appropriate learning paths based on their skill level and objectives.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/60480dfc-91f5-11f1-a1ee-1653c1a47218.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Fri, 07 Aug 2026 00:20:18 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9330/#v1.0.4</guid>
     </item>
   </channel>
 </rss>
