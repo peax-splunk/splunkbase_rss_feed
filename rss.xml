@@ -6,7 +6,291 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Mon, 17 Aug 2026 10:22:26 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 17 Aug 2026 11:16:45 +0000</lastBuildDate>
+    <item>
+      <title>PostHog Activity Logs Add-on - v0.6.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9462/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;This release replaces 0.3.0. If you have that version installed, remove it and install
+
+fresh rather than upgrading in place. Splunk leaves files from the old version on disk
+
+when it upgrades an app, so an upgrade keeps dependencies this version no longer needs.
+
+
+
+**Smaller download**
+
+\- The package is about 1.6 MB, down from 9 MB. Dependencies the add-on never uses were
+
+&amp;#x20; removed, and it is now pure Python, so one build installs on any platform.
+
+
+
+**Compatibility**
+
+\- The add-on declares the Python versions it supports, 3.9 and 3.13, on its input and
+
+&amp;#x20; its REST handlers.
+
+
+
+**Collection**
+
+\- Requests to PostHog now identify themselves as coming from Splunk, so this traffic can
+
+&amp;#x20; be told apart from other API clients.
+
+
+
+**Corrections**
+
+\- Collecting history again needs a new input name. Deleting an input does not reset its
+
+&amp;#x20; position, so an input recreated under the same name resumes where the old one stopped
+
+&amp;#x20; and collects nothing. The input form now says this.
+
+
+
+**Other**
+
+\- The app uses the PostHog logo.
+
+\- The MIT license text ships with the app.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collect PostHog activity logs into Splunk as OCSF events. Splunk polls PostHog on a schedule you set, giving you an audit trail of who changed what in your PostHog organization alongside the rest of your security data. Works on Splunk Cloud Platform and Splunk Enterprise.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;PostHog activity logs record who did what in your PostHog organization. Every change to a feature flag, insight, dashboard, or other resource is captured, along with logins and account provisioning changes.
+
+This add-on collects that record into Splunk, so you can keep an audit trail alongside the rest of your security data, alert on sensitive changes, and meet compliance requirements.
+
+Splunk polls PostHog on a schedule you choose. There is nothing to run or host yourself, and the add-on works the same way on Splunk Cloud Platform and Splunk Enterprise.
+
+Events arrive in Open Cybersecurity Schema Framework (OCSF) 1.5.0, so searches and dashboards that already understand OCSF work without a custom parser. Activity maps to three OCSF classes: Entity Management (3004) for changes to resources, Authentication (3002) for logins and logouts, and Account Change (3001) for provisioning. Activity types with no direct OCSF equivalent keep their original PostHog name, so nothing is dropped.
+
+Each poll resumes from where the previous one stopped, so entries are collected once. Every event carries the PostHog activity log ID in metadata.uid, which is stable across replays if you need to deduplicate.
+
+By default an event records which fields changed, not their values. That answers who changed what and when, which is what an audit trail needs. You can turn on changed values per input when you need the before and after content.
+
+Events are timestamped with when the activity happened in PostHog rather than when Splunk indexed them, so historical searches reflect real history.
+
+The add-on requires a PostHog personal API key with the activity_log:read scope. Activity logs are available on the PostHog Boost, Scale and Enterprise packages.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/898e2588-9a2a-11f1-8abe-f2e02a4ae486.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Yasen Slavov</dc:creator>
+      <pubDate>Mon, 17 Aug 2026 11:06:31 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9462/#v0.6.0</guid>
+    </item>
+    <item>
+      <title>mispfuse - v2.2.4 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9278/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;# **MISPFuse 2.2.4**
+
+MISPFuse 2.2.4 is a compatibility and release-hardening update focused on broader Splunk Enterprise support and Splunk Packaging Toolkit validation.
+
+The application functionality remains centered on securely sending selected Splunk search results to MISP through the mispfusepush command or the MISPFuse alert action.
+
+## **Compatibility**
+
+* Splunk Enterprise 8.0.0 or later
+* Supported Splunk Python runtimes: 3.7, 3.9, and 3.13
+* MISP 2.5.x
+* UCC 6.5.3 used for application generation
+
+Splunk Cloud deployment remains subject to AppInspect and Cloud vetting for the exact submitted package.
+
+## **Changed**
+
+* Expanded the declared Splunk Enterprise compatibility range to &gt;\=8.0.0.
+* Added compatibility with the Python 3.7 runtime used by older supported Splunk Enterprise releases.
+* Retained python.version \= python3 for Splunk releases that use the legacy Python runtime selector.
+* Retained python.required \= 3.9, 3.13 for newer Splunk releases that support explicit runtime requirements.
+* Updated the runtime dependency closure so the packaged libraries remain compatible with Python 3.7, 3.9, and 3.13.
+* Continued to use exact dependency versions and SHA-256 hashes for reproducible packaging.
+
+## **Fixed**
+
+* Fixed SLIM validation failures caused by the previous Splunk Enterprise version constraints not intersecting with the Enterprise versions recognized by the Packaging Toolkit catalog.
+* Changed the manifest requirement from &gt;\=9.0.0 to the verified &gt;\=8.0.0 boundary.
+* Preserved backward-compatible Python runtime selection without removing Python 3.13 support on newer Splunk releases.
+
+## **Functionality**
+
+MISPFuse provides:
+
+* Multiple configurable MISP server connections.
+* Encrypted MISP API-key storage through Splunk credential management.
+* Save-time MISP connection validation.
+* Manual IOC and event submission using the mispfusepush SPL command.
+* Scheduled event submission through a custom alert action.
+* Four bundled mapping templates:
+  * network\_ioc
+  * file\_hashes
+  * email\_phishing
+  * passthrough
+* single\_event, per\_row, and by\_field event grouping.
+* Splunk multivalue-field handling.
+* MISP describeTypes validation against the connected MISP server.
+* Configurable distribution, threat level, analysis state, tags, to\_ids, and event publishing.
+* Proxy support and TLS certificate verification.
+* API-key and proxy-credential redaction from connection errors.
+* Response-size limits, disabled redirects, and connection/read timeouts.
+* No platform-specific native runtime libraries in the release package.
+
+## **Validation**
+
+Release 2.2.4 was validated with:
+
+* Splunk Packaging Toolkit 1.2.8 using standalone slim validate.
+* 41 unit tests across Python 3.7, Python 3.9, and Python 3.13.
+* UCC 6.5.3 build and post-build package verification.
+* Splunk AppInspect 4.3.0 precert validation with Cloud tags.
+* Release checks for compiled Python files and native binaries.
+* Exact and hash-locked runtime dependencies.
+
+## **Upgrade Notes**
+
+Version 2.2.4 supersedes the 2.2.0 through 2.2.3 compatibility milestones.
+
+The 2.2.x series progressively expanded runtime compatibility while preserving the MISPFuse application behavior introduced in 2.1.0:
+
+* 2.2.0 added Python 3.9 compatibility and replaced the Python-3.13-only Splunk SDK dependency.
+* 2.2.1 adjusted compatibility for Splunk 9.x.
+* 2.2.2 refined the manifest version boundary for SLIM validation.
+* 2.2.3 added Python 3.7 compatibility and multi-runtime release testing.
+* 2.2.4 establishes the &gt;\=8.0.0 manifest boundary verified against the SLIM catalog used during release validation.
+
+Existing MISPFuse 2.x configurations should be reviewed after upgrade, and a controlled MISP connection test and non-publishing test event are recommended before re-enabling production alert actions.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Push Splunk search results to MISP using validated templates, secure MISP connections, SPL commands, and alert actions.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;MISPFuse sends selected Splunk search results to MISP as events and attributes using reusable mapping templates, multiple MISP connections, a custom search command, and an alert action.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/3be59f6e-97ff-11f1-b368-464ca62301ca.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">majid ershadi</dc:creator>
+      <pubDate>Mon, 17 Aug 2026 10:55:10 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9278/#v2.2.4</guid>
+    </item>
+    <item>
+      <title>AEGISYST FOR SPLUNK - v1.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9425/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Version 1.0.1: Compatibility update for Splunk 10.x and minor performance improvements to the rule-sync Python script&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Build, validate, and deploy Sigma-based Splunk detections in seconds with Aegisyst’s AI-native workspace.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;AI-native detection engineering for Splunk. Aegisyst automates the process of building, validating, and deploying Sigma-based detection rules. Our engine translates high-level security requirements into production-ready Splunk SPL in seconds, while reducing false positives through our built-in verification sandbox.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/7834333e-92e3-11f1-97ad-5e3ae45ca1a4.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Puneet Sharma</dc:creator>
+      <pubDate>Mon, 17 Aug 2026 10:51:04 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9425/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>PT NAD - v1.4.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9471/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Official Positive Technologies add-on for ingesting, parsing, CIM-normalizing, and visualizing PT NAD JSON syslog events in Splunk Enterprise, including attacks, activities, IoCs, audit events, and combined multi-rule incidents.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Official PT NAD Add-on for Splunk enables organizations to ingest, parse, normalize, search, and visualize JSON syslog events generated by Positive Technologies Network Attack Discovery (PT NAD).
+
+The add-on addresses the need to integrate PT NAD telemetry with Splunk Enterprise without requiring administrators to create custom field extractions for every event type. It supports attack alerts, activity detections, indicators of compromise, audit events, and combined incidents containing multiple detection rules.
+
+PT NAD fields are normalized for the Splunk Common Information Model (CIM), including the Intrusion Detection, Alerts, Authentication, and Change data models. The add-on also provides event types, CIM tags, historical-event parsing, normalized correlation identifiers, multi-rule incident fields, and the PT NAD Security Overview dashboard.
+
+This add-on prepares PT NAD data for customer-developed correlation searches and detection content. It does not synchronize PT NAD asset discovery with the Splunk Enterprise Security Asset and Identity Framework, create customer-specific correlation searches, or install automated response playbooks.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a1a8bf04-937f-11f1-a1ee-1653c1a47218.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sina Mohebi</dc:creator>
+      <pubDate>Mon, 17 Aug 2026 10:45:58 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9471/#v1.4.1</guid>
+    </item>
+    <item>
+      <title>QuantumGenie Add-on for Splunk - v0.1.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9474/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**v0.1.0 — Initial release**
+Adds the QuantumGenie CBOM modular input, pulling cryptographic discovery data (resources, dependency relationships, and certificates) from a QuantumGenie workspace into Splunk via a token-authenticated API. Events indexed under sourcetype `quantumgenie:cbom`. Requires an active QuantumGenie account and an Integration API token with `cbom:read` scope.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Cryptographic posture management and quantum-resistant encryption is delivered by QuantumGenie Add-on for Splunk. Pulls cryptographic discovery, CBOM, and certificate data from QuantumGenie into Splunk — track post-quantum cryptography (PQC) readiness, crypto agility, and cryptographic risk without leaving Splunk.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Enterprises struggle to see where cryptography lives across their code, cloud infrastructure, certificates, keys, and endpoints — and which of it is classical, quantum-vulnerable, or already NIST-approved post-quantum cryptography (PQC). Security teams often run cryptographic discovery and quantum readiness assessments in a separate tool, disconnected from their SIEM.
+
+The QuantumGenie Add-on for Splunk closes that gap. It pulls your organization&amp;#x27;s Cryptographic Bill of Materials (CBOM) — assets, dependencies, and certificates — directly from your QuantumGenie workspace into Splunk on a configurable polling interval, so SOC analysts and security engineers can search, alert on, and dashboard cryptographic risk, crypto agility posture, and post-quantum migration progress without leaving Splunk. This tool surfaces the cryptographic risk of an enterprise in Splunk. It informs where legacy encryption is being used, and which services are dependent on it.
+
+Once installed, you&amp;#x27;ll see events under sourcetype quantumgenie:cbom, sourced as quantumgenie:resource, quantumgenie:relationship, and quantumgenie:certificate — covering algorithm classification (classical vs. NIST post-quantum standards such as ML-KEM and ML-DSA and more), quantum-readiness status, certificate expiry, and dependency relationships across your cryptographic estate. Use it to build alerts for expiring certificates, legacy/non-PQC algorithm usage (e.g. RSA-2048), or newly discovered quantum-vulnerable assets — supporting crypto agility, cryptographic risk management, and PQC migration tracking inside your existing Splunk workflows. It closely integrates with CipherScan by QuantumGenie.
+
+Requires an active QuantumGenie account and an Integration API token, generated from the &amp;quot;Integration API Tokens&amp;quot; page inside your QuantumGenie workspace.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a7ece2d8-9392-11f1-97ad-5e3ae45ca1a4.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Srijan Dhare</dc:creator>
+      <pubDate>Mon, 17 Aug 2026 10:43:46 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9474/#v0.1.0</guid>
+    </item>
+    <item>
+      <title>Envy Splunk Health - v0.2.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9479/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v0.2.0 — Initial public release
+
+First public release of Envy Splunk Health — the data-collection traffic light for Splunk.
+
+\- Data-Collection Health — grades every sourcetype at a glance (fresh / aging / stale / STOPPED), with explicit STOPPED detection so a  silently-dead feed can't hide.
+
+\- Config &amp; License Status — usage by index, a 14-day license-burn trend, and index health in one view.
+
+\- License Burn &amp; Junk Finder — ranks where your licensed GB actually go and flags low-value volume that's safe to trim.
+
+\- Premium (licensed): full Health Report (dated scorecard + SLA + remediation guidance, branded PDF) and a scheduled STOPPED-feed alert.  - Read-only; no setup; runs on your own indexed data. Free tier makes no outbound calls and fails closed to free on any licensing error.
+
+\- Splunk Enterprise 9.x+ and Splunk Cloud. Packaged clean (AppInspect: 0 failures / 0 errors).&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Envy Splunk Health&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Envy Splunk Health reads your own indexed data and turns &amp;quot;is my data actually arriving?&amp;quot; into a glance. It grades every sourcetype fresh  / aging / stale / STOPPED, shows where your license is being spent, and flags low-value volume you can safely trim — no configuration, read-only, on your own data.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0359349a-9416-11f1-940b-92a478090419.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Robert Ayers</dc:creator>
+      <pubDate>Mon, 17 Aug 2026 10:42:59 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9479/#v0.2.0</guid>
+    </item>
+    <item>
+      <title>DV AI Assistant - v1.0.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9491/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;AI-powered Splunk security operations with natural-language SPL, Splunk ES notable-event triage, autonomous triage, multi-LLM support, knowledge-base context, guarded actions, role-based access, and firewall-ready IP block lists.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;DV AI Assistant is an AI-powered security operations application for Splunk designed to help SOC teams investigate security events, generate and execute SPL, and triage Splunk Enterprise Security notable events.
+
+The application provides an AI Command Center for natural-language interaction with Splunk data and an AI Triage Center for manual or autonomous notable-event analysis. It supports multiple LLM providers including Ollama, OpenAI, Google Gemini, and custom endpoints, and can use a configurable knowledge base to provide environment-specific context to the AI.
+
+DV AI Assistant includes security controls for AI-generated actions and searches. Generated SPL is passed through guardrails before autonomous execution to prevent write or side-effecting commands. IP block and unblock actions require explicit confirmation and the block_ip capability. Built-in admin and sc_admin roles receive this capability by default, while the dv_ai_action role can be assigned separately when block/unblock permission is required.
+
+Blocked IP addresses are maintained by the application and exported as a plain-text firewall-consumable list, allowing external firewalls or security controls to retrieve the current block list.
+
+The application also includes an autonomous triage worker. When Auto Triage is enabled, the scripted input runs every 60 seconds by default, identifies eligible unprocessed Splunk ES notable events, sends the complete event context for AI analysis, and writes the resulting triage report back to the notable event.
+
+Role-based access is provided through dv_ai_user, dv_ai_admin, and dv_ai_action roles. Standard users can access AI Chat and AI Alert Triage, while administrative configuration areas such as AI Providers, Data Context Mapping, Audit, and App Settings are restricted to authorized administrators.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9368eda8-958f-11f1-a762-766689169f1b.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Mustafa YILMAZ</dc:creator>
+      <pubDate>Mon, 17 Aug 2026 10:40:01 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9491/#v1.0.0</guid>
+    </item>
+    <item>
+      <title>Security Alerts - v0.1.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9494/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Security Alerts App allows you to manage your alerts from any index using SPL query (or from multiple indexes)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Security Alerts App allows you to manage your alerts from any index using SPL query (or from multiple indexes).&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c1a8b9c0-9632-11f1-b9d2-96d8013f63e9.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">adnan alshammary</dc:creator>
+      <pubDate>Mon, 17 Aug 2026 10:39:09 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9494/#v0.1.0</guid>
+    </item>
+    <item>
+      <title>LeakData Exposure Monitoring App - v1.0.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9513/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;\## 1.0.0 — 2026-08-13
+
+
+
+\- Initial content-only Splunk app package.
+
+\- Added Exposure Overview, Target Exposure, and Event Explorer dashboards.
+
+\- Added documented LeakData HEC field normalization and event types.
+
+\- Added a disabled-by-default strict critical exposure review search with no automated response action.
+
+\- Documented HEC token configuration, data minimization, indexing verification, and human-review boundaries.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Review LeakData exposure signals and canonical risk context in Splunk. Includes dashboards, normalized searches, event types, and an opt-in review search; it never treats exposure as confirmed compromise.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Review LeakData exposure signals in Splunk with three dashboards, normalized search macros, event types, and a disabled-by-default human-review search. The app preserves reported context and counts without treating an exposure signal as proof of compromise. It contains no scripted inputs, binaries, outbound network calls, or automated response actions.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ffff7d44-9763-11f1-8e06-2e4409467398.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Emre ÇAPAN</dc:creator>
+      <pubDate>Mon, 17 Aug 2026 10:38:08 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9513/#v1.0.0</guid>
+    </item>
+    <item>
+      <title>DV IOC Enrichment - v1.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9525/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Automated VirusTotal and AbuseIPDB enrichment for Splunk ES notable events with quota-aware key rotation, caching, exclusions, and urgency updates.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;DV IOC Enrichment automates threat intelligence enrichment for Splunk Enterprise Security notable events.
+
+The app extracts IP addresses, domains, URLs, and file hashes from configured notable event fields and queries supported intelligence providers, including VirusTotal and AbuseIPDB. Provider responses are evaluated against configurable thresholds, and malicious findings can automatically update the notable event urgency, add enrichment evidence as an ES comment, and trigger an email notification.
+
+DV IOC Enrichment addresses the operational overhead of manually investigating repeated indicators while preventing unnecessary API usage through configurable caching, exclusion rules, provider-specific quota controls, and multi-key VirusTotal rotation.
+
+Each provider operates independently. If one provider becomes unavailable or reaches its quota, enrichment continues through the remaining providers. Temporarily incomplete events can be retried when provider capacity becomes available again.
+
+The app includes:
+
+* Automatic enrichment of Splunk ES notable events
+* VirusTotal support for IP, domain, URL, and hash indicators
+* AbuseIPDB support for public IP reputation
+* Separate VirusTotal malicious and suspicious thresholds
+* Configurable AbuseIPDB confidence threshold
+* Multiple VirusTotal API keys with quota-aware rotation
+* Per-provider request and quota controls
+* Reusable enrichment cache with configurable TTL
+* Exact, CIDR, IP range, and domain suffix exclusions
+* Automatic urgency updates and ES comments
+* Optional email notifications
+* Operational dashboard and structured internal logging&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Mustafa YILMAZ</dc:creator>
+      <pubDate>Mon, 17 Aug 2026 10:35:22 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9525/#v1.0.1</guid>
+    </item>
     <item>
       <title>Sysdig App for Splunk - v1.1.3 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5330/</link>
@@ -1898,126 +2182,6 @@ Version 1.0.6 is a maintenance and compatibility release that upgrades the UCC f
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Fri, 07 Aug 2026 20:13:27 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5843/#v3.0.2</guid>
-    </item>
-    <item>
-      <title>PostgreSQL - v4.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6146/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Restrict the PostgreSQL other field to supported non-file libpq parameters and replace the ssl_root_cert host path with an uploaded PEM file, requiring affected assets to upload their trusted CA again.
-* Return generic PostgreSQL connection failures to action callers instead of exposing underlying driver exception details.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app supports investigative actions against a PostgreSQL database&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b60d5976-929b-11f1-9d7d-fa5860a031a9.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Fri, 07 Aug 2026 20:08:10 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6146/#v4.0.0</guid>
-    </item>
-    <item>
-      <title>Parser - v2.10.8 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5832/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Bounds RFC 2047 encoded-word recognition when parsing malformed email headers.
-* Limits parsed email attachments to 100 files under the supported 30 MB vault upload size.
-* Extracts URLs from HTML form actions, submit overrides, object data, and refresh metadata.
-* Decodes structured and unstructured CSV input consistently across supported character encodings.
-* Removes NUL and Unicode format controls from structured CSV CEF names and values.
-* Normalizes numeric IPv4 URL hosts before creating email IOC artifacts.
-* Preserves complete email URL paths containing browser-handled punctuation.
-* Maps CEF source and destination address aliases consistently to `src_ip` and `dest_ip`.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app extracts IOCs from various files such as PDFs, emails, or raw text&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f3cf8d84-929a-11f1-9349-fa4200655410.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Fri, 07 Aug 2026 20:02:44 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5832/#v2.10.8</guid>
-    </item>
-    <item>
-      <title>Splunk Add-On for OpenTelemetry Collector - v0.158.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7125/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Add-On with Splunk OpenTelemetry Collector v0.158.0
-
-[Release Notes](https://github.com/signalfx/splunk-otel-collector/releases/tag/v0.158.0)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Use the Splunk Add-on for OpenTelemetry Collector to collect traces and metrics for Splunk Observability Cloud.
-To learn more about how Splunk Observability Cloud works with your environment to provide data, see https://help.splunk.com/en/splunk-observability-cloud/get-started&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/3fff37a2-9298-11f1-9349-fa4200655410.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Fri, 07 Aug 2026 19:59:16 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7125/#v0.158.0</guid>
-    </item>
-    <item>
-      <title>QRadar - v3.0.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5874/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Validate and clamp scheduled ingestion checkpoints to the current poll boundary.
-* Propagate HTML response failures as scalar action errors during offense and event ingestion.
-* Skip malformed offense records without aborting the remaining ingestion batch or corrupting its checkpoint.
-* Allow successful reference-set and close-offense responses to omit the optional Content-Type header.
-* Bound QRadar API requests with the connector's existing 30-second network timeout.
-* Return a clean action error when QRadar sends a non-object JSON error response.
-* Stop Ariel result pagination when an additional page makes no forward progress.
-* Reject non-object Ariel search creation and status responses with a clean action error.
-* Preserve explicit requested and checkpointed event time bounds in alternate Ariel queries.
-* Process capped alternate-ingestion offense batches oldest first during scheduled polling.
-* Fail closed when an explicitly supplied alternate-ingestion offense ID list contains no valid IDs.
-* Process capped event queries oldest first during scheduled polling so checkpoints do not skip unfetched events.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app supports generic, investigative, and ingestion actions on an IBM QRadar device&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/24ca393a-929a-11f1-a8a1-8613163b4622.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Fri, 07 Aug 2026 19:56:57 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5874/#v3.0.2</guid>
-    </item>
-    <item>
-      <title>Phishing Initiative - v2.1.5 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5835/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Normalizes common defanged HTTP(S) URL forms before reputation lookups and rejects inputs that are not valid HTTP(S) URLs.
-* Returns a clean action error when a URL lookup response does not contain the expected JSON object.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Implements reputational capabilities for URL by querying the Phishing Initiative web API&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/66daf5c2-9299-11f1-9d7d-fa5860a031a9.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Fri, 07 Aug 2026 19:51:38 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5835/#v2.1.5</guid>
-    </item>
-    <item>
-      <title>Splunk Add-On for OpenTelemetry Collector (for Windows x86_64) - v0.158.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8699/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Add-On with Splunk OpenTelemetry Collector v0.158.0
-
-[Release Notes](https://github.com/signalfx/splunk-otel-collector/releases/tag/v0.158.0)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Use the Splunk Add-on for OpenTelemetry Collector (for Windows x86_64)  to collect traces and metrics for Splunk Observability Cloud on Windows amd64  machines.
-To learn more about how Splunk Observability Cloud works with your environment to provide data, see https://help.splunk.com/en/splunk-observability-cloud/get-started&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/28cf0e72-9298-11f1-a8a1-8613163b4622.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Fri, 07 Aug 2026 19:50:24 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8699/#v0.158.0</guid>
-    </item>
-    <item>
-      <title>Splunk Add-On for OpenTelemetry Collector (for Linux x86_64) - v0.158.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8698/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Add-On with Splunk OpenTelemetry Collector v0.158.0
-
-[Release Notes](https://github.com/signalfx/splunk-otel-collector/releases/tag/v0.158.0)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Use the Splunk Add-on for OpenTelemetry Collector (for Linux x86_64)  to collect traces and metrics for Splunk Observability Cloud on Linux amd64  machines.
-To learn more about how Splunk Observability Cloud works with your environment to provide data, see https://help.splunk.com/en/splunk-observability-cloud/get-started&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0eb1a09a-9298-11f1-a1ee-1653c1a47218.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Fri, 07 Aug 2026 19:47:07 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8698/#v0.158.0</guid>
-    </item>
-    <item>
-      <title>PhishTank - v3.0.5 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5925/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Normalize common defanged HTTP and HTTPS URLs before PhishTank reputation lookups.
-* Return a clean action error when PhishTank returns a non-object JSON response.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app implements URL investigative capabilities utilizing PhishTank&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a816fa64-9298-11f1-809d-ee2ccd3c403d.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Fri, 07 Aug 2026 19:46:18 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5925/#v3.0.5</guid>
-    </item>
-    <item>
-      <title>PhishLabs - v2.0.9 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5924/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Fixed list tickets to retrieve all available PhishLabs case pages.
-* Fixed list tickets to return a clear error for malformed PhishLabs case data.
-* Fixed get config to return clear errors for malformed PhishLabs configuration data.
-* Fixed create ticket to require confirmation that PhishLabs created a case.
-* Fixed outbound PhishLabs API requests to time out after 30 seconds.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app implements investigative actions on the PhishLabs Casetracker Portal&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ea000bec-9297-11f1-9d7d-fa5860a031a9.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Fri, 07 Aug 2026 19:40:59 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5924/#v2.0.9</guid>
-    </item>
-    <item>
-      <title>Panorama - v6.0.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5831/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Bound threat PCAP downloads by the configured SOAR vault attachment limit.
-* Normalized internationalized URL hostnames before adding or removing Panorama block entries.
-* Respected the commit opt-out when blocking URLs on PAN-OS 8 and earlier.
-* Returned actionable errors instead of crashing when credential generation or response parsing fails.
-* Limited invalid-credential recovery to one token refresh per Panorama request.
-* Failed closed when address, address group, or tag existence checks return errors or malformed results.
-* Created paired source and destination rules when a custom block policy targets both traffic directions.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with the Palo Alto Networks Panorama product to support several containment and investigative actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2c721a02-9297-11f1-a1ee-1653c1a47218.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Fri, 07 Aug 2026 19:35:41 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5831/#v6.0.2</guid>
     </item>
   </channel>
 </rss>
