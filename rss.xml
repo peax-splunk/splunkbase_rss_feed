@@ -6,7 +6,93 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Mon, 17 Aug 2026 15:16:49 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 17 Aug 2026 16:17:18 +0000</lastBuildDate>
+    <item>
+      <title>WithSecure Elements Add-on - v1.0.7 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8820/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**Bug fix release** — reported by an external reviewer. **Recommended upgrade for anyone running v1.0.6 or earlier**, especially environments with dual-stack hosts or multi-homed machines.
+
+### The bug
+
+The WithSecure Elements API returns `details.hostIpAddress` as a single JSON string that concatenates every IP the host is bound to, separated by spaces:
+
+```
+&quot;hostIpAddress&quot;: &quot;192.168.110.128/24 192.168.171.128/24 10.0.0.5/8&quot;
+
+```
+
+Splunk's `INDEXED_EXTRACTIONS = json` stored this as one flat string, so a search like:
+
+```
+index=main sourcetype=&quot;withsecure:epp:security_event&quot;
+    &quot;details.hostIpAddress&quot;=&quot;192.168.171.128/24&quot;
+
+```
+
+never matched events where that address was not the first one in the string. In the reporter's test corpus 13/53 events had two IPs and were affected — the same pattern is present on any host with multiple network interfaces or a dual-stack (IPv4 + link-local) configuration.
+
+### The fix
+
+A single search-time `EVAL` calculated field on the `security_event` sourcetype that splits the string into a real multivalue field:
+
+```
+[withsecure:epp:security_event]
+EVAL-details.hostIpAddress = split('details.hostIpAddress', &quot; &quot;)
+
+```
+
+**Search-time only:**
+
+* no impact on ingestion, no re-indexing needed
+* applies retroactively to events already in the index
+* 100 % reversible (remove the line to go back to a flat string)
+
+After upgrading, the following now behave consistently on every IP the host reports:
+
+* exact-match: `details.hostIpAddress=&quot;192.168.171.128/24&quot;`
+* `IN()`: `details.hostIpAddress IN (&quot;10.0.0.5/8&quot;, &quot;192.168.171.128/24&quot;)`
+* `| mvexpand details.hostIpAddress` — one row per IP
+* `mvcount(details.hostIpAddress)` — actual count of IPs
+* CIM `src_ip` alias — respects the multivalue
+
+### Upgrade safety
+
+Non-destructive in-place upgrade. KV Store checkpoints, input configuration, and existing indexed events are preserved.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects EPP Security Events and EDR Broad Context Detections from WithSecure Elements via OAuth2-authenticated API, with CIM-compliant field extractions for endpoint, malware, intrusion detection, and process data.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The WithSecure Elements Add-on collects endpoint protection and detection data from the WithSecure Elements API. It ingests EPP Security Events and EDR Broad Context Detections through OAuth2-authenticated modular inputs, enabling centralized security event analysis in Splunk. The add-on maps collected events to CIM endpoint, malware, intrusion detection, and process tags, facilitating correlation with other security data sources. Two modular inputs handle data collection: withsecure_epp_input retrieves endpoint protection events, while withsecure_bcd_input collects EDR broad context detection incidents. Events are indexed under source types withsecure:epp:security_event, withsecure:epp:bcd_incident, and withsecure:epp:bcd_detection. The add-on includes a custom search command for retrieving specific detection details and provides a workflow action to fetch incident detections directly from the Splunk interface.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e44518ce-9a52-11f1-a44d-ea15ad7a6800.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Flo Flo</dc:creator>
+      <pubDate>Mon, 17 Aug 2026 15:51:02 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8820/#v1.0.7</guid>
+    </item>
+    <item>
+      <title>Security Alerts - v0.1.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9494/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Security Alerts App allows you to manage your alerts from any index using SPL query (or from multiple indexes)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Security Alerts App allows you to manage your alerts from any index ( or multiple indexes) based on SPL query. It can be used to manage alerts for different team within SOC (threat hunting , compromised assessments, or threat intelligence team, …).
+
+the App define two custom roles:
+- secalerts_analyst
+- secalerts_admin
+
+&amp;quot;secalerts_analyst&amp;quot; role is the minimum role needed to manage the alerts (by selecting alerts and click &amp;quot;Edit&amp;quot; button):
+- add comment
+- update alert status or disposition
+- assign alert(s) to specific user
+
+
+
+ Two Splunk SOAR playbooks were developed to interact with the App ( retrieving alerts , add comment , update alert status , …etc).
+
+for more information about the playbooks and more details about the App find below github link:
+
+https://github.com/Adnan-Alshammary/SecurityAlerts/
+
+
+ installation:
+- the App  requires new version of Splunk enterprise (10.4 or later)
+- restart the Search Head is required after installing the App
+- the App support search head cluster since its maintain kvstore and lookup files to manage the alerts.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c1a8b9c0-9632-11f1-b9d2-96d8013f63e9.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">adnan alshammary</dc:creator>
+      <pubDate>Mon, 17 Aug 2026 15:35:02 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9494/#v0.1.0</guid>
+    </item>
     <item>
       <title>AEGISYST FOR SPLUNK - v1.0.1 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/9425/</link>
@@ -93,37 +179,6 @@ Information Use: Your email address is used to improve detection logic based on 
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Mon, 17 Aug 2026 12:27:33 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6211/#v2.5.1</guid>
-    </item>
-    <item>
-      <title>Security Alerts - v0.1.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/9494/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Security Alerts App allows you to manage your alerts from any index using SPL query (or from multiple indexes)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Security Alerts App allows you to manage your alerts from any index ( or multiple indexes) based on SPL query. It can be used to manage alerts for different team within SOC (threat hunting , compromised assessments, or threat intelligence team, …).
-
-the App define two custom roles:
-- secalerts_analyst
-- secalerts_admin
-
-&amp;quot;secalerts_analyst&amp;quot; role is the minimum role needed to manage the alerts (by selecting alerts and click &amp;quot;Edit&amp;quot; button):
-- add comment
-- update alert status or disposition
-- assign alert(s) to specific user
-
-
-
- Two Splunk SOAR playbooks were developed to interact with the App ( retrieving alerts , add comment , update alert status , …etc).
-
-for more information about the playbooks and more details about the App find below github link:
-
-https://github.com/Adnan-Alshammary/SecurityAlerts/
-
-
- installation:
-- the App  requires new version of Splunk enterprise (10.4 or later)
-- restart the Search Head is required after installing the App
-- the App support search head cluster since its maintain kvstore and lookup files to manage the alerts.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c1a8b9c0-9632-11f1-b9d2-96d8013f63e9.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">adnan alshammary</dc:creator>
-      <pubDate>Mon, 17 Aug 2026 12:20:39 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9494/#v0.1.0</guid>
     </item>
     <item>
       <title>PostHog Activity Logs Add-on - v0.6.1 [Version Update]</title>
@@ -2147,21 +2202,6 @@ Version 1.0.6 is a maintenance and compatibility release that upgrades the UCC f
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Fri, 07 Aug 2026 20:24:03 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5840/#v2.0.8</guid>
-    </item>
-    <item>
-      <title>ProtectWise - v2.1.6 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5838/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Handle responses without a Content-Type header without raising a connector exception.
-* Report scalar JSON responses as unsupported response shapes instead of raising a connector exception.
-* Parse Z-suffixed hunt time parameters as UTC regardless of the SOAR host timezone.
-* Preserve polling retry coverage when ProtectWise event-detail retrieval fails.
-* Reject invalid or out-of-window ProtectWise event timestamps without advancing the polling checkpoint.
-* Use integer chunk sizes when downloading ProtectWise PCAP files larger than 20 MiB.
-* Validate downloaded tcpdump PCAP headers before adding capture data to the SOAR vault.
-* Bound streamed PCAP downloads by the SOAR platform configurable vault attachment limit.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with the ProtectWise cloud platform to implement ingestion and investigative actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/30b3c4fc-929d-11f1-a8a1-8613163b4622.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Fri, 07 Aug 2026 20:18:45 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5838/#v2.1.6</guid>
     </item>
   </channel>
 </rss>
