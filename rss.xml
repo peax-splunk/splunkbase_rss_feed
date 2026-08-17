@@ -6,57 +6,50 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Mon, 17 Aug 2026 11:16:45 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 17 Aug 2026 12:24:14 +0000</lastBuildDate>
     <item>
-      <title>PostHog Activity Logs Add-on - v0.6.0 [Version Update]</title>
+      <title>Security Alerts - v0.1.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9494/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Security Alerts App allows you to manage your alerts from any index using SPL query (or from multiple indexes)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Security Alerts App allows you to manage your alerts from any index ( or multiple indexes) based on SPL query. It can be used to manage alerts for different team within SOC (threat hunting , compromised assessments, or threat intelligence team, …).
+
+the App define two custom roles:
+- secalerts_analyst
+- secalerts_admin
+
+&amp;quot;secalerts_analyst&amp;quot; role is the minimum role needed to manage the alerts (by selecting alerts and click &amp;quot;Edit&amp;quot; button):
+- add comment
+- update alert status or disposition
+- assign alert(s) to specific user
+
+
+
+ Two Splunk SOAR playbooks were developed to interact with the App ( retrieving alerts , add comment , update alert status , …etc).
+
+for more information about the playbooks and more details about the App find below github link:
+
+https://github.com/Adnan-Alshammary/SecurityAlerts/
+
+
+ installation:
+- the App  requires new version of Splunk enterprise (10.4 or later)
+- restart the Search Head is required after installing the App
+- the App support search head cluster since its maintain kvstore and lookup files to manage the alerts.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c1a8b9c0-9632-11f1-b9d2-96d8013f63e9.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">adnan alshammary</dc:creator>
+      <pubDate>Mon, 17 Aug 2026 12:20:39 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9494/#v0.1.0</guid>
+    </item>
+    <item>
+      <title>PostHog Activity Logs Add-on - v0.6.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/9462/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;This release replaces 0.3.0. If you have that version installed, remove it and install
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**Choosing an index**
 
-fresh rather than upgrading in place. Splunk leaves files from the old version on disk
+\- The index field is now empty when you add an input, instead of arriving prefilled.
 
-when it upgrades an app, so an upgrade keeps dependencies this version no longer needs.
+&amp;#x20; You need the index name to search your events, so it is worth choosing deliberately.
 
+&amp;#x20; The previous default showed up as a new value in the Splunk Cloud picker, which read
 
-
-**Smaller download**
-
-\- The package is about 1.6 MB, down from 9 MB. Dependencies the add-on never uses were
-
-&amp;#x20; removed, and it is now pure Python, so one build installs on any platform.
-
-
-
-**Compatibility**
-
-\- The add-on declares the Python versions it supports, 3.9 and 3.13, on its input and
-
-&amp;#x20; its REST handlers.
-
-
-
-**Collection**
-
-\- Requests to PostHog now identify themselves as coming from Splunk, so this traffic can
-
-&amp;#x20; be told apart from other API clients.
-
-
-
-**Corrections**
-
-\- Collecting history again needs a new input name. Deleting an input does not reset its
-
-&amp;#x20; position, so an input recreated under the same name resumes where the old one stopped
-
-&amp;#x20; and collects nothing. The input form now says this.
-
-
-
-**Other**
-
-\- The app uses the PostHog logo.
-
-\- The MIT license text ships with the app.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collect PostHog activity logs into Splunk as OCSF events. Splunk polls PostHog on a schedule you set, giving you an audit trail of who changed what in your PostHog organization alongside the rest of your security data. Works on Splunk Cloud Platform and Splunk Enterprise.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;PostHog activity logs record who did what in your PostHog organization. Every change to a feature flag, insight, dashboard, or other resource is captured, along with logins and account provisioning changes.
+&amp;#x20; as though accepting it would create an index.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collect PostHog activity logs into Splunk as OCSF events. Splunk polls PostHog on a schedule you set, giving you an audit trail of who changed what in your PostHog organization alongside the rest of your security data. Works on Splunk Cloud Platform and Splunk Enterprise.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;PostHog activity logs record who did what in your PostHog organization. Every change to a feature flag, insight, dashboard, or other resource is captured, along with logins and account provisioning changes.
 
 This add-on collects that record into Splunk, so you can keep an audit trail alongside the rest of your security data, alert on sensitive changes, and meet compliance requirements.
 
@@ -70,10 +63,95 @@ By default an event records which fields changed, not their values. That answers
 
 Events are timestamped with when the activity happened in PostHog rather than when Splunk indexed them, so historical searches reflect real history.
 
-The add-on requires a PostHog personal API key with the activity_log:read scope. Activity logs are available on the PostHog Boost, Scale and Enterprise packages.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/898e2588-9a2a-11f1-8abe-f2e02a4ae486.png&quot;&gt;</description>
+The add-on requires a PostHog personal API key with the activity_log:read scope. Activity logs are available on the PostHog Boost, Scale and Enterprise packages.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/604e8194-9a35-11f1-8bb8-7ab544f5313a.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Yasen Slavov</dc:creator>
-      <pubDate>Mon, 17 Aug 2026 11:06:31 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9462/#v0.6.0</guid>
+      <pubDate>Mon, 17 Aug 2026 12:19:36 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9462/#v0.6.1</guid>
+    </item>
+    <item>
+      <title>DV IOC Enrichment - v1.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9525/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Automated VirusTotal and AbuseIPDB enrichment for Splunk ES notable events with quota-aware key rotation, caching, exclusions, and urgency updates.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;DV IOC Enrichment automates threat intelligence enrichment for Splunk Enterprise Security notable events.
+
+The app extracts IP addresses, domains, URLs, and file hashes from configured notable event fields and queries supported intelligence providers, including VirusTotal and AbuseIPDB. Provider responses are evaluated against configurable thresholds, and malicious findings can automatically update the notable event urgency, add enrichment evidence as an ES comment, and trigger an email notification.
+
+DV IOC Enrichment addresses the operational overhead of manually investigating repeated indicators while preventing unnecessary API usage through configurable caching, exclusion rules, provider-specific quota controls, and multi-key VirusTotal rotation.
+
+Each provider operates independently. If one provider becomes unavailable or reaches its quota, enrichment continues through the remaining providers. Temporarily incomplete events can be retried when provider capacity becomes available again.
+
+The app includes:
+
+* Automatic enrichment of Splunk ES notable events
+* VirusTotal support for IP, domain, URL, and hash indicators
+* AbuseIPDB support for public IP reputation
+* Separate VirusTotal malicious and suspicious thresholds
+* Configurable AbuseIPDB confidence threshold
+* Multiple VirusTotal API keys with quota-aware rotation
+* Per-provider request and quota controls
+* Reusable enrichment cache with configurable TTL
+* Exact, CIDR, IP range, and domain suffix exclusions
+* Automatic urgency updates and ES comments
+* Optional email notifications
+* Operational dashboard and structured internal logging&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Mustafa YILMAZ</dc:creator>
+      <pubDate>Mon, 17 Aug 2026 12:07:38 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9525/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>DV AI Assistant - v1.0.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9491/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;AI-powered Splunk security operations with natural-language SPL, Splunk ES notable-event triage, autonomous triage, multi-LLM support, knowledge-base context, guarded actions, role-based access, and firewall-ready IP block lists.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;DV AI Assistant is an AI-powered security operations application for Splunk designed to help SOC teams investigate security events, generate and execute SPL, and triage Splunk Enterprise Security notable events.
+
+The application provides an AI Command Center for natural-language interaction with Splunk data and an AI Triage Center for manual or autonomous notable-event analysis. It supports multiple LLM providers including Ollama, OpenAI, Google Gemini, and custom endpoints, and can use a configurable knowledge base to provide environment-specific context to the AI.
+
+DV AI Assistant includes security controls for AI-generated actions and searches. Generated SPL is passed through guardrails before autonomous execution to prevent write or side-effecting commands. IP block and unblock actions require explicit confirmation and the block_ip capability. Built-in admin and sc_admin roles receive this capability by default, while the dv_ai_action role can be assigned separately when block/unblock permission is required.
+
+Blocked IP addresses are maintained by the application and exported as a plain-text firewall-consumable list, allowing external firewalls or security controls to retrieve the current block list.
+
+The application also includes an autonomous triage worker. When Auto Triage is enabled, the scripted input runs every 60 seconds by default, identifies eligible unprocessed Splunk ES notable events, sends the complete event context for AI analysis, and writes the resulting triage report back to the notable event.
+
+Role-based access is provided through dv_ai_user, dv_ai_admin, and dv_ai_action roles. Standard users can access AI Chat and AI Alert Triage, while administrative configuration areas such as AI Providers, Data Context Mapping, Audit, and App Settings are restricted to authorized administrators.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9368eda8-958f-11f1-a762-766689169f1b.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Mustafa YILMAZ</dc:creator>
+      <pubDate>Mon, 17 Aug 2026 11:55:28 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9491/#v1.0.0</guid>
+    </item>
+    <item>
+      <title>Threat Hunting Essentials - v1.3.80 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7633/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
+
+For Premium Version - Contact sales https://www.avertpoint.com/contactus.html
+
+It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
+
+Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
+
+1. Backdoor.
+2. Worms.
+3. Ransomware.
+4. Bots.
+5. Trojan horses.
+6. Keyloggers.
+7. Rootkits.
+8. Spyware.
+9. Fileless malware.
+10. Cryptojacking.
+11. Wiper malware.
+12. Adware.
+14. Viruses
+15. P2P-Worm
+16. Internet Worms
+17. Net-worm
+18. Clickjacking
+19. Cryptominer
+20. Fileless malware
+
+You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
+
+Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ff06d928-9a2e-11f1-8832-a251be47410e.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
+      <pubDate>Mon, 17 Aug 2026 11:31:08 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.80</guid>
     </item>
     <item>
       <title>mispfuse - v2.2.4 [New App Release]</title>
@@ -217,32 +295,6 @@ First public release of Envy Splunk Health — the data-collection traffic light
       <guid>https://splunkbase.splunk.com/app/9479/#v0.2.0</guid>
     </item>
     <item>
-      <title>DV AI Assistant - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/9491/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;AI-powered Splunk security operations with natural-language SPL, Splunk ES notable-event triage, autonomous triage, multi-LLM support, knowledge-base context, guarded actions, role-based access, and firewall-ready IP block lists.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;DV AI Assistant is an AI-powered security operations application for Splunk designed to help SOC teams investigate security events, generate and execute SPL, and triage Splunk Enterprise Security notable events.
-
-The application provides an AI Command Center for natural-language interaction with Splunk data and an AI Triage Center for manual or autonomous notable-event analysis. It supports multiple LLM providers including Ollama, OpenAI, Google Gemini, and custom endpoints, and can use a configurable knowledge base to provide environment-specific context to the AI.
-
-DV AI Assistant includes security controls for AI-generated actions and searches. Generated SPL is passed through guardrails before autonomous execution to prevent write or side-effecting commands. IP block and unblock actions require explicit confirmation and the block_ip capability. Built-in admin and sc_admin roles receive this capability by default, while the dv_ai_action role can be assigned separately when block/unblock permission is required.
-
-Blocked IP addresses are maintained by the application and exported as a plain-text firewall-consumable list, allowing external firewalls or security controls to retrieve the current block list.
-
-The application also includes an autonomous triage worker. When Auto Triage is enabled, the scripted input runs every 60 seconds by default, identifies eligible unprocessed Splunk ES notable events, sends the complete event context for AI analysis, and writes the resulting triage report back to the notable event.
-
-Role-based access is provided through dv_ai_user, dv_ai_admin, and dv_ai_action roles. Standard users can access AI Chat and AI Alert Triage, while administrative configuration areas such as AI Providers, Data Context Mapping, Audit, and App Settings are restricted to authorized administrators.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9368eda8-958f-11f1-a762-766689169f1b.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Mustafa YILMAZ</dc:creator>
-      <pubDate>Mon, 17 Aug 2026 10:40:01 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9491/#v1.0.0</guid>
-    </item>
-    <item>
-      <title>Security Alerts - v0.1.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/9494/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Security Alerts App allows you to manage your alerts from any index using SPL query (or from multiple indexes)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Security Alerts App allows you to manage your alerts from any index using SPL query (or from multiple indexes).&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c1a8b9c0-9632-11f1-b9d2-96d8013f63e9.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">adnan alshammary</dc:creator>
-      <pubDate>Mon, 17 Aug 2026 10:39:09 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9494/#v0.1.0</guid>
-    </item>
-    <item>
       <title>LeakData Exposure Monitoring App - v1.0.0 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/9513/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;\## 1.0.0 — 2026-08-13
@@ -261,35 +313,6 @@ Role-based access is provided through dv_ai_user, dv_ai_admin, and dv_ai_action 
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Emre ÇAPAN</dc:creator>
       <pubDate>Mon, 17 Aug 2026 10:38:08 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/9513/#v1.0.0</guid>
-    </item>
-    <item>
-      <title>DV IOC Enrichment - v1.0.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/9525/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Automated VirusTotal and AbuseIPDB enrichment for Splunk ES notable events with quota-aware key rotation, caching, exclusions, and urgency updates.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;DV IOC Enrichment automates threat intelligence enrichment for Splunk Enterprise Security notable events.
-
-The app extracts IP addresses, domains, URLs, and file hashes from configured notable event fields and queries supported intelligence providers, including VirusTotal and AbuseIPDB. Provider responses are evaluated against configurable thresholds, and malicious findings can automatically update the notable event urgency, add enrichment evidence as an ES comment, and trigger an email notification.
-
-DV IOC Enrichment addresses the operational overhead of manually investigating repeated indicators while preventing unnecessary API usage through configurable caching, exclusion rules, provider-specific quota controls, and multi-key VirusTotal rotation.
-
-Each provider operates independently. If one provider becomes unavailable or reaches its quota, enrichment continues through the remaining providers. Temporarily incomplete events can be retried when provider capacity becomes available again.
-
-The app includes:
-
-* Automatic enrichment of Splunk ES notable events
-* VirusTotal support for IP, domain, URL, and hash indicators
-* AbuseIPDB support for public IP reputation
-* Separate VirusTotal malicious and suspicious thresholds
-* Configurable AbuseIPDB confidence threshold
-* Multiple VirusTotal API keys with quota-aware rotation
-* Per-provider request and quota controls
-* Reusable enrichment cache with configurable TTL
-* Exact, CIDR, IP range, and domain suffix exclusions
-* Automatic urgency updates and ES comments
-* Optional email notifications
-* Operational dashboard and structured internal logging&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Mustafa YILMAZ</dc:creator>
-      <pubDate>Mon, 17 Aug 2026 10:35:22 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9525/#v1.0.1</guid>
     </item>
     <item>
       <title>Sysdig App for Splunk - v1.1.3 [Version Update]</title>
@@ -487,44 +510,6 @@ Get started today with our quickstart guide at https://www.alertmanager.app/docs
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Datapunctum AG</dc:creator>
       <pubDate>Mon, 17 Aug 2026 06:47:04 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6730/#v3.9.2</guid>
-    </item>
-    <item>
-      <title>Threat Hunting Essentials - v1.3.80 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7633/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
-
-For Premium Version - Contact sales https://www.avertpoint.com/contactus.html
-
-It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
-
-Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
-
-1. Backdoor.
-2. Worms.
-3. Ransomware.
-4. Bots.
-5. Trojan horses.
-6. Keyloggers.
-7. Rootkits.
-8. Spyware.
-9. Fileless malware.
-10. Cryptojacking.
-11. Wiper malware.
-12. Adware.
-14. Viruses
-15. P2P-Worm
-16. Internet Worms
-17. Net-worm
-18. Clickjacking
-19. Cryptominer
-20. Fileless malware
-
-You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
-
-Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d4468f90-9965-11f1-8e06-2e4409467398.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
-      <pubDate>Sun, 16 Aug 2026 15:48:21 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.80</guid>
     </item>
     <item>
       <title>Red Hat Event Driven Ansible Add-on For Splunk - v1.2.0 [Version Update]</title>
