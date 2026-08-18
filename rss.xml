@@ -6,7 +6,243 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Tue, 18 Aug 2026 20:12:57 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 18 Aug 2026 21:14:12 +0000</lastBuildDate>
+    <item>
+      <title>TheHive/Cortex - v4.2.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5329/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;\# Release Notes - v4.2.2: &quot;The Pollen Sieve&quot; 🌼
+
+
+
+\## Summary
+
+Version 4.2.2 is a \*\*bug-fix release\*\* about things that used to fall through
+
+without a sound. A custom field of type \`url\` was dropped from every alert and
+
+case with no error at all; an empty &quot;Job SID&quot; let the create action fail deep
+
+inside the add-on instead of stopping at the form. Both are fixed, and the
+
+add-on now \*\*says something\*\* when it drops a custom field instead of staying
+
+silent. Splunk Cloud administrators (\`sc\_admin\`) also regain write access to
+
+the views and navigation.
+
+
+
+No new feature is introduced and no configuration change is required — this is
+
+a safe, drop-in update from v4.2.1.
+
+
+
+\## Improvements &amp; Bug Fixes
+
+
+
+\### 🧩 Alert Actions: \`url\` custom fields are no longer dropped (\[#133]\(https://github.com/LetMeR00t/TA-thehive-cortex/issues/133))
+
+\- \*\*Root cause\*\*: custom field values are only forwarded when their type is
+
+&amp;#x20; recognised by a chain handling \`string\`, \`boolean\`, \`integer\`, \`float\` and
+
+&amp;#x20; \`date\`. The \`url\` type, available since TheHive 5.1, was missing from that
+
+&amp;#x20; chain, so the field was skipped. The alert or case was still created, minus
+
+&amp;#x20; the field, and \*\*nothing was logged\*\* — the value simply never arrived.
+
+\- \*\*Fix\*\*: \`url\` carries a plain string value and is now handled exactly like
+
+&amp;#x20; \`string\`. Both &quot;Create a new alert&quot; and &quot;Create a new case&quot; are affected, as
+
+&amp;#x20; they share the same parsing routine.
+
+\- \*\*No more silence\*\*: a custom field dropped because its type is unmapped, or
+
+&amp;#x20; because its value does not match its declared type, is now logged as a
+
+&amp;#x20; warning (\`THC-117\`) naming both the field and the type. A future unknown type
+
+&amp;#x20; will be visible in the logs instead of costing a day of troubleshooting.
+
+\- \*\*Regression tests\*\*: the parsing routine gains its first unit tests. Every
+
+&amp;#x20; TheHive custom field type is now asserted to survive, and the &quot;dropped but
+
+&amp;#x20; logged&quot; behaviour is asserted too.
+
+
+
+\### 🖥️ Dashboards: the Job SID is now required (\[#132]\(https://github.com/LetMeR00t/TA-thehive-cortex/issues/132))
+
+\- \*\*Root cause\*\*: &quot;Job SID (input data)&quot; was optional in the \*Create a new
+
+&amp;#x20; case\* and \*Create a new alert\* panels. Leaving it empty produced an empty
+
+&amp;#x20; \`| loadjob\`, and the failure surfaced far from its cause — a
+
+&amp;#x20; \`FileNotFoundError\` followed by \`UnboundLocalError: local variable 'rf'
+
+&amp;#x20; referenced before assignment\`, deep inside the alert action base.
+
+\- \*\*Fix\*\*: Splunk Simple XML has no \`required\` attribute, so the field now
+
+&amp;#x20; drives a token and the action panel depends on it. The action cannot run
+
+&amp;#x20; until a SID is entered, and the label carries a \`\*\` like the other mandatory
+
+&amp;#x20; fields.
+
+
+
+\### ☁️ Splunk Cloud: \`sc\_admin\` can write views and navigation
+
+\- \`metadata/default.meta\` granted write access on \`\[views]\` and \`\[nav]\` to the
+
+&amp;#x20; \`admin\` role only. Splunk Cloud customers hold \*\*\`sc\_admin\`\*\*, not \`admin\`,
+
+&amp;#x20; so those knowledge objects were unreachable for them. Both roles are now
+
+&amp;#x20; granted, matching what the app-level stanza already did.
+
+
+
+\### 📚 Documentation (\[#128]\(https://github.com/LetMeR00t/TA-thehive-cortex/issues/128))
+
+\- The UC2 walkthrough screenshots predate the v4.0.0 UCC rework: they still
+
+&amp;#x20; show \*TheHive instance ID\* as free text and \*Alert mode\* as radio buttons,
+
+&amp;#x20; where both are now dropdowns named \*\*Instance\*\* and \*\*Alert mode\*\*.
+
+\- The screenshots could not be regenerated for this release, so the section now
+
+&amp;#x20; carries the \*\*field values in writing\*\*, read off the images themselves,
+
+&amp;#x20; including the fact that \`Severity\`, \`TLP\`, \`PAP\` and \`Scope\` are dropdowns
+
+&amp;#x20; rather than field names, and that \`Description\` expects the \*\*name of the
+
+&amp;#x20; field\*\* holding the text (\`info\` in the UC2 search).
+
+
+
+\## Under the hood
+
+
+
+These change nothing for users, but matter to anyone building the add-on:
+
+
+
+\- \*\*\`splunktaucclib\` 8.1.0 → 8.2.0\*\*, the minimum accepted by \`ucc-gen\` 6.5.3.
+
+&amp;#x20; Building with an older pin fails before any code is compiled.
+
+\- \*\*\`package/lib/requirements.txt\` is now versioned.\*\* It was silently excluded
+
+&amp;#x20; by the generic \`lib/\` rule of the Python \`.gitignore\`, which meant a fresh
+
+&amp;#x20; clone could not rebuild the same add-on.
+
+\- \*\*The test suite is now part of the repository.\*\* The unit tests mock every
+
+&amp;#x20; Splunk and network module and run anywhere; the integration tests read their
+
+&amp;#x20; endpoints and credentials from a local \`.env\`, which stays out of the
+
+&amp;#x20; repository.
+
+\- \`CONTRIBUTE.md\` gains the \*\*AppInspect step\*\*, which the build/package/deploy
+
+&amp;#x20; lifecycle did not describe.
+
+
+
+\## Splunk Cloud vetting
+
+
+
+Measured with AppInspect \*\*4.3.0\*\* (\`--mode precert --included-tags cloud\`) on
+
+the packaged \`.spl\`:
+
+
+
+\| | |
+
+\| :--- | :--- |
+
+\| \`error\` / \`failure\` | \*\*0 / 0\*\* |
+
+\| \`future\_failure\` | 1 |
+
+\| \`warning\` | 15 (all informational) |
+
+\| \`success\` | 136 |
+
+
+
+The remaining \`future\_failure\` is \`check\_for\_custom\_mako\_templates\`, on
+
+\`appserver/templates/base.html\`. \*\*It cannot be fixed from this repository\*\*:
+
+the file does not exist in the sources — \`ucc-gen\` generates it, the latest
+
+release (6.5.3) still does, and three generated views reference it
+
+(\`configuration.xml\`, \`dashboard.xml\`, \`inputs.xml\`). AppInspect advises
+
+regenerating with UCC ≥ 6.3.0, which does not remove it. It becomes blocking
+
+with Splunk Enterprise 10.4; the fix has to come from a future UCC release.
+
+
+
+\## Deployment Notes
+
+\- \*\*Prerequisite\*\*: Python 3.9 (matches Splunk's bundled interpreter).
+
+\- \*\*Migration Path\*\*:
+
+&amp;#x20;   \- \*\*From v4.2.1 / v4.2.0 / v4.1.0 / v4.0.0\*\*: non-breaking update. Existing
+
+&amp;#x20;     configuration, accounts, instances and certificates are preserved.
+
+&amp;#x20;   \- \*\*From v3.9.0 (Direct Upgrade)\*\*: you can upgrade directly to v4.2.2.
+
+&amp;#x20;   \- \*\*⚠️ CRITICAL\*\*: if upgrading from v3.x, the
+
+&amp;#x20;     \*\*\[v4.0.0 migration instructions]\(./v4.0.0.md) are mandatory\*\* and remain
+
+&amp;#x20;     valid for this version (UCC architecture migration, breaking configuration
+
+&amp;#x20;     changes, and new credential storage). Please read them carefully before
+
+&amp;#x20;     proceeding.
+
+\- \*\*After upgrading\*\*: if you use a custom field of type \`url\` in an alert
+
+&amp;#x20; action, it will start arriving in TheHive — check that the receiving custom
+
+&amp;#x20; field is the one you expect.
+
+\- \*\*Upgrade tip (Windows / on-prem)\*\*: never delete the app's \`local/\` folder.
+
+&amp;#x20; Stop Splunk, back up \`local/\`, deploy the new build, restore \`local/\`, then
+
+&amp;#x20; start Splunk.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This TA allows to add interaction features between TheHive or Cortex (https://www.strangebee.com/) and Splunk. It allows to retrieve all kind of information from TheHive/Cortex and to perform actions on these instances using Splunk, from a search or from a predefined dashboard.
+
+This TA is supporting only TheHive 5. For having an app supporting TheHive 3 or 4, please check the oldest releases. It&amp;#x27;s also supporting the Cortex 3 version.
+
+More information here: https://github.com/LetMeR00t/TA-thehive-cortex&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/7680c594-9b48-11f1-9d26-4e738ad78dcd.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Alexandre Demeyer</dc:creator>
+      <pubDate>Tue, 18 Aug 2026 21:13:22 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5329/#v4.2.2</guid>
+    </item>
     <item>
       <title>PowerConnect for SAP Solutions - v9.2.2 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/3153/</link>
@@ -2195,24 +2431,6 @@ Version 1.0.6 is a maintenance and compatibility release that upgrades the UCC f
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Fri, 07 Aug 2026 21:03:24 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5931/#v4.0.0</guid>
-    </item>
-    <item>
-      <title>Slack - v2.10.4 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5846/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Preserve backslashes and Unicode text verbatim when sending Slack messages.
-* Encode email lookup values as a single Slack API query parameter.
-* Return clean action errors for non-object Slack JSON responses.
-* Treat non-2xx or unsuccessful Slack JSON responses as action failures.
-* Bound Slack cursor pagination when responses repeat or stop making progress.
-* Retrieve all cursor-paginated channel and thread messages in get history.
-* Return clean action errors when ask-question callback metadata exceeds Slack's limit.
-* Stop and restart only the Slack bot process belonging to the current asset.
-* Contain Socket Mode answer files within the Slack app-state directory.
-* Split long Slack bot messages iteratively while guaranteeing forward progress.
-* Validate ask-question responses against the posted choices, conversation, and configured responder allowlist.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Integrate with Slack to post messages and attachments to channels&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/af756994-92a2-11f1-809d-ee2ccd3c403d.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Fri, 07 Aug 2026 20:58:06 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5846/#v2.10.4</guid>
     </item>
   </channel>
 </rss>
