@@ -6,7 +6,70 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Tue, 18 Aug 2026 06:26:54 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 18 Aug 2026 07:30:03 +0000</lastBuildDate>
+    <item>
+      <title>Splunk Remote Upgrader for Linux Universal Forwarders - v1.0.6 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7699/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Fixed an issue preventing install when user belongs to multiple groups.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Remote Upgrader for Linux Universal Forwarders is used to remotely upgrade your universal forwarder for Linux. You install the upgrader on the same Linux instance as your universal forwarder. The upgrader then monitors for new universal forwarder packages in a predefined folder and if a new universal forwarder package is found, the upgrader upgrades the universal forwarder with that package.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Tue, 18 Aug 2026 07:24:13 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7699/#v1.0.6</guid>
+    </item>
+    <item>
+      <title>WithSecure Elements Add-on - v1.0.7 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8820/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**Bug fix release** — reported by an external reviewer. **Recommended upgrade for anyone running v1.0.6 or earlier**, especially environments with dual-stack hosts or multi-homed machines.
+
+### The bug
+
+The WithSecure Elements API returns `details.hostIpAddress` as a single JSON string that concatenates every IP the host is bound to, separated by spaces:
+
+```
+&quot;hostIpAddress&quot;: &quot;192.168.110.128/24 192.168.171.128/24 10.0.0.5/8&quot;
+
+```
+
+Splunk's `INDEXED_EXTRACTIONS = json` stored this as one flat string, so a search like:
+
+```
+index=main sourcetype=&quot;withsecure:epp:security_event&quot;
+    &quot;details.hostIpAddress&quot;=&quot;192.168.171.128/24&quot;
+
+```
+
+never matched events where that address was not the first one in the string. In the reporter's test corpus 13/53 events had two IPs and were affected — the same pattern is present on any host with multiple network interfaces or a dual-stack (IPv4 + link-local) configuration.
+
+### The fix
+
+A single search-time `EVAL` calculated field on the `security_event` sourcetype that splits the string into a real multivalue field:
+
+```
+[withsecure:epp:security_event]
+EVAL-details.hostIpAddress = split('details.hostIpAddress', &quot; &quot;)
+
+```
+
+**Search-time only:**
+
+* no impact on ingestion, no re-indexing needed
+* applies retroactively to events already in the index
+* 100 % reversible (remove the line to go back to a flat string)
+
+After upgrading, the following now behave consistently on every IP the host reports:
+
+* exact-match: `details.hostIpAddress=&quot;192.168.171.128/24&quot;`
+* `IN()`: `details.hostIpAddress IN (&quot;10.0.0.5/8&quot;, &quot;192.168.171.128/24&quot;)`
+* `| mvexpand details.hostIpAddress` — one row per IP
+* `mvcount(details.hostIpAddress)` — actual count of IPs
+* CIM `src_ip` alias — respects the multivalue
+
+### Upgrade safety
+
+Non-destructive in-place upgrade. KV Store checkpoints, input configuration, and existing indexed events are preserved.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects EPP Security Events and EDR Broad Context Detections from WithSecure Elements via OAuth2-authenticated API, with CIM-compliant field extractions for endpoint, malware, intrusion detection, and process data.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The WithSecure Elements Add-on collects endpoint protection and detection data from the WithSecure Elements API. It ingests EPP Security Events and EDR Broad Context Detections through OAuth2-authenticated modular inputs, enabling centralized security event analysis in Splunk. The add-on maps collected events to CIM endpoint, malware, intrusion detection, and process tags, facilitating correlation with other security data sources. Two modular inputs handle data collection: withsecure_epp_input retrieves endpoint protection events, while withsecure_bcd_input collects EDR broad context detection incidents. Events are indexed under source types withsecure:epp:security_event, withsecure:epp:bcd_incident, and withsecure:epp:bcd_detection. The add-on includes a custom search command for retrieving specific detection details and provides a workflow action to fetch incident detections directly from the Splunk interface.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e44518ce-9a52-11f1-a44d-ea15ad7a6800.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Flo Flo</dc:creator>
+      <pubDate>Tue, 18 Aug 2026 07:04:49 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8820/#v1.0.7</guid>
+    </item>
     <item>
       <title>Netskope Add-on For Splunk - v4.6.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/3808/</link>
@@ -62,61 +125,6 @@ The Sysdig App for Splunk enables you to view and visualize your Sysdig security
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sysdig, Inc</dc:creator>
       <pubDate>Tue, 18 Aug 2026 03:01:46 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5330/#v1.1.3</guid>
-    </item>
-    <item>
-      <title>WithSecure Elements Add-on - v1.0.7 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8820/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**Bug fix release** — reported by an external reviewer. **Recommended upgrade for anyone running v1.0.6 or earlier**, especially environments with dual-stack hosts or multi-homed machines.
-
-### The bug
-
-The WithSecure Elements API returns `details.hostIpAddress` as a single JSON string that concatenates every IP the host is bound to, separated by spaces:
-
-```
-&quot;hostIpAddress&quot;: &quot;192.168.110.128/24 192.168.171.128/24 10.0.0.5/8&quot;
-
-```
-
-Splunk's `INDEXED_EXTRACTIONS = json` stored this as one flat string, so a search like:
-
-```
-index=main sourcetype=&quot;withsecure:epp:security_event&quot;
-    &quot;details.hostIpAddress&quot;=&quot;192.168.171.128/24&quot;
-
-```
-
-never matched events where that address was not the first one in the string. In the reporter's test corpus 13/53 events had two IPs and were affected — the same pattern is present on any host with multiple network interfaces or a dual-stack (IPv4 + link-local) configuration.
-
-### The fix
-
-A single search-time `EVAL` calculated field on the `security_event` sourcetype that splits the string into a real multivalue field:
-
-```
-[withsecure:epp:security_event]
-EVAL-details.hostIpAddress = split('details.hostIpAddress', &quot; &quot;)
-
-```
-
-**Search-time only:**
-
-* no impact on ingestion, no re-indexing needed
-* applies retroactively to events already in the index
-* 100 % reversible (remove the line to go back to a flat string)
-
-After upgrading, the following now behave consistently on every IP the host reports:
-
-* exact-match: `details.hostIpAddress=&quot;192.168.171.128/24&quot;`
-* `IN()`: `details.hostIpAddress IN (&quot;10.0.0.5/8&quot;, &quot;192.168.171.128/24&quot;)`
-* `| mvexpand details.hostIpAddress` — one row per IP
-* `mvcount(details.hostIpAddress)` — actual count of IPs
-* CIM `src_ip` alias — respects the multivalue
-
-### Upgrade safety
-
-Non-destructive in-place upgrade. KV Store checkpoints, input configuration, and existing indexed events are preserved.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects EPP Security Events and EDR Broad Context Detections from WithSecure Elements via OAuth2-authenticated API, with CIM-compliant field extractions for endpoint, malware, intrusion detection, and process data.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The WithSecure Elements Add-on collects endpoint protection and detection data from the WithSecure Elements API. It ingests EPP Security Events and EDR Broad Context Detections through OAuth2-authenticated modular inputs, enabling centralized security event analysis in Splunk. The add-on maps collected events to CIM endpoint, malware, intrusion detection, and process tags, facilitating correlation with other security data sources. Two modular inputs handle data collection: withsecure_epp_input retrieves endpoint protection events, while withsecure_bcd_input collects EDR broad context detection incidents. Events are indexed under source types withsecure:epp:security_event, withsecure:epp:bcd_incident, and withsecure:epp:bcd_detection. The add-on includes a custom search command for retrieving specific detection details and provides a workflow action to fetch incident detections directly from the Splunk interface.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e44518ce-9a52-11f1-a44d-ea15ad7a6800.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Flo Flo</dc:creator>
-      <pubDate>Mon, 17 Aug 2026 15:51:02 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8820/#v1.0.7</guid>
     </item>
     <item>
       <title>Security Alerts - v0.1.0 [New App Release]</title>
@@ -1428,14 +1436,6 @@ Start a free 60-day trial at netflowlogic.com/free-trial — or request a demo t
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">NetFlow Logic</dc:creator>
       <pubDate>Thu, 13 Aug 2026 16:05:12 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/9133/#v0.1.4</guid>
-    </item>
-    <item>
-      <title>Splunk Remote Upgrader for Linux Universal Forwarders - v1.0.6 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7699/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Fixed an issue preventing install when user belongs to multiple groups.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Remote Upgrader for Linux Universal Forwarders is used to remotely upgrade your universal forwarder for Linux. You install the upgrader on the same Linux instance as your universal forwarder. The upgrader then monitors for new universal forwarder packages in a predefined folder and if a new universal forwarder package is found, the upgrader upgrades the universal forwarder with that package.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Thu, 13 Aug 2026 15:16:17 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7699/#v1.0.6</guid>
     </item>
     <item>
       <title>Splunk Remote Upgrader for Windows Universal Forwarders - v1.0.6 [Version Update]</title>
