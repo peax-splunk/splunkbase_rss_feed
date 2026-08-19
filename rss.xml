@@ -6,7 +6,87 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Aug 2026 12:25:51 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 19 Aug 2026 13:36:38 +0000</lastBuildDate>
+    <item>
+      <title>Speculus - v0.3.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9081/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## Release Notes 0.3.0
+
+* \| speculus search command. Adds 29 fields to any event with an IP field:
+  threat score (0-100), risk level, ASN/ISP/organization, geolocation,
+  infrastructure flags (Tor, VPN, proxy, datacenter, blacklisted), residential
+  proxy detail, and threat activity with malware family, compromise status,
+  corroboration count, and first/last seen. IPv4 and IPv6. The IP field is
+  auto-detected or named explicitly with field\=.
+* Speculus Threat Feed dashboard. Scan any index for risky IPs, with a
+  connection origin map, breakdowns by threat activity, risk level and source
+  organization, and a table of observed risky addresses with click-through to
+  investigation.
+* Speculus IP Investigate dashboard. The full Speculus record for one address,
+  plus which of your own indexes contain it and its sightings over time.
+* Speculus Setup page. Guided configuration with a live database status check.
+* Speculus MMDB Updater. Scheduled database updates using conditional requests,
+  so an unchanged database costs a single round-trip. Downloads are validated
+  before replacing the live copy.
+* Workflow actions. Right-click any IP field in any event to scan it or open
+  its full enrichment record.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Official Speculus App for Splunk. Transform  network logs into actionable threat intelligence. The Speculus Splunk App integrates directly with the Speculus platform to provide instant visibility into malicious IP intent, helping security teams identify malware droppers, active adversary campaigns, proxy detections, and anomalous infrastructure across your network.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Official Speculus App for Splunk. Transform  network logs into actionable threat intelligence. The Speculus Splunk App integrates directly with the Speculus platform to provide instant visibility into malicious IP intent, helping security teams identify malware droppers, active adversary campaigns, proxy detections, and anomalous infrastructure across your network.
+
+The Speculs Splunk App requires an active Speculus subscription and specific user privileges for installation.
+
+Once installed you instantly gain access to search entire indexes or visualize your threat landscape through our dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/08bc161c-9a58-11f1-a44d-ea15ad7a6800.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Speculus</dc:creator>
+      <pubDate>Wed, 19 Aug 2026 12:50:42 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9081/#v0.3.0</guid>
+    </item>
+    <item>
+      <title>NordStellar - v1.0.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9446/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Initial release.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Ingest NordStellar threat exposure findings — leaked credentials, malware infections, dark web mentions, domain squatting, and attack surface vulnerabilities — into Splunk, parsed and CIM-normalized.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Unify security visibility by ingesting NordStellar threat exposure events into the Splunk® platform. NordStellar detects leaked employee and consumer credentials, malware infections, dark web mentions, domain squatting, and attack surface vulnerabilities — and this app delivers those findings straight into your Splunk index, parsed and CIM-normalized, ready for search, dashboards, and alerting.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/59ac1030-9a31-11f1-b368-464ca62301ca.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Nord Security Inc</dc:creator>
+      <pubDate>Wed, 19 Aug 2026 12:46:54 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9446/#v1.0.0</guid>
+    </item>
+    <item>
+      <title>EventTimeline - v1.0.3 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9536/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;```
+EventTimeline 1.0.3 is the initial public Splunkbase release.
+
+Highlights:
+
+• Converts Splunk saved-search alerts into normalized investigation findings.
+• Generates chronological AWS CloudTrail timelines organized into before-alert, alert-trigger, and after-alert phases.
+• Uses manual timeline generation by default to reduce search-head workload.
+• Provides optional automatic timeline generation through Setup.
+• Supports configurable investigation windows from 30 minutes to 24 hours.
+• Includes MITRE ATT&amp;CK and kill-chain views.
+• Provides identity, assumed-role, resource, account, source-IP, access-key, event-name, and event-ID pivots.
+• Includes a manual timeline generator for analyst-led investigations.
+• Provides raw-event inspection and Markdown or CSV export.
+• Includes timeline search status, diagnostics, truncation reporting, retry handling, deduplication, and health monitoring.
+• Includes an in-app Saved Search Guide with field requirements and CloudTrail examples.
+• Adds bounded searches and hydration limits for large CloudTrail environments.
+• Does not require an AI provider or external analysis service.
+• Does not include prebuilt detection content; it operates with existing Splunk saved searches and alerts.
+```&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Convert AWS CloudTrail saved-search alerts into chronological investigation timelines with normalized context, MITRE mapping, entity pivots, manual searches, and exportable evidence.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;EventTimeline turns AWS CloudTrail alerts from Splunk saved searches into structured, chronological investigations.
+
+When a saved search triggers, EventTimeline creates a normalized finding containing the alert context, actor, resource, source IP, account, API action, severity, and event timestamp. Analysts can then fetch related CloudTrail activity for a selected investigation window and review what happened before, during, and after the alert.
+
+EventTimeline includes chronological evidence views, MITRE ATT&amp;amp;CK and kill-chain context, identity and resource pivots, raw-event access, timeline filtering, Markdown export, a manual timeline generator, and timeline health diagnostics.
+
+The app does not include proprietary detection content or require an AI provider. It works with your existing CloudTrail saved searches and allows teams to retain control over their detection logic and investigation workflow.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/4fe97b7a-9a4d-11f1-9a95-c2d480950ce5.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">anish upadhya</dc:creator>
+      <pubDate>Wed, 19 Aug 2026 12:45:45 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9536/#v1.0.3</guid>
+    </item>
+    <item>
+      <title>TA for Statseeker - v0.0.21 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9542/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Ingests Statseeker interface telemetry, device snapshots, and operational records into Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This add-on ingests Statseeker interface telemetry, device snapshots, and operational records into Splunk. Port, CPU, and memory timeseries are modeled as metrics, while device health, temperature, WAN 3G, and event-style resources are modeled as JSON events because they are current-state snapshots with mixed descriptive fields rather than clean sampled series.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ca0b2318-9aca-11f1-8bb8-7ab544f5313a.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Greg Ford</dc:creator>
+      <pubDate>Wed, 19 Aug 2026 12:36:59 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9542/#v0.0.21</guid>
+    </item>
     <item>
       <title>Threat Hunting Essentials - v1.3.83 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7633/</link>
@@ -710,14 +790,6 @@ https://github.com/Adnan-Alshammary/SecurityAlerts/
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">adnan alshammary</dc:creator>
       <pubDate>Mon, 17 Aug 2026 15:35:02 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/9494/#v0.1.0</guid>
-    </item>
-    <item>
-      <title>AEGISYST FOR SPLUNK - v1.0.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/9425/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Version 1.0.1: Compatibility update for Splunk 10.x and minor performance improvements to the rule-sync Python script&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Build, validate, and deploy Sigma-based Splunk detections in seconds with Aegisyst’s AI-native workspace.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;AI-native detection engineering for Splunk. Aegisyst automates the process of building, validating, and deploying Sigma-based detection rules. Our engine translates high-level security requirements into production-ready Splunk SPL in seconds, while reducing false positives through our built-in verification sandbox.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/7834333e-92e3-11f1-97ad-5e3ae45ca1a4.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Puneet Sharma</dc:creator>
-      <pubDate>Mon, 17 Aug 2026 14:57:56 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9425/#v1.0.1</guid>
     </item>
     <item>
       <title>Splunk Add-on for Jira Cloud - v2.5.1 [Version Update]</title>
@@ -2396,95 +2468,6 @@ The app includes example dashboards showing how to configure forms, use SPL disp
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Yuri Baker</dc:creator>
       <pubDate>Sun, 09 Aug 2026 00:37:41 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8569/#v2.3.9</guid>
-    </item>
-    <item>
-      <title>TA-suhlabs-eMASS - v1.0.6 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8253/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**# Release Notes: TA-suhlabs-eMASS v1.0.6**
-
-**\*\*Release Date:\*\*** 2026-08-07
-
-**\*\*UCC Framework Version:\*\*** 6.5.2
-
-**## Overview**
-
-Version 1.0.6 is a maintenance and compatibility release that upgrades the UCC framework to version 6.5.2, officially declares compatibility with Splunk 10.x (dropping 9.x), adds standard Splunk app icons, and cleans up deprecated custom Mako templates to ensure complete AppInspect compliance.
-
-
-**## New Features**
-
-\- **\*\*Splunk 10.x Compatibility\*\***: Official compatibility declared for Splunk 10.x. Docker and demo configurations have been updated to use the latest Splunk versions. Compatibility with Splunk 9.x has been dropped.
-
-\- **\*\*Splunk App Icons\*\***: Integrated standard Splunk application icons (\`appIcon.png\` and \`appIcon\_2x.png\`) under both \`package/appserver/static/\` and \`package/static/\` to ensure visual presence in launcher and apps lists.
-
-\- **\*\*GitHub Dependabot\*\***: Enabled automated dependency tracking and security alerts via Dependabot.
-
-
-
-**## Bug Fixes &amp; Hardening**
-
-\- **\*\*AppInspect Compliance (Mako Templates)\*\***: Deleted deprecated custom HTML template \`package/appserver/templates/base.html\` to guarantee clean AppInspect vetting with zero custom Mako templates.
-
-\- **\*\*Agent Rules Alignment\*\***: Standardized engineering constraints and project rules in \`.agents/rules/\` for developer tooling consistency.
-
-\- **\*\*zip\_ta.sh — Exclusion Hardening\*\***: Enhanced packaging exclusions to prevent packaging volume-mounted \`default.old.\*\` stanzas.
-
-**## Dependency Updates**
-
-\- Upgraded \`splunk-add-on-ucc-framework\` from \`6.1.0\` to \`6.5.2\`.
-
-**## Upgrade Notes**
-
-\- Rebuild and repackage required: \`make build &amp;&amp; make zip\`
-
-\- No configuration schema changes or migration steps are needed.
-
-
-
-**## Verified On**
-
-\- Splunk Enterprise: 10.x (Latest)
-
-\- UCC Framework: 6.5.2
-
-\- Python: 3.12 / 3.13
-
-\- AppInspect: 0 errors, 0 warnings&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;App Purpose
-
-  TA-suhlabs-eMASS is a Splunk Technology Add-on that ingests Plan of Action &amp;amp; Milestones (POA&amp;amp;M) data from the Enterprise Mission Assurance Support Service (eMASS) API into Splunk.
-
-  Problem/Situation Addressed
-
-  Organizations using eMASS for cybersecurity compliance and risk management face several challenges:
-
-  Data Silos: Security compliance data resides in eMASS while operational security data lives in Splunk, creating fragmented visibility across the security program.
-
-  Manual Reporting: Security teams must manually extract POA&amp;amp;M data from eMASS to create reports, analyze trends, or correlate vulnerabilities with other security events - a time-consuming and error-prone process.
-
-  Limited Analytics: eMASS provides compliance tracking, but lacks the advanced analytics, correlation, and visualization capabilities needed for comprehensive security operations and risk analysis.
-
-  Compliance Monitoring: Organizations need real-time monitoring of their security posture and remediation progress, but accessing this data requires switching between multiple systems.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/65673f38-92d1-11f1-809d-ee2ccd3c403d.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Young Suh</dc:creator>
-      <pubDate>Sat, 08 Aug 2026 02:43:15 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8253/#v1.0.6</guid>
-    </item>
-    <item>
-      <title>Cisco Firepower - v4.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5995/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Scoped automatic deployments to devices with pending changes for the configured network group without forcing deployment or ignoring warnings.
-* Limited unblock actions to entries recorded as created by the same asset and SOAR installation.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app interfaces with Cisco Firepower devices to add or remove IPs or networks to a Firepower Network Group Object, which is configured with an ACL&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ad083658-92a9-11f1-809d-ee2ccd3c403d.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Fri, 07 Aug 2026 21:48:08 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5995/#v4.0.0</guid>
-    </item>
-    <item>
-      <title>WiGLE - v2.0.10 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5868/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Returns a clear error when WiGLE responds with a non-object JSON body.
-* Adds a 30-second timeout to WiGLE API requests.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with the WiGLE service to implement investigative actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/eb871634-92a8-11f1-b342-6225a067f144.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Fri, 07 Aug 2026 21:42:43 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5868/#v2.0.10</guid>
     </item>
   </channel>
 </rss>
