@@ -6,7 +6,32 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Thu, 20 Aug 2026 14:25:52 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 20 Aug 2026 15:24:19 +0000</lastBuildDate>
+    <item>
+      <title>DV AI Assistant - v1.0.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9491/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Fixed AI provider connection testing.
+* Fixed provider deletion and credential cleanup.
+* Fixed Enterprise Security integration credential updates.
+* Improved provider test timeout and TLS behavior.
+* Added server-side guardrail validation before running SPL from AI Chat.
+* Fixed provider and Quick Query loading for standard DV AI Assistant users.
+* Fixed Notable Event Triage Audit event correlation.
+* General stability and reliability improvements.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;AI-powered Splunk security operations with natural-language SPL, Splunk ES notable-event triage, autonomous triage, multi-LLM support, knowledge-base context, guarded actions, role-based access, and firewall-ready IP block lists.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;DV AI Assistant is an AI-powered security operations application for Splunk designed to help SOC teams investigate security events, generate and execute SPL, and triage Splunk Enterprise Security notable events.
+
+The application provides an AI Command Center for natural-language interaction with Splunk data and an AI Triage Center for manual or autonomous notable-event analysis. It supports multiple LLM providers including Ollama, OpenAI, Google Gemini, and custom endpoints, and can use a configurable knowledge base to provide environment-specific context to the AI.
+
+DV AI Assistant includes security controls for AI-generated actions and searches. Generated SPL is passed through guardrails before autonomous execution to prevent write or side-effecting commands. IP block and unblock actions require explicit confirmation and the block_ip capability. Built-in admin and sc_admin roles receive this capability by default, while the dv_ai_action role can be assigned separately when block/unblock permission is required.
+
+Blocked IP addresses are maintained by the application and exported as a plain-text firewall-consumable list, allowing external firewalls or security controls to retrieve the current block list.
+
+The application also includes an autonomous triage worker. When Auto Triage is enabled, the scripted input runs every 60 seconds by default, identifies eligible unprocessed Splunk ES notable events, sends the complete event context for AI analysis, and writes the resulting triage report back to the notable event.
+
+Role-based access is provided through dv_ai_user, dv_ai_admin, and dv_ai_action roles. Standard users can access AI Chat and AI Alert Triage, while administrative configuration areas such as AI Providers, Data Context Mapping, Audit, and App Settings are restricted to authorized administrators.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/7323cd54-9ca3-11f1-8e76-ba648af39907.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Mustafa YILMAZ</dc:creator>
+      <pubDate>Thu, 20 Aug 2026 14:36:46 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9491/#v1.0.1</guid>
+    </item>
     <item>
       <title>Threat Hunting Essentials - v1.3.84 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7633/</link>
@@ -999,24 +1024,6 @@ The app includes:
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Mustafa YILMAZ</dc:creator>
       <pubDate>Mon, 17 Aug 2026 12:07:38 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/9525/#v1.0.1</guid>
-    </item>
-    <item>
-      <title>DV AI Assistant - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/9491/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;AI-powered Splunk security operations with natural-language SPL, Splunk ES notable-event triage, autonomous triage, multi-LLM support, knowledge-base context, guarded actions, role-based access, and firewall-ready IP block lists.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;DV AI Assistant is an AI-powered security operations application for Splunk designed to help SOC teams investigate security events, generate and execute SPL, and triage Splunk Enterprise Security notable events.
-
-The application provides an AI Command Center for natural-language interaction with Splunk data and an AI Triage Center for manual or autonomous notable-event analysis. It supports multiple LLM providers including Ollama, OpenAI, Google Gemini, and custom endpoints, and can use a configurable knowledge base to provide environment-specific context to the AI.
-
-DV AI Assistant includes security controls for AI-generated actions and searches. Generated SPL is passed through guardrails before autonomous execution to prevent write or side-effecting commands. IP block and unblock actions require explicit confirmation and the block_ip capability. Built-in admin and sc_admin roles receive this capability by default, while the dv_ai_action role can be assigned separately when block/unblock permission is required.
-
-Blocked IP addresses are maintained by the application and exported as a plain-text firewall-consumable list, allowing external firewalls or security controls to retrieve the current block list.
-
-The application also includes an autonomous triage worker. When Auto Triage is enabled, the scripted input runs every 60 seconds by default, identifies eligible unprocessed Splunk ES notable events, sends the complete event context for AI analysis, and writes the resulting triage report back to the notable event.
-
-Role-based access is provided through dv_ai_user, dv_ai_admin, and dv_ai_action roles. Standard users can access AI Chat and AI Alert Triage, while administrative configuration areas such as AI Providers, Data Context Mapping, Audit, and App Settings are restricted to authorized administrators.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9368eda8-958f-11f1-a762-766689169f1b.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Mustafa YILMAZ</dc:creator>
-      <pubDate>Mon, 17 Aug 2026 11:55:28 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9491/#v1.0.0</guid>
     </item>
     <item>
       <title>mispfuse - v2.2.4 [New App Release]</title>
