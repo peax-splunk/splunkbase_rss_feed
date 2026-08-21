@@ -6,30 +6,27 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Fri, 21 Aug 2026 07:34:53 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 21 Aug 2026 08:28:15 +0000</lastBuildDate>
     <item>
-      <title>EventTimeline - v1.0.3 [Version Update]</title>
+      <title>EventTimeline - v1.0.5 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/9536/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;```
-EventTimeline 1.0.3 is the initial public Splunkbase release.
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;### Improvements
 
-Highlights:
+* Added a compact timeline search engine that performs bounded, entity-specific filtering before normalization.
+* Added an optional **Include role lineage** toggle for AssumeRole parent and child session correlation.
+* Compact mode excludes expensive AssumeRole expansion by default.
+* Improved timeline searches for usernames, IAM roles, S3 buckets, resources, and source IP addresses.
+* Added direct Splunk job tracking and result retrieval.
+* **Stop Search** now cancels the active Splunk search job.
+* Role-lineage panels are displayed only when enriched correlation is enabled.
 
-• Converts Splunk saved-search alerts into normalized investigation findings.
-• Generates chronological AWS CloudTrail timelines organized into before-alert, alert-trigger, and after-alert phases.
-• Uses manual timeline generation by default to reduce search-head workload.
-• Provides optional automatic timeline generation through Setup.
-• Supports configurable investigation windows from 30 minutes to 24 hours.
-• Includes MITRE ATT&amp;CK and kill-chain views.
-• Provides identity, assumed-role, resource, account, source-IP, access-key, event-name, and event-ID pivots.
-• Includes a manual timeline generator for analyst-led investigations.
-• Provides raw-event inspection and Markdown or CSV export.
-• Includes timeline search status, diagnostics, truncation reporting, retry handling, deduplication, and health monitoring.
-• Includes an in-app Saved Search Guide with field requirements and CloudTrail examples.
-• Adds bounded searches and hydration limits for large CloudTrail environments.
-• Does not require an AI provider or external analysis service.
-• Does not include prebuilt detection content; it operates with existing Splunk saved searches and alerts.
-```&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Convert AWS CloudTrail saved-search alerts into chronological investigation timelines with normalized context, MITRE mapping, entity pivots, manual searches, and exportable evidence.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;EventTimeline turns AWS CloudTrail alerts from Splunk saved searches into structured, chronological investigations.
+### Bug Fixes
+
+* Fixed valid Splunk search results sometimes not appearing in the manual timeline.
+* Fixed completed search jobs losing their results during the frontend lifecycle.
+* Fixed empty timelines for valid username, role, bucket, and resource searches.
+* Fixed stale search callbacks replacing newer investigation results.
+* Improved deduplication and result-count accuracy.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Convert AWS CloudTrail saved-search alerts into chronological investigation timelines with normalized context, MITRE mapping, entity pivots, manual searches, and exportable evidence.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;EventTimeline turns AWS CloudTrail alerts from Splunk saved searches into structured, chronological investigations.
 
 When a saved search triggers, EventTimeline creates a normalized finding containing the alert context, actor, resource, source IP, account, API action, severity, and event timestamp. Analysts can then fetch related CloudTrail activity for a selected investigation window and review what happened before, during, and after the alert.
 
@@ -37,8 +34,20 @@ EventTimeline includes chronological evidence views, MITRE ATT&amp;amp;CK and ki
 
 The app does not include proprietary detection content or require an AI provider. It works with your existing CloudTrail saved searches and allows teams to retain control over their detection logic and investigation workflow.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b438521c-9d32-11f1-8457-d60b57157b84.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">anish upadhya</dc:creator>
-      <pubDate>Fri, 21 Aug 2026 07:34:46 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9536/#v1.0.3</guid>
+      <pubDate>Fri, 21 Aug 2026 07:44:41 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9536/#v1.0.5</guid>
+    </item>
+    <item>
+      <title>ProActive Threat Analysis - v1.0.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7914/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The ProActive File Threat Analysis for Splunk enables organizations to detect and respond to high-confidence indicators of human insider risk by classifying SHA-1 file hashes against NetClean’s ProActive Threat Intelligence API. 
+
+This add-on is designed to support security, compliance, and forensic teams by identifying known Child Sexual Abuse Material (CSAM) within enterprise environments. A positive classification represents a zero false positive signal and should be treated as a high-priority alert within existing incident response workflows. 
+
+By integrating this add-on into Splunk, organizations can operationalize CSAM detection as part of their broader threat detection and insider risk management strategy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a37c406a-9bb0-11f1-bd0f-e60466253034.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Kim Andersson</dc:creator>
+      <pubDate>Fri, 21 Aug 2026 07:37:05 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7914/#v1.0.2</guid>
     </item>
     <item>
       <title>Pubnub Modular Input - v1.5.1 [Version Update]</title>
@@ -761,28 +770,6 @@ Try uberAgent yourself. Setting up a PoC is quick and easy: https://docs.citrix.
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vast limits GmbH</dc:creator>
       <pubDate>Wed, 19 Aug 2026 09:13:53 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/1448/#v8.1.0</guid>
-    </item>
-    <item>
-      <title>uberAgent ESA - Endpoint Security Analytics - v8.1.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5357/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;[https://docs.citrix.com/en-us/uberagent/8-x/whats-new](https://docs.citrix.com/en-us/uberagent/8-0/whats-new)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This is the searchhead app for the uberAgent ESA endpoint security analytics product. See the details tab for other required and optional components of the uberAgent solution.
-
-***************************************************
-Please note that DATA MODEL ACCELERATION NEEDS TO BE ENABLED MANUALLY due to Splunk app certification policies. App versions without these restrictions are part of the download package that is available at https://www.citrix.com/downloads/citrix-monitoring-observability/.
-
-See the documentation for details: https://docs.citrix.com/en-us/uberagent/current-release/kb/installation-upgrade/differences-when-using-uberagent-with-splunk-cloud
-***************************************************
-
-uberAgent is an innovative Windows and macOS user experience monitoring and security analytics product for physical and virtual endpoints.
-
-uberAgent&amp;#x27;s UX highlights include detailed information about boot and logon duration (showing why and when boots/logons are slow), application unresponsiveness detection, network reliability drilldowns, process startup duration, application usage metering, browser performance per website, and remoting protocol insights.
-
-On the security side, uberAgent provides deep visibility at a low data volume through its flexible process tagging engine for identifying risky activity with predefined rules for many common threats.
-
-Try uberAgent yourself. Setting up a PoC is quick and easy: https://docs.citrix.com/en-us/uberagent&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/478ce44c-9568-11f1-ac74-c6bd98d23516.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">vast limits GmbH</dc:creator>
-      <pubDate>Wed, 19 Aug 2026 09:13:49 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5357/#v8.1.0</guid>
     </item>
     <item>
       <title>Technology Add-On for Vectra Detect (JSON) - v1.4.5 [Version Update]</title>
