@@ -6,35 +6,70 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sun, 23 Aug 2026 00:46:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 23 Aug 2026 02:18:57 +0000</lastBuildDate>
     <item>
-      <title>DV IOC Enrichment - v1.0.1 [New App Release]</title>
+      <title>DV AI Assistant - v1.0.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9491/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Fixed AI provider connection testing.
+* Fixed provider deletion and credential cleanup.
+* Fixed Enterprise Security integration credential updates.
+* Improved provider test timeout and TLS behavior.
+* Added server-side guardrail validation before running SPL from AI Chat.
+* Fixed provider and Quick Query loading for standard DV AI Assistant users.
+* Fixed Notable Event Triage Audit event correlation.
+* General stability and reliability improvements.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;AI-powered Splunk security operations with natural-language SPL, Splunk ES notable-event triage, autonomous triage, multi-LLM support, knowledge-base context, guarded actions, role-based access, and firewall-ready IP block lists.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;DV AI Assistant is an AI-powered security operations application for Splunk designed to help SOC teams investigate security events, generate and execute SPL, and triage Splunk Enterprise Security notable events.
+
+The application provides an AI Command Center for natural-language interaction with Splunk data and an AI Triage Center for manual or autonomous notable-event analysis. It supports multiple LLM providers including Ollama, OpenAI, Google Gemini, and custom endpoints, and can use a configurable knowledge base to provide environment-specific context to the AI.
+
+DV AI Assistant includes security controls for AI-generated actions and searches. Generated SPL is passed through guardrails before autonomous execution to prevent write or side-effecting commands. IP block and unblock actions require explicit confirmation and the block_ip capability. Built-in admin and sc_admin roles receive this capability by default, while the dv_ai_action role can be assigned separately when block/unblock permission is required.
+
+Blocked IP addresses are maintained by the application and exported as a plain-text firewall-consumable list, allowing external firewalls or security controls to retrieve the current block list.
+
+The application also includes an autonomous triage worker. When Auto Triage is enabled, the scripted input runs every 60 seconds by default, identifies eligible unprocessed Splunk ES notable events, sends the complete event context for AI analysis, and writes the resulting triage report back to the notable event.
+
+Role-based access is provided through dv_ai_user, dv_ai_admin, and dv_ai_action roles. Standard users can access AI Chat and AI Alert Triage, while administrative configuration areas such as AI Providers, Data Context Mapping, Audit, and App Settings are restricted to authorized administrators.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/7323cd54-9ca3-11f1-8e76-ba648af39907.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Mustafa YILMAZ</dc:creator>
+      <pubDate>Sun, 23 Aug 2026 01:01:59 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9491/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>DV IOC Enrichment - v1.2.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/9525/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Automated VirusTotal and AbuseIPDB enrichment for Splunk ES notable events with quota-aware key rotation, caching, exclusions, and urgency updates.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;DV IOC Enrichment automates threat intelligence enrichment for Splunk Enterprise Security notable events.
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Added MISP and AlienVault OTX provider integrations.
+* Added provider-specific TLS verification, custom CA bundle, and outbound proxy support.
+* Added a Health Check page for application, provider, storage, and Splunk-side checks.
+* Added dashboard evidence drilldown with notable event IDs and normalized provider evidence.
+* Added resumable IOC processing and improved retry, cache, and multi-key quota rotation reliability.
+* Added the `NO MATCH` verdict to distinguish missing intelligence from explicitly clean results.
+* Improved provider fallback, operational dashboard visibility, error handling, and logging.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Automated VirusTotal, AbuseIPDB, MISP, and AlienVault OTX enrichment for Splunk ES notable events with caching, quota-aware key rotation, exclusions, and urgency updates.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;DV IOC Enrichment automates threat intelligence enrichment for Splunk Enterprise Security notable events.
 
-The app extracts IP addresses, domains, URLs, and file hashes from configured notable event fields and queries supported intelligence providers, including VirusTotal and AbuseIPDB. Provider responses are evaluated against configurable thresholds, and malicious findings can automatically update the notable event urgency, add enrichment evidence as an ES comment, and trigger an email notification.
+The app extracts IP addresses, domains, URLs, and file hashes from configured notable event fields and queries supported intelligence providers, including VirusTotal, AbuseIPDB, MISP, and AlienVault OTX. Provider responses are evaluated against configurable thresholds, and malicious findings can automatically update the notable event urgency, add enrichment evidence as an ES comment, and trigger an email notification.
 
-DV IOC Enrichment addresses the operational overhead of manually investigating repeated indicators while preventing unnecessary API usage through configurable caching, exclusion rules, provider-specific quota controls, and multi-key VirusTotal rotation.
+DV IOC Enrichment addresses the operational overhead of manually investigating repeated indicators while preventing unnecessary API usage through configurable caching, exclusion rules, provider-specific quota controls, and multi-key rotation.
 
 Each provider operates independently. If one provider becomes unavailable or reaches its quota, enrichment continues through the remaining providers. Temporarily incomplete events can be retried when provider capacity becomes available again.
 
 The app includes:
 
-* Automatic enrichment of Splunk ES notable events
-* VirusTotal support for IP, domain, URL, and hash indicators
-* AbuseIPDB support for public IP reputation
-* Separate VirusTotal malicious and suspicious thresholds
-* Configurable AbuseIPDB confidence threshold
-* Multiple VirusTotal API keys with quota-aware rotation
-* Per-provider request and quota controls
-* Reusable enrichment cache with configurable TTL
-* Exact, CIDR, IP range, and domain suffix exclusions
-* Automatic urgency updates and ES comments
-* Optional email notifications
-* Operational dashboard and structured internal logging&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+- Automatic enrichment of Splunk ES notable events
+- VirusTotal support for IP, domain, URL, and hash indicators
+- AbuseIPDB support for public IP reputation
+- MISP support for IP, domain, URL, and hash attribute matches
+- AlienVault OTX support for IP, domain, URL, and hash pulse intelligence
+- Configurable provider-specific thresholds
+- Multiple API keys with quota-aware rotation
+- Per-provider request and quota controls
+- Reusable enrichment cache with configurable TTL
+- Exact, CIDR, IP range, and domain suffix exclusions
+- Independent provider fallback and retry handling
+- Automatic urgency updates and ES comments
+- Optional email notifications
+- Operational dashboard with provider evidence drilldown
+- Read-only application Health Check
+- Structured internal logging&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Mustafa YILMAZ</dc:creator>
-      <pubDate>Sun, 23 Aug 2026 00:44:49 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9525/#v1.0.1</guid>
+      <pubDate>Sun, 23 Aug 2026 01:01:49 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9525/#v1.2.0</guid>
     </item>
     <item>
       <title>Threat Hunting Essentials - v1.3.85 [Version Update]</title>
@@ -767,31 +802,6 @@ For details of the support we offer for our Apps , browse to : https://www.baboo
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">BaboonBones Ltd</dc:creator>
       <pubDate>Fri, 21 Aug 2026 04:44:59 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5242/#v1.1.1</guid>
-    </item>
-    <item>
-      <title>DV AI Assistant - v1.0.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/9491/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Fixed AI provider connection testing.
-* Fixed provider deletion and credential cleanup.
-* Fixed Enterprise Security integration credential updates.
-* Improved provider test timeout and TLS behavior.
-* Added server-side guardrail validation before running SPL from AI Chat.
-* Fixed provider and Quick Query loading for standard DV AI Assistant users.
-* Fixed Notable Event Triage Audit event correlation.
-* General stability and reliability improvements.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;AI-powered Splunk security operations with natural-language SPL, Splunk ES notable-event triage, autonomous triage, multi-LLM support, knowledge-base context, guarded actions, role-based access, and firewall-ready IP block lists.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;DV AI Assistant is an AI-powered security operations application for Splunk designed to help SOC teams investigate security events, generate and execute SPL, and triage Splunk Enterprise Security notable events.
-
-The application provides an AI Command Center for natural-language interaction with Splunk data and an AI Triage Center for manual or autonomous notable-event analysis. It supports multiple LLM providers including Ollama, OpenAI, Google Gemini, and custom endpoints, and can use a configurable knowledge base to provide environment-specific context to the AI.
-
-DV AI Assistant includes security controls for AI-generated actions and searches. Generated SPL is passed through guardrails before autonomous execution to prevent write or side-effecting commands. IP block and unblock actions require explicit confirmation and the block_ip capability. Built-in admin and sc_admin roles receive this capability by default, while the dv_ai_action role can be assigned separately when block/unblock permission is required.
-
-Blocked IP addresses are maintained by the application and exported as a plain-text firewall-consumable list, allowing external firewalls or security controls to retrieve the current block list.
-
-The application also includes an autonomous triage worker. When Auto Triage is enabled, the scripted input runs every 60 seconds by default, identifies eligible unprocessed Splunk ES notable events, sends the complete event context for AI analysis, and writes the resulting triage report back to the notable event.
-
-Role-based access is provided through dv_ai_user, dv_ai_admin, and dv_ai_action roles. Standard users can access AI Chat and AI Alert Triage, while administrative configuration areas such as AI Providers, Data Context Mapping, Audit, and App Settings are restricted to authorized administrators.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/7323cd54-9ca3-11f1-8e76-ba648af39907.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Mustafa YILMAZ</dc:creator>
-      <pubDate>Thu, 20 Aug 2026 14:36:46 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9491/#v1.0.1</guid>
     </item>
     <item>
       <title>FalconSearch - v2.6.4 [Version Update]</title>
