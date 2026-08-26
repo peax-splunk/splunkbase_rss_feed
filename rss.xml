@@ -6,7 +6,272 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Wed, 26 Aug 2026 16:10:17 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 26 Aug 2026 18:50:47 +0000</lastBuildDate>
+    <item>
+      <title>Vectra XDR Technology Add-on - v2.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6991/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## Version 2.0.0
+
+**Important — action required after upgrading.** Data inputs configured in v1.1.2 or earlier will no longer be listed on the Inputs page after this upgrade and must be recreated. Configured accounts, credentials and add-on settings are retained and do not need to be re-entered.
+
+### Breaking change: modular input types renamed
+
+All modular input types are now prefixed with `vectra_rux_`:
+
+| Previous (v1.1.2 and earlier) | v2.0.0 and later |
+| --- | --- |
+| `entity_scoring_input` | `vectra_rux_entity_scoring_input` |
+| `detections_input` | `vectra_rux_detections_input` |
+| `audits_input` | `vectra_rux_audits_input` |
+| `lockdown_input` | `vectra_rux_lockdown_input` |
+| `health_input` | `vectra_rux_health_input` |
+
+Earlier releases used generic input-type names that other Splunk technology add-ons can also define. Modular input names are unique per Splunk instance, so where another add-on defined the same name, Splunk could load the wrong input definition or return an error on the Inputs page. Prefixing every Vectra input type guarantees these definitions are unique.
+
+Splunk treats the renamed types as new inputs, which is why data inputs created in v1.1.2 or earlier are not carried forward.
+
+### New features
+
+* **Detection input** — added `Include Triaged`, `Include Info Category` and `From Checkpoint ID`. `From Checkpoint ID` lets collection begin from a specific detection event ID on the first run.
+* **Health input** — added optional collection of EDR and external connector health data: `Get Health EDR`, `Get Health EDR Details`, `Get Health External Connectors` and `Get Health External Connectors Details`. Each dataset is ingested with its own `source` value so it can be searched independently.
+
+### Changes
+
+* Detection, audit and lockdown collection migrated to Vectra RUX API v3.5. Health and entity scoring collection continues to use v3.4.
+* Entity scoring collects from the unified `/entities` endpoint using page-based pagination.
+* The add-on version reported to the Vectra API is now read from `app.conf` at runtime, so it stays accurate across releases.
+* Refreshed Vectra branding for the app icon and navigation logo.
+
+### Upgrade procedure
+
+1. Record the configuration of each existing data input (name, interval, index and Vectra RUX account).
+2. Disable &amp; delete all configured inputs.
+3. Install the v2.0.0 package with the **Upgrade app** option selected.
+4. Restart Splunk. A restart is required for this release.
+5. Recreate each data input from the Inputs page using the values recorded in step 1.
+
+Existing checkpoints are preserved. Recreating an input with the same name resumes collection from where it stopped, avoiding gaps and duplicate events.
+
+### Documentation
+
+* [Upgrade guide: v1.1.2 to v2.0.0](https://docs.vectra.ai/configuration/response/siem/upgrade-guide-vectra-xdr-technology-add-on-v1.1.2-to-vectra-rux-technology-add-on-v2.0.0)
+* [Splunk On-Prem integration guide](https://docs.vectra.ai/configuration/response/siem/splunk-siem-vectra-integration-guide-start-here-for-rux)
+* [Splunk Cloud integration guide](https://docs.vectra.ai/configuration/response/siem/splunk-siem-vectra-integration-guide-start-here-for-rux-1)
+
+### Support
+
+Email [support@vectra.ai](mailto:support@vectra.ai)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Vectra AI is the leader in AI-driven threat detection and response for hybrid and multi-cloud enterprises. Organizations worldwide rely on Vectra to stay ahead of modern cyber-attacks. The Vectra AI App enables the security operations team to consume the industry&amp;#x27;s richest threat signals spanning public cloud, SaaS, identity and data center networks inside of Splunk.  
+
+The Vectra XDR Technology Add-on pulls entity scoring data, detection data, audit data, lockdown data and health data from the Vectra platform and does CIM mapping on detection and audit data.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e274c8fa-a178-11f1-8a99-3261d15ff290.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Vectra AI</dc:creator>
+      <pubDate>Wed, 26 Aug 2026 18:11:59 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6991/#v2.0.0</guid>
+    </item>
+    <item>
+      <title>Vectra XDR App - v2.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6992/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## Version 2.0.0
+
+### New
+
+- **Configuration dashboard** — select the Vectra data index from the UI. The app writes the index macro for you, so there is no longer any need to edit search macros manually.
+- **Click-to-filter on every chart** — clicking a series or a pie slice applies the matching dashboard filter, leaving the selected time range unchanged.
+- **Traffic entity type** in Lockdown, supported in the Entity Type filter, the trend chart and the table.
+
+### Improved
+
+- Refreshed layout and styling across the Entities, Detections, Audit, Lockdown and Health dashboards: summary tiles, card-style panels, grouped filter panels, and clearer tables with expandable rows and a per-page row count.
+- **Data Source Type** is now consistent between the filter, the table column and the charts on both Entities and Detections. The Azure category is labelled **Microsoft Azure** throughout.
+- **Pivot to Vectra** links now carry the current app version automatically.
+- Vectra branding applied to the app icon, browser favicon and dashboard header.
+
+### Fixed
+
+- Network detections whose entity name began with a cloud prefix (for example `AWS:` or `O365:`) were classified under the wrong data source.
+- Entity names could appear blank for Account entities with no source prefix.
+- The Entities **Data Source Type** column could show a different value from the filter that had been applied.
+
+### Upgrade notes
+
+- Requires **Vectra XDR Technology Add-on 2.0.0 or later** for the EDR and External Connectors health dashboards. Below that version these two dashboards show an upgrade prompt instead of content.
+- After upgrading, set your data index on the **Configuration** dashboard.
+- **Data Source Type values have changed.** Filters now use `AWS`, `Microsoft 365 / Azure AD`, `Microsoft Azure` and `Network`. Review any saved searches, reports or alerts that filter on these values.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Vectra AI is the leader in AI-driven threat detection and response for hybrid and multi-cloud enterprises. Organizations worldwide rely on Vectra to stay ahead of modern cyber-attacks. The Vectra AI App enables the security operations team to consume the industry&amp;#x27;s richest threat signals spanning public cloud, SaaS, identity and data center networks inside of Splunk.
+
+The Vectra XDR App builds a dashboard from data provided by Vectra XDR Technology Add-on for Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/6e9f0392-a177-11f1-aed9-be83659393b1.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Vectra AI</dc:creator>
+      <pubDate>Wed, 26 Aug 2026 18:02:38 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6992/#v2.0.0</guid>
+    </item>
+    <item>
+      <title>Corelight App For Splunk - v2.6.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/3884/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;### New Features
+- Dashboards
+  - Data Insights
+    - **Shadow AI Insights** – Provides visibility into generative AI adoption, shadow AI usage, and associated risks across the enterprise.
+  - Security Workflows
+    - **Network Performance Anomalies (NPA)** – Tracks and detects network performance issues such as high RTT, slow handshake times, and DNS response anomalies.
+    - **Post-Quantum Cryptography (PQC)** – Assesses organizational readiness for quantum-safe algorithms in SSH and TLS protocols to mitigate &quot;harvest now, decrypt later&quot; threats.
+  - Data Explorer
+    - **Application Discovery** – Facilitates the discovery and categorization of network applications using `app` field data from `conn.log`.
+### Improvements
+- Dashboards
+  - **Anomaly Detection Details** – Consolidated multiple specific anomaly detail dashboards (e.g., RDP, SSH, Admin Shares, HTTP User Agents) into a single, unified Anomaly Detection Details dashboard for a more streamlined investigation workflow.
+- Sourcetypes
+  - Added `corelight_net_perf` for network performance monitoring.
+  - Added `corelight_websocket` for visibility into WebSocket traffic.
+- CIM Compliance
+  - Improved `url` extraction for HTTP and HTTP2 logs, providing more accurate protocol and port representation.
+  - Enhanced mapping for SSL/TLS, including certificate validity status and hashing for better security auditing.
+  - Added or improved `uid` extraction across multiple sourcetypes to enable more robust correlation between related events.
+  - Updated eventtypes, tags, and field aliases to improve overall integration with Splunk Data Models.
+- General
+  - Updated lookup configurations to remove versioning from file names, ensuring greater stability during app upgrades.
+### Bug Fixes
+- Fixed a typo in a sourcetype name that prevented correct log parsing.
+- Fixed variable replacement logic in `corelight_use_cases.csv` to ensure correct information is displayed in dashboards.
+- Various SPL optimizations and bug fixes across multiple dashboards to improve performance and data accuracy.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Corelight App for Splunk enables incident responders and threat hunters who use Splunk® and Splunk Enterprise Security to work faster and more effectively. The app and required TA extracts information and knowledge from Zeek (formerly known as Bro) via Corelight Sensors or open-source Zeek, resulting in powerful security insights through key traffic dashboards such as:
+
+Intel: Find IOCs from external sources matched in network traffic.
+
+Notices: See situations flagged by the Notice policy for further investigation.
+
+IP Interrogation: Identify anomalies by reviewing top protocol usage, internal vs. external connections, top connections by bytes transferred and more.
+
+Log Hunting: Accelerate your hunt by narrowing down many logs to only the logs that matter.
+
+Detections: Find and respond to off-port protocol usage, IOC matches, and other potentially interesting events.
+
+Connections: Gain situational awareness using lists of top services, ports, dataflows, originators, and responders.
+
+HTTP: Find suspicious HTTP transactions by reviewing a list of top host headers, originators, rare user agents and rare host headers.
+
+DNS: Detect DNS exfiltration by spotting queries to non-existent domains and high connection counts.
+
+Files: Find executables hidden in benign extensions and compressed files.
+
+Corelight Egress Monitor: Find risky North/South user connections to weak SSL versions.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/dad21a08-a169-11f1-a0b5-feb4c43d03b9.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Corelight Inc</dc:creator>
+      <pubDate>Wed, 26 Aug 2026 18:00:51 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/3884/#v2.6.1</guid>
+    </item>
+    <item>
+      <title>EventTimeline - v1.0.12 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9536/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Standard Splunk `user` can discover and open EventTimeline
+* Findings, timelines, settings, and triage access verified
+* Setup and Timeline Health remain admin-only&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Convert AWS CloudTrail saved-search alerts into chronological investigation timelines with normalized context, MITRE mapping, entity pivots, manual searches, and exportable evidence.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;EventTimeline turns AWS CloudTrail alerts from Splunk saved searches into structured, chronological investigations.
+
+When a saved search triggers, EventTimeline creates a normalized finding containing the alert context, actor, resource, source IP, account, API action, severity, and event timestamp. Analysts can then fetch related CloudTrail activity for a selected investigation window and review what happened before, during, and after the alert.
+
+EventTimeline includes chronological evidence views, MITRE ATT&amp;amp;CK and kill-chain context, identity and resource pivots, raw-event access, timeline filtering, Markdown export, a manual timeline generator, and timeline health diagnostics.
+
+The app does not include proprietary detection content or require an AI provider. It works with your existing CloudTrail saved searches and allows teams to retain control over their detection logic and investigation workflow.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/76dee76c-a14e-11f1-9e40-8e226c025181.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">anish upadhya</dc:creator>
+      <pubDate>Wed, 26 Aug 2026 17:15:21 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9536/#v1.0.12</guid>
+    </item>
+    <item>
+      <title>Cisco Enterprise Networking NetFlow Add-on for Splunk - v4.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6872/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;#### Highlights
+
+* **Product family alignment:** Renamed the package to **Cisco Enterprise Networking NetFlow Add-on for Splunk** and coordinated version 4.0.0 with the App and core Add-on. The existing `splunk_app_stream_ipfix_cisco_hsl` application ID and Stream compatibility identifiers remain unchanged.
+* **Expanded IPFIX v10 decoding:** Added Cisco Catalyst SD-WAN Unified Logging mappings for firewall, intrusion prevention, URL filtering, Advanced Malware Protection, application, transport locator, and Bidirectional Forwarding Detection fields.
+* **Validated drop-reason fields:** Added validated Cisco enterprise elements for firewall drop-reason identifiers and names.
+* **Safer Stream lifecycle:** Removed duplicate aliases that blocked destination-index updates and shipped the Cisco Stream definition disabled until an operator selects the intended index.
+* **Improved field documentation:** Added a 251-field reference that distinguishes directly aligned Common Information Model fields, fields requiring normalization, and fields without a direct mapping.
+* **Clear application guidance:** Added **Application Setup** and **About this add-on** content explaining package responsibilities, deployment placement, the Splunk Stream data path, and the handoff to the guided workflow in the core Add-on.
+* **Package metadata integrity:** Made source `app.conf` authoritative for the display name and added build validation that prevents stale secondary metadata from restoring a retired name.
+* **Coordinated release:** Aligned the package at version 4.0.0 with **Cisco Enterprise Networking App for Splunk** and **Cisco Enterprise Networking Add-on for Splunk**.
+
+#### Upgrade notes
+
+* NetFlow collection still requires Splunk App for Stream, Splunk Add-on for Stream Forwarders, and Splunk Add-on for Stream Wire Data.
+* Install this package on each Stream Forwarder or Heavy Forwarder that receives Cisco enterprise NetFlow or IPFIX records.
+* Select the intended Stream destination index before enabling the Cisco definition.
+* Enable only the intended definition and validate one canary export before expanding deployment.
+* Production flow events continue to use `sourcetype=stream:netflow`.
+* Use **Cisco Enterprise Networking Add-on for Splunk → Application Setup → Cisco Catalyst SD-WAN → NetFlow** for the guided configuration and validation workflow.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Map Cisco Catalyst SD-WAN enterprise IPFIX and HSL fields in NetFlow data collected through Splunk Stream. Current setup and troubleshooting instructions are in the User Guide included with Cisco Catalyst Add-on for Splunk: https://splunkbase.splunk.com/app/7538&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Cisco Catalyst Enhanced Netflow Add-on for Splunk maps Cisco enterprise IPFIX and High-Speed Logging (HSL) elements in NetFlow data collected from Cisco Catalyst SD-WAN through Splunk Stream.
+
+Current dependency, deployment, receiver, exporter, validation, and troubleshooting instructions are maintained in the User Guide included with Cisco Catalyst Add-on for Splunk: https://splunkbase.splunk.com/app/7538
+
+Author: Cisco Systems
+Support: cisco-en-programmability@cisco.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b09c2bce-a160-11f1-89c8-421a3ca10701.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco Systems, Inc.</dc:creator>
+      <pubDate>Wed, 26 Aug 2026 16:27:58 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6872/#v4.0.0</guid>
+    </item>
+    <item>
+      <title>Cisco Enterprise Networking App for Splunk - v4.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7539/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;#### Highlights
+
+* **Product family alignment:** Standardized the product name as **Cisco Enterprise Networking App for Splunk**. The existing `cisco-catalyst-app` application ID and compatibility identifiers remain unchanged.
+* **Dashboard modernization:** Migrated Cisco network-data dashboards to Dashboard Studio, added six operational intelligence dashboards, improved drilldowns and filter behavior, and retained classic dashboards under **All Legacy Dashboards**.
+* **Consistent visual experience:** Applied an accessible Cisco C3 color system across Dashboard Studio, Simple XML, and the React landing page.
+* **Expanded data model:** Added twelve source-specific datasets for Cisco Catalyst Center, Cisco Catalyst SD-WAN, Cisco Identity Services Engine, Cisco Meraki, and related operational data. The internal `Cisco_Catalyst_App` data-model identifier remains unchanged.
+* **Improved search reliability:** Corrected invalid fields, unresolved tokens, ineffective drilldowns, wildcard handling, and dashboard searches that did not dispatch reliably.
+* **Data-model acceleration visibility:** Added live acceleration status, stale-summary detection, controlled retained-summary support, and guidance for rebuilding summaries after an upgrade.
+* **Reduced acceleration workload:** Changed summary maintenance from every 5 minutes to every 15 minutes, limited concurrent summarization, and retained the 7-day summary range.
+* **Coordinated add-on compatibility:** The app now requires **Cisco Enterprise Networking Add-on for Splunk 4.0.0** or later. Cisco IOS enrichment is owned by the add-on rather than duplicated in the app.
+
+#### Upgrade notes
+
+* Install **Cisco Enterprise Networking Add-on for Splunk 4.0.0** before upgrading the app.
+* Rebuild the `Cisco_Catalyst_App` acceleration summaries because the packaged data-model definition changed.
+* Preserve any deployment-specific `cisco_catalyst_app_index` macro override. Include the ThousandEyes metric index when ThousandEyes data is collected.
+* Use the Overview readiness checks to verify add-on compatibility and acceleration health after the upgrade.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Dashboards and data models for Cisco enterprise networking data. Current installation, dependency, configuration, and troubleshooting instructions are in the User Guide included with Cisco Catalyst Add-on for Splunk (Splunkbase 7538).&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Cisco Enterprise Networking for Splunk Platform provides dashboards and data models for Cisco Catalyst Center, Cisco Catalyst SD-WAN, Cisco Identity Services Engine (ISE), Cisco Cyber Vision, Cisco Meraki, Cisco ThousandEyes, supported Cisco network-device data, and NetFlow.
+
+Current installation, dependency, configuration, validation, and troubleshooting instructions are maintained in the User Guide included with Cisco Catalyst Add-on for Splunk (Splunkbase 7538).
+
+Author: Cisco Systems
+Support: cisco-en-programmability@cisco.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b9b262fa-a160-11f1-838d-9298805aabed.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco Systems, Inc.</dc:creator>
+      <pubDate>Wed, 26 Aug 2026 16:27:56 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7539/#v4.0.0</guid>
+    </item>
+    <item>
+      <title>Cisco Enterprise Networking Add-on for Splunk - v4.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7538/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;#### Highlights
+
+* **Product family alignment:** Renamed the package to **Cisco Enterprise Networking Add-on for Splunk**. The existing `TA_cisco_catalyst` application ID, sourcetypes, stanzas, and compatibility identifiers remain unchanged.
+* **Guided NetFlow configuration:** Added a five-step Cisco Catalyst SD-WAN NetFlow workflow that checks dependencies, guides the NetFlow v9 or IPFIX v10 choice, configures the local Stream receiver, confirms the destination index, and requires canary validation.
+* **Protocol-aware guidance:** Added separate guidance for NetFlow v9 with High Speed Logging and IPFIX v10 with Unified Logging. Suggested ports do not overwrite saved receiver settings.
+* **Safer Stream activation:** Destination-index changes are saved and verified before a disabled Stream definition is enabled. Missing or unverifiable Stream dependencies block unsafe index operations.
+* **NetFlow collection health:** Added NetFlow status to the Data Collection Health overview and a dedicated view for freshness, volume, processing hosts, pipeline rates, destination indexes, and indexed hosts.
+* **Stable migration contracts:** Added self-contained transition eventtypes so current and retained Catalyst Center, Cisco Catalyst SD-WAN, Generic Custom API, and Cisco Identity Services Engine data remain searchable without renaming or reindexing historical events.
+* **Improved syslog collection:** Added supported TLS listener options, corrected Cisco Catalyst SD-WAN firewall framing and fallback routing, and expanded native Unified Threat Defense message parsing.
+* **Improved collection health:** Corrected Catalyst Center device matching and report status, expanded migration-aware health searches, and improved Cisco Identity Services Engine multipart and alarm processing.
+* **Application Setup improvements:** Added a focused full-width workspace, a draggable layout, release badges, consistent product names, sourcetype explanations, and visible diagnostic log levels.
+* **Build and metadata integrity:** Made source `app.conf` authoritative for the package label and aligned macOS, Linux, and Windows packaging behavior.
+
+#### Upgrade notes
+
+* Splunk Enterprise 9.4.0 or later is the supported platform floor.
+* New events use the documented stable sourcetype families. Historical events retain their original sourcetypes; use the supplied transition eventtypes across both.
+* Do not rename or reindex historical data during the migration.
+* Install the required Splunk Stream packages and **Cisco Enterprise Networking NetFlow Add-on for Splunk 4.0.0** on their documented deployment tiers.
+* Validate one representative controller or edge before expanding collection across a large environment.
+* After upgrading the companion app, rebuild the `Cisco_Catalyst_App` acceleration summaries.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collect and normalize data from Cisco Catalyst Center, Cisco Catalyst SD-WAN, Cisco ISE, Cisco Cyber Vision, and supported Cisco network devices. The included User Guide covers installation, deployment, configuration, validation, and troubleshooting.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Cisco Catalyst Add-on for Splunk collects and normalizes API data from Cisco Catalyst Center, Cisco Catalyst SD-WAN, Cisco Identity Services Engine (ISE), and Cisco Cyber Vision. It also provides parsing and knowledge objects for supported Cisco syslog and NetFlow data.
+
+The add-on includes an in-product User Guide with current installation, deployment, configuration, validation, and troubleshooting instructions.
+
+Author: Cisco Systems
+Support: cisco-en-programmability@cisco.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/7df46728-a164-11f1-8a8e-02ec8b602e5e.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco Systems, Inc.</dc:creator>
+      <pubDate>Wed, 26 Aug 2026 16:27:53 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7538/#v4.0.0</guid>
+    </item>
+    <item>
+      <title>TA for Corelight - v2.6.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/3885/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Please see [https://splunkbase.splunk.com/app/3884](https://splunkbase.splunk.com/app/3884) for full release notes.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This is the Indexer TA for the Corelight App.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/df3083f0-a169-11f1-80d0-4a19af0872e0.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Corelight Inc</dc:creator>
+      <pubDate>Wed, 26 Aug 2026 16:20:22 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/3885/#v2.6.1</guid>
+    </item>
     <item>
       <title>Splunk Secure Networking Essentials (Beta) - v1.0.45 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/9257/</link>
@@ -34,22 +299,6 @@ The app is intended for network operations, security operations, IT operations, 
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">OPSWAT MetaDefender</dc:creator>
       <pubDate>Wed, 26 Aug 2026 14:54:42 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/9069/#v1.0.1</guid>
-    </item>
-    <item>
-      <title>EventTimeline - v1.0.11 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/9536/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Optimized Manual Timeline Generator searches for usernames, IAM roles, identity ARNs, assumed-role sessions, and role-session names.
-* Added indexed term filtering and lightweight identity matching before full CloudTrail normalization.
-* Reduced unnecessary search processing and prevented unrelated events from consuming the timeline candidate limit.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Convert AWS CloudTrail saved-search alerts into chronological investigation timelines with normalized context, MITRE mapping, entity pivots, manual searches, and exportable evidence.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;EventTimeline turns AWS CloudTrail alerts from Splunk saved searches into structured, chronological investigations.
-
-When a saved search triggers, EventTimeline creates a normalized finding containing the alert context, actor, resource, source IP, account, API action, severity, and event timestamp. Analysts can then fetch related CloudTrail activity for a selected investigation window and review what happened before, during, and after the alert.
-
-EventTimeline includes chronological evidence views, MITRE ATT&amp;amp;CK and kill-chain context, identity and resource pivots, raw-event access, timeline filtering, Markdown export, a manual timeline generator, and timeline health diagnostics.
-
-The app does not include proprietary detection content or require an AI provider. It works with your existing CloudTrail saved searches and allows teams to retain control over their detection logic and investigation workflow.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/76dee76c-a14e-11f1-9e40-8e226c025181.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">anish upadhya</dc:creator>
-      <pubDate>Wed, 26 Aug 2026 14:48:26 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9536/#v1.0.11</guid>
     </item>
     <item>
       <title>DV AI Assistant - v1.0.1 [Version Update]</title>
@@ -3321,50 +3570,6 @@ See readme.md for more details.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&
       <guid>https://splunkbase.splunk.com/app/5271/#v1.4.5</guid>
     </item>
     <item>
-      <title>Inno Observability - v1.2.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/9379/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Inno Observability 1.2.0
-
-
-
-What's new
-
-\- The app now installs and opens without a license key. Overview, Services, Traces,
-
-&amp;#x20; Infrastructure, Kubernetes, Agents and System Events are all available with built-in
-
-&amp;#x20; sample data, so you can evaluate the workflows before wiring up your own environment.
-
-\- Service Map runs on your own data, so you can see your services in the app right away.
-
-\- New &quot;Data Readiness&quot; screen: checks what you are currently collecting and tells you,
-
-&amp;#x20; screen by screen, what is ready and what is still missing (traces, host metrics,
-
-&amp;#x20; Kubernetes objects, collector telemetry).
-
-\- Licensed capabilities — dashboards on your own data, the dashboard Studio, agent
-
-&amp;#x20; deployment and AI root-cause analysis — are provided by a companion engine and a
-
-&amp;#x20; license key. Your deployment ID is on the License page.
-
-
-
-Notes
-
-\- Splunk Enterprise (on-premises). Splunk Cloud is not supported.
-
-\- User interface available in English, Korean and Japanese.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Inno Observability turns OpenTelemetry spans in your Splunk indexes into ready-made
-APM dashboards — service and endpoint response times, error rates, trace search and a
-span waterfall, plus Kubernetes and host context for the same time window. It reads
-data you already collect and runs entirely inside your own Splunk deployment.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Application observability inside Splunk — service health, trace analysis and
-Kubernetes context, built from the trace data in your own indexes.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f5461ede-9971-11f1-87bd-d6cce1c9a853.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Inno Software</dc:creator>
-      <pubDate>Wed, 19 Aug 2026 05:52:37 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9379/#v1.2.0</guid>
-    </item>
-    <item>
       <title>TheHive/Cortex - v4.2.2 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5329/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;\# Release Notes - v4.2.2: &quot;The Pollen Sieve&quot; 🌼
@@ -3697,91 +3902,6 @@ The Add-on typically imports and enriches data from Netskope API, creating a ric
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Mon, 17 Aug 2026 12:27:33 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6211/#v2.5.1</guid>
-    </item>
-    <item>
-      <title>Microsoft 365 Defender Threat Vulnerability Add-on for Splunk - v2.0.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6470/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Vulnerabilities are flaws in a computer system that weakens the overall security of the device or system.
-And in both small and large organizations it can be quite daunting to keep all devices patched against all vulnerabilities at all times.
-
-This is also troublesome for managers, who need to give compliance reports regarding their systems.
-By utilizing MS Defender Vulnerability framework it is much easier to give a clear answer regarding how well patched your devices are.
-
-Import the Defender data to Splunk and give your organization a boost in both threat insights and security analytics.
-The app comes packaged with one example dashboard to give you an idea of how to use the data.
-It also CIM normalizes the data into the Vulnerability data model, and holds reports that generates ES ready asset lookups for you.
-
-Check out the README for more details.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/82f2a4dc-9a17-11f1-8bb8-7ab544f5313a.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Thomas Hillesøy</dc:creator>
-      <pubDate>Mon, 17 Aug 2026 08:43:37 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6470/#v2.0.2</guid>
-    </item>
-    <item>
-      <title>Splunk Add-on for Microsoft Windows - v11.0.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/742/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;*** Important: Read upgrade instructions and test add-on update before deploying to production ***
-The Splunk Add-on for Windows 5.0.0 introduced breaking changes. If you are upgrading from a version of the Splunk Add-on for Windows that is earlier than 5.0.0, you must follow the documented upgrade instructions to avoid data loss. A best practice is to test the upgraded version in a non-production environment before deploying to production.
-
-Neither the Splunk Add-on for Windows DNS version 1.0.1 nor the Splunk Add-on for Windows Active Directory version 1.0.0 is supported when installed alongside the Splunk Add-on for Windows version 6.0.0. The Splunk Add-on for Windows version 6.0.0 includes the Splunk Add-on for Windows DNS and the Splunk Add-on for Microsoft Active Directory.
-
-The Splunk for Microsoft Windows add-on includes predefined inputs to collect data from Windows systems and maps to normalize the data to the Common Information Model.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/50382bd2-9a0f-11f1-a713-8eefeb85aa85.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Mon, 17 Aug 2026 07:46:48 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/742/#v11.0.2</guid>
-    </item>
-    <item>
-      <title>Splunk Add-on for Box - v5.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/2679/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;*** Important: Read upgrade instructions and test your update before deploying to production ***
-Version 2.0.0 of the Splunk Add-on for Box introduces breaking changes. To avoid data loss or data duplication, follow the documented upgrade instructions. If your are upgrading from an earlier version, a best practice is to test your update in a non-production environment before deploying to production.
-
-The Splunk Add-on for Box allows a Splunk software administrator to collect data from Box and monitor Box events in near real time. The add-on can collect the following data via the Box REST APIs:
-* Enterprise events
-* Metadata about files and folders
-* User and user group data
-* Collaboration data for folders
-* Tasks data for files&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0b1251a0-9a09-11f1-8832-a251be47410e.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Mon, 17 Aug 2026 07:12:01 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/2679/#v5.0.0</guid>
-    </item>
-    <item>
-      <title>Splunk Add-on for BMC Remedy - v5.7.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/3087/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Add-on for BMC Remedy enables a Splunk software administrator to create and update incidents in a Remedy system from the Splunk platform. This add-on does not collect any data.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c5237984-9a09-11f1-a44d-ea15ad7a6800.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Mon, 17 Aug 2026 07:11:52 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/3087/#v5.7.1</guid>
-    </item>
-    <item>
-      <title>Splunk Add-on for Citrix NetScaler - v8.2.4 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/2770/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Add-on for Citrix NetScaler allows a Splunk software administrator to collect data from Citrix NetScaler servers using syslog, IPFIX, and the NITRO API. This add-on provides the inputs as well as CIM and ITSI compatible knowledge to use with other Splunk apps, such as Splunk Enterprise Security and the Splunk App for PCI Compliance.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/20a41e26-9a0a-11f1-9a95-c2d480950ce5.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Mon, 17 Aug 2026 07:11:41 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/2770/#v8.2.4</guid>
-    </item>
-    <item>
-      <title>Red Hat Event Driven Ansible Add-on For Splunk - v1.2.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7868/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Add Compatibility for Splunk ITSI 5.0.0
-* Support All Platforms - Splunk Enterprise / ES / ITSI 4.x / ITSI 5.x
-* Restore base.html - missing in 1.1.0
-* Add Rulebook and Playbook examples for ITSI&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Enhance your Splunk instance by connecting it to the power of Ansible automation.
-This add-on provides a custom alert action that sends critical events from Splunk directly to the Red Hat Ansible Automation Platform.
-
-With this integration, you can automatically trigger Ansible rulebooks and playbooks in response to security threats or operational issues.
-
-Requirements:
-- The Red Hat Event-Driven Ansible Add-on for Splunk (this app)
-- Ansible Automation Platform with an active Event-Driven Ansible Controller to receive events and launch automations.
-
-Use Cases:
-1. Custom Alert Action triggered by a saved search in Splunk Core and Splunk Enterprise Security (ES).
-2. Episode Action called in the Episode Review page of Splunk IT Service Intelligence (ITSI)&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2f389dec-9977-11f1-8e06-2e4409467398.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Red Hat</dc:creator>
-      <pubDate>Sun, 16 Aug 2026 13:48:44 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7868/#v1.2.0</guid>
     </item>
   </channel>
 </rss>
