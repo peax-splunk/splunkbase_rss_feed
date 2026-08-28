@@ -6,7 +6,159 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Fri, 28 Aug 2026 08:06:11 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 28 Aug 2026 20:30:42 +0000</lastBuildDate>
+    <item>
+      <title>SPLap - Motorsport Telemetry Lab - v2.1.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9608/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;SPLap 2.1.1 (first Splunkbase release)
+
+
+
+Real session showcase: 2025 Italian Grand Prix, Monza (OpenF1 session 9912), race window 14:00-14:13:30 UTC, packaged as lookups and static replay assets. Circuit geometry (centreline, pit lane, sectors, DRS zones, 11 numbered corners) derived from the cars' GPS.
+
+
+
+Pit Wall: hybrid SVG + Canvas renderer, livery-coloured car glyphs with collision-aware labels, timing tower (gap/interval, tyre, pit, position change, fastest lap), driver card, hover card, 60 s traces, layers, broadcast mode, 0.25x-4x replay, jump to pit/overtake/flag, team-radio markers, lap counter, weather plate, share-moment link. Zero searches per animation frame.
+
+
+
+Lap Delta and Incident Review run on the real session: distance-aligned laps with per-corner metrics; 30 s evidence windows around race-control messages, overtakes, pit stops and team radio.
+
+
+
+Race Engineer: deterministic findings (rules 2.1.1) with version, confidence, provenance, evidence and SPL.
+
+
+
+Canonical schema splap.canonical/1: one index, 17 splap:\* sourcetypes, provenance on every event, per-session capability object, idempotent import\_id.
+
+
+
+Connect Data: browser import wizard (OpenF1), offline race bundles with SHA-256 checksums, CSV/NDJSON upload; Python CLI tools/splap\_import.py with REST or HEC ingest. No credentials in browser code.
+
+
+
+Install Doctor: 28 executed checks and a secret-redacted diagnostic bundle. Synthetic Demo Race 07 fixture retained for SPL Garage, Strategy Lab and Labs, and as labelled \*\_synthetic views.
+
+
+
+Tested on Splunk Enterprise 10.4 (Linux) and validated by AppInspect for Splunk Cloud Platform. Known limitations: bundled telemetry covers a 13.5-minute race window (import the full race from Connect Data); track width is a modeled constant; the live plane is not available in this release. Race data courtesy of OpenF1 under its non-commercial terms.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;A real Formula 1 race, replayed inside Splunk. Watch the 2025 Italian GP lap by lap, click any panel for its SPL, and import any race weekend you want. No internet, no LLM, installs in a minute. A father-daughter project.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;SPLap is a motorsport telemetry lab for Splunk. Install one package and the 2025 Italian Grand Prix is already replaying: 20 cars on a Monza map drawn from the cars&amp;#x27; own GPS, a timing tower, per-driver telemetry, and deterministic Race Engineer findings. The SPL behind every panel is one click away.
+
+Pit Wall
+Live replay at broadcast pace. Pick a driver, scrub to any lap, watch the battles unfold. Attract mode hops between overtakes, pit stops and flags on its own.
+
+Position Worm
+The whole race on one canvas: every position change, pit stop and flag period for all 20 drivers. Click anywhere to jump the replay to that exact moment.
+
+Lap Delta and Incident Review
+Compare any two drivers lap by lap, and audit every race control message against the telemetry around it.
+
+Race Engineer
+Deterministic findings such as undercuts, tyre offsets and pace collapses, computed in SPL. No LLM. Every finding shows the search that produced it.
+
+Bring your own race
+The Connect Data wizard imports any session from the community OpenF1 API, and featured race weekends import with one click. Imported sessions get the same views as Monza.
+
+Runs anywhere
+No setup, no API key, no internet needed for the packaged race. Works on Splunk Enterprise 10.x and Splunk Cloud. Free and non-commercial (OpenF1 data terms).
+
+Co-developed by Lloyd Clark and Lilli. We are both big F1 nerds; this started as a father-daughter weekend project. Site and docs: https://splap.dev
+
+SPLap is an independent project, not affiliated with, endorsed by or sponsored by Splunk LLC, Formula One Licensing BV, the FIA, any team, driver or circuit. Race data is provided by OpenF1 under its non-commercial terms; no official logos, sponsor graphics or car images are used and team colours are curated approximations.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9afad6a8-a2ff-11f1-96f7-8e02f1043ad7.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Lloyd Clark</dc:creator>
+      <pubDate>Fri, 28 Aug 2026 17:41:19 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9608/#v2.1.1</guid>
+    </item>
+    <item>
+      <title>Atlas Software Platform for Splunk - v5.1.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5614/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;[Review our Documentation Online!](https://docs.atlas.kinneygroup.com/docs/references/release-notes#atlas-version-510 &quot;Review our Documentation Online!&quot;)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Atlas™ is the premier enablement platform for Splunk. Whatever you’re creating in Splunk, be it powerful dashboards, incredible insights, more secure IT environments, or the analytics you need to generate business results, Atlas is jet fuel for your Splunk journey.
+
+With knowledge from 650+ Splunk engagements, we&amp;#x27;ve developed a comprehensive platform that combines software tools and expert services to help organizations maximize their Splunk investment and overcome common challenges.
+
+The Atlas Platform consists of:
+
+1. Atlas Assessment: Atlas Assessment provides high-level insights into what&amp;#x27;s working in your Splunk environment, what could be tuned, and how Atlas can help you manage your Splunk environment more effectively
+
+2. Atlas Software Suite: The Atlas Platform&amp;#x27;s Application Suite helps you speed up powerful searches, manage your data sources, optimize your license utilization, and get more value from your investment in Splunk.
+
+3. Atlas Expertise on Demand (EoD): EoD is the fastest and easiest way to solve pressing Splunk challenges and extend the Splunk capabilities of your team. Get on-demand access to our team of Splunk certified professionals for guidance, troubleshooting, custom development, and knowledge transfer.
+
+Atlas Benefits:
+- Faster time-to-value for Splunk implementation (Enterprise or Cloud)
+- Enhanced operation efficiency
+- Lower total cost of ownership
+- Access to specialized expertise
+- Continuous Environment Improvement
+
+Atlas combines technology and expertise to transform your data into actionable insights and measurable business outcomes. Whether you&amp;#x27;re just starting with Splunk or looking to enhance an established environment, the Atlas Platform provides the tools and knowledge to accelerate your success.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/cf8ce896-a2fc-11f1-bafc-9e1182ebe77d.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Presidio - Key Partner Acct</dc:creator>
+      <pubDate>Fri, 28 Aug 2026 16:33:18 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5614/#v5.1.0</guid>
+    </item>
+    <item>
+      <title>Threat Hunting Essentials - v1.3.92 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7633/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
+
+For Premium Version - Contact sales https://www.avertpoint.com/contactus.html
+
+It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
+
+Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
+
+1. Backdoor.
+2. Worms.
+3. Ransomware.
+4. Bots.
+5. Trojan horses.
+6. Keyloggers.
+7. Rootkits.
+8. Spyware.
+9. Fileless malware.
+10. Cryptojacking.
+11. Wiper malware.
+12. Adware.
+14. Viruses
+15. P2P-Worm
+16. Internet Worms
+17. Net-worm
+18. Clickjacking
+19. Cryptominer
+20. Fileless malware
+
+You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
+
+Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d10b553c-a2d3-11f1-a0fb-9a22e7c897a8.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
+      <pubDate>Fri, 28 Aug 2026 14:28:17 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.92</guid>
+    </item>
+    <item>
+      <title>Splunk Add-on for Google Workspace - v5.0.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5556/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Configuration fix to ensure compatibility with future Splunk versions&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk Add-on for Google Workspace lets a Splunk administrator collect Google Workspace event data using Google Workspace APIs, and provides CIM-compatible knowledge to use with other Splunk apps.
+
+Version 2.8.1 of the Splunk Add-on for Google Workspace has the following new features:
+Fixed issues with gmail_logs_migrated input
+
+From version 2.8.0, Splunk Add-on for Google Workspace contains the following new sourcetypes:
+
+gws:reports:chat
+gws:reports:mobile
+gws:reports:chrome&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/dd7c4ed6-a2d6-11f1-90d0-326654c07830.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Fri, 28 Aug 2026 13:22:33 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5556/#v5.0.1</guid>
+    </item>
+    <item>
+      <title>Splunk Remote Upgrader for Linux Universal Forwarders - v1.0.7 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7699/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Security update&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Remote Upgrader for Linux Universal Forwarders is used to remotely upgrade your universal forwarder for Linux. You install the upgrader on the same Linux instance as your universal forwarder. The upgrader then monitors for new universal forwarder packages in a predefined folder and if a new universal forwarder package is found, the upgrader upgrades the universal forwarder with that package.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Fri, 28 Aug 2026 10:06:00 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7699/#v1.0.7</guid>
+    </item>
     <item>
       <title>Splunk AI Toolkit - v6.1.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/2890/</link>
@@ -43,20 +195,6 @@ Smart Assistants (new assistants with revamped UI and better ml pipeline/experim
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Fri, 28 Aug 2026 06:16:23 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/2890/#v6.1.0</guid>
-    </item>
-    <item>
-      <title>ProActive Threat Analysis - v1.0.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7914/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Enhanced NetClean ProActive API: Updated legacy endpoint string to align with the latest NetClean ProActive Cloud API standards.
-* Improved Tenant Management: Configurable support for all NetClean ProActive tenant information directly within the app.
-* General Maintenance: Includes minor bug fixes and performance optimizations.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The ProActive File Threat Analysis for Splunk enables organizations to detect and respond to high-confidence indicators of human insider risk by classifying SHA-1 file hashes against NetClean’s ProActive Threat Intelligence API. 
-
-This add-on is designed to support security, compliance, and forensic teams by identifying known Child Sexual Abuse Material (CSAM) within enterprise environments. A positive classification represents a zero false positive signal and should be treated as a high-priority alert within existing incident response workflows. 
-
-By integrating this add-on into Splunk, organizations can operationalize CSAM detection as part of their broader threat detection and insider risk management strategy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a37c406a-9bb0-11f1-bd0f-e60466253034.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Kim Andersson</dc:creator>
-      <pubDate>Fri, 28 Aug 2026 05:43:13 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7914/#v1.0.2</guid>
     </item>
     <item>
       <title>Zero Trust Compliance - v1.1.5 [Version Update]</title>
@@ -482,44 +620,6 @@ The goals of the Splunk Add-on Builder are to:
       <guid>https://splunkbase.splunk.com/app/2962/#v4.5.2</guid>
     </item>
     <item>
-      <title>Threat Hunting Essentials - v1.3.90 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7633/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
-
-For Premium Version - Contact sales https://www.avertpoint.com/contactus.html
-
-It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
-
-Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
-
-1. Backdoor.
-2. Worms.
-3. Ransomware.
-4. Bots.
-5. Trojan horses.
-6. Keyloggers.
-7. Rootkits.
-8. Spyware.
-9. Fileless malware.
-10. Cryptojacking.
-11. Wiper malware.
-12. Adware.
-14. Viruses
-15. P2P-Worm
-16. Internet Worms
-17. Net-worm
-18. Clickjacking
-19. Cryptominer
-20. Fileless malware
-
-You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
-
-Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a6d83394-a20a-11f1-b13c-5ea4452444b9.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
-      <pubDate>Thu, 27 Aug 2026 11:31:14 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.90</guid>
-    </item>
-    <item>
       <title>Riskability - v1.0.2 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/9583/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;# Riskability 1.0.2
@@ -646,62 +746,6 @@ This add-on provides the inputs and CIM-compatible knowledge to use with other S
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Thu, 27 Aug 2026 09:51:25 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/1928/#v11.1.0</guid>
-    </item>
-    <item>
-      <title>SPLap - Motorsport Telemetry Lab - v2.1.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/9608/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;SPLap 2.1.1 (first Splunkbase release)
-
-
-
-Real session showcase: 2025 Italian Grand Prix, Monza (OpenF1 session 9912), race window 14:00-14:13:30 UTC, packaged as lookups and static replay assets. Circuit geometry (centreline, pit lane, sectors, DRS zones, 11 numbered corners) derived from the cars' GPS.
-
-
-
-Pit Wall: hybrid SVG + Canvas renderer, livery-coloured car glyphs with collision-aware labels, timing tower (gap/interval, tyre, pit, position change, fastest lap), driver card, hover card, 60 s traces, layers, broadcast mode, 0.25x-4x replay, jump to pit/overtake/flag, team-radio markers, lap counter, weather plate, share-moment link. Zero searches per animation frame.
-
-
-
-Lap Delta and Incident Review run on the real session: distance-aligned laps with per-corner metrics; 30 s evidence windows around race-control messages, overtakes, pit stops and team radio.
-
-
-
-Race Engineer: deterministic findings (rules 2.1.1) with version, confidence, provenance, evidence and SPL.
-
-
-
-Canonical schema splap.canonical/1: one index, 17 splap:\* sourcetypes, provenance on every event, per-session capability object, idempotent import\_id.
-
-
-
-Connect Data: browser import wizard (OpenF1), offline race bundles with SHA-256 checksums, CSV/NDJSON upload; Python CLI tools/splap\_import.py with REST or HEC ingest. No credentials in browser code.
-
-
-
-Install Doctor: 28 executed checks and a secret-redacted diagnostic bundle. Synthetic Demo Race 07 fixture retained for SPL Garage, Strategy Lab and Labs, and as labelled \*\_synthetic views.
-
-
-
-Tested on Splunk Enterprise 10.4 (Linux) and validated by AppInspect for Splunk Cloud Platform. Known limitations: bundled telemetry covers a 13.5-minute race window (import the full race from Connect Data); track width is a modeled constant; the live plane is not available in this release. Race data courtesy of OpenF1 under its non-commercial terms.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Replay a real Formula 1 race inside Splunk: the 2025 Italian GP on a GPS-derived circuit map with a timing tower, driver telemetry, deterministic race-engineer findings and the SPL behind every panel. Import any historical session. A father-daughter F1 project.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;SPLap is a motorsport telemetry lab for the Splunk platform. Install one package and the 2025 Italian Grand Prix at Monza is already replaying: 20 cars on a circuit map derived from the cars&amp;#x27; own GPS, a timing tower, per-driver telemetry traces and deterministic Race Engineer findings, with the SPL behind every panel one click away. No setup, API key, index, internet access or LLM is required to run it.
-
-What is inside
-- Real session data from the community OpenF1 API: 3.7 Hz location and car telemetry (speed, RPM, gear, throttle, brake, DRS), laps, sectors, stints, pit stops, positions, intervals, race control, weather, overtakes and team radio, packaged as gzip lookups and static replay assets.
-- Canonical schema splap.canonical/1: one index, 17 splap:* sourcetypes with props.conf timestamping, every event tagged observed / derived / modeled / unavailable, a per-session capability object and an idempotent import_id so a session is never indexed twice.
-- Pit Wall: hybrid SVG + Canvas renderer (circuit, pit lane, curbs, sectors, DRS zones, numbered corners; livery-coloured cars with collision-aware labels), 500 ms replay frames interpolated in the browser, 0.25x-4x replay, jump to pit / overtake / flag, data layers, broadcast mode. Zero searches per animation frame, at most four to load.
-- Lap Delta: two real laps aligned by distance with per-corner braking point, minimum speed, throttle reapplication and time gained or lost.
-- Incident Review: a 30-second evidence window around any race-control message, overtake, pit stop or team radio, with map, telemetry, gaps and weather on one cursor.
-- Race Engineer: deterministic rules with rule version, confidence, provenance, evidence and the SPL that reproduces each finding. No LLM.
-- Connect Data: import any historical session from the browser, load an offline race bundle, or use the Python CLI with HEC. Credentials never touch browser code.
-- Install Doctor with 28 executed checks; SPL Garage, Strategy Lab and Labs on a labelled synthetic fixture.
-
-Why Splunk: it ingests a hundred thousand telemetry events without blinking, SPL is made for these time-series questions, and Simple XML plus SplunkJS let us draw a race instead of a bar chart.
-
-Co-developed by Lloyd Clark and Lilli. We are both big F1 nerds; this started as a father-daughter weekend project to learn how real apps get built and to lay the groundwork for modeling race physics. Version 2.1 is the data foundation; the physics is next.
-
-SPLap is an independent project, not affiliated with, endorsed by, sponsored by or certified by Splunk LLC, Formula One Licensing BV, the FIA, any team, driver or circuit. Race data is provided by OpenF1 under its non-commercial terms; no official logos, sponsor graphics or car images are used and team colours are curated approximations.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ec3e1fc4-a10c-11f1-b54d-6ecda62412ed.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Lloyd Clark</dc:creator>
-      <pubDate>Thu, 27 Aug 2026 04:49:18 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9608/#v2.1.1</guid>
     </item>
     <item>
       <title>Globe Viz for Dashboard Studio - v1.0.0 [New App Release]</title>
@@ -3662,48 +3706,6 @@ On receiving the event data, Cyware Orchestrate ingests the Source/Triggered Eve
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyware Labs</dc:creator>
       <pubDate>Wed, 19 Aug 2026 18:16:59 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6405/#v1.1.10</guid>
-    </item>
-    <item>
-      <title>Splunk Add-on for Amazon Web Services (AWS) - v8.2.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/1876/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Add-on for AWS, from version 7.0.0 and above, includes a merge of all the capabilities of the Splunk Add-on for Amazon Security Lake. This allows you to configure the Splunk Add-on for AWS to ingest data across all AWS data sources, facilitating the integration of AWS data into your Splunk platform deployment.
-
-If you use both the Splunk Add-on for Amazon Security Lake as well as the Splunk Add-on for AWS on the same Splunk instance, then you must uninstall the Splunk Add-on for Amazon Security Lake before upgrading the Splunk Add-on for AWS to version 7.0.0 or later in order to avoid any data duplication and discrepancy issues.
-__________________________________________________________________________________________________________
-
-Ingesting data from AWS to Splunk Cloud? Have you tried the new Splunk Data Inputs (Formerly called Data Manager)  yet? Data Inputs makes AWS data ingestion simpler, more automated and centrally managed for you, while co-existing with AWS and/or Kinesis TAs. Read our blog post to learn more about Data Inputs and it’s availability on your Splunk Cloud instance: https://splk.it/3e9F863
-__________________________________________________________________________________________________________
-
-The Splunk Add-on for Amazon Web Services allows a Splunk software administrator to collect:
-* Configuration snapshots, configuration changes, and historical configuration data from the AWS Config service.
-* Metadata for your AWS EC2 instances, reserved instances, and EBS snapshots.
-* Compliance details, compliance summary, and evaluation status of your AWS Config Rules.
-* Assessment Runs and Findings data from the Amazon Inspector service.
-* Management and change events from the AWS CloudTrail service.
-* VPC flow logs and other logs from the CloudWatch Logs service.
-* Performance and billing metrics from the AWS CloudWatch service.
-* Billing reports that you have configured in AWS.
-* S3, CloudFront, and ELB access logs.
-* Generic data from your S3 buckets.
-* Generic data from your Kinesis streams.
-* Generic data from SQS.
-* Security events from Amazon Security Lake
-
-This add-on provides modular inputs and CIM-compatible knowledge to use with other apps, such as the Splunk App for AWS, Splunk Enterprise Security and Splunk IT Service Intelligence.
-
-Versions 5.0.0 and later of the Splunk Add-on for AWS is compatible only with Splunk Enterprise version 8.0.0 and above.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2c0cf996-9b99-11f1-a62e-b2d4c9eab8e3.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Wed, 19 Aug 2026 11:38:44 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/1876/#v8.2.2</guid>
-    </item>
-    <item>
-      <title>Technology Add-On for Vectra Detect (JSON) - v1.4.5 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5271/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Vectra Cognito technology add-on enables users to integrate context from their Cognito deployment into their Splunk SIEM.
-See readme.md for more details.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/73cdf81c-9ba2-11f1-a62e-b2d4c9eab8e3.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Vectra AI</dc:creator>
-      <pubDate>Wed, 19 Aug 2026 07:52:54 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5271/#v1.4.5</guid>
     </item>
   </channel>
 </rss>
