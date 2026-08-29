@@ -6,13 +6,13 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sat, 29 Aug 2026 14:49:39 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 29 Aug 2026 18:02:19 +0000</lastBuildDate>
     <item>
-      <title>Riskability - v1.2.1 [Version Update]</title>
+      <title>Riskability - v1.2.2 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/9583/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;# Riskability 1.2.1
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;# Riskability 1.2.2
 
-Everything since 1.0.2, which is the version currently on this listing. 1.2.1 adds the corrections listed at the end. Only the changes that matter to somebody running the app are listed.
+Everything since 1.0.2, which is the version currently on this listing. 1.2.1 and 1.2.2 add what is listed at the end. Only the changes that matter to somebody running the app are listed.
 
 ## A page about one machine
 
@@ -37,6 +37,16 @@ Lifecycle data describes applications, runtimes, databases, servers and operatin
 A Windows host can now be told which build the vendor currently ships for its release, which update produces that build, and how many revisions behind it is. Windows 11 25H2 shipping as an enablement package over 24H2, and build 26100 being both Windows 11 24H2 and Server 2025, are both handled explicitly.
 
 The panel says current with the feed rather than up to date, and means it: the comparison is inside the host's own servicing branch and edition, so it is never a claim that the release itself is the newest one or is still supported.
+
+## The Riskability Cycle
+
+The landing page shows what the app is doing right now and what it does next. Almost every schedule in Riskability runs hourly, so the panel is a dial: one turn is one cycle of the pipeline. The centre names the next job and counts down to it, the hand marks where in the hour you are, and the lit arc covers the stretch the app is actually working, which on a default install is :05 to :55.
+
+Around the ring is a mark for each scheduled job at its own minute, coloured by how it last finished, and naming itself, its minute and its last duration when hovered. They are deliberately texture rather than a list: which of thirty six runs next matters far less than whether the cycle is turning at all, and a failure shows as a red mark on the ring without needing to be picked out by name.
+
+The two schedules that are not hourly cannot sit on an hour dial, so they are named underneath with when they next run rather than being left out. The panel refreshes every minute, so the countdown is live without reloading the page.
+
+It reads Splunk's own REST endpoints for the schedules and their last runs, and needs no access to any index, so it works for an account that can see the app but not the internal logs. An account that cannot see the schedules at all is told so, rather than being shown an idle pipeline.
 
 ## Hosts that are quiet on purpose
 
@@ -64,7 +74,11 @@ Replace the app and reload. No configuration changes and nothing to do on the fo
 
 The support timeline's look ahead window and product picker are inside that panel now, rather than in a filter bar that implied it filtered the whole page.
 
-Every source in a bundle declares itself in the sources table on Feed administration. Windows update history registered nothing before, so a bundle carrying Microsoft build data did not say so and its attribution was recorded nowhere. The lifecycle source is named for its publisher, endoflife-date, like every other row there.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Correlate the software your fleet already reports against offline CVE databases on a search head with no internet access. Ranks findings by exploitation likelihood and by whether the network can actually reach them. What software is already or soon becoming End Of Life?&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Most vulnerability tooling cannot run where it is needed most. A search head with no route to the internet cannot call an API, pull a feed on a schedule, or fetch a score on demand. Riskability is built for that machine.
+Every source in a bundle declares itself in the sources table on Feed administration. Windows update history registered nothing before, so a bundle carrying Microsoft build data did not say so and its attribution was recorded nowhere. The lifecycle source is named for its publisher, endoflife-date, like every other row there.
+
+## Corrections in 1.2.2
+
+Feed administration reported the Windows update source as unreachable when it was not. Every source was probed with an HTTP HEAD request, and Microsoft's update index answers HEAD with 405 Method Not Allowed while answering the request the builder actually makes with 200. Anyone reading that would have concluded Windows patch data could not be fetched and left it out. A source that refuses HEAD is now asked again the way the real fetch asks.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Correlate the software your fleet already reports against offline CVE databases on a search head with no internet access. Ranks findings by exploitation likelihood and by whether the network can actually reach them. Track software that is already or soon becoming End Of Life!&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Most vulnerability tooling cannot run where it is needed most. A search head with no route to the internet cannot call an API, pull a feed on a schedule, or fetch a score on demand. Riskability is built for that machine.
 
 It takes the software inventory your hosts already report, correlates it against vulnerability databases you carry across the air gap yourself, and answers what a CVE count never does: of everything found, what should somebody actually do tonight?
 
@@ -90,10 +104,10 @@ Accepted risks are recorded in an audit index that is written once and never rew
 
 NO OUTBOUND NETWORK ACCESS
 
-The app makes no outbound requests. You build a feed bundle on a connected machine with the builder the app hands you, carry it across, and import it. Nothing is scheduled at install time.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/886c95d4-a3aa-11f1-90d0-326654c07830.png&quot;&gt;</description>
+The app makes no outbound requests. You build a feed bundle on a connected machine with the builder the app hands you, carry it across, and import it. Nothing is scheduled at install time.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/87560fc2-a3cd-11f1-9f0a-da67833a8486.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Christian Haugan</dc:creator>
-      <pubDate>Sat, 29 Aug 2026 13:11:26 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9583/#v1.2.1</guid>
+      <pubDate>Sat, 29 Aug 2026 17:22:37 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9583/#v1.2.2</guid>
     </item>
     <item>
       <title>EventTimeline - v1.0.12 [Version Update]</title>
