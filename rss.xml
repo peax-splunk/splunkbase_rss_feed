@@ -6,7 +6,163 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sat, 29 Aug 2026 09:41:29 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 29 Aug 2026 14:49:39 +0000</lastBuildDate>
+    <item>
+      <title>Riskability - v1.2.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9583/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;# Riskability 1.2.1
+
+Everything since 1.0.2, which is the version currently on this listing. 1.2.1 adds the corrections listed at the end. Only the changes that matter to somebody running the app are listed.
+
+## A page about one machine
+
+Host detail gathers what the app knows about a single system, built as a dossier rather than a smaller copy of the fleet page. Identity and four clocks in one card: when the collector last ran, when the software last changed, when the host was last compared to the feed, and how old the feed is. Then an assessment ledger of what has been measured and what has not, what to do first, the open findings, the configuration surface the machine is set up to run, what it exposes, its Windows patch level, and what on it is no longer supported.
+
+The ledger is deliberately not a score. Its inputs are missing at unrelated rates, so a score would have to treat missing as zero, which is forbidden, or normalise over what is present, which is monotone the wrong way: the fewer things measured about a host, the better it would score.
+
+## When nobody is going to fix it again
+
+The bundle now carries product and operating system support lifecycles, so the app can report software that has run out of supported releases. This is a different question from a CVE and no advisory answers it.
+
+Support is decided by who ships the copy. A package a distribution installs and maintains is informational while that distribution still supports its release, because vendors backport without changing the upstream version. A package carrying an esm or fips marker in its version string says in its own version that it is being maintained past the ordinary date. A copy no package manager owns is where the upstream date is the whole truth, and only that is reported at high confidence.
+
+A timeline on the Coverage page places every product release found on the fleet at the date its support ends, with everything already past that date included, because a product nobody has fixed for three years is the urgent end of the same timeline. Every row also states how much evidence there is that the software runs, from listening on a routable address down to installed with nothing observed running it. That order ranks evidence, not danger.
+
+Clicking a product on the timeline lists every host carrying it, and a row there opens that machine's own page. The lifecycle source is offered on both feed paths: a checkbox on the direct fetch in Feed administration, and a --lifecycle-file flag for a copy downloaded on a machine with better connectivity.
+
+Lifecycle data describes applications, runtimes, databases, servers and operating system releases rather than every library a distribution ships, so it covers a minority of any inventory and the Coverage page says so.
+
+## Windows patch level, from Microsoft's own data
+
+A Windows host can now be told which build the vendor currently ships for its release, which update produces that build, and how many revisions behind it is. Windows 11 25H2 shipping as an enablement package over 24H2, and build 26100 being both Windows 11 24H2 and Server 2025, are both handled explicitly.
+
+The panel says current with the feed rather than up to date, and means it: the comparison is inside the host's own servicing branch and edition, so it is never a claim that the release itself is the newest one or is still supported.
+
+## Hosts that are quiet on purpose
+
+A host that has not reported for a month is not necessarily broken. Some are collected only after a deliberate change. The app now learns each host's own reporting rhythm and calls it late only against that, rather than against a fixed threshold. Learned rhythms in testing ranged from hourly to once every sixty two days. Hosts that had gone quiet were previously deleted from the app outright and are now kept.
+
+## Findings that were never real
+
+Installer and launcher stubs were catalogued as the software they install, producing findings about software that was not present. Load evidence could cross root boundaries, matching a snap base's library against the host's copy of the same name. On Windows a doubled backslash in a path meant a package could never be recognised as fixed, so an upgraded package stayed open forever. Open findings on the test fleet fell from 5,340 to 2,688, and none of the difference was a vulnerability that stopped being reported.
+
+A finding is also closed only when the source that reported it actually ran again. A collector invoked with a narrower set of sources no longer reads as software having been removed.
+
+## Colour that means the same on every chart
+
+Chart colour was relative to whatever was on screen, so a fleet whose worst case was four findings and one whose worst case was four thousand drew the same picture. Colour is now an absolute scale, and a pale chart is a statement rather than an accident.
+
+## Tables
+
+Date columns take a real range: an exact day, since, before, a span such as 2026-08-01..2026-08-28, and open ended forms such as 2026-08-01 followed by two dots. Columns whose values are typed rather than chosen no longer offer a dropdown of every value in the column. Advisories that never received a CVE number, such as GHSA, USN, DSA and RHSA identifiers, are links rather than plain text.
+
+## Upgrading
+
+Replace the app and reload. No configuration changes and nothing to do on the forwarders or the indexers. The Windows patch level and end of support panels are populated by the next feed you import and say so until then, rather than implying that everything is current and supported.
+
+## Corrections in 1.2.1
+
+The support timeline's look ahead window and product picker are inside that panel now, rather than in a filter bar that implied it filtered the whole page.
+
+Every source in a bundle declares itself in the sources table on Feed administration. Windows update history registered nothing before, so a bundle carrying Microsoft build data did not say so and its attribution was recorded nowhere. The lifecycle source is named for its publisher, endoflife-date, like every other row there.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Correlate the software your fleet already reports against offline CVE databases on a search head with no internet access. Ranks findings by exploitation likelihood and by whether the network can actually reach them. What software is already or soon becoming End Of Life?&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Most vulnerability tooling cannot run where it is needed most. A search head with no route to the internet cannot call an API, pull a feed on a schedule, or fetch a score on demand. Riskability is built for that machine.
+
+It takes the software inventory your hosts already report, correlates it against vulnerability databases you carry across the air gap yourself, and answers what a CVE count never does: of everything found, what should somebody actually do tonight?
+
+THE PROBLEM
+
+A fleet of any size produces tens of thousands of open findings. Severity alone does not reduce that to a working list. CVSS describes how bad a vulnerability would be if exploited, not how likely anyone is to exploit it, and neither knows whether your copy is reachable.
+
+WHAT THIS APP ADDS
+
+Exploitation likelihood. Findings are ranked by EPSS, the published probability that a vulnerability will be exploited in the wild, and by the CISA KEV catalogue of vulnerabilities already observed under exploitation. Both arrive in the feed you import, never fetched live.
+
+Reachability. The collector reports listening ports, the process holding each one, and the containers behind them. Riskability separates findings that answer a network address from those that answer only loopback, and from those with nothing listening at all. On a test fleet that turned 10,206 open findings into 11 that answer the network. It reorders the work. It never shortens it.
+
+End of support. A CVE says a thing is broken. End of support says nobody is going to fix it again, which no advisory states. Product and operating system lifecycles ride in the same bundle, so the app names software that has run out of supported releases, places each on a timeline at the date support ends, and says how much evidence there is that it runs.
+
+One machine at a time. A host page gathers what is known about a single system: what has been measured on it and what has not, what it runs, what it exposes, and its Windows patch level.
+
+WHAT IT REFUSES TO GUESS
+
+Every finding carries a confidence level, and confidence describes the strength of the evidence rather than the severity of the vulnerability. Ubuntu and Red Hat backport fixes without changing the upstream version, so a version comparison alone cannot settle whether such a package is patched. Riskability reports that as informational and says why. The same rule governs end of support: a package a distribution still maintains is not called abandoned because its upstream series finished. A Coverage dashboard lists what the imported data cannot speak to at all, because a gap in visibility is not an absence of risk.
+
+Accepted risks are recorded in an audit index that is written once and never rewritten: who accepted, when, why, and when the acceptance expires.
+
+NO OUTBOUND NETWORK ACCESS
+
+The app makes no outbound requests. You build a feed bundle on a connected machine with the builder the app hands you, carry it across, and import it. Nothing is scheduled at install time.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/886c95d4-a3aa-11f1-90d0-326654c07830.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Christian Haugan</dc:creator>
+      <pubDate>Sat, 29 Aug 2026 13:11:26 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9583/#v1.2.1</guid>
+    </item>
+    <item>
+      <title>EventTimeline - v1.0.12 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9536/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Standard Splunk `user` can discover and open EventTimeline
+* Findings, timelines, settings, and triage access verified
+* Setup and Timeline Health remain admin-only&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Convert AWS CloudTrail saved-search alerts into chronological investigation timelines with normalized context, MITRE mapping, entity pivots, manual searches, and exportable evidence.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;EventTimeline turns AWS CloudTrail alerts from Splunk saved searches into structured, chronological investigations.
+
+When a saved search triggers, EventTimeline creates a normalized finding containing the alert context, actor, resource, source IP, account, API action, severity, and event timestamp. Analysts can then fetch related CloudTrail activity for a selected investigation window and review what happened before, during, and after the alert.
+
+EventTimeline includes chronological evidence views, MITRE ATT&amp;amp;CK and kill-chain context, identity and resource pivots, raw-event access, timeline filtering, Markdown export, a manual timeline generator, and timeline health diagnostics.
+
+The app does not include proprietary detection content or require an AI provider. It works with your existing CloudTrail saved searches and allows teams to retain control over their detection logic and investigation workflow.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/273d6504-a3aa-11f1-a0fb-9a22e7c897a8.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">anish upadhya</dc:creator>
+      <pubDate>Sat, 29 Aug 2026 13:05:49 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9536/#v1.0.12</guid>
+    </item>
+    <item>
+      <title>Inno Observability - v1.3.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9379/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**New — Lost Request Tracing.**&amp;#x20;
+
+For the hardest kind of incident: a request that simply disappears, where the callee never responds and leaves no log. Because the failure is defined by *absence*, ordinary dashboards can't answer it. This screen instead records a **chain of custody across eight handover points** between the two hosts — from the app writing the request to the destination app handling it. The step where the chain breaks is the culprit; everything before it is cleared. A path map shows one row per affected segment, so you can see whether the request never left the caller, vanished between the hosts, or arrived and was dropped inside the destination. Steps it cannot judge are shown as unknown, never as passed — so neither the network nor the application is blamed by default.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Inno Observability turns OpenTelemetry spans in your Splunk indexes into ready-made
+APM dashboards — service and endpoint response times, error rates, trace search and a
+span waterfall, plus Kubernetes and host context for the same time window. It reads
+data you already collect and runs entirely inside your own Splunk deployment.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Application observability inside Splunk — service health, trace analysis and
+Kubernetes context, built from the trace data in your own indexes.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f5182516-a3a2-11f1-bfe8-8285df2daa36.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Inno Software</dc:creator>
+      <pubDate>Sat, 29 Aug 2026 12:18:37 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9379/#v1.3.0</guid>
+    </item>
+    <item>
+      <title>Threat Hunting Essentials - v1.3.93 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7633/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
+
+For Premium Version - Contact sales https://www.avertpoint.com/contactus.html
+
+It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
+
+Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
+
+1. Backdoor.
+2. Worms.
+3. Ransomware.
+4. Bots.
+5. Trojan horses.
+6. Keyloggers.
+7. Rootkits.
+8. Spyware.
+9. Fileless malware.
+10. Cryptojacking.
+11. Wiper malware.
+12. Adware.
+14. Viruses
+15. P2P-Worm
+16. Internet Worms
+17. Net-worm
+18. Clickjacking
+19. Cryptominer
+20. Fileless malware
+
+You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
+
+Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/fbd9c0f4-a39c-11f1-bafc-9e1182ebe77d.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
+      <pubDate>Sat, 29 Aug 2026 12:00:28 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.93</guid>
+    </item>
     <item>
       <title>SPLap - Motorsport Telemetry Lab - v2.1.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/9608/</link>
@@ -95,44 +251,6 @@ Atlas combines technology and expertise to transform your data into actionable i
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Presidio - Key Partner Acct</dc:creator>
       <pubDate>Fri, 28 Aug 2026 16:33:18 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5614/#v5.1.0</guid>
-    </item>
-    <item>
-      <title>Threat Hunting Essentials - v1.3.92 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7633/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
-
-For Premium Version - Contact sales https://www.avertpoint.com/contactus.html
-
-It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
-
-Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
-
-1. Backdoor.
-2. Worms.
-3. Ransomware.
-4. Bots.
-5. Trojan horses.
-6. Keyloggers.
-7. Rootkits.
-8. Spyware.
-9. Fileless malware.
-10. Cryptojacking.
-11. Wiper malware.
-12. Adware.
-14. Viruses
-15. P2P-Worm
-16. Internet Worms
-17. Net-worm
-18. Clickjacking
-19. Cryptominer
-20. Fileless malware
-
-You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
-
-Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d10b553c-a2d3-11f1-a0fb-9a22e7c897a8.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
-      <pubDate>Fri, 28 Aug 2026 14:28:17 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.92</guid>
     </item>
     <item>
       <title>Splunk Add-on for Google Workspace - v5.0.1 [Version Update]</title>
@@ -544,22 +662,6 @@ If you have any questions, please contact us from https://www.invicti.com/contac
       <guid>https://splunkbase.splunk.com/app/9588/#v1.0.0</guid>
     </item>
     <item>
-      <title>EventTimeline - v1.0.12 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/9536/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Standard Splunk `user` can discover and open EventTimeline
-* Findings, timelines, settings, and triage access verified
-* Setup and Timeline Health remain admin-only&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Convert AWS CloudTrail saved-search alerts into chronological investigation timelines with normalized context, MITRE mapping, entity pivots, manual searches, and exportable evidence.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;EventTimeline turns AWS CloudTrail alerts from Splunk saved searches into structured, chronological investigations.
-
-When a saved search triggers, EventTimeline creates a normalized finding containing the alert context, actor, resource, source IP, account, API action, severity, and event timestamp. Analysts can then fetch related CloudTrail activity for a selected investigation window and review what happened before, during, and after the alert.
-
-EventTimeline includes chronological evidence views, MITRE ATT&amp;amp;CK and kill-chain context, identity and resource pivots, raw-event access, timeline filtering, Markdown export, a manual timeline generator, and timeline health diagnostics.
-
-The app does not include proprietary detection content or require an AI provider. It works with your existing CloudTrail saved searches and allows teams to retain control over their detection logic and investigation workflow.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9c5521d0-a236-11f1-96f7-8e02f1043ad7.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">anish upadhya</dc:creator>
-      <pubDate>Thu, 27 Aug 2026 16:47:03 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9536/#v1.0.12</guid>
-    </item>
-    <item>
       <title>Envy Splunk Health - v0.4.2 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/9479/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Documentation only. No dashboard, search, lookup, conf or licensing change.
@@ -618,120 +720,6 @@ The goals of the Splunk Add-on Builder are to:
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Thu, 27 Aug 2026 13:19:03 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/2962/#v4.5.2</guid>
-    </item>
-    <item>
-      <title>Riskability - v1.0.2 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/9583/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;# Riskability 1.0.2
-
-Everything since 0.1.42, which is the version this listing carries. The recent work is about what happens when you click a panel, and about tables that were showing less than they held. Below that is the 1.0.0 release, which was cut but never uploaded here, so this is one changelog rather than two.
-
-## A wrapped path was printed on top of the next column
-
-A wrapped table cell breaks at whitespace, and the values these tables wrap for do not have any: a filesystem path, a package URL, a container digest. With no break opportunity the line ran past its cell and was drawn over the column beside it, so what the reader saw was a word belonging to neither field. Wrapped cells now break inside a value, which is what the cell tooltip already did with the same values.
-
-## The mitigation guidance filled the panel it was meant to explain
-
-MITRE's wording for a control against a technique runs to several hundred words with citation markers in it, and one of those in a table cell is four hundred pixels tall, so two rows filled a panel that exists to be scanned. The citations are dropped and the text is cut to its opening, with the caption saying so and naming where the full version lives.
-
-## Clicking a panel no longer opens the panel's own search
-
-Five panels had no drilldown of their own, so Splunk supplied its default one and a click opened the SPL that drew the panel. That is the dashboard showing its working to somebody who asked a question about their fleet, and on the MITRE ATT&amp;CK page it happened to the panels most likely to be clicked, because those are the ones naming something an operator has not seen before.
-
-Two of them now lead somewhere. Clicking a bar on the configuration surface opens the mechanisms behind it: the cron jobs, timers, services or SUID binaries themselves, with the path, the account each runs as, the schedule, and the package that owns it. No package owns this is called out as the interesting row rather than the alarming one, because it is usually a container or a snap.
-
-Clicking a control on the mitigations chart opens the techniques that control would cover here, each with the reach of the worst finding behind it and MITRE's own guidance for that technique. That guidance is written per technique rather than per control, so showing one of them beside a control's total would have presented one technique's advice as the control's definition. The chart and the table it opens are now generated from a single definition rather than two copies of the same chain, so they cannot drift apart.
-
-Three panels had nothing to drill into and now do nothing rather than falling through to a search. The attack pattern prose already carries the whole answer in the row. The loaded library findings table has a link on every CVE, which is where a finding leads. The fix version diagram draws the feed rather than your fleet, and the panel above it is the one that knows which of those versions you run.
-
-No panel in the app now falls through to a raw search.
-
-## Eleven tables were being cut off at the bottom
-
-The containers panel on Exposure asked for a box 320 pixels tall. The table component carries a floor of 340, so it drew itself taller than the panel and the panel clipped it. Nothing warns and nothing logs, so the panel looks deliberate, and a table cut off at the bottom reads as a table with fewer rows in it than it has. On a panel headed a stopped container is not a safe container, that is the wrong thing to be wrong about.
-
-Eleven panels were below the floor, four of them at 300 pixels. Each is now at least 400, and the lists that are routinely long get more. The floor is written down in the component itself now, beside the rule that sets it.
-
-# What 1.0.0 brought
-
-## The ATT&amp;CK page argues from four kinds of evidence
-
-A CVE used to reach a technique only through its weakness class, and most CVEs fell out of that chain. Three more sources now place a CVE, each labelled by strength, filterable on its own, and never blended into one number.
-
-**Inherited from a parent weakness class.** A CVE tagged with a specific weakness that has no mapping borrows its parent class's, at most two steps toward the root and never from a top level category. A weaker claim than the asserted chain, and marked as one.
-
-**Inferred from the CVSS vector.** The vector needs no weakness class, so it reaches the CVEs the chain cannot. Four rules in the open: network with no privileges to Exploit Public-Facing Application, network with user interaction to Client Execution, adjacent to Exploitation of Remote Services, local scope change with real impact to Privilege Escalation.
-
-**Observed answering the network.** A CVE whose package is measured on a listening socket is placed on Exploit Public-Facing Application as an observation from the collector, the strongest claim on the page.
-
-Measured on a small fleet, CVE placement rose from 23 percent to 69 percent.
-
-## The configuration surface, the half of ATT&amp;CK a CVE feed cannot reach
-
-swinv 0.8.0 reports what a host is configured to run: cron, systemd timers and services, SUID and SGID binaries, each carrying the ATT&amp;CK technique it is the surface for. A new panel shows those techniques, counted in mechanisms because that is what they are, and kept apart from the CVE matrix because a configured mechanism is a different kind of claim from a vulnerability that could enable a technique. A mechanism is not a finding: the collector's own weakness count decides that, carried through untouched. Turn it on with the collector's config include flag.
-
-## The matrix states its own denominator
-
-The caption is now a ledger, computed hourly beside the placement so the two can never disagree: unique open CVEs in scope, how many can be placed and through which source, how many cannot and why, always with the sentence that unplaced is not not-vulnerable. Counts are unique CVEs, not findings, so a large fleet does not inflate the taxonomy.
-
-## The known exploited bridge shows impact, not just exploitation
-
-The bridge kept only the exploitation technique and discarded the impact technique MITRE maps for the same CVE, which for most known exploited CVEs is a second cell. It now shows exploitation, impact, and the ransomware flag implication of data encrypted for impact, each labelled by role, with a drilldown to the findings behind a cell.
-
-## Fast on a large fleet
-
-The matrix expanded every open finding on every page load, which does not survive a large fleet. That expansion now runs once an hour in a scheduled rollup, and the fleet view reads a few hundred precomputed rows in under a second however large the fleet. A single host drilldown still computes live, because one host is small.
-
-## Two defects worth upgrading for
-
-**Three feed members were being truncated to one row.** The bundle writer opened nine member files but counted six, and the counter is incremented after the line is written, so the KEV to ATT&amp;CK mapping, the CAPEC prose and the ATT&amp;CK mitigations each wrote one record and then raised an error the builder swallowed as a failed fetch. Every bundle built with the MITRE flag carried exactly one row of each. One row reads as data on a panel, which is worse than none. A real build now carries 1,183 KEV mappings, 559 CAPEC patterns and 1,448 mitigation edges. Rebuild the feed to pick this up, because the fault was in the builder rather than in the app that reads it.
-
-**Fetch failures never reached the operator.** The builder never passed its failures to the manifest, so the warning banner that Feed administration renders for an incomplete bundle had never once fired, and a bundle built on a host where a source failed imported looking complete. Failures now travel with the bundle.
-
-## Correctness
-
-An rpm version with an empty release now sorts above one with no release and below one with a zero release, matching rpm, where before an empty and an absent release compared equal and could read a vulnerable package as not affected.
-
-The encyclopaedia says why it is empty. Its richest panels read the CVE Program catalogue, which is opt in when the feed is built. Without it the page showed blank panels that read as nothing is known about this CVE, when the truth was this bundle cannot describe it. A banner now names the reason and the flag that fixes it.
-
-## What the version number means
-
-From 1.0.0 the index names, the KV Store collection field lists, the feed bundle members and their schema floor, the dashboard token names and the minimum collector version are things a site can automate against and expect to survive a minor upgrade. Making that promise safe took three pieces of settling work, none of which changes what you see:
-
-The feed schema floor stays where it is, deliberately. Every Riskability released so far refuses a bundle whose manifest schema is not exactly the current value, and that code is installed on search heads with no route to a network. Raising it would refuse every bundle already carried across an air gap, and would stop a bundle built by this version importing into a search head nobody has upgraded yet.
-
-Collection field lists were audited against live data. Seventeen fields that appear unwritten are written only in particular states and are documented as conditional; one was genuinely dead and is removed before the contract freezes it.
-
-The collector version is stated once and checked against the fleet. Install the current swinv, 0.8.0, which is what this app is built against; 0.7.1 is the minimum it tolerates while a fleet is part way through a collector rollout. Coverage now labels the collector version every host already reports in its heartbeat, so a host below the minimum, or one without the configuration surface, says so on the page rather than leaving an empty panel to be read as a clean result.
-
-## Upgrading
-
-Install over the previous version and restart. Nothing needs re-importing: the feed, the findings, the risk acceptances and their audit trail all live in the KV Store and survive the upgrade. Rebuild the feed with the MITRE flag to pick up the corrected bundle members and the new mapping data, and update the two add ons on your forwarders and indexers so the configuration records route.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Correlate the software your fleet already reports against offline CVE databases on a search head with no internet access. Ranks findings by exploitation likelihood and by whether the network can actually reach them. Makes no outbound connections, ever.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Most vulnerability tooling cannot run where it is needed most. A search head with no route to the internet cannot call an API, pull a feed on a schedule, or fetch a score on demand. Riskability is built for exactly that machine.
-
-It takes the software inventory your hosts already report, correlates it against vulnerability databases you carry across the air gap yourself, and answers the question a CVE count never answers: of everything found, what should somebody actually do tonight?
-
-THE PROBLEM
-
-A fleet of any size produces tens of thousands of open findings. Severity alone does not reduce that to a working list. CVSS describes how bad a vulnerability would be if exploited, not how likely anyone is to exploit it, and neither number knows whether your copy of the software is reachable at all.
-
-WHAT THIS APP ADDS
-
-Exploitation likelihood. Findings are ranked by EPSS, the published probability that a vulnerability will be exploited in the wild, and by the CISA KEV catalogue of vulnerabilities already observed under exploitation. Both arrive in the feed you import. Neither is fetched live.
-
-Reachability. The collector reports listening ports, the process holding each one, and the containers behind them. Riskability uses that to separate findings that answer a network address from those that answer only loopback, and from those with nothing listening at all. On a test fleet of two hosts that turns 10,206 open findings into 11 that answer the network. It reorders the work. It never shortens it, and an unreachable vulnerability is still reported in full.
-
-WHAT IT REFUSES TO GUESS
-
-Every finding carries a confidence level, and confidence describes the strength of the evidence rather than the severity of the vulnerability. Ubuntu and Red Hat backport fixes without changing the upstream version, so a version comparison alone cannot settle whether such a package is patched. Riskability reports that as informational and says why, rather than asserting a vulnerability it cannot prove. Windows software carries no package identity, only a display name and a registry version, so every Windows finding is reported at low confidence. A Coverage dashboard lists what the feed cannot speak to at all, because a gap in visibility is not the same as an absence of risk.
-
-Accepted risks are recorded in an audit index that is written once and never rewritten, holding who accepted the risk, when, the justification, and the date the acceptance expires.
-
-NO OUTBOUND NETWORK ACCESS
-
-The app makes no outbound requests. You build a feed bundle on a connected machine using the builder the app itself hands you, carry it across, and import it. Nothing is scheduled at install time and nothing reaches the internet on its own.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/44c1139c-a1fb-11f1-be80-5e48f8eb6eb4.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Christian Haugan</dc:creator>
-      <pubDate>Thu, 27 Aug 2026 09:57:51 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9583/#v1.0.2</guid>
     </item>
     <item>
       <title>Splunk Add-on for ServiceNow - v11.1.0 [Version Update]</title>
@@ -3650,32 +3638,6 @@ Added: FalconSearch Operations dashboard for detection metrics and insights.
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
       <pubDate>Thu, 20 Aug 2026 13:28:30 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7564/#v2.6.4</guid>
-    </item>
-    <item>
-      <title>Cyware Intel Exchange - v4.0.3 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4876/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**What's New**
-
-* Upgraded the app's UI framework to the latest Splunk Add-on UCC framework for improved compatibility with current and future Splunk Enterprise and Splunk Cloud Platform releases
-* Added Splunk Cloud Platform (ARM/Graviton) compatibility.
-
-**Fixes**
-
-* Fixed an issue where, with Fetch Enriched Data enabled on an input, indicator custom attributes and tags could be overwritten by enrichment data instead of being combined, which could cause recently updated attribute or tag values to be temporarily missing.
-
-**Upgrade Notes**
-
-* No configuration changes are required. Existing accounts, inputs, and settings are preserved during the upgrade.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Integrate Cyware Intel Exchange with Splunk to ingest, correlate, and act on threat intelligence directly within your Splunk environment.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Cyware Intel Exchange App for Splunk integrates Intel Exchange directly into Splunk Enterprise, enabling teams to ingest, correlate, and operationalize threat indicators without leaving their Splunk environment.
-
-Using this add-on, you can:
-
-1. Ingest threat indicators from Cyware Intel Exchange into Splunk using KV Store–based lookups.
-2. Correlate indicators with Splunk events to identify sightings and support detection workflows.
-3. Visualize threat intelligence activity through prebuilt dashboards for indicator and correlation insights.
-4. Manage indicators directly from Splunk using operational actions such as updating status, applying tags, creating tasks, and adding notes.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/cdf9aa8e-9bd9-11f1-bc53-aaafb8cde5a0.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyware Labs</dc:creator>
-      <pubDate>Thu, 20 Aug 2026 12:13:09 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4876/#v4.0.3</guid>
     </item>
     <item>
       <title>Agent Management Versioned App Retrieval - v1.0.3 [Version Update]</title>
