@@ -6,13 +6,13 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sun, 30 Aug 2026 02:36:18 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 30 Aug 2026 08:43:25 +0000</lastBuildDate>
     <item>
-      <title>Riskability - v1.2.2 [Version Update]</title>
+      <title>Riskability - v1.2.3 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/9583/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;# Riskability 1.2.2
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;# Riskability 1.2.3
 
-Everything since 1.0.2, which is the version currently on this listing. 1.2.1 and 1.2.2 add what is listed at the end. Only the changes that matter to somebody running the app are listed.
+Everything since 1.0.2, which is the version currently on this listing. 1.2.1, 1.2.2 and 1.2.3 add what is listed at the end. Only the changes that matter to somebody running the app are listed.
 
 ## A page about one machine
 
@@ -78,7 +78,19 @@ Every source in a bundle declares itself in the sources table on Feed administra
 
 ## Corrections in 1.2.2
 
-Feed administration reported the Windows update source as unreachable when it was not. Every source was probed with an HTTP HEAD request, and Microsoft's update index answers HEAD with 405 Method Not Allowed while answering the request the builder actually makes with 200. Anyone reading that would have concluded Windows patch data could not be fetched and left it out. A source that refuses HEAD is now asked again the way the real fetch asks.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Correlate the software your fleet already reports against offline CVE databases on a search head with no internet access. Ranks findings by exploitation likelihood and by whether the network can actually reach them. Track software that is already or soon becoming End Of Life!&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Most vulnerability tooling cannot run where it is needed most. A search head with no route to the internet cannot call an API, pull a feed on a schedule, or fetch a score on demand. Riskability is built for that machine.
+Feed administration reported the Windows update source as unreachable when it was not. Every source was probed with an HTTP HEAD request, and Microsoft's update index answers HEAD with 405 Method Not Allowed while answering the request the builder actually makes with 200. Anyone reading that would have concluded Windows patch data could not be fetched and left it out. A source that refuses HEAD is now asked again the way the real fetch asks.
+
+## Corrections in 1.2.3
+
+A host is now kept for 180 days without contact rather than 30. That setting, `riskability_host_retire_days`, is the only thing deciding how long silence is tolerated, and a month deleted exactly the estates this app is built for: an appliance or OT fleet collected once a quarter lost every host between scans and was rediscovered later as new machines with no history. Lower it if your hosts report nightly, raise it for an annual audit cycle.
+
+Three tiles on the landing page stopped colouring themselves as faults. Newest inventory turned amber after six hours and red after forty eight, which tells a fleet collected twice a week that it is failing while it does exactly what it was configured to do. Last match climbed for ever on a stable fleet, because nothing is compared when nothing new has arrived, so it went red for having nothing to do. Open findings was amber above one finding and red above a hundred, which is every real fleet, permanently. All three are answered properly elsewhere: whether a host is late is judged against its own learned rhythm, and whether the pipeline is running is shown directly by the cycle dial. Feed age keeps its colour, because a stale feed does degrade every answer on every page no matter how often anybody scans.
+
+A host that reports rarely no longer disappears. Three views rebuilt themselves from a thirty day window and replaced their contents wholesale, so a machine quieter than that dropped out of the end of support view, the Windows patch level and the ecosystem coverage panel entirely, and the page then read as an answer rather than as missing data. They now carry their state forward like the rest of the app, and a single setting, riskability_host_retire_days, decides how long a silent host is kept. It defaults to thirty days and a site whose hosts report quarterly should raise it.
+
+There is no minimum collection frequency, and the Details tab now says so along with the smallest flag set the app can use. This matters for appliance and OT estates that are collected only after a deliberate change, which are a first class case here rather than an edge case.
+
+The feed builder can also be handed a source that the search head cannot download. Feed administration previously told anyone blocked from CISA to rebuild the entire bundle offline, which meant downloading every other source again over one file. A blocked source can now be uploaded on the page and the direct fetch uses it while downloading the rest as normal.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Correlate the software your fleet already reports against offline CVE databases on a search head with no internet access. Ranks findings by exploitation likelihood and by whether the network can actually reach them. Track software that is already or soon becoming End Of Life!&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Most vulnerability tooling cannot run where it is needed most. A search head with no route to the internet cannot call an API, pull a feed on a schedule, or fetch a score on demand. Riskability is built for that machine.
 
 It takes the software inventory your hosts already report, correlates it against vulnerability databases you carry across the air gap yourself, and answers what a CVE count never does: of everything found, what should somebody actually do tonight?
 
@@ -104,10 +116,10 @@ Accepted risks are recorded in an audit index that is written once and never rew
 
 NO OUTBOUND NETWORK ACCESS
 
-The app makes no outbound requests. You build a feed bundle on a connected machine with the builder the app hands you, carry it across, and import it. Nothing is scheduled at install time.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/87560fc2-a3cd-11f1-9f0a-da67833a8486.png&quot;&gt;</description>
+The app makes no outbound requests. You build a feed bundle on a connected machine with the builder the app hands you, carry it across, and import it. Nothing is scheduled at install time.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/3c519fa6-a435-11f1-a0fb-9a22e7c897a8.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Christian Haugan</dc:creator>
-      <pubDate>Sat, 29 Aug 2026 17:22:37 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9583/#v1.2.2</guid>
+      <pubDate>Sun, 30 Aug 2026 05:46:58 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9583/#v1.2.3</guid>
     </item>
     <item>
       <title>EventTimeline - v1.0.12 [Version Update]</title>
