@@ -6,7 +6,134 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Tue, 01 Sep 2026 05:53:27 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 01 Sep 2026 10:49:22 +0000</lastBuildDate>
+    <item>
+      <title>SEKOIA.IO - v1.5.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6327/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;### Fixed
+
+[](https://github.com/SEKOIA-IO/SEKOIA.IO-for-Splunk/blob/master/CHANGELOG.md#fixed)
+
+* Replace deprecated &quot;Intelligence Center - Read Only&quot; role with new &quot;Analyst Role&quot; in the app setup page template&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Easily detect threats in your logs by looking for Indicators of Compromise produced by SEKOIA.IO.  
+
+The Indicators of Compromise produced by SEKOIA.IO are contextualized, exploitable and accurate. It is is a mix of exclusive SEKOIA.IO threat Intelligence data (coming from C2 trackers, VT trackers, honeypots etc. ) and refined OSINT data (URLhaus, ThreatFox, etc.).&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/72a8359e-a5eb-11f1-803b-c25332650027.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Georges Bossert</dc:creator>
+      <pubDate>Tue, 01 Sep 2026 10:06:29 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6327/#v1.5.2</guid>
+    </item>
+    <item>
+      <title>WithSecure Elements Add-on - v1.1.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8820/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## Release notes — v1.1.1
+
+**Enhancement release on the 1.1.x line** — targets Splunk Enterprise / Cloud 10.2+ (Python 3.13). Same fix backported to the 1.0.x maintenance line as v1.0.8.
+
+### What changed
+
+The WithSecure Elements API now returns a top-level `mitre` array on each BCD detection that mixes ATT\&amp;CK tactic IDs (TA\*) and technique IDs (T\*), e.g. `[&quot;TA0003&quot;, &quot;T1518.001&quot;, &quot;T1543.002&quot;, &quot;T1059.004&quot;]`. Previously only the `activityContext[].mitre_id` items were populated for cloud detections and the flattened `ac_mitre_id` field was aliased to `mitre_technique_id`.
+
+Two new search-time EVAL calculated fields on the `withsecure:epp:bcd_detection` sourcetype split the flat array by prefix:
+
+```
+EVAL-mitre_technique_id = coalesce(mvfilter(match('mitre{}', &quot;^T[0-9]&quot;)), ac_mitre_id)
+EVAL-mitre_tactic_id    = mvfilter(match('mitre{}', &quot;^TA[0-9]&quot;))
+
+```
+
+The regexes are disjoint: `TA0003` matches `^TA[0-9]` but not `^T[0-9]` because `[0-9]` requires a digit at position 1, and `A` is not a digit. `mitre_technique_id` falls back to the legacy `ac_mitre_id` when the top-level array is not present, so events indexed before the API migration keep working. `mitre_tactic_id` is a new field aligned with the Splunk CIM Endpoint datamodel, no legacy fallback needed.
+
+### SOC-friendly queries this enables
+
+```
+index=main sourcetype=&quot;withsecure:epp:bcd_detection&quot; mitre_tactic_id=&quot;TA0003&quot;
+index=main sourcetype=&quot;withsecure:epp:bcd_detection&quot; mitre_technique_id IN (&quot;T1059.001&quot;,&quot;T1112&quot;)
+index=main sourcetype=&quot;withsecure:epp:bcd_detection&quot; | stats count by mitre_tactic_id mitre_technique_id
+
+```
+
+### Upgrade safety
+
+Non-destructive in-place upgrade. Search-time only — no ingestion impact, applies retroactively to detections already in the index, 100 % reversible.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects EPP Security Events and EDR Broad Context Detections from WithSecure Elements via OAuth2-authenticated API, with CIM-compliant field extractions for endpoint, malware, intrusion detection, and process data.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The WithSecure Elements Add-on collects endpoint protection and detection data from the WithSecure Elements API. It ingests EPP Security Events and EDR Broad Context Detections through OAuth2-authenticated modular inputs, enabling centralized security event analysis in Splunk. The add-on maps collected events to CIM endpoint, malware, intrusion detection, and process tags, facilitating correlation with other security data sources. Two modular inputs handle data collection: withsecure_epp_input retrieves endpoint protection events, while withsecure_bcd_input collects EDR broad context detection incidents. Events are indexed under source types withsecure:epp:security_event, withsecure:epp:bcd_incident, and withsecure:epp:bcd_detection. The add-on includes a custom search command for retrieving specific detection details and provides a workflow action to fetch incident detections directly from the Splunk interface.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/1275347a-a5ea-11f1-97ea-ca8262f90adf.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Flo Flo</dc:creator>
+      <pubDate>Tue, 01 Sep 2026 09:52:30 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8820/#v1.1.1</guid>
+    </item>
+    <item>
+      <title>GitHub - v3.0.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5792/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Updated the Splunk SOAR SDK dependency to version 4.1.2 while preserving existing action read-only declarations.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with GitHub to support various investigative and issue-based actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/099db2f0-a5d6-11f1-803b-c25332650027.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Tue, 01 Sep 2026 07:23:34 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5792/#v3.0.2</guid>
+    </item>
+    <item>
+      <title>Cisco Secure Access - v1.0.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9057/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Updated the Splunk SOAR SDK dependency to version 4.1.2 while preserving existing action read-only declarations.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Cisco Secure Access API actions for Splunk SOAR&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/3bc6c63c-a5d5-11f1-97ea-ca8262f90adf.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Tue, 01 Sep 2026 07:17:48 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9057/#v1.0.2</guid>
+    </item>
+    <item>
+      <title>Microsoft 365 - v1.2.7 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8612/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Updated the Splunk SOAR SDK dependency to version 4.1.2 and marked mutating actions as not read-only.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app enables MS Graph API-based email ingestion and investigative actions on Microsoft 365, replacing the Microsoft Graph for Office 365 app.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/6636f88e-a5d4-11f1-a0fa-ce2b8c5ab0f9.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Tue, 01 Sep 2026 07:11:50 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8612/#v1.2.7</guid>
+    </item>
+    <item>
+      <title>Microsoft 365 Defender - v2.0.3 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6563/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Updated the Splunk SOAR SDK dependency to version 4.1.2 while preserving existing action read-only declarations.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with Microsoft 365 Defender to execute various generic and investigative actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/961b906a-a5d3-11f1-97ea-ca8262f90adf.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Tue, 01 Sep 2026 07:06:01 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6563/#v2.0.3</guid>
+    </item>
+    <item>
+      <title>IMAP v2 - v1.1.6 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8610/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Updated the Splunk SOAR SDK dependency to version 4.1.2 while preserving existing action read-only declarations.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app supports email ingestion and various investigative actions over IMAP&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b0b9ec42-a5d2-11f1-9ca3-362bc53b2c18.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Tue, 01 Sep 2026 06:59:36 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8610/#v1.1.6</guid>
+    </item>
+    <item>
+      <title>Doppel - v1.0.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8663/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Updated the Splunk SOAR SDK dependency to version 4.1.2 while preserving existing action read-only declarations.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Doppel-Splunk SOAR integration automates the ingestion of Doppel alerts into Splunk SOAR, creating containers and artifacts for efficient analysis. It supports actions to create, retrieve, and update alerts directly within the platform.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/df54d446-a5d1-11f1-af44-f25091ca5909.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
+      <pubDate>Tue, 01 Sep 2026 06:53:44 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8663/#v1.0.2</guid>
+    </item>
+    <item>
+      <title>AD LDAP - v3.0.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5755/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Updated the Splunk SOAR SDK dependency to version 4.1.2 while preserving existing action read-only declarations.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;App specifically designed for interacting with Microsoft Active Directory&amp;#x27;s LDAP Implementation&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/fa13a542-a5d0-11f1-97ea-ca8262f90adf.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Tue, 01 Sep 2026 06:47:20 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5755/#v3.0.1</guid>
+    </item>
+    <item>
+      <title>Splunk Add-on for Unix and Linux - v10.3.4 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/833/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Improved the performance and reliability of the `vmstat` scripted inputs by retrieving CPU-count information directly through operating system-specific commands, removing the dependency on `hardware.sh`. No configuration changes are required.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;*** Important: Read upgrade Instructions and test add-on update before deploying to production ***
+There are changes to default indexes and .conf changes in version 6.0 of Splunk Add-on for Unix and Linux that can break an existing installation if upgrade instructions are not followed in detail. If an existing Splunk Add-on for Unix and Linux is being upgraded, please test in a non-production environment first.
+
+
+The Splunk Add-on for Unix and Linux works with the Splunk App for Unix and Linux to provide rapid insights and operational visibility into large-scale Unix and Linux environments.  With its new pre-packaged alerting capability, flexible service-based hosts grouping, and easy management of many data sources, it arms administrators with a powerful ability to quickly identify performance and capacity bottlenecks and outliers in Unix and Linux environments.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ed15f1de-a5cf-11f1-af44-f25091ca5909.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Tue, 01 Sep 2026 06:46:14 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/833/#v10.3.4</guid>
+    </item>
+    <item>
+      <title>Analyst1 for Splunk SOAR - v2.0.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9495/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Updated the Splunk SOAR SDK dependency to version 4.1.2 while preserving existing action read-only declarations.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Interact with the Analyst1 API to power SOAR workflows, including indicator lookups, evidence management, and other supported Analyst1 operations.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/15c768f6-a5d0-11f1-9ca3-362bc53b2c18.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
+      <pubDate>Tue, 01 Sep 2026 06:40:57 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9495/#v2.0.1</guid>
+    </item>
     <item>
       <title>EventTimeline - v1.0.19 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/9536/</link>
@@ -3240,19 +3367,6 @@ The app includes:
       <guid>https://splunkbase.splunk.com/app/7474/#v2.0.0</guid>
     </item>
     <item>
-      <title>Microsoft 365 - v1.2.6 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8612/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Encoded Microsoft Graph message, folder, and attachment IDs before using them in request paths.
-* Implemented the `download_email` option in `get email`, saving the message as an EML file to the Vault.
-* Added recipients, sender, and headers to the `on poll` email artifact.
-* Surfaced nested email attachments as their own Email Artifact in `get email` and `on poll`, independent of the EML download setting.
-* Extracted domains from `mailto:` links and scheme-less URLs during `on poll` domain extraction.
-* Extracted URL, domain, IP, and hash indicators from nested email attachments during `on poll`.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app enables MS Graph API-based email ingestion and investigative actions on Microsoft 365, replacing the Microsoft Graph for Office 365 app.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b53306c2-9dae-11f1-a26e-b27d6260494e.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Fri, 21 Aug 2026 22:21:52 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8612/#v1.2.6</guid>
-    </item>
-    <item>
       <title>Splunk - v4.0.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5848/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* PAPP-38390: validate device asset config parameter&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with Splunk to update data on the device, in addition to investigate and ingestion actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d3eacc40-9dad-11f1-bd70-16ecf2bf8a47.svg&quot;&gt;</description>
@@ -3297,216 +3411,6 @@ By leveraging this add-on, Splunk users can gain comprehensive visibility into t
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Data Elicit Solutions</dc:creator>
       <pubDate>Fri, 21 Aug 2026 08:52:51 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7948/#v1.0.3</guid>
-    </item>
-    <item>
-      <title>Pubnub Modular Input - v1.5.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/3074/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;conf file updates to support latest Appinspect rules , python.required setting&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This is a Splunk modular input add-on for subscribing to Pubnub channels.
-
-The Python code in this App is dual 2.7/3 compatible.
-This version of the App enforces Python 3 for execution of the modular input script when running on Splunk 8+ in order to satisfy Splunkbase AppInspect requirements.
-If running this App on Splunk versions prior to 8 , then Python 2.7 will get executed.
-
-For details of the support we offer for our Apps , browse to : https://www.baboonbones.com/#support
-
-This App is fully AppInspect passed for installing in your own hosted Splunk Enterprise environments or on your own hosted Splunk Forwarders and forwarding the collected data into Splunk Cloud.
-
-If you want to install this App directly in Splunk Cloud , for our Commercially supported customers on our Ultra plan ( https://www.baboonbones.com/#support )  we provide custom private builds of any of our Apps tailored to the customer&amp;#x27;s specific requirements and configuration , and these custom private builds can then be uploaded as your own private Splunk Cloud Apps.
-
-For customers that don&amp;#x27;t have support,  we also offer the option to perform ad-hoc custom private builds of any of our Apps.
-
-Browse to https://www.baboonbones.com/#cloud for more details of our Cloud options and offerings.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ef7e3456-9d26-11f1-b13c-4281c5fc32ec.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">BaboonBones Ltd</dc:creator>
-      <pubDate>Fri, 21 Aug 2026 06:12:43 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/3074/#v1.5.1</guid>
-    </item>
-    <item>
-      <title>Pubnub Modular Alert - v1.6.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/3073/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;conf file updates to support latest Appinspect rules , python.required setting&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This is a Splunk Modular Alert for sending messages to a Pubnub channel.
-
-The Python code in this App is dual 2.7/3 compatible.
-This version of the App enforces Python 3 for execution of the modular alert script when running on Splunk 8+ in order to satisfy Splunkbase AppInspect requirements.
-If running this App on Splunk versions prior to 8 , then Python 2.7 will get executed.
-
-For details of the support we offer for our Apps , browse to : https://www.baboonbones.com/#support
-
-This App is fully AppInspect passed for running in your own Splunk Enterprise environments.
-
-If you want to install this App directly in Splunk Cloud , for our Commercially supported customers on our Ultra plan ( https://www.baboonbones.com/#support )  we provide custom private builds of any of our Apps tailored to the customer&amp;#x27;s specific requirements and configuration , and these custom private builds can then be uploaded as your own private Splunk Cloud Apps.
-
-For customers that don&amp;#x27;t have support,  we also offer the option to perform ad-hoc custom private builds of any of our Apps.
-
-Browse to https://www.baboonbones.com/#cloud for more details of our Cloud options and offerings.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/5de6f622-9d26-11f1-ad0f-a697e6addc2c.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">BaboonBones Ltd</dc:creator>
-      <pubDate>Fri, 21 Aug 2026 06:09:18 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/3073/#v1.6.0</guid>
-    </item>
-    <item>
-      <title>Scheduled Export of Indexed Data (SEND)  to File - v1.4.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/2914/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;conf file updates to support latest Appinspect rules , python.required setting&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This is a Splunk Modular Alert used to facilitate scheduled export of indexed data (SEND) to a file location
-
-The exported file is just a gzipped CSV of the search results that triggered the alert.
-
-The real intent of this add-on though is as an example for developers to follow to show how you can essentially leverage the Modular Alerts framework to perform a scheduled data output.
-
-Other types of outputs to consider implementing : ftp,scp,jms,kafka,aws,rdbms,datawarehouse,some other data storage or processing platform etc...
-
-The Python code in this App is dual 2.7/3 compatible.
-This version of the App enforces Python 3 for execution of the modular alert script when running on Splunk 8+ in order to satisfy Splunkbase AppInspect requirements.
-If running this App on Splunk versions prior to 8 , then Python 2.7 will get executed.
-
-For details of the support we offer for our Apps , browse to : https://www.baboonbones.com/#support
-
-This App is fully AppInspect passed for running in your own Splunk Enterprise environments.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/dc85d5da-9d25-11f1-8457-d60b57157b84.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">BaboonBones Ltd</dc:creator>
-      <pubDate>Fri, 21 Aug 2026 06:05:25 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/2914/#v1.4.0</guid>
-    </item>
-    <item>
-      <title>Twilio SMS Alerting - v1.4.4 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/2865/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;conf file updates to support latest Appinspect rules , python.required setting&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This is a Splunk Modular Alert for sending SMS messages using Twilio.
-
-The Python code in this App is dual 2.7/3 compatible.
-This version of the App enforces Python 3 for execution of the modular alert script when running on Splunk 8+ in order to satisfy Splunkbase AppInspect requirements.
-If running this App on Splunk versions prior to 8 , then Python 2.7 will get executed.
-
-For details of the support we offer for our Apps , browse to : https://www.baboonbones.com/#support
-
-This App is fully AppInspect passed for running in your own Splunk Enterprise environments or installing directly in Splunk Cloud.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/4ed48aba-9d25-11f1-9b56-36c99fd20942.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">BaboonBones Ltd</dc:creator>
-      <pubDate>Fri, 21 Aug 2026 06:01:42 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/2865/#v1.4.4</guid>
-    </item>
-    <item>
-      <title>COAP Modular Input - v1.5.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/2713/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;conf file updates to support latest Appinspect rules , python.required setting
-
-updated the internal log4j libraries to version 2.26.0&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This is a Splunk Modular Input Add-On for indexing messages from a COAP (Constrained Application Protocol) Server.
-
-The Python code in this App is dual 2.7/3 compatible.
-This version of the App enforces Python 3 for execution of the modular input script when running on Splunk 8+ in order to satisfy Splunkbase AppInspect requirements.
-If running this App on Splunk versions prior to 8 , then Python 2.7 will get executed.
-
-For details of the support we offer for our Apps , browse to : https://www.baboonbones.com/#support
-
-This App is fully AppInspect passed for installing in your own hosted Splunk Enterprise environments or on your own hosted Splunk Forwarders and forwarding the collected data into Splunk Cloud.
-
-If you want to install this App directly in Splunk Cloud , for our Commercially supported customers on our Ultra plan ( https://www.baboonbones.com/#support )  we provide custom private builds of any of our Apps tailored to the customer&amp;#x27;s specific requirements and configuration , and these custom private builds can then be uploaded as your own private Splunk Cloud Apps.
-
-For customers that don&amp;#x27;t have support,  we also offer the option to perform ad-hoc custom private builds of any of our Apps.
-
-Browse to https://www.baboonbones.com/#cloud for more details of our Cloud options and offerings.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c605354a-9d24-11f1-b8a9-9abf09e1e87d.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">BaboonBones Ltd</dc:creator>
-      <pubDate>Fri, 21 Aug 2026 05:57:23 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/2713/#v1.5.1</guid>
-    </item>
-    <item>
-      <title>Protocol Data Inputs - v2.0.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/1901/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;conf file updates to support latest Appinspect rules , python.required setting
-
-updated the internal log4j libraries to version 2.26.0&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The ORIGINAL Data Stream Processing Solution for Splunk and still going strong !
-
-This is a Splunk Add-On for receiving data via a number of different data protocols such as TCP , TCP(s) ,HTTP(s) PUT/POST/File Upload , UDP , Websockets , SockJS.  The event driven , non blocking , asynchronous architecture is designed to handle connections and data at scale. The polyglot event bus allows you to declaratively plug in custom data handlers in numerous different languages(Java , Javascript , Python, Groovy , Scala , Clojure ,  Ruby etc..) to pre-process raw data before indexing in Splunk. Secure transport channels also allow for client certificate authentication.
-
-The Python code in this App is dual 2.7/3 compatible.
-This version of the App enforces Python 3 for execution of the modular input script when running on Splunk 8+ in order to satisfy Splunkbase AppInspect requirements.
-If running this App on Splunk versions prior to 8 , then Python 2.7 will get executed.
-
-For details of the support we offer for our Apps , browse to : https://www.baboonbones.com/#support
-
-This App is fully AppInspect passed for running in your own Splunk Enterprise environments or running on your own Forwarders and sending the data into Splunk Cloud.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/02e2a408-9d24-11f1-ad0f-a697e6addc2c.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">BaboonBones Ltd</dc:creator>
-      <pubDate>Fri, 21 Aug 2026 05:54:00 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/1901/#v2.0.1</guid>
-    </item>
-    <item>
-      <title>MQTT Modular Input - v1.8.3 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/1890/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;conf file updates to support latest Appinspect rules , python.required setting
-
-updated the internal log4j libraries to version 2.26.0&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This is a Splunk Modular Input Add-On for indexing messages from a MQTT Broker.
-
-The Python code in this App is dual 2.7/3 compatible.
-This version of the App enforces Python 3 for execution of the modular input script when running on Splunk 8+ in order to satisfy Splunkbase AppInspect requirements.
-If running this App on Splunk versions prior to 8 , then Python 2.7 will get executed.
-
-For details of the support we offer for our Apps , browse to : https://www.baboonbones.com/#support
-
-This App is fully AppInspect passed for installing in your own hosted Splunk Enterprise environments or on your own hosted Splunk Forwarders and forwarding the collected data into Splunk Cloud.
-
-If you want to install this App directly in Splunk Cloud , for our Commercially supported customers on our Ultra plan ( https://www.baboonbones.com/#support )  we provide custom private builds of any of our Apps tailored to the customer&amp;#x27;s specific requirements and configuration , and these custom private builds can then be uploaded as your own private Splunk Cloud Apps.
-
-For customers that don&amp;#x27;t have support,  we also offer the option to perform ad-hoc custom private builds of any of our Apps.
-
-Browse to https://www.baboonbones.com/#cloud for more details of our Cloud options and offerings.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/4b8ce728-9d23-11f1-bd70-16ecf2bf8a47.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">BaboonBones Ltd</dc:creator>
-      <pubDate>Fri, 21 Aug 2026 05:46:48 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/1890/#v1.8.3</guid>
-    </item>
-    <item>
-      <title>Amazon Kinesis Modular Input - v1.7.9 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/1856/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;conf file updates to support latest Appinspect rules , python.required setting
-
-updated the internal log4j libraries to version 2.26.0&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This is a Splunk Modular Input Add-On for indexing records from Amazon Kinesis.
-
-The Python code in this App is dual 2.7/3 compatible.
-This version of the App enforces Python 3 for execution of the modular input script when running on Splunk 8+ in order to satisfy Splunkbase AppInspect requirements.
-If running this App on Splunk versions prior to 8 , then Python 2.7 will get executed.
-
-For details of the support we offer for our Apps , browse to : https://www.baboonbones.com/#support
-
-This App is fully AppInspect passed for installing in your own hosted Splunk Enterprise environments or on your own hosted Splunk Forwarders and forwarding the collected data into Splunk Cloud.
-
-If you want to install this App directly in Splunk Cloud , for our Commercially supported customers on our Ultra plan ( https://www.baboonbones.com/#support )  we provide custom private builds of any of our Apps tailored to the customer&amp;#x27;s specific requirements and configuration , and these custom private builds can then be uploaded as your own private Splunk Cloud Apps.
-
-For customers that don&amp;#x27;t have support,  we also offer the option to perform ad-hoc custom private builds of any of our Apps.
-
-Browse to https://www.baboonbones.com/#cloud for more details of our Cloud options and offerings.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/bb970eaa-9d22-11f1-a26e-b27d6260494e.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">BaboonBones Ltd</dc:creator>
-      <pubDate>Fri, 21 Aug 2026 05:42:55 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/1856/#v1.7.9</guid>
-    </item>
-    <item>
-      <title>Kafka Messaging Modular Input - v1.9.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/1817/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;conf file updates to support latest Appinspect rules , python.required setting
-
-updated the internal log4j libraries to version 2.26.0&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This is a Splunk Modular Input Add-On for indexing messages from an Apache Kafka broker or cluster of brokers.
-
-The Python code in this App is dual 2.7/3 compatible.
-This version of the App enforces Python 3 for execution of the modular input script when running on Splunk 8+ in order to satisfy Splunkbase AppInspect requirements.
-If running this App on Splunk versions prior to 8 , then Python 2.7 will get executed.
-
-For details of the support we offer for our Apps , browse to : https://www.baboonbones.com/#support
-
-This App is fully AppInspect passed for installing in your own hosted Splunk Enterprise environments or on your own hosted Splunk Forwarders and forwarding the collected data into Splunk Cloud or installing directly in Splunk Cloud.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/28b75630-9d22-11f1-ad0f-a697e6addc2c.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">BaboonBones Ltd</dc:creator>
-      <pubDate>Fri, 21 Aug 2026 05:38:19 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/1817/#v1.9.0</guid>
-    </item>
-    <item>
-      <title>AMQP Messaging Modular Input - v1.8.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/1812/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;conf file updates to support latest Appinspect rules , python.required setting
-
-updated the internal log4j libraries to version 2.26.0&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This is a Splunk Modular Input Add-On for indexing messages from an AMQP Broker.It utilizes the RabbitMQ Java client library , but can be used against any AMQP v0-9-1, 0-9 and 0-8 compliant broker.
-
-The Python code in this App is dual 2.7/3 compatible.
-This version of the App enforces Python 3 for execution of the modular input script when running on Splunk 8+ in order to satisfy Splunkbase AppInspect requirements.
-If running this App on Splunk versions prior to 8 , then Python 2.7 will get executed.
-
-For details of the support we offer for our Apps , browse to : https://www.baboonbones.com/#support
-
-This App is fully AppInspect passed for installing in your own hosted Splunk Enterprise environments or on your own hosted Splunk Forwarders and forwarding the collected data into Splunk Cloud or installing directly in Splunk Cloud.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8358e316-9d21-11f1-bd70-16ecf2bf8a47.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">BaboonBones Ltd</dc:creator>
-      <pubDate>Fri, 21 Aug 2026 05:34:41 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/1812/#v1.8.1</guid>
     </item>
   </channel>
 </rss>
