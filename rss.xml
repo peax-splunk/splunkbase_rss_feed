@@ -6,7 +6,128 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Wed, 02 Sep 2026 14:49:08 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 02 Sep 2026 18:15:02 +0000</lastBuildDate>
+    <item>
+      <title>NuHarbor - TA for AppGate Zero Trust Network Access - v1.1.2 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9120/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Minor updates to internal comments in files for additional clarity&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Provides CIM-compliant field extractions and mappings for Appgate SDP audit events across Network Traffic, Authentication, Network Sessions, Certificates, and Compute Inventory data models.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Appgate SDP Add-on provides CIM-compliant field extractions, eventtypes, and tags for Appgate SDP (Software Defined Perimeter / Zero Trust Network Access) audit events. The add-on processes single-line JSON-formatted events from the appgate:sdp sourcetype and maps them to five CIM data models: Network Traffic, Authentication, Network Sessions, Certificates, and Compute Inventory. All field mappings are applied at search time using KV_MODE=json, field aliases, calculated fields, lookups, eventtypes, and tags. The add-on supports events ingested through SC4S to HEC as well as alternative paths including file monitor, TCP, and Universal Forwarder. It expects events in a structured JSON envelope format with a nested log payload. The CIM mappings have been verified against CIM 8.5 data model documentation and align with the Appgate SDP v6.4 audit log catalog. This add-on establishes the canonical sourcetype convention for Appgate SDP events in Splunk deployments.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/89619fa4-a6f5-11f1-a2e8-66c89b4e07b9.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Paul Kiripolsky</dc:creator>
+      <pubDate>Wed, 02 Sep 2026 17:44:52 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9120/#v1.1.2</guid>
+    </item>
+    <item>
+      <title>MaxMind GeoIP App - v1.3.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8554/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Fix the `geoip` command silently dropping fields from some events. The Splunk
+  SDK locks the set of output fields to the fields of the first result in each
+  chunk, so any event whose lookup produced a field the chunk's first event did
+  not have lost that field. Most visibly, one event with a missing, invalid, or
+  not-found IP at the head of a chunk stripped all enrichment from every other
+  event in it, with no error anywhere; less visibly, fields that vary between
+  matched IPs (city, subdivisions, postal) were dropped from events whose chunk
+  started with an IP that lacked them. All events in a chunk now carry the same
+  field set, with empty values where a field does not apply.
+* Add the `geoipdebug` diagnostic search command. It generates one event per
+  configured database with its build time, type, and file details, plus events
+  with the app, Splunk, and Python versions and the app's non-secret settings.
+  With `indexers=true` it runs on the indexers and reports the database copies
+  their knowledge bundle carries.
+* Fix the &quot;Run on indexers&quot; setting sometimes never taking effect on the
+  indexers, even after the required search head restart.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;MaxMind GeoIP database lookups for Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This is a Splunk app for MaxMind GeoIP database lookups. It provides IP geolocation and enrichment using MaxMind&amp;#x27;s GeoIP and GeoLite databases, including country, city, anonymous IP detection, ISP, and more.
+
+The app provides a streaming search command (geoip) that enriches events with data from one or more MaxMind databases.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8ae62a5e-a6f3-11f1-a2e8-66c89b4e07b9.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">William Storey</dc:creator>
+      <pubDate>Wed, 02 Sep 2026 17:32:06 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8554/#v1.3.0</guid>
+    </item>
+    <item>
+      <title>Threat Hunting Essentials - v1.3.97 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7633/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
+
+For Premium Version - Contact sales https://www.avertpoint.com/contactus.html
+
+It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
+
+Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
+
+1. Backdoor.
+2. Worms.
+3. Ransomware.
+4. Bots.
+5. Trojan horses.
+6. Keyloggers.
+7. Rootkits.
+8. Spyware.
+9. Fileless malware.
+10. Cryptojacking.
+11. Wiper malware.
+12. Adware.
+14. Viruses
+15. P2P-Worm
+16. Internet Worms
+17. Net-worm
+18. Clickjacking
+19. Cryptominer
+20. Fileless malware
+
+You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
+
+Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a5add648-a6c1-11f1-a2e8-66c89b4e07b9.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
+      <pubDate>Wed, 02 Sep 2026 15:16:48 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.97</guid>
+    </item>
+    <item>
+      <title>Splunk App for PCI Compliance - Splunk Enterprise Security - v8.7.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/2897/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;[https://help.splunk.com/en/splunk-enterprise-security-7/splunk-app-for-pci-compliance/release-notes/8.7/splunk-app-for-pci-compliance-release-notes/release-notes-for-the-splunk-app-for-pci-compliance](https://help.splunk.com/en/splunk-enterprise-security-7/splunk-app-for-pci-compliance/release-notes/8.7/splunk-app-for-pci-compliance-release-notes/release-notes-for-the-splunk-app-for-pci-compliance)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk App for PCI Compliance (for Splunk Enterprise Security) is a Splunk developed and supported App designed to help organizations meet PCI DSS 4.0 requirements. It reviews and measures the effectiveness and status of PCI compliance technical controls in real time. It can also identify and prioritize any control areas that may need to be addressed and let you quickly address any auditor report or data request. 
+
+The App provides out-of-the-box searches, dashboards, reports, an incident response framework, and integration with employee and asset information to give you visibility into system, application, and device activity relevant to PCI compliance. 
+
+NOTE: There are two installer options for this App. If you are installing the App on Splunk Enterprise Security use the installer on this page. If you are installing the App stand-alone on Splunk Enterprise, use the installer https://splunkbase.splunk.com/app/1143
+
+The Splunk App for PCI Compliance requires a paid license. PCI DSS 3.2.1 is supported until version 5.2.0 of the app and later versions are updated to PCI DSS 4.0.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/98ee54d6-a523-11f1-9f0a-da67833a8486.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Wed, 02 Sep 2026 15:11:39 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/2897/#v8.7.0</guid>
+    </item>
+    <item>
+      <title>Splunk App for PCI Compliance - Splunk Enterprise - v8.7.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/1143/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;[https://help.splunk.com/en/splunk-enterprise-security-7/splunk-app-for-pci-compliance/release-notes/8.7/splunk-app-for-pci-compliance-release-notes/release-notes-for-the-splunk-app-for-pci-compliance](https://help.splunk.com/en/splunk-enterprise-security-7/splunk-app-for-pci-compliance/release-notes/8.7/splunk-app-for-pci-compliance-release-notes/release-notes-for-the-splunk-app-for-pci-compliance)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk App for PCI Compliance (for Splunk Enterprise) is a Splunk developed and supported App designed to help organizations meet PCI DSS 4.0 requirements.  It reviews and measures the effectiveness and status of PCI compliance technical controls in real time. It can also identify and prioritize any control areas that may need to be addressed and let you quickly address any auditor report or data request. 
+
+The App provides out-of-the-box searches, dashboards, reports, an incident response framework, and integration with employee and asset information to give you visibility into system, application, and device activity relevant to PCI compliance. 
+
+NOTE: There are two installer options for this App. If you are installing the App on Splunk Enterprise 6.4+ use the installer on this page. But if you are installing the App on Splunk Enterprise Security, use the installer at https://splunkbase.splunk.com/app/2897/
+
+The Splunk App for PCI Compliance requires a paid license. PCI DSS 3.2.1 is supported until version 5.2.0 of the app and later versions are updated to PCI DSS 4.0.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Wed, 02 Sep 2026 15:11:31 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/1143/#v8.7.0</guid>
+    </item>
+    <item>
+      <title>Splunk Enterprise Security - v8.7.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/263/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;[https://help.splunk.com/en/splunk-enterprise-security-8/release-notes-and-resources/8.7/splunk-enterprise-security-release-notes/release-notes-for-splunk-enterprise-security](https://help.splunk.com/en/splunk-enterprise-security-8/release-notes-and-resources/8.7/splunk-enterprise-security-release-notes/release-notes-for-splunk-enterprise-security)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk Enterprise Security (ES) solves a wide range of security analytics and operations use cases including continuous security monitoring, advanced threat detection, compliance, incident investigation, forensics and incident response. Splunk ES delivers an end-to-end view of organizations’ security postures with flexible investigations, unmatched performance, and the most flexible deployment options offered in the cloud, on-premises or hybrid deployment models. Splunk ES enables you to: 
+
+- Conquer alert fatigue with high-fidelity Risk-Based Alerting.
+- Bring visibility across your hybrid environment with multicloud security monitoring.
+- Conduct flexible investigations for effective threat hunting across security, IT and DevOps data sources.
+
+Splunk ES is a premium security solution requiring a paid license.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/98b845f4-a518-11f1-bfe8-8285df2daa36.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Wed, 02 Sep 2026 15:11:18 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/263/#v8.7.0</guid>
+    </item>
+    <item>
+      <title>Splunk Common Information Model (CIM) - v8.7.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/1621/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;[https://help.splunk.com/en/splunk-cloud-platform/common-information-model/8.7/introduction/release-notes-for-the-splunk-common-information-model-add-on](https://help.splunk.com/en/splunk-cloud-platform/common-information-model/8.7/introduction/release-notes-for-the-splunk-common-information-model-add-on)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Common Information Model is a set of field names and tags which are expected to define the least common denominator of a domain of interest. It is implemented as documentation on the Splunk docs website and JSON data model files in this add-on. Use the CIM add-on when modeling data or building apps to ensure compatibility between apps, or to just take advantage of these data models to pivot and report.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b05a7bb8-a564-11f1-9ca3-362bc53b2c18.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Wed, 02 Sep 2026 14:56:51 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/1621/#v8.7.0</guid>
+    </item>
     <item>
       <title>Atlas Windows Event Intelligence - vnull [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/9651/</link>
@@ -150,44 +271,6 @@ Companion add-on for the Cisco AI Defense + Splunk integration.&lt;/p&gt;&lt;img
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Swati Aher</dc:creator>
       <pubDate>Wed, 02 Sep 2026 12:34:39 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/9624/#v1.0.0</guid>
-    </item>
-    <item>
-      <title>Threat Hunting Essentials - v1.3.96 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7633/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
-
-For Premium Version - Contact sales https://www.avertpoint.com/contactus.html
-
-It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
-
-Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
-
-1. Backdoor.
-2. Worms.
-3. Ransomware.
-4. Bots.
-5. Trojan horses.
-6. Keyloggers.
-7. Rootkits.
-8. Spyware.
-9. Fileless malware.
-10. Cryptojacking.
-11. Wiper malware.
-12. Adware.
-14. Viruses
-15. P2P-Worm
-16. Internet Worms
-17. Net-worm
-18. Clickjacking
-19. Cryptominer
-20. Fileless malware
-
-You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
-
-Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a5add648-a6c1-11f1-a2e8-66c89b4e07b9.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
-      <pubDate>Wed, 02 Sep 2026 11:30:40 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.96</guid>
     </item>
     <item>
       <title>IPInfo App for Splunk - v9.7.0 [Version Update]</title>
@@ -1101,75 +1184,6 @@ Smart Assistants (new assistants with revamped UI and better ml pipeline/experim
       <guid>https://splunkbase.splunk.com/app/2890/#v6.1.0</guid>
     </item>
     <item>
-      <title>Zero Trust Compliance - v1.1.5 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/9582/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;\### Release Notes — Version 1.1.5 (Production Release)
-
-\#### 🚀 What's New:
-
-\* \*\*160 DoD Zero Trust Activities Coverage:\*\*
-
-&amp;#x20; \* Complete coverage of the DoD Zero Trust Execution Roadmap (COAs 1–3, v1.1) including all 152 roadmap activities and 8 Sprint 0 integration enablers across all 7 pillars.
-
-&amp;#x20; \* Explicit delineation of Enterprise vs. Component implementation responsibilities with dedicated swimlanes and filter badges.
-
-\* \*\*Agile Sprint Board &amp; Kanban Governance (\`zt\_kanban\`):\*\*
-
-&amp;#x20; \* Interactive 5-column Jira-style board with story point allocation, real-time WIP limits, and predecessor dependency checks.
-
-&amp;#x20; \* 5-tab governance modal supporting Proof of Delivery (PoD) live telemetry validation, CAC digital approvals, and NIST SP 800-207 P\* component mappings.
-
-\* \*\*Dual ISSO / ISSM CAC Stage-Gate Authority:\*\*
-
-&amp;#x20; \* Cryptographic Common Access Card (CAC) audit capture recording 10-digit EDIPI, Certificate Subject DN, and digital signature digests.
-
-&amp;#x20; \* Tamper-resistant \`🛡️ ISSO LOCKED\` and \`🛡️ CERTIFIED\` badges protecting vetted records from automated scan overwrites.
-
-\* \*\*Integrated Master Schedule (IMS) &amp; Critical Path Engine (\`zt\_ims\_gantt\`):\*\*
-
-&amp;#x20; \* High-performance Custom Search Command (\`| getcriticalpath\`) computing DAG CPM early/late dates, total float/slack, and True Critical Paths.
-
-&amp;#x20; \* Built-in US Statutory Federal Holiday Calendar (evaluating all 11 Federal holidays with weekend shift rules) and custom team PTO exclusions.
-
-\* \*\*Cryptographic Proof of Delivery (PoD) Vault (\`zt\_pod\_vault\`):\*\*
-
-&amp;#x20; \* Automated SHA-256 digesting of live SPL queries or uploaded STIG/DFD artifacts.
-
-&amp;#x20; \* On-demand export for eMASS POA\&amp;M closure and NIST SP 800-53 Rev 5 control derivation.
-
-\* \*\*Official User Manual &amp; PDF Guide Integration:\*\*
-
-&amp;#x20; \* Embedded in-app User Manual (\`zt\_user\_guide\`) and downloadable offline PDF manual (\`Zero\_Trust\_Compliance\_User\_Manual.pdf\`) tailored for non-agile defense personnel.
-
-&amp;#x20; \* Added global \`Dashboards\` and \`Search\` navigation tabs.
-
-\* \*\*Splunk Cloud &amp; Air-Gap Hardening:\*\*
-
-&amp;#x20; \* Splunk Cloud Precertified: Passed Splunk AppInspect with 0 errors and 0 failures.
-
-&amp;#x20; \* 100% Air-Gapped / Zero-CDN: Completely isolated local asset bundling—ready for classified SCIF, SIPR, and DoD IL5/IL6 enclaves.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;DoD Zero Trust compliance and continuous ATO (cATO) platform for Splunk. Automates 160 activities with an Agile Kanban board, CPM Critical Path scheduling, dual ISSO CAC approvals, and SHA-256 Proof of Delivery vaulting.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Problem
-Organizations across the Department of Defense (DoD), Federal agencies, and regulated enterprises face a strict mandate to achieve Target Level Zero Trust Architecture by FY2027 (DoD Zero Trust Execution Roadmap v1.1 / NIST SP 800-207).
-
-However, compliance teams face critical operational bottlenecks:
-
-Disconnected Telemetry &amp;amp; Spreadsheets: Engineering progress is tracked in static spreadsheets and siloed ticketing systems that lack real-time correlation with live security logs.
-Subjective &amp;quot;Check-the-Box&amp;quot; Attestation: Traditional triennial point-in-time audits lack verifiable, cryptographic proof of technical control effectiveness.
-Unclear Schedule Deadlines: Compliance roadmaps struggle to forecast actual delivery dates without accounting for complex prerequisite dependencies, task float/slack, and US Federal statutory non-working days.
-The Solution
-The Zero Trust Compliance &amp;amp; IMS Splunk App solves these challenges by transforming static compliance requirements into an interactive, data-driven Continuous Authorization to Operate (cATO) platform.
-
-Built directly inside Splunk, the app correlates live multi-pillar telemetry with formal regulatory governance:
-
-160 Activities Agile Kanban Board: Tracks all 152 DoD Roadmap activities plus 8 foundational telemetry enablers across a 5-stage workflow (Backlog, To Do, In Progress, Testing / In Review, Done / Certified) with real-time WIP limits and flow metrics.
-Cryptographic Proof of Delivery (PoD) Vault: Binds live SPL search results and compliance artifacts into immutable SHA-256 digests, eliminating self-attestation guesswork.
-Dual ISSO / ISSM CAC Stage-Gate Authority: Enforces formal regulatory review with Common Access Card (CAC) 10-digit EDIPI audit stamps and tamper-resistant override locks (🛡️ ISSO LOCKED).
-Critical Path Method (CPM) Scheduling: Built-in calculation engine (| getcriticalpath) evaluates early/late dates, milestone slack, and True Critical Paths factoring in all 11 US Statutory Federal Holidays and team PTO.
-Continuous Posture Discovery: Nightly off-peak scans continuously monitor accelerated CIM data models to detect compliance deviations and stream real-time posture alerts to Authorizing Officials (AOs).&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/47ff27f6-a0b1-11f1-9682-eef3942f1027.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Young Suh</dc:creator>
-      <pubDate>Thu, 27 Aug 2026 23:05:41 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9582/#v1.1.5</guid>
-    </item>
-    <item>
       <title>Splunk Add-On for OpenTelemetry Collector - v0.159.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7125/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Add-On with Splunk OpenTelemetry Collector v0.159.0
@@ -1405,14 +1419,6 @@ This add-on provides the inputs and CIM-compatible knowledge to use with other S
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Spavin</dc:creator>
       <pubDate>Thu, 27 Aug 2026 02:27:59 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/9595/#v1.0.0</guid>
-    </item>
-    <item>
-      <title>Calendar Viz for Dashboard Studio - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/9575/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Initial release&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;The Calendar Viz provides a new visualisation for Dashboard Studio. Show events on an interactive calendar, like changes, incidents, or secure certificate expiry dates.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Calendar Viz provides a new visualisation for Dashboard Studio. Show events on an interactive calendar, like changes, incidents, or secure certificate expiry dates. This visualisation will not work in Classic (Simple XML) dashboards - only Dashboard Studio.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/dca60f94-9f5a-11f1-bd70-16ecf2bf8a47.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Spavin</dc:creator>
-      <pubDate>Thu, 27 Aug 2026 02:27:54 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9575/#v1.0.0</guid>
     </item>
     <item>
       <title>Cyera TA - v4.1.42 [Version Update]</title>
@@ -2724,46 +2730,6 @@ Requires a RansomLeak tenant and an API token.&lt;/p&gt;&lt;img height=&quot;36p
       <guid>https://splunkbase.splunk.com/app/9569/#v0.0.1</guid>
     </item>
     <item>
-      <title>DentiSystems Add-on for Splunk - v1.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/9585/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**Initial Release — Version 1.0.0**
-
-
-
-
-**Included in this release:**
-
-
-
-
-* **Real-time HEC Ingestion:** HTTP Event Collector pipeline tailored for DentiGrid and GATE edge proxies.
-* **Automated Threat Intelligence:** Scheduled polling powered by the Python-based modular input (`dentisystems_feed`).
-* **Full CIM Normalization:** Standardized data model mapping and tagging for `Alerts`, `Intrusion_Detection`, and `Network_Traffic`.
-* **Out-of-the-Box SOC Dashboard:** Ready-to-use visualizations for geographic threat tracking, protocol breakdowns, and decoy sensor telemetry.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Connect Splunk with DentiSystems to ingest high-confidence threat intelligence and active defense telemetry from DentiGrid, GATE, and LEAKS.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;DentiSystems Add-on for Splunk (TA-dentisystems) connects Splunk Enterprise and Splunk Cloud with the DentiSystems active defense and threat intelligence ecosystem.
-
-The add-on enables security teams to ingest and analyze high-fidelity telemetry from DentiSystems platforms, including DentiGrid, distributed deception and threat intelligence infrastructure; GATE, edge security gateways; and LEAKS, credential exposure and breach monitoring.
-
-DentiSystems focuses on identifying adversary activity through deception-based and intelligence-driven detection. Interactions with DentiSystems deception infrastructure can provide high-confidence indicators of reconnaissance, scanning, exploitation attempts, and credential abuse, helping security teams prioritize activity that warrants investigation.
-
-Key Highlights:
-
-High-Confidence Threat Intelligence: Ingest adversary IP addresses, attack activity, targeted protocols, indicators, and related telemetry into Splunk for investigation and correlation.
-
-DentiGrid Integration: Bring telemetry from distributed deception sensor nodes into your existing Splunk SecOps workflows.
-
-GATE &amp;amp; LEAKS Intelligence: Correlate edge security and credential exposure intelligence with broader security data.
-
-CIM-Oriented Normalization: Map supported telemetry to relevant Splunk Common Information Model (CIM) data models, including Intrusion Detection, Alerts, and Network Traffic.
-
-Flexible Ingestion: Support automated scheduled feed polling through the Python-based modular input, with supported HTTP Event Collector (HEC) workflows where configured in the deployment.
-Security Operations Integration: Use DentiSystems intelligence alongside existing Splunk searches, dashboards, alerts, and correlation workflows.
-
-Enterprise-Ready Architecture: Designed to integrate DentiSystems threat intelligence into existing Splunk-based security operations without requiring a separate analysis platform.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c477256a-9f97-11f1-898d-229df4bf04ee.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">MD SADMAN SHOVIK</dc:creator>
-      <pubDate>Wed, 26 Aug 2026 12:40:33 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9585/#v1.0.0</guid>
-    </item>
-    <item>
       <title>Panel with Embedded KV Editor - v1.19.2 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/9592/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;1.19.2 — first Splunkbase release.
@@ -3375,58 +3341,6 @@ or visit our page : https://www.valantic.com/en/cx/services/cx-monitoring/&lt;/p
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco Systems, Inc.</dc:creator>
       <pubDate>Mon, 24 Aug 2026 07:41:54 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7719/#v0.9.0</guid>
-    </item>
-    <item>
-      <title>Add-On for HaveIBeenPwned - v2.3.4 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5050/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* ensured future splunk cloud compatibility&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;A Splunk® add-on providing a custom search command &amp;quot;haveibeenpwned&amp;quot; to query Troy Hunt&amp;#x27;s Have I Been Pwned API (https://haveibeenpwned.com/api/v3/) for known breaches of your (company&amp;#x27;s) domains or your friends&amp;#x27;/family&amp;#x27;s/enemies&amp;#x27;/hardly distantly related someone&amp;#x27;s/employees&amp;#x27;/colleagues&amp;#x27; mail adresses.
-
-Please respect people&amp;#x27;s privacy and adhere to the service&amp;#x27;s acceptable use (https://haveibeenpwned.com/API/v3#AcceptableUse). I tried respecting the limits posed on the API&amp;#x27;s use in the command&amp;#x27;s source code, which is why you&amp;#x27;ll have to have a little patience when querying for large amounts of mail addresses.
-
-I was unsatisfied with the publicly available Splunk add-ons already providing this functionality as they either didn&amp;#x27;t allow control over what and how is queried for or didn&amp;#x27;t format the output to my wishes. So I came up with my own Splunk add-on implementing these missing features.
-
-Cross-compatible with Python 2 and 3. Tested on Splunk Enterprise 10.0 on Windows, Linux and Splunk Cloud.
-
-Licensed under http://www.apache.org/licenses/LICENSE-2.0.
-
-Feel free to submit issues via https://github.com/hRun/SA-haveibeenpwned/issues.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/882e8838-9f2d-11f1-af89-b6c5fb2ad65a.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Harun Kuessner</dc:creator>
-      <pubDate>Mon, 24 Aug 2026 07:13:10 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5050/#v2.3.4</guid>
-    </item>
-    <item>
-      <title>Add-On for Encryption and Encoding - v2.4.4 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5062/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* ensured future splunk cloud compatibility&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;A Splunk® Add-On providing the custom search commands cipher, crypt, encode, and hash for ciphering/deciphering, encrypting/decrypting, encoding/decoding and hashing fields and events at search time.
-
-* Cipher/decipher fields or complete events during search time using RC4, ROT13, ROT47, XOR
-* Encrypt/decrypt fields or complete events during search time using RSA, AES-128/192/256-CBC or AES-128/192/256-OFB
-* Encode/decode fields or complete events during search time using Base32, Base58, Base62, Base64, Binary, Decimal, Hex, Octal
-* Hash fields or complete events during search time using MD5, SHA1, SHA2 (224, 256, 384, 512), SHA3 (224, 256, 384, 512), Blake2
-* Manage access to encryption and decryption functionality on a per-user or per-role basis via two shipped roles
-* Manage usable encryption/decryption keys on a per-user or per-role basis via the app&amp;#x27;s configuration screen
-
-Cross-compatible with Python 2 and 3. Tested on Splunk Enterprise 10.0 on Windows and Linux (64-bit).
-
-Licensed under http://creativecommons.org/licenses/by-nc-sa/4.0/.
-
-Shoutout to some contributors: Windu Sayles, (back in the days also: Simon Balz, Mika Borner, Christoph Dittmann)
-
-Feel free to submit discovered issues or enhancement requests via https://github.com/hRun/TA-cryptosuite/issues.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/3a9e0c14-9f2e-11f1-84d2-ba0c2a53224e.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Harun Kuessner</dc:creator>
-      <pubDate>Mon, 24 Aug 2026 07:12:58 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5062/#v2.4.4</guid>
-    </item>
-    <item>
-      <title>VMRay - v2.6.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5978/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Fixed an issue that caused screenshots to be downloaded multiple times.
-* Apply pre-commit fixes
-* Add Python version 3.13
-* Drop the six dependency (Python 2 compatibility shim, no longer needed)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app enables you to detonate files and URLs, and perform investigative actions, using the VMRay Platform, thereby giving you automated analysis and advanced threat detection through an agentless hypervisor-based sandbox&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/310d9f90-9f7c-11f1-8457-d60b57157b84.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
-      <pubDate>Mon, 24 Aug 2026 05:25:18 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5978/#v2.6.2</guid>
     </item>
   </channel>
 </rss>
