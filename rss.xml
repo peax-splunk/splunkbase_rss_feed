@@ -6,23 +6,23 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Fri, 04 Sep 2026 22:39:15 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 05 Sep 2026 00:29:12 +0000</lastBuildDate>
     <item>
-      <title>Cisco Enterprise Networking Add-on for Splunk - v4.0.20 [Version Update]</title>
+      <title>Cisco Enterprise Networking Add-on for Splunk - v4.0.30 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7538/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;##### Catalyst Center Issue convergence
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;##### Bounded Catalyst Center diagnostics and Issue time
 
-* **Live count growth is no longer a false failure:** The collector freezes one 24-hour window and requests issues in ascending `mostRecentOccurredTime` order. If the vendor-reported count grows monotonically while that window is being reconciled, the page plan extends through the new tail. The regression reproduces the observed growth from 3,924 to 3,926 rows at offset 951.
-* **True instability remains bounded:** A count decrease, duplicate issue identity, or premature short page triggers at most one full restart over the same frozen window, and only when the remaining poll budget can fit it. Repeated instability, malformed data, limit violations, response-byte overflow, or insufficient time still fails closed without publishing a partial snapshot or advancing checkpoints.
-* **Actionable poll evidence:** Successful and failed poll heartbeats report `initial_reported_count`, `reported_count`, `count_growth_events`, `pagination_restarts`, page count, pacing floor, and output completeness. The existing 1,800-second default remains the large-volume baseline; qualify p95 duration below 80% of the interval on the largest controller.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collect and normalize data from Cisco Catalyst Center, Cisco Catalyst SD-WAN, Cisco ISE, Cisco Cyber Vision, and supported Cisco network devices. The included User Guide covers installation, deployment, configuration, validation, and troubleshooting.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Cisco Catalyst Add-on for Splunk collects and normalizes API data from Cisco Catalyst Center, Cisco Catalyst SD-WAN, Cisco Identity Services Engine (ISE), and Cisco Cyber Vision. It also provides parsing and knowledge objects for supported Cisco syslog and NetFlow data.
+* **Useful DEBUG evidence without raw inventory copies:** An oversized successful JSON response is represented by its UTF-8 byte size, SHA-256 fingerprint, JSON shape, bounded top-level keys, record/count/page metadata, and fingerprints of the first and last records. Raw device names, addresses, serial numbers, and other record values are not copied into that diagnostic.
+* **Errors preserve both ends safely:** A large error or malformed response keeps a redacted 4,096-byte head-and-tail preview so the vendor envelope and final root cause remain visible. Customer hostnames and URL query values are omitted, authentication and cookie headers are redacted, and DEBUG-disabled collection performs no diagnostic body parsing or fingerprinting. The existing 99,999-byte `splunktaciscodnacenter:log` parsing limit remains unchanged.
+* **Exact Issue event time with fallback:** New Issue events set modular-input event time from the validated `IssueSpecificTimestamp` epoch-millisecond value using exact `seconds.mmm` precision. The JSON retains that field and separately preserves first and most-recent occurrence timestamps when supplied without changing checkpoint identity. Missing, malformed, or implausible values leave event time unset so the existing `TIMESTAMP_FIELDS = IssueSpecificTimestamp` path can fall back without dropping the Issue.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collect and normalize data from Cisco Catalyst Center, Cisco Catalyst SD-WAN, Cisco ISE, Cisco Cyber Vision, and supported Cisco network devices. The included User Guide covers installation, deployment, configuration, validation, and troubleshooting.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Cisco Catalyst Add-on for Splunk collects and normalizes API data from Cisco Catalyst Center, Cisco Catalyst SD-WAN, Cisco Identity Services Engine (ISE), and Cisco Cyber Vision. It also provides parsing and knowledge objects for supported Cisco syslog and NetFlow data.
 
 The add-on includes an in-product User Guide with current installation, deployment, configuration, validation, and troubleshooting instructions.
 
 Author: Cisco Systems
-Support: cisco-en-programmability@cisco.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0e8f0a9a-a8ae-11f1-8526-1ee874abe3fe.png&quot;&gt;</description>
+Support: cisco-en-programmability@cisco.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/3bd7ef3e-a8be-11f1-8526-1ee874abe3fe.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco Systems, Inc.</dc:creator>
-      <pubDate>Fri, 04 Sep 2026 22:22:46 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7538/#v4.0.20</guid>
+      <pubDate>Sat, 05 Sep 2026 00:18:21 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7538/#v4.0.30</guid>
     </item>
     <item>
       <title>Certificate Fit for Purpose Checker (Bottle Opener) - v0.2.0 [New App Release]</title>
