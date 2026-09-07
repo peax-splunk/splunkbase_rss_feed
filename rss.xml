@@ -6,14 +6,37 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Mon, 07 Sep 2026 05:28:15 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 07 Sep 2026 11:05:56 +0000</lastBuildDate>
     <item>
-      <title>XRPL Servers Observer - v1.1.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/7282/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Version 1.1.0 modernizes the app for current xrpld and Splunk releases. It fixes the latency panel to average latency\_ms, adds explicit Boolean grouping to warning/error searches, replaces state sample counts with per-minute state duration, disables placeholder inputs in the distributable package, refreshes metadata and XRPL Servers Observer branding, and retains legacy rippled field and source identifiers for compatibility. Validated with live xrpld 3.3.0 Testnet logs and StatsD metrics on Splunk Enterprise 10.4.2.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Dashboards and search-time field extractions for monitoring xrpld logs and StatsD operational metrics in Splunk.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Monitor XRP Ledger infrastructure in Splunk. XRPL Servers Observer parses xrpld logs and visualizes operational warnings, service latency, long-running jobs, and time spent in server states from StatsD metrics. Use it to confirm data flow, spot degraded behavior, and investigate node health from one dashboard.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8515f580-aa6f-11f1-bcca-e22ff5fe55ae.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ilya Reshetnikov</dc:creator>
-      <pubDate>Mon, 07 Sep 2026 04:31:27 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7282/#v1.1.0</guid>
+      <title>SPL Workshop - v0.0.4 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9661/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Another bug fixed. When it rains, it pours.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;A better way to learn SPL techniques!&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;SPL Workshop is a better way to learn SPL techniques!
+
+Students are walked trough step by step solutions to challenges. Features such as the ability to compare the current step with the previous step, or the ever present &amp;quot;open in search&amp;quot; link make the learning interactive and much more fun than reading a blog post.
+
+Teachers can easily develop and share their own modules (all powered by CSV lookups) and the app will serve them.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ce6753e6-aaa1-11f1-85c7-46499c802cab.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Gabriel Vasseur</dc:creator>
+      <pubDate>Mon, 07 Sep 2026 10:03:00 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9661/#v0.0.4</guid>
+    </item>
+    <item>
+      <title>Splunk Add-on for CyberArk EPM - v5.0.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5160/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Fixed issues
+  * Removed the hardcoded EPM REST API version from supported API URLs. The EPM server now selects its latest available API version, while the Computer Groups endpoint continues to use its documented v2 path.
+  * Improved account validation messages for HTTP 401, 403, and 404 responses without exposing credentials or tokens.
+  * Improved Account Admin Audit collection by rechecking a five-minute overlap and filtering events that have already been indexed. This prevents events from being missed when timestamps are identical, include fractional seconds, or arrive late.
+  * Added bounded retry handling for Policy and Account Admin Audit collection. Requests now honor Retry-After responses and stop after a limited number of retries.
+  * Account Admin Audit collection now preserves the last successful checkpoint when collection cannot complete, allowing it to resume during the next run.
+  * Admin Audit API Logout events now use the CIM-compliant action value &quot;logoff&quot; instead of &quot;logout&quot;.
+  * Account Admin Audit events are no longer mapped to Change.Account\_Management solely because their Description begins with &quot;API Logout&quot;. Events with Feature\=&quot;Account Mgmt&quot; remain mapped.
+* Upgrade notes
+  * Update saved searches, dashboards, and alerts that filter for action\=&quot;logout&quot; to use action\=&quot;logoff&quot;.
+  * Searches for Account Admin Audit API Logout events should use: sourcetype\=&quot;cyberark:epm:account:admin:audit&quot; Description\=&quot;API Logout\*&quot;
+  * The event type changes affect the accelerated Change data model. If Automatic Rebuilds is disabled, rebuild the Change data model manually. Searches using its acceleration summary may return stale results until rebuilding is complete.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Add-on for CyberArk EPM allows a Splunk software administrator to pull aggregated events of Application Events, Policy Audit, and Threat Detection categories using the cloud administration APIs of CyberArk EPM. Moreover, it can also collect the logs related to Policies, Computers, and Computer Groups. This add-on provides modular inputs and CIM-compatible knowledge to use with other Splunk apps, such as Splunk Enterprise Security. This add-on is only Python3 compatible.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9cb8d810-aa9c-11f1-862d-9ed2e7510ff2.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Mon, 07 Sep 2026 09:25:52 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5160/#v5.0.1</guid>
     </item>
     <item>
       <title>EventTimeline - v1.0.20 [Version Update]</title>
@@ -26,8 +49,16 @@ EventTimeline includes chronological evidence views, MITRE ATT&amp;amp;CK and ki
 
 The app does not include proprietary detection content or require an AI provider. It works with your existing CloudTrail saved searches and allows teams to retain control over their detection logic and investigation workflow.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/234de5b4-a69c-11f1-b3a6-567089d24835.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">anish upadhya</dc:creator>
-      <pubDate>Sun, 06 Sep 2026 16:59:15 +0000</pubDate>
+      <pubDate>Mon, 07 Sep 2026 09:25:01 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/9536/#v1.0.20</guid>
+    </item>
+    <item>
+      <title>XRPL Servers Observer - v1.1.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/7282/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Version 1.1.0 modernizes the app for current xrpld and Splunk releases. It fixes the latency panel to average latency\_ms, adds explicit Boolean grouping to warning/error searches, replaces state sample counts with per-minute state duration, disables placeholder inputs in the distributable package, refreshes metadata and XRPL Servers Observer branding, and retains legacy rippled field and source identifiers for compatibility. Validated with live xrpld 3.3.0 Testnet logs and StatsD metrics on Splunk Enterprise 10.4.2.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Dashboards and search-time field extractions for monitoring xrpld logs and StatsD operational metrics in Splunk.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Monitor XRP Ledger infrastructure in Splunk. XRPL Servers Observer parses xrpld logs and visualizes operational warnings, service latency, long-running jobs, and time spent in server states from StatsD metrics. Use it to confirm data flow, spot degraded behavior, and investigate node health from one dashboard.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8515f580-aa6f-11f1-bcca-e22ff5fe55ae.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ilya Reshetnikov</dc:creator>
+      <pubDate>Mon, 07 Sep 2026 04:31:27 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7282/#v1.1.0</guid>
     </item>
     <item>
       <title>Threat Hunting Essentials - v1.3.101 [Version Update]</title>
@@ -1137,18 +1168,6 @@ Windows Event Intelligence is included in the Atlas Software Platform for Splunk
       <guid>https://splunkbase.splunk.com/app/9651/#vnull</guid>
     </item>
     <item>
-      <title>SPL Workshop - v0.0.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/9661/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;First version: concept proved, multiple awesome lessons implemented, more to come. Trying to get ahead of the delay in getting the app visible on splunkbase.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;A better way to learn SPL techniques!&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;SPL Workshop is a better way to learn SPL techniques!
-
-Students are walked trough step by step solutions to challenges. Tools such as the ability to compare the current step with the previous step, or the ever present &amp;quot;open in search&amp;quot; link make the learning interactive and much more fun than reading a blog post.
-
-Teachers can easily develop and share their own modules (all powered by CSV lookups) and the app will serve them.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/111c2422-a616-11f1-a92a-5ae9dae50c71.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Gabriel Vasseur</dc:creator>
-      <pubDate>Wed, 02 Sep 2026 12:47:17 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9661/#v0.0.1</guid>
-    </item>
-    <item>
       <title>Kyberis Threat Intelligence - v1.0.0 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/9633/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&gt; Initial public release.
@@ -1968,41 +1987,6 @@ The Vectra XDR Technology Add-on pulls entity scoring data, detection data, audi
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Vectra AI</dc:creator>
       <pubDate>Wed, 26 Aug 2026 18:11:59 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6991/#v2.0.0</guid>
-    </item>
-    <item>
-      <title>Vectra XDR App - v2.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6992/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## Version 2.0.0
-
-### New
-
-- **Configuration dashboard** — select the Vectra data index from the UI. The app writes the index macro for you, so there is no longer any need to edit search macros manually.
-- **Click-to-filter on every chart** — clicking a series or a pie slice applies the matching dashboard filter, leaving the selected time range unchanged.
-- **Traffic entity type** in Lockdown, supported in the Entity Type filter, the trend chart and the table.
-
-### Improved
-
-- Refreshed layout and styling across the Entities, Detections, Audit, Lockdown and Health dashboards: summary tiles, card-style panels, grouped filter panels, and clearer tables with expandable rows and a per-page row count.
-- **Data Source Type** is now consistent between the filter, the table column and the charts on both Entities and Detections. The Azure category is labelled **Microsoft Azure** throughout.
-- **Pivot to Vectra** links now carry the current app version automatically.
-- Vectra branding applied to the app icon, browser favicon and dashboard header.
-
-### Fixed
-
-- Network detections whose entity name began with a cloud prefix (for example `AWS:` or `O365:`) were classified under the wrong data source.
-- Entity names could appear blank for Account entities with no source prefix.
-- The Entities **Data Source Type** column could show a different value from the filter that had been applied.
-
-### Upgrade notes
-
-- Requires **Vectra XDR Technology Add-on 2.0.0 or later** for the EDR and External Connectors health dashboards. Below that version these two dashboards show an upgrade prompt instead of content.
-- After upgrading, set your data index on the **Configuration** dashboard.
-- **Data Source Type values have changed.** Filters now use `AWS`, `Microsoft 365 / Azure AD`, `Microsoft Azure` and `Network`. Review any saved searches, reports or alerts that filter on these values.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Vectra AI is the leader in AI-driven threat detection and response for hybrid and multi-cloud enterprises. Organizations worldwide rely on Vectra to stay ahead of modern cyber-attacks. The Vectra AI App enables the security operations team to consume the industry&amp;#x27;s richest threat signals spanning public cloud, SaaS, identity and data center networks inside of Splunk.
-
-The Vectra XDR App builds a dashboard from data provided by Vectra XDR Technology Add-on for Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/6e9f0392-a177-11f1-aed9-be83659393b1.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Vectra AI</dc:creator>
-      <pubDate>Wed, 26 Aug 2026 18:02:38 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6992/#v2.0.0</guid>
     </item>
   </channel>
 </rss>
