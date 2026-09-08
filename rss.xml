@@ -6,7 +6,41 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Tue, 08 Sep 2026 16:55:53 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 08 Sep 2026 19:41:18 +0000</lastBuildDate>
+    <item>
+      <title>Cisco Enterprise Networking App for Splunk - v4.0.10 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7539/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;##### Compatibility and dashboards
+
+* **TA compatibility preflight:** Overview now confirms that Cisco Enterprise Networking Add-on for Splunk 4.0.0 or later is installed and that the complete transition-eventtype contract is available. Missing, older, or incomplete TA deployments receive a persistent warning.
+* **NetFlow search compatibility:** NetFlow searches, drilldowns, React search links, and data-model constraints use `eventtype=cisco_netflow`, covering production `stream:netflow` while excluding options metadata from Network Traffic scope.
+* **SD-WAN access migration compatibility:** ACL and SGACL searches and data-model constraints use `cisco_sdwan_acl_logs` and `cisco_sdwan_sgacl_logs`, preserving current and retained sourcetype history without broadening unrelated data-model children.
+* **Catalyst Center report migration compatibility:** Scheduled-report datasets use `cisco_dnac_inventory_report`, `cisco_dnac_compliance_report`, and `cisco_dnac_report` while retaining the existing dataset and field names.
+* **Dashboard correctness:** Invalid data-model fields, an undeclared Cyber Vision host token, empty drilldown conditions, incorrect Security Insights filters, and SD-WAN/Meraki Security Events time-series selectors were corrected.
+* **Bounded dashboard work:** The Security Events timeline now uses two data-model scans instead of three, top-N panels use bounded sorts, and discarded sort or aggregation stages were removed from trend searches.
+* **Navigation and branding:** Supported Splunk 10.4 navigation icons replace collapsed-menu letter monograms, and the packaged app icon and logo set align with the Cisco Enterprise Networking Add-on.
+* **Search contract audit:** Automated coverage now checks classic dashboards, Dashboard Studio definitions, and scheduled searches for macro, token, data-model field, index, acceleration, and bounded-search contracts.
+
+##### Security and build tooling
+
+* **Patched dependency graph:** The Yarn dependency graph resolves the repository's current security advisories, removes the unused Lerna/Nx/npm publication subtree, and upgrades the packaging toolchain without adding `node_modules` to the installable Splunk app.
+* **Smaller build surface:** The lockfile was reduced from 1,296 to 849 package resolutions while retaining the TypeScript, Tailwind, React, and Splunk packaging workflow. Node.js 20.9 or later is required only for building the app, not for running the packaged Splunk app.
+
+##### Upgrade notes
+
+* Install Cisco Enterprise Networking Add-on for Splunk **4.0.0** before App 4.0.0. The coordinated app depends on TA-owned transition eventtypes and does not bundle or redefine them.
+* Rebuild existing `Cisco_Catalyst_App` data-model acceleration summaries after upgrading both packages because the NetFlow, SD-WAN access, and Catalyst Center report constraints changed.
+* Keep `stream:netflow` in the app discovery macro and use `eventtype=cisco_netflow` in searches.
+* Generic Custom API data remains outside broad CIM children; select it by its stable product sourcetype plus `endpoint_name` or `endpoint_path`.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Dashboards and data models for Cisco enterprise networking data. Current installation, dependency, configuration, and troubleshooting instructions are in the User Guide included with Cisco Catalyst Add-on for Splunk (Splunkbase 7538).&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Cisco Enterprise Networking for Splunk Platform provides dashboards and data models for Cisco Catalyst Center, Cisco Catalyst SD-WAN, Cisco Identity Services Engine (ISE), Cisco Cyber Vision, Cisco Meraki, Cisco ThousandEyes, supported Cisco network-device data, and NetFlow.
+
+Current installation, dependency, configuration, validation, and troubleshooting instructions are maintained in the User Guide included with Cisco Catalyst Add-on for Splunk (Splunkbase 7538).
+
+Author: Cisco Systems
+Support: cisco-en-programmability@cisco.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f6f79d0a-a896-11f1-a330-9a08bf8638fe.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco Systems, Inc.</dc:creator>
+      <pubDate>Tue, 08 Sep 2026 17:01:08 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7539/#v4.0.10</guid>
+    </item>
     <item>
       <title>Datalake2SplunkV3 - v1.1.4 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7982/</link>
@@ -2134,40 +2168,6 @@ Support: cisco-en-programmability@cisco.com&lt;/p&gt;&lt;img height=&quot;36px&q
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">HD Moore</dc:creator>
       <pubDate>Fri, 04 Sep 2026 20:31:54 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6549/#v3.3.6</guid>
-    </item>
-    <item>
-      <title>Cisco Enterprise Networking App for Splunk - v4.0.10 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7539/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;##### Compatibility and dashboards
-
-* **TA compatibility preflight:** Overview now confirms that Cisco Enterprise Networking Add-on for Splunk 4.0.0 or later is installed and that the complete transition-eventtype contract is available. Missing, older, or incomplete TA deployments receive a persistent warning.
-* **NetFlow search compatibility:** NetFlow searches, drilldowns, React search links, and data-model constraints use `eventtype=cisco_netflow`, covering production `stream:netflow` while excluding options metadata from Network Traffic scope.
-* **SD-WAN access migration compatibility:** ACL and SGACL searches and data-model constraints use `cisco_sdwan_acl_logs` and `cisco_sdwan_sgacl_logs`, preserving current and retained sourcetype history without broadening unrelated data-model children.
-* **Catalyst Center report migration compatibility:** Scheduled-report datasets use `cisco_dnac_inventory_report`, `cisco_dnac_compliance_report`, and `cisco_dnac_report` while retaining the existing dataset and field names.
-* **Dashboard correctness:** Invalid data-model fields, an undeclared Cyber Vision host token, empty drilldown conditions, incorrect Security Insights filters, and SD-WAN/Meraki Security Events time-series selectors were corrected.
-* **Bounded dashboard work:** The Security Events timeline now uses two data-model scans instead of three, top-N panels use bounded sorts, and discarded sort or aggregation stages were removed from trend searches.
-* **Navigation and branding:** Supported Splunk 10.4 navigation icons replace collapsed-menu letter monograms, and the packaged app icon and logo set align with the Cisco Enterprise Networking Add-on.
-* **Search contract audit:** Automated coverage now checks classic dashboards, Dashboard Studio definitions, and scheduled searches for macro, token, data-model field, index, acceleration, and bounded-search contracts.
-
-##### Security and build tooling
-
-* **Patched dependency graph:** The Yarn dependency graph resolves the repository's current security advisories, removes the unused Lerna/Nx/npm publication subtree, and upgrades the packaging toolchain without adding `node_modules` to the installable Splunk app.
-* **Smaller build surface:** The lockfile was reduced from 1,296 to 849 package resolutions while retaining the TypeScript, Tailwind, React, and Splunk packaging workflow. Node.js 20.9 or later is required only for building the app, not for running the packaged Splunk app.
-
-##### Upgrade notes
-
-* Install Cisco Enterprise Networking Add-on for Splunk **4.0.0** before App 4.0.0. The coordinated app depends on TA-owned transition eventtypes and does not bundle or redefine them.
-* Rebuild existing `Cisco_Catalyst_App` data-model acceleration summaries after upgrading both packages because the NetFlow, SD-WAN access, and Catalyst Center report constraints changed.
-* Keep `stream:netflow` in the app discovery macro and use `eventtype=cisco_netflow` in searches.
-* Generic Custom API data remains outside broad CIM children; select it by its stable product sourcetype plus `endpoint_name` or `endpoint_path`.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Dashboards and data models for Cisco enterprise networking data. Current installation, dependency, configuration, and troubleshooting instructions are in the User Guide included with Cisco Catalyst Add-on for Splunk (Splunkbase 7538).&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Cisco Enterprise Networking for Splunk Platform provides dashboards and data models for Cisco Catalyst Center, Cisco Catalyst SD-WAN, Cisco Identity Services Engine (ISE), Cisco Cyber Vision, Cisco Meraki, Cisco ThousandEyes, supported Cisco network-device data, and NetFlow.
-
-Current installation, dependency, configuration, validation, and troubleshooting instructions are maintained in the User Guide included with Cisco Catalyst Add-on for Splunk (Splunkbase 7538).
-
-Author: Cisco Systems
-Support: cisco-en-programmability@cisco.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f6f79d0a-a896-11f1-a330-9a08bf8638fe.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco Systems, Inc.</dc:creator>
-      <pubDate>Fri, 04 Sep 2026 20:26:07 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7539/#v4.0.10</guid>
     </item>
     <item>
       <title>Splunk Cisco App Navigator (SCAN) - v1.0.31 [Version Update]</title>
