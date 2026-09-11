@@ -6,7 +6,184 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Fri, 11 Sep 2026 00:41:38 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 11 Sep 2026 05:26:49 +0000</lastBuildDate>
+    <item>
+      <title>Inno Observability - v1.3.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9379/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;\# Inno Observability 1.3.1
+
+
+
+\## Highlights
+
+
+
+\*\*Guided agent deployment.\*\* The Agent Deploy screen now walks you through the whole
+
+path — what to enter, what is already decided, what is optional — and generates a
+
+command you can copy and run as-is. Install, verify, and uninstall are one line each.
+
+
+
+\*\*Central management via a Splunk deployment server.\*\* Install the Universal Forwarder
+
+on a target server once; the collector and its configuration come from the deployment
+
+server after that. Version and settings changes are then made in Splunk alone, without
+
+touching the monitored servers.
+
+
+
+\*\*Per-application APM instrumentation.\*\* Java instrumentation now attaches to one
+
+application at a time instead of the whole host. Applications that already have another
+
+APM agent are detected and skipped, so several applications can share a server safely.
+
+Applying it does not restart your application — you choose when to restart.
+
+
+
+\*\*Works without internet.\*\* The instrumentation library ships with the app, so servers
+
+in a closed network fetch it from your Splunk instance. No staging step, no per-server
+
+file copying.
+
+
+
+\*\*Clustered services.\*\* Give every node the same service name and they appear as one
+
+service with one instance per server, so you can compare throughput, error rate and
+
+latency across instances and see which node is at fault. The same applies to databases,
+
+message brokers and caches through a new solution cluster name.
+
+
+
+\## Fixes
+
+
+
+\- \`--dry-run\` no longer installs anything when the deployment server method is used.
+
+&amp;#x20; It previously ran the real installation while reporting a preview.
+
+\- \`--uninstall\` now removes the Universal Forwarder and the instrumentation library.
+
+&amp;#x20; It previously reported success while leaving the forwarder running.
+
+\- Commands that still contain placeholders (\`\&lt;HEC\_URL&gt;\`, \`\&lt;HEC\_TOKEN&gt;\`) are rejected
+
+&amp;#x20; with a message naming the field to fill in. They were previously installed as-is,
+
+&amp;#x20; which sent data to an unusable address without any error.
+
+\- Instrumentation targets are addressed by unit name. Target numbers could change
+
+&amp;#x20; when a JVM restarted, which could apply or remove instrumentation on the wrong
+
+&amp;#x20; application.
+
+\- Host names are attached to metrics on the deployment-server path, so infrastructure
+
+&amp;#x20; screens and agent status join correctly.
+
+\- Solution receivers and tags are no longer offered where they have no effect; the
+
+&amp;#x20; screen says why and what to do instead.
+
+\- Valid licences are accepted on search head clusters and other licence peers, where
+
+&amp;#x20; the deployment ID could previously be read as empty.
+
+
+
+\## Notes
+
+
+
+\- Korean, English and Japanese interfaces.
+
+\- No licence key is included. Without a key the app runs in demonstration mode.
+
+\- Requires a Splunk deployment server for the central-management method; single-server
+
+&amp;#x20; installation is available as an alternative.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Inno Observability turns OpenTelemetry spans in your Splunk indexes into ready-made
+APM dashboards — service and endpoint response times, error rates, trace search and a
+span waterfall, plus Kubernetes and host context for the same time window. It reads
+data you already collect and runs entirely inside your own Splunk deployment.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Application observability inside Splunk — service health, trace analysis and
+Kubernetes context, built from the trace data in your own indexes.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d6c95926-acef-11f1-85ed-3a33842cb703.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Inno Software</dc:creator>
+      <pubDate>Fri, 11 Sep 2026 04:19:47 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9379/#v1.3.1</guid>
+    </item>
+    <item>
+      <title>Splunk Secure Networking Essentials (Beta) - v1.0.48 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9257/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Configurable executive, IT operations, and secure networking dashboards unifying Cisco network health, identity, security, infrastructure, application, and topology data in Splunk.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Beta release: Participation is by invitation only and limited to a small group of approved users. The app is not yet publicly downloadable on Splunkbase, and access requests are not currently being accepted. General availability is targeted for fall 2026.
+
+Splunk App for Secure Networking helps organizations turn fragmented Cisco infrastructure, networking, identity, security, application experience, and building telemetry into clear executive and operational insights in Splunk.
+
+Cisco environments often produce data across multiple products, add-ons, indexes, sourcetypes, and data models. Building a consolidated view normally requires teams to create and maintain separate searches, dashboards, index mappings, and visualizations. This app provides a reusable foundation that brings those signals together through configurable dashboards, shared search definitions, index-mapping macros, health indicators, drilldowns, and interactive topology views.
+
+The app includes Secure Networking Posture dashboards covering Zero Trust Access, Secure Infrastructure, Scalable Network Segmentation, Hybrid Mesh Firewalling, and Agentic Operations. It also provides executive briefing, IT health, security, asset inventory, network readiness, building intelligence, Cisco Spaces, and network topology experiences.
+
+Searches use configurable index macros instead of hardcoded index names, allowing the app to adapt to different Splunk environments. Administrators can use the included Macro Index Tuning utility to discover relevant data and map dashboards to their indexes.
+
+Splunk App for Secure Networking does not collect Cisco data directly. It visualizes data already ingested into Splunk through applicable Cisco add-ons, integrations, and data models. The dashboards displayed and populated in each environment depend on the available data sources.
+
+The app is intended for network operations, security operations, IT operations, Splunk administrators, architects, customer success teams, and executives who need a consolidated view of the health, security, availability, and performance of their Cisco environment.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Field Solutions</dc:creator>
+      <pubDate>Fri, 11 Sep 2026 03:51:05 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9257/#v1.0.48</guid>
+    </item>
+    <item>
+      <title>Splunk Add-On for OpenTelemetry Collector - v0.160.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7125/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Add-On with Splunk OpenTelemetry Collector v0.160.0
+
+[Release Notes](https://github.com/signalfx/splunk-otel-collector/releases/tag/v0.160.0)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Use the Splunk Add-on for OpenTelemetry Collector to collect traces and metrics for Splunk Observability Cloud.
+To learn more about how Splunk Observability Cloud works with your environment to provide data, see https://help.splunk.com/en/splunk-observability-cloud/get-started&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f15dcef2-ad8a-11f1-a7c4-d2288c8cc50a.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Fri, 11 Sep 2026 03:01:56 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7125/#v0.160.0</guid>
+    </item>
+    <item>
+      <title>Splunk Add-On for OpenTelemetry Collector (for Windows x86_64) - v0.160.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8699/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Add-On with Splunk OpenTelemetry Collector v0.160.0
+
+[Release Notes](https://github.com/signalfx/splunk-otel-collector/releases/tag/v0.160.0)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Use the Splunk Add-on for OpenTelemetry Collector (for Windows x86_64)  to collect traces and metrics for Splunk Observability Cloud on Windows amd64  machines.
+To learn more about how Splunk Observability Cloud works with your environment to provide data, see https://help.splunk.com/en/splunk-observability-cloud/get-started&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ec703b82-ad8a-11f1-a073-ae125ba980e9.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Fri, 11 Sep 2026 02:53:41 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8699/#v0.160.0</guid>
+    </item>
+    <item>
+      <title>Splunk Add-On for OpenTelemetry Collector (for Linux x86_64) - v0.160.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8698/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Add-On with Splunk OpenTelemetry Collector v0.160.0
+
+[Release Notes](https://github.com/signalfx/splunk-otel-collector/releases/tag/v0.160.0)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Use the Splunk Add-on for OpenTelemetry Collector (for Linux x86_64)  to collect traces and metrics for Splunk Observability Cloud on Linux amd64  machines.
+To learn more about how Splunk Observability Cloud works with your environment to provide data, see https://help.splunk.com/en/splunk-observability-cloud/get-started&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c85bf36c-ad8a-11f1-965b-ce223d6d2f90.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Fri, 11 Sep 2026 02:52:42 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8698/#v0.160.0</guid>
+    </item>
+    <item>
+      <title>Splunk Connect for OTLP - v0.160.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8704/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Splunk Connect for OTLP v0.160.0
+
+[Release Notes](https://github.com/signalfx/splunk-otel-collector/releases/tag/v0.160.0)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk Connect for OTLP is a technical addon that exposes a OTLP endpoint for consumption of logs, traces and metrics. OTLP stands for OpenTelemetry Protocol, a standard communication protocol to transmit signals using Protobuf over gRPC or HTTP.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Fri, 11 Sep 2026 02:45:17 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8704/#v0.160.0</guid>
+    </item>
     <item>
       <title>Cisco Enterprise Networking Add-on for Splunk - v4.0.35 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7538/</link>
@@ -2223,120 +2400,6 @@ See all plans: https://trackme-solutions.com/pricing/&lt;/p&gt;&lt;img height=&q
       <guid>https://splunkbase.splunk.com/app/7569/#v1.0.55</guid>
     </item>
     <item>
-      <title>Inno Observability - v1.3.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/9379/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;\# Inno Observability 1.3.1
-
-
-
-\## Highlights
-
-
-
-\*\*Guided agent deployment.\*\* The Agent Deploy screen now walks you through the whole
-
-path — what to enter, what is already decided, what is optional — and generates a
-
-command you can copy and run as-is. Install, verify, and uninstall are one line each.
-
-
-
-\*\*Central management via a Splunk deployment server.\*\* Install the Universal Forwarder
-
-on a target server once; the collector and its configuration come from the deployment
-
-server after that. Version and settings changes are then made in Splunk alone, without
-
-touching the monitored servers.
-
-
-
-\*\*Per-application APM instrumentation.\*\* Java instrumentation now attaches to one
-
-application at a time instead of the whole host. Applications that already have another
-
-APM agent are detected and skipped, so several applications can share a server safely.
-
-Applying it does not restart your application — you choose when to restart.
-
-
-
-\*\*Works without internet.\*\* The instrumentation library ships with the app, so servers
-
-in a closed network fetch it from your Splunk instance. No staging step, no per-server
-
-file copying.
-
-
-
-\*\*Clustered services.\*\* Give every node the same service name and they appear as one
-
-service with one instance per server, so you can compare throughput, error rate and
-
-latency across instances and see which node is at fault. The same applies to databases,
-
-message brokers and caches through a new solution cluster name.
-
-
-
-\## Fixes
-
-
-
-\- \`--dry-run\` no longer installs anything when the deployment server method is used.
-
-&amp;#x20; It previously ran the real installation while reporting a preview.
-
-\- \`--uninstall\` now removes the Universal Forwarder and the instrumentation library.
-
-&amp;#x20; It previously reported success while leaving the forwarder running.
-
-\- Commands that still contain placeholders (\`\&lt;HEC\_URL&gt;\`, \`\&lt;HEC\_TOKEN&gt;\`) are rejected
-
-&amp;#x20; with a message naming the field to fill in. They were previously installed as-is,
-
-&amp;#x20; which sent data to an unusable address without any error.
-
-\- Instrumentation targets are addressed by unit name. Target numbers could change
-
-&amp;#x20; when a JVM restarted, which could apply or remove instrumentation on the wrong
-
-&amp;#x20; application.
-
-\- Host names are attached to metrics on the deployment-server path, so infrastructure
-
-&amp;#x20; screens and agent status join correctly.
-
-\- Solution receivers and tags are no longer offered where they have no effect; the
-
-&amp;#x20; screen says why and what to do instead.
-
-\- Valid licences are accepted on search head clusters and other licence peers, where
-
-&amp;#x20; the deployment ID could previously be read as empty.
-
-
-
-\## Notes
-
-
-
-\- Korean, English and Japanese interfaces.
-
-\- No licence key is included. Without a key the app runs in demonstration mode.
-
-\- Requires a Splunk deployment server for the central-management method; single-server
-
-&amp;#x20; installation is available as an alternative.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Inno Observability turns OpenTelemetry spans in your Splunk indexes into ready-made
-APM dashboards — service and endpoint response times, error rates, trace search and a
-span waterfall, plus Kubernetes and host context for the same time window. It reads
-data you already collect and runs entirely inside your own Splunk deployment.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Application observability inside Splunk — service health, trace analysis and
-Kubernetes context, built from the trace data in your own indexes.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d6c95926-acef-11f1-85ed-3a33842cb703.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Inno Software</dc:creator>
-      <pubDate>Thu, 10 Sep 2026 08:22:02 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9379/#v1.3.1</guid>
-    </item>
-    <item>
       <title>Technical Addon for the Metricator application for Nmon (HEC) - v1.1.3 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/4022/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Updated branding and support information. All apps are privately maintained by Guilhem Marchand, with support available at [guilhem.marchand@gmail.com](mailto:guilhem.marchand@gmail.com).
@@ -2532,14 +2595,6 @@ The default configuration supports index=e2g with sourcetypes e2g_authentication
       <guid>https://splunkbase.splunk.com/app/9718/#v1.0.0</guid>
     </item>
     <item>
-      <title>Splunk Common Information Model (CIM) - v8.7.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/1621/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;[https://help.splunk.com/en/splunk-cloud-platform/common-information-model/8.7/introduction/release-notes-for-the-splunk-common-information-model-add-on](https://help.splunk.com/en/splunk-cloud-platform/common-information-model/8.7/introduction/release-notes-for-the-splunk-common-information-model-add-on)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Common Information Model is a set of field names and tags which are expected to define the least common denominator of a domain of interest. It is implemented as documentation on the Splunk docs website and JSON data model files in this add-on. Use the CIM add-on when modeling data or building apps to ensure compatibility between apps, or to just take advantage of these data models to pivot and report.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b05a7bb8-a564-11f1-9ca3-362bc53b2c18.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Wed, 09 Sep 2026 15:33:48 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/1621/#v8.7.0</guid>
-    </item>
-    <item>
       <title>WALLIX Advanced Monitoring - v1.0.0 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/9697/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;# WALLIX Advanced Monitoring 1.0.0
@@ -2643,16 +2698,6 @@ they have been.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Amara Mohamed Traore</dc:creator>
       <pubDate>Wed, 09 Sep 2026 15:27:04 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/9697/#v1.0.0</guid>
-    </item>
-    <item>
-      <title>AI tier - vnull [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/9666/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;AI tier brings AI capabilities to organizations that cannot or will not move sensitive workloads to the cloud&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;AI tier is Splunk&amp;#x27;s Kubernetes-native AI services layer that brings selected Splunk AI capabilities —including the Splunk AI Assistant and hosted foundation models — directly into on-premises, private-cloud, and air-gapped environments. For organizations that need AI requests, model execution, and platform data to remain under their operational control, AI tier delivers a cloud-like AI experience while keeping data local.
-
-Unlike Splunk Cloud AI features which require cloud connectivity, AI tier is purpose-built for customers in highly regulated industries, government, defense, financial services, and security-sensitive sectors that cannot — or prefer not to — move sensitive workloads to the cloud. This GA release is designed for production-ready, on-premises AI deployment for Security, IT Ops, and SRE teams.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Wed, 09 Sep 2026 15:06:45 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9666/#vnull</guid>
     </item>
     <item>
       <title>HCP Vault by Netbr - v0.1.0 [New App Release]</title>
@@ -3695,26 +3740,6 @@ Nothing goes out unless you set up AI, and the recommended shape is a model in t
       <guid>https://splunkbase.splunk.com/app/9583/#v1.4.1</guid>
     </item>
     <item>
-      <title>Splunk Secure Networking Essentials (Beta) - v1.0.48 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/9257/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Configurable executive, IT operations, and secure networking dashboards unifying Cisco network health, identity, security, infrastructure, application, and topology data in Splunk.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Beta release: Participation is by invitation only and limited to a small group of approved users. The app is not yet publicly downloadable on Splunkbase, and access requests are not currently being accepted. General availability is targeted for fall 2026.
-
-Splunk App for Secure Networking helps organizations turn fragmented Cisco infrastructure, networking, identity, security, application experience, and building telemetry into clear executive and operational insights in Splunk.
-
-Cisco environments often produce data across multiple products, add-ons, indexes, sourcetypes, and data models. Building a consolidated view normally requires teams to create and maintain separate searches, dashboards, index mappings, and visualizations. This app provides a reusable foundation that brings those signals together through configurable dashboards, shared search definitions, index-mapping macros, health indicators, drilldowns, and interactive topology views.
-
-The app includes Secure Networking Posture dashboards covering Zero Trust Access, Secure Infrastructure, Scalable Network Segmentation, Hybrid Mesh Firewalling, and Agentic Operations. It also provides executive briefing, IT health, security, asset inventory, network readiness, building intelligence, Cisco Spaces, and network topology experiences.
-
-Searches use configurable index macros instead of hardcoded index names, allowing the app to adapt to different Splunk environments. Administrators can use the included Macro Index Tuning utility to discover relevant data and map dashboards to their indexes.
-
-Splunk App for Secure Networking does not collect Cisco data directly. It visualizes data already ingested into Splunk through applicable Cisco add-ons, integrations, and data models. The dashboards displayed and populated in each environment depend on the available data sources.
-
-The app is intended for network operations, security operations, IT operations, Splunk administrators, architects, customer success teams, and executives who need a consolidated view of the health, security, availability, and performance of their Cisco environment.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d2f6b30a-a819-11f1-a3ee-dea75a4eb38d.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Field Solutions</dc:creator>
-      <pubDate>Sat, 05 Sep 2026 03:18:20 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9257/#v1.0.48</guid>
-    </item>
-    <item>
       <title>Certificate Fit for Purpose Checker (Bottle Opener) - v0.2.0 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/9556/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;This app is intended to examine the Splunk settings related to TLS and certificate validation to ensure that the certificate(s) are &amp;quot;Fit for Purpose&amp;quot;.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app is intended to examine the Splunk settings related to TLS and certificate validation to ensure that the certificate(s) are &amp;quot;Fit for Purpose&amp;quot; - that the settings are valid and will validate successfully. Inspected settings are:
@@ -4115,22 +4140,6 @@ ThreatDown makes endpoints resilient through adaptive cyber protection, active t
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Wed, 02 Sep 2026 23:29:53 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5795/#v3.2.5</guid>
-    </item>
-    <item>
-      <title>CrowdStrike OAuth API - v6.0.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5786/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Updated the Splunk SOAR SDK dependency to version 4.1.2 while preserving existing action read-only declarations.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with CrowdStrike OAuth2 authentication standard to implement querying of endpoint security data&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2d3a03e4-a725-11f1-b774-56c7af67eb72.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Wed, 02 Sep 2026 23:22:35 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5786/#v6.0.1</guid>
-    </item>
-    <item>
-      <title>NuHarbor - TA for AppGate Zero Trust Network Access - v1.1.2 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/9120/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Minor updates to internal comments in files for additional clarity&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Provides CIM-compliant field extractions and mappings for Appgate SDP audit events across Network Traffic, Authentication, Network Sessions, Certificates, and Compute Inventory data models.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Appgate SDP Add-on provides CIM-compliant field extractions, eventtypes, and tags for Appgate SDP (Software Defined Perimeter / Zero Trust Network Access) audit events. The add-on processes single-line JSON-formatted events from the appgate:sdp sourcetype and maps them to five CIM data models: Network Traffic, Authentication, Network Sessions, Certificates, and Compute Inventory. All field mappings are applied at search time using KV_MODE=json, field aliases, calculated fields, lookups, eventtypes, and tags. The add-on supports events ingested through SC4S to HEC as well as alternative paths including file monitor, TCP, and Universal Forwarder. It expects events in a structured JSON envelope format with a nested log payload. The CIM mappings have been verified against CIM 8.5 data model documentation and align with the Appgate SDP v6.4 audit log catalog. This add-on establishes the canonical sourcetype convention for Appgate SDP events in Splunk deployments.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/89619fa4-a6f5-11f1-a2e8-66c89b4e07b9.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Paul Kiripolsky</dc:creator>
-      <pubDate>Wed, 02 Sep 2026 17:44:52 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9120/#v1.1.2</guid>
     </item>
   </channel>
 </rss>
