@@ -6,7 +6,24 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Thu, 10 Sep 2026 22:06:27 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 11 Sep 2026 00:41:38 +0000</lastBuildDate>
+    <item>
+      <title>Cisco Enterprise Networking Add-on for Splunk - v4.0.35 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7538/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;##### Large-fleet pagination honesty
+
+* **Recovering Device Health prefixes:** Cross-page identity overlap, live `totalCount` drift, and a deadline after at least one validated health page publish the bounded set as `recovering` with `snapshot_source_completeness=partial` and skip inventory merge. Network-device inventory remains fail-closed. Sourcetype remains `cisco:dnac:devicehealth`. Default interval is 900 seconds; a 60-second stanza can still miss. Saved intervals are not migrated.
+* **Issue partial-first with durable continuation:** Live-list drift still publishes recovering/partial rows. Budget and deadline segments commit changed-content hashes and then save the fixed window, next offset, and hashed identities so later polls resume instead of repeating offset 1. Writer or checkpoint failure cannot advance progress, and only a stable reconciled logical walk reports complete. This does not make a 24-hour snapshot of \~30,000 issues feasible in one short poll. Default interval remains 1,800 seconds.
+* **Client and Application Traffic honesty:** Client defaults to 3600 seconds. Unlike the shipped 4.0.30 fail-closed walk, live identity overlap, live `page.count` drift, and a deadline after at least one validated page publish `recovering` / `output_complete=false`; a count that shrinks below the current offset stops without ingesting a repeated previous page. Malformed metadata, ambiguous HTTP 400, and later-page vendor failures still abort. A full unpaged Application Traffic catalog of 500 or more rows reports `recovering` / `output_complete=false`.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collect and normalize data from Cisco Catalyst Center (DNA Center, DNAC), Cisco Catalyst SD-WAN / SDWAN (vManage), Cisco ISE, Cisco Cyber Vision (CyberVision), and supported Cisco network devices. The included User Guide covers installation, deployment, configuration, validation, and troubleshooting.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Cisco Enterprise Networking Add-on for Splunk, also known as the Cisco Catalyst Add-on, collects and normalizes API, syslog, and NetFlow data from Cisco Catalyst Center (formerly DNA Center, DNAC), Cisco Catalyst SD-WAN and Cisco Catalyst SD-WAN Manager (SDWAN, formerly vManage), Cisco Identity Services Engine (ISE), and Cisco Cyber Vision (CyberVision).
+
+The add-on includes an in-product User Guide with current installation, deployment, configuration, validation, and troubleshooting instructions.
+
+Author: Cisco Systems
+Support: cisco-en-programmability@cisco.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/1b289bda-abd9-11f1-bc61-9e9473c678fc.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco Systems, Inc.</dc:creator>
+      <pubDate>Thu, 10 Sep 2026 23:28:00 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7538/#v4.0.35</guid>
+    </item>
     <item>
       <title>Flashpoint Splunk App - v2.5.2 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/4784/</link>
@@ -3159,23 +3176,6 @@ Teachers can easily develop and share their own modules (all powered by CSV look
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Gabriel Vasseur</dc:creator>
       <pubDate>Wed, 09 Sep 2026 09:21:09 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/9661/#v0.1.0</guid>
-    </item>
-    <item>
-      <title>Cisco Enterprise Networking Add-on for Splunk - v4.0.35 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7538/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;##### Large-fleet pagination honesty
-
-* **Recovering Device Health prefixes:** Cross-page identity overlap, live `totalCount` drift, and a deadline after at least one validated health page publish the bounded set as `recovering` with `snapshot_source_completeness=partial` and skip inventory merge. Network-device inventory remains fail-closed. Sourcetype remains `cisco:dnac:devicehealth`. Default interval is 900 seconds; a 60-second stanza can still miss. Saved intervals are not migrated.
-* **Issue partial-first with durable continuation:** Live-list drift still publishes recovering/partial rows. Budget and deadline segments commit changed-content hashes and then save the fixed window, next offset, and hashed identities so later polls resume instead of repeating offset 1. Writer or checkpoint failure cannot advance progress, and only a stable reconciled logical walk reports complete. This does not make a 24-hour snapshot of \~30,000 issues feasible in one short poll. Default interval remains 1,800 seconds.
-* **Client and Application Traffic honesty:** Client defaults to 3600 seconds. Unlike the shipped 4.0.30 fail-closed walk, live identity overlap, live `page.count` drift, and a deadline after at least one validated page publish `recovering` / `output_complete=false`; a count that shrinks below the current offset stops without ingesting a repeated previous page. Malformed metadata, ambiguous HTTP 400, and later-page vendor failures still abort. A full unpaged Application Traffic catalog of 500 or more rows reports `recovering` / `output_complete=false`.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collect and normalize data from Cisco Catalyst Center, Cisco Catalyst SD-WAN, Cisco ISE, Cisco Cyber Vision, and supported Cisco network devices. The included User Guide covers installation, deployment, configuration, validation, and troubleshooting.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Cisco Catalyst Add-on for Splunk collects and normalizes API data from Cisco Catalyst Center, Cisco Catalyst SD-WAN, Cisco Identity Services Engine (ISE), and Cisco Cyber Vision. It also provides parsing and knowledge objects for supported Cisco syslog and NetFlow data.
-
-The add-on includes an in-product User Guide with current installation, deployment, configuration, validation, and troubleshooting instructions.
-
-Author: Cisco Systems
-Support: cisco-en-programmability@cisco.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/1b289bda-abd9-11f1-bc61-9e9473c678fc.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco Systems, Inc.</dc:creator>
-      <pubDate>Tue, 08 Sep 2026 23:09:34 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7538/#v4.0.35</guid>
     </item>
     <item>
       <title>Cisco Enterprise Networking App for Splunk - v4.0.10 [Version Update]</title>
