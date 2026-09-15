@@ -6,7 +6,180 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Tue, 15 Sep 2026 08:12:17 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 15 Sep 2026 14:00:34 +0000</lastBuildDate>
+    <item>
+      <title>Cisco Security Cloud - v3.7.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7404/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;This maintenance release updates the CIM field mappings for Cisco Multicloud Defense gateway events so that DPI/IPS alerts report the actual client and backend server IP addresses instead of the gateway’s IP address.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Cisco Security Cloud application offers seamless integration for connecting your Cisco devices with Splunk. It features a modular UX input design, built-in health checks, and constant monitoring to ensure operational integrity.
+
+Product(s) Enabled:
+    Cisco AI Defense
+    Cisco Duo
+    Cisco Email Threat Defense (ETD)
+    Cisco Endpoint Visibility Module (EVM) CIM Mappings (Beta)
+    Cisco Identity Intelligence (CII)
+    Cisco Multicloud Defense
+    Cisco NVM
+    Cisco Secure Endpoint
+    Cisco Secure Firewall (FTD/eStreamer/ASA)
+    Cisco Secure Workload
+    Cisco Isovalent
+    Cisco Isovalent Edge Processor **Alpha
+    Cisco Secure Malware Analytics (SMA)
+    Cisco Secure Network Analytics (SNA)
+    Cisco Vulnerability Intelligence
+    Cisco XDR (Incident Import &amp;amp; Promote to ES Notable)
+
+Here’s the revised version with the sourcetype list and stronger 3.x transition language.
+
+**MAJOR VERSION CHANGE:  CiscoSecurityCloud 4.0.0 Release Notes**
+
+CiscoSecurityCloud 4.0.0 introduces expanded Cisco Secure Firewall / FTD syslog and Advanced Logging support, with improved parsing, event routing, CIM/data model alignment, dashboard visibility, and ingestion reliability.
+
+This release adds a new FTD sourcetype routing model that separates FTD events by event family instead of keeping all events under a single generic `cisco:ftd:syslog` sourcetype. This improves field extraction accuracy, dashboard filtering, data model mapping, and long-term supportability for FTD syslog and Advanced Logging data.
+
+Because this changes how FTD events are categorized, **4.0.0 may be a breaking change for customers with custom Splunk content**.
+
+Content that may require review includes:
+
+- Saved searches, alerts, reports, and dashboards that filter only on `sourcetype=&amp;quot;cisco:ftd:syslog&amp;quot;`
+- Custom macros, eventtypes, tags, and CIM/data model constraints
+- Custom props/transforms or routing assumptions for FTD syslog
+- Data model acceleration searches scoped to the previous FTD sourcetype
+- External integrations or correlation searches that expect all FTD events in one sourcetype
+
+Customers should update broad FTD searches from &amp;quot;cisco:ftd:syslog&amp;quot; to
+
+cisco:ftd:intrusion
+cisco:ftd:connection
+cisco:ftd:connection:security
+cisco:ftd:file
+cisco:ftd:malware
+cisco:ftd:discovery
+cisco:ftd:useractivity
+cisco:ftd:correlation
+cisco:ftd:intrusionpacket
+cisco:ftd:adv:http
+cisco:ftd:adv:ftp
+cisco:ftd:adv:conn
+cisco:ftd:adv:dns
+cisco:ftd:adv:weird
+cisco:ftd:adv:notice
+
+CiscoSecurityCloud 4.0.0 is intended for customers who want the new FTD Advanced Logging model and are ready to validate custom content against the expanded sourcetypes.
+
+To ease the transition, the CiscoSecurityCloud 3.x branch will be actively maintained and should remain the recommended stable branch for customers who require the existing FTD sourcetype behavior. Customers can continue using 3.x while they assess 4.0.0, update custom SPL, and validate dashboards, alerts, and data model acceleration.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9937790a-b10c-11f1-b648-b6586300c1a7.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco Systems, Inc.</dc:creator>
+      <pubDate>Tue, 15 Sep 2026 13:57:25 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7404/#v3.7.1</guid>
+    </item>
+    <item>
+      <title>Genesys Cloud Add-on for Splunk - v0.4.2 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9730/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;First release.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Genesys Cloud Add-on for Splunk integrates with Genesys Cloud to collect metrics, service statuses and operational events.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0efd42e4-ac5f-11f1-911a-d21a720f6959.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Field Solutions</dc:creator>
+      <pubDate>Tue, 15 Sep 2026 13:15:47 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9730/#v0.4.2</guid>
+    </item>
+    <item>
+      <title>Threat Hunting Essentials - v1.3.110 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7633/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
+
+For Premium Version - Contact sales https://www.avertpoint.com/contactus.html
+
+It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
+
+Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
+
+1. Backdoor.
+2. Worms.
+3. Ransomware.
+4. Bots.
+5. Trojan horses.
+6. Keyloggers.
+7. Rootkits.
+8. Spyware.
+9. Fileless malware.
+10. Cryptojacking.
+11. Wiper malware.
+12. Adware.
+14. Viruses
+15. P2P-Worm
+16. Internet Worms
+17. Net-worm
+18. Clickjacking
+19. Cryptominer
+20. Fileless malware
+
+You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
+
+Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/cd21d5c6-b0f8-11f1-9fb3-d23af6b0dd92.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
+      <pubDate>Tue, 15 Sep 2026 11:47:44 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.110</guid>
+    </item>
+    <item>
+      <title>Cyberwatch Syslog Add-on for Splunk - v2.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7333/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;### Version 2.0.0
+
+This is a major release. **It changes the value of every field this add-on produces.** Read the breaking changes below before upgrading if you have searches, alerts or dashboards built on version 1.0.x.
+
+#### Breaking changes
+
+**Field values no longer carry quotes.**&amp;#x20;
+
+**Timestamps are now extracted.**
+
+**Three fields are removed.** `description` and `name` were both copies of `cve_code` — use `cve` and `signature`. `severity_id` held the string `level_high` in a field the CIM types as a number — use `severity`.
+
+**`cvss_vector` is now the vendor's own.** 1.0.3 overwrote it with a CVSS v2 vector rebuilt from `cvss_AV`, `cvss_AC` and `cvss_Au.`Cyberwatch sends a complete, versioned vector of its own (`CVSS:3.1/...`, `CVSS:4.0/...`), and that is what you now get.
+
+#### Added
+
+* **All 24 fields Cyberwatch emits are extracted and documented** — `epss`, `triage_status`, `computer_criticality`, `computer_os_name`, `computer_os_arch`, `computer_category`, `computer_id`, `groups`, `active`, `ignored`, `fixed_at`, `created_at`, `updated_at` and `source_node` were never usable before.
+* **CIM mapping reviewed against the Vulnerabilities data model, CIM 8.x.** `cvss` is converted to a number, and `severity` is mapped explicitly from `cve_level`. When Cyberwatch reports `level_unknown`, `severity` is left unset: the CIM prescribes `critical`, `high`, `medium`, `low` and `informational`, none of which means &quot;the source does not know&quot;.
+* **An explicit time zone.** The BSD syslog header carries none, so the add-on declares `TZ = UTC` — every timestamp in the Cyberwatch payload is UTC. Override it in local/props.conf if your appliance emits local time.
+* Line breaking, truncation and event breaker settings are declared.
+
+#### Changed
+
+* The `cyberwatch_vulnerability_detection` event type now keys on the extracted `cve_code` field instead of matching the literal string `CVE-` anywhere in the event, which tagged any message merely mentioning an identifier.
+
+#### Upgrading
+
+1. Install 2.0.0 over the existing add-on. Your `local/` directory is preserved, so your input configuration survives.
+2. **Restart Splunk.** The timestamp and line-breaking settings are index-time settings and do not apply until you do.
+3. Update any search that compares field values against the quoted form.
+
+#### Compatibility
+
+Splunk Enterprise 8.0 and later, Splunk Cloud Platform. No Python, no scripted inputs, no custom UI.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Cyberwatch Syslog Add-on for Splunk allows a Splunk software administrator to collect data in syslog format from Cyberwatch. This add-on provides the inputs and CIM-compatible knowledge to use with other Splunk apps, such as Splunk Enterprise Security.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/daa78cf0-b0e3-11f1-8c54-9efbc3005523.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Thomas Dussossoy</dc:creator>
+      <pubDate>Tue, 15 Sep 2026 11:40:50 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7333/#v2.0.0</guid>
+    </item>
+    <item>
+      <title>Splunk WLM Resource Protection App - v1.0.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8839/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Improved security by preventing monitored users from bypassing resource protection through excluded application namespaces.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Monitors active searches and terminates over-threshold workloads to protect Splunk stack performance and stability.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk WLM Resource Protection App helps protect Splunk search performance by monitoring active searches and automatically terminating searches that exceed configured CPU or memory thresholds. It addresses situations where a small number of resource-intensive searches can degrade stack stability, impact other users, or consume excessive search head and indexer capacity.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Tue, 15 Sep 2026 09:48:02 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8839/#v1.0.2</guid>
+    </item>
+    <item>
+      <title>Microsoft Graph Security Score Add-on - v1.3.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5693/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;\* Added compatibility with Python 3.13 while retaining Python 3.9 / existing Splunk support.
+
+\* Declared dependencies pinned to versions compatible with both Python 3.9 and 3.13 (Splunk Python SDK 2.1.1, requests 2.32.5); splunktaucclib 8.1.0, solnlib 8.1.0.
+
+\* Updated GitHub CI to splunk-app-action v7; set \`python.version \= latest\` for all Python handlers/inputs.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Microsoft Graph Security Score Add-on for Splunk allows users to collect their Azure (Office 365) Security Score from Microsoft&amp;#x27;s Security Graph API. It consists of Python scripts that collect the required/necessary data to configure the account information.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/09f336c8-b0e2-11f1-8c54-9efbc3005523.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Crossrealms, Inc. - Partner</dc:creator>
+      <pubDate>Tue, 15 Sep 2026 08:48:44 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5693/#v1.3.0</guid>
+    </item>
     <item>
       <title>Screenshot Machine - v3.0.8 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5933/</link>
@@ -362,14 +535,6 @@ If Customers' searches, dashboards, alerts, or forwarding rules expect a fixed s
       <guid>https://splunkbase.splunk.com/app/6819/#v26.2.1</guid>
     </item>
     <item>
-      <title>Genesys Cloud Add-on for Splunk - v0.4.2 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/9730/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;First release.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Genesys Cloud Add-on for Splunk integrates with Genesys Cloud to collect metrics, service statuses and operational events.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0efd42e4-ac5f-11f1-911a-d21a720f6959.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Field Solutions</dc:creator>
-      <pubDate>Mon, 14 Sep 2026 20:25:49 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9730/#v0.4.2</guid>
-    </item>
-    <item>
       <title>Git Version Control for Splunk - v1.4.6 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/4182/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Fixed broken link on the Data Inputs page that would end in a 404 error. Thank you to AlenS for identifying this&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Simple version control of Splunk. Zero-effort versioning of your dashboards, .conf changes, saved searches etc.
@@ -553,44 +718,6 @@ Enhance your security operations with the spiderSilk Resonance App for Splunk, e
       <guid>https://splunkbase.splunk.com/app/7682/#v1.3.0</guid>
     </item>
     <item>
-      <title>Threat Hunting Essentials - v1.3.109 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7633/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
-
-For Premium Version - Contact sales https://www.avertpoint.com/contactus.html
-
-It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
-
-Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
-
-1. Backdoor.
-2. Worms.
-3. Ransomware.
-4. Bots.
-5. Trojan horses.
-6. Keyloggers.
-7. Rootkits.
-8. Spyware.
-9. Fileless malware.
-10. Cryptojacking.
-11. Wiper malware.
-12. Adware.
-14. Viruses
-15. P2P-Worm
-16. Internet Worms
-17. Net-worm
-18. Clickjacking
-19. Cryptominer
-20. Fileless malware
-
-You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
-
-Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a2895736-b02f-11f1-a7aa-9a1667648c59.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
-      <pubDate>Mon, 14 Sep 2026 12:58:04 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.109</guid>
-    </item>
-    <item>
       <title>TrackMe - v2.4.17 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/4621/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**TrackMe 2.4.17 — A faster AI Assistant, Concierge actions from within the Assistant, and targeted fixes for AI Advisors on Splunk-hosted models, Topology Studio, Backup &amp; Restore, Tenant Home and the policy engine.**
@@ -673,25 +800,6 @@ https://support.trustlogin.com/hc/ja/articles/36595922342297
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">TrustLogin GMO</dc:creator>
       <pubDate>Mon, 14 Sep 2026 07:36:31 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7598/#v1.1.0</guid>
-    </item>
-    <item>
-      <title>E2G Plant Asset Integrity Add-on - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/9718/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Initial release of the E2G Plant Asset Integrity CIM Add-on.
-* Added CIM normalization for E2G authentication events using the Authentication data model.
-* Added CIM normalization for E2G audit/user activity using the Change data model.
-* Added support for e2g\_authentication and E2G-Audit sourcetypes.
-* Added field mappings, event types, tags, and audit attribute extraction.
-* Supports E2G data collected from UserAccessLogEntry and TransactionLog database tables.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;CIM normalization for E2G Plant Asset Integrity authentication and audit logs collected from the application database. Supports the Splunk Authentication and Change data models.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The E2G Plant Asset Integrity Add-on provides search-time CIM normalization and enrichment for authentication and audit data collected from the E2G Plant Asset Integrity application.
-
-Authentication events are normalized and enriched for the Splunk Authentication data model, while audit and user activity events are normalized and enriched for the Splunk Change data model.
-
-The add-on provides field mappings, derived fields, event types, tags, and search-time extractions to enrich E2G events and make supported data available to CIM-compatible searches, data models, and Splunk Enterprise Security content.
-
-The default configuration supports index=e2g with sourcetypes e2g_authentication and E2G-Audit. Data collection is handled separately using Splunk DB Connect.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">ARAFAT MALIK</dc:creator>
-      <pubDate>Sun, 13 Sep 2026 09:29:01 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9718/#v1.0.0</guid>
     </item>
     <item>
       <title>NLP Text Analytics - v1.2.6 [Version Update]</title>
@@ -3402,14 +3510,6 @@ Documentation can be found at https://docs.splunk.com/Documentation/AddOns/relea
       <guid>https://splunkbase.splunk.com/app/8612/#v1.4.0</guid>
     </item>
     <item>
-      <title>HCP Vault by Netbr - v0.1.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/9684/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Provides security and stability monitoring dashboards and alerts for HashiCorp Vault audit logs and metrics ingested via HEC into hcp-vault-metrics and hcp-vault-logs indexes.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The NETBR Vault Dashboards app provides monitoring dashboards and alerting capabilities for HashiCorp Cloud Platform (HCP) Vault Dedicated deployments. The app processes audit logs and metrics streamed into the hcp-vault-metrics and hcp-vault-logs indexes, enabling security operations and infrastructure teams to monitor vault activity, detect anomalous behavior, and track cluster health. The app includes two dashboards for operational visibility and 25 scheduled searches covering security detection, stability monitoring, and periodic reporting. Security alerts detect suspicious patterns such as authentication failures, permission denials, token misuse, unauthorized access attempts, secret manipulation, and configuration changes. Stability alerts monitor cluster availability, resource utilization (CPU, memory, disk), and data pipeline health. Weekly and daily reports summarize authentication activity, privileged operations, configuration changes, and resource consumption trends.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/39a02d06-ab95-11f1-911a-d21a720f6959.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">João Miziara</dc:creator>
-      <pubDate>Wed, 09 Sep 2026 14:01:06 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9684/#v0.1.0</guid>
-    </item>
-    <item>
       <title>Macaddress vendor lookup - v1.1.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/9581/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**Version 1.1.0**
@@ -3556,24 +3656,6 @@ Teachers can easily develop and share their own modules (all powered by CSV look
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Gabriel Vasseur</dc:creator>
       <pubDate>Wed, 09 Sep 2026 09:21:09 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/9661/#v0.1.0</guid>
-    </item>
-    <item>
-      <title>Companies House Add-on for Splunk - v1.0.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7812/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Companies House Add-on for Splunk 1.0.2&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Companies House Add-on for Splunk allows users to pull data from Companies House and ingest it into Splunk. This add-on provides detailed information about new companies and industry registrations worldwide, enabling seamless monitoring and analysis of company data&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/81f0bf76-ab8b-11f1-9610-6ad8863d2072.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Data Elicit Solutions</dc:creator>
-      <pubDate>Tue, 08 Sep 2026 14:31:36 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7812/#v1.0.2</guid>
-    </item>
-    <item>
-      <title>Splunk WLM Resource Protection App - v1.0.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8839/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Improved application performance and reduced scheduled monitoring execution time
-* Added a setup-page option to refresh the list of monitored users
-* Improved security by preventing monitored searches from bypassing resource-protection rules&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Monitors active searches and terminates over-threshold workloads to protect Splunk stack performance and stability.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk WLM Resource Protection App helps protect Splunk search performance by monitoring active searches and automatically terminating searches that exceed configured CPU or memory thresholds. It addresses situations where a small number of resource-intensive searches can degrade stack stability, impact other users, or consume excessive search head and indexer capacity.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 08 Sep 2026 13:16:26 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8839/#v1.0.1</guid>
     </item>
   </channel>
 </rss>
