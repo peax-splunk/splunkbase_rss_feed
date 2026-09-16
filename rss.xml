@@ -6,7 +6,68 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Wed, 16 Sep 2026 02:30:01 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 16 Sep 2026 08:05:37 +0000</lastBuildDate>
+    <item>
+      <title>Sentinel - v1.0.5 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6655/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Add Python 3.13 support&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app provides integration with Microsoft Sentinel&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/54518d2e-b186-11f1-ab6c-96936f8244c0.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
+      <pubDate>Wed, 16 Sep 2026 04:23:13 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6655/#v1.0.5</guid>
+    </item>
+    <item>
+      <title>Microsoft Graph Security Score Add-on - v1.3.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5693/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;\* Added compatibility with Python 3.13 while retaining Python 3.9 / existing Splunk support.
+
+\* Declared dependencies pinned to versions compatible with both Python 3.9 and 3.13 (Splunk Python SDK 2.1.1, requests 2.32.5); splunktaucclib 8.1.0, solnlib 8.1.0.
+
+\* Updated GitHub CI to splunk-app-action v7; set \`python.version \= latest\` for all Python handlers/inputs.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Microsoft Graph Security Score Add-on for Splunk allows users to collect their Azure (Office 365) Security Score from Microsoft&amp;#x27;s Security Graph API. It consists of Python scripts that collect the required/necessary data to configure the account information.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/09f336c8-b0e2-11f1-8c54-9efbc3005523.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Crossrealms, Inc. - Partner</dc:creator>
+      <pubDate>Wed, 16 Sep 2026 03:03:23 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5693/#v1.3.0</guid>
+    </item>
+    <item>
+      <title>Cyberwatch Syslog Add-on for Splunk - v2.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7333/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;### Version 2.0.0
+
+This is a major release. **It changes the value of every field this add-on produces.** Read the breaking changes below before upgrading if you have searches, alerts or dashboards built on version 1.0.x.
+
+#### Breaking changes
+
+**Field values no longer carry quotes.**&amp;#x20;
+
+**Timestamps are now extracted.**
+
+**Three fields are removed.** `description` and `name` were both copies of `cve_code` — use `cve` and `signature`. `severity_id` held the string `level_high` in a field the CIM types as a number — use `severity`.
+
+**`cvss_vector` is now the vendor's own.** 1.0.3 overwrote it with a CVSS v2 vector rebuilt from `cvss_AV`, `cvss_AC` and `cvss_Au.`Cyberwatch sends a complete, versioned vector of its own (`CVSS:3.1/...`, `CVSS:4.0/...`), and that is what you now get.
+
+#### Added
+
+* **All 24 fields Cyberwatch emits are extracted and documented** — `epss`, `triage_status`, `computer_criticality`, `computer_os_name`, `computer_os_arch`, `computer_category`, `computer_id`, `groups`, `active`, `ignored`, `fixed_at`, `created_at`, `updated_at` and `source_node` were never usable before.
+* **CIM mapping reviewed against the Vulnerabilities data model, CIM 8.x.** `cvss` is converted to a number, and `severity` is mapped explicitly from `cve_level`. When Cyberwatch reports `level_unknown`, `severity` is left unset: the CIM prescribes `critical`, `high`, `medium`, `low` and `informational`, none of which means &quot;the source does not know&quot;.
+* **An explicit time zone.** The BSD syslog header carries none, so the add-on declares `TZ = UTC` — every timestamp in the Cyberwatch payload is UTC. Override it in local/props.conf if your appliance emits local time.
+* Line breaking, truncation and event breaker settings are declared.
+
+#### Changed
+
+* The `cyberwatch_vulnerability_detection` event type now keys on the extracted `cve_code` field instead of matching the literal string `CVE-` anywhere in the event, which tagged any message merely mentioning an identifier.
+
+#### Upgrading
+
+1. Install 2.0.0 over the existing add-on. Your `local/` directory is preserved, so your input configuration survives.
+2. **Restart Splunk.** The timestamp and line-breaking settings are index-time settings and do not apply until you do.
+3. Update any search that compares field values against the quoted form.
+
+#### Compatibility
+
+Splunk Enterprise 8.0 and later, Splunk Cloud Platform. No Python, no scripted inputs, no custom UI.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Cyberwatch Syslog Add-on for Splunk allows a Splunk software administrator to collect data in syslog format from Cyberwatch. This add-on provides the inputs and CIM-compatible knowledge to use with other Splunk apps, such as Splunk Enterprise Security.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/daa78cf0-b0e3-11f1-8c54-9efbc3005523.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Thomas Dussossoy</dc:creator>
+      <pubDate>Wed, 16 Sep 2026 03:01:38 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7333/#v2.0.0</guid>
+    </item>
     <item>
       <title>ThreatQuotient Splunk Soar Connector - v3.0.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/6082/</link>
@@ -244,65 +305,12 @@ Information Use: Your email address is used to improve detection logic based on 
       <guid>https://splunkbase.splunk.com/app/7633/#v1.3.110</guid>
     </item>
     <item>
-      <title>Cyberwatch Syslog Add-on for Splunk - v2.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7333/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;### Version 2.0.0
-
-This is a major release. **It changes the value of every field this add-on produces.** Read the breaking changes below before upgrading if you have searches, alerts or dashboards built on version 1.0.x.
-
-#### Breaking changes
-
-**Field values no longer carry quotes.**&amp;#x20;
-
-**Timestamps are now extracted.**
-
-**Three fields are removed.** `description` and `name` were both copies of `cve_code` — use `cve` and `signature`. `severity_id` held the string `level_high` in a field the CIM types as a number — use `severity`.
-
-**`cvss_vector` is now the vendor's own.** 1.0.3 overwrote it with a CVSS v2 vector rebuilt from `cvss_AV`, `cvss_AC` and `cvss_Au.`Cyberwatch sends a complete, versioned vector of its own (`CVSS:3.1/...`, `CVSS:4.0/...`), and that is what you now get.
-
-#### Added
-
-* **All 24 fields Cyberwatch emits are extracted and documented** — `epss`, `triage_status`, `computer_criticality`, `computer_os_name`, `computer_os_arch`, `computer_category`, `computer_id`, `groups`, `active`, `ignored`, `fixed_at`, `created_at`, `updated_at` and `source_node` were never usable before.
-* **CIM mapping reviewed against the Vulnerabilities data model, CIM 8.x.** `cvss` is converted to a number, and `severity` is mapped explicitly from `cve_level`. When Cyberwatch reports `level_unknown`, `severity` is left unset: the CIM prescribes `critical`, `high`, `medium`, `low` and `informational`, none of which means &quot;the source does not know&quot;.
-* **An explicit time zone.** The BSD syslog header carries none, so the add-on declares `TZ = UTC` — every timestamp in the Cyberwatch payload is UTC. Override it in local/props.conf if your appliance emits local time.
-* Line breaking, truncation and event breaker settings are declared.
-
-#### Changed
-
-* The `cyberwatch_vulnerability_detection` event type now keys on the extracted `cve_code` field instead of matching the literal string `CVE-` anywhere in the event, which tagged any message merely mentioning an identifier.
-
-#### Upgrading
-
-1. Install 2.0.0 over the existing add-on. Your `local/` directory is preserved, so your input configuration survives.
-2. **Restart Splunk.** The timestamp and line-breaking settings are index-time settings and do not apply until you do.
-3. Update any search that compares field values against the quoted form.
-
-#### Compatibility
-
-Splunk Enterprise 8.0 and later, Splunk Cloud Platform. No Python, no scripted inputs, no custom UI.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Cyberwatch Syslog Add-on for Splunk allows a Splunk software administrator to collect data in syslog format from Cyberwatch. This add-on provides the inputs and CIM-compatible knowledge to use with other Splunk apps, such as Splunk Enterprise Security.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/daa78cf0-b0e3-11f1-8c54-9efbc3005523.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Thomas Dussossoy</dc:creator>
-      <pubDate>Tue, 15 Sep 2026 11:40:50 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7333/#v2.0.0</guid>
-    </item>
-    <item>
       <title>Splunk WLM Resource Protection App - v1.0.2 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8839/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Improved security by preventing monitored users from bypassing resource protection through excluded application namespaces.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Monitors active searches and terminates over-threshold workloads to protect Splunk stack performance and stability.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk WLM Resource Protection App helps protect Splunk search performance by monitoring active searches and automatically terminating searches that exceed configured CPU or memory thresholds. It addresses situations where a small number of resource-intensive searches can degrade stack stability, impact other users, or consume excessive search head and indexer capacity.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Tue, 15 Sep 2026 09:48:02 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8839/#v1.0.2</guid>
-    </item>
-    <item>
-      <title>Microsoft Graph Security Score Add-on - v1.3.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5693/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;\* Added compatibility with Python 3.13 while retaining Python 3.9 / existing Splunk support.
-
-\* Declared dependencies pinned to versions compatible with both Python 3.9 and 3.13 (Splunk Python SDK 2.1.1, requests 2.32.5); splunktaucclib 8.1.0, solnlib 8.1.0.
-
-\* Updated GitHub CI to splunk-app-action v7; set \`python.version \= latest\` for all Python handlers/inputs.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Microsoft Graph Security Score Add-on for Splunk allows users to collect their Azure (Office 365) Security Score from Microsoft&amp;#x27;s Security Graph API. It consists of Python scripts that collect the required/necessary data to configure the account information.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/09f336c8-b0e2-11f1-8c54-9efbc3005523.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Crossrealms, Inc. - Partner</dc:creator>
-      <pubDate>Tue, 15 Sep 2026 08:48:44 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5693/#v1.3.0</guid>
     </item>
     <item>
       <title>Screenshot Machine - v3.0.8 [Version Update]</title>
@@ -3550,57 +3558,6 @@ Documentation can be found at https://docs.splunk.com/Documentation/AddOns/relea
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Thu, 10 Sep 2026 00:56:13 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8612/#v1.4.0</guid>
-    </item>
-    <item>
-      <title>Macaddress vendor lookup - v1.1.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/9581/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**Version 1.1.0**
-
-New configuration experience. The setup screen has been rebuilt with Splunk's Universal Configuration Console (UCC), replacing the legacy setup.xml page. Configuration now works on Splunk Cloud Platform and on deployments with Search Head Clustering, where setup.xml was not supported.
-
-Action required after upgrading: open the app, go to Configuration, and re-enter your macadress.com API key on the Settings tab. Version 1.1.0 does not read the key stored by the old setup page, so the macaddresslookup command will report &quot;No macadress.com API key configured&quot; until you do this once. The key is still held in Splunk's encrypted credential store, never in a plain-text .conf file.
-
-Also in this release:
-
-* Declares python.required \= 3.13 for the search command and REST handler, for compatibility with current and upcoming Splunk versions.
-* Passes Splunk AppInspect cloud checks with no errors or failures.
-
-No change to the macaddresslookup command, its arguments, or the fields it adds. Existing saved searches and dashboards keep working unchanged once the API key is re-entered.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Add a macaddresslookup search command that enriches any event with a MAC address field: manufacturer, device type, virtualization/container signals, randomization confidence, and reserved/protocol address detection, all in one streaming SPL command.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TA-macadress adds a `macaddresslookup` search command that resolves MAC
-addresses to vendor, device category, virtualization, and special-use
-information, using the macadress.com API.
-
-Any event with a MAC address field, DHCP leases, ARP tables, wireless
-associations, switch port tables, asset inventories, can be enriched in
-place with:
-
-- Vendor and manufacturer identity, resolved against the full IEEE OUI
-  registry (organization name, matched registry prefix, country)
-- Device category inference (router, switch, wireless access point,
-  embedded device, and more) from a manually curated, source-verified
-  dataset, not a guess
-- Virtualization and container detection: VMware, Hyper-V, Xen,
-  VirtualBox, Parallels, QEMU/KVM, and Docker&amp;#x27;s default bridge convention
-- Special-use address classification: broadcast, IPv4/IPv6 multicast,
-  VRRP, HSRP, STP, LACP, 802.1X, LLDP, each with its source protocol cited
-- Randomization signals: whether an address is locally administered or
-  otherwise likely to be a privacy-randomized or spoofed MAC, useful for
-  flagging anomalous device behavior in security and asset-inventory use
-  cases
-
-This turns a raw MAC address into something you can actually search,
-filter, and stat on: `stats count by mac_organization`,
-`where mac_virtualization_platform!=&amp;quot;&amp;quot;`, `where mac_potentially_randomized=1`,
-and so on, without leaving SPL.
-
-Lookups are batched (up to 100 addresses per API call) for efficiency on
-large event volumes, and the API key is stored via Splunk&amp;#x27;s encrypted
-storage/passwords endpoint rather than a plain-text configuration file.
-
-A free API key is available at macadress.com/signup; paid plans raise the
-request-rate and monthly-quota limits for larger deployments.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/790cb328-ac54-11f1-a2f1-d68c2a1df7cd.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Samy Massoud</dc:creator>
-      <pubDate>Wed, 09 Sep 2026 13:51:02 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9581/#v1.1.0</guid>
     </item>
   </channel>
 </rss>
