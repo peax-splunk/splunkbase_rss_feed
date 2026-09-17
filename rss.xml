@@ -6,7 +6,23 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Wed, 16 Sep 2026 23:25:16 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 17 Sep 2026 02:34:15 +0000</lastBuildDate>
+    <item>
+      <title>Holidays - v1.4.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4853/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Minor update for Splunk Cloud compatability.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Ever needed an easy way to generate if a given day is a holiday in your locale? This app provides a wrapper for the python library holidays (https://github.com/vacanza/holidays) to enrich existing data with timestamps to know if the given timestamp is a holiday, business day, or business holiday (a holiday that occurs on a normal business day). This can be helpful for a number of reasons but often for predictions or forecasts (like in Smart Forecasting&amp;#x27;s &amp;quot;Special Days field&amp;quot; option) as those days usually will mean a difference in the model, especially those holidays that land on a business day.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0ba70a54-b22b-11f1-a427-626cb822c09a.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Nathan Worsham</dc:creator>
+      <pubDate>Thu, 17 Sep 2026 00:05:00 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4853/#v1.4.1</guid>
+    </item>
+    <item>
+      <title>SSL Certificate Lookup - v1.1.6 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4580/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Added configurable \`timeout\` field to sslcert\_lookup (defaults to 1 second). Added Splunk-style rotating file logging to \`$SPLUNK\_HOME/var/log/splunk/sslcert\_lookup.log\`. Added python requirements for Splunk Cloud.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Provides sslcert_lookup, an external lookup that when given an IP or domain (works with SNI) and optionally port from an existing search, can give enrich the search by finding values from an SSL certificate like CN , SAN (Subject Alternative Names), and expiration. This can be handy for several use cases like looking for certificate expiration or discovering what site may be at an IP address.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/7631ae6e-b227-11f1-8a65-7e2e2d9dfb6b.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Nathan Worsham</dc:creator>
+      <pubDate>Wed, 16 Sep 2026 23:55:29 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4580/#v1.1.6</guid>
+    </item>
     <item>
       <title>Supporting App for CUBE - v0.7.2 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8614/</link>
@@ -351,40 +367,6 @@ Information Use: Your email address is used to improve detection logic based on 
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Wed, 16 Sep 2026 11:18:55 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5943/#v5.0.1</guid>
-    </item>
-    <item>
-      <title>Polyswarm App - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/9745/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**Version 1.0.0. First public release.**
-
-**What is included**
-
-Five search commands. polyswarmsearch enriches hashes, URLs and domains with a crowd-sourced verdict, a PolyScore, detection counts and a permalink, with optional attribution for malware families, tags and actors. polyswarmextract pulls indicators out of any text field and refangs defanged ones, using no API quota. polyswarmdetonate submits a URL for sandbox detonation. polyswarmusage reports what your plan is entitled to and what remains. polyswarmsync previews one cycle of the scheduled intel pull without advancing its checkpoint.
-
-Three dashboards. Overview for cached verdicts, attribution, sandbox findings and entitlement. Triage for enriching any search and reading the per-engine detail behind a verdict. Sandbox Tasks for every detonation the app submitted and what the sandbox found.
-
-Three workflow actions on hash, URL and domain fields, so an analyst can enrich or open the PolySwarm portal from the event field menu without writing a search.
-
-An alert action, PolySwarm Detonate, that submits a URL from search results. It is declared as an Enterprise Security adaptive response action, so it appears alongside other response actions on a notable event.
-
-Two modular inputs. A sandbox task poller that follows each detonation until the platform settles it, enabled by default and making no request when there are no tasks. A scheduled intel pull for recent malicious artifacts, disabled by default because it spends quota.
-
-A verdict cache in the KV store, so a repeated indicator does not spend a second API request, and every result records whether it cost quota.
-
-**Notes**
-
-Your API key is stored once through the app's setup page into Splunk's encrypted credential storage. The app never writes a key to a configuration file, a log line, a search string or a search result.
-
-The app ships a polyswarm\_analyst role for users who need to read the stored key without full administrator rights.
-
-Metered commands are opt-in and capped. Attribution is off by default, the enrichment command requires an explicit result limit, and the detonation command handles one URL per invocation.
-
-Tested on Splunk Enterprise 10.4.2. Supports Splunk Enterprise 9.4 and later and Splunk Enterprise 10.x, on a search head. Splunk Cloud Platform is supported through a private app upload, and role access for sc\_admin is included. Every Python stanza declares support for both Python 3.9 and 3.13, so one package runs across a mixed estate.
-
-Requires a PolySwarm API key and outbound HTTPS to api.polyswarm.network on port 443. No indexer components, no index time configuration, and nothing to deploy to a forwarder. The KV store must be enabled.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Enriches hashes, URLs, and domains with crowd-sourced malware verdicts, attribution, and sandbox detonation results from the PolySwarm threat intelligence platform.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The PolySwarm App integrates crowd-sourced malware threat intelligence into Splunk by enriching indicators of compromise with verdicts derived from multiple detection engines. The app processes hashes, URLs, and domains found in Splunk events, annotating them with threat scores, verdict classifications, and detection counts sourced from the PolySwarm platform. It extracts and refangs indicators from raw text fields within the search head environment and submits artifacts to a cloud-based sandbox for behavioral analysis. Search results are augmented with metadata including malware family attribution, file type classification, and aggregated security vendor assessments. The app operates entirely on the search head tier and relies on a key-value store to cache verdict data, track sandbox task state, and maintain modular input checkpoints. Data enrichment occurs through five specialized search commands that query the PolySwarm API, returning threat intelligence without requiring data to leave the Splunk deployment. Events tagged with the polyswarm:artifact source type represent intelligence pulled from the PolySwarm feed and sandbox task results. The app includes dashboards for reviewing enrichment activity, monitoring sandbox detonations, and triaging indicators flagged by scheduled searches. Workflow actions provide analysts with one-click enrichment from search result tables and direct navigation to the PolySwarm portal for detailed artifact analysis.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2d2c00e4-ad4e-11f1-9c70-4e0861d004e0.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Erick Ingleby</dc:creator>
-      <pubDate>Wed, 16 Sep 2026 10:14:40 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9745/#v1.0.0</guid>
     </item>
     <item>
       <title>API Operational Intelligence for AWS API Gateway - v1.0.2 [New App Release]</title>
@@ -1582,35 +1564,6 @@ Key Benefits:
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Spavin</dc:creator>
       <pubDate>Fri, 11 Sep 2026 06:55:00 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/9595/#v1.0.1</guid>
-    </item>
-    <item>
-      <title>Flashpoint Splunk App - v2.5.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4784/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Updated app icons&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Leveraging Flashpoint’s technical data and intelligence reports provides Splunk users with visibility into illicit online communities in order to correlate information related to their infrastructure, therefore, gaining insights in a timely manner and leveraging connections to prioritize their response. The Flashpoint Splunk App and Add-on enables Flashpoint data to be seamlessly integrated into customers’ Splunk instances in order to automatically alert customers when a match has been made between indicators from internal log data and Flashpoint intelligence. 
-
-Integrated Flashpoint Datasets:
-
-Technical Indicators: Enables users access to indicators of compromise (IOCs) and technical data across Flashpoint datasets, including those found in Flashpoint Finished Intelligence Reports, allowing for seamless integration into users’ workflows and automated tools. 
-
-Finished Intelligence:  Access to analytical reports produced by our intelligence analysts. Reports cover a wide spectrum of illicit underground activity, including crimeware, fraud, emerging malware, violent extremism, and physical threats.
-
-Flashpoint CVEs Dataset: CVEs: Access to the latest CVEs within Flashpoint collection, including access to MITRE and NVD data, as well as CVEs discussed by threat actors as observed by Flashpoint Intelligence Analysts.
-
-Key Features: 
-
-- Captures, indexes, and correlates in real time Flashpoint technical data within Splunk’s searchable repository 
-- Enables users to generate reports and visualizations, including graphs, alerts, and dashboards 
-- Collect integrated data using Flashpoint’s REST-based API 
-- Includes IOCs such as hashes, URLs, domains, as well as details related to malware families, mapping to the MITRE ATT&amp;amp;CK framework 
-- Access Pre-Built Dashboards with associated Flashpoint data
-- View new CVEs and see which products they affect, see which CVEs are being discussed by malicious actors and see which CVEs have active exploits
-
-About Flashpoint
-Flashpoint delivers converged intelligence and risk solutions to private and public sector organizations worldwide. As the global leader in Business Risk Intelligence (BRI), Flashpoint provides meaningful intelligence to assist organizations in combating threats and adversaries. Through sophisticated technology, advanced data collections, and human-powered analysis, Flashpoint is the only intelligence firm that can help multiple teams across an organization bolster cybersecurity, confront fraud, detect insider threats, enhance corporate and physical security, improve executive protection, address third-party risk, and support due diligence efforts. 
-For more information, visit https://www.flashpoint-intel.com/ or follow us on Twitter at @FlashpointIntel.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/fed5d3bc-ad45-11f1-8356-c651d01ae567.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Matt Howell</dc:creator>
-      <pubDate>Thu, 10 Sep 2026 18:35:40 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4784/#v2.5.2</guid>
     </item>
   </channel>
 </rss>
