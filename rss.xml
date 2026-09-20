@@ -6,7 +6,75 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sun, 20 Sep 2026 08:05:44 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 20 Sep 2026 13:21:24 +0000</lastBuildDate>
+    <item>
+      <title>Threat Hunting Essentials - v1.3.114 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7633/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
+
+For Premium Version - Contact sales https://www.avertpoint.com/contactus.html
+
+It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
+
+Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
+
+1. Backdoor.
+2. Worms.
+3. Ransomware.
+4. Bots.
+5. Trojan horses.
+6. Keyloggers.
+7. Rootkits.
+8. Spyware.
+9. Fileless malware.
+10. Cryptojacking.
+11. Wiper malware.
+12. Adware.
+14. Viruses
+15. P2P-Worm
+16. Internet Worms
+17. Net-worm
+18. Clickjacking
+19. Cryptominer
+20. Fileless malware
+
+You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
+
+Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a0eae3c0-b4e6-11f1-be9e-02cbe2ea6992.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
+      <pubDate>Sun, 20 Sep 2026 11:30:40 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.114</guid>
+    </item>
+    <item>
+      <title>Add-on for Prisma Cloud Audit - v2.0.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7700/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;### Fixed
+
+* **Infinite loop / stuck input process.** Every failure path (auth call fails, no token in auth response, data call fails, empty result page) previously logged an error and looped back immediately with no exit condition — the modular input would spin forever, re-hitting the Prisma Cloud API with no backoff, and never exit. All paths now terminate the run.
+* **Unhandled crash on non-JSON error bodies (`JSONDecodeError`).** `response.json()` / `auth_response.json()` were called inline inside `.format()` calls with no error handling. A 5xx response with an empty or non-JSON body raised an uncaught `JSONDecodeError`, killing the script with a raw traceback instead of a clean log line. Both the auth response and the data response JSON parsing are now wrapped in `try/except ValueError`, logging the raw response text and exiting cleanly.
+* **Silent error messages.** `&quot;error in data collection&quot;.format(response.json())` and similar calls had no `{}` placeholder, so the parsed response body was discarded — errors logged with zero detail. Now logs the actual response body (`response.text` / `auth_response.text`).
+* **Misleading exit-condition log message.** The message logged when there's nothing new to collect said `&quot;end_date&gt;start_date.existing the script!&quot;`, which was backwards (it fires when `start_date &gt;= end_date`) and had a typo. Corrected to `&quot;start_date&gt;=end_date, nothing new to collect. exiting the script!&quot;`.
+* **Empty-page handling.** A data response with no `value` records previously skipped the entire pagination/checkpoint block, leaving `keep_running` untouched — another path into the infinite loop. Now logs, saves a checkpoint, and exits cleanly.
+
+### Changed
+
+* Genuine failures (auth failure, missing token, data-fetch HTTP error, malformed JSON, checkpoint-save exception) now `raise RuntimeError(...)` instead of just logging. This surfaces failed runs to the `splunktaucclib` framework (which logs the traceback and marks the run as failed) instead of exiting silently as if successful — important for noticing things like bad credentials or persistent API errors.
+* Benign &quot;nothing to do&quot; cases (no new time range, no records this cycle) still exit cleanly without raising, since they aren't errors.
+
+### Removed
+
+* Dead code: an unused `headers` dict (apikey-style auth header) that was built but never passed to any request — the actual calls use `auth_headers` / `data_headers`.
+
+### Verified
+
+* `python3 -m py_compile` passes with no syntax errors.
+* Confirmed against a live 500-error and JSON-decode-error traceback, and a live invalid-credentials scenario — both now produce a single clean `RuntimeError` with the real API error message instead of a raw crash or silent infinite retry.
+
+###&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Fetches audit events from Prisma.io Cloud&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ec0f4b0a-b4cf-11f1-9350-b6f458c6f607.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Rotimi Akinbobola</dc:creator>
+      <pubDate>Sun, 20 Sep 2026 08:52:40 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7700/#v2.0.1</guid>
+    </item>
     <item>
       <title>TA-Vulnerability catalog - v1.1.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/9694/</link>
@@ -246,44 +314,6 @@ Vulnrichment は CVE レコードの原本をそのまま保持します。&lt;/
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">hiroaki ogawa</dc:creator>
       <pubDate>Sun, 20 Sep 2026 02:55:08 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/9694/#v1.1.0</guid>
-    </item>
-    <item>
-      <title>Threat Hunting Essentials - v1.3.114 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7633/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
-
-For Premium Version - Contact sales https://www.avertpoint.com/contactus.html
-
-It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
-
-Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
-
-1. Backdoor.
-2. Worms.
-3. Ransomware.
-4. Bots.
-5. Trojan horses.
-6. Keyloggers.
-7. Rootkits.
-8. Spyware.
-9. Fileless malware.
-10. Cryptojacking.
-11. Wiper malware.
-12. Adware.
-14. Viruses
-15. P2P-Worm
-16. Internet Worms
-17. Net-worm
-18. Clickjacking
-19. Cryptominer
-20. Fileless malware
-
-You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
-
-Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/76d0c16e-b41d-11f1-b7c7-a223fca43fd6.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
-      <pubDate>Sat, 19 Sep 2026 15:34:19 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.114</guid>
     </item>
     <item>
       <title>Insights Suite for Splunk (IS4S) - v1.4.2 [Version Update]</title>
@@ -1590,14 +1620,6 @@ This add-on is designed for customers who want to extend the value of Cisco Spac
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Mon, 14 Sep 2026 22:43:58 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5768/#v2.0.0</guid>
-    </item>
-    <item>
-      <title>AWS Systems Manager - v2.3.6 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5769/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Prevent action-scoped AWS credentials from being retained in action results.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with AWS Simple Systems Manager (SSM) to remotely and securely manage the configuration of any EC2 instance or on-premise machine configured for SSM&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2dc42f4e-b08d-11f1-9c30-96d10028c8cf.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Mon, 14 Sep 2026 22:39:44 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5769/#v2.3.6</guid>
     </item>
   </channel>
 </rss>
