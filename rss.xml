@@ -6,7 +6,113 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Tue, 22 Sep 2026 00:24:58 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 22 Sep 2026 05:38:34 +0000</lastBuildDate>
+    <item>
+      <title>Suricata SOC Investigation - v1.4.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8559/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Version 1.4.0
+
+
+
+\- Added CIM support: Suricata alerts map to the Intrusion Detection data model when the sourcetype is suricata, suricata:eve, suricata\_eve, or eve-json.
+
+\- MITRE Lookup Editor rebuilt: Mode drop-down (Search, Add, Edit, Delete), full edit including renaming a signature, add with only a signature name, result messages, and easier search.
+
+\- Unknown MITRE Coverage: click a row to add a mapping.
+
+\- MITRE lookup expanded from 12 to about 420 signatures. The full mapping file (about 26,800 Emerging Threats signatures) is on GitHub.
+
+\- Fixed &quot;SYN port scan33 detected&quot; showing as Unknown.
+
+\- Anomaly Detection now counts alerts only, and Top Noisy Source IPs always shows the top 10.
+
+\- Removed unused scheduled searches, data model, and macro.
+
+\- Help page updated with contact links.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Splunk app for investigating Suricata alerts with dashboards, anomaly detection, MITRE mapping, and SOC-focused analysis workflows.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Suricata SOC Investigation is a Splunk app for investigating Suricata IDS and IPS alerts through analyst-focused dashboards, correlation views, anomaly detection, and ATT&amp;amp;CK-aligned context. It helps SOC teams move beyond basic alert counts by providing workflows for triage, attack-story reconstruction, target risk scoring, MITRE mapping, and alert-driven investigation. The app is designed for security analysts who ingest Suricata data into Splunk and need a practical investigation experience built around detection review, prioritization, and response-oriented analysis.
+More details: https://github.com/kaledaljebur/suricata-soc-investigation&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Kaled Aljebur</dc:creator>
+      <pubDate>Tue, 22 Sep 2026 03:01:30 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8559/#v1.4.1</guid>
+    </item>
+    <item>
+      <title>Splunk Secure Networking Essentials (Beta) - v1.0.52 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9257/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Version 1.0.52 improves the reliability, security, and usability of Insights Workspaces, topology maps, Searchbase searches, Dashboard Studio dashboards, and Guided Setup.
+
+### Highlights
+
+* Expanded reusable Cisco searches across Catalyst Center, ISE, ThousandEyes, Cisco Spaces, Secure Firewall, data center, and security operations.
+* Added Secure Networking Pillars with five investigation areas and 30 Searchbase-powered cards.
+* Rebuilt the in-app User Guide with clearer workspace creation, sharing, permissions, persistence, Signal Rail, and topology instructions.
+* Improved light and dark theme readability throughout workspace editors, drawers, map controls, setup pages, and dashboards.
+
+### Topology and ThousandEyes
+
+* Fixed topology-map creation and first-save failures.
+* Prevented stale editor tabs from overwriting newer shared topology changes.
+* Added protection against malformed or incomplete stored topology configurations.
+* Fixed Searchbase-bound link telemetry remaining in a loading state while the same search worked from Open in Search.
+* Improved ThousandEyes agent-to-agent selection so tests are discovered from the deployment’s observed data instead of relying on a hard-coded test ID.
+* Added safer confirmation flows for discarding drafts and restoring factory topology.
+* Improved map controls, attribution, keyboard access, and editing permissions.
+
+### Search and dashboard reliability
+
+* Corrected dotted-field aggregation across Cisco Spaces, Catalyst Center, Meraki, and reusable Searchbase searches.
+* Fixed Catalyst Center multivalue health fields and prevented unavailable `-1` scores from appearing as 0% health.
+* Updated health tiles to show the latest valid score with its reporting age.
+* Fixed operational searches, adaptive time buckets, forecast confidence bands, anomaly fields, and data-model acceleration behavior.
+* Replaced the resource-intensive Threat Sources calculation with an accelerated Network Traffic data-model search while retaining Cisco firewall filtering.
+* Improved Guided Setup discovery, progress reporting, cancellation, retries, CIM allowlist detection, and macro persistence.
+
+### Security and compatibility
+
+* Updated shipped JavaScript dependencies, including a critical MapLibre GL JS cross-site scripting fix.
+* Retained React 18.3.1 compatibility with the supported Splunk UI dependency line.
+* Restricted shared workspace, topology, and background-image administration to authorized roles.
+* Removed customer-identifying and deployment-specific content from the shipped catalogue.
+* Strengthened release packaging to exclude development-only and local-secret resources.
+
+### Upgrade action
+
+Topology link bindings are stored by search display name. If a link used the former customer-specific ThousandEyes agent-to-agent search, open the map editor and rebind it to:
+
+`Overview - Link ThousandEyes A2A Health`
+
+Also reselect any affected NetOps Readiness or Cisco Spaces searches whose display names changed from “exercise” terminology to “surge event.” Search stanza IDs did not change, so dashboards, drilldowns, and saved searches that reference stanza IDs are unaffected.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Configurable executive, IT operations, and secure networking dashboards unifying Cisco network health, identity, security, infrastructure, application, and topology data in Splunk.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Beta release: Participation is by invitation only and limited to a small group of approved users. The app is not yet publicly downloadable on Splunkbase, and access requests are not currently being accepted. General availability is targeted for fall 2026.
+
+Splunk App for Secure Networking helps organizations turn fragmented Cisco infrastructure, networking, identity, security, application experience, and building telemetry into clear executive and operational insights in Splunk.
+
+Cisco environments often produce data across multiple products, add-ons, indexes, sourcetypes, and data models. Building a consolidated view normally requires teams to create and maintain separate searches, dashboards, index mappings, and visualizations. This app provides a reusable foundation that brings those signals together through configurable dashboards, shared search definitions, index-mapping macros, health indicators, drilldowns, and interactive topology views.
+
+The app includes Secure Networking Posture dashboards covering Zero Trust Access, Secure Infrastructure, Scalable Network Segmentation, Hybrid Mesh Firewalling, and Agentic Operations. It also provides executive briefing, IT health, security, asset inventory, network readiness, building intelligence, Cisco Spaces, and network topology experiences.
+
+Searches use configurable index macros instead of hardcoded index names, allowing the app to adapt to different Splunk environments. Administrators can use the included Macro Index Tuning utility to discover relevant data and map dashboards to their indexes.
+
+Splunk App for Secure Networking does not collect Cisco data directly. It visualizes data already ingested into Splunk through applicable Cisco add-ons, integrations, and data models. The dashboards displayed and populated in each environment depend on the available data sources.
+
+The app is intended for network operations, security operations, IT operations, Splunk administrators, architects, customer success teams, and executives who need a consolidated view of the health, security, availability, and performance of their Cisco environment.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9b666042-b62f-11f1-8c57-1a1384d091f6.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Field Solutions</dc:creator>
+      <pubDate>Tue, 22 Sep 2026 02:52:58 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9257/#v1.0.52</guid>
+    </item>
+    <item>
+      <title>Koodous - v3.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5808/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Verify server certificates by default for Koodous API requests.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with Koodous to analyze APK files&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8a846da0-b620-11f1-81d2-96ec5ceef1ac.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Tue, 22 Sep 2026 00:57:11 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5808/#v3.0.0</guid>
+    </item>
+    <item>
+      <title>urlscan.io - v5.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5861/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Verify TLS certificates by default for make request actions while retaining an explicit opt-out.
+* Preserve TLS certificate verification for legacy assets that do not store the verification setting.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app supports investigative actions on urlscan.io&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/3abc3ca8-b620-11f1-9a8a-eae6681803d5.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Tue, 22 Sep 2026 00:54:57 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5861/#v5.0.0</guid>
+    </item>
     <item>
       <title>AWS Inspector - v3.0.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5764/</link>
@@ -101,33 +207,6 @@ or visit our page : https://www.valantic.com/en/cx/services/cx-monitoring/&lt;/p
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">AIOPS Group Monitoring Team</dc:creator>
       <pubDate>Mon, 21 Sep 2026 17:14:27 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6570/#v6.15.0</guid>
-    </item>
-    <item>
-      <title>Suricata SOC Investigation - v1.4.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8559/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Version 1.4.0
-
-
-
-\- Added CIM support: Suricata alerts map to the Intrusion Detection data model when the sourcetype is suricata, suricata:eve, suricata\_eve, or eve-json.
-
-\- MITRE Lookup Editor rebuilt: Mode drop-down (Search, Add, Edit, Delete), full edit including renaming a signature, add with only a signature name, result messages, and easier search.
-
-\- Unknown MITRE Coverage: click a row to add a mapping.
-
-\- MITRE lookup expanded from 12 to about 420 signatures. The full mapping file (about 26,800 Emerging Threats signatures) is on GitHub.
-
-\- Fixed &quot;SYN port scan33 detected&quot; showing as Unknown.
-
-\- Anomaly Detection now counts alerts only, and Top Noisy Source IPs always shows the top 10.
-
-\- Removed unused scheduled searches, data model, and macro.
-
-\- Help page updated with contact links.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Splunk app for investigating Suricata alerts with dashboards, anomaly detection, MITRE mapping, and SOC-focused analysis workflows.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Suricata SOC Investigation is a Splunk app for investigating Suricata IDS and IPS alerts through analyst-focused dashboards, correlation views, anomaly detection, and ATT&amp;amp;CK-aligned context. It helps SOC teams move beyond basic alert counts by providing workflows for triage, attack-story reconstruction, target risk scoring, MITRE mapping, and alert-driven investigation. The app is designed for security analysts who ingest Suricata data into Splunk and need a practical investigation experience built around detection review, prioritization, and response-oriented analysis.
-More details: https://github.com/kaledaljebur/suricata-soc-investigation&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Kaled Aljebur</dc:creator>
-      <pubDate>Mon, 21 Sep 2026 14:41:15 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8559/#v1.4.1</guid>
     </item>
     <item>
       <title>Threat Hunting Essentials - v1.3.116 [Version Update]</title>
@@ -702,26 +781,6 @@ You can use the Animated Chart Viz to provide information in a dashboard panel o
       <guid>https://splunkbase.splunk.com/app/7474/#v2.1.1</guid>
     </item>
     <item>
-      <title>Splunk Secure Networking Essentials (Beta) - v1.0.51 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/9257/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Configurable executive, IT operations, and secure networking dashboards unifying Cisco network health, identity, security, infrastructure, application, and topology data in Splunk.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Beta release: Participation is by invitation only and limited to a small group of approved users. The app is not yet publicly downloadable on Splunkbase, and access requests are not currently being accepted. General availability is targeted for fall 2026.
-
-Splunk App for Secure Networking helps organizations turn fragmented Cisco infrastructure, networking, identity, security, application experience, and building telemetry into clear executive and operational insights in Splunk.
-
-Cisco environments often produce data across multiple products, add-ons, indexes, sourcetypes, and data models. Building a consolidated view normally requires teams to create and maintain separate searches, dashboards, index mappings, and visualizations. This app provides a reusable foundation that brings those signals together through configurable dashboards, shared search definitions, index-mapping macros, health indicators, drilldowns, and interactive topology views.
-
-The app includes Secure Networking Posture dashboards covering Zero Trust Access, Secure Infrastructure, Scalable Network Segmentation, Hybrid Mesh Firewalling, and Agentic Operations. It also provides executive briefing, IT health, security, asset inventory, network readiness, building intelligence, Cisco Spaces, and network topology experiences.
-
-Searches use configurable index macros instead of hardcoded index names, allowing the app to adapt to different Splunk environments. Administrators can use the included Macro Index Tuning utility to discover relevant data and map dashboards to their indexes.
-
-Splunk App for Secure Networking does not collect Cisco data directly. It visualizes data already ingested into Splunk through applicable Cisco add-ons, integrations, and data models. The dashboards displayed and populated in each environment depend on the available data sources.
-
-The app is intended for network operations, security operations, IT operations, Splunk administrators, architects, customer success teams, and executives who need a consolidated view of the health, security, availability, and performance of their Cisco environment.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/fbe9cc3c-b3a1-11f1-b958-dae75679fe60.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Field Solutions</dc:creator>
-      <pubDate>Fri, 18 Sep 2026 20:48:54 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9257/#v1.0.51</guid>
-    </item>
-    <item>
       <title>Splunk Add-On for OpenTelemetry Collector - v0.161.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7125/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Add-On with Splunk OpenTelemetry Collector v0.161.0
@@ -948,14 +1007,6 @@ Optionally, you can easily submit files and URLs to the VMRay Platform from with
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Fri, 18 Sep 2026 05:03:41 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5848/#v4.0.3</guid>
-    </item>
-    <item>
-      <title>urlscan.io - v4.0.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5861/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Updated dependencies.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app supports investigative actions on urlscan.io&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d3364808-b31d-11f1-abd1-928321cec61e.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Fri, 18 Sep 2026 05:00:11 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5861/#v4.0.2</guid>
     </item>
     <item>
       <title>AD LDAP - v3.0.2 [Version Update]</title>
@@ -1640,15 +1691,6 @@ You need to sign up with DocoDocoJP (fee-based) for using this application.
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Mon, 14 Sep 2026 23:25:35 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5807/#v2.0.23</guid>
-    </item>
-    <item>
-      <title>Joe Sandbox v2 - v2.1.5 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5905/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Return an error when a completed detonation has no usable JSON report.
-* Require at least one populated report section before completing a detonation.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app supports executing investigative actions to analyze files and URLs on Joe Sandbox&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0e6f8930-b093-11f1-b9b1-8e0ae00b3154.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Mon, 14 Sep 2026 23:21:48 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5905/#v2.1.5</guid>
     </item>
   </channel>
 </rss>
