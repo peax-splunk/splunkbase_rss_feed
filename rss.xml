@@ -6,44 +6,7 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Wed, 23 Sep 2026 01:04:42 +0000</lastBuildDate>
-    <item>
-      <title>Supporting App for Oracle SBC CDR - v1.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7051/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* CRITICAL: disconnect\_cause was declared twice in the Stop record field list, at positions 17 and 134. Splunk took the first, so for three releases the field held Oracle's coarse outcome category and the Q.850 cause at position 134 had no field name at all and could not be searched. Position 17 is now cisco\_disconnect\_cause, which is Oracle's own name for it, and disconnect\_cause now holds the Q.850 cause. If you have saved searches or dashboards matching on disconnect\_cause values, they are matching the coarse category and need to move to cisco\_disconnect\_cause.
-* CRITICAL: calling\_mos, called\_mos, calling\_r\_factor and called\_r\_factor now hold the actual score. Oracle writes all four multiplied by 100 so that an integer attribute can carry a fraction - a MOS of 4.3 arrives on the wire as 430 - and the fields previously passed that through, so any threshold written against them was wrong by two orders of magnitude. The wire value is still available as calling\_mos\_raw and so on. A zero in these columns means the SBC has no QoS feature set enabled rather than a call scoring 0.0, so zero now reads as null.
-* The app now extracts a ciscoguid from accounting\_call\_id, so SBC records can be rolled up with CUCM, CUBE and CVP data where the deployment carries the identifier across.
-* Added worst\_mos and worst\_r\_factor, the score of the worse of the two directions. For some statistical analysis end-users will want to exclude the &quot;not bad&quot; side. These new fields will now let them do that more easily.
-* Oracle SBC CDR's two disconnect cause spaces are finally extracted as separate fields. Added q850\_cause\_description and cisco\_cause\_description, which describe the two cause spaces separately, from a new cause\_descriptions lookup.
-* the now-general &quot;cause\_description&quot; values now list the most specific reason available: the Q.850 cause where there is a meaningful one, and Oracle's coarse category where there is not. Prior to this release, cause\_description was simply giving the RADIUS accounting termination cause (still available as accounting\_termination\_cause\_description).
-* Added a ciscoguid\_family field, which reports whether a ciscoguid is an H.225-format guid or a time-based UUID. This was previously only available via a search macro that misreported any record carrying two guids.
-* The descriptions shown for SIP response codes, ie the sip\_status\_description field, have been rewritten from the IETF specifications that define each code - RFC 3261, plus the fifteen later RFCs that define the codes RFC 3261 does not cover. The codes themselves and their reason phrases (sip\_status\_code and sip\_status\_name) are unchanged. If you have saved searches, alerts or dashboards that match on the old description text rather than on sip\_status\_code, update them.
-* Added a health check that lists any saved search, dashboard or macro still using the old west/east media flow field names, with the name that replaces each. Run it as a user with admin\_all\_objects for a complete inventory.
-* Added a THIRD-PARTY-NOTICES.md file to the app, itemizing the third-party components it bundles and the origin of the data in each of its reference lookups.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app provides the Splunk configuration to ingest the CDR data from Oracle SBC.     It is intended to work for both Oracle Session Router CDR and Oracle SBC CDR, although some unknowns remain as of this writing. 
-
-It is also designed to work as a Supporting App alongside Sideview&amp;#x27;s commercial &amp;quot;Cisco CDR Reporting and Analytics&amp;quot; app.  
-When used in conjunction with the Cisco CDR app, the Oracle SBC data can be used in that app alongside the CUCM data.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/13ea7fb0-b6e6-11f1-9b7f-3a06688f50e0.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
-      <pubDate>Wed, 23 Sep 2026 00:34:17 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7051/#v1.0.0</guid>
-    </item>
-    <item>
-      <title>Supporting Add-on for Oracle SBC CDR - v1.0.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8467/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Fixed the party number extractions on records whose SIP display name contains a comma, as &quot;Last, First&quot; from a corporate directory does.  The station id fields are quoted for that reason, but the extraction walked the line by commas without honouring the quoting, so such a record was read one field out of step: callingPartyNumber came out empty and calledPartyNumber held the CALLING party's number, while the real called number was lost.                                                    &amp;#x20;
-* These are index-time fields, so the correction applies to newly indexed data only.  Events already in the index keep the shifted values.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app provides the index-time configuration to ingest the CDR data from Oracle Session Border Controller (Oracle SBC) and also from Oracle Session Router.     Specifically the CSV-formatted CDR format that you get if you enable local cdr storage on the oracle boxes.      The app correctly separates the intermingled start, interim and end records of this dataset,  into three distinct sourcetypes, and extract the fields from each correctly.
-
-Note that although you can use it purely to onboard the data,   this app contains NO search-time config and will not by itself extract the search-time fields properly.    This is because it is designed to always work in conjunction with Sideview&amp;#x27;s &amp;quot;Supporting App for Oracle SBC&amp;quot;, which is to be installed on the Search Head and which handles the search-time field extractions among other things.
-
-Furthermore ,both of these apps together are also designed to work with Sideview&amp;#x27;s &amp;quot;Cisco CDR Reporting and Analytics&amp;quot; app.   When all three pieces are used together, the solution gives users a more general Investigation and Reporting solution for Oracle SBC and Oracle Session Router.
-
-The use cases are actually nearly endless so please contact Sideview if you have questions or would just like to find out more.
-
-this app is a part of Sideview&amp;#x27;s overall Investigation and Reporting solution, and you can find more documentation on the Sideview website:  https://sideviewapps.com/documentation/oracle-sbc-cdr&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d2755a8c-b6e5-11f1-9b7f-3a06688f50e0.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
-      <pubDate>Wed, 23 Sep 2026 00:30:40 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8467/#v1.0.2</guid>
-    </item>
+    <lastBuildDate>Wed, 23 Sep 2026 07:00:57 +0000</lastBuildDate>
     <item>
       <title>Supply Chain and AI Threat Intelligence Platform - v1.2.17 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/8814/</link>
@@ -122,32 +85,526 @@ this app is a part of Sideview&amp;#x27;s overall Investigation and Reporting so
 &lt;li&gt;&lt;strong&gt;Saved-search renames.&lt;/strong&gt; EU CRA and FDA compliance saved searches were renamed to match their new control identifiers. Any local override or external reference to the old stanza names must be updated.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Alert severity.&lt;/strong&gt; Triggered-alert severity now reports real values instead of 0. Alert actions keyed on severity will begin seeing 2 through 5.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;HIPAA control count&lt;/strong&gt; drops from 9 to 8 in-scope controls. The descoped control's saved search is disabled rather than deleted, preserving the audit trail.&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Unifies software supply chain risk (SBOM/SCA), MITRE ATLAS AI-threat detection, and nine-framework compliance in one Splunk app — with FedRAMP-ready audit exports and no external security product required.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;SCIP unifies software composition analysis (SCA), supply chain risk monitoring, and AI threat detection in one Splunk app. Ingest SBOMs, correlate components against live vulnerability intelligence (OSV, NVD, CISA KEV, EPSS), detect adversarial AI/ML threats with MITRE ATLAS, and assess compliance posture across nine global frameworks — with detection logic written as transparent SPL you can open and read, and no external security product required.
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;A Splunk app that detects AI-threat patterns (MITRE ATLAS) and runs software composition analysis (SCA) on your SBOMs to identify known-vulnerable components (NVD, OSV) — surfacing the applications where both appear at once. Compliance evidence across nine frameworks and FedRAMP/RMF audit exports, with no separate platform to stand up.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;SCIP is a Splunk app that detects adversarial AI/ML threats (MITRE ATLAS) and runs software composition analysis (SCA) on your SBOMs to identify known-vulnerable components (NVD, OSV) — then, through Compound Risk, surfaces the applications where an AI-threat detection and a known vulnerability appear at once, the exposure neither signal shows alone. It prioritizes with CISA KEV and EPSS and assesses compliance posture across nine frameworks — detection logic written as transparent SPL you can open and read, and no separate platform to stand up.
 
-CAPABILITIES
-- SBOM ingestion — file-drop or HEC, supporting CycloneDX (JSON/XML) and SPDX (JSON)
-- Vulnerability correlation — daily OSV feed (264,944+ records across 11 ecosystems) with PURL-based correlation; NVD CPE-based correlation; CISA KEV matching; EPSS exploit-probability scoring
-- Air-gapped operation — all four intelligence feeds (OSV, NVD, CISA KEV, EPSS) refresh by file transfer, with no outbound connectivity required
-- Supply Chain Risk Score — 0–100 global and per-application risk scoring weighted by severity, KEV status, and EPSS
-- Vendor Risk — per-vendor risk aggregation and letter-grading across your SBOM portfolio
-- SBOM Drift Detection — baseline-vs-current component change tracking
-- License Compliance — GPL/AGPL/copyleft detection and license-risk classification
+AI THREAT DETECTION
 - MITRE ATLAS Detection — 81 AI/agentic threat detection rules (72 mapped to 57 MITRE ATLAS techniques)
+- Compound Risk — correlates MITRE ATLAS AI-threat detections with KEV-listed or critical-severity vulnerabilities on the same application
 - Silent-Source Detection — alerts when an enrolled AI/LLM telemetry source goes quiet, so a dead pipe is never mistaken for a clean one
-- Compliance Gap Assessment — nine frameworks: PCI DSS 4.0.1, NIST CSF 2.0, SOC 2 Type II, HIPAA Security Rule, EU Cyber Resilience Act, FedRAMP / RMF / CISA, DORA, FDA 524B Premarket Cybersecurity, SEBI CSCRF
-- Long-Unpatched Critical Exposure — flags critical/high-severity vulnerabilities unpatched 180+ days
-- POA&amp;amp;M &amp;amp; FedRAMP Workflow — POA&amp;amp;M dashboard, monthly ConMon package builder, BOD 26-04 risk-tier classification (CISA&amp;#x27;s four-variable model with computed deadlines), deviation request workflow. Dashboards always available; automated POA&amp;amp;M generation is opt-in from Setup
-- Coverage-Evidence Manifest — AU-12-aligned attestation of unbroken AI-monitoring coverage
-- Audit-ready exports — FedRAMP POA&amp;amp;M Workbook (R3.0 and R2.1), SSP Appendix M Integrated Inventory, Deviation Request Form (Template 2.1 / Aug 2024)
-- Component Search — instant cross-SBOM component lookup
-- Compound Risk — correlates active MITRE ATLAS AI-threat detections with KEV-listed or critical-severity vulnerabilities on the same application, surfacing compounding risk neither signal shows alone
-- AI/ML Bill of Materials — catalogs AI/ML model components from your SBOMs (architecture, training data, lineage) with insecure-serialization-format flagging and risk classification
+- AI/ML Bill of Materials — catalogs AI/ML model components from your SBOMs with insecure-serialization-format flagging and risk classification
 
-SUPPORT
-GIC Engineering Consultants — contact@gicengineeringconsultants.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2c29cea0-b6d7-11f1-940c-a215abe51482.png&quot;&gt;</description>
+SOFTWARE SUPPLY CHAIN
+- SBOM ingestion — file-drop or HEC, supporting CycloneDX (JSON/XML) and SPDX (JSON)
+- Vulnerability correlation — bundled OSV dataset (250,000+ records across 11 ecosystems) with PURL-based correlation, refreshed daily from the live OSV feed across 8 configurable ecosystems; NVD CPE-based correlation; CISA KEV matching; EPSS scoring
+- Supply Chain Risk Score — 0–100 global and per-application scoring weighted by severity, KEV status, and EPSS
+- Vendor Risk — per-vendor risk aggregation and letter-grading
+- SBOM Drift Detection — baseline-vs-current component change tracking
+- Long-Unpatched Critical Exposure — flags critical/high-severity vulnerabilities unpatched 180+ days
+- License Compliance — GPL/AGPL/copyleft detection and license-risk classification
+
+COMPLIANCE, FEDERAL &amp;amp; AIR-GAPPED DEPLOYMENT
+- Air-gapped operation — AI-threat detection runs on your own Splunk data, SBOM correlation on the bundled OSV dataset, and intelligence feeds refresh by file transfer rather than live calls; deployed disconnected, SCIP makes no outbound connections
+- Compliance Gap Assessment — nine frameworks: PCI DSS 4.0.1, NIST CSF 2.0, SOC 2 Type II, HIPAA Security Rule, EU Cyber Resilience Act, FedRAMP / RMF / CISA, DORA, FDA 524B Premarket Cybersecurity, SEBI CSCRF
+- POA&amp;amp;M &amp;amp; FedRAMP Workflow — POA&amp;amp;M dashboard, monthly ConMon package builder, BOD 26-04 risk-tier classification, deviation request workflow. Dashboards always available; automated POA&amp;amp;M generation is opt-in from Setup
+- Coverage-Evidence Manifest — AU-12-aligned attestation of unbroken AI-monitoring coverage
+- Audit-ready exports — FedRAMP POA&amp;amp;M Workbook, SSP Appendix M Integrated Inventory, Deviation Request Form&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2c29cea0-b6d7-11f1-940c-a215abe51482.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">GIC Engineering Consultants, Inc.</dc:creator>
-      <pubDate>Tue, 22 Sep 2026 23:29:26 +0000</pubDate>
+      <pubDate>Wed, 23 Sep 2026 04:53:30 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8814/#v1.2.17</guid>
+    </item>
+    <item>
+      <title>AWS-DFD-Visualizer - v2.8.6 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8628/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;# Release Notes: AWS-DFD-Visualizer v2.8.6
+
+**Release Date:** September 18, 2026
+**Framework:** Splunk Unified Dashboard Framework (Dashboard Studio) &amp; Classic SimpleXML
+**Target Environment:** DoD Impact Level 5 (IL5) / NIST 800-53 / Zero-Trust Architecture
+
+---
+
+## Overview
+
+Version 2.8.6 is a comprehensive security hardening and vulnerability remediation release. It addresses all findings from third-party and internal DoD IL5 security evaluations:
+- **Column-Driven Drilldown Protection**: Implemented a comprehensive high-risk SPL command denylist (`delete`, `sendemail`, `outputcsv`, `outputlookup`, `collect`, `mcollect`, `meventcollect`, `tscollect`, `outputtext`, `rest`, `runshellscript`, `script`, `dump`, `sendalert`, `map`, `run`, `crawl`, `dbxoutput`) and backtick macro execution blocking (`...`) on search-driven `node_drilldown` and `link_drilldown` fields across pipes and newlines, while preserving trusted dashboard SimpleXML templates and legitimate query pipelines (e.g. `| head 5`). Added an `allowColumnDrilldown` visualizer option.
+- **Zero Secrets Policy Enforced**: Removed hardcoded lab credentials and Base64 tokens from all internal script harnesses (`test-drilldown.py`, `test-spl.py`), migrating to environment-driven authentication (`SPLUNK_USER`, `SPLUNK_PASSWORD`) with graceful offline handling and strict TLS verification defaults.
+- **Path Traversal Hardening (CWE-22)**: Upgraded `sanitizeFallbackUrl` to decode URI components prior to validation, strictly rejecting directory traversal sequences (`..`), backslashes (`\`), and lingering percent characters.
+- **Case-Insensitive Script Export Protection**: Hardened Draw.io XML and SVG exporters with case-insensitive `/&lt;script/i` regex pattern scanning and DOM tree inspection, preventing bypasses using uppercase or mixed-case script tags.
+- **CSV Live Feed Isolation &amp; Fix**: Fixed CSV header/column mapping order in `handleApplyCsv` to eliminate index-shift bugs when drilldown columns appear mid-table, and neutralized `node_drilldown`/`link_drilldown` columns to prevent client-side trust bypasses. Added `enableCsvConsole` option.
+- **Console Privacy &amp; HUD Hardening**: Gated verbose debug logging in `visualization_source.js` and `AwsDfdVisualizer.jsx` behind `config.debug` and removed node ID listings from the production HUD canvas.
+- **Supply Chain &amp; CI Gate Hardening**: Enforced non-zero exit codes on Bandit SAST scans, added production `npm audit --omit=dev --audit-level=high` gates, pinned `@splunk/webpack-configs` to `^7.0.3`, added `browserslist` override to `package.json`, and ensured `check_for_updates = 1` in `app.conf`.
+
+---
+
+# Release Notes: AWS-DFD-Visualizer v2.8.5
+
+**Release Date:** August 27, 2026
+**Framework:** Splunk Unified Dashboard Framework (Dashboard Studio) &amp; Classic SimpleXML
+**Target Environment:** DoD Impact Level 5 (IL5) / NIST 800-53 / Zero-Trust Architecture
+
+---
+
+## Overview
+
+Version 2.8.5 is a foundational contract, catalog, and security release. It integrates full Azure V24 service icon catalogs, schema alias auto-detection for AWS Config, strict vertical Zero-Trust tier stratification, CWE-79 XSS URL/token hardening, and canonical Zero-Trust plane enum exact resolution (`Policy_Plane`, `Identity_Plane`, `Control_Plane`, `Data_Plane`).
+
+---
+
+## 🛡️ Zero-Trust Plane Resolution &amp; Schema Contract
+
+- **Canonical Zero-Trust Enum Exact-Match Resolution**: Fixed plane resolution logic to perform case-insensitive exact matching against the four canonical `ZERO_TRUST_PLANES` enum values (`Policy_Plane`, `Identity_Plane`, `Control_Plane`, `Data_Plane`) prior to keyword regex evaluation. Ensures SPL specifying `plane=&quot;Policy_Plane&quot;` correctly lands within the Policy plane hull (`🛡️ POLICY_PLANE`).
+- **Strict Tier Stratification (`strictPlanes`)**: Added `strictPlanes` configuration in Formatter UI, `visualizations.conf`, and React layout engine to enforce distinct vertical tier stratification in Hierarchy and Zero-Trust layouts without vertical collapse.
+- **Zero-Trust Containment Decoupling**: Hardened `resolveHierarchy` so that Policy and Identity plane compute nodes automatically parent directly to `GLOBAL_ROOT` regardless of `subnetId` or `vpcId` values. Prevents policy/identity resources from nesting inside subnet/VPC container hulls and suppresses unintended dummy subnet generation.
+- **Field Precedence Hardening**: Clarified and aligned field evaluation precedence across `plane` → `src_plane` → `dest_plane` → `zone_name` → `group` → `vpcId` → `container`.
+
+---
+
+## 🎨 Multi-Cloud Icon &amp; Stencil Catalogs (Azure V24 + AWS Config)
+
+- **Official Azure V24 Catalog Ingest**: Added over 700 official Microsoft Azure V24 service icons with build-time catalog generation and category fallback trees (Compute, Networking, Security, Storage, Web, AI, Databases).
+- **AWS Config Semantic Schema Aliases**: Auto-detects and binds AWS Config schema fields (`resourceType` + `resourceName` / `resourceId` / `targetResourceId`) directly to official AWS Architecture icons and node cards without requiring explicit SPL `eval` statements.
+- **Automated Catalog Tooling**: Added `scripts/generate-stencil-catalog.js` and `scripts/validate-stencils.js` to automatically index on-disk stencils and validate SVG integrity at build time.
+
+---
+
+## 🔒 Security Hardening (CWE-79 Remediation)
+
+- **Fallback &amp; Missing Image URL Allowlist**: Implemented `sanitizeFallbackUrl` and `missingImageURL` validation to reject untrusted external URL schemes (`javascript:`, `data:`, arbitrary external domains) and safely fall back to `generic.svg`.
+- **Drilldown Token Sanitization**: Hardened token interpolation and drilldown handlers via `sanitizeSplunkToken`, preserving SPL structural syntax while escaping malicious injection payloads in node drilldown parameters.
+
+---
+
+## 🧪 Testing and Quality Assurance
+
+- **58 Passing Cypress Component Specs**: Comprehensive test coverage across multi-cloud provider detection, hybrid plane assignment, strict tier stratification, dynamic link bundling, and security validations.
+- **Splunk AppInspect 0/0/0**: Fully validated against Splunk AppInspect with 0 errors, 0 warnings, and 0 failures.
+
+---
+
+# Release Notes: AWS-DFD-Visualizer v2.8.4
+
+**Release Date:** August 6, 2026
+**Framework:** Splunk Unified Dashboard Framework (Dashboard Studio) &amp; Classic SimpleXML
+**Target Environment:** DoD Impact Level 5 (IL5) / NIST 800-53 / Zero-Trust Architecture
+
+---
+
+## Overview
+
+Version 2.8.4 is an emergency release that removes all commercial licensing restrictions, overlays, and limits, enabling unlimited, restriction-free data flow diagram rendering. The 1,000-node display cap has also been lifted to support large-scale enterprise deployments without truncation.
+
+---
+
+## 🔑 Licensing Removal &amp; Unlimited Node Layouts
+
+- **Emergency Licensing Constraints Removal**: All licensing validation code, Base64 parser checks, tier checks, and commercial licensing enforcement constraints have been completely removed.
+- **Removed Licensing UI Elements**:
+  - The glassmorphic &quot;License Capacity Exceeded&quot; warning block overlay that restricted unlicensed datasets exceeding 50 nodes.
+  - The &quot;License Key&quot; HUD console button and its settings configurations/text areas.
+  - The &quot;Licensing&quot; section options in the Splunk Format panel (`formatter.html`).
+  - Local storage key bindings (`aws_dfd_license_key`) and inputs.
+- **Removed 1,000-Node Display Cap**: Lifted the 1,000-node rendering cap to allow displaying complete, high-density topologies without truncation. Large datasets (&gt;500 nodes) still trigger a performance warning banner recommending data filtering, but the display is no longer capped.
+- **License Update in Documentation**: Replaced licensing options and billing notes in `README.MD`, `SPLUNKBASE_LISTING.md`, and `user_guide.xml` with references to the open Apache License 2.0 standard.
+
+---
+
+## 🧪 Testing and Quality Assurance
+
+- **Cypress Test Refactoring**: Updated Cypress component specs to align with the licensing removal. Removed test suites verifying license keys, local storage persistence, and licensing block screens.
+- **High-Volume Verification**: Refactored the high-volume rendering test case to verify that a dataset with 1,200 nodes renders completely (1,200 nodes and their connections draw on the canvas) and the warning banner no longer claims the display is capped.
+- **Webpack &amp; AppInspect Validation**: Built production Webpack bundle cleanly. Verified all 37 Cypress component tests pass successfully. Passed Splunk AppInspect with 0 errors, 0 warnings, and 0 failures.
+
+---
+
+# Release Notes: AWS-DFD-Visualizer v2.8.3
+
+**Release Date:** July 9, 2026
+**Framework:** Splunk Unified Dashboard Framework (Dashboard Studio) &amp; Classic SimpleXML
+**Target Environment:** DoD Impact Level 5 (IL5) / NIST 800-53 / Zero-Trust Architecture
+
+---
+
+## Overview
+
+Version 2.8.3 is a minor feature and security hardening release introducing native edge bundling/weighting for high-volume network environments, user-defined custom status color palettes via the Splunk Format panel UI, and strict CWE-79 input sanitization controls for Visualizer options.
+
+---
+
+## ⚡ Feature: Native Edge Bundling &amp; Logarithmic Weight Scaling (Req-1)
+
+AWS-DFD-Visualizer now automatically bundles overlapping connections to improve render performance and layout legibility.
+
+- **Deduplication &amp; Counter**: The data aggregation pipeline clusters parallel records sharing identical source and target endpoints into a single edge containing a `count` attribute.
+- **Logarithmic Stroke Weight**: Links scale their rendered path thickness logarithmically based on the row count:
+  ```javascript
+  strokeWidth = Math.min(10, 2 + Math.log2(count + 1))
+  ```
+  Single rows draw at a baseline 2.5px width, while high-volume traffic (50+ rows) scales up to 10px to visually signify volume. React owns this visual SVG attribute directly (React-D3 SoC rule preserved).
+- **Hover Count Badge**: Hovering on a weighted edge displays a blue tooltip/badge containing the aggregated row counts (e.g. `×42 rows`) under the connection label.
+
+---
+
+## 🎨 Feature: Configurable Custom Status Palettes (Req-2)
+
+Enables dynamic, UI-driven color overrides for custom telemetry status codes.
+
+- **Format Panel Integration**: Adds a &quot;Custom Status Palette&quot; text input in the Format options panel (`formatter.html`) to allow mapping custom values to hex colors (e.g., `NonCompliant=#FF6B6B,EXEMPT=#4ECB71`).
+- **Unified Highlight Engine**: Replaces two pre-existing diverging inline methods in `LinkLabel` and `NodeCard` with a module-level `buildStatusHighlight(status, customPaletteMap)` helper.
+- **Priority Defenses**: Custom visual overrides augment rather than replace core built-in safety highlights. Crucial life-cycle states (like `ResourceDeleted` dimming/opacity and `ResourceNotRecorded` dashed styling) take absolute precedence and cannot be disabled.
+
+---
+
+## 🔒 Security &amp; XSS Mitigation (CWE-79 / STIG)
+
+- **Palette Input Sanitization**: The status palette configuration parser applies strict key allow-listing (`/^[a-zA-Z0-9\-_\s]{1,64}$/`) and value format validation (`/^#[0-9A-Fa-f]{6}$/`). Malicious script tags or special character payloads are safely stripped and ignored before DOM rendering.
+- **AppInspect Cleanliness**: The codebase compiles with 0 warnings, 0 failures, and 0 errors, meeting the zero-tolerance criteria for Splunk AppInspect.
+
+---
+
+## 🧪 Testing and Quality Assurance
+
+- **5 New Cypress Integration Tests**:
+  - `TC-AUT-v2.8.3-A Spec A`: Mounts 50 duplicate paths to confirm 1 aggregated edge path is rendered with weight scaling.
+  - `TC-AUT-v2.8.3-A Spec B`: Asserts single-row baseline edge width resolves to baseline.
+  - `TC-AUT-v2.8.3-B Spec A`: Verifies custom palette mapping maps status to border colors.
+  - `TC-AUT-v2.8.3-B Spec B`: Asserts malicious `&lt;script&gt;` injection attempts are safely stripped from the SVG.
+  - `TC-AUT-v2.8.3-B Spec C`: Verifies `ResourceDeleted` built-in dimming rules override custom palette color mappings.
+
+---
+
+# Release Notes: AWS-DFD-Visualizer v2.8.0
+
+**Release Date:** June 18, 2026
+**Framework:** Splunk Unified Dashboard Framework (Dashboard Studio) &amp; Classic SimpleXML
+**Target Environment:** DoD Impact Level 5 (IL5) / NIST 800-53 / Zero-Trust Architecture
+
+---
+
+## Overview
+
+Version 2.8.0 is a **major feature release** delivering five pillars of advancement: Multi-Cloud Service Provider (CSP) rendering for hybrid AWS/Azure/GCP environments, a fully hardened Zero-Trust Static Blueprint Layout Engine for IL5 RMF audit compliance, commercial license enforcement, advanced security hardening (STIG/NIST), and a complete suite of rendering quality, performance, and UX polish fixes. This release encompasses work from 7 engineering sessions (June 2 – June 18, 2026).
+
+---
+
+## 🌐 Feature: Multi-Cloud Service Provider (CSP) Extension
+
+AWS-DFD-Visualizer now renders hybrid and multi-cloud architectures — AWS, Microsoft Azure, and Google Cloud Platform — on a single canvas.
+
+- **Dynamic CSP Auto-Detection:** A dataset-wide voting algorithm scans all incoming resource IDs and types to automatically select the dominant cloud provider (`aws`, `azure`, `gcp`). Manual override available via the `cspStencilSet` formatter option.
+- **Per-Node Stencil Resolution:** Individual node cards resolve their own provider stencils independently, enabling true hybrid rendering where AWS EC2 instances, Azure Virtual Machines, and GCP Compute Engines appear side-by-side with accurate vendor icons.
+- **Recursive Multi-Tier Container Layout:** The layout engine now processes arbitrary container nesting depth (e.g., Subscription → Resource Group → VNet → Subnet) using recursive post-order/pre-order traversal, replacing the previous 2-level hardcoded VPC/Subnet structure.
+- **Azure &amp; GCP SVG Asset Library:** Azure and GCP architecture SVG stencils are deployed to `appserver/static/icons/azure/` and `appserver/static/icons/gcp/` respectively, maintaining strict `755`/`644` AppInspect-compliant permissions.
+- **Dynamic URL Subpath Resolution:** Icon base paths now resolve dynamically via `window.Splunk.util.make_full_url` to support non-default Splunk web mount locations (e.g., `/splunk/` prefix environments).
+
+---
+
+## 🏛️ Feature: Zero-Trust Static Blueprint Engine (IL5 RMF Audit Mode)
+
+A fully deterministic, physics-free layout engine for producing reproducible, audit-ready network topology diagrams.
+
+- **Three-Plane Swimlane Architecture:** Resources are automatically sorted into Identity Plane (top), Policy &amp; Control Plane (middle), and Infrastructure / Data Plane (bottom) using resource type classification. Empty planes display annotated placeholder banners rather than blank space.
+- **Nested VPC/Subnet Enclosures:** VPC and Subnet containers are rendered as labeled nested bounding boxes with deterministic coordinate assignment — no physics jitter, no variation between renders.
+- **Orthogonal Manhattan Routing:** All inter-node connections use clamped-radius rounded orthogonal paths (`Q` Bezier arcs), giving diagrams a clean, formal blueprint appearance suitable for DoD briefings.
+- **SSH/22 Compliance Interception:** Links targeting nodes with non-compliant security groups or `status=violation` are automatically routed in Vibrant Red (`#FF0000`) with dashed line styling (`stroke-dasharray: 4,4`), providing an instant visual audit signal for open SSH ingress violations.
+- **Concentric Security Group Envelopes:** Security group compliance state is rendered as concentric ring overlays around compute node cards (Green = compliant, Red = non-compliant).
+- **Static Blueprint Group Layout:** The `clusterBy=group` + `layoutMode=Hierarchy` combination now routes through a fully static deterministic layout engine, bypassing the Splunk Dashboard Engine rendering bug that previously ignored `clusterBy`.
+- **Dynamic viewBox Height:** Canvas height auto-expands to fit actual VPC container heights, eliminating the vertical clipping and extreme bottom whitespace seen in prior releases.
+- **Reversed Arrow Correction:** Fixed a D3 link aggregation bug where bidirectional edge deduplication reversed arrowhead direction. Primary flow direction is now preserved.
+- **Two-Pass Link Rendering:** Link paths and link label capsules are rendered in separate SVG passes, guaranteeing that white label backgrounds always occlude the lines beneath them — fixing the &quot;label behind line&quot; visual artifact.
+
+---
+
+## 🔒 Feature: STIG Hardening &amp; Security Compliance
+
+- **Text-Only DOM Rendering Policy:** Formally documented and enforced a strict `dangerouslySetInnerHTML` and D3 `.html()` ban. All dynamic strings are set via React standard string interpolation to prevent DOM-Based XSS (CWE-79).
+- **SPL Injection Sanitization:** `sanitizeSplunkToken` now applies a strict regex allow-list query check (rather than blocklist), hardening drilldown token interpolation against SPL injection payloads.
+- **DoS Circuit Breaker:** A client-side guard blocks rendering and displays a full-screen warning if raw row count exceeds 5,000 records, preventing browser thread exhaustion from adversarial or misconfigured queries.
+- **SVG &amp; Draw.io Export Scanning:** Exported SVG and Draw.io XML files are scanned for embedded `&lt;script&gt;` tags before download. Any file containing dynamic script injection is blocked with local diagnostic audit reporting and zero outbound telemetry.
+- **Dependency Remediations:** Upgraded `shell-quote` to `1.8.4` (CVE patch), `form-data` to `4.0.6` (GHSA-hmw2-7cc7-3qxx), and added `uuid` override to `11.1.1`. All packages pass `npm audit` clean.
+- **CI/CD Hardening:** Pinned TruffleHog to `v3.95.5` stable tag; added explicit `contents: read` permissions to GitHub Actions workflow to resolve CodeQL workflow permission alerts.
+
+---
+
+## 🔑 Feature: Commercial License Enforcement
+
+- **Free / Developer Tier:** Unlicensed instances cap rendering at 50 nodes. Datasets exceeding this threshold display a glassmorphic &quot;License Capacity Exceeded&quot; overlay with tier upgrade call-to-action.
+- **Enterprise / Sovereign License Parsing:** Base64-encoded license keys are validated entirely client-side (no network calls) — supporting air-gapped DoD IL5 environments. Validation checks signature, tier, client, expiration date, and node capacity.
+- **License HUD Indicator:** Licensed instances display tier status (`Enterprise` / `Sovereign`) in the debug HUD.
+- **Formatter Panel Integration:** A &quot;Licensing&quot; section is exposed in the Splunk Format panel (`formatter.html`) allowing administrators to enter license keys without editing XML.
+
+---
+
+## ⚡ Feature: Performance &amp; Physics Engine Upgrades
+
+- **Zero-Latency Layout Bypass:** Graphs with fewer than 100 nodes now pre-tick 300 physics simulation cycles synchronously before first render — eliminating the visible &quot;settling&quot; animation in operational briefings.
+- **Batched requestAnimationFrame Layout:** Graphs with 150+ nodes process physics in 30-tick batches via `requestAnimationFrame`, with a glassmorphic loading overlay, preventing UI thread blocking on large topologies.
+- **Rectangular Collision Force (`rectCollide`):** Replaced the circular `forceCollide` radius with a custom D3 force that accounts for actual card rectangular bounds (`280×100`px default), eliminating horizontal card overlaps and excessive vertical gaps.
+- **D3 Submodule Tree-Shaking:** Replaced monolithic `import * as d3` with explicit submodule imports (`d3-array`, `d3-selection`, `d3-zoom`, `d3-drag`, `d3-polygon`, `d3-shape`, `d3-hierarchy`, `d3-force`) linked via a namespace bridge, reducing unused module weight.
+
+---
+
+## 🎨 Feature: Rendering Quality &amp; UX Polish
+
+- **Dynamic Edge Label Pill Width:** Edge label background capsules now auto-size to fit their text content using `Math.max(80, chars × fontSize × 0.58 + 24)px`. Fixes truncated long labels (e.g., &quot;Core PDP/PEP Data Access Path&quot;, &quot;Multi-Source PIP Query Engine&quot;) and violation labels with emoji prefixes.
+- **Violation Label Sizing Fixed:** `⚠️ SSH/22` labels now compute pill width from the *full display string* (including the warning prefix), matching the HTTPS/443 capsule sizing behavior.
+- **Cross-Link Routing for Same-Level Nodes:** In Blueprint Mode, links between horizontally adjacent same-row nodes now route side-to-side rather than wrapping through the midpoint elbow — producing cleaner, less tangled diagrams.
+- **Arrowhead Clearance Padding:** Added 12px target offset to orthogonal path endpoints so arrowheads clear the type badge below node cards without overlapping.
+- **Increased Grid Spacing:** Column gap increased 60px and row gap increased 30px across all layout presets to give link labels breathing room and eliminate label collisions (e.g., &quot;Assume Role&quot;).
+- **SSH/22 Label Float:** On same-row horizontal Zero-Trust links, the label midpoint is offset −22px above the line so the ⚠️ capsule floats clearly above the arrow.
+- **Hover State Enhancements:** Node cards and edge labels scale to 115% on hover with text-shadow halos for improved legibility over dense diagrams.
+- **Compliance Violation Indicators:** Container labels (VPCs, Subnets) append a live violation count (e.g., `Default VPC (1 Violation)`) in red when non-compliant security groups exist within them.
+- **Resource Lifecycle Styling:** Deleted resources (`ResourceDeleted`) render with dashed borders and 60% opacity; stale config nodes drift with a CSS keyframe animation.
+- **App Icon Corrected:** `appIcon.png` and `appIcon_2x.png` updated to Splunk-required `36×36` and `72×72` pixel dimensions respectively, with new navy/orange DFD graph branding. Deployed to both `appserver/static/` and `static/` (Classic XML path).
+
+---
+
+## 🧪 Testing &amp; Quality
+
+- **27 Cypress Component Tests Passing:** Test suite covers node count, link count, `viewBox` integrity, edge stroke attributes, ARN normalization, empty state handling, license gate trigger, and license key validation.
+- **Splunk AppInspect:** `0 errors, 0 failures, 0 warnings` — maintained across all sessions.
+- **Webpack Build:** `webpack compiled with 3 warnings` (known bundle-size advisory only, no errors).
+- **CI/CD Pipeline:** 2-stage GitHub Actions pipeline (TruffleHog → Bandit → AppInspect → Node 22 Build → CycloneDX SBOM) passes green on `master`.
+
+---
+
+## 📦 Delivery Artifacts
+
+| Artifact | Description |
+|---|---|
+| `AWS-DFD-Visualizer-2.8.0.spl` | Splunk app package — deploy via Splunk Web or `make deploy` |
+| `bom.json` | CycloneDX SBOM (generated by CI via Syft) |
+| `LESSONS_LEARNED.md` | New institutional memory doc for recurring bug patterns |
+| `IMPLEMENTATION_PLAN.md` | Zero-Trust layout engine design specification |
+
+---
+
+## 🔄 Upgrade Notes
+
+- **No breaking changes** to existing SPL query schemas — all existing `from`, `to`, `node_label`, `edge_label`, `vpcId`, `subnetId`, `securityGroups`, `stencil`, `status` columns are backward compatible.
+- **New optional columns:** `cspStencilSet`, `node_drilldown`, `link_drilldown` — safely ignored if absent.
+- **License key required** only for datasets &gt; 50 nodes. Contact your account manager for Enterprise or Sovereign tier keys.
+- **Formatter panel** (`format` button in Splunk) now exposes: CSP selector, License key input, Link text size, Node text size, Design layout density, Hierarchy direction.
+
+---
+
+# Release Notes: AWS-DFD-Visualizer v2.7.0
+
+**Release Date:** June 1, 2026
+**Framework:** Splunk Unified Dashboard Framework (Dashboard Studio) &amp; Classic SimpleXML
+
+## Overview
+Version 2.7.0 introduces four major advanced visualizer capabilities to improve diagram portability, dense dashboard integration, visual stabilization, and client-side testing:
+
+
+## Major Features &amp; Enhancements
+
+### 1. Export to draw.io XML
+* **Portability:** Added an &quot;Export to draw.io&quot; button in the HUD overlay. Clicking this button dynamically generates an uncompressed, standard mxGraphModel XML diagram of the current network state, including node placement coordinates, nested subnet/VPC shapes, edge connection paths, and security compliance coloration.
+
+### 2. SPL → D3 Live Feed CSV Parser
+* **Ad-hoc Console:** Implemented a collapsable CSV console overlay. Pasting a standard CSV edge table (with headers like `from,to,node_label,vpcId,subnetId,securityGroups`) allows users to immediately render and test custom diagram topologies client-side without executing backend Splunk searches.
+
+### 3. Dashboard Layout Optimization (Compact Layouts)
+* **Density Scaling:** Introduced a &quot;Dashboard Layout&quot; formatter setting (`compact`, `default`, `expanded`). Selecting `compact` automatically down-scales compute node card boundaries, font sizes, padding metrics, and grid gaps, making it optimal for dense, multi-panel Splunk dashboards.
+
+### 4. Alternative Physics Models &amp; shakeTowards Stabilization
+* **Alternate Formats:** Added `physicsModel` configurations (`classic`, `cluster`, `horizontal-stack`) to adjust node spacing and group alignments in Auto mode.
+* **Directional Pull:** Added `shakeTowards` option (`none`, `center`, `top`, `bottom`, `left`, `right`) to gently pull isolated nodes toward specific screen bounds to prevent layout drifts.
+
+---
+
+# Release Notes: AWS-DFD-Visualizer v2.6.2
+
+**Release Date:** June 1, 2026
+**Framework:** Splunk Unified Dashboard Framework (Dashboard Studio) &amp; Classic SimpleXML
+
+## Overview
+Version 2.6.2 introduces the **Zero-Trust Static Deterministic Layout Engine (IL5 RMF Audit Mode)**. This release replaces the dynamic D3 force-directed physics engine with a 100% reproducible, static, nested-box network topology visualizer designed to meet DoD Impact Level 5 (IL5) Risk Management Framework (RMF) auditing requirements.
+
+## Major Features &amp; Enhancements
+
+### 1. Pure Deterministic Layout Engine
+* **Two-Pass Layout Engine:** Developed custom Bottom-Up Dimensioning (`computeDimensions`) and Top-Down Coordinate Allocation (`assignCoordinates`) to render a predictable grid topology without physics jitter.
+* **Canvas Expansion:** Expanded the viewport viewBox boundary to $1200 \times 1400$ to prevent vertical layout clipping across high-density nodes.
+* **Physics &amp; Drag Lockout:** Draggability and D3 tick calculations are completely frozen when Zero-Trust layout mode is active.
+
+### 2. Segmented Zero-Trust Planes (Swimlanes)
+* **Identity Plane Toolbar:** Locked unassociated IAM roles, users, and policy nodes horizontally at the top of the canvas to clarify identity boundaries.
+* **Policy &amp; Control Plane:** Locked global network assets (AWS WAF, CloudFront distributions) centered horizontally between identity and infrastructure boundaries.
+* **Infrastructure Plane:** Nested VPC containers and subnet enclosures are placed strictly within the lower infrastructure bounds.
+* **Decorations:** Added distinct background bands, swimlane labels, and center-aligned placeholders for empty planes to improve layout scannability.
+
+### 3. Mid-Flight Compliance Interception &amp; Manhattan Routing
+* **Orthogonal Manhattan Paths:** Routed connecting lines using rounded, orthogonal Manhattan vectors.
+* **Clamped Corner Radius ($\hat{R}$):** Curvature radius dynamically clamps to prevent loop overlaps on high-density node clusters.
+* **Interception Interrogation:** Interrogates target security posture mid-flight. Port 22/SSH connections targeting non-compliant nodes are rendered in Vibrant Red with dashed line styles, while compliant links render in Vibrant Green.
+
+### 4. Concentric Security Group Envelopes
+* **Visual Compliance Envelopes:** Renders nested outer rings around compute nodes representing their associated security groups, colored by their compliance state (Green for compliant, Red for non-compliant) to make configurations immediately auditable.
+
+---
+
+# Release Notes: AWS-DFD-Visualizer v2.6.1
+
+**Release Date:** May 22, 2026
+**Framework:** Splunk Unified Dashboard Framework (Dashboard Studio) &amp; Classic SimpleXML
+
+## Overview
+Version 2.6.1 delivers all Critical, High, and Medium enhancements prioritized in the May 2026 backlog. This release introduces advanced data formatting for edge-case AWS Config environments, robust zero-trust grouping visualizers, and interactive token integration for complex Splunk dashboard workflows.
+
+## Major Features &amp; Enhancements
+
+### 1. Robust Data Normalization &amp; Edge Guarding
+* **ARN-Safe Node Normalization:** ARNs passed as `resourceId` (e.g., Lambda, S3, Firehose) containing colons and slashes no longer crash D3 physics math. They are slugged internally while preserving the original ARN for display.
+* **Bidirectional Edge Deduplication:** Complex AWS Config data mapping relationships on both ends (A→B and B→A) are now deduplicated via a canonical sorting algorithm `[from,to].sort().join('|')` to prevent D3 force stacking and graph collapse.
+* **Null Label Fallbacks:** Automatically falls back to parsing short, human-readable labels from full ARNs if `resourceName` is missing in the telemetry.
+
+### 2. Zero-Trust &amp; Architecture Layouts
+* **ZTA Pillar Cluster Hulls:** Nodes can now be logically grouped into convex polygons representing distinct Zero Trust boundaries (Identity, Network, Data, Visibility).
+* **Region/VPC Swim Lanes:** Floating resources can now be constrained using `forceX/forceY` logic to pull them into distinct Region or VPC horizontal bands.
+* **Hierarchical Tree Mode:** Added `layoutMode=&quot;hierarchy&quot;` toggle for use cases better represented as top-down trees rather than standard force graphs.
+* **Control Plane Boundaries:** Nodes flagged as Control Plane now render with distinct visual boundaries to isolate them from Data Plane workloads.
+
+### 3. Interactive Dashboard Token Drilldowns
+* **Advanced Token Integration:** Implemented an aggressive, capture-phase React listener (`onClickCapture`) to safely bypass D3 drag intercepts. Clicking a node now instantly pushes `tokenValue`, `tokenNode`, and `tokenToolTip` variables up to the Splunk dashboard framework so secondary panels can load dynamic SPL queries.
+
+---
+
+# Release Notes: AWS-DFD-Visualizer v2.5.19 (Cumulative Update)
+
+**Release Date:** May 10, 2026
+**Framework:** Splunk Unified Dashboard Framework (Dashboard Studio) &amp; Classic SimpleXML
+
+## Overview
+Version 2.5.19 is a major cumulative update (rolling up hotfixes 2.5.9 through 2.5.19) that completely hardens the React/D3 migration for Splunk Dashboard Studio. It resolves multiple critical rendering bugs, theme detection failures, and SPL parsing edge-cases, ensuring production-ready stability for both Dark Mode NOC dashboards and Classic SimpleXML layouts.
+
+## Engineering Improvements
+* **Cypress Component Testing:** We have fully decoupled the React rendering layer from Splunk UI dependencies, enabling a robust Cypress headless testing pipeline. Node physics (D3) and mathematical coordinate mapping are now automatically verified before `.spl` compilation, eliminating manual &quot;upload-and-pray&quot; cycles.
+* **Theme Hook &amp; AMD Module Removal:** Ripped out failing `@splunk/themes` dependencies that caused silent React unmounts (White Screen of Death) and resolved the AMD `CustomVizClassDef is not a constructor` wrapper issue natively at the Webpack layer via `libraryExport: 'default'`.
+
+## Bug Fixes
+* **White Box Render Bug in Dashboard Studio:** The visualizer now features robust dark mode detection tailored for Dashboard Studio. It intercepts `$config` payloads to correctly trigger dark themes when `&quot;backgroundColor&quot;: &quot;#000000&quot;` is detected, and forces the container background to `transparent` so it seamlessly inherits the exact Splunk dashboard panel color behind it.
+* **SPL Column Fallback Parsing Error:** Fixed an issue where queries lacking a specific `node_label` field incorrectly fell back to the 4th column (`edge_label`), mislabeling nodes with connection protocols (e.g., &quot;HTTPS&quot; instead of &quot;Internet&quot;).
+* **D3 Physics Engine NaN Collapse:** Fixed a catastrophic division-by-zero math cascade in D3's `forceCollide` algorithm. Nodes now instantiate with a random spatial jitter algorithm (`Math.random() * 50 - 25`), preventing perfectly stacked coordinates from crashing the SVG renderer.
+* **Dashboard Studio Results Support:** Added fallback support to process object arrays (`data.results`) natively passed by Dashboard Studio instead of forcing Classic SimpleXML row arrays (`data.rows`).
+* **SVG Coordinate Scaling:** Added an explicit `viewBox=&quot;0 0 1200 1000&quot;` and a hardcoded `minHeight: 400px` to decouple the visualization from Splunk's bounding box logic, forcing the map to scale dynamically into any panel size without clipping.
+
+---
+
+# Release Notes: AWS-DFD-Visualizer v2.5.8
+
+**Release Date:** May 5, 2026
+**Framework:** Splunk Unified Dashboard Framework (Dashboard Studio) &amp; Legacy Simple XML Compatible
+
+## Overview
+Version 2.5.8 represents a major architectural overhaul. The legacy Simple XML Backbone.js visualization has been entirely rewritten into a modern, native React component using the Splunk UI Toolkit (`@splunk/react-ui`). This ensures full compatibility with Splunk Dashboard Studio, allowing you to migrate your AWS network gap analysis dashboards to the modern framework without breaking custom visualizations.
+
+## Major Features &amp; Enhancements
+
+### 1. Dashboard Studio Modernization (TECH-003)
+* **React/D3 Hybrid Architecture:** The visualization now strictly separates concerns. D3 handles the heavy mathematical physics calculations (force simulation, collision, links), while React exclusively manages DOM rendering (`&lt;NodeCard&gt;`, `&lt;Link&gt;`). This resolves performance bottlenecks and prevents &quot;ghost DOM elements&quot; when Splunk state changes.
+* **Constrained Zoom/Pan:** The `d3.zoom()` functionality is now constrained via `scaleExtent`, preventing users from infinitely panning into blank white space.
+* **Empty States:** The visualizer now gracefully handles queries returning 0 results by displaying a clean &quot;No data found&quot; UI standard to Splunk, rather than rendering a broken blank panel.
+
+### 2. Stencil Decoupling Engine (BUG-001)
+* **Explicit Icon Mapping:** The visualization no longer relies exclusively on string-matching the display node names to determine which AWS stencil to draw. It now accepts `icon` or `stencil` columns in your SPL payload.
+* **Graceful Degradation:** If an explicit `icon`/`stencil` is missing from the search results, the visualizer continues to support legacy fallback logic (string-matching on `type`, `id`, and `node_label`).
+* **Semantic Normalization:** The mapping engine is now case-insensitive, seamlessly handling messy Splunk data (e.g., matching &quot;lambda&quot;, &quot;Lambda&quot;, or &quot;LAMBDA&quot;).
+* **Static Stencils:** We removed the experimental &quot;flowing&quot; zero-trust animations. The component now correctly renders static, rich AWS Stencil cards with shadows and explicit grouping zones.
+
+### 3. Edge Labeling for Ports/Protocols (ENH-002)
+* **Link Text Support:** Added native support for rendering metadata directly on the D3 connecting links. You no longer need to artificially concatenate ports/protocols into node names in your SPL.
+* **Collision Prevention (Halo):** Edge labels now render with a white, semi-transparent rounded rectangle &quot;halo&quot; behind the text. This guarantees high readability when paths cross grid lines or overlapping nodes.
+
+## Documentation
+* Added `README_STENCILS.md` to the package root. This provides a complete dictionary of all exact strings supported by the visualization (e.g., `WAFV2`, `EC2`, `ALB`, `CLOUDTRAIL`) and instructions on how to use the new `stencil` column in SPL.
+
+## Build &amp; Security
+* **AppInspect Hardened:** Version 2.5.8 successfully passes all rigorous Splunk Cloud `splunk-appinspect` checks with 0 errors, 0 failures, and 0 warnings.
+* **Dependencies:** Clean NPM security audit (0 vulnerabilities found across all 483 sub-modules). Updated dependencies to `@splunk/webpack-configs: latest`.
+* **Makefile Integration:** Reconfigured the Makefile to correctly execute `npm run build` using Webpack before packaging, preventing build desynchronization.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Multi-cloud interactive Data Flow Diagram (DFD) visualizer for Splunk. Renders AWS, Azure, and GCP Config topologies as Zero-Trust blueprint diagrams with nested VPC/Subnet enclosures, and SSH/22 compliance violation paths. Designed for DoD IL5 / NIST 800-53 / Zero-Trust Architecture environments.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;### Purpose &amp;amp; Background
+Auditing complex cloud infrastructure for compliance — DoD Impact Level 5 (IL5), NIST 800-53, or NIST 800-207 Zero-Trust Architectures — is extremely challenging. While cloud accounts (AWS, Azure, GCP) generate high-volume telemetry from AWS Config, Azure Resource Manager, GCP Asset Inventory, VPC Flow Logs, and GuardDuty, reviewing these configurations in flat Splunk tables makes it difficult for security teams, system auditors, and DevSecOps engineers to analyze isolation boundaries, spot structural gaps, or verify access routes.
+
+**AWS DFD Visualizer** transforms your live Splunk search results into interactive, audit-ready Data Flow Diagrams directly inside Splunk — no external tools required.
+
+### 🤝 The Complete Solution: Companion + Visualizer
+
+The AWS Zero-Trust topology solution consists of two complementary apps designed to work seamlessly together:
+
+&amp;gt; **&amp;quot;Companion produces the table; Visualizer draws the diagram.&amp;quot;**
+
+- **AWS-DFD-Companion (v1.1.6)**: The data preparation utility. Ingests raw AWS Config, CloudWatch VPC Flow Logs, and inventory telemetry, packaging pre-built CIM macros to produce normalized DFD table rows (`from`, `to`, `edge_label`, `status`).
+- **AWS-DFD-Visualizer (v2.8.6)**: The presentation canvas. Renders those rows into interactive, audit-ready Zero-Trust blueprints with DoD IL5 compliance boundaries, nested VPC/Subnet containers, and drilldown capabilities.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ab03b8fc-b705-11f1-b5ec-227dd71ce028.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Young Suh</dc:creator>
+      <pubDate>Wed, 23 Sep 2026 04:29:33 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8628/#v2.8.6</guid>
+    </item>
+    <item>
+      <title>Cisco Intersight Add-on for Splunk - v3.2.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7828/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;# [Resolved Caveats:]()
+
+**Issue:** Expensive Alarm query present in the addon.
+
+**Resolution:** Optimized the query to better use the index.
+
+
+
+## [What’s New in Version 3.2.]()2
+
+1.        Optimization of Alarm query in the addon.
+
+2.        UCC version updated to 6.6.0.
+
+
+
+## [Known Caveats:]()
+
+The minimal-privilege service account support currently applies only to updating the default KV Store collections provided in the add-on. Customers configuring Custom Inputs must continue to use a service account with Splunk administrator privileges.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Cisco Intersight Add-on for Splunk is a Cisco supported extension to Splunk platform designed to integrate Cisco Intersight&amp;#x27;s powerful infrastructure management capabilities with Splunk&amp;#x27;s robust data analysis platform. This add-on enables IT administrators and engineers to collect, monitor, and analyze data from Cisco Intersight, providing deep insights into their data center operations and enhancing their ability to manage infrastructure efficiently.
+
+The Cisco Intersight Add-on for Splunk enables data collection from key sources including Alarms, Audit Logs, Inventory, and Metrics within the Cisco Intersight platform. It also includes pre-built dashboards that provide high-level insights into the collected data, allowing for faster analysis and streamlined monitoring.
+
+For more information: Please refer to the User Guide: https://intersight.com/help/saas/resources#intersight_add-on_for_splunk&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d27a27ae-b6fb-11f1-940c-a215abe51482.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco Systems, Inc.</dc:creator>
+      <pubDate>Wed, 23 Sep 2026 03:22:04 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7828/#v3.2.2</guid>
+    </item>
+    <item>
+      <title>Supporting App for Oracle SBC CDR - v1.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7051/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* CRITICAL: disconnect\_cause was declared twice in the Stop record field list, at positions 17 and 134. Splunk took the first, so for three releases the field held Oracle's coarse outcome category and the Q.850 cause at position 134 had no field name at all and could not be searched. Position 17 is now cisco\_disconnect\_cause, which is Oracle's own name for it, and disconnect\_cause now holds the Q.850 cause. If you have saved searches or dashboards matching on disconnect\_cause values, they are matching the coarse category and need to move to cisco\_disconnect\_cause.
+* CRITICAL: calling\_mos, called\_mos, calling\_r\_factor and called\_r\_factor now hold the actual score. Oracle writes all four multiplied by 100 so that an integer attribute can carry a fraction - a MOS of 4.3 arrives on the wire as 430 - and the fields previously passed that through, so any threshold written against them was wrong by two orders of magnitude. The wire value is still available as calling\_mos\_raw and so on. A zero in these columns means the SBC has no QoS feature set enabled rather than a call scoring 0.0, so zero now reads as null.
+* The app now extracts a ciscoguid from accounting\_call\_id, so SBC records can be rolled up with CUCM, CUBE and CVP data where the deployment carries the identifier across.
+* Added worst\_mos and worst\_r\_factor, the score of the worse of the two directions. For some statistical analysis end-users will want to exclude the &quot;not bad&quot; side. These new fields will now let them do that more easily.
+* Oracle SBC CDR's two disconnect cause spaces are finally extracted as separate fields. Added q850\_cause\_description and cisco\_cause\_description, which describe the two cause spaces separately, from a new cause\_descriptions lookup.
+* the now-general &quot;cause\_description&quot; values now list the most specific reason available: the Q.850 cause where there is a meaningful one, and Oracle's coarse category where there is not. Prior to this release, cause\_description was simply giving the RADIUS accounting termination cause (still available as accounting\_termination\_cause\_description).
+* Added a ciscoguid\_family field, which reports whether a ciscoguid is an H.225-format guid or a time-based UUID. This was previously only available via a search macro that misreported any record carrying two guids.
+* The descriptions shown for SIP response codes, ie the sip\_status\_description field, have been rewritten from the IETF specifications that define each code - RFC 3261, plus the fifteen later RFCs that define the codes RFC 3261 does not cover. The codes themselves and their reason phrases (sip\_status\_code and sip\_status\_name) are unchanged. If you have saved searches, alerts or dashboards that match on the old description text rather than on sip\_status\_code, update them.
+* Added a health check that lists any saved search, dashboard or macro still using the old west/east media flow field names, with the name that replaces each. Run it as a user with admin\_all\_objects for a complete inventory.
+* Added a THIRD-PARTY-NOTICES.md file to the app, itemizing the third-party components it bundles and the origin of the data in each of its reference lookups.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app provides the Splunk configuration to ingest the CDR data from Oracle SBC.     It is intended to work for both Oracle Session Router CDR and Oracle SBC CDR, although some unknowns remain as of this writing. 
+
+It is also designed to work as a Supporting App alongside Sideview&amp;#x27;s commercial &amp;quot;Cisco CDR Reporting and Analytics&amp;quot; app.  
+When used in conjunction with the Cisco CDR app, the Oracle SBC data can be used in that app alongside the CUCM data.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/13ea7fb0-b6e6-11f1-9b7f-3a06688f50e0.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
+      <pubDate>Wed, 23 Sep 2026 00:34:17 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7051/#v1.0.0</guid>
+    </item>
+    <item>
+      <title>Supporting Add-on for Oracle SBC CDR - v1.0.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8467/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Fixed the party number extractions on records whose SIP display name contains a comma, as &quot;Last, First&quot; from a corporate directory does.  The station id fields are quoted for that reason, but the extraction walked the line by commas without honouring the quoting, so such a record was read one field out of step: callingPartyNumber came out empty and calledPartyNumber held the CALLING party's number, while the real called number was lost.                                                    &amp;#x20;
+* These are index-time fields, so the correction applies to newly indexed data only.  Events already in the index keep the shifted values.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app provides the index-time configuration to ingest the CDR data from Oracle Session Border Controller (Oracle SBC) and also from Oracle Session Router.     Specifically the CSV-formatted CDR format that you get if you enable local cdr storage on the oracle boxes.      The app correctly separates the intermingled start, interim and end records of this dataset,  into three distinct sourcetypes, and extract the fields from each correctly.
+
+Note that although you can use it purely to onboard the data,   this app contains NO search-time config and will not by itself extract the search-time fields properly.    This is because it is designed to always work in conjunction with Sideview&amp;#x27;s &amp;quot;Supporting App for Oracle SBC&amp;quot;, which is to be installed on the Search Head and which handles the search-time field extractions among other things.
+
+Furthermore ,both of these apps together are also designed to work with Sideview&amp;#x27;s &amp;quot;Cisco CDR Reporting and Analytics&amp;quot; app.   When all three pieces are used together, the solution gives users a more general Investigation and Reporting solution for Oracle SBC and Oracle Session Router.
+
+The use cases are actually nearly endless so please contact Sideview if you have questions or would just like to find out more.
+
+this app is a part of Sideview&amp;#x27;s overall Investigation and Reporting solution, and you can find more documentation on the Sideview website:  https://sideviewapps.com/documentation/oracle-sbc-cdr&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d2755a8c-b6e5-11f1-9b7f-3a06688f50e0.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
+      <pubDate>Wed, 23 Sep 2026 00:30:40 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8467/#v1.0.2</guid>
     </item>
     <item>
       <title>Databricks Add-on for Splunk - v1.4.4 [Version Update]</title>
@@ -1768,45 +2225,6 @@ Requires: https://splunkbase.splunk.com/app/6485&lt;/p&gt;&lt;img height=&quot;3
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
       <pubDate>Tue, 15 Sep 2026 15:18:37 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7380/#v1.1.3</guid>
-    </item>
-    <item>
-      <title>Splunk Add-on for CrowdStrike FDR - v3.2.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/5579/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;This release includes the following key enhancements and fixes:
-
-* Added observability metrics for the CrowdStrike FDR ingestion flow, including emitted event and byte counts.
-* Disabled the **Shutdown input after each processed data file** (`per_file_exec`) setting for managed S3 consumer inputs and changed the default interval to 30 seconds.
-* Fixed `dest` field extraction for CrowdStrike event types not covered by the existing mappings, including hostname and AID fallback handling.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Add-on for CrowdStrike FDR lets you collect event data stored in CrowdStrike and bring it into your own Splunk instance for retention and further analysis. The Add-on collects different logs and events from different sources monitored by the CrowdStrike platform and provides CIM-compatible knowledge to use with other Splunk apps.
-
-Crowdstrike FDR events must be fetched from an AWS S3 bucket that is provisioned for you. The integration utilizes AWS SQS to support scaling horizontally if required.
-
-Version 2.0.0 of the Splunk Add-on for Crowdstrike FDR contains the following new and changed features:
-
--New monitoring dashboard
--New events for CIM normalization
--Updated events CIM normalization
--FedRAMP certification
--IPv6 compatibility
-
-----
-Additional Note:
-For Splunk Cloud customers:
-You can now ingest CrowdStrike data with Data Inputs (formerly called Data Manager) , providing the most scalable and efficient solution for managing your FDR feeds. By utilizing the Splunk Add-on for CrowdStrike FDR, this integration automates complex configurations and ensures seamless, high-performance data processing as your environment scales. Streamline your security operations today with this robust, infrastructure-ready ingestion method.
-
-Data Inputs ( Data Manager ) is a built-in application exclusively available within the Splunk Cloud Platform.
-documentation:
-https://help.splunk.com/en/splunk-cloud-platform/ingest-data-from-cloud-services/data-manager-user-manual/1.16/crowdstrike-data/crowdstrike-introduction&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b573235e-b106-11f1-b648-b6586300c1a7.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 15 Sep 2026 14:11:46 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5579/#v3.2.0</guid>
-    </item>
-    <item>
-      <title>Splunk WLM Resource Protection App - v1.0.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8839/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Improved security by preventing monitored users from bypassing resource protection through excluded application namespaces.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Monitors active searches and terminates over-threshold workloads to protect Splunk stack performance and stability.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk WLM Resource Protection App helps protect Splunk search performance by monitoring active searches and automatically terminating searches that exceed configured CPU or memory thresholds. It addresses situations where a small number of resource-intensive searches can degrade stack stability, impact other users, or consume excessive search head and indexer capacity.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 15 Sep 2026 09:48:02 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8839/#v1.0.2</guid>
     </item>
   </channel>
 </rss>
