@@ -6,7 +6,204 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Tue, 22 Sep 2026 22:33:10 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 23 Sep 2026 01:04:42 +0000</lastBuildDate>
+    <item>
+      <title>Supporting App for Oracle SBC CDR - v1.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7051/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* CRITICAL: disconnect\_cause was declared twice in the Stop record field list, at positions 17 and 134. Splunk took the first, so for three releases the field held Oracle's coarse outcome category and the Q.850 cause at position 134 had no field name at all and could not be searched. Position 17 is now cisco\_disconnect\_cause, which is Oracle's own name for it, and disconnect\_cause now holds the Q.850 cause. If you have saved searches or dashboards matching on disconnect\_cause values, they are matching the coarse category and need to move to cisco\_disconnect\_cause.
+* CRITICAL: calling\_mos, called\_mos, calling\_r\_factor and called\_r\_factor now hold the actual score. Oracle writes all four multiplied by 100 so that an integer attribute can carry a fraction - a MOS of 4.3 arrives on the wire as 430 - and the fields previously passed that through, so any threshold written against them was wrong by two orders of magnitude. The wire value is still available as calling\_mos\_raw and so on. A zero in these columns means the SBC has no QoS feature set enabled rather than a call scoring 0.0, so zero now reads as null.
+* The app now extracts a ciscoguid from accounting\_call\_id, so SBC records can be rolled up with CUCM, CUBE and CVP data where the deployment carries the identifier across.
+* Added worst\_mos and worst\_r\_factor, the score of the worse of the two directions. For some statistical analysis end-users will want to exclude the &quot;not bad&quot; side. These new fields will now let them do that more easily.
+* Oracle SBC CDR's two disconnect cause spaces are finally extracted as separate fields. Added q850\_cause\_description and cisco\_cause\_description, which describe the two cause spaces separately, from a new cause\_descriptions lookup.
+* the now-general &quot;cause\_description&quot; values now list the most specific reason available: the Q.850 cause where there is a meaningful one, and Oracle's coarse category where there is not. Prior to this release, cause\_description was simply giving the RADIUS accounting termination cause (still available as accounting\_termination\_cause\_description).
+* Added a ciscoguid\_family field, which reports whether a ciscoguid is an H.225-format guid or a time-based UUID. This was previously only available via a search macro that misreported any record carrying two guids.
+* The descriptions shown for SIP response codes, ie the sip\_status\_description field, have been rewritten from the IETF specifications that define each code - RFC 3261, plus the fifteen later RFCs that define the codes RFC 3261 does not cover. The codes themselves and their reason phrases (sip\_status\_code and sip\_status\_name) are unchanged. If you have saved searches, alerts or dashboards that match on the old description text rather than on sip\_status\_code, update them.
+* Added a health check that lists any saved search, dashboard or macro still using the old west/east media flow field names, with the name that replaces each. Run it as a user with admin\_all\_objects for a complete inventory.
+* Added a THIRD-PARTY-NOTICES.md file to the app, itemizing the third-party components it bundles and the origin of the data in each of its reference lookups.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app provides the Splunk configuration to ingest the CDR data from Oracle SBC.     It is intended to work for both Oracle Session Router CDR and Oracle SBC CDR, although some unknowns remain as of this writing. 
+
+It is also designed to work as a Supporting App alongside Sideview&amp;#x27;s commercial &amp;quot;Cisco CDR Reporting and Analytics&amp;quot; app.  
+When used in conjunction with the Cisco CDR app, the Oracle SBC data can be used in that app alongside the CUCM data.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/13ea7fb0-b6e6-11f1-9b7f-3a06688f50e0.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
+      <pubDate>Wed, 23 Sep 2026 00:34:17 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7051/#v1.0.0</guid>
+    </item>
+    <item>
+      <title>Supporting Add-on for Oracle SBC CDR - v1.0.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8467/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Fixed the party number extractions on records whose SIP display name contains a comma, as &quot;Last, First&quot; from a corporate directory does.  The station id fields are quoted for that reason, but the extraction walked the line by commas without honouring the quoting, so such a record was read one field out of step: callingPartyNumber came out empty and calledPartyNumber held the CALLING party's number, while the real called number was lost.                                                    &amp;#x20;
+* These are index-time fields, so the correction applies to newly indexed data only.  Events already in the index keep the shifted values.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app provides the index-time configuration to ingest the CDR data from Oracle Session Border Controller (Oracle SBC) and also from Oracle Session Router.     Specifically the CSV-formatted CDR format that you get if you enable local cdr storage on the oracle boxes.      The app correctly separates the intermingled start, interim and end records of this dataset,  into three distinct sourcetypes, and extract the fields from each correctly.
+
+Note that although you can use it purely to onboard the data,   this app contains NO search-time config and will not by itself extract the search-time fields properly.    This is because it is designed to always work in conjunction with Sideview&amp;#x27;s &amp;quot;Supporting App for Oracle SBC&amp;quot;, which is to be installed on the Search Head and which handles the search-time field extractions among other things.
+
+Furthermore ,both of these apps together are also designed to work with Sideview&amp;#x27;s &amp;quot;Cisco CDR Reporting and Analytics&amp;quot; app.   When all three pieces are used together, the solution gives users a more general Investigation and Reporting solution for Oracle SBC and Oracle Session Router.
+
+The use cases are actually nearly endless so please contact Sideview if you have questions or would just like to find out more.
+
+this app is a part of Sideview&amp;#x27;s overall Investigation and Reporting solution, and you can find more documentation on the Sideview website:  https://sideviewapps.com/documentation/oracle-sbc-cdr&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d2755a8c-b6e5-11f1-9b7f-3a06688f50e0.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
+      <pubDate>Wed, 23 Sep 2026 00:30:40 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8467/#v1.0.2</guid>
+    </item>
+    <item>
+      <title>Supply Chain and AI Threat Intelligence Platform - v1.2.17 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8814/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;SCIP v1.2.17 &amp;mdash; MITRE ATLAS coverage expansion, severity re-rating, compliance citation corrections, and audit fixes&lt;/h2&gt;
+
+&lt;p&gt;This release consolidates the work in v1.2.15, v1.2.16 and v1.2.17 since the last published release (v1.2.14). The AI/agentic detection library grows from 66 to 81 rules (72 MITRE ATLAS-mapped, 9 vendor-defined). No cryptographic surface was modified.&lt;/p&gt;
+
+&lt;h3&gt;New detections (15)&lt;/h3&gt;
+
+&lt;p&gt;Fifteen new AI and agentic threat detections were added, covering: an AI service API used as a covert command-and-control channel; AI supply-chain rug pulls, where an established component's newly published content turns malicious; artifact repositories used as dead-drop C2 channels; agent runtime capability discovery; and sub-technique coverage for dataset and capability acquisition, autonomous exploit and agent tool development, system prompt and instruction discovery, agent tool data collection, tool runtime response poisoning, and poisoned model, dataset and agent-tool publication.&lt;/p&gt;
+
+&lt;p&gt;Separately, two existing detections gain additional technique tags, for multimodal prompt-injection triggers and for misconfigured or publicly exposed AI services. These are more precise labels on rules that already shipped, not new detections.&lt;/p&gt;
+
+&lt;h3&gt;Detection accuracy and severity&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Every ATLAS rule and the SBOM Drift Monitor now set &lt;code&gt;alert.severity&lt;/code&gt; as an integer. String values were being coerced by Splunk and read back as 0, so triggered-alert severity in Splunk and any alert action keyed on it were unusable. Emitted severity fields, lookups and dashboard behaviour are unchanged.&lt;/li&gt;
+&lt;li&gt;A severity rubric pass re-rated three rules added in the previous release and confirmed nine others.&lt;/li&gt;
+&lt;li&gt;Five MITRE ATLAS technique names and tactics were corrected to the catalog text, and coverage is now scoped against ATLAS 2026.09 with a recorded disposition for every technique added in that catalog release.&lt;/li&gt;
+&lt;li&gt;Three regression guards now run before every package build: one validates every technique stamp against the shipped lookup, including secondary stamps; one validates the severity mapping on every rule; and one verifies that shared facts agree across the README, the deployment guide and the shipped artifacts.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Compliance citation corrections&lt;/h3&gt;
+
+&lt;p&gt;No assessment logic changed. Citations and control identifiers were corrected across seven of the nine frameworks SCIP assesses:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;EU Cyber Resilience Act control IDs now use the regulation's own Annex and Article labels; two transposed points corrected; coverage added for two security-update provisions. Now 21 controls.&lt;/li&gt;
+&lt;li&gt;FDA 524B: transposed statutory citations corrected, the patch-cycle control re-cited, the cyber device definition restored to its three statutory prongs, and guidance-derived rows distinguished from statutory ones. Now 21 controls.&lt;/li&gt;
+&lt;li&gt;NIST CSF 2.0: 16 subcategory descriptions replaced with CSF 2.0 outcome text.&lt;/li&gt;
+&lt;li&gt;PCI DSS 4.0.1 and FedRAMP: requirement and control titles restored to official text.&lt;/li&gt;
+&lt;li&gt;HIPAA: four rows re-titled to the standard's own name; a control that was being assessed twice is now out of scope.&lt;/li&gt;
+&lt;li&gt;DORA: incident classification and ICT concentration risk re-cited.&lt;/li&gt;
+&lt;li&gt;A nightly cleanup now retires status records for controls that are no longer in scope, so renamed or descoped controls leave nothing frozen behind.&lt;/li&gt;
+&lt;li&gt;Compliance views and the CSV export now carry a Last Assessed column, flagging any status older than two days as stale.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Functional fixes&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The POA&amp;amp;M population search collided its inline time bounds with its dispatch window and scanned nothing while reporting success.&lt;/li&gt;
+&lt;li&gt;Five scheduled searches stored a search string beginning with a literal &lt;code&gt;search&lt;/code&gt; command, which silently excluded events whose raw text lacked that word.&lt;/li&gt;
+&lt;li&gt;Setup, Remediation Tracking and Telemetry Settings could write to the KV Store on page load, before any Save action. All three now write only on an explicit action.&lt;/li&gt;
+&lt;li&gt;Telemetry Settings rewrote the license collection on every page view; it now updates a single record on an explicit selection.&lt;/li&gt;
+&lt;li&gt;The license status check treated a record with a missing or non-numeric expiry as active.&lt;/li&gt;
+&lt;li&gt;Risk score pruning deleted rows with a missing or non-numeric timestamp; those rows are now retained.&lt;/li&gt;
+&lt;li&gt;Incomplete SBOM baseline rows no longer suppress the set-a-baseline prompts or count toward baselined-application totals.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Setup and onboarding&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The Setup page now names every index SCIP requires, states that SCIP does not create them, gives both standalone and clustered paths, and warns when any is missing.&lt;/li&gt;
+&lt;li&gt;A new section explains that SBOM drift's component, version and count signals are inactive until a baseline is set.&lt;/li&gt;
+&lt;li&gt;The file monitor section states that both SBOM inputs ship disabled, that the monitored path must be repointed, and that SPDX files belong in their own directory.&lt;/li&gt;
+&lt;li&gt;NVD API key copy corrected in four places.&lt;/li&gt;
+&lt;li&gt;The license blocklist field no longer shows an internal placeholder on load, and the blocklist is emptied through an explicit Clear action.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Air-gapped and egress-restricted deployments&lt;/h3&gt;
+
+&lt;p&gt;CISA KEV and EPSS threat intelligence can now be refreshed by file transfer, as NVD and OSV already could. Both feeds write normalized records to spool directories that new file-monitor inputs index. Previously both were script-only, so without outbound access they stayed frozen at install, silently degrading KEV-driven risk scoring. The IL Deployment Guide documents the record formats and procedure.&lt;/p&gt;
+
+&lt;h3&gt;Roles and user experience&lt;/h3&gt;
+
+&lt;p&gt;All three SCIP roles gain eleven read and UI capabilities that restore the Apps menu icons and the Setup credential-status read. The administrative role retains the capabilities its credential-save controls require.&lt;/p&gt;
+
+&lt;h3&gt;Documentation&lt;/h3&gt;
+
+&lt;p&gt;New ATLAS coverage manifest and a guide to authoring your own ATLAS detections on top of the shipped baseline. The deployment guide now lists every required index in both its standalone and clustered instructions, documents scheduled searches that ship disabled by design, and corrects the outbound-connection table, which described telemetry as opt-out. Telemetry is opt-in and off by default.&lt;/p&gt;
+
+&lt;h3&gt;Upgrade notes&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Role assignment.&lt;/strong&gt; SCIP roles are additive. If a user was assigned a SCIP role as their only role, they have been without the top-right username and account menu since v1.1.11. Assign your organization's base Splunk role alongside the SCIP role.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Saved-search renames.&lt;/strong&gt; EU CRA and FDA compliance saved searches were renamed to match their new control identifiers. Any local override or external reference to the old stanza names must be updated.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Alert severity.&lt;/strong&gt; Triggered-alert severity now reports real values instead of 0. Alert actions keyed on severity will begin seeing 2 through 5.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HIPAA control count&lt;/strong&gt; drops from 9 to 8 in-scope controls. The descoped control's saved search is disabled rather than deleted, preserving the audit trail.&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Unifies software supply chain risk (SBOM/SCA), MITRE ATLAS AI-threat detection, and nine-framework compliance in one Splunk app — with FedRAMP-ready audit exports and no external security product required.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;SCIP unifies software composition analysis (SCA), supply chain risk monitoring, and AI threat detection in one Splunk app. Ingest SBOMs, correlate components against live vulnerability intelligence (OSV, NVD, CISA KEV, EPSS), detect adversarial AI/ML threats with MITRE ATLAS, and assess compliance posture across nine global frameworks — with detection logic written as transparent SPL you can open and read, and no external security product required.
+
+CAPABILITIES
+- SBOM ingestion — file-drop or HEC, supporting CycloneDX (JSON/XML) and SPDX (JSON)
+- Vulnerability correlation — daily OSV feed (264,944+ records across 11 ecosystems) with PURL-based correlation; NVD CPE-based correlation; CISA KEV matching; EPSS exploit-probability scoring
+- Air-gapped operation — all four intelligence feeds (OSV, NVD, CISA KEV, EPSS) refresh by file transfer, with no outbound connectivity required
+- Supply Chain Risk Score — 0–100 global and per-application risk scoring weighted by severity, KEV status, and EPSS
+- Vendor Risk — per-vendor risk aggregation and letter-grading across your SBOM portfolio
+- SBOM Drift Detection — baseline-vs-current component change tracking
+- License Compliance — GPL/AGPL/copyleft detection and license-risk classification
+- MITRE ATLAS Detection — 81 AI/agentic threat detection rules (72 mapped to 57 MITRE ATLAS techniques)
+- Silent-Source Detection — alerts when an enrolled AI/LLM telemetry source goes quiet, so a dead pipe is never mistaken for a clean one
+- Compliance Gap Assessment — nine frameworks: PCI DSS 4.0.1, NIST CSF 2.0, SOC 2 Type II, HIPAA Security Rule, EU Cyber Resilience Act, FedRAMP / RMF / CISA, DORA, FDA 524B Premarket Cybersecurity, SEBI CSCRF
+- Long-Unpatched Critical Exposure — flags critical/high-severity vulnerabilities unpatched 180+ days
+- POA&amp;amp;M &amp;amp; FedRAMP Workflow — POA&amp;amp;M dashboard, monthly ConMon package builder, BOD 26-04 risk-tier classification (CISA&amp;#x27;s four-variable model with computed deadlines), deviation request workflow. Dashboards always available; automated POA&amp;amp;M generation is opt-in from Setup
+- Coverage-Evidence Manifest — AU-12-aligned attestation of unbroken AI-monitoring coverage
+- Audit-ready exports — FedRAMP POA&amp;amp;M Workbook (R3.0 and R2.1), SSP Appendix M Integrated Inventory, Deviation Request Form (Template 2.1 / Aug 2024)
+- Component Search — instant cross-SBOM component lookup
+- Compound Risk — correlates active MITRE ATLAS AI-threat detections with KEV-listed or critical-severity vulnerabilities on the same application, surfacing compounding risk neither signal shows alone
+- AI/ML Bill of Materials — catalogs AI/ML model components from your SBOMs (architecture, training data, lineage) with insecure-serialization-format flagging and risk classification
+
+SUPPORT
+GIC Engineering Consultants — contact@gicengineeringconsultants.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2c29cea0-b6d7-11f1-940c-a215abe51482.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">GIC Engineering Consultants, Inc.</dc:creator>
+      <pubDate>Tue, 22 Sep 2026 23:29:26 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8814/#v1.2.17</guid>
+    </item>
+    <item>
+      <title>Databricks Add-on for Splunk - v1.4.4 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5416/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Bumped the minimum required Python version to 3.13 as per Splunk standards.
+* Upgraded the Add-on Builder (AOB) version to 4.5.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Databricks Add-on for Splunk allows Splunk Enterprise and Splunk Cloud users to run queries and execute actions, such as running notebooks and jobs, in Databricks.
+
+Click the Details tab for Installation instructions and documentation.
+
+Features
+- Run Databricks SQL queries right from the Splunk search bar and see the results in Splunk UI
+- Execute actions in Databricks, such as notebook runs and jobs, from Splunk&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a812b214-b6d9-11f1-9378-86431f2ad435.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Databricks Inc</dc:creator>
+      <pubDate>Tue, 22 Sep 2026 23:21:24 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5416/#v1.4.4</guid>
+    </item>
+    <item>
+      <title>Splunk AI Assistant - v2.3.3 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7245/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;See what the Splunk AI Assistant can do for you https://youtu.be/ynRBiepXVw4?si=eua38GwP0nwuvk3m&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk AI Assistant is your AI-powered Agentic companion for getting answers from your data in Splunk. Whether you&amp;#x27;re a seasoned expert or just starting out, it helps you discover, analyze, and act on your data through natural conversation — going far beyond writing and explaining SPL. https://youtu.be/ynRBiepXVw4?si=eua38GwP0nwuvk3m
+
+With Agent Mode, the assistant reasons through your requests, takes actions on your behalf, and leverages a growing set of tools and skills from a single chat window. It decomposes complex questions into parallel steps, exposes its reasoning to build trust, and asks clarifying questions when prompts are ambiguous.
+
+What it can do for you:
+
+🚀 SPL Generation, Editing &amp;amp; Optimization: Describe your search in plain English and get accurate SPL — or modify existing queries without rewriting, while making them faster.
+
+📖 SPL Explanation: Understand any search in plain English, with a detailed breakdown of its logic.
+
+🔍 Data Discovery: Don&amp;#x27;t know where your data lives? The assistant scans your environment to find the right sources.
+
+⚡ Search Execution &amp;amp; Analysis: With your permission, it runs searches and summarizes results in chat — so you get answers, not just queries.
+
+📊 Content Discovery: Semantically search across dashboards, saved searches, reports, and lookups — the assistant finds and reuses the best-matching content through natural language.
+
+📚 Knowledge Retrieval: Get answers about Splunk documentation, platform terms, and products.
+
+🎯 ITSI Integration (Read-Only): Bring IT Service Intelligence into the conversation — retrieve service health, KPIs, episodes, and related insights without leaving chat.
+
+🌐 SPL2 &amp;amp; Federated Search (Beta): The assistant now supports SPL2 and Federated Search, including the Machine Data Lake, so you can query data across multiple sources and tiers.
+
+🧰 More Tools in Agent Mode: This release expands Agent Mode with additional tools and skills, so the assistant can handle more of your workflows end to end.
+
+Teach AI (Beta): Admins can provide custom instructions via a markdown file to teach the assistant their org&amp;#x27;s best practices, data catalog, and guardrails — for smarter, more relevant results.
+
+Context Settings: Formerly Personalization, this generates more contextual results using non-personal metadata while honoring role-based access controls. Admins have full visibility into data collected.
+
+Model Runtime Choices: The assistant leverages Azure OpenAI models alongside Splunk-hosted LLMs for the best response quality.
+
+Availability: Splunk Cloud customers in AWS and Azure commercial regions, FedRAMP IL2, and Enterprise customers via Cloud Connected. Agent Mode is available to AWS commercial Splunk Cloud customers with this release.
+
+(c) Splunk 2026. All rights reserved.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/994f8482-b6b6-11f1-940c-a215abe51482.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Tue, 22 Sep 2026 23:21:19 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7245/#v2.3.3</guid>
+    </item>
     <item>
       <title>FireAMP - v2.1.17 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5897/</link>
@@ -159,19 +356,6 @@ Official site: www.infigosiem.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Infigo  IS</dc:creator>
       <pubDate>Tue, 22 Sep 2026 08:40:00 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7150/#v2.2.3</guid>
-    </item>
-    <item>
-      <title>Log Monitoring - v3.12.2 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/9774/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;### Release Notes
-
-* Added HA peer pairing through the Actions menu to monitor active/passive hosts together.
-* Added row actions to acknowledge outages, temporarily suppress alerts, set custom thresholds, and stop monitoring individual sources.
-* Improved outage monitoring per index, sourcetype, and host.
-* Simplified initial setup and expanded upgrade instructions.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Detects log delivery outages per index/sourcetype/host by tracking arrival time and diagnosing whether the forwarder agent or source stopped delivering.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Log Monitoring detects log delivery outages on a per-index, per-sourcetype, per-host basis by tracking arrival time and diagnosing whether the forwarder agent or the source itself has stopped delivering data. The app uses scheduled searches to record the most recent arrival time for each source every five minutes and computes outage status at read time, eliminating the need for manual inventory maintenance. Detection is based on arrival time rather than event time to avoid false positives caused by clock skew or timestamp parsing failures. The app distinguishes between three failure modes: an agent that has stopped running, an agent that is running but not forwarding data, and a source that has genuinely stopped producing logs. This diagnosis relies on independent liveness signals from Splunk internal logs and deployment server phone-home data. All tracking data is stored in KV store collections and CSV lookups, with no custom indexes, Python code, scripted inputs, or custom commands required.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d8d8c7a2-b0d6-11f1-b70d-8a438ae63e09.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Burak ATABAY</dc:creator>
-      <pubDate>Tue, 22 Sep 2026 08:14:29 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9774/#v3.12.2</guid>
     </item>
     <item>
       <title>Infigo Threat Intelligence - v4.4.0 [Version Update]</title>
@@ -1512,52 +1696,6 @@ With a template, it&amp;#x27;s possible to specify the resulting text with place
       <guid>https://splunkbase.splunk.com/app/5904/#v4.0.2</guid>
     </item>
     <item>
-      <title>Cyberwatch Syslog Add-on for Splunk - v2.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7333/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;### Version 2.0.0
-
-This is a major release. **It changes the value of every field this add-on produces.** Read the breaking changes below before upgrading if you have searches, alerts or dashboards built on version 1.0.x.
-
-#### Breaking changes
-
-**Field values no longer carry quotes.**&amp;#x20;
-
-**Timestamps are now extracted.**
-
-**Three fields are removed.** `description` and `name` were both copies of `cve_code` — use `cve` and `signature`. `severity_id` held the string `level_high` in a field the CIM types as a number — use `severity`.
-
-**`cvss_vector` is now the vendor's own.** 1.0.3 overwrote it with a CVSS v2 vector rebuilt from `cvss_AV`, `cvss_AC` and `cvss_Au.`Cyberwatch sends a complete, versioned vector of its own (`CVSS:3.1/...`, `CVSS:4.0/...`), and that is what you now get.
-
-#### Added
-
-* **All 24 fields Cyberwatch emits are extracted and documented** — `epss`, `triage_status`, `computer_criticality`, `computer_os_name`, `computer_os_arch`, `computer_category`, `computer_id`, `groups`, `active`, `ignored`, `fixed_at`, `created_at`, `updated_at` and `source_node` were never usable before.
-* **CIM mapping reviewed against the Vulnerabilities data model, CIM 8.x.** `cvss` is converted to a number, and `severity` is mapped explicitly from `cve_level`. When Cyberwatch reports `level_unknown`, `severity` is left unset: the CIM prescribes `critical`, `high`, `medium`, `low` and `informational`, none of which means &quot;the source does not know&quot;.
-* **An explicit time zone.** The BSD syslog header carries none, so the add-on declares `TZ = UTC` — every timestamp in the Cyberwatch payload is UTC. Override it in local/props.conf if your appliance emits local time.
-* Line breaking, truncation and event breaker settings are declared.
-
-#### Changed
-
-* The `cyberwatch_vulnerability_detection` event type now keys on the extracted `cve_code` field instead of matching the literal string `CVE-` anywhere in the event, which tagged any message merely mentioning an identifier.
-
-#### Upgrading
-
-1. Install 2.0.0 over the existing add-on. Your `local/` directory is preserved, so your input configuration survives.
-2. **Restart Splunk.** The timestamp and line-breaking settings are index-time settings and do not apply until you do.
-3. Update any search that compares field values against the quoted form.
-
-#### Compatibility
-
-Splunk Enterprise 8.0 and later, Splunk Cloud Platform. No Python, no scripted inputs, no custom UI.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Normalizes Cyberwatch vulnerability detection syslog events to CIM-compliant fields, enabling integration with Splunk Enterprise Security and the Vulnerabilities data model.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Cyberwatch Syslog Add-on normalizes vulnerability detection data sent by Cyberwatch appliances over syslog into the Splunk Common Information Model.
-It provides field extractions, index-time configuration, and CIM compliance for the Vulnerabilities data model, enabling integration with Splunk Enterprise Security and IT operations workflows.
-
-The add-on handles the cyberwatch:syslog sourcetype and includes timestamp recognition, field extraction rules, and CIM tagging to ensure vulnerability events are properly structured for downstream analysis.
-
-It contains configuration files only, with no custom scripts or user interface components.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/daa78cf0-b0e3-11f1-8c54-9efbc3005523.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Thomas Dussossoy</dc:creator>
-      <pubDate>Wed, 16 Sep 2026 12:26:58 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7333/#v2.0.0</guid>
-    </item>
-    <item>
       <title>vSphere - v5.0.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5943/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Fixed get system info to find virtual machines by vCenter Inventory Name.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app implements investigative, containment and VM management actions on VMware ESXi or vCenter server&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/66fd6fc6-b1c0-11f1-8775-c2cc8c3277ff.svg&quot;&gt;</description>
@@ -1580,18 +1718,6 @@ It contains configuration files only, with no custom scripts or user interface c
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
       <pubDate>Wed, 16 Sep 2026 04:23:13 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6655/#v1.0.5</guid>
-    </item>
-    <item>
-      <title>Microsoft Graph Security Score Add-on - v1.3.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5693/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;\* Added compatibility with Python 3.13 while retaining Python 3.9 / existing Splunk support.
-
-\* Declared dependencies pinned to versions compatible with both Python 3.9 and 3.13 (Splunk Python SDK 2.1.1, requests 2.32.5); splunktaucclib 8.1.0, solnlib 8.1.0.
-
-\* Updated GitHub CI to splunk-app-action v7; set \`python.version \= latest\` for all Python handlers/inputs.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Microsoft Graph Security Score Add-on for Splunk allows users to collect their Azure (Office 365) Security Score from Microsoft&amp;#x27;s Security Graph API. It consists of Python scripts that collect the required/necessary data to configure the account information.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/09f336c8-b0e2-11f1-8c54-9efbc3005523.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Crossrealms, Inc. - Partner</dc:creator>
-      <pubDate>Wed, 16 Sep 2026 03:03:23 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5693/#v1.3.0</guid>
     </item>
     <item>
       <title>ThreatQuotient Splunk Soar Connector - v3.0.1 [Version Update]</title>
@@ -1681,24 +1807,6 @@ https://help.splunk.com/en/splunk-cloud-platform/ingest-data-from-cloud-services
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Tue, 15 Sep 2026 09:48:02 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8839/#v1.0.2</guid>
-    </item>
-    <item>
-      <title>Screenshot Machine - v3.0.8 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5933/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Keep Screenshot Machine API keys out of persisted permalink URLs.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with the Screenshot Machine service&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e2eb17a6-b0cf-11f1-abd7-760848489e27.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 15 Sep 2026 06:37:14 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5933/#v3.0.8</guid>
-    </item>
-    <item>
-      <title>GreyNoise for SOAR - v3.1.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6347/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Update python default version
-* Update GreyNoise SDK to v3.1.0
-* Update min_phantom version to 7.0.0&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app provides investigative capabilities using the GreyNoise plugin and supports receiving alerts and feeds via webhook from GreyNoise&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/7c53b21e-b0cf-11f1-b9b1-8e0ae00b3154.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
-      <pubDate>Tue, 15 Sep 2026 06:34:22 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6347/#v3.1.0</guid>
     </item>
   </channel>
 </rss>
