@@ -6,7 +6,33 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Thu, 24 Sep 2026 00:07:23 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 24 Sep 2026 05:39:36 +0000</lastBuildDate>
+    <item>
+      <title>Jev for Splunk (unofficial) - v0.1.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9833/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**0.1.0, 22 September 2026.** First release.
+
+- The `| jev` search command: Choice, Score and Noul questions to TypeSafe's Jev model, inline
+  or from a question set in `jev.conf`, one API call per row for all questions of the set.
+- Configuration page (UCC): encrypted API key, base URL (https only), model, proxy, row limits,
+  parallel requests, answer cache, log level.
+- The `run_jev` capability gates the command; `maxrows` and a hard ceiling bound every search;
+  one audit line per chunk of rows in `jev_for_splunk.log` with field names and counts only.
+- Answer cache in the KV store collection `jev_cache`, keyed by a hash of model, questions and
+  state; `| jevpurge` deletes expired entries nightly.
+- Retries with backoff on HTTP 429 and 5xx; a rejected key or question stops the search, any
+  other failure marks the row with `jev_error` and continues.
+- The command runs on the search head only and on Splunk's Python 3.9 with the standard
+  library; no dependency outside the app.
+
+Known limits: no starter question sets ship yet (write your own in `jev.conf`); the command
+does not distribute to indexers; the SDK vendored by the UCC framework is splunk-sdk 2.1.1,
+which AppInspect flags as outdated but which is the release that runs on Python 3.9.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Integrates TypeSafe&amp;#x27;s Jev AI model into Splunk searches, enabling AI-based classification and scoring of search results through a custom command that sends field values to a third-party API and returns typed judgments as fields.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Jev for Splunk (unofficial) provides a search command that integrates Splunk search results with TypeSafe&amp;#x27;s Jev AI model for typed judgments. The app sends result row field values to the TypeSafe API and returns AI-generated answers as new fields that can be filtered, sorted, and stored in Splunk. It supports three judgment types: Choice (categorical classification), Score (numeric rating), and Noul (probability).
+The app includes built-in controls to limit data exposure, including a mandatory capability requirement, configurable row limits, audit logging to the internal index, and cache management through KV store. Administrators must configure a TypeSafe API key before the command becomes operational. All API communication occurs over HTTPS to api.typesafe.ai by default. This is not an official TypeSafe product.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Abdallah Atie</dc:creator>
+      <pubDate>Thu, 24 Sep 2026 04:21:57 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9833/#v0.1.0</guid>
+    </item>
     <item>
       <title>Venn Diagram Viz for Dashboard Studio - v1.0.0 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/9788/</link>
@@ -327,32 +353,6 @@ Compatible with Splunk Enterprise 10.0.0 and later, the MISP Splunk Add-on store
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Hans-Henning Gehrts</dc:creator>
       <pubDate>Wed, 23 Sep 2026 12:39:13 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/9831/#v3.4.0</guid>
-    </item>
-    <item>
-      <title>Jev for Splunk (unofficial) - v0.1.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/9833/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**0.1.0, 22 September 2026.** First release.
-
-- The `| jev` search command: Choice, Score and Noul questions to TypeSafe's Jev model, inline
-  or from a question set in `jev.conf`, one API call per row for all questions of the set.
-- Configuration page (UCC): encrypted API key, base URL (https only), model, proxy, row limits,
-  parallel requests, answer cache, log level.
-- The `run_jev` capability gates the command; `maxrows` and a hard ceiling bound every search;
-  one audit line per chunk of rows in `jev_for_splunk.log` with field names and counts only.
-- Answer cache in the KV store collection `jev_cache`, keyed by a hash of model, questions and
-  state; `| jevpurge` deletes expired entries nightly.
-- Retries with backoff on HTTP 429 and 5xx; a rejected key or question stops the search, any
-  other failure marks the row with `jev_error` and continues.
-- The command runs on the search head only and on Splunk's Python 3.9 with the standard
-  library; no dependency outside the app.
-
-Known limits: no starter question sets ship yet (write your own in `jev.conf`); the command
-does not distribute to indexers; the SDK vendored by the UCC framework is splunk-sdk 2.1.1,
-which AppInspect flags as outdated but which is the release that runs on Python 3.9.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Integrates TypeSafe&amp;#x27;s Jev AI model into Splunk searches, enabling AI-based classification and scoring of search results through a custom command that sends field values to a third-party API and returns typed judgments as fields.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Jev for Splunk (unofficial) provides a search command that integrates Splunk search results with TypeSafe&amp;#x27;s Jev AI model for typed judgments. The app sends result row field values to the TypeSafe API and returns AI-generated answers as new fields that can be filtered, sorted, and stored in Splunk. It supports three judgment types: Choice (categorical classification), Score (numeric rating), and Noul (probability).
-The app includes built-in controls to limit data exposure, including a mandatory capability requirement, configurable row limits, audit logging to the internal index, and cache management through KV store. Administrators must configure a TypeSafe API key before the command becomes operational. All API communication occurs over HTTPS to api.typesafe.ai by default. This is not an official TypeSafe product.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Abdallah Atie</dc:creator>
-      <pubDate>Wed, 23 Sep 2026 12:37:44 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9833/#v0.1.0</guid>
     </item>
     <item>
       <title>Threat Hunting Essentials - v1.3.118 [Version Update]</title>
