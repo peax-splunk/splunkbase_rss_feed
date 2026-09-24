@@ -6,7 +6,346 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Thu, 24 Sep 2026 05:39:36 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 24 Sep 2026 10:47:17 +0000</lastBuildDate>
+    <item>
+      <title>HoneyLabs Intelligence - v1.2.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9360/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;1.2.0 is built for the triage queue rather than the demo.
+
+New feed input, fingerprints: TLS (JA4) and HTTP request (Akin) fingerprints the HoneyLabs sensors saw from 20 or more addresses in the shape of a scanning tool, with population counts and the port and path they favour. A scheduled search keeps it in the honeylabs\_fingerprints lookup, so a lookup on the JA4 field of your own TLS logs (Zeek ssl.log carries one) flags a scanning client on your perimeter with no API call, even when the address is clean. The Triage dashboard gains a fourth panel on it. Without a key the feed carries the 500 most widespread shapes of the last 7 days; with a free key stored on the setup page the input pulls the full list over 30 days.
+
+The honeylabs enrichment command returns honeylabs\_cves: the CVEs whose exploit paths the address probed in the last 7 days, so an alert can say what the address was after and a correlation search can join it against what you are exposed to.
+
+honeylabssearch mode\=similar takes an Akin token from your own web, WAF or proxy logs and returns the request shapes within a few headers of it, what those clients ask for, and the family it belongs to.
+
+Three alerts ship switched off, each with a 24 hour throttle per indicator: inbound from active exploiters, outbound to captured malware infrastructure, and a coordinated scanner client on the perimeter. Every row carries an evidence link.
+
+HTTP request fingerprints are Akin tokens (https://github.com/honeylabshq/akin). fp\_type\=akin works in mode\=fingerprint and mode\=population, and mode\=events takes an akin\= filter. fp\_type\=ja4h reports that the type was retired instead of failing the search.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Threat intelligence from live honeypot sensors, in SPL. Enrich any IP field with a verdict, ASN, ports and first and last seen, or query the dataset directly: raw probes, request payloads, CVE exploitation, JA4 fingerprints, top attackers. Plus two hourly threat feeds. Free API key gives 500 lookups a day; no key gives 10.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;HoneyLabs runs open-source honeypot sensors on the public internet. Nothing reaches them by accident, so every connection they record is a scan, a probe, a brute-force attempt or an exploit. There are no false positives to filter out, because there is no legitimate traffic to confuse them with. This app puts that dataset inside Splunk.
+
+Two search commands.
+
+The first enriches addresses you already have. Point it at any field holding a public IPv4 address and it annotates every event:
+
+index=firewall | honeylabs field=src_ip | where honeylabs_events &amp;gt; 0
+
+It writes back verdict, verdict_key, network_type, events, first_seen, last_seen, country, asn, asn_org, rdns, top_port, ports, exploit_hits and reference, each prefixed honeylabs_ so nothing collides with your own fields. Addresses are de-duplicated per search, so an index carrying the same scanner across ten thousand events costs one lookup.
+
+The second queries the honeypot dataset directly, with no local data required. Nine modes cover raw events, captured request payloads, top attackers, timelines, ASN profiles, TLS and HTTP fingerprints, IOC and CIDR lookups, CVE exploitation, and fingerprint population counts. Use it to answer questions your own logs cannot: who else is exercising this CVE, what payload is being sent, which other sources share this JA4 fingerprint.
+
+Two modular inputs, shipped disabled, index active exploiter addresses and captured malware staging URLs on an hourly schedule. Neither needs credentials. Two dashboards ship with the app: an overview of what the feeds currently carry, and an explorer for querying the dataset without writing SPL by hand.
+
+About the API key. The app installs and runs with no account and no setup, but anonymous use is capped at 10 lookups a day, which is enough to try the commands and not enough to work with. A free key raises that to 500 a day and takes about a minute to create at https://honeylabs.net/dashboard. Paste it into the app&amp;#x27;s setup page; it is stored through Splunk&amp;#x27;s storage/passwords, encrypted at rest, and never written to a .conf file. Paid plans go to 50,000 a day.
+
+On privacy: a lookup sends only the public IP addresses in your search. Not your index, host, source or sourcetype names, not your Splunk version, not the search string. Private, loopback, link-local, multicast and reserved addresses are filtered out locally before the request is built. The feed inputs are ordinary HTTPS downloads of a public file and disclose nothing at all.
+
+Running Enterprise Security? Load the indicator feeds through its own threat intelligence framework so they reach correlation searches and risk scoring rather than only being searchable, and keep these commands for on-demand investigation. Walkthrough: https://honeylabs.net/integrations/splunk-es&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/210326ce-b7f5-11f1-b93d-1ef8a3f7096c.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Stefan Grimminck</dc:creator>
+      <pubDate>Thu, 24 Sep 2026 09:00:16 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9360/#v1.2.0</guid>
+    </item>
+    <item>
+      <title>Astelia Add-on - v0.1.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9814/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Initial release.
+
+- Modular inputs for Astelia audit logs and connector health.
+- Audit events mapped to the CIM Change data model.
+- Splunk Cloud compatible; Python 3.9 and 3.13.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Astelia audit logs and connector health in Splunk.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Brings your Astelia audit trail and connector health into Splunk. The add-on polls your organization&amp;#x27;s Astelia API on a schedule, keeps its place between polls, and maps audit events to the Splunk Common Information Model so they work with your existing searches and dashboards. Requires an Astelia API key.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d02f3886-b63d-11f1-a2b0-0e1779d2c14a.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Gilad David</dc:creator>
+      <pubDate>Thu, 24 Sep 2026 08:48:12 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9814/#v0.1.0</guid>
+    </item>
+    <item>
+      <title>Splunk Add-on for Box - v5.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/2679/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;*** Important: Read upgrade instructions and test your update before deploying to production ***
+Version 2.0.0 of the Splunk Add-on for Box introduces breaking changes. To avoid data loss or data duplication, follow the documented upgrade instructions. If your are upgrading from an earlier version, a best practice is to test your update in a non-production environment before deploying to production.
+
+The Splunk Add-on for Box allows a Splunk software administrator to collect data from Box and monitor Box events in near real time. The add-on can collect the following data via the Box REST APIs:
+* Enterprise events
+* Metadata about files and folders
+* User and user group data
+* Collaboration data for folders
+* Tasks data for files&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/4da88424-b7f2-11f1-9dfd-725dcb8d42d9.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Thu, 24 Sep 2026 08:36:28 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/2679/#v5.0.1</guid>
+    </item>
+    <item>
+      <title>Splunk Add-on for Citrix NetScaler - v8.2.5 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/2770/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Add-on for Citrix NetScaler allows a Splunk software administrator to collect data from Citrix NetScaler servers using syslog, IPFIX, and the NITRO API. This add-on provides the inputs as well as CIM and ITSI compatible knowledge to use with other Splunk apps, such as Splunk Enterprise Security and the Splunk App for PCI Compliance.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/41d6697c-b7f2-11f1-aa81-e6bda79274d5.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Thu, 24 Sep 2026 08:34:04 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/2770/#v8.2.5</guid>
+    </item>
+    <item>
+      <title>Process-IT Add-on for Stormshield - v1.6.9 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9815/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## 1.6.9
+
+Updated app icon, now built from Stormshield's official brand asset, with the full icon set (`appIcon`, `appIconAlt`, standard and high-resolution).&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;The Stormshield Add-on provides event breaking, field extraction, and Common Information Model (CIM) compliance for Stormshield firewall syslog data within Splunk and Splunk Enterprise Security.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Stormshield Add-on provides event breaking, field extraction, and Common Information Model (CIM) compliance for Stormshield firewall syslog data within Splunk.
+
+The add-on processes raw Stormshield syslog events and classifies them into typed sourcetypes based on log category, including filter, connection, web, authentication, system, plugin, intrusion detection, server, DHCP, VPN, FTP, POP3, SMTP, SSL, XVPN, PVM, and sandboxing events.
+
+Each classified event is mapped to the appropriate CIM data model, enabling normalized field names and accelerated security use cases across Network Traffic, Web, Authentication, Intrusion Detection, Network Sessions, Change, and Vulnerabilities domains.
+
+This allows direct use with Splunk Enterprise Security.
+
+The add-on is designed for deployment on heavy forwarders or indexers that receive syslog data directly from Stormshield firewalls.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/cc88082e-b7ec-11f1-b832-461b87cd0ebf.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Romain Caputi</dc:creator>
+      <pubDate>Thu, 24 Sep 2026 08:03:00 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9815/#v1.6.9</guid>
+    </item>
+    <item>
+      <title>TA-Vulnerability catalog - v1.1.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9694/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**# TA-Vulnerability catalog 1.1.0 — Release notes**
+
+Released: 2026-09-19
+
+Previous version: 1.0.0
+
+**---**
+
+**## New features**
+
+**\*\*CISA Vulnrichment data input\*\***
+
+A third data source has been added: the CISA Vulnrichment repository
+
+(\`cisagov/vulnrichment\`), indexed under the new sourcetype \`vulninfo:vulnrichment\`.
+
+\* The first run streams the branch tarball and indexes every record, without consuming the
+
+  GitHub API rate limit. Subsequent runs walk the GitHub Commits API from the last processed
+
+  commit SHA and index only the CVE files that were added or changed.
+
+\* Events retain the **\*\*complete raw CVE Record 5.x JSON\*\***, with CIM fields extracted in front
+
+  of it — nothing from the source record is discarded.
+
+\* CISA ADP enrichment is exposed as searchable fields: SSVC decision points
+
+  (\`ssvc\_exploitation\`, \`ssvc\_automatable\`, \`ssvc\_technical\_impact\`), KEV membership
+
+  (\`is\_known\_exploited\`, \`kev\_date\_added\`), CVSS vectors and CWE identifiers.
+
+\* Mapped to the CIM **\*\*Vulnerabilities\*\*** data model: \`cve\`, \`signature\`, \`cvss\`, \`severity\`,
+
+  \`severity\_id\`, \`cwe\`, \`category\`, \`vendor\_product\`, \`url\`, \`xref\`, \`vuln\_published\_time\`,
+
+  \`vuln\_modified\_time\`, \`dest\`, \`dvc\`.
+
+\* A GitHub personal access token can optionally be configured to raise the API rate limit
+
+  from 60 to 5,000 requests per hour. No token scopes are required.
+
+\* \`Seed max files\` allows the initial full load to be split across several runs, resuming
+
+  from the same pinned commit snapshot.
+
+**\*\*Full reload option on every input\*\***
+
+All three inputs now have a \`Full reload\` checkbox. When enabled, the input ignores its
+
+checkpoint and re-ingests the entire dataset on the next run — useful after changing the
+
+destination index or losing indexed data. A warning is logged on every run while it is on,
+
+as a reminder to turn it back off.
+
+**\*\*Expanded CIM coverage for the KEV catalog\*\***
+
+\`vulninfo:kevcatalog\` now populates \`dest\`, \`dvc\` and \`severity\_id\`, which were previously
+
+absent. KEV rows in the Vulnerabilities data model are no longer missing \`dest\`.
+
+**---**
+
+**## Fixes**
+
+**\*\*Checkpoints are now scoped per input instance\*\***
+
+The KEV and EPSS inputs previously stored their progress under a fixed checkpoint key,
+
+shared by every instance of that input. As a result, running two instances of the same input
+
+caused them to overwrite each other's progress, and deleting and recreating an input under a
+
+different name did not start from a clean state.
+
+Checkpoint keys now include the input instance name
+
+(\`kev\_catalog\_state\_v2\_\&lt;name&gt;\`, \`epss\_last\_score\_date\_\&lt;name&gt;\`), so instances are fully
+
+independent. **\*\*Upgrading does not cause re-ingestion:\*\*** on the first run after upgrade, each
+
+input adopts the value from its old key and logs the migration.
+
+**\*\*EPSS no longer risks repeated full re-ingestion\*\***
+
+The EPSS input used the snapshot's \`score\_date\` — read from the CSV header comment — as its
+
+checkpoint, and skipped saving the checkpoint entirely when that value could not be parsed.
+
+If the upstream header format ever changed, the checkpoint would never advance and the full
+
+snapshot (300,000+ events) would be re-indexed on every interval, duplicating indefinitely.
+
+The checkpoint is now always saved. When \`score\_date\` is unavailable, a hash of the snapshot
+
+content is used instead, and a warning is logged. Collection continues normally and
+
+unchanged snapshots are still skipped.
+
+**\*\*EPSS events removed from the CIM Vulnerabilities data model\*\***
+
+\`vulninfo:epss\` carried a custom \`epss\` tag that matched no data model, which produced a
+
+warning in the add-on's data model mapping and placed the events in no dataset. EPSS scores
+
+are per-CVE probabilities rather than vulnerability records, so the mapping has been removed
+
+rather than completed. EPSS events remain fully searchable and are intended to be joined to
+
+the other sourcetypes on \`cve\`.
+
+**---**
+
+**## Upgrade notes**
+
+\* **\*\*Restart Splunk after upgrading.\*\*** The add-on adds a new modular input and new input
+
+  parameters; splunkd must re-read \`inputs.conf.spec\` before they take effect.
+
+\* **\*\*No re-ingestion occurs for existing inputs.\*\*** Legacy checkpoints migrate automatically on
+
+  the first run. The migration is logged:
+
+  \`index\=\_internal source\=\*ta\_vulnerability\_catalog\* &quot;checkpoint migrated&quot;\`
+
+\* **\*\*Before enabling the Vulnrichment input, check your license headroom.\*\*** The initial load
+
+  is 130,000–200,000 events at several KB to tens of KB each.
+
+\* **\*\*If you built searches on \`tag\=epss\`\*\***, switch them to \`sourcetype\=vulninfo:epss\`. The
+
+  eventtype and tag no longer exist.
+
+\* Each input must be enabled on exactly one node. Checkpoints are stored per node, so running
+
+  the same input on several nodes produces duplicate events.
+
+\------------------------------8\&lt; note in Japanese------------------------------
+
+**# TA-Vulnerability catalog 1.1.0 — リリースノート**
+
+リリース日: 2026-09-19
+
+前バージョン: 1.0.0
+
+**---**
+
+**## 新機能**
+
+**\*\*CISA Vulnrichment データ入力\*\***
+
+3つ目のデータソースとして CISA Vulnrichment リポジトリ（\`cisagov/vulnrichment\`）の取り込みに対応しました。新しい sourcetype \`vulninfo:vulnrichment\` でインデックスされます。
+
+\* 初回はブランチの tarball をストリーミング展開して全件を取り込みます。GitHub API のレート制限を消費しません。2回目以降は、最後に処理したコミット SHA を起点にGitHub Commits API を辿り、追加・変更された CVE ファイルだけを取り込みます。
+
+\* イベントは **\*\*CVE Record 5.x の生 JSON 全体をそのまま保持\*\***&amp;#x3057;、その手前に CIM フィールドを展開しています。元レコードの情報は一切欠落しません。
+
+\* CISA ADP による拡充情報を検索可能なフィールドとして提供します。SSVC の判断項目
+
+  （\`ssvc\_exploitation\` / \`ssvc\_automatable\` / \`ssvc\_technical\_impact\`）、KEV 掲載有無
+
+  （\`is\_known\_exploited\` / \`kev\_date\_added\`）、CVSS ベクタ、CWE 識別子。
+
+\* CIM **\*\*Vulnerabilities\*\*** データモデルにマッピング済みです。\`cve\` / \`signature\` / \`cvss\` /
+
+  \`severity\` / \`severity\_id\` / \`cwe\` / \`category\` / \`vendor\_product\` / \`url\` / \`xref\` /
+
+  \`vuln\_published\_time\` / \`vuln\_modified\_time\` / \`dest\` / \`dvc\`。
+
+\* GitHub Personal Access Token を任意で設定でき、API のレート制限が 60 → 5,000リクエスト/時に上がります。トークンのスコープ（権限）は不要です。
+
+\* \`Seed max files\` により、初回の全件取り込みを複数回の実行に分割できます。コミット SHA を固定したスナップショットから再開するため、分割しても取りこぼしは発生しません。
+
+**\*\*全入力への Full reload オプション\*\***
+
+3つの入力すべてに \`Full reload\` チェックボックスを追加しました。有効にすると、次回の実行でチェックポイントを無視して全件を取り込み直します。取り込み先インデックスを変更した場合や、インデックス済みデータを失った場合に使用します。有効な間は実行のたびに警告ログを出力し、戻し忘れを防ぎます。
+
+**\*\*KEV カタログの CIM フィールド拡充\*\***
+
+\`vulninfo:kevcatalog\` が \`dest\` / \`dvc\` / \`severity\_id\` を出力するようになりました。従来はこれらが欠けており、Vulnerabilities データモデル上で KEV の行だけ \`dest\` が空になっていました。
+
+**---**
+
+**## 修正ポイント**
+
+**\*\*チェックポイントを入力インスタンス単位に分離\*\***
+
+KEV と EPSS の入力は、取り込み位置&amp;#x3092;**\*\*固定のキー\*\***&amp;#x306B;保存していました。このキーは同じ入力の全インスタンスで共有されるため、同一入力を2つ作ると互いの進捗を上書きし合い、また入力を削除して別名で作り直しても初期状態から始まりませんでした。
+
+チェックポイントのキーに入力インスタンス名を含めるよう変更し\`kev\_catalog\_state\_v2\_\&lt;入力名&gt;\` / \`epss\_last\_score\_date\_\&lt;入力名&gt;\`）、インスタンスが完全に独立して動作するようになりました。**\*\*アップグレードによる再取り込みは発生しません。\*\***
+
+アップグレード後の初回実行時に旧キーの値を自動で引き継ぎ、移行をログに記録します。
+
+**\*\*EPSS の全件再取り込みループを防止\*\***
+
+EPSS 入力は、CSV のヘッダーコメントから読み取ったスナップショットの \`score\_date\` をチェックポイントとしていましたが、この値が取得できない場合はチェックポイント&amp;#x3092;**\*\*一切保存しない\*\***&amp;#x5B9F;装になっていました。配布元のヘッダー書式が変わると、チェックポイントが永久に更新されず、実行間隔ごとに全件（30万件以上）を再インデックスし続け、重複が際限なく増える状態に陥ります。
+
+チェックポイントを必ず保存するよう修正しました。\`score\_date\` が取得できない場合はスナップショット本文のハッシュを代替キーとして使用し、警告ログを出力します。取り込みは継続され、内容が変わらないスナップショットは従来どおりスキップされます。
+
+**\*\*EPSS イベントを CIM Vulnerabilities データモデルから除外\*\***
+
+\`vulninfo:epss\` には、どのデータモデルとも一致しない独自タグ \`epss\` が付与されており、アドオンのデータモデルマッピング画面に警告が表示されるうえ、イベントはどのデータセットにも載っていませんでした。EPSS のスコアは脆弱性レコードではなく CVE 単位の確率値であるため、マッピングを完成させるのではなく削除する方針としました。EPSS イベントは引き続き検索可能で、他の sourcetype とは \`cve\` で join して使用することを想定しています。
+
+**---**
+
+**## アップグレード時の注意**
+
+\* **\*\*アップグレード後に Splunk を再起動してください。\*\*** 新しいモジュラー入力と新しい入力パラメータが追加されているため、splunkd が \`inputs.conf.spec\` を読み直すまで有効になりません。
+
+\* **\*\*既存の入力で再取り込みは発生しません。\*\*** 初回実行時に旧チェックポイントを自動で引き継ぎます。移行はログで確認できます。
+
+  \`index\=\_internal source\=\*ta\_vulnerability\_catalog\* &quot;checkpoint migrated&quot;\`
+
+\* **\*\*Vulnrichment 入力を有効化する前に、ライセンスの余裕を確認してください。\*\*** 初回取り込みは13万〜20万件、1件あたり数 KB〜数十 KB です。
+
+\* **\*\*\`tag\=epss\` を使った検索を作成していた場合\*\***&amp;#x306F;、\`sourcetype\=vulninfo:epss\` に置き換えてください。当該のイベントタイプとタグは存在しなくなりました。
+
+\* 各入力は 1 ノードでのみ有効化してください。チェックポイントはノードごとに独立しているため、複数ノードで同じ入力を動かすとイベントが重複します。&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Brings the CISA KEV catalog, CISA Vulnrichment and FIRST.org EPSS scores into Splunk, normalized to the CIM Vulnerabilities data model.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;*ENGLISH*
+**TA-Vulnerability catalog** ingests three public vulnerability catalogs into Splunk and
+normalizes them to the CIM **Vulnerabilities** data model: the CISA KEV catalog, CISA
+Vulnrichment (CVE Record 5.x with CISA ADP enrichment) and FIRST.org EPSS scores. Together
+they answer the three questions that drive patch prioritization — is this CVE being
+exploited, how likely is it to be, and how bad would it be. Collection is incremental, and
+Vulnrichment events retain the complete raw CVE record.
+
+*JAPANESE*
+**TA-Vulnerability catalog** は、3つの公開脆弱性カタログを Splunk に取り込み、CIM
+**Vulnerabilities** データモデルに正規化する Technology Add-on です。対象は CISA KEV
+カタログ、CISA Vulnrichment（CVE Record 5.x + CISA ADP による拡充）、FIRST.org EPSS スコア。
+「その CVE は悪用されているか」「悪用される確率はどれだけか」「悪用されたら影響はどれだけか」
+という、対応優先度を決める3つの問いに答えるためのデータが揃います。取り込みは差分方式で、
+Vulnrichment は CVE レコードの原本をそのまま保持します。&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e1e00500-b3c8-11f1-8830-7a1734055b20.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">hiroaki ogawa</dc:creator>
+      <pubDate>Thu, 24 Sep 2026 07:44:33 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9694/#v1.1.0</guid>
+    </item>
+    <item>
+      <title>Splunk - v4.0.4 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5848/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Regenerated the dependency lockfile to align package metadata with Splunk 4.0.2.
+* Replaced the unsupported `escapejs` filter with Jinja-compatible JSON escaping in the run query widget.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with Splunk to update data on the device, in addition to investigate and ingestion actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0accd550-b7e9-11f1-9a58-d6168fbad95e.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Thu, 24 Sep 2026 07:24:57 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5848/#v4.0.4</guid>
+    </item>
     <item>
       <title>Jev for Splunk (unofficial) - v0.1.0 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/9833/</link>
@@ -99,24 +438,6 @@ The analytic stories and their searches are also available at - https://github.c
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Wed, 23 Sep 2026 16:09:30 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/3449/#v6.7.0</guid>
-    </item>
-    <item>
-      <title>Process-IT Add-on for Stormshield - v1.6.8 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/9815/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;\## **1.6.8**
-
-
-
-First public release on Splunkbase. This add-on was developed and
-
-hardened internally at Process-IT — parsing rules, CIM mappings and
-
-packaging were iterated on in-house before this initial submission, which
-
-is why the version number does not start at 1.0.0.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Splunk add-on providing event breaking, field extraction and CIM mapping for Stormshield firewall syslog data.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk add-on providing event breaking, field extraction and CIM mapping for Stormshield firewall syslog data.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/4a8f9578-b6d7-11f1-940c-a215abe51482.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Romain Caputi</dc:creator>
-      <pubDate>Wed, 23 Sep 2026 14:51:39 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9815/#v1.6.8</guid>
     </item>
     <item>
       <title>Hunt.io App for Splunk - v1.2.0 [Version Update]</title>
@@ -291,18 +612,6 @@ You want to give detailed descriptions of playbooks that are triggered manually 
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Scott Horton</dc:creator>
       <pubDate>Wed, 23 Sep 2026 12:43:50 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/9812/#v0.5.6</guid>
-    </item>
-    <item>
-      <title>Astelia Add-on - v0.1.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/9814/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Initial release.
-
-- Modular inputs for Astelia audit logs and connector health.
-- Audit events mapped to the CIM Change data model.
-- Splunk Cloud compatible; Python 3.9 and 3.13.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Astelia audit logs and connector health in Splunk.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Brings your Astelia audit trail and connector health into Splunk. The add-on polls your organization&amp;#x27;s Astelia API on a schedule, keeps its place between polls, and maps audit events to the Splunk Common Information Model so they work with your existing searches and dashboards. Requires an Astelia API key.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d02f3886-b63d-11f1-a2b0-0e1779d2c14a.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Gilad David</dc:creator>
-      <pubDate>Wed, 23 Sep 2026 12:42:18 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9814/#v0.1.0</guid>
     </item>
     <item>
       <title>SuriZeek - v1.5.7 [New App Release]</title>
@@ -1424,246 +1733,6 @@ This add-on provides the inputs and CIM-compatible knowledge to use with other S
       <guid>https://splunkbase.splunk.com/app/7700/#v2.0.1</guid>
     </item>
     <item>
-      <title>TA-Vulnerability catalog - v1.1.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/9694/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**# TA-Vulnerability catalog 1.1.0 — Release notes**
-
-Released: 2026-09-19
-
-Previous version: 1.0.0
-
-**---**
-
-**## New features**
-
-**\*\*CISA Vulnrichment data input\*\***
-
-A third data source has been added: the CISA Vulnrichment repository
-
-(\`cisagov/vulnrichment\`), indexed under the new sourcetype \`vulninfo:vulnrichment\`.
-
-\* The first run streams the branch tarball and indexes every record, without consuming the
-
-  GitHub API rate limit. Subsequent runs walk the GitHub Commits API from the last processed
-
-  commit SHA and index only the CVE files that were added or changed.
-
-\* Events retain the **\*\*complete raw CVE Record 5.x JSON\*\***, with CIM fields extracted in front
-
-  of it — nothing from the source record is discarded.
-
-\* CISA ADP enrichment is exposed as searchable fields: SSVC decision points
-
-  (\`ssvc\_exploitation\`, \`ssvc\_automatable\`, \`ssvc\_technical\_impact\`), KEV membership
-
-  (\`is\_known\_exploited\`, \`kev\_date\_added\`), CVSS vectors and CWE identifiers.
-
-\* Mapped to the CIM **\*\*Vulnerabilities\*\*** data model: \`cve\`, \`signature\`, \`cvss\`, \`severity\`,
-
-  \`severity\_id\`, \`cwe\`, \`category\`, \`vendor\_product\`, \`url\`, \`xref\`, \`vuln\_published\_time\`,
-
-  \`vuln\_modified\_time\`, \`dest\`, \`dvc\`.
-
-\* A GitHub personal access token can optionally be configured to raise the API rate limit
-
-  from 60 to 5,000 requests per hour. No token scopes are required.
-
-\* \`Seed max files\` allows the initial full load to be split across several runs, resuming
-
-  from the same pinned commit snapshot.
-
-**\*\*Full reload option on every input\*\***
-
-All three inputs now have a \`Full reload\` checkbox. When enabled, the input ignores its
-
-checkpoint and re-ingests the entire dataset on the next run — useful after changing the
-
-destination index or losing indexed data. A warning is logged on every run while it is on,
-
-as a reminder to turn it back off.
-
-**\*\*Expanded CIM coverage for the KEV catalog\*\***
-
-\`vulninfo:kevcatalog\` now populates \`dest\`, \`dvc\` and \`severity\_id\`, which were previously
-
-absent. KEV rows in the Vulnerabilities data model are no longer missing \`dest\`.
-
-**---**
-
-**## Fixes**
-
-**\*\*Checkpoints are now scoped per input instance\*\***
-
-The KEV and EPSS inputs previously stored their progress under a fixed checkpoint key,
-
-shared by every instance of that input. As a result, running two instances of the same input
-
-caused them to overwrite each other's progress, and deleting and recreating an input under a
-
-different name did not start from a clean state.
-
-Checkpoint keys now include the input instance name
-
-(\`kev\_catalog\_state\_v2\_\&lt;name&gt;\`, \`epss\_last\_score\_date\_\&lt;name&gt;\`), so instances are fully
-
-independent. **\*\*Upgrading does not cause re-ingestion:\*\*** on the first run after upgrade, each
-
-input adopts the value from its old key and logs the migration.
-
-**\*\*EPSS no longer risks repeated full re-ingestion\*\***
-
-The EPSS input used the snapshot's \`score\_date\` — read from the CSV header comment — as its
-
-checkpoint, and skipped saving the checkpoint entirely when that value could not be parsed.
-
-If the upstream header format ever changed, the checkpoint would never advance and the full
-
-snapshot (300,000+ events) would be re-indexed on every interval, duplicating indefinitely.
-
-The checkpoint is now always saved. When \`score\_date\` is unavailable, a hash of the snapshot
-
-content is used instead, and a warning is logged. Collection continues normally and
-
-unchanged snapshots are still skipped.
-
-**\*\*EPSS events removed from the CIM Vulnerabilities data model\*\***
-
-\`vulninfo:epss\` carried a custom \`epss\` tag that matched no data model, which produced a
-
-warning in the add-on's data model mapping and placed the events in no dataset. EPSS scores
-
-are per-CVE probabilities rather than vulnerability records, so the mapping has been removed
-
-rather than completed. EPSS events remain fully searchable and are intended to be joined to
-
-the other sourcetypes on \`cve\`.
-
-**---**
-
-**## Upgrade notes**
-
-\* **\*\*Restart Splunk after upgrading.\*\*** The add-on adds a new modular input and new input
-
-  parameters; splunkd must re-read \`inputs.conf.spec\` before they take effect.
-
-\* **\*\*No re-ingestion occurs for existing inputs.\*\*** Legacy checkpoints migrate automatically on
-
-  the first run. The migration is logged:
-
-  \`index\=\_internal source\=\*ta\_vulnerability\_catalog\* &quot;checkpoint migrated&quot;\`
-
-\* **\*\*Before enabling the Vulnrichment input, check your license headroom.\*\*** The initial load
-
-  is 130,000–200,000 events at several KB to tens of KB each.
-
-\* **\*\*If you built searches on \`tag\=epss\`\*\***, switch them to \`sourcetype\=vulninfo:epss\`. The
-
-  eventtype and tag no longer exist.
-
-\* Each input must be enabled on exactly one node. Checkpoints are stored per node, so running
-
-  the same input on several nodes produces duplicate events.
-
-\------------------------------8\&lt; note in Japanese------------------------------
-
-**# TA-Vulnerability catalog 1.1.0 — リリースノート**
-
-リリース日: 2026-09-19
-
-前バージョン: 1.0.0
-
-**---**
-
-**## 新機能**
-
-**\*\*CISA Vulnrichment データ入力\*\***
-
-3つ目のデータソースとして CISA Vulnrichment リポジトリ（\`cisagov/vulnrichment\`）の取り込みに対応しました。新しい sourcetype \`vulninfo:vulnrichment\` でインデックスされます。
-
-\* 初回はブランチの tarball をストリーミング展開して全件を取り込みます。GitHub API のレート制限を消費しません。2回目以降は、最後に処理したコミット SHA を起点にGitHub Commits API を辿り、追加・変更された CVE ファイルだけを取り込みます。
-
-\* イベントは **\*\*CVE Record 5.x の生 JSON 全体をそのまま保持\*\***&amp;#x3057;、その手前に CIM フィールドを展開しています。元レコードの情報は一切欠落しません。
-
-\* CISA ADP による拡充情報を検索可能なフィールドとして提供します。SSVC の判断項目
-
-  （\`ssvc\_exploitation\` / \`ssvc\_automatable\` / \`ssvc\_technical\_impact\`）、KEV 掲載有無
-
-  （\`is\_known\_exploited\` / \`kev\_date\_added\`）、CVSS ベクタ、CWE 識別子。
-
-\* CIM **\*\*Vulnerabilities\*\*** データモデルにマッピング済みです。\`cve\` / \`signature\` / \`cvss\` /
-
-  \`severity\` / \`severity\_id\` / \`cwe\` / \`category\` / \`vendor\_product\` / \`url\` / \`xref\` /
-
-  \`vuln\_published\_time\` / \`vuln\_modified\_time\` / \`dest\` / \`dvc\`。
-
-\* GitHub Personal Access Token を任意で設定でき、API のレート制限が 60 → 5,000リクエスト/時に上がります。トークンのスコープ（権限）は不要です。
-
-\* \`Seed max files\` により、初回の全件取り込みを複数回の実行に分割できます。コミット SHA を固定したスナップショットから再開するため、分割しても取りこぼしは発生しません。
-
-**\*\*全入力への Full reload オプション\*\***
-
-3つの入力すべてに \`Full reload\` チェックボックスを追加しました。有効にすると、次回の実行でチェックポイントを無視して全件を取り込み直します。取り込み先インデックスを変更した場合や、インデックス済みデータを失った場合に使用します。有効な間は実行のたびに警告ログを出力し、戻し忘れを防ぎます。
-
-**\*\*KEV カタログの CIM フィールド拡充\*\***
-
-\`vulninfo:kevcatalog\` が \`dest\` / \`dvc\` / \`severity\_id\` を出力するようになりました。従来はこれらが欠けており、Vulnerabilities データモデル上で KEV の行だけ \`dest\` が空になっていました。
-
-**---**
-
-**## 修正ポイント**
-
-**\*\*チェックポイントを入力インスタンス単位に分離\*\***
-
-KEV と EPSS の入力は、取り込み位置&amp;#x3092;**\*\*固定のキー\*\***&amp;#x306B;保存していました。このキーは同じ入力の全インスタンスで共有されるため、同一入力を2つ作ると互いの進捗を上書きし合い、また入力を削除して別名で作り直しても初期状態から始まりませんでした。
-
-チェックポイントのキーに入力インスタンス名を含めるよう変更し\`kev\_catalog\_state\_v2\_\&lt;入力名&gt;\` / \`epss\_last\_score\_date\_\&lt;入力名&gt;\`）、インスタンスが完全に独立して動作するようになりました。**\*\*アップグレードによる再取り込みは発生しません。\*\***
-
-アップグレード後の初回実行時に旧キーの値を自動で引き継ぎ、移行をログに記録します。
-
-**\*\*EPSS の全件再取り込みループを防止\*\***
-
-EPSS 入力は、CSV のヘッダーコメントから読み取ったスナップショットの \`score\_date\` をチェックポイントとしていましたが、この値が取得できない場合はチェックポイント&amp;#x3092;**\*\*一切保存しない\*\***&amp;#x5B9F;装になっていました。配布元のヘッダー書式が変わると、チェックポイントが永久に更新されず、実行間隔ごとに全件（30万件以上）を再インデックスし続け、重複が際限なく増える状態に陥ります。
-
-チェックポイントを必ず保存するよう修正しました。\`score\_date\` が取得できない場合はスナップショット本文のハッシュを代替キーとして使用し、警告ログを出力します。取り込みは継続され、内容が変わらないスナップショットは従来どおりスキップされます。
-
-**\*\*EPSS イベントを CIM Vulnerabilities データモデルから除外\*\***
-
-\`vulninfo:epss\` には、どのデータモデルとも一致しない独自タグ \`epss\` が付与されており、アドオンのデータモデルマッピング画面に警告が表示されるうえ、イベントはどのデータセットにも載っていませんでした。EPSS のスコアは脆弱性レコードではなく CVE 単位の確率値であるため、マッピングを完成させるのではなく削除する方針としました。EPSS イベントは引き続き検索可能で、他の sourcetype とは \`cve\` で join して使用することを想定しています。
-
-**---**
-
-**## アップグレード時の注意**
-
-\* **\*\*アップグレード後に Splunk を再起動してください。\*\*** 新しいモジュラー入力と新しい入力パラメータが追加されているため、splunkd が \`inputs.conf.spec\` を読み直すまで有効になりません。
-
-\* **\*\*既存の入力で再取り込みは発生しません。\*\*** 初回実行時に旧チェックポイントを自動で引き継ぎます。移行はログで確認できます。
-
-  \`index\=\_internal source\=\*ta\_vulnerability\_catalog\* &quot;checkpoint migrated&quot;\`
-
-\* **\*\*Vulnrichment 入力を有効化する前に、ライセンスの余裕を確認してください。\*\*** 初回取り込みは13万〜20万件、1件あたり数 KB〜数十 KB です。
-
-\* **\*\*\`tag\=epss\` を使った検索を作成していた場合\*\***&amp;#x306F;、\`sourcetype\=vulninfo:epss\` に置き換えてください。当該のイベントタイプとタグは存在しなくなりました。
-
-\* 各入力は 1 ノードでのみ有効化してください。チェックポイントはノードごとに独立しているため、複数ノードで同じ入力を動かすとイベントが重複します。&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Brings the CISA KEV catalog, CISA Vulnrichment and FIRST.org EPSS scores into Splunk, normalized to the CIM Vulnerabilities data model.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;*ENGLISH*
-**TA-Vulnerability catalog** ingests three public vulnerability catalogs into Splunk and
-normalizes them to the CIM **Vulnerabilities** data model: the CISA KEV catalog, CISA
-Vulnrichment (CVE Record 5.x with CISA ADP enrichment) and FIRST.org EPSS scores. Together
-they answer the three questions that drive patch prioritization — is this CVE being
-exploited, how likely is it to be, and how bad would it be. Collection is incremental, and
-Vulnrichment events retain the complete raw CVE record.
-
-*JAPANESE*
-**TA-Vulnerability catalog** は、3つの公開脆弱性カタログを Splunk に取り込み、CIM
-**Vulnerabilities** データモデルに正規化する Technology Add-on です。対象は CISA KEV
-カタログ、CISA Vulnrichment（CVE Record 5.x + CISA ADP による拡充）、FIRST.org EPSS スコア。
-「その CVE は悪用されているか」「悪用される確率はどれだけか」「悪用されたら影響はどれだけか」
-という、対応優先度を決める3つの問いに答えるためのデータが揃います。取り込みは差分方式で、
-Vulnrichment は CVE レコードの原本をそのまま保持します。&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e1e00500-b3c8-11f1-8830-7a1734055b20.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">hiroaki ogawa</dc:creator>
-      <pubDate>Sun, 20 Sep 2026 02:55:08 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9694/#v1.1.0</guid>
-    </item>
-    <item>
       <title>Insights Suite for Splunk (IS4S) - v1.4.2 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7186/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**# Insights Suite for Splunk 1.4.2 release notes**
@@ -2074,14 +2143,6 @@ Optionally, you can easily submit files and URLs to the VMRay Platform from with
       <guid>https://splunkbase.splunk.com/app/5865/#v3.0.8</guid>
     </item>
     <item>
-      <title>Splunk - v4.0.3 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5848/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Updated dependencies.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with Splunk to update data on the device, in addition to investigate and ingestion actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/508ecf3c-b31e-11f1-8830-7a1734055b20.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Fri, 18 Sep 2026 05:03:41 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5848/#v4.0.3</guid>
-    </item>
-    <item>
       <title>AD LDAP - v3.0.2 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5755/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Updated the bundled pyasn1 dependency to 0.6.3.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;App specifically designed for interacting with Microsoft Active Directory&amp;#x27;s LDAP Implementation&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/389066be-b31b-11f1-abd1-928321cec61e.svg&quot;&gt;</description>
@@ -2355,30 +2416,6 @@ Bug Fixes and Improvements:
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Wed, 16 Sep 2026 21:40:28 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5792/#v3.0.3</guid>
-    </item>
-    <item>
-      <title>CylancePROTECT - v2.0.10 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5890/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* - Updated the bundled PyJWT dependency to 2.13.0.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app supports the various investigative, containment, and corrective actions on CylancePROTECT&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/3be422b6-b216-11f1-8a65-7e2e2d9dfb6b.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Wed, 16 Sep 2026 21:33:19 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5890/#v2.0.10</guid>
-    </item>
-    <item>
-      <title>Big Query - v2.1.9 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5773/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* - Updated the bundled pyasn1 dependency to 0.6.3.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app allows running investigative actions against Google BigQuery&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e8e47d0e-b215-11f1-b5ae-e65604180b66.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Wed, 16 Sep 2026 21:31:00 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5773/#v2.1.9</guid>
-    </item>
-    <item>
-      <title>BigFix - v2.0.19 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5772/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* - Updated the bundled lxml dependency to 6.1.0.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app supports several investigative actions on IBM Big Fix&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/6a51bb1e-b215-11f1-a427-626cb822c09a.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Wed, 16 Sep 2026 21:27:28 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5772/#v2.0.19</guid>
     </item>
   </channel>
 </rss>
