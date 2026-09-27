@@ -6,23 +6,105 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sun, 27 Sep 2026 08:44:18 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 27 Sep 2026 14:25:29 +0000</lastBuildDate>
     <item>
-      <title>ActionStack - Forms for SOAR - v0.5.7 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/9812/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* light theme refinements
-* adjustments to cards &quot;open form&quot; button so opening a form is easier to click on&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Provides role-aware forms and reliable event submission from Splunk Enterprise to Splunk SOAR through a native UI with workspace management.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Over the last year or so as I install apps and build out playbooks in Splunk SOAR I find myself wanting to be able to trigger automation based off of input instead of an event in Enterprise Security or as an ad-hoc run from a Finding or Investigation.
+      <title>Log Continuity Manager for Splunk - v1.2.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8958/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Version 1.2.1
 
-Ideas this could help with...
-You get asked to place a mailbox on legal hold and you already have SOAR connected and authorized to do this but you don&amp;#x27;t have an easy way to trigger it.
 
-You want to give detailed descriptions of playbooks that are triggered manually to your analysts before they run a playbook or maybe your playbook needs additional information before execution.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d0098552-b9dd-11f1-93ac-7e323c747d37.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Scott Horton</dc:creator>
-      <pubDate>Sat, 26 Sep 2026 19:11:28 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9812/#v0.5.7</guid>
+
+Log Continuity Manager 1.2.1 introduces Mass Interruption monitoring and several reliability and usability improvements.
+
+
+
+New Features
+
+\- Added Mass Interruption Policies for detecting widespread log interruptions across monitored hosts.
+
+\- Added Host Count and Percentage threshold types.
+
+\- Added policy scope support for:
+
+&amp;#x20; \- All monitored targets
+
+&amp;#x20; \- host\_index
+
+&amp;#x20; \- host\_index\_source
+
+&amp;#x20; \- host\_index\_sourcetype
+
+\- Added optional exact Source and Sourcetype filters for scoped Mass Interruption policies.
+
+\- Added Mass Interruption, Reminder and Recovery email notifications.
+
+\- Added configurable email subject templates for Mass Interruption notifications.
+
+\- Added Suppress New Individual Interruption Emails option during an active mass incident.
+
+\- Added Current Mass Incidents visibility.
+
+\- Added Current Mass Notification Delivery status.
+
+\- Added Recent Mass Notification Delivery history with sent and failed delivery visibility.
+
+\- Added delivery history time filters.
+
+
+
+Reliability Improvements
+
+\- Improved Mass Interruption notification claim and scheduler handoff reliability.
+
+\- Added safer handling for orphaned and stale notification claims.
+
+\- Improved runtime lock contention handling with bounded retry logic.
+
+\- Preserved notification fencing and duplicate-send protection.
+
+\- Improved handling of deleted and disabled Mass Interruption policies.
+
+\- Improved backward compatibility for existing policies and monitoring data.
+
+
+
+Monitoring Improvements
+
+\- Mass Interruption calculations now use normalized unique hosts.
+
+\- Percentage thresholds are calculated against the policy's scoped eligible host population.
+
+\- Maintenance-suppressed, redundancy-suppressed and disabled targets are excluded from Mass Interruption evaluation.
+
+\- Scope information is included in Mass Interruption status and email content.
+
+
+
+Other Improvements
+
+\- Improved KV Store-based persistence for Search Head Cluster deployments.
+
+\- Added Unicode-safe handling for user-entered fields such as Owner and Description.
+
+\- Various UI, validation and stability improvements.
+
+
+
+Compatibility
+
+\- Existing monitoring targets and existing Mass Interruption policies remain backward compatible.
+
+\- Policies created before scope support automatically continue using the default &quot;All monitored targets&quot; behavior.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;A Splunk app for monitoring log continuity, detecting interruptions, managing monitoring targets, tracking recoveries, and improving visibility into ingestion health.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Log Continuity Manager for Splunk helps security and operations teams monitor whether expected log sources continue sending data on time. It provides a practical workflow to define monitoring targets, detect log interruptions, identify untracked sources, manage monitored targets, and review recovery history from a single app.
+
+The app is designed for teams that need visibility into log continuity health without building custom searches and dashboards from scratch. It supports target-based monitoring using host, index, source, and sourcetype combinations, and helps reduce false positives in redundant environments through redundancy-aware interruption handling.
+
+With its operational views, users can discover live data sources, compare discovered sources against configured monitoring targets, add new targets quickly, manage target settings, review current interruptions, and track when interrupted sources recover. This makes it easier to maintain monitoring coverage, reduce blind spots, and improve confidence in Splunk data ingestion health.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ae4b625c-ba71-11f1-93ac-7e323c747d37.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Furkan KILINC</dc:creator>
+      <pubDate>Sun, 27 Sep 2026 12:54:44 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8958/#v1.2.1</guid>
     </item>
     <item>
-      <title>Threat Hunting Essentials - v1.3.120 [Version Update]</title>
+      <title>Threat Hunting Essentials - v1.3.122 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7633/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
 
@@ -54,10 +136,24 @@ Threat Hunting Essentials detects a wide range of malware tools used by threat a
 
 You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
 
-Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9f6437d4-b99d-11f1-93ac-7e323c747d37.png&quot;&gt;</description>
+Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c9d33bfe-ba66-11f1-8336-8e4c25c50c14.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
-      <pubDate>Sat, 26 Sep 2026 11:30:45 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.120</guid>
+      <pubDate>Sun, 27 Sep 2026 12:05:42 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.122</guid>
+    </item>
+    <item>
+      <title>ActionStack - Forms for SOAR - v0.5.7 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9812/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* light theme refinements
+* adjustments to cards &quot;open form&quot; button so opening a form is easier to click on&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Provides role-aware forms and reliable event submission from Splunk Enterprise to Splunk SOAR through a native UI with workspace management.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Over the last year or so as I install apps and build out playbooks in Splunk SOAR I find myself wanting to be able to trigger automation based off of input instead of an event in Enterprise Security or as an ad-hoc run from a Finding or Investigation.
+
+Ideas this could help with...
+You get asked to place a mailbox on legal hold and you already have SOAR connected and authorized to do this but you don&amp;#x27;t have an easy way to trigger it.
+
+You want to give detailed descriptions of playbooks that are triggered manually to your analysts before they run a playbook or maybe your playbook needs additional information before execution.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d0098552-b9dd-11f1-93ac-7e323c747d37.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Scott Horton</dc:creator>
+      <pubDate>Sat, 26 Sep 2026 19:11:28 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9812/#v0.5.7</guid>
     </item>
     <item>
       <title>Amazon S3 Uploader for Splunk - v3.0.0 [Version Update]</title>
@@ -1859,30 +1955,6 @@ or visit our page : https://www.valantic.com/en/cx/services/cx-monitoring/&lt;/p
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">AIOPS Group Monitoring Team</dc:creator>
       <pubDate>Mon, 21 Sep 2026 17:14:27 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6570/#v6.15.0</guid>
-    </item>
-    <item>
-      <title>Log Continuity Manager for Splunk - v1.1.3 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8958/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Version 1.1.3
-
-\- Added configurable email subject templates for interruption, recovery, and reminder notifications.
-
-\- Improved email notification scheduling to run every minute.
-
-\- Added explicit UTC labels for notification timestamps.
-
-\- Added vendor-neutral controlled retries for confirmed transient pre-send SMTP failures.
-
-\- Preserved duplicate suppression and safe handling of ambiguous or permanent SMTP failures.
-
-\- Improved notification reliability and auditability.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;A Splunk app for monitoring log continuity, detecting interruptions, managing monitoring targets, tracking recoveries, and improving visibility into ingestion health.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Log Continuity Manager for Splunk helps security and operations teams monitor whether expected log sources continue sending data on time. It provides a practical workflow to define monitoring targets, detect log interruptions, identify untracked sources, manage monitored targets, and review recovery history from a single app.
-
-The app is designed for teams that need visibility into log continuity health without building custom searches and dashboards from scratch. It supports target-based monitoring using host, index, source, and sourcetype combinations, and helps reduce false positives in redundant environments through redundancy-aware interruption handling.
-
-With its operational views, users can discover live data sources, compare discovered sources against configured monitoring targets, add new targets quickly, manage target settings, review current interruptions, and track when interrupted sources recover. This makes it easier to maintain monitoring coverage, reduce blind spots, and improve confidence in Splunk data ingestion health.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f65054a2-b5b9-11f1-a713-928c078be2b9.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Furkan KILINC</dc:creator>
-      <pubDate>Mon, 21 Sep 2026 12:46:00 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8958/#v1.1.3</guid>
     </item>
     <item>
       <title>Splunk Add-on for ServiceNow - v11.2.0 [Version Update]</title>
