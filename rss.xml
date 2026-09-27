@@ -6,7 +6,7 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sun, 27 Sep 2026 14:25:29 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 27 Sep 2026 18:46:37 +0000</lastBuildDate>
     <item>
       <title>Log Continuity Manager for Splunk - v1.2.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8958/</link>
@@ -14,7 +14,7 @@
 
 
 
-Log Continuity Manager 1.2.1 introduces Mass Interruption monitoring and several reliability and usability improvements.
+Log Continuity Manager 1.2.1 focuses on Mass Interruption monitoring, delivery visibility, Search Head Cluster readiness and AppInspect compatibility.
 
 
 
@@ -24,7 +24,7 @@ New Features
 
 \- Added Host Count and Percentage threshold types.
 
-\- Added policy scope support for:
+\- Added Policy Scope support for:
 
 &amp;#x20; \- All monitored targets
 
@@ -38,9 +38,9 @@ New Features
 
 \- Added Mass Interruption, Reminder and Recovery email notifications.
 
-\- Added configurable email subject templates for Mass Interruption notifications.
+\- Added configurable subject templates for Mass Interruption notifications.
 
-\- Added Suppress New Individual Interruption Emails option during an active mass incident.
+\- Added Suppress New Individual Interruption Emails option during active mass incidents.
 
 \- Added Current Mass Incidents visibility.
 
@@ -52,56 +52,110 @@ New Features
 
 
 
-Reliability Improvements
+Mass Interruption Improvements
+
+\- Mass Interruption calculations use normalized unique hosts.
+
+\- Percentage thresholds are calculated against the scoped eligible host population.
+
+\- Maintenance-suppressed, redundancy-suppressed and disabled targets are excluded from evaluation.
+
+\- Scope information is shown in incident status and email content.
+
+\- Source and Sourcetype scoped policies are supported without affecting unrelated monitoring targets.
+
+\- Existing policies remain backward compatible and default to All monitored targets when scope fields are absent.
+
+
+
+Notification Reliability
 
 \- Improved Mass Interruption notification claim and scheduler handoff reliability.
 
-\- Added safer handling for orphaned and stale notification claims.
+\- Added safer stale/orphan claim handling.
 
-\- Improved runtime lock contention handling with bounded retry logic.
+\- Preserved duplicate-send protection and notification fencing.
 
-\- Preserved notification fencing and duplicate-send protection.
+\- Improved runtime lock contention handling with bounded retry behavior.
 
 \- Improved handling of deleted and disabled Mass Interruption policies.
 
-\- Improved backward compatibility for existing policies and monitoring data.
+\- Added clearer visibility for interruption, reminder and recovery delivery states.
 
 
 
-Monitoring Improvements
+KV Store and SHC Improvements
 
-\- Mass Interruption calculations now use normalized unique hosts.
+\- Runtime application state is persisted in KV Store.
 
-\- Percentage thresholds are calculated against the policy's scoped eligible host population.
+\- Improved Search Head Cluster compatibility for application state.
 
-\- Maintenance-suppressed, redundancy-suppressed and disabled targets are excluded from Mass Interruption evaluation.
+\- Added safer runtime locking behavior.
 
-\- Scope information is included in Mass Interruption status and email content.
+\- Preserved current-state and historical notification data across normal app upgrades.
+
+\- Improved Unicode handling for user-entered fields such as Owner and Description.
 
 
 
-Other Improvements
+AppInspect and Compatibility Improvements
 
-\- Improved KV Store-based persistence for Search Head Cluster deployments.
+\- Resolved blocking AppInspect failures.
 
-\- Added Unicode-safe handling for user-entered fields such as Owner and Description.
+\- Resolved Python-related Future Failure findings for custom commands, alert actions and REST handlers.
 
-\- Various UI, validation and stability improvements.
+\- Added explicit Python 3 interpreter requirements where required.
+
+\- Improved web.conf and custom configuration reload compatibility.
+
+\- Improved package/version metadata validation.
+
+
+
+Validation
+
+\- Mass Interruption Host Count and Percentage scenarios validated.
+
+\- host\_index\_source and host\_index\_sourcetype scopes validated.
+
+\- Interruption, Reminder and Recovery email flows validated.
+
+\- Individual alert suppression behavior validated.
+
+\- Current and Recent Mass Notification Delivery visibility validated.
+
+\- LAB regression and AppInspect validation completed successfully.
 
 
 
 Compatibility
 
-\- Existing monitoring targets and existing Mass Interruption policies remain backward compatible.
+\- Existing monitoring targets and historical KV Store data remain compatible.
 
-\- Policies created before scope support automatically continue using the default &quot;All monitored targets&quot; behavior.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;A Splunk app for monitoring log continuity, detecting interruptions, managing monitoring targets, tracking recoveries, and improving visibility into ingestion health.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Log Continuity Manager for Splunk helps security and operations teams monitor whether expected log sources continue sending data on time. It provides a practical workflow to define monitoring targets, detect log interruptions, identify untracked sources, manage monitored targets, and review recovery history from a single app.
+\- Existing Mass Interruption policies continue working without requiring manual migration.
+
+\- Version 1.2.1 is intended for Splunk Enterprise deployments.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;A Splunk app for monitoring log continuity, detecting interruptions, managing monitoring targets, tracking recoveries, and improving visibility into ingestion health.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Log Continuity Manager for Splunk helps security and operations teams monitor whether expected log sources continue sending data on time. It provides a practical workflow to define monitoring targets, detect log interruptions, identify untracked sources, manage monitored targets, and review recovery history from a single app.
 
 The app is designed for teams that need visibility into log continuity health without building custom searches and dashboards from scratch. It supports target-based monitoring using host, index, source, and sourcetype combinations, and helps reduce false positives in redundant environments through redundancy-aware interruption handling.
 
 With its operational views, users can discover live data sources, compare discovered sources against configured monitoring targets, add new targets quickly, manage target settings, review current interruptions, and track when interrupted sources recover. This makes it easier to maintain monitoring coverage, reduce blind spots, and improve confidence in Splunk data ingestion health.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ae4b625c-ba71-11f1-93ac-7e323c747d37.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Furkan KILINC</dc:creator>
-      <pubDate>Sun, 27 Sep 2026 12:54:44 +0000</pubDate>
+      <pubDate>Sun, 27 Sep 2026 14:30:50 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8958/#v1.2.1</guid>
+    </item>
+    <item>
+      <title>Inno Observability - v2.0.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9379/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;2.0.0 — Network analysis, lost-request tracing, and offline agent deployment.
+
+Adds a seven-dashboard Network suite (switch impact, server path trace, topology and design checks, network log anomalies) and Lost Request Tracing, which pinpoints where a request between two services disappeared. Agents can now be installed on air-gapped servers from a bundle shipped inside the app, through your deployment server.&amp;#x20;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Inno Observability turns OpenTelemetry spans in your Splunk indexes into ready-made
+APM dashboards — service and endpoint response times, error rates, trace search and a
+span waterfall, plus Kubernetes and host context for the same time window. It reads
+data you already collect and runs entirely inside your own Splunk deployment.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Application observability inside Splunk — service health, trace analysis and
+Kubernetes context, built from the trace data in your own indexes.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/bffd979c-ba7e-11f1-91ea-2eb22300f1d8.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Inno Software</dc:creator>
+      <pubDate>Sun, 27 Sep 2026 14:29:08 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9379/#v2.0.0</guid>
     </item>
     <item>
       <title>Threat Hunting Essentials - v1.3.122 [Version Update]</title>
@@ -2385,24 +2439,6 @@ Get object ID: Fetch an object&amp;#x27;s ID from its name.&lt;/p&gt;&lt;img hei
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
       <pubDate>Fri, 18 Sep 2026 12:27:45 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7772/#v1.0.4</guid>
-    </item>
-    <item>
-      <title>Add-on for VMRay Platform - v2.3.5 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5563/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;# Added
-
-* Support for the new analysis type: investigative
-
-# Fixed
-
-* VMRay addon log path now logs into the correct Splunk folder&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The VMRay Platform’s advanced threat detection and analysis is based on our best-of-breed sandbox technology, which underlies our market-leading Dynamic Analysis. The Platform also features superior static file analysis as well as handy reputation lookup for files and URLs.
-
-The Splunk Enterprise Add-on for the VMRay Platform enables users to import valuable file and URL analysis results generated by the VMRay Platform into Splunk, thereby helping you to aggregate threat intelligence in a single location. The Add-on enables you to automatically import verdicts, VMRay Threat Identifier (VTI) scores, IOCs, YARA rule matches, file hashes and more. It also allows you to automatically export hashes of malicious files into Threat Intel within Splunk Enterprise Security.
-
-Optionally, you can easily submit files and URLs to the VMRay Platform from within Splunk, using the pre-configured Actions (included as part of the Add-on) which are integrated into Splunk’s Adaptive Response framework. And of course, once generated, these analysis results can be imported into Splunk too, which enables you to further consolidate your threat intelligence within Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/99a07b14-b26d-11f1-b912-0ae0031bb0be.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Developers VMRay</dc:creator>
-      <pubDate>Fri, 18 Sep 2026 09:42:04 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5563/#v2.3.5</guid>
     </item>
     <item>
       <title>Snowflake - v1.2.0 [Version Update]</title>
