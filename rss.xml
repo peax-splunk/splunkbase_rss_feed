@@ -6,7 +6,137 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Mon, 28 Sep 2026 14:44:18 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 28 Sep 2026 20:56:18 +0000</lastBuildDate>
+    <item>
+      <title>Cloudflare R2 Log Ingestion Add-on for Splunk - v1.1.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9150/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Adds optional HTTP forward proxy support, for environments that route outbound traffic through a proxy instead of opening direct internet access.
+
+* New app-wide Proxy setting under Configuration &gt; Settings (not per-Account) - matches how the Splunk Add-on for AWS scopes its own proxy config
+* HTTP proxy only, HTTP Basic authentication only - no SOCKS4/5 (R2's API is HTTPS-only, so this was never required), no NTLM/Kerberos proxy auth
+* Validated against a real R2 bucket through both an unauthenticated and a username/password-authenticated proxy, including a proxy that performs its own TLS inspection (&quot;SSL bumping&quot;), and confirmed working against a real corporate proxy in production by a community tester - zero duplicate events in every scenario tested&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Ingests Cloudflare Logpush logs from R2 into Splunk via a stdlib-only S3-compatible
+modular input.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Cloudflare R2 Log Ingestion is a Splunk Technology Add-on (TA) that pulls Cloudflare
+Logpush log files directly from a Cloudflare R2 bucket into Splunk, using a
+purpose-built modular input that speaks R2&amp;#x27;s S3-compatible API.
+
+Key capabilities:
+- Works with any Cloudflare Logpush dataset (Gateway DNS, HTTP Requests, Access, Audit, and more) - fully dataset-agnostic
+- One input per bucket/prefix, each with its own sourcetype and index, so a single Splunk instance can ingest multiple Logpush datasets side by side
+- Credentials live in a reusable, encrypted Account (stored via Splunk&amp;#x27;s storage/passwords, never in inputs.conf); any number of Cloudflare accounts can feed the same Splunk instance
+- Checkpointing via a typed KV Store processed-key set plus a configurable lookback window, so restarts don&amp;#x27;t lose progress and late-delivered Logpush batches are still picked up (not a single fragile monotonic cursor)
+- The R2 access layer is pure Python standard library - no boto3, no botocore, no vendored AWS SDK to keep patched
+
+Pairs well with the Cloudflare App for Splunk for dashboards and field extractions
+once the data is in Splunk.
+
+Requirements: Splunk Enterprise 9.4 or higher. Requires KV Store, so it runs on a
+heavy forwarder, IDM, standalone, or search head - not a Universal Forwarder. This
+release targets on-premises Splunk Enterprise only; Splunk Cloud is not currently a
+supported deployment target.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/37075bfa-bb62-11f1-9358-f6c18cb049d6.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cloudflare, Inc</dc:creator>
+      <pubDate>Mon, 28 Sep 2026 17:46:51 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9150/#v1.1.0</guid>
+    </item>
+    <item>
+      <title>AbuseIPDB App - v2.2.14 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7040/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Official AbuseIPDB App for Splunk seamlessly integrates AbuseIPDB&amp;#x27;s IP threat intelligence API with Splunk, enabling you to quickly and accurately perform threat analysis on IP addresses and enrich IOCs.
+
+AbuseIPDB is the largest crowdsourced cyber threat intelligence platform, with over one million IP abuse reports processed daily.
+
+This integration adds several search commands that allow you to access the following functions:
+
+*Check IP Address*: Check IP addresses for abuse by returning an &amp;quot;abuseConfidenceScore&amp;quot; that represents how confident AbuseIPDB is that the given IP is abusive. 
+*Check IP Block*: Check an entire subnet for abuse reports
+*Report IP Address*: Submit your own abuse report to AbuseIPDB, based on your own evidence
+*Download Abuse Reports*: Research an IOC by pulling in details of abuse reports made by others against an IP
+*Download Abuse Blacklist*: Download a customizable bulk list of the most actively abusive IPs from AbuseIPDB
+
+*Sync AbuseIPDB IP Blacklist to Splunk:*
+The app also allows you to set up a Splunk cron that will regularly download an up-to-date list of the most abusive IPs from the AbuseIPDB IP Blacklist into a Splunk KV Store, allowing easy construction of automations and workflows checking for abusive IPs that engage on your network.
+
+This app is actively under development by the AbuseIPDB team, and we plan to be rolling out additional useful features in the future.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8ed6b4ba-bb59-11f1-89d1-c23cef0dc2b2.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jonathan Weber</dc:creator>
+      <pubDate>Mon, 28 Sep 2026 16:29:05 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7040/#v2.2.14</guid>
+    </item>
+    <item>
+      <title>CopyCat - v0.4.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8540/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Improve realism of CopyCat logs by adding weights to random choices&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;A lightweight, dependency-free Splunk add-on that generates realistic mock logs for testing AI agents, parsing rules, and data analysis workflows.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;CopyCat is a lightweight, dependency-free Splunk add-on that generates realistic mock logs for testing AI agents, parsing rules, and data analysis workflows.
+
+Features:
+- Splunk Add-on: Automatically generates logs via scripted inputs
+- CLI Tool: Standalone Python script for manual log generation
+- Time Control: Generate historical logs with custom date ranges
+- Zero Dependencies: Uses Python standard library only and maintains compatibility with Splunk (Python 3.9)
+- Realistic Data: Includes IPs, usernames, hostnames, UUIDs, and more
+
+To learn more visit https://docs.trylynx.ai/copycat.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/26267340-bb56-11f1-a1c7-7a3ebc563b2c.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Lynx AI</dc:creator>
+      <pubDate>Mon, 28 Sep 2026 16:09:30 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8540/#v0.4.0</guid>
+    </item>
+    <item>
+      <title>Axis Security - v1.9.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5196/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Axis Security Splunk application adds granular real-time information about users, applications and access policy. 
+The Axis Security app automatically pulls Axis Security access and audit data into Splunk.
+This data includes insights revealed by the App Axis Cloud, which can also be integrated into real-time dashboards and reports.
+ 
+Once added to Splunk, application updates are automatic, initiated when a new version is available.
+
+To stream Axis Security logs with the Splunk application, please follow the instructions in the “Log streaming” screen on the Axis Security Management Console.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/7cbf7d6e-bb51-11f1-9358-f6c18cb049d6.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">nimrod yoely</dc:creator>
+      <pubDate>Mon, 28 Sep 2026 15:31:32 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5196/#v1.9.1</guid>
+    </item>
+    <item>
+      <title>Hornetsecurity 365 Total Protection - v1.0.7 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8069/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Hornetsecurity 365 Total Protection is a robust email security solution designed to filter out spam and malicious threats.  
+With real-time protection and advanced threat detection, it ensures your inbox remains clean and secure.  
+
+This add-on allows you to integrate Hornetsecurity 365 Total Protection email logs into Splunk.  
+It provides automated data ingestion, supports real-time monitoring, and enables you to build dashboards and alerts based on Hornetsecurity data.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a9fc1b3a-bb50-11f1-89d1-c23cef0dc2b2.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Hornetsecurity Gmbh</dc:creator>
+      <pubDate>Mon, 28 Sep 2026 15:31:02 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8069/#v1.0.7</guid>
+    </item>
+    <item>
+      <title>QuantumGenie Add-on for Splunk - v0.1.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9474/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Updated the modular input to support Python 3.13, maintaining compatibility with current and future Splunk Cloud Platform releases.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Cryptographic posture management and quantum-resistant encryption is delivered by QuantumGenie Add-on for Splunk. Pulls cryptographic discovery, CBOM, and certificate data from QuantumGenie into Splunk — track post-quantum cryptography (PQC) readiness, crypto agility, and cryptographic risk without leaving Splunk.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Enterprises struggle to see where cryptography lives across their code, cloud infrastructure, certificates, keys, and endpoints — and which of it is classical, quantum-vulnerable, or already NIST-approved post-quantum cryptography (PQC). Security teams often run cryptographic discovery and quantum readiness assessments in a separate tool, disconnected from their SIEM.
+
+The QuantumGenie Add-on for Splunk closes that gap. It pulls your organization&amp;#x27;s Cryptographic Bill of Materials (CBOM) — assets, dependencies, and certificates — directly from your QuantumGenie workspace into Splunk on a configurable polling interval, so SOC analysts and security engineers can search, alert on, and dashboard cryptographic risk, crypto agility posture, and post-quantum migration progress without leaving Splunk. This tool surfaces the cryptographic risk of an enterprise in Splunk. It informs where legacy encryption is being used, and which services are dependent on it.
+
+Once installed, you&amp;#x27;ll see events under sourcetype quantumgenie:cbom, sourced as quantumgenie:resource, quantumgenie:relationship, and quantumgenie:certificate — covering algorithm classification (classical vs. NIST post-quantum standards such as ML-KEM and ML-DSA and more), quantum-readiness status, certificate expiry, and dependency relationships across your cryptographic estate. Use it to build alerts for expiring certificates, legacy/non-PQC algorithm usage (e.g. RSA-2048), or newly discovered quantum-vulnerable assets — supporting crypto agility, cryptographic risk management, and PQC migration tracking inside your existing Splunk workflows. It closely integrates with CipherScan by QuantumGenie.
+
+Requires an active QuantumGenie account and an Integration API token, generated from the &amp;quot;Integration API Tokens&amp;quot; page inside your QuantumGenie workspace.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/37fb4f4e-bb4e-11f1-a1c7-7a3ebc563b2c.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Srijan Dhare</dc:creator>
+      <pubDate>Mon, 28 Sep 2026 15:26:31 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9474/#v0.1.1</guid>
+    </item>
+    <item>
+      <title>Anomali ThreatStream App for Splunk - v6.7.8 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/3443/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;This release contains 2 fixes:
+
+**SPK-888: Splunk Cloud Compatibility**
+
+&amp;#x20; \- Updated \`.conf\` files to address future Appinspect failures for Cloud compatibility (Splunk 10.5)
+
+&amp;#x20; \- Ensures app maintains Cloud compatibility and passes future validation checks
+
+**SPK-893: Replaced usage of deprecated readfp() method**
+
+&amp;#x20; \- TS IOC INGEST utilised the readfp() function which was deprecated in Python3.12. Swapped for readfile() instead for compatiblity with the new 3.13 Python interpreter in Splunk 10.X environments&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Anomali ThreatStream App for Splunk empowers Splunk users to leverage threat intelligence to detect, prioritize, and response to security incidents. It provides Splunk users with threat data collected and curated from industry leading threat intelligence platform ThreatStream to correlate with your log data in Splunk, detect malicious activities in incoming and outgoing traffic, alert security teams, and provide you with detailed contextual information from a variety of threat sources (open source, commercial, Anomali Labs, customer internal, etc.). 
+
+Moreover, the app has built-in Splunk Adaptive Response actions, automating security and threat investigation workflow to reduce investigation time and enable a rapid, decisive response.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/10e7ad02-b68b-11f1-940c-a215abe51482.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Anomali Team</dc:creator>
+      <pubDate>Mon, 28 Sep 2026 14:52:34 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/3443/#v6.7.8</guid>
+    </item>
     <item>
       <title>Salesforce Commerce Cloud Connector for CX Monitoring - v6.15.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/6570/</link>
@@ -2432,29 +2562,6 @@ To learn more about how Splunk Observability Cloud works with your environment t
       <guid>https://splunkbase.splunk.com/app/5846/#v2.10.5</guid>
     </item>
     <item>
-      <title>AbuseIPDB App - v2.2.13 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7040/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Bugfixes&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Official AbuseIPDB App for Splunk seamlessly integrates AbuseIPDB&amp;#x27;s IP threat intelligence API with Splunk, enabling you to quickly and accurately perform threat analysis on IP addresses and enrich IOCs.
-
-AbuseIPDB is the largest crowdsourced cyber threat intelligence platform, with over one million IP abuse reports processed daily.
-
-This integration adds several search commands that allow you to access the following functions:
-
-*Check IP Address*: Check IP addresses for abuse by returning an &amp;quot;abuseConfidenceScore&amp;quot; that represents how confident AbuseIPDB is that the given IP is abusive. 
-*Check IP Block*: Check an entire subnet for abuse reports
-*Report IP Address*: Submit your own abuse report to AbuseIPDB, based on your own evidence
-*Download Abuse Reports*: Research an IOC by pulling in details of abuse reports made by others against an IP
-*Download Abuse Blacklist*: Download a customizable bulk list of the most actively abusive IPs from AbuseIPDB
-
-*Sync AbuseIPDB IP Blacklist to Splunk:*
-The app also allows you to set up a Splunk cron that will regularly download an up-to-date list of the most abusive IPs from the AbuseIPDB IP Blacklist into a Splunk KV Store, allowing easy construction of automations and workflows checking for abusive IPs that engage on your network.
-
-This app is actively under development by the AbuseIPDB team, and we plan to be rolling out additional useful features in the future.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/1586e08a-b37a-11f1-9350-b6f458c6f607.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jonathan Weber</dc:creator>
-      <pubDate>Fri, 18 Sep 2026 16:02:11 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7040/#v2.2.13</guid>
-    </item>
-    <item>
       <title>Endace - v3.0.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5965/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Enable EndaceProbe TLS certificate verification by default. Existing asset owners should review the setting after upgrading.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with the Endace Packet Capture device to implement investigative actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/782e3390-b36c-11f1-b7c7-a223fca43fd6.svg&quot;&gt;</description>
@@ -2563,125 +2670,6 @@ Get object ID: Fetch an object&amp;#x27;s ID from its name.&lt;/p&gt;&lt;img hei
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Fri, 18 Sep 2026 04:41:33 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5755/#v3.0.2</guid>
-    </item>
-    <item>
-      <title>Parser - v2.10.9 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5832/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Updated the bundled pyOpenSSL dependency to 26.0.0.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app extracts IOCs from various files such as PDFs, emails, or raw text&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b6ed9050-b31a-11f1-b6a8-5e32138a49f4.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Fri, 18 Sep 2026 04:37:55 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5832/#v2.10.9</guid>
-    </item>
-    <item>
-      <title>InsightVM - v4.0.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5800/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Updated the bundled lxml dependency to 6.1.0.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with Rapid7 InsightVM (formerly Nexpose) to ingest scan data and perform investigative actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d794bc62-b319-11f1-b958-dae75679fe60.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Fri, 18 Sep 2026 04:31:40 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5800/#v4.0.1</guid>
-    </item>
-    <item>
-      <title>Fortra DLP Technology Add-On - ARC - v3.0.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4842/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Version 3.0.2
-
-Splunk Cloud Compatibility
-
-Removed the restart-on-state-change setting so the default release satisfies Splunk Cloud
-
-Platform AppInspect requirements.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Fortra DLP Technology Add-On (TA) – ARC enables Splunk Enterprise to seamlessly pull data from Fortra’s Analytics &amp;amp; Reporting Cloud (ARC) for advanced visualization and reporting. This TA collects foundational insights from Digital Guardian events, violations, and alarms required for advanced analytics and visualization within the Splunk platform.
-Key capabilities include:
-•	Secure, cloud-based data collection from ARC
-•	Normalization of DLP data for use in Splunk searches, dashboards, and alerts
-•	Integration support for the Fortra DLP App for Splunk – ARC
-
-For more information, visit:
-https://www.digitalguardian.com/platform/technology-integrations/splunk&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b3def2be-b2ac-11f1-b6a8-5e32138a49f4.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Digital Guardian</dc:creator>
-      <pubDate>Thu, 17 Sep 2026 19:32:33 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4842/#v3.0.2</guid>
-    </item>
-    <item>
-      <title>Cisco Security Cloud - v3.7.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7404/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Release restores Isovalent Runtime Security integration temporarily, pending the official release of the separate Isovalent TA. It also includes Secure Endpoint connectivity/API response fixes and isolates Duo failures by log class so other log types continue processing.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Cisco Security Cloud application offers seamless integration for connecting your Cisco devices with Splunk. It features a modular UX input design, built-in health checks, and constant monitoring to ensure operational integrity.
-
-Product(s) Enabled:
-    Cisco AI Defense
-    Cisco Duo
-    Cisco Email Threat Defense (ETD)
-    Cisco Endpoint Visibility Module (EVM) CIM Mappings (Beta)
-    Cisco Identity Intelligence (CII)
-    Cisco Multicloud Defense
-    Cisco NVM
-    Cisco Secure Endpoint
-    Cisco Secure Firewall (FTD/eStreamer/ASA)
-    Cisco Secure Workload
-    Cisco Isovalent
-    Cisco Isovalent Edge Processor **Alpha
-    Cisco Secure Malware Analytics (SMA)
-    Cisco Secure Network Analytics (SNA)
-    Cisco Vulnerability Intelligence
-    Cisco XDR (Incident Import &amp;amp; Promote to ES Notable)
-
-Here’s the revised version with the sourcetype list and stronger 3.x transition language.
-
-**MAJOR VERSION CHANGE:  CiscoSecurityCloud 4.0.0 Release Notes**
-
-CiscoSecurityCloud 4.0.0 introduces expanded Cisco Secure Firewall / FTD syslog and Advanced Logging support, with improved parsing, event routing, CIM/data model alignment, dashboard visibility, and ingestion reliability.
-
-This release adds a new FTD sourcetype routing model that separates FTD events by event family instead of keeping all events under a single generic `cisco:ftd:syslog` sourcetype. This improves field extraction accuracy, dashboard filtering, data model mapping, and long-term supportability for FTD syslog and Advanced Logging data.
-
-Because this changes how FTD events are categorized, **4.0.0 may be a breaking change for customers with custom Splunk content**.
-
-Content that may require review includes:
-
-- Saved searches, alerts, reports, and dashboards that filter only on `sourcetype=&amp;quot;cisco:ftd:syslog&amp;quot;`
-- Custom macros, eventtypes, tags, and CIM/data model constraints
-- Custom props/transforms or routing assumptions for FTD syslog
-- Data model acceleration searches scoped to the previous FTD sourcetype
-- External integrations or correlation searches that expect all FTD events in one sourcetype
-
-Customers should update broad FTD searches from &amp;quot;cisco:ftd:syslog&amp;quot; to
-
-cisco:ftd:intrusion
-cisco:ftd:connection
-cisco:ftd:connection:security
-cisco:ftd:file
-cisco:ftd:malware
-cisco:ftd:discovery
-cisco:ftd:useractivity
-cisco:ftd:correlation
-cisco:ftd:intrusionpacket
-cisco:ftd:adv:http
-cisco:ftd:adv:ftp
-cisco:ftd:adv:conn
-cisco:ftd:adv:dns
-cisco:ftd:adv:weird
-cisco:ftd:adv:notice
-
-CiscoSecurityCloud 4.0.0 is intended for customers who want the new FTD Advanced Logging model and are ready to validate custom content against the expanded sourcetypes.
-
-To ease the transition, the CiscoSecurityCloud 3.x branch will be actively maintained and should remain the recommended stable branch for customers who require the existing FTD sourcetype behavior. Customers can continue using 3.x while they assess 4.0.0, update custom SPL, and validate dashboards, alerts, and data model acceleration.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/14bf95ca-b2c1-11f1-b6a8-5e32138a49f4.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco Systems, Inc.</dc:creator>
-      <pubDate>Thu, 17 Sep 2026 18:06:37 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7404/#v3.7.2</guid>
-    </item>
-    <item>
-      <title>HCP Vault by Netbr - v0.3.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/9684/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Provides security and stability monitoring dashboards and alerts for HashiCorp Vault audit logs and metrics ingested via HEC into hcp-vault-metrics and hcp-vault-logs indexes.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The NETBR Vault Dashboards app provides monitoring dashboards and alerting capabilities for HashiCorp Cloud Platform (HCP) Vault Dedicated deployments. The app processes audit logs and metrics streamed into the hcp-vault-metrics and hcp-vault-logs indexes, enabling security operations and infrastructure teams to monitor vault activity, detect anomalous behavior, and track cluster health. The app includes two dashboards for operational visibility and 25 scheduled searches covering security detection, stability monitoring, and periodic reporting. Security alerts detect suspicious patterns such as authentication failures, permission denials, token misuse, unauthorized access attempts, secret manipulation, and configuration changes. Stability alerts monitor cluster availability, resource utilization (CPU, memory, disk), and data pipeline health. Weekly and daily reports summarize authentication activity, privileged operations, configuration changes, and resource consumption trends.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f496f476-b29a-11f1-8830-7a1734055b20.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">João Miziara</dc:creator>
-      <pubDate>Thu, 17 Sep 2026 13:26:12 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9684/#v0.3.0</guid>
-    </item>
-    <item>
-      <title>SentinelOne - v2.2.13 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6056/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Normalize the Python version metadata to the Splunkbase-compatible format.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with the SentinelOne Singularity platform to perform prevention, detection, remediation, and forensic endpoint management tasks&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/6cdd1f2e-b29a-11f1-b958-dae75679fe60.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
-      <pubDate>Thu, 17 Sep 2026 13:19:35 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6056/#v2.2.13</guid>
     </item>
   </channel>
 </rss>
