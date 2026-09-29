@@ -6,53 +6,56 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Tue, 29 Sep 2026 00:46:25 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 29 Sep 2026 06:25:20 +0000</lastBuildDate>
     <item>
-      <title>Splunk Secure Networking Essentials (Beta) - v1.0.52 [Version Update]</title>
+      <title>Cyera TA - v4.1.45 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7330/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**Audit collection now uses the Cyera Events API.** The audit input (`cyera:audit`) now collects from the Events API `Authentication` category. The sourcetype name is unchanged and no reconfiguration is required. Access to the Frontegg audit API will be deprecated in Cyera v41, so upgrade before v41 to keep audit data flowing.
+
+**Events API audit records for every events input.** After the upgrade, every input with **Collect Events** on automatically writes Events API authentication records to `cyera:audit`, whatever the legacy checkbox says. Collection starts from the input's existing events checkpoint, and earlier records are not backfilled.
+
+**Legacy Frontegg collection continues by default until v41.** On upgrade, an input that already collected Frontegg audit logs keeps collecting them alongside the Events API records. The new global setting **Legacy Frontegg audit collection** (Configuration &gt; Add-on Settings) ships set to **Default**, which preserves existing behavior. New inputs don't collect Frontegg audit logs. The per-input checkbox **Collect Legacy Frontegg Audit Logs (deprecated — stops working in Cyera v41)** is unchecked for new inputs. Set the global setting to **Off** to stop Frontegg collection early. When Cyera v41 deprecates the Frontegg audit API, Frontegg collection stops working and the add-on reports it as an error. At that point, set the global setting to **Off**. Legacy collection will be removed in a later add-on release.
+
+**Updated Audit Trail dashboard and data model.** Both now use the Events API fields `type`, `outcome`, `ip`, `userAgent`, and `email`. The release adds three panels: **Failed Authentications**, **Authentication Outcomes Over Time**, and **Top Source IPs**. **Configuration Changes** is renamed **Provisioning Changes (SCIM)**. Newly included events are failed sign-ins and SSO sign-ins, MFA enrollment prompts and failed MFA verifications, password resets, signups, lockouts, IP-policy blocks, and SCIM user and group provisioning. The Login KPIs and the `Cyera_Login` event type count only Events API records.
+
+**CIM Authentication mapping.** For Events API records, `action` and `result` are `success` or `failure` (from `outcome`). The readable event label, such as &quot;Login&quot;, &quot;SSO Login&quot;, or &quot;SCIM User Create&quot;, is in `vendor_action` and `signature`. `user` is the email when present, otherwise the user ID, and `src` is the IP address. Legacy Frontegg records keep their original `action` text, for example &quot;User logged in&quot;, which is also copied to `vendor_action`.
+
+**Government (FedRAMP) support.** Audit collection and the Audit Trail dashboard are now available in the Government environment, which records successful sign-in, SSO sign-in, and sign-out events. The informational message that previously skipped the audit input in Government no longer appears.
+
+**Upgrade notes.**
+
+* Until v41, upgraded inputs index sign-in events in `cyera:audit` in both record shapes, legacy Frontegg and Events API. The Login KPIs and `Cyera_Login` are not doubled, but **Total Audit Events** and the action distributions include both.
+* Update custom searches that filtered on an event label in `action` (for example `action=&quot;Login&quot;`) to use `vendor_action=&quot;Login&quot;` or `type=&quot;IdpAuthLoginEvent&quot;`.
+* Replace Frontegg fields (`frontegg_id`, `createdAt`, `severity`) with `uid`, `date`, and `outcome`.
+* In the commercial environment, sign-out events (&quot;User logged out&quot;) and Frontegg's new-device, impossible-travel, and suspicious-IP detections are not available from the Events API. Alerts that depend on them stop matching when Frontegg collection ends.
+* If you manage `inputs.conf` by hand or through a deployment server, `enable_audit` now defaults to `0`. Set `enable_audit = 1` explicitly on templated inputs that should keep Frontegg collection.
+* Authentication events also appear in `cyera:events`, which collects all Events API categories. Deduplicate on `uid` across sourcetypes \[CONFIRM whether this release filters Authentication events out of `cyera:events`].
+
+**Troubleshooting.** If events appear in the Cyera Event Log but not in Splunk (for example after a platform-side backfill), change the add-on's Days to Look Back setting to force a re-collection of that window.
+
+See &quot;Audit data sources: Frontegg audit API (legacy) vs Events API Authentication&quot; in the add-on documentation.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This add-on allows Splunk admins to see audit trail and event data for the Cyera application. It also allows them to see when issues discovered by Cyera&amp;#x27;s classification and DSPM capabilities are added or updated in the platform. If users wish to see datastore and classification information in Splunk, that is also available. OCSF data models for use with CIM are available. In the latest release, all events in the platform are available, and the current Cyera API endpoints are used.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/54248c54-bba7-11f1-89d1-c23cef0dc2b2.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Hampton</dc:creator>
+      <pubDate>Tue, 29 Sep 2026 02:12:51 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7330/#v4.1.45</guid>
+    </item>
+    <item>
+      <title>Splunk Secure Networking Essentials (Beta) - v1.0.53 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/9257/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Version 1.0.52 improves the reliability, security, and usability of Insights Workspaces, topology maps, Searchbase searches, Dashboard Studio dashboards, and Guided Setup.
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Dashboard Manager
 
-### Highlights
+* Fixed dashboard creation conflicts involving existing dashboard IDs, preventing accidental overwrites and duplicate submissions.
+* Added persistent creation errors inside the dialog and an option to open a saved dashboard when app sharing fails.
+* Kept error notifications above open dialogs and previews until dismissed.
 
-* Expanded reusable Cisco searches across Catalyst Center, ISE, ThousandEyes, Cisco Spaces, Secure Firewall, data center, and security operations.
-* Added Secure Networking Pillars with five investigation areas and 30 Searchbase-powered cards.
-* Rebuilt the in-app User Guide with clearer workspace creation, sharing, permissions, persistence, Signal Rail, and topology instructions.
-* Improved light and dark theme readability throughout workspace editors, drawers, map controls, setup pages, and dashboards.
+Topology maps
 
-### Topology and ThousandEyes
+* Improved link selection near site markers, widened clickable link areas, and added keyboard activation with visible focus.
 
-* Fixed topology-map creation and first-save failures.
-* Prevented stale editor tabs from overwriting newer shared topology changes.
-* Added protection against malformed or incomplete stored topology configurations.
-* Fixed Searchbase-bound link telemetry remaining in a loading state while the same search worked from Open in Search.
-* Improved ThousandEyes agent-to-agent selection so tests are discovered from the deployment’s observed data instead of relying on a hard-coded test ID.
-* Added safer confirmation flows for discarding drafts and restoring factory topology.
-* Improved map controls, attribution, keyboard access, and editing permissions.
+Search performance
 
-### Search and dashboard reliability
-
-* Corrected dotted-field aggregation across Cisco Spaces, Catalyst Center, Meraki, and reusable Searchbase searches.
-* Fixed Catalyst Center multivalue health fields and prevented unavailable `-1` scores from appearing as 0% health.
-* Updated health tiles to show the latest valid score with its reporting age.
-* Fixed operational searches, adaptive time buckets, forecast confidence bands, anomaly fields, and data-model acceleration behavior.
-* Replaced the resource-intensive Threat Sources calculation with an accelerated Network Traffic data-model search while retaining Cisco firewall filtering.
-* Improved Guided Setup discovery, progress reporting, cancellation, retries, CIM allowlist detection, and macro persistence.
-
-### Security and compatibility
-
-* Updated shipped JavaScript dependencies, including a critical MapLibre GL JS cross-site scripting fix.
-* Retained React 18.3.1 compatibility with the supported Splunk UI dependency line.
-* Restricted shared workspace, topology, and background-image administration to authorized roles.
-* Removed customer-identifying and deployment-specific content from the shipped catalogue.
-* Strengthened release packaging to exclude development-only and local-secret resources.
-
-### Upgrade action
-
-Topology link bindings are stored by search display name. If a link used the former customer-specific ThousandEyes agent-to-agent search, open the map editor and rebind it to:
-
-`Overview - Link ThousandEyes A2A Health`
-
-Also reselect any affected NetOps Readiness or Cisco Spaces searches whose display names changed from “exercise” terminology to “surge event.” Search stanza IDs did not change, so dashboards, drilldowns, and saved searches that reference stanza IDs are unaffected.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Configurable executive, IT operations, and secure networking dashboards unifying Cisco network health, identity, security, infrastructure, application, and topology data in Splunk.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Beta release: Participation is by invitation only and limited to a small group of approved users. The app is not yet publicly downloadable on Splunkbase, and access requests are not currently being accepted. General availability is targeted for fall 2026.
+* Replaced raw event scans with indexed-metadata searches for FTD feed freshness, WSA volume, SD-WAN audit volume, and total SSE activity.
+* Added data-model-backed aggregation for ThousandEyes page-completion and path-quality details, plus Catalyst interface spike, drop, and asymmetry analyses. These searches require the corresponding companion models and honor the configured summary-coverage setting.
+* Reduced enrichment work for SSE event details and FTD anomalous sessions while preserving result selection, limits, and thresholds.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Configurable executive, IT operations, and secure networking dashboards unifying Cisco network health, identity, security, infrastructure, application, and topology data in Splunk.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Beta release: Participation is by invitation only and limited to a small group of approved users. The app is not yet publicly downloadable on Splunkbase, and access requests are not currently being accepted. General availability is targeted for fall 2026.
 
 Splunk App for Secure Networking helps organizations turn fragmented Cisco infrastructure, networking, identity, security, application experience, and building telemetry into clear executive and operational insights in Splunk.
 
@@ -66,16 +69,8 @@ Splunk App for Secure Networking does not collect Cisco data directly. It visual
 
 The app is intended for network operations, security operations, IT operations, Splunk administrators, architects, customer success teams, and executives who need a consolidated view of the health, security, availability, and performance of their Cisco environment.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/09812094-bb9e-11f1-9358-f6c18cb049d6.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Field Solutions</dc:creator>
-      <pubDate>Tue, 29 Sep 2026 00:45:43 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9257/#v1.0.52</guid>
-    </item>
-    <item>
-      <title>Cyera TA - v4.1.43 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7330/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Added optional API URL configuration to support regional API checks.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This add-on allows Splunk admins to see audit trail and event data for the Cyera application. It also allows them to see when issues discovered by Cyera&amp;#x27;s classification and DSPM capabilities are added or updated in the platform. If users wish to see datastore and classification information in Splunk, that is also available. OCSF data models for use with CIM are available. In the latest release, all events in the platform are available, and the current Cyera API endpoints are used.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/cb3f6b84-bb9c-11f1-a1c7-7a3ebc563b2c.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Hampton</dc:creator>
-      <pubDate>Tue, 29 Sep 2026 00:32:48 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7330/#v4.1.43</guid>
+      <pubDate>Tue, 29 Sep 2026 01:12:06 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9257/#v1.0.53</guid>
     </item>
     <item>
       <title>DBX addon for clickhouse (sample) - v1.0.2 [New App Release]</title>
