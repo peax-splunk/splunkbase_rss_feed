@@ -6,7 +6,85 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Mon, 28 Sep 2026 20:56:18 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 29 Sep 2026 00:46:25 +0000</lastBuildDate>
+    <item>
+      <title>Splunk Secure Networking Essentials (Beta) - v1.0.52 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9257/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Version 1.0.52 improves the reliability, security, and usability of Insights Workspaces, topology maps, Searchbase searches, Dashboard Studio dashboards, and Guided Setup.
+
+### Highlights
+
+* Expanded reusable Cisco searches across Catalyst Center, ISE, ThousandEyes, Cisco Spaces, Secure Firewall, data center, and security operations.
+* Added Secure Networking Pillars with five investigation areas and 30 Searchbase-powered cards.
+* Rebuilt the in-app User Guide with clearer workspace creation, sharing, permissions, persistence, Signal Rail, and topology instructions.
+* Improved light and dark theme readability throughout workspace editors, drawers, map controls, setup pages, and dashboards.
+
+### Topology and ThousandEyes
+
+* Fixed topology-map creation and first-save failures.
+* Prevented stale editor tabs from overwriting newer shared topology changes.
+* Added protection against malformed or incomplete stored topology configurations.
+* Fixed Searchbase-bound link telemetry remaining in a loading state while the same search worked from Open in Search.
+* Improved ThousandEyes agent-to-agent selection so tests are discovered from the deployment’s observed data instead of relying on a hard-coded test ID.
+* Added safer confirmation flows for discarding drafts and restoring factory topology.
+* Improved map controls, attribution, keyboard access, and editing permissions.
+
+### Search and dashboard reliability
+
+* Corrected dotted-field aggregation across Cisco Spaces, Catalyst Center, Meraki, and reusable Searchbase searches.
+* Fixed Catalyst Center multivalue health fields and prevented unavailable `-1` scores from appearing as 0% health.
+* Updated health tiles to show the latest valid score with its reporting age.
+* Fixed operational searches, adaptive time buckets, forecast confidence bands, anomaly fields, and data-model acceleration behavior.
+* Replaced the resource-intensive Threat Sources calculation with an accelerated Network Traffic data-model search while retaining Cisco firewall filtering.
+* Improved Guided Setup discovery, progress reporting, cancellation, retries, CIM allowlist detection, and macro persistence.
+
+### Security and compatibility
+
+* Updated shipped JavaScript dependencies, including a critical MapLibre GL JS cross-site scripting fix.
+* Retained React 18.3.1 compatibility with the supported Splunk UI dependency line.
+* Restricted shared workspace, topology, and background-image administration to authorized roles.
+* Removed customer-identifying and deployment-specific content from the shipped catalogue.
+* Strengthened release packaging to exclude development-only and local-secret resources.
+
+### Upgrade action
+
+Topology link bindings are stored by search display name. If a link used the former customer-specific ThousandEyes agent-to-agent search, open the map editor and rebind it to:
+
+`Overview - Link ThousandEyes A2A Health`
+
+Also reselect any affected NetOps Readiness or Cisco Spaces searches whose display names changed from “exercise” terminology to “surge event.” Search stanza IDs did not change, so dashboards, drilldowns, and saved searches that reference stanza IDs are unaffected.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Configurable executive, IT operations, and secure networking dashboards unifying Cisco network health, identity, security, infrastructure, application, and topology data in Splunk.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Beta release: Participation is by invitation only and limited to a small group of approved users. The app is not yet publicly downloadable on Splunkbase, and access requests are not currently being accepted. General availability is targeted for fall 2026.
+
+Splunk App for Secure Networking helps organizations turn fragmented Cisco infrastructure, networking, identity, security, application experience, and building telemetry into clear executive and operational insights in Splunk.
+
+Cisco environments often produce data across multiple products, add-ons, indexes, sourcetypes, and data models. Building a consolidated view normally requires teams to create and maintain separate searches, dashboards, index mappings, and visualizations. This app provides a reusable foundation that brings those signals together through configurable dashboards, shared search definitions, index-mapping macros, health indicators, drilldowns, and interactive topology views.
+
+The app includes Secure Networking Posture dashboards covering Zero Trust Access, Secure Infrastructure, Scalable Network Segmentation, Hybrid Mesh Firewalling, and Agentic Operations. It also provides executive briefing, IT health, security, asset inventory, network readiness, building intelligence, Cisco Spaces, and network topology experiences.
+
+Searches use configurable index macros instead of hardcoded index names, allowing the app to adapt to different Splunk environments. Administrators can use the included Macro Index Tuning utility to discover relevant data and map dashboards to their indexes.
+
+Splunk App for Secure Networking does not collect Cisco data directly. It visualizes data already ingested into Splunk through applicable Cisco add-ons, integrations, and data models. The dashboards displayed and populated in each environment depend on the available data sources.
+
+The app is intended for network operations, security operations, IT operations, Splunk administrators, architects, customer success teams, and executives who need a consolidated view of the health, security, availability, and performance of their Cisco environment.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/09812094-bb9e-11f1-9358-f6c18cb049d6.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Field Solutions</dc:creator>
+      <pubDate>Tue, 29 Sep 2026 00:45:43 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9257/#v1.0.52</guid>
+    </item>
+    <item>
+      <title>Cyera TA - v4.1.43 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7330/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Added optional API URL configuration to support regional API checks.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This add-on allows Splunk admins to see audit trail and event data for the Cyera application. It also allows them to see when issues discovered by Cyera&amp;#x27;s classification and DSPM capabilities are added or updated in the platform. If users wish to see datastore and classification information in Splunk, that is also available. OCSF data models for use with CIM are available. In the latest release, all events in the platform are available, and the current Cyera API endpoints are used.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/cb3f6b84-bb9c-11f1-a1c7-7a3ebc563b2c.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Hampton</dc:creator>
+      <pubDate>Tue, 29 Sep 2026 00:32:48 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7330/#v4.1.43</guid>
+    </item>
+    <item>
+      <title>DBX addon for clickhouse (sample) - v1.0.2 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8832/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;updated the configuration trigger&amp;#x20;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Provides a custom JDBC driver package that enables Splunk DB Connect to connect to ClickHouse Cloud databases.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk DBX Add-on for Clickhouse extends Splunk DB Connect by providing a custom JDBC driver package specifically designed to connect to ClickHouse Cloud databases. This add-on addresses the absence of native ClickHouse support in Splunk DB Connect by bundling the clickhouse-jdbc driver along with the necessary configuration files. Once installed and registered with DB Connect, the add-on enables ClickHouse as a selectable database type, allowing administrators to configure connections, execute queries, and ingest data from ClickHouse instances. The add-on uses an all-in-one JAR distribution to ensure compatibility with DB Connect&amp;#x27;s class loader architecture and to prevent dependency-related runtime errors that can occur with multi-JAR configurations.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Masayuki Hyugaji</dc:creator>
+      <pubDate>Mon, 28 Sep 2026 22:11:17 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8832/#v1.0.2</guid>
+    </item>
     <item>
       <title>Cloudflare R2 Log Ingestion Add-on for Splunk - v1.1.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/9150/</link>
@@ -2097,68 +2175,6 @@ Official site: www.infigosiem.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width
       <guid>https://splunkbase.splunk.com/app/7145/#v4.4.0</guid>
     </item>
     <item>
-      <title>Splunk Secure Networking Essentials (Beta) - v1.0.52 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/9257/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Version 1.0.52 improves the reliability, security, and usability of Insights Workspaces, topology maps, Searchbase searches, Dashboard Studio dashboards, and Guided Setup.
-
-### Highlights
-
-* Expanded reusable Cisco searches across Catalyst Center, ISE, ThousandEyes, Cisco Spaces, Secure Firewall, data center, and security operations.
-* Added Secure Networking Pillars with five investigation areas and 30 Searchbase-powered cards.
-* Rebuilt the in-app User Guide with clearer workspace creation, sharing, permissions, persistence, Signal Rail, and topology instructions.
-* Improved light and dark theme readability throughout workspace editors, drawers, map controls, setup pages, and dashboards.
-
-### Topology and ThousandEyes
-
-* Fixed topology-map creation and first-save failures.
-* Prevented stale editor tabs from overwriting newer shared topology changes.
-* Added protection against malformed or incomplete stored topology configurations.
-* Fixed Searchbase-bound link telemetry remaining in a loading state while the same search worked from Open in Search.
-* Improved ThousandEyes agent-to-agent selection so tests are discovered from the deployment’s observed data instead of relying on a hard-coded test ID.
-* Added safer confirmation flows for discarding drafts and restoring factory topology.
-* Improved map controls, attribution, keyboard access, and editing permissions.
-
-### Search and dashboard reliability
-
-* Corrected dotted-field aggregation across Cisco Spaces, Catalyst Center, Meraki, and reusable Searchbase searches.
-* Fixed Catalyst Center multivalue health fields and prevented unavailable `-1` scores from appearing as 0% health.
-* Updated health tiles to show the latest valid score with its reporting age.
-* Fixed operational searches, adaptive time buckets, forecast confidence bands, anomaly fields, and data-model acceleration behavior.
-* Replaced the resource-intensive Threat Sources calculation with an accelerated Network Traffic data-model search while retaining Cisco firewall filtering.
-* Improved Guided Setup discovery, progress reporting, cancellation, retries, CIM allowlist detection, and macro persistence.
-
-### Security and compatibility
-
-* Updated shipped JavaScript dependencies, including a critical MapLibre GL JS cross-site scripting fix.
-* Retained React 18.3.1 compatibility with the supported Splunk UI dependency line.
-* Restricted shared workspace, topology, and background-image administration to authorized roles.
-* Removed customer-identifying and deployment-specific content from the shipped catalogue.
-* Strengthened release packaging to exclude development-only and local-secret resources.
-
-### Upgrade action
-
-Topology link bindings are stored by search display name. If a link used the former customer-specific ThousandEyes agent-to-agent search, open the map editor and rebind it to:
-
-`Overview - Link ThousandEyes A2A Health`
-
-Also reselect any affected NetOps Readiness or Cisco Spaces searches whose display names changed from “exercise” terminology to “surge event.” Search stanza IDs did not change, so dashboards, drilldowns, and saved searches that reference stanza IDs are unaffected.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Configurable executive, IT operations, and secure networking dashboards unifying Cisco network health, identity, security, infrastructure, application, and topology data in Splunk.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Beta release: Participation is by invitation only and limited to a small group of approved users. The app is not yet publicly downloadable on Splunkbase, and access requests are not currently being accepted. General availability is targeted for fall 2026.
-
-Splunk App for Secure Networking helps organizations turn fragmented Cisco infrastructure, networking, identity, security, application experience, and building telemetry into clear executive and operational insights in Splunk.
-
-Cisco environments often produce data across multiple products, add-ons, indexes, sourcetypes, and data models. Building a consolidated view normally requires teams to create and maintain separate searches, dashboards, index mappings, and visualizations. This app provides a reusable foundation that brings those signals together through configurable dashboards, shared search definitions, index-mapping macros, health indicators, drilldowns, and interactive topology views.
-
-The app includes Secure Networking Posture dashboards covering Zero Trust Access, Secure Infrastructure, Scalable Network Segmentation, Hybrid Mesh Firewalling, and Agentic Operations. It also provides executive briefing, IT health, security, asset inventory, network readiness, building intelligence, Cisco Spaces, and network topology experiences.
-
-Searches use configurable index macros instead of hardcoded index names, allowing the app to adapt to different Splunk environments. Administrators can use the included Macro Index Tuning utility to discover relevant data and map dashboards to their indexes.
-
-Splunk App for Secure Networking does not collect Cisco data directly. It visualizes data already ingested into Splunk through applicable Cisco add-ons, integrations, and data models. The dashboards displayed and populated in each environment depend on the available data sources.
-
-The app is intended for network operations, security operations, IT operations, Splunk administrators, architects, customer success teams, and executives who need a consolidated view of the health, security, availability, and performance of their Cisco environment.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9b666042-b62f-11f1-8c57-1a1384d091f6.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Field Solutions</dc:creator>
-      <pubDate>Tue, 22 Sep 2026 02:52:58 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9257/#v1.0.52</guid>
-    </item>
-    <item>
       <title>Koodous - v3.0.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5808/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Verify server certificates by default for Koodous API requests.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with Koodous to analyze APK files&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8a846da0-b620-11f1-81d2-96ec5ceef1ac.svg&quot;&gt;</description>
@@ -2231,14 +2247,6 @@ This add-on is designed for customers who want to extend the value of Cisco Spac
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Mon, 21 Sep 2026 20:20:02 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5769/#v2.3.7</guid>
-    </item>
-    <item>
-      <title>Cyera TA - v4.1.43 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7330/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Added optional API URL configuration to support regional API checks.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This add-on allows Splunk admins to see audit trail and event data for the Cyera application. It also allows them to see when issues discovered by Cyera&amp;#x27;s classification and DSPM capabilities are added or updated in the platform. If users wish to see datastore and classification information in Splunk, that is also available. OCSF data models for use with CIM are available. In the latest release, all events in the platform are available, and the current Cyera API endpoints are used.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/352c5866-b5eb-11f1-81d2-96ec5ceef1ac.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Hampton</dc:creator>
-      <pubDate>Mon, 21 Sep 2026 18:48:29 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7330/#v4.1.43</guid>
     </item>
     <item>
       <title>Splunk Add-on for ServiceNow - v11.2.0 [Version Update]</title>
@@ -2662,14 +2670,6 @@ Get object ID: Fetch an object&amp;#x27;s ID from its name.&lt;/p&gt;&lt;img hei
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Fri, 18 Sep 2026 05:06:43 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5865/#v3.0.8</guid>
-    </item>
-    <item>
-      <title>AD LDAP - v3.0.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5755/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Updated the bundled pyasn1 dependency to 0.6.3.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;App specifically designed for interacting with Microsoft Active Directory&amp;#x27;s LDAP Implementation&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/389066be-b31b-11f1-abd1-928321cec61e.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Fri, 18 Sep 2026 04:41:33 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5755/#v3.0.2</guid>
     </item>
   </channel>
 </rss>
