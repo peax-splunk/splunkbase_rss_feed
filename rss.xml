@@ -6,7 +6,38 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Mon, 05 Oct 2026 03:10:17 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 05 Oct 2026 11:00:10 +0000</lastBuildDate>
+    <item>
+      <title>TA-Vulnerability catalog - v1.1.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9694/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;\## What's changed - Splunk 10.2+ (Python 3.13) readiness: added \`python.required \= 3.9, 3.13\` to the REST handlers in \`default/restmap.conf\` (all five \`admin\_external\` stanzas) (#2) - Resolves the AppInspect check \`check\_admin\_external\_restmap\_conf\_python\_required\` - Bumped the version to 1.1.1 ## AppInspect Passed splunk-appinspect 4.3.1 (precert mode, \`cloud\` and \`future\` tags) with 0 errors, 0 failures and 0 future failures. ## Compatibility \`python.version \= python3\` is kept, so the add-on continues to run on Splunk 9.x as before.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Brings the CISA KEV catalog, CISA Vulnrichment and FIRST.org EPSS scores into Splunk, normalized to the CIM Vulnerabilities data model.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;*ENGLISH*
+**TA-Vulnerability catalog** ingests three public vulnerability catalogs into Splunk and
+normalizes them to the CIM **Vulnerabilities** data model: the CISA KEV catalog, CISA
+Vulnrichment (CVE Record 5.x with CISA ADP enrichment) and FIRST.org EPSS scores. Together
+they answer the three questions that drive patch prioritization — is this CVE being
+exploited, how likely is it to be, and how bad would it be. Collection is incremental, and
+Vulnrichment events retain the complete raw CVE record.
+
+*JAPANESE*
+**TA-Vulnerability catalog** は、3つの公開脆弱性カタログを Splunk に取り込み、CIM
+**Vulnerabilities** データモデルに正規化する Technology Add-on です。対象は CISA KEV
+カタログ、CISA Vulnrichment（CVE Record 5.x + CISA ADP による拡充）、FIRST.org EPSS スコア。
+「その CVE は悪用されているか」「悪用される確率はどれだけか」「悪用されたら影響はどれだけか」
+という、対応優先度を決める3つの問いに答えるためのデータが揃います。取り込みは差分方式で、
+Vulnrichment は CVE レコードの原本をそのまま保持します。&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b59d29b2-c09a-11f1-9804-8ecdd70b3c6d.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">hiroaki ogawa</dc:creator>
+      <pubDate>Mon, 05 Oct 2026 09:03:07 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9694/#v1.1.1</guid>
+    </item>
+    <item>
+      <title>Microsoft 365 Defender - v2.0.4 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6563/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Use Jinja-compatible JSON escaping for values in widget context menus.
+* Update Splunk SOAR SDK to 6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with Microsoft 365 Defender to execute various generic and investigative actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/291e05ee-c098-11f1-a5bf-620486c92853.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Mon, 05 Oct 2026 08:38:39 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6563/#v2.0.4</guid>
+    </item>
     <item>
       <title>SSL Certificate Monitor App - v2.0.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/9907/</link>
@@ -1852,111 +1883,6 @@ After the Splunk platform indexes the events, you can analyze the data using the
       <guid>https://splunkbase.splunk.com/app/3088/#v5.2.0</guid>
     </item>
     <item>
-      <title>Supply Chain and AI Threat Intelligence Platform - v1.2.17 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8814/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;h2&gt;SCIP v1.2.17 &amp;mdash; MITRE ATLAS coverage expansion, severity re-rating, compliance citation corrections, and audit fixes&lt;/h2&gt;
-
-&lt;p&gt;This release consolidates the work in v1.2.15, v1.2.16 and v1.2.17 since the last published release (v1.2.14). The AI/agentic detection library grows from 66 to 81 rules (72 MITRE ATLAS-mapped, 9 vendor-defined). No cryptographic surface was modified.&lt;/p&gt;
-
-&lt;h3&gt;New detections (15)&lt;/h3&gt;
-
-&lt;p&gt;Fifteen new AI and agentic threat detections were added, covering: an AI service API used as a covert command-and-control channel; AI supply-chain rug pulls, where an established component's newly published content turns malicious; artifact repositories used as dead-drop C2 channels; agent runtime capability discovery; and sub-technique coverage for dataset and capability acquisition, autonomous exploit and agent tool development, system prompt and instruction discovery, agent tool data collection, tool runtime response poisoning, and poisoned model, dataset and agent-tool publication.&lt;/p&gt;
-
-&lt;p&gt;Separately, two existing detections gain additional technique tags, for multimodal prompt-injection triggers and for misconfigured or publicly exposed AI services. These are more precise labels on rules that already shipped, not new detections.&lt;/p&gt;
-
-&lt;h3&gt;Detection accuracy and severity&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Every ATLAS rule and the SBOM Drift Monitor now set &lt;code&gt;alert.severity&lt;/code&gt; as an integer. String values were being coerced by Splunk and read back as 0, so triggered-alert severity in Splunk and any alert action keyed on it were unusable. Emitted severity fields, lookups and dashboard behaviour are unchanged.&lt;/li&gt;
-&lt;li&gt;A severity rubric pass re-rated three rules added in the previous release and confirmed nine others.&lt;/li&gt;
-&lt;li&gt;Five MITRE ATLAS technique names and tactics were corrected to the catalog text, and coverage is now scoped against ATLAS 2026.09 with a recorded disposition for every technique added in that catalog release.&lt;/li&gt;
-&lt;li&gt;Three regression guards now run before every package build: one validates every technique stamp against the shipped lookup, including secondary stamps; one validates the severity mapping on every rule; and one verifies that shared facts agree across the README, the deployment guide and the shipped artifacts.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Compliance citation corrections&lt;/h3&gt;
-
-&lt;p&gt;No assessment logic changed. Citations and control identifiers were corrected across seven of the nine frameworks SCIP assesses:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;EU Cyber Resilience Act control IDs now use the regulation's own Annex and Article labels; two transposed points corrected; coverage added for two security-update provisions. Now 21 controls.&lt;/li&gt;
-&lt;li&gt;FDA 524B: transposed statutory citations corrected, the patch-cycle control re-cited, the cyber device definition restored to its three statutory prongs, and guidance-derived rows distinguished from statutory ones. Now 21 controls.&lt;/li&gt;
-&lt;li&gt;NIST CSF 2.0: 16 subcategory descriptions replaced with CSF 2.0 outcome text.&lt;/li&gt;
-&lt;li&gt;PCI DSS 4.0.1 and FedRAMP: requirement and control titles restored to official text.&lt;/li&gt;
-&lt;li&gt;HIPAA: four rows re-titled to the standard's own name; a control that was being assessed twice is now out of scope.&lt;/li&gt;
-&lt;li&gt;DORA: incident classification and ICT concentration risk re-cited.&lt;/li&gt;
-&lt;li&gt;A nightly cleanup now retires status records for controls that are no longer in scope, so renamed or descoped controls leave nothing frozen behind.&lt;/li&gt;
-&lt;li&gt;Compliance views and the CSV export now carry a Last Assessed column, flagging any status older than two days as stale.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Functional fixes&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;The POA&amp;amp;M population search collided its inline time bounds with its dispatch window and scanned nothing while reporting success.&lt;/li&gt;
-&lt;li&gt;Five scheduled searches stored a search string beginning with a literal &lt;code&gt;search&lt;/code&gt; command, which silently excluded events whose raw text lacked that word.&lt;/li&gt;
-&lt;li&gt;Setup, Remediation Tracking and Telemetry Settings could write to the KV Store on page load, before any Save action. All three now write only on an explicit action.&lt;/li&gt;
-&lt;li&gt;Telemetry Settings rewrote the license collection on every page view; it now updates a single record on an explicit selection.&lt;/li&gt;
-&lt;li&gt;The license status check treated a record with a missing or non-numeric expiry as active.&lt;/li&gt;
-&lt;li&gt;Risk score pruning deleted rows with a missing or non-numeric timestamp; those rows are now retained.&lt;/li&gt;
-&lt;li&gt;Incomplete SBOM baseline rows no longer suppress the set-a-baseline prompts or count toward baselined-application totals.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Setup and onboarding&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;The Setup page now names every index SCIP requires, states that SCIP does not create them, gives both standalone and clustered paths, and warns when any is missing.&lt;/li&gt;
-&lt;li&gt;A new section explains that SBOM drift's component, version and count signals are inactive until a baseline is set.&lt;/li&gt;
-&lt;li&gt;The file monitor section states that both SBOM inputs ship disabled, that the monitored path must be repointed, and that SPDX files belong in their own directory.&lt;/li&gt;
-&lt;li&gt;NVD API key copy corrected in four places.&lt;/li&gt;
-&lt;li&gt;The license blocklist field no longer shows an internal placeholder on load, and the blocklist is emptied through an explicit Clear action.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;Air-gapped and egress-restricted deployments&lt;/h3&gt;
-
-&lt;p&gt;CISA KEV and EPSS threat intelligence can now be refreshed by file transfer, as NVD and OSV already could. Both feeds write normalized records to spool directories that new file-monitor inputs index. Previously both were script-only, so without outbound access they stayed frozen at install, silently degrading KEV-driven risk scoring. The IL Deployment Guide documents the record formats and procedure.&lt;/p&gt;
-
-&lt;h3&gt;Roles and user experience&lt;/h3&gt;
-
-&lt;p&gt;All three SCIP roles gain eleven read and UI capabilities that restore the Apps menu icons and the Setup credential-status read. The administrative role retains the capabilities its credential-save controls require.&lt;/p&gt;
-
-&lt;h3&gt;Documentation&lt;/h3&gt;
-
-&lt;p&gt;New ATLAS coverage manifest and a guide to authoring your own ATLAS detections on top of the shipped baseline. The deployment guide now lists every required index in both its standalone and clustered instructions, documents scheduled searches that ship disabled by design, and corrects the outbound-connection table, which described telemetry as opt-out. Telemetry is opt-in and off by default.&lt;/p&gt;
-
-&lt;h3&gt;Upgrade notes&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Role assignment.&lt;/strong&gt; SCIP roles are additive. If a user was assigned a SCIP role as their only role, they have been without the top-right username and account menu since v1.1.11. Assign your organization's base Splunk role alongside the SCIP role.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Saved-search renames.&lt;/strong&gt; EU CRA and FDA compliance saved searches were renamed to match their new control identifiers. Any local override or external reference to the old stanza names must be updated.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Alert severity.&lt;/strong&gt; Triggered-alert severity now reports real values instead of 0. Alert actions keyed on severity will begin seeing 2 through 5.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;HIPAA control count&lt;/strong&gt; drops from 9 to 8 in-scope controls. The descoped control's saved search is disabled rather than deleted, preserving the audit trail.&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;A Splunk app that detects AI-threat patterns (MITRE ATLAS) and runs software composition analysis (SCA) on your SBOMs to identify known-vulnerable components (NVD, OSV) — surfacing the applications where both appear at once. Compliance evidence across nine frameworks and FedRAMP/RMF audit exports, with no separate platform to stand up.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;SCIP is a Splunk app that detects adversarial AI/ML threats (MITRE ATLAS) and runs software composition analysis (SCA) on your SBOMs to identify known-vulnerable components (NVD, OSV) — then, through Compound Risk, surfaces the applications where an AI-threat detection and a known vulnerability appear at once, the exposure neither signal shows alone. It prioritizes with CISA KEV and EPSS and assesses compliance posture across nine frameworks — detection logic written as transparent SPL you can open and read, and no separate platform to stand up.
-
-AI THREAT DETECTION
-- MITRE ATLAS Detection — 81 AI/agentic threat detection rules (72 mapped to 57 MITRE ATLAS techniques)
-- Compound Risk — correlates MITRE ATLAS AI-threat detections with KEV-listed or critical-severity vulnerabilities on the same application
-- Silent-Source Detection — alerts when an enrolled AI/LLM telemetry source goes quiet, so a dead pipe is never mistaken for a clean one
-- AI/ML Bill of Materials — catalogs AI/ML model components from your SBOMs with insecure-serialization-format flagging and risk classification
-
-SOFTWARE SUPPLY CHAIN
-- SBOM ingestion — file-drop or HEC, supporting CycloneDX (JSON/XML) and SPDX (JSON)
-- Vulnerability correlation — bundled OSV dataset (250,000+ records across 11 ecosystems) with PURL-based correlation, refreshed daily from the live OSV feed across 8 configurable ecosystems; NVD CPE-based correlation; CISA KEV matching; EPSS scoring
-- Supply Chain Risk Score — 0–100 global and per-application scoring weighted by severity, KEV status, and EPSS
-- Vendor Risk — per-vendor risk aggregation and letter-grading
-- SBOM Drift Detection — baseline-vs-current component change tracking
-- Long-Unpatched Critical Exposure — flags critical/high-severity vulnerabilities unpatched 180+ days
-- License Compliance — GPL/AGPL/copyleft detection and license-risk classification
-
-COMPLIANCE, FEDERAL &amp;amp; AIR-GAPPED DEPLOYMENT
-- Air-gapped operation — AI-threat detection runs on your own Splunk data, SBOM correlation on the bundled OSV dataset, and intelligence feeds refresh by file transfer rather than live calls; deployed disconnected, SCIP makes no outbound connections
-- Compliance Gap Assessment — nine frameworks: PCI DSS 4.0.1, NIST CSF 2.0, SOC 2 Type II, HIPAA Security Rule, EU Cyber Resilience Act, FedRAMP / RMF / CISA, DORA, FDA 524B Premarket Cybersecurity, SEBI CSCRF
-- POA&amp;amp;M &amp;amp; FedRAMP Workflow — POA&amp;amp;M dashboard, monthly ConMon package builder, BOD 26-04 risk-tier classification, deviation request workflow. Dashboards always available; automated POA&amp;amp;M generation is opt-in from Setup
-- Coverage-Evidence Manifest — AU-12-aligned attestation of unbroken AI-monitoring coverage
-- Audit-ready exports — FedRAMP POA&amp;amp;M Workbook, SSP Appendix M Integrated Inventory, Deviation Request Form&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2c29cea0-b6d7-11f1-940c-a215abe51482.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">GIC Engineering Consultants, Inc.</dc:creator>
-      <pubDate>Wed, 23 Sep 2026 04:53:30 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8814/#v1.2.17</guid>
-    </item>
-    <item>
       <title>AWS-DFD-Visualizer - v2.8.6 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8628/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;# Release Notes: AWS-DFD-Visualizer v2.8.6
@@ -2434,14 +2360,6 @@ Features
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Databricks Inc</dc:creator>
       <pubDate>Tue, 22 Sep 2026 23:21:24 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5416/#v1.4.4</guid>
-    </item>
-    <item>
-      <title>FireAMP - v2.1.17 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5897/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Fix `remove listitem` action incorrectly marked as `read_only`&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This App allows for querying endpoints connected to Cisco FireAMP while also providing investigative hunting capabilities&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e241e1b2-b6ca-11f1-8a17-5adad3c3470f.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 22 Sep 2026 21:16:33 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5897/#v2.1.17</guid>
     </item>
   </channel>
 </rss>
