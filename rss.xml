@@ -6,7 +6,130 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Wed, 07 Oct 2026 20:20:07 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 08 Oct 2026 00:36:03 +0000</lastBuildDate>
+    <item>
+      <title>Slack Notification Alert - v3.1.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/2878/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Upgrading from 2.x
+
+* Requires Splunk Enterprise 10.0 or later, or Splunk Cloud Platform.
+* Alerts that use the global Slack App OAuth token or webhook URL stop sending until you re-enter it in Apps &gt; Slack Alerts &gt; Configuration.
+* Per-alert settings carry over unchanged.
+* Remove param.slack\_app\_oauth\_token and param.webhook\_url from local/alert\_actions.conf. 3.x ignores them.
+* Grant the read\_slack\_alerts\_credential capability to alert owners other than admin and sc\_admin, or assign them the slack\_alert\_action role.
+
+Upgrading from 3.0.0
+
+* Settings on the Configuration page carry over unchanged.
+* Alert owners other than admin and sc\_admin fail with exit code 7 until they hold read\_slack\_alerts\_credential. Grant the capability, or assign them the slack\_alert\_action role.
+* Owners stop needing list\_settings and list\_storage\_passwords for Slack alerts. Revoke them if you granted them only for this app.
+
+Added
+
+* Configuration page in place of the legacy setup page.
+* Logging tab on the Configuration page.
+* read\_slack\_alerts\_credential capability and a slack\_alert\_action role that grants it.
+* Credential reads are logged to slack\_alerts\_credential\_broker.log.
+
+Changed
+
+* Supports Splunk Enterprise 10.0-10.6 and Splunk Cloud Platform.
+* The Slack App OAuth token and webhook URL are stored encrypted.
+* Alert owners need read\_slack\_alerts\_credential in place of list\_settings and list\_storage\_passwords.
+* An enabled proxy with an empty host or invalid port fails the alert instead of sending direct.
+
+Removed
+
+* Python 2 support.
+
+Fixed
+
+* Alerts owned by non-admin users failing with exit code 2.
+* Alerts with zero results failing with exit code 2.
+
+Known issues
+
+* On Splunk Enterprise, a SPLUNK\_BINDIP set to a routable address fails every alert with exit code 7 and status 403.
+* On Splunk Enterprise, the app adds an unused sc\_admin role.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Sends Splunk alert messages to Slack channels using OAuth tokens or webhook URLs with support for custom messages and attachments.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Send Splunk alert results to a Slack channel through a Slack App OAuth token (chat.postMessage) or an incoming webhook URL.
+
+- Stores the Slack App OAuth token and webhook URL encrypted.
+- Set the channel, message, attachment, and fields per alert.
+- Override the token, webhook URL, or proxy per alert.
+- Sends through a proxy.
+
+Source code and issues: https://github.com/splunk/slack-alerts&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/08027582-c2a2-11f1-aea0-0a229fcae80d.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Security Center of Excellence</dc:creator>
+      <pubDate>Wed, 07 Oct 2026 23:28:11 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/2878/#v3.1.0</guid>
+    </item>
+    <item>
+      <title>Binary Defense - v0.1.2 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9942/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;The Binary Defense app provides a centralized repository of knowledge objects that support Binary Defense&amp;#x27;s detection rules running in customer Splunk environments.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Binary Defense app provides a centralized repository of knowledge objects that support Binary Defense&amp;#x27;s detection rules running in customer Splunk environments.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/044a26f8-be6d-11f1-860e-f2d838dab173.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Christopher Rex</dc:creator>
+      <pubDate>Wed, 07 Oct 2026 22:09:28 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9942/#v0.1.2</guid>
+    </item>
+    <item>
+      <title>CrowdStrike Scheduled Search Technical Add-on - v3.1.3 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6902/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&lt;u&gt;**Bug Fixes:** &lt;/u&gt;
+
+* Checkpoint storage issue causing 404/500 errors
+
+&lt;u&gt;**Improvements:** &lt;/u&gt;
+
+* Splunk 10.x compatibility
+* FalconPy SDK update, &amp; Python dependency upgrades
+* UCC 6.4.0 UI framework
+
+&lt;u&gt;**Compatibility:**&lt;/u&gt;****&amp;#x20;
+
+* Splunk 8.0+
+* Python 3.9/3.13
+* all CrowdStrike cloud regions&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The CrowdStrike Falcon Platform provides customers with extensive visibility into the configuration of and events taking place on endpoints and workloads. While triggered detections are an important part of endpoint security, CrowdStrike also provides the ability to search the raw event data. Scheduled searches can be used to automate the recurrence of those searches. This technical add-on allows CrowdStrike Falcon customers to retrieve successful scheduled searched from the Falcon platform via public APIs and have the events indexed into Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0c3d62be-c1d1-11f1-8015-46c5779ac0e1.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">CrowdStrike</dc:creator>
+      <pubDate>Wed, 07 Oct 2026 21:05:06 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6902/#v3.1.3</guid>
+    </item>
+    <item>
+      <title>Polyswarm App - v1.1.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9745/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;The three dashboards were rebuilt to the approved design: new panels, the brand
+palette, and a per-engine swarm drawing on Overview and Triage. Two changes are
+behaviour rather than appearance and matter before you upgrade. **Triage is now
+a per-indicator detail page.** The free-text base search box is gone; run
+`polyswarmsearch` in the ordinary search bar over your own search, then open
+Triage on one indicator from that result's field menu, through the new Triage in
+PolySwarm workflow action on a hash field. The hash field, indicator limit and
+time range inputs went with the box. **`polyswarmusage` gained a `refresh`
+option**, so the Overview entitlement panel reads the stored answer instead of
+showing an unrendered panel on a fresh install, and reaches PolySwarm only when
+you select Refresh now. A search that enriches nothing no longer needs a stored
+credential. Opening any page in the app now costs nothing under any
+circumstances: the only panel on any dashboard that can reach PolySwarm is
+Overview's entitlement refresh, and it does so only when you select Refresh now.
+No role, permission or capability changed, and every search a 1.0.0 install runs
+today runs the same way.
+
+Two smaller things to know on upgrade. **The page background files were
+renamed.** Splunk serves them with a one year cache at an address that carries
+no version, so an upgrading install would otherwise have kept 1.0.0's artwork
+for up to a year; the names now change whenever the artwork does, and your
+browser fetches the new art on first open. **Four readings came off the Overview
+entitlement panels**, the plan name, the trial flag, the overage and the plan
+period, because ten columns in that space left each one narrower than its own
+sort control. All four are still returned by the searches behind those panels,
+so `polyswarmusage` in the search bar still reports every one of them. Two
+panels were also corrected after the first render against a populated cache: the
+engine swarm's centre now reports the detection count PolySwarm published rather
+than recounting it from the assertions, so it agrees with the Verdict panel
+beside it, and the artifact origins chart draws one bar per country instead of
+plotting country names on a numeric scale.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Enriches hashes, URLs, and domains with crowd-sourced malware verdicts, attribution, and sandbox detonation results from the PolySwarm threat intelligence platform.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The PolySwarm App integrates crowd-sourced malware threat intelligence into Splunk by enriching indicators of compromise with verdicts derived from multiple detection engines. The app processes hashes, URLs, and domains found in Splunk events, annotating them with threat scores, verdict classifications, and detection counts sourced from the PolySwarm platform. It extracts and refangs indicators from raw text fields within the search head environment and submits artifacts to a cloud-based sandbox for behavioral analysis. Search results are augmented with metadata including malware family attribution, file type classification, and aggregated security vendor assessments. The app operates entirely on the search head tier and relies on a key-value store to cache verdict data, track sandbox task state, and maintain modular input checkpoints. Data enrichment occurs through five specialized search commands that query the PolySwarm API, returning threat intelligence without requiring data to leave the Splunk deployment. Events tagged with the polyswarm:artifact source type represent intelligence pulled from the PolySwarm feed and sandbox task results. The app includes dashboards for reviewing enrichment activity, monitoring sandbox detonations, and triaging indicators flagged by scheduled searches. Workflow actions provide analysts with one-click enrichment from search result tables and direct navigation to the PolySwarm portal for detailed artifact analysis.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9b67c1ee-c0de-11f1-8d67-bed29783d393.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Erick Ingleby</dc:creator>
+      <pubDate>Wed, 07 Oct 2026 20:40:05 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9745/#v1.1.0</guid>
+    </item>
     <item>
       <title>runZero Asset Inventory - v3.3.7 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/6549/</link>
@@ -151,14 +274,6 @@ Documentation: https://www.outcoldsolutions.com/docs/ai-agent/&lt;/p&gt;&lt;img 
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Outcold Solutions LLC</dc:creator>
       <pubDate>Wed, 07 Oct 2026 13:09:35 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/9973/#v1.0.0</guid>
-    </item>
-    <item>
-      <title>Binary Defense - v0.1.2 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/9942/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Provides shared knowledge objects (macros, lookups, and field normalizations) that support Binary Defense&amp;#x27;s detection rules in customer Splunk environments.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Binary Defense app provides a centralized repository of knowledge objects that support Binary Defense&amp;#x27;s detection rules running in customer Splunk environments. This foundation app contains macros, lookups, and field normalizations that are shared across all Binary Defense detections deployed in the environment. The knowledge objects are configured with global sharing, making them accessible to correlation searches in any app, including Splunk Enterprise Security. The app serves as a prerequisite component for Binary Defense&amp;#x27;s security content, ensuring consistent data normalization and lookup functionality across all detection rules. It includes an Overview dashboard for monitoring the app&amp;#x27;s operational status.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/044a26f8-be6d-11f1-860e-f2d838dab173.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Christopher Rex</dc:creator>
-      <pubDate>Wed, 07 Oct 2026 12:45:40 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9942/#v0.1.2</guid>
     </item>
     <item>
       <title>App for Cilium - v0.5.0 [New App Release]</title>
@@ -1464,36 +1579,6 @@ The Nozomi Networks Universal Add-on works with N2OS version 24 and higher.&lt;/
       <guid>https://splunkbase.splunk.com/app/9079/#v1.0.2</guid>
     </item>
     <item>
-      <title>Salesforce Commerce Cloud Connector for CX Monitoring - v6.16.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6570/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;The Salesforce Commerce Cloud (SFCC) Connector is part of a comprehensive CX Monitoring solution, offering 360° monitoring with self-healing and 110+ rt alerts. It performs millions of real-time checks across logs, orders, products, pricebooks, inventory, eCDN, and customer data. Gain visibility into 200+ KPIs to detect CX issues, optimize operations, and prevent revenue loss.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Salesforce Commerce Cloud (SFCC) Connector empowers businesses with powerful tools to monitor and optimize the CX journey. The solution features 360-degree data ingestion self-monitoring with robust autohealing mechanisms, ensuring high reliability and operational efficiency.
-
-This is a fully automated system equipped with 110+ SFCC alerts based on real-life use cases that address potential issues leading to significant revenue loss. These alerts perform millions of near real-time checks across all included data sources, ensuring comprehensive monitoring and swift detection of anomalies.
-
-This solution offers seamless integration, providing data inputs to ingest logs, order events, products, pricebook, inventory, eCDN logs, customer registrations, logins, and audit tracking. It enables visibility through dashboards and alerts based on 200+ crucial business KPIs, ensuring your business stays proactive in handling CX complexities.
-
-Tools Provided to detect and troubleshoot a wide range of critical issues, including:
- - Third-Party Integrations - monitor integration failures and outages.
- - Checkout Issues - identify bottlenecks and interruptions within the checkout process.
- - Anti-Fraud Integrations - detect anomalies in fraud prevention systems.
- - Payment Integrations - monitor payment system availability and performance.
- - Orders Velocity - analyze and respond to order processing fluctuations.
- - Order Flow Anomaly Detection - identify irregularities in the order lifecycle.
- - Jobs Performance - track and optimize scheduled job execution.
- - Product Data Flows - ensure seamless catalog imports, inventory updates, and pricebook synchronization.
- - eCDN Velocity and Availability - monitor eCDN performance and ensure uninterrupted service.
- - Release and Replication Errors - detect and resolve issues arising during deployments or data replications.
-
-Please note that usage of this connector requires an additional dashboard app and license to operate fully. 
-
-Contact us at : sales@aiopsgroup.com 
-
-or visit our page : https://www.valantic.com/en/cx/services/cx-monitoring/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/43fc4c58-bb49-11f1-89d1-c23cef0dc2b2.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">AIOPS Group Monitoring Team</dc:creator>
-      <pubDate>Tue, 29 Sep 2026 08:48:49 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6570/#v6.16.0</guid>
-    </item>
-    <item>
       <title>DBX addon for clickhouse (sample) - v1.0.2 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/8832/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;updated the configuration trigger&amp;#x20;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Provides a custom JDBC driver package that enables Splunk DB Connect to connect to ClickHouse Cloud databases.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk DBX Add-on for Clickhouse extends Splunk DB Connect by providing a custom JDBC driver package specifically designed to connect to ClickHouse Cloud databases. This add-on addresses the absence of native ClickHouse support in Splunk DB Connect by bundling the clickhouse-jdbc driver along with the necessary configuration files. Once installed and registered with DB Connect, the add-on enables ClickHouse as a selectable database type, allowing administrators to configure connections, execute queries, and ingest data from ClickHouse instances. The add-on uses an all-in-one JAR distribution to ensure compatibility with DB Connect&amp;#x27;s class loader architecture and to prevent dependency-related runtime errors that can occur with multi-JAR configurations.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
@@ -1610,32 +1695,6 @@ Requires an active QuantumGenie account and an Integration API token, generated 
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Srijan Dhare</dc:creator>
       <pubDate>Mon, 28 Sep 2026 15:26:31 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/9474/#v0.1.1</guid>
-    </item>
-    <item>
-      <title>Network Behavior Analytics for Splunk - v2.5.4 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4052/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;This release adds compatibility with Python 3.13.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Hundreds of security teams use this app to process CIM compliant DNS, IP, HTTP, TLS, and DHCP events within Splunk and flag compromised hosts. Use Network Behavior Analytics for Splunk to instantly uncover DNS and ICMP tunnels, DGA traffic, C2 callbacks and implant beaconing, data exfiltration, Tor and I2P anonymizing circuit activity, cryptomining, and threats without known signatures or indicators.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f49199ce-bb3f-11f1-9358-f6c18cb049d6.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">AlphaSOC, Inc.</dc:creator>
-      <pubDate>Mon, 28 Sep 2026 13:34:48 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4052/#v2.5.4</guid>
-    </item>
-    <item>
-      <title>Cato Networks CIM Add-on for Splunk - v1.0.66 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8563/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Removal of redundant event type mapping from authentication CIM model&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Technology add-on that maps Cato SASE platform events and flows to the Splunk Common Information Model (CIM).&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Cato Networks provides a cloud-native, single-vendor SASE platform that converges networking and security in a global cloud service. The Cato Networks CIM Add-on for Splunk normalizes Cato platform events and flow telemetry to the Splunk Common Information Model (CIM).
-
-This add-on enables Cato telemetry to integrate seamlessly with CIM-based applications such as Splunk Enterprise Security. It provides field extractions, tags, and data model mappings for the following CIM data models:
-
-• Network Traffic
-• Intrusion Detection
-• Network Resolution (DNS)
-• Web
-• Authentication
-• Malware
-• Change (Account Management)&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ecfe2ace-bb30-11f1-b655-1276a2495842.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cato Networks</dc:creator>
-      <pubDate>Mon, 28 Sep 2026 11:43:36 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8563/#v1.0.66</guid>
     </item>
   </channel>
 </rss>
