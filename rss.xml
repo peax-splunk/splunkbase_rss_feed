@@ -6,7 +6,21 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sat, 10 Oct 2026 20:23:26 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 10 Oct 2026 23:59:43 +0000</lastBuildDate>
+    <item>
+      <title>Log10x App - v1.1.5 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9866/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;\- A compact event's \_time is now the time in its original log line wherever the template has a timestamp, so searches and alerts over a time range select late and replayed logs by their own time. Events from templates without a timestamp keep their index time. The setting adds no licence-metered bytes. It applies where events are parsed: install the app on the indexers or heavy forwarders as well as on the search heads.
+
+\- Expanded timestamps render in UTC for every viewer at every hour of the year. Around a daylight-saving transition they could render an hour off for a viewer in a zone that observes one, and a zone in the timestamp format printed the viewer's offset; it now prints +0000 or UTC.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Send Splunk the logs that sampling and filters keep out to fit the license, on that same license. Compact events take a fraction of the volume and expand back byte-identical at search time; classic dashboards keep their SPL, and one command covers the search bar, saved searches, alerts and the REST API.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;With the Log10x App, Splunk can index compact log events and still search, chart and alert on the original lines. The 10x Receiver stores each event as a template hash plus the values that change, so a stream of repeated patterns takes less of the license. On the OpenTelemetry demo, Splunk&amp;#x27;s license meter counted 63.91% fewer bytes, encoded events and templates included, and every line expanded back byte-identical with the Receiver settings in the installation steps (measurement: https://github.com/log-10x/benchmarks/tree/main/splunk-license). The same license then holds more: sources that were sampled, filtered or kept out of Splunk to stay under the limit can come back, or the license can be smaller.
+
+Classic dashboards keep their SPL: the browser sends each panel&amp;#x27;s search to the app, which rewrites it on the server. From the search bar, saved searches, alerts and the REST API, a search is wrapped in the tx command (tenxsearch also works). An alert created in the app&amp;#x27;s Compile Alert view is compiled once into a native saved search, so the scheduler runs no Python. NOT, OR, groups, phrases, field conditions, and values such as IP addresses and hostnames behave as they do on the original data.
+
+The 10x Receiver produces compact events, and it is free on up to 10 nodes (https://www.log10x.com/pricing). No sign-up is required to evaluate it: with no license token it runs the full product for 30 days on up to 10 nodes, air-gapped, and a free license removes the time limit (https://doc.log10x.com/manage/license/). The app itself is open source under the MIT license.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/46dfd686-c500-11f1-aea0-0a229fcae80d.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Tal Weiss</dc:creator>
+      <pubDate>Sat, 10 Oct 2026 23:25:02 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9866/#v1.1.5</guid>
+    </item>
     <item>
       <title>Wind Compass - v0.5.3 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/9969/</link>
@@ -423,28 +437,6 @@ This add-on enables Cato telemetry to integrate seamlessly with CIM-based applic
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cato Networks</dc:creator>
       <pubDate>Thu, 08 Oct 2026 13:02:24 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8563/#v1.0.83</guid>
-    </item>
-    <item>
-      <title>Log10x App - v1.1.4 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/9866/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;\- The app's searchable copy of each template is now written with Splunk's \`collect\` as sourcetype \`stash\`, which Splunk does not count against the licence. Template records sent by the Receiver are counted as before.
-
-\- Two different templates under one template hash are detected when stored. Their events stay compact and carry \`tenx\_expand\_refused\=hash-conflict\` instead of expanding with the wrong text, and the Diagnostics dashboard lists them.
-
-\- A stored template that is a cut-short copy of the one the Receiver sends is replaced by the whole template.
-
-\- A compact event from a template with no values now expands.
-
-\- The new \`tx\` command takes the search as written, with no \`searchstring\=\` option and no escaped quotes: \`| tx index\=app\_logs sourcetype\=tenx\_encoded &quot;payment failed&quot; NOT retry\`. \`tenxsearch\` works as before.
-
-\- Recompile all managed alerts keeps the rest of an alert's pipeline, such as \`| stats count\`, when it converts a \`tenxsearch\` alert, and converts \`tx\` alerts too.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Send Splunk the logs that sampling and filters keep out to fit the license, on that same license. Compact events take a fraction of the volume and expand back byte-identical at search time; classic dashboards keep their SPL, and one command covers the search bar, saved searches, alerts and the REST API.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;With the Log10x App, Splunk can index compact log events and still search, chart and alert on the original lines. The 10x Receiver stores each event as a template hash plus the values that change, so a stream of repeated patterns takes less of the license. On the OpenTelemetry demo the bytes sent to Splunk shrank by 63.7%, encoded events and template dictionary counted together, and every line expanded back byte-identical with the Receiver settings in the installation steps (measurement: https://www.log10x.com/blog/cutting-splunk-log-storage/). The same license then holds more: sources that were sampled, filtered or kept out of Splunk to stay under the limit can come back, or the license can be smaller.
-
-Classic dashboards keep their SPL: the browser sends each panel&amp;#x27;s search to the app, which rewrites it on the server. From the search bar, saved searches, alerts and the REST API, a search is wrapped in the tenxsearch command. An alert created in the app&amp;#x27;s Compile Alert view is compiled once into a native saved search, so the scheduler runs no Python. NOT, OR, groups, phrases, field conditions, and values such as IP addresses and hostnames behave as they do on the original data.
-
-The 10x Receiver produces compact events, and it is free on up to 10 nodes (https://www.log10x.com/pricing). No sign-up is required to evaluate it: with no license token it runs the full product for 30 days on up to 10 nodes, air-gapped, and a free license removes the time limit (https://doc.log10x.com/manage/license/). The app itself is open source under the MIT license.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/98bfe2b2-c310-11f1-aea0-0a229fcae80d.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Tal Weiss</dc:creator>
-      <pubDate>Thu, 08 Oct 2026 12:10:03 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9866/#v1.1.4</guid>
     </item>
     <item>
       <title>Neotelix - v1.1.0 [New App Release]</title>
