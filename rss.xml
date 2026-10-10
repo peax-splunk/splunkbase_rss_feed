@@ -6,7 +6,37 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sat, 10 Oct 2026 16:01:51 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 10 Oct 2026 20:23:26 +0000</lastBuildDate>
+    <item>
+      <title>Wind Compass - v0.5.3 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9969/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Animated wind compass for Splunk Dashboard Studio. Works instantly with live Open-Meteo data by city, or bind your own search. Direction, speed, temperature, and weather icon on Clean, Marine, and Instrument skins.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Wind Compass is a custom visualization for Splunk Dashboard Studio (Splunk 10.4+) that renders an animated compass showing wind direction, speed, and weather condition — with no search required.
+
+Animated wind compass for Splunk Dashboard Studio. Works instantly with live Open-Meteo data by city, or bind your own search. Direction, speed, temperature, and weather icon on Clean, Marine, and Instrument skins.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ee741c00-c4c8-11f1-aea0-0a229fcae80d.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Tomas Baublys</dc:creator>
+      <pubDate>Sat, 10 Oct 2026 16:56:15 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9969/#v0.5.3</guid>
+    </item>
+    <item>
+      <title>Whiteboard App - v0.3.75 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8908/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**Splunkbase AppInspect fixes**
+
+* Cleared the &quot;public IP `3.57.65.44`&quot; rejection. There is no address: SVG path data lets numbers run together, because a second decimal point always begins a new number, so that run is the three coordinates `3.57`, `0.65` and `0.44`. All 20 hits came from icon artwork inside Excalidraw.
+* The build now separates those runs at a boundary the parser already recognised, leaving rendering untouched — across the 14 affected paths the parsed number sequences are identical before and after. `scripts/space-svg-path-numbers.py` is confined to `d=&quot;...&quot;` attributes and **fails the build** if an IP-shaped string survives outside path data.
+* Removed `[install] state_change_requires_restart`, which forced a splunkd restart on every enable/disable. No `[triggers]` stanza replaces it: that is only for an app's own custom conf files, and configuring it for `collections.conf`/`transforms.conf` is itself an AppInspect failure.
+
+**Shape library**
+
+* Inserts as **SVG Icon** by default, listed first, with *Elements* relabelled **Text**. Sticky notes and zones have no icon artwork and still insert as editable elements.
+* The toggle row wraps instead of compressing: `all: unset` strips the buttons' sizing, so without `flex-shrink: 0` the label spilled out of its own highlight.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collaborative Excalidraw whiteboard inside Splunk for platform architecture and workshop diagrams. Splunk shapes, example boards, and KV Store persistence — no external infrastructure.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Whiteboard App is a native Splunk canvas for architecture and workshop diagrams — no external database or middleware. Draw inside Splunk Web with Excalidraw, Splunk infrastructure shapes, and ready-made example boards; boards persist in KV Store. New boards are private by default; share with everyone on the instance when you are ready. Export PNG/SVG/JSON or walk through designs step-by-step in Present mode. Built for architects, SEs, and facilitators who sketch where their audience already works.
+
+
+Requires Splunk Enterprise or Splunk Cloud (Victoria) 9.0.0 or later. Source: https://github.com/bautt/splunk-whiteboard-app&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b985efd4-c4c6-11f1-bd65-0e6ab12b3d16.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Tomas Baublys</dc:creator>
+      <pubDate>Sat, 10 Oct 2026 16:36:59 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8908/#v0.3.75</guid>
+    </item>
     <item>
       <title>Threat Hunting Essentials - v1.3.135 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7633/</link>
@@ -970,60 +1000,6 @@ Data is sent to the Splunk HTTP Event Collector from the EasySMF Events SMF agen
       <guid>https://splunkbase.splunk.com/app/9955/#v1.0.0</guid>
     </item>
     <item>
-      <title>Wind Compass - v0.5.2 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/9969/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;\* Fixed: choosing the default red in the &quot;Needle color&quot; picker had no effect —
-
-&amp;#x20; the schema default did not match the app's, so the skin's own needle colour
-
-&amp;#x20; was used instead. On the Instrument dark skin that rendered a white needle
-
-&amp;#x20; for a user who had explicitly picked red.
-
-\* Fixed: compass cardinal labels (N/E/S/W) were sized from the panel's pixel
-
-&amp;#x20; width inside an already-scaling SVG, so they grew to a third of the dial
-
-&amp;#x20; radius on large panels and collided with the needle, while shrinking to
-
-&amp;#x20; near-invisible on small ones.
-
-\* Fixed: a non-numeric value in an optional, auto-detected column (for example
-
-&amp;#x20; a text column named &quot;temp&quot; or &quot;gusts&quot;) blanked the whole panel. Unusable
-
-&amp;#x20; optional values are now ignored and the wind still renders.
-
-\* Fixed: &quot;Speed in center hub&quot; did nothing unless &quot;Speed readout&quot; was also on,
-
-&amp;#x20; so turning the panel readout off and the hub on hid the speed entirely.
-
-\* Fixed: entering 0 in &quot;Animation (ms)&quot; fell back to 600 ms instead of
-
-&amp;#x20; disabling the animation.
-
-\* Fixed: status and error messages ignored the Theme option, so Theme \= Light
-
-&amp;#x20; on a dark dashboard left the text in the wrong palette.
-
-\* Added: &quot;Wind gusts&quot; field mapping, which existed in the app but had no
-
-&amp;#x20; control in the editor.
-
-\* Changed: documented that search mode expects km/h and °C at the input, with
-
-&amp;#x20; the unit options being display conversions on top. Editor labels now say so.
-
-\* Changed: the browser cache records a schema version, so an entry written by
-
-&amp;#x20; a different app version is discarded rather than rendered.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Animated wind compass for Splunk Dashboard Studio. Works instantly with live Open-Meteo data by city, or bind your own search. Direction, speed, temperature, and weather icon on Clean, Marine, and Instrument skins.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Wind Compass is a custom visualization for Splunk Dashboard Studio (Splunk 10.4+) that renders an animated compass showing wind direction, speed, and weather condition — with no search required.
-
-Animated wind compass for Splunk Dashboard Studio. Works instantly with live Open-Meteo data by city, or bind your own search. Direction, speed, temperature, and weather icon on Clean, Marine, and Instrument skins.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/49aec4ac-c191-11f1-876b-dad1998cf39d.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Tomas Baublys</dc:creator>
-      <pubDate>Wed, 07 Oct 2026 12:40:32 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9969/#v0.5.2</guid>
-    </item>
-    <item>
       <title>Sophos Email Security Add-on - v1.0.0 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/9971/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* First version with Sophos Central API connection to collect Sophos Email Security data from the Sophos Central XDR Data Lake.
@@ -1877,14 +1853,6 @@ The app presents this information in graphical dashboards. This integration help
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Vinod Pal</dc:creator>
       <pubDate>Wed, 30 Sep 2026 09:55:23 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7991/#v2.0.0</guid>
-    </item>
-    <item>
-      <title>Slack - v2.10.6 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5846/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Package `sh` 2.3.0 and use its v2-compatible process lookup for Slack actions.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Integrate with Slack to post messages and attachments to channels&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ebfa2a08-bc69-11f1-b635-e6eec09fb61a.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Wed, 30 Sep 2026 00:57:34 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5846/#v2.10.6</guid>
     </item>
   </channel>
 </rss>
