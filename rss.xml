@@ -6,9 +6,128 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Tue, 13 Oct 2026 12:21:41 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 13 Oct 2026 19:39:59 +0000</lastBuildDate>
     <item>
-      <title>Threat Hunting Essentials - v1.3.137 [Version Update]</title>
+      <title>Polyswarm App - v1.1.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9745/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;The three dashboards were rebuilt to the approved design: new panels, the brand
+palette, and a per-engine swarm drawing on Overview and Triage. Two changes are
+behaviour rather than appearance and matter before you upgrade. **Triage is now
+a per-indicator detail page.** The free-text base search box is gone; run
+`polyswarmsearch` in the ordinary search bar over your own search, then open
+Triage on one indicator from that result's field menu, through the new Triage in
+PolySwarm workflow action on a hash field. The hash field, indicator limit and
+time range inputs went with the box. **`polyswarmusage` gained a `refresh`
+option**, so the Overview entitlement panel reads the stored answer instead of
+showing an unrendered panel on a fresh install, and reaches PolySwarm only when
+you select Refresh now. A search that enriches nothing no longer needs a stored
+credential. Opening any page in the app now costs nothing under any
+circumstances: the only panel on any dashboard that can reach PolySwarm is
+Overview's entitlement refresh, and it does so only when you select Refresh now.
+No role, permission or capability changed, and every search a 1.0.0 install runs
+today runs the same way.
+
+Two smaller things to know on upgrade. **The page background files were
+renamed.** Splunk serves them with a one year cache at an address that carries
+no version, so an upgrading install would otherwise have kept 1.0.0's artwork
+for up to a year; the names now change whenever the artwork does, and your
+browser fetches the new art on first open. **Four readings came off the Overview
+entitlement panels**, the plan name, the trial flag, the overage and the plan
+period, because ten columns in that space left each one narrower than its own
+sort control. All four are still returned by the searches behind those panels,
+so `polyswarmusage` in the search bar still reports every one of them. Two
+panels were also corrected after the first render against a populated cache: the
+engine swarm's centre now reports the detection count PolySwarm published rather
+than recounting it from the assertions, so it agrees with the Verdict panel
+beside it, and the artifact origins chart draws one bar per country instead of
+plotting country names on a numeric scale.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;PolySwarm malware threat intelligence and file reputation for Splunk Enterprise and Splunk Cloud Platform. Hash lookup and IOC enrichment for file hashes, URLs and domains: crowd-sourced verdicts from many engines, malware family attribution, sandbox detonation, and an opt-in threat intel feed.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The PolySwarm App integrates crowd-sourced malware threat intelligence into Splunk by enriching indicators of compromise, or IOCs, with verdicts derived from multiple detection engines. It is a file reputation and hash lookup source for the SOC: the app processes hashes, URLs, and domains found in Splunk events, annotating them with threat scores, verdict classifications, and detection counts sourced from the PolySwarm platform.
+
+It extracts and refangs indicators from raw text fields within the search head environment, at no cost and with no API key, and submits artifacts to a cloud-based sandbox for behavioral analysis. Search results are augmented with metadata including malware family attribution, file type classification, and aggregated security vendor assessments.
+
+The app operates entirely on the search head tier and relies on a key-value store to cache verdict data, track sandbox task state, and maintain modular input checkpoints. Enrichment occurs through five specialized search commands that query the PolySwarm API: the indicators being looked up are sent to PolySwarm, and nothing else from the deployment is transmitted. A local verdict cache means a repeated indicator costs nothing, and every metered request carries an explicit ceiling.
+
+Events tagged with the polyswarm:artifact source type represent threat intel pulled from the PolySwarm feed and from sandbox task results. Three dashboards cover enrichment activity and entitlement, sandbox detonations, and per-indicator triage, and opening any of them is free because no panel calls PolySwarm. Four workflow actions give an analyst one-click enrichment from a search result&amp;#x27;s field menu, enrichment with attribution, direct navigation to the PolySwarm portal, and the Triage page opened on that indicator.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a94c630e-c73d-11f1-af5f-a24df39d4ff6.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Erick Ingleby</dc:creator>
+      <pubDate>Tue, 13 Oct 2026 19:39:31 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9745/#v1.1.0</guid>
+    </item>
+    <item>
+      <title>NVD CVE Add-on - v1.0.3 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7946/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This is an add-on to pull CVE records from the NIST CVE database. It offers customization of checkpoint type (based on publish time, modify time, index, or none), keyword searches, data fields of the CVEs to display, languages in the CVE description, and any other field supported by the NIST CVE API. It also supports proxies.
+
+NOTE: This product uses the NVD API but is not endorsed or certified by NIST or the NVD.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/081ffbac-c67b-11f1-ba3a-b69af59b06d0.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">marlin arnall</dc:creator>
+      <pubDate>Tue, 13 Oct 2026 18:08:37 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7946/#v1.0.3</guid>
+    </item>
+    <item>
+      <title>Slack Notification Alert - v3.1.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/2878/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Added:
+
+* default/props.conf, which assigns the slack\_alerts:log sourcetype to all logs generated by this app.
+
+Changed
+
+* The alert action logs to slack\_alerts\_alert.log.
+
+Fixed
+
+* Alert action logs landing in the cim\_modactions index on search heads that run the Splunk Common Information Model add-on.
+
+Upgrade notes
+
+* Point saved searches and alerts that monitor this app at index\=\_internal sourcetype\=slack\_alerts:log, or source\=\*slack\_alerts\_alert.log for the alert action.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Sends Splunk alert messages to Slack channels using OAuth tokens or webhook URLs with support for custom messages and attachments.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Send Splunk alert results to a Slack channel through a Slack App OAuth token (chat.postMessage) or an incoming webhook URL.
+
+- Stores the Slack App OAuth token and webhook URL encrypted.
+- Set the channel, message, attachment, and fields per alert.
+- Override the token, webhook URL, or proxy per alert.
+- Sends through a proxy.
+
+Source code and issues: https://github.com/splunk/slack-alerts&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/56f06200-c71e-11f1-876f-f29e67cfea79.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Security Center of Excellence</dc:creator>
+      <pubDate>Tue, 13 Oct 2026 17:28:42 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/2878/#v3.1.1</guid>
+    </item>
+    <item>
+      <title>Bitdefender GravityZone Data Collector - v1.0.6 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8267/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;# Version 1.0.6
+
+A maintenance release: a fix that matters on busy systems, a safeguard, and a small addition. It installs over 1.0.5 or 1.0.4 and keeps your inputs and settings.
+
+## Fixed
+
+* **Change lists no longer leave changes out.** *Recent changes* on Incident Overview and the change feed on Incident Changes now list every change of every update. In 1.0.5, once the selected period held a few hundred updates, the search behind them reached Splunk's memory limit for expanding results (`mvexpand`, 500 MB by default): Splunk showed a warning and silently dropped most of the changes. The search now carries only each incident's summary fields while listing its changes.&amp;#x20;
+
+## Improved
+
+* **Most active incidents**, on Incident Changes, shows each incident's type, EDR or XDR, like the other incident lists.
+
+## Upgrading
+
+* **From 1.0.5:** install 1.0.6 over it and restart Splunk. There is nothing to reconfigure, and data already indexed is unaffected.
+* **From 1.0.4:** the same, but read the version 1.0.5 release notes first: incident collection changed in 1.0.5, and the licence volume grows.
+* If you edited one of the add-on's dashboards in Splunk, your edited copy replaces the add-on's own and does not receive these changes.
+
+## Requirements
+
+Unchanged from 1.0.5: Splunk Enterprise 8.1 or later, and a GravityZone API key with access to the Incidents API (`getIncidentsList`, `getIncidentsByIds`) and the Accounts API (`getActivityLogsForCompany`).&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects Bitdefender GravityZone security incidents (EDR and XDR) and the complete console activity log into Splunk. Every change to an incident is indexed with a readable summary of what changed, console actions on incidents are linked to the incidents they affected, and four dashboards cover triage, incident history, response times and ingestion health.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Bitdefender GravityZone Data Collector brings GravityZone security incidents and console activity into Splunk.
+
+GravityZone incidents do not stand still: alerts are added, more endpoints become involved, severity changes, and analysts assign, prioritise, comment on and close them. The add-on collects that whole history, so you can triage, investigate and report on GravityZone incidents alongside the rest of your security data.
+
+It collects two kinds of data through the GravityZone API, one input per GravityZone company, so a single Splunk deployment can follow many companies, as partners and managed service providers need. The first is security incidents, both endpoint (EDR) and extended (XDR): every time an incident changes, the add-on indexes the new version with a field-level diff and a short, readable summary of what changed. The second is console activity: every entry of the company&amp;#x27;s GravityZone user activity log, such as sign-ins and failed sign-ins, changes to users and companies, tasks, quarantine actions and actions on incidents, each indexed as its own searchable event. Actions on incidents are also linked to the incidents they affected.
+
+Four dashboards are included. Incident Overview shows what is open, how serious it is, who owns it, who initiated it and what GravityZone did about it. Incident Changes is a filterable feed of changes, with severity and priority escalations and re-opened incidents. Incident Detail shows the current state and full history of one incident, with its alerts, nodes and notes, the incidents GravityZone grouped with it, and who changed it in the console. SLA and Ingestion Health shows the time taken to assign and to resolve incidents, open work by owner, and whether every input is collecting.
+
+The dashboards focus on incidents; the complete console activity log is available to your own searches, selected by gz_event_type=activity_log. All data uses the bitdefender:gravityzone sourcetype, with plain summary fields named gz_* that keep your own searches simple and fast.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e927642a-c70a-11f1-8cc4-12dbbc6c7195.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Bitdefender LLC</dc:creator>
+      <pubDate>Tue, 13 Oct 2026 15:21:57 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8267/#v1.0.6</guid>
+    </item>
+    <item>
+      <title>Threat Hunting Essentials - v1.3.138 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7633/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
 
@@ -42,8 +161,224 @@ You can easily configure the scan interval in the app’s settings. The real-tim
 
 Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/70f31294-c6f9-11f1-9eaf-de83f1e47b6b.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
-      <pubDate>Tue, 13 Oct 2026 11:30:40 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.137</guid>
+      <pubDate>Tue, 13 Oct 2026 14:12:16 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.138</guid>
+    </item>
+    <item>
+      <title>Network Topology Dashboard - v1.1.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5612/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Version 1.1.1 modernizes the Network Topology Dashboard and makes the application fully self-contained.
+The custom Network Topology visualization is now included directly in the app, so the separate **Network Topology - Custom Visualization (app 3762)** dependency is no longer required.
+The visualization was also updated to remove outdated and vulnerable JavaScript libraries, improving overall security and compatibility with current Splunk Enterprise versions.
+Additional improvements include updated application metadata and icons, improved installation and configuration documentation, and clarification that the included SNMP/CDP collector is designed for **Cisco network devices**.
+The scheduled lookup-generation search is now disabled by default to prevent bundled demo data from being overwritten before a real topology data source is configured.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This application is used to visualize the topology of an enterprise network. 
+Using the application, you can visualize a graph representing the relationship between different nodes, flexible filtering by sites and subnets.
+This dashboard has 5 panels:
+1) Visualization of network topology
+2) All events of the network node
+3) Description of the network node (ip address, host name, product name, serial number, version)
+4) The last commands entered by the administrator on the network node
+5) Graphics of incoming events by hosts
+
+This application comes with a script using the SNMP protocol to collect data about network nodes based on Cisco and instruction for creating a report in which the data is divided by sites, subnets, and devices.
+For the working of application, you need to install the &amp;quot;Network Topology - Custom Visualization (https://splunkbase.splunk.com/app/3762/)&amp;quot; application, the functionality of which is the basis.
+
+Detailed instructions for using the application in the README.txt file.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d22928f8-c705-11f1-8cc4-12dbbc6c7195.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyberfox DEVELOPER</dc:creator>
+      <pubDate>Tue, 13 Oct 2026 13:45:46 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5612/#v1.1.1</guid>
+    </item>
+    <item>
+      <title>Deslicer AI Insights Add-on - v1.1.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8558/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;[](https://github.com/deslicer/deslicer-ai-insights-for-splunk/blob/development/CHANGELOG.md#111--2026-10-07)
+
+### Fixed
+
+[](https://github.com/deslicer/deslicer-ai-insights-for-splunk/blob/development/CHANGELOG.md#fixed-4)
+
+* **Splunk Cloud / AppInspect:** Package-time injection of `python.required = 3.13` for the Deslicer Investigate alert action (resolves AppInspect `check_alert_actions_conf_python_required`; required to maintain Splunkbase Cloud compatibility after the 1.1.0 listing window).
+* **Search head clustering:** `conf_replication_include.enrollment = false` in `server.conf` so enrollment tokens are not replicated across SHC members.
+* Deslicer Investigate alert action: UCC Python path setup and alert-parameter schema fixes for the saved-search API token field.
+
+### Changed
+
+[](https://github.com/deslicer/deslicer-ai-insights-for-splunk/blob/development/CHANGELOG.md#changed-2)
+
+* **Removed packaged default modular-input instance** (`[deslicer_ai_insights://default]` from `default/inputs.conf`). The package retains scheme-level metadata only. Operators must create a named instance via the Inputs UI or an operator-chosen stanza in `local/inputs.conf` (Deployment Server).
+* **Upgrade decision: delete (no disabled tombstone).** Splunk app upgrades replace package `default/` files; a removed default-layer stanza does not persist unless copied into `local/`. A one-release disabled tombstone would re-ship a package-owned named instance and is reserved only if a real Splunk 9.x/10.x upgrade E2E proves unexpected retention.
+* **Non-destructive local-input guarantee:** package upgrades never delete or edit `local/inputs.conf`. Customer and UCC-created stanzas remain byte-for-byte.
+
+### Added
+
+[](https://github.com/deslicer/deslicer-ai-insights-for-splunk/blob/development/CHANGELOG.md#added-2)
+
+* **Observer connection probe** on the Configuration tab — on-demand HTTPS reachability check to the configured Observer API URL before saving accounts.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;The real-time configuration observation layer for the Deslicer Automation Platform. Every Splunk Enterprise host streams live, CIM-compliant configuration state — enabling drift detection, AI-driven recommendations, and safe audited deployments across your entire fleet.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Deslicer AI Insights Add-on is the real-time configuration observation layer for the Deslicer Automation Platform (DAP) — giving Splunk administrators live visibility into the configuration state of every host in their deployment, and unlocking AI-driven automation across the entire Splunk estate.
+
+The Insights Add-on runs on all Splunk Enterprise hosts — indexers, search heads, heavy forwarders, and cluster managers — continuously observing and reporting configuration state to the DAP Observer. This real-time stream of configuration intelligence is what enables DAP to detect drift the moment it happens, power AI-driven change recommendations, and safely execute audited deployments with human approval at every step.
+
+All events are indexed with CIM-compliant field extractions (sourcetype: deslicer:insights:node), mapped to the Change, Authentication, and Application State data models — ready for Enterprise Security, custom correlation searches, and CIM-based reporting out of the box.
+
+On search heads and SHC members, enable the add-on in Splunk Web to access the Insights Node Monitoring dashboard — visibility into the health, activity, and status of every collector node across your fleet.
+
+Deslicer AI connects directly to this live configuration data stream, giving purpose-built agents real Splunk context — not guesses. Agents automate daily health checks, GDI onboarding, deployment planning, and more. Every change requires explicit human approval with cryptographic signing and a full audit trail.
+
+Deslicer runs fully on-premises (Kubernetes, Docker, air-gapped) or as SaaS — your data stays inside your perimeter when required.
+
+Sign up at https://deslicer.ai to connect your Splunk deployment and unlock the full value of real-time configuration intelligence.
+
+Splunk EMEA Technology Innovation Partner 2025.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/95f78824-c706-11f1-84f2-6a7dc70e9d5d.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Deslicer AB</dc:creator>
+      <pubDate>Tue, 13 Oct 2026 13:15:26 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8558/#v1.1.1</guid>
+    </item>
+    <item>
+      <title>Log Continuity Manager for Splunk - v1.2.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8958/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Version 1.2.2
+
+
+
+Bug Fixes
+
+\- Fixed a Quick Add Target issue where successfully created monitoring targets could incorrectly be reported as blocked with &quot;target\_id not found&quot;.
+
+\- Removed the unnecessary immediate post-create collection read that caused false-negative create results, especially noticeable in distributed/Search Head Cluster environments.
+
+\- Preserved deterministic target IDs, duplicate prevention, runtime locking and existing target validation behavior.
+
+\- Actual KV Store write failures continue to be reported correctly.
+
+
+
+Validation
+
+\- Added regression coverage for delayed KV Store read visibility after successful inserts.
+
+\- Verified duplicate-safe Quick Add behavior.
+
+\- Full Python, JavaScript, XML and configuration validation completed successfully.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;A Splunk app for monitoring log continuity, detecting individual and mass interruptions, tracking recovery, and managing monitoring targets with KV Store-backed state.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Log Continuity Manager for Splunk helps teams detect, manage and investigate log ingestion interruptions across monitored hosts, indexes, sources and sourcetypes.
+
+The app supports target-based continuity monitoring, interruption detection, recovery tracking, maintenance and redundancy-aware handling, and operational dashboards for monitoring status and history.
+
+Version 1.2.1 adds Mass Interruption monitoring with Host Count and Percentage thresholds, scoped policies for host_index, host_index_source and host_index_sourcetype targets, interruption/reminder/recovery email notifications, notification delivery visibility, KV Store-backed runtime state, and improved Search Head Cluster readiness.
+
+The app is designed for Splunk Enterprise environments where continuous log visibility and rapid identification of ingestion gaps are operationally important.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/3a4ad9c8-c705-11f1-876f-f29e67cfea79.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Furkan KILINC</dc:creator>
+      <pubDate>Tue, 13 Oct 2026 12:57:55 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8958/#v1.2.2</guid>
+    </item>
+    <item>
+      <title>Nifi Monitoring TA - v2.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6124/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;2.0.0 — NiFi 2.x support and a new configuration screen
+
+Read the upgrade guide before installing over 1.x: [https://kudawdev.github.io/nifi-monitoring-splunk/upgrading/](https://kudawdev.github.io/nifi-monitoring-splunk/upgrading/)
+
+BREAKING CHANGES
+
+* Splunk 9.4 is the minimum.
+* TLS certificates are verified by default. Over HTTPS, set a CA bundle path, or turn verification off deliberately.
+* Status history has new sourcetypes: nifi:api:processors\_status and nifi:api:process\_groups\_status, one event per snapshot. nifi:api:\*\_history remains for the push path only.
+* nifi:api:site\_to\_site and nifi:api:controller\_cluster are no longer collected.
+* Passwords are stored per input. A 1.x input keeps working, with a warning, until it is opened and saved again.
+* The add-on now appears in the app menu, with its own configuration screen.
+
+NEW
+
+* NiFi 2.x support from the same input: the add-on detects the NiFi version per input and adapts.
+* A configuration screen built with UCC: grouped form with validation, a Test connection button, and a Logging tab.
+* Clusters detected automatically, with per-node diagnostics and bulletins that name their node.
+* Custom endpoints: any NiFi REST path, indexed as nifi:api:custom:{name}.
+* Flow metrics from /flow/metrics/json (NiFi 1.16 or later), off by default.
+* Bulletins polled from the bulletin board with a cursor, without a reporting task.
+* nifi:log:deprecation and nifi:log:request monitors for the Universal Forwarder.
+
+FIXES
+
+* The add-on logs in before its first request instead of a 401 per endpoint on every cold start.
+* A failing custom endpoint writes no event; error bodies used to be indexed as data.
+* The token and the bulletin cursor no longer live in a file inside the app, which was lost on reinstall and could be overwritten between two inputs.
+* An input with no Host sends its events under the input's name instead of $decideOnStartup.
+
+Full notes: [https://github.com/kudawdev/nifi-monitoring-splunk/blob/main/CHANGELOG.md](https://github.com/kudawdev/nifi-monitoring-splunk/blob/main/CHANGELOG.md)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects Apache NiFi status, diagnostics, bulletins and metrics through its REST API, and parses NiFi&amp;#x27;s logs, for the Nifi Monitoring app. NiFi 1.16–1.28 and 2.x.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Nifi Monitoring TA gets Apache NiFi&amp;#x27;s data into Splunk and normalizes it for the Nifi Monitoring app (https://splunkbase.splunk.com/app/6125), which depends on it.
+
+* A modular input polls NiFi&amp;#x27;s REST API — flow status, system diagnostics, bulletins, processor and process group status history, and optionally flow metrics — one input per NiFi instance or cluster.
+* Authentication: none, or username and password (NiFi&amp;#x27;s token is kept in Splunk&amp;#x27;s credential store). TLS certificates are verified, with an optional CA bundle.
+* Clusters are detected automatically, with per-node data.
+* Parsing for NiFi&amp;#x27;s log files (app, bootstrap, user, request, deprecation) sent by a Universal Forwarder.
+* Also parses the data sent by the NiFi flow (push), for when Splunk cannot reach NiFi.
+
+Compatibility: Splunk Enterprise / Splunk Cloud 9.4 – 10.x; Apache NiFi 1.16 – 1.28.1 and 2.0 – 2.11.
+
+Documentation: https://kudawdev.github.io/nifi-monitoring-splunk/
+Source and issues: https://github.com/kudawdev/nifi-monitoring-splunk&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f1634196-c416-11f1-ada4-e27b573a05bb.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Kudaw SA</dc:creator>
+      <pubDate>Tue, 13 Oct 2026 12:40:09 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6124/#v2.0.0</guid>
+    </item>
+    <item>
+      <title>Nifi Monitoring for Splunk - v2.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6125/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;2.0.0 — NiFi 2.x support and rebuilt dashboards
+
+Read the upgrade guide before installing over 1.x: https://kudawdev.github.io/nifi-monitoring-splunk/upgrading/
+
+BREAKING CHANGES
+
+* Splunk 9.4 is the minimum (Dashboard Studio features verified on 9.4 and 10.4).
+* The dashboards were rebuilt in Dashboard Studio, and several views were renamed or merged: bookmarks to home, nifi_instances_detail, nifi_status_history, nifi_bulletin and nifi_internal_monitoring stop working.
+* The index_nifi macro is now index=nifi instead of index=*, and the app ships that index. If your NiFi data lives elsewhere, override the macro in local/macros.conf; Configuration &gt; Collection Health shows where the data is.
+* NIFI datamodel: Reporting_Bulletin and Reporting_Task are now children of Bulletins and Throughput, and Status_History became Component_Status. Your own tstats searches on those datasets may need a change.
+* Datamodel acceleration ships off. Turn it on for faster panels.
+* Status Indicator is no longer a dependency.
+
+NEW
+
+* Eight views: Overview, Instance, Components, Bulletins, Logs, Cluster, Alerts and Collection Health.
+* Eight alerts, shipped disabled: instance without data, repository filling up, sustained high heap, ERROR bulletin spike, backpressure, cluster node disconnected, versioned flow sync failure and add-on HTTP errors.
+* Per-instance thresholds in the instance inventory (Configuration &gt; NiFi Instances), shared by panels and alerts.
+* One definition of health that respects each input's polling interval.
+* NiFi 2.x support, clusters shown as one instance with named nodes, and several independent instances.
+* Components view: the bottleneck processor, group or connection, with NiFi's own backpressure prediction.
+* Logs view: application, deprecation and API request logs.
+
+FIXES
+
+* On a cluster, events from the push flow carry the instance's name instead of whichever node sent them, so the Overview no longer reports the cluster down and Bulletins is no longer empty. Set instance_name in the flow.
+
+Requires Nifi Monitoring TA 2.0.0. Full notes: https://github.com/kudawdev/nifi-monitoring-splunk/blob/main/CHANGELOG.md&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Monitor all your Apache NiFi instances and clusters from Splunk: flow status, heap and repositories, bulletins, logs and ready-made alerts. Supports NiFi 1.16–1.28 and 2.x.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Nifi Monitoring centralizes, in Splunk, the operational visibility of your Apache NiFi instances — a single one, several independent ones, or a cluster — so you no longer have to open each NiFi UI to know whether it is healthy.
+
+What you get:
+
+* Overview: the whole fleet at a glance — healthy instances, ERROR bulletins, worst heap and repository, queued FlowFiles.
+* Instance: heap, threads, load, GC, repository usage and throughput for one NiFi.
+* Components: which processor, group or connection is the bottleneck, including connections near backpressure.
+* Bulletins: NiFi&amp;#x27;s errors and warnings, traceable to the component that raised them.
+* Logs (optional, via a Universal Forwarder): app, user, request and deprecation logs — including what to clear before moving to NiFi 2.x.
+* Cluster: connected nodes, primary and coordinator, heap and queues per node.
+* Alerts: 8 ready-made alerts (backpressure, disconnected node, ERROR spike, stale instance, repository filling up, sustained high heap, TA HTTP errors, versioned flow sync failure), with per-instance thresholds.
+* Collection Health: whether data collection itself is working.
+
+Data reaches Splunk by polling NiFi&amp;#x27;s REST API with the Nifi Monitoring TA (pull, recommended), or from a flow inside NiFi that sends to Splunk&amp;#x27;s HEC (push, for when Splunk cannot reach NiFi).
+
+Compatibility:
+
+* Splunk Enterprise / Splunk Cloud 9.4 – 10.x
+* Apache NiFi 1.16 – 1.28.1 and 2.0 – 2.11
+
+Requirements:
+
+* Nifi Monitoring TA — https://splunkbase.splunk.com/app/6124
+* Lookup File Editor — https://splunkbase.splunk.com/app/1724
+
+Upgrading from 1.x? Status Indicator is no longer needed, and the upgrade guide covers what changed: https://kudawdev.github.io/nifi-monitoring-splunk/upgrading/
+
+Documentation: https://kudawdev.github.io/nifi-monitoring-splunk/
+Source and issues: https://github.com/kudawdev/nifi-monitoring-splunk&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/056adefc-c416-11f1-89d4-72910eebafd2.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Kudaw SA</dc:creator>
+      <pubDate>Tue, 13 Oct 2026 12:39:46 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6125/#v2.0.0</guid>
     </item>
     <item>
       <title>Luminar IOCs and leaked credentials - v2.0.0 [Version Update]</title>
@@ -109,16 +444,6 @@ Cognyte is a global leader in security analytics software that empowers governme
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Saviynt Inc</dc:creator>
       <pubDate>Tue, 13 Oct 2026 04:36:25 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6644/#v1.2.4</guid>
-    </item>
-    <item>
-      <title>NVD CVE Add-on - v1.0.3 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7946/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This is an add-on to pull CVE records from the NIST CVE database. It offers customization of checkpoint type (based on publish time, modify time, index, or none), keyword searches, data fields of the CVEs to display, languages in the CVE description, and any other field supported by the NIST CVE API. It also supports proxies.
-
-NOTE: This product uses the NVD API but is not endorsed or certified by NIST or the NVD.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/081ffbac-c67b-11f1-ba3a-b69af59b06d0.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">marlin arnall</dc:creator>
-      <pubDate>Tue, 13 Oct 2026 03:02:10 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7946/#v1.0.3</guid>
     </item>
     <item>
       <title>OT Security Add-on for Splunk - v3.0.2 [Version Update]</title>
@@ -247,69 +572,6 @@ Atlas combines Presidio&amp;#x27;s deep Splunk expertise with purpose-built soft
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Presidio - Key Partner Acct</dc:creator>
       <pubDate>Mon, 12 Oct 2026 20:21:17 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5614/#v5.2.0</guid>
-    </item>
-    <item>
-      <title>Bitdefender GravityZone Data Collector - v1.0.5 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8267/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;# Version 1.0.5
-
-Version 1.0.5 changes how incidents are collected and adds four dashboards. It installs over 1.0.4 and keeps your inputs and settings.
-
-## Highlights
-
-* **Every change to an incident is collected.** Version 1.0.4 indexed each incident once, when GravityZone first reported it, and collected nothing that happened to it afterwards. Version 1.0.5 indexes a new version of an incident each time it changes - status, priority, assignee, severity, alerts, endpoints, MITRE techniques, response actions, notes - together with an exact field-level diff and a short, readable summary of what changed, such as `status: open -&gt; in_progress`.
-* **Four dashboards**, under the new **Incidents** menu:
-  * *Incident Overview*: what is open, how serious it is, who owns it, who initiated it and what GravityZone did about it, plus recent activity.
-  * *Incident Changes*: a filterable feed of changes, with severity and priority escalations and re-opened incidents.
-  * *Incident Detail*: the current state and full history of one incident, with its alerts, nodes, notes and the incidents GravityZone grouped with it.
-  * *SLA and Ingestion Health*: time to assign and to resolve, open work by owner, and the health of every input.
-* **Extended (XDR) incidents** are supported alongside endpoint (EDR) incidents, including which incidents GravityZone grouped together, its narrative of the attack and the kill-chain phase reached.
-* **Console activity is linked to incidents.** As in 1.0.4, every entry of the GravityZone user activity log is collected, such as sign-ins, changes to users and companies, tasks and quarantine actions, etc. New in 1.0.5, actions on incidents - assignments, status and priority changes, notes - are also attributed to the incidents they affected, so each incident shows who changed it and when.
-
-## New
-
-* Full incident details are fetched with the `getIncidentsByIds` method of the Incidents API, in addition to `getIncidentsList`.
-* New fields on incident events: `gz_snapshot_reason` (why the event was written), `gz_changes` (the field-level diff), `gz_change_categories` (27 categories, such as `status`, `alert_added` or `endpoint_added`), `gz_change_digest` and `gz_change_digest_categories` (the readable summary), `gz_change_paths`, `gz_change_count`, and `gz_initiator` and `gz_initiator_process` (the account and process that triggered an EDR incident).
-* New fields on console activity events: `gz_target_incident_ids` and `gz_target_incident_numbers`, the incidents an action affected.
-* `gz_event_type` (`incident` or `activity_log`) tells the two kinds of event apart; both use the `bitdefender:gravityzone` sourcetype, as before.
-* Search macros for your own searches, such as `gz_incidents`, `gz_current_incidents`, `gz_open_only` and `gz_index`.
-* Two optional input settings, `collect_user_activity` and `collect_incidents`, set in `inputs.conf`, collect only one kind of data for a company. Both are on by default.
-
-## Changed
-
-* New inputs poll every 300 seconds by default instead of every 30. Existing inputs keep their interval.
-* Updates in which GravityZone changed only its own internal timestamps are not indexed.
-* The `bitdefender:gravityzone` sourcetype accepts events of any size (`TRUNCATE = 0`) - a complete incident is often a few hundred kilobytes - and extracts JSON fields at search time.
-* An unset priority is shown as `unassigned`, as in the GravityZone console. The raw event keeps GravityZone's own value, `unknown`.
-
-## Fixed
-
-* The add-on's own log is now given the `tagravityzonedatacollector:log` sourcetype. The 1.0.4 setting matched an older file name, so the log received an automatically learned sourcetype instead.
-* Changing the timezone of the GravityZone user that owns the API key no longer makes every incident look changed.
-
-## Upgrading from 1.0.4
-
-* Install 1.0.5 over 1.0.4 and restart Splunk. Inputs, API, proxy and logging settings are kept; nothing needs reconfiguring.
-* The API key must allow the Incidents API method `getIncidentsByIds`, which 1.0.4 did not use.
-* On its first run, each input collects the incidents that changed in the last 24 hours. Other incidents are collected from their next change.
-* Data collected by 1.0.4 stays in your index. The dashboards include the console activity it collected, but not its incident records, which hold only each incident's first version.
-* **Plan for more licence volume.** Each incident version is indexed in full: about 140 KB on average, more for incidents with many alerts. A busy incident produces several versions a day, and the first run after the upgrade indexes the last day's incidents at once.
-
-## Requirements
-
-* Splunk Enterprise 8.1 or later.
-* A GravityZone API key with access to the Incidents API (`getIncidentsList`, `getIncidentsByIds`) and the Accounts API (`getActivityLogsForCompany`).&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects Bitdefender GravityZone security incidents (EDR and XDR) and the complete console activity log into Splunk. Every change to an incident is indexed with a readable summary of what changed, console actions on incidents are linked to the incidents they affected, and four dashboards cover triage, incident history, response times and ingestion health.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Bitdefender GravityZone Data Collector brings GravityZone security incidents and console activity into Splunk.
-
-GravityZone incidents do not stand still: alerts are added, more endpoints become involved, severity changes, and analysts assign, prioritise, comment on and close them. The add-on collects that whole history, so you can triage, investigate and report on GravityZone incidents alongside the rest of your security data.
-
-It collects two kinds of data through the GravityZone API, one input per GravityZone company, so a single Splunk deployment can follow many companies, as partners and managed service providers need. The first is security incidents, both endpoint (EDR) and extended (XDR): every time an incident changes, the add-on indexes the new version with a field-level diff and a short, readable summary of what changed. The second is console activity: every entry of the company&amp;#x27;s GravityZone user activity log, such as sign-ins and failed sign-ins, changes to users and companies, tasks, quarantine actions and actions on incidents, each indexed as its own searchable event. Actions on incidents are also linked to the incidents they affected.
-
-Four dashboards are included. Incident Overview shows what is open, how serious it is, who owns it, who initiated it and what GravityZone did about it. Incident Changes is a filterable feed of changes, with severity and priority escalations and re-opened incidents. Incident Detail shows the current state and full history of one incident, with its alerts, nodes and notes, the incidents GravityZone grouped with it, and who changed it in the console. SLA and Ingestion Health shows the time taken to assign and to resolve incidents, open work by owner, and whether every input is collecting.
-
-The dashboards focus on incidents; the complete console activity log is available to your own searches, selected by gz_event_type=activity_log. All data uses the bitdefender:gravityzone sourcetype, with plain summary fields named gz_* that keep your own searches simple and fast.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0fdc6ea6-c64a-11f1-ac72-4a7f22fdfd0e.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Bitdefender LLC</dc:creator>
-      <pubDate>Mon, 12 Oct 2026 17:16:57 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8267/#v1.0.5</guid>
     </item>
     <item>
       <title>Twilio Alert Action - v3.2.15 [New App Release]</title>
@@ -1146,61 +1408,6 @@ This App is fully AppInspect passed for installing in your own hosted Splunk Ent
       <guid>https://splunkbase.splunk.com/app/1537/#v1.8.9</guid>
     </item>
     <item>
-      <title>Slack Notification Alert - v3.1.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/2878/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Upgrading from 2.x
-
-* Requires Splunk Enterprise 10.0 or later, or Splunk Cloud Platform.
-* Alerts that use the global Slack App OAuth token or webhook URL stop sending until you re-enter it in Apps &gt; Slack Alerts &gt; Configuration.
-* Per-alert settings carry over unchanged.
-* Remove param.slack\_app\_oauth\_token and param.webhook\_url from local/alert\_actions.conf. 3.x ignores them.
-* Grant the read\_slack\_alerts\_credential capability to alert owners other than admin and sc\_admin, or assign them the slack\_alert\_action role.
-
-Upgrading from 3.0.0
-
-* Settings on the Configuration page carry over unchanged.
-* Alert owners other than admin and sc\_admin fail with exit code 7 until they hold read\_slack\_alerts\_credential. Grant the capability, or assign them the slack\_alert\_action role.
-* Owners stop needing list\_settings and list\_storage\_passwords for Slack alerts. Revoke them if you granted them only for this app.
-
-Added
-
-* Configuration page in place of the legacy setup page.
-* Logging tab on the Configuration page.
-* read\_slack\_alerts\_credential capability and a slack\_alert\_action role that grants it.
-* Credential reads are logged to slack\_alerts\_credential\_broker.log.
-
-Changed
-
-* Supports Splunk Enterprise 10.0-10.6 and Splunk Cloud Platform.
-* The Slack App OAuth token and webhook URL are stored encrypted.
-* Alert owners need read\_slack\_alerts\_credential in place of list\_settings and list\_storage\_passwords.
-* An enabled proxy with an empty host or invalid port fails the alert instead of sending direct.
-
-Removed
-
-* Python 2 support.
-
-Fixed
-
-* Alerts owned by non-admin users failing with exit code 2.
-* Alerts with zero results failing with exit code 2.
-
-Known issues
-
-* On Splunk Enterprise, a SPLUNK\_BINDIP set to a routable address fails every alert with exit code 7 and status 403.
-* On Splunk Enterprise, the app adds an unused sc\_admin role.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Sends Splunk alert messages to Slack channels using OAuth tokens or webhook URLs with support for custom messages and attachments.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Send Splunk alert results to a Slack channel through a Slack App OAuth token (chat.postMessage) or an incoming webhook URL.
-
-- Stores the Slack App OAuth token and webhook URL encrypted.
-- Set the channel, message, attachment, and fields per alert.
-- Override the token, webhook URL, or proxy per alert.
-- Sends through a proxy.
-
-Source code and issues: https://github.com/splunk/slack-alerts&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/08027582-c2a2-11f1-aea0-0a229fcae80d.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Security Center of Excellence</dc:creator>
-      <pubDate>Wed, 07 Oct 2026 23:28:11 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/2878/#v3.1.0</guid>
-    </item>
-    <item>
       <title>Binary Defense - v0.1.2 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/9942/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;The Binary Defense app provides a centralized repository of knowledge objects that support Binary Defense&amp;#x27;s detection rules running in customer Splunk environments.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Binary Defense app provides a centralized repository of knowledge objects that support Binary Defense&amp;#x27;s detection rules running in customer Splunk environments.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/044a26f8-be6d-11f1-860e-f2d838dab173.png&quot;&gt;</description>
@@ -1229,44 +1436,6 @@ Source code and issues: https://github.com/splunk/slack-alerts&lt;/p&gt;&lt;img 
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">CrowdStrike</dc:creator>
       <pubDate>Wed, 07 Oct 2026 21:05:06 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6902/#v3.1.3</guid>
-    </item>
-    <item>
-      <title>Polyswarm App - v1.1.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/9745/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;The three dashboards were rebuilt to the approved design: new panels, the brand
-palette, and a per-engine swarm drawing on Overview and Triage. Two changes are
-behaviour rather than appearance and matter before you upgrade. **Triage is now
-a per-indicator detail page.** The free-text base search box is gone; run
-`polyswarmsearch` in the ordinary search bar over your own search, then open
-Triage on one indicator from that result's field menu, through the new Triage in
-PolySwarm workflow action on a hash field. The hash field, indicator limit and
-time range inputs went with the box. **`polyswarmusage` gained a `refresh`
-option**, so the Overview entitlement panel reads the stored answer instead of
-showing an unrendered panel on a fresh install, and reaches PolySwarm only when
-you select Refresh now. A search that enriches nothing no longer needs a stored
-credential. Opening any page in the app now costs nothing under any
-circumstances: the only panel on any dashboard that can reach PolySwarm is
-Overview's entitlement refresh, and it does so only when you select Refresh now.
-No role, permission or capability changed, and every search a 1.0.0 install runs
-today runs the same way.
-
-Two smaller things to know on upgrade. **The page background files were
-renamed.** Splunk serves them with a one year cache at an address that carries
-no version, so an upgrading install would otherwise have kept 1.0.0's artwork
-for up to a year; the names now change whenever the artwork does, and your
-browser fetches the new art on first open. **Four readings came off the Overview
-entitlement panels**, the plan name, the trial flag, the overage and the plan
-period, because ten columns in that space left each one narrower than its own
-sort control. All four are still returned by the searches behind those panels,
-so `polyswarmusage` in the search bar still reports every one of them. Two
-panels were also corrected after the first render against a populated cache: the
-engine swarm's centre now reports the detection count PolySwarm published rather
-than recounting it from the assertions, so it agrees with the Verdict panel
-beside it, and the artifact origins chart draws one bar per country instead of
-plotting country names on a numeric scale.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Enriches hashes, URLs, and domains with crowd-sourced malware verdicts, attribution, and sandbox detonation results from the PolySwarm threat intelligence platform.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The PolySwarm App integrates crowd-sourced malware threat intelligence into Splunk by enriching indicators of compromise with verdicts derived from multiple detection engines. The app processes hashes, URLs, and domains found in Splunk events, annotating them with threat scores, verdict classifications, and detection counts sourced from the PolySwarm platform. It extracts and refangs indicators from raw text fields within the search head environment and submits artifacts to a cloud-based sandbox for behavioral analysis. Search results are augmented with metadata including malware family attribution, file type classification, and aggregated security vendor assessments. The app operates entirely on the search head tier and relies on a key-value store to cache verdict data, track sandbox task state, and maintain modular input checkpoints. Data enrichment occurs through five specialized search commands that query the PolySwarm API, returning threat intelligence without requiring data to leave the Splunk deployment. Events tagged with the polyswarm:artifact source type represent intelligence pulled from the PolySwarm feed and sandbox task results. The app includes dashboards for reviewing enrichment activity, monitoring sandbox detonations, and triaging indicators flagged by scheduled searches. Workflow actions provide analysts with one-click enrichment from search result tables and direct navigation to the PolySwarm portal for detailed artifact analysis.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9b67c1ee-c0de-11f1-8d67-bed29783d393.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Erick Ingleby</dc:creator>
-      <pubDate>Wed, 07 Oct 2026 20:40:05 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9745/#v1.1.0</guid>
     </item>
     <item>
       <title>runZero Asset Inventory - v3.3.7 [Version Update]</title>
@@ -1533,23 +1702,6 @@ When used in conjunction with the Cisco CDR app, the Oracle SBC data can be used
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
       <pubDate>Wed, 07 Oct 2026 03:10:26 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7051/#v1.0.1</guid>
-    </item>
-    <item>
-      <title>Splunk Add-on for CyberArk - v2.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/2891/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Improved compatibility with the Splunk Common Information Model.
-* Improved event parsing and field mappings.
-* Improved handling of CyberArk EPV and PTA events.
-* Corrected session, failure, user, object, source, and destination mappings.
-* Updated the CyberArk EPV syslog translator.
-* Updated supported Python and Splunk platform versions.
-* Updated product documentation and upgrade instructions.
-* This release contains breaking changes. Review the upgrade documentation before installation.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Add-on for CyberArk allows a Splunk software administrator to pull system logs and traffic statistics from Privileged Threat Analytics (PTA) 12.0 and Enterprise Password Vault (EPV) 12.0 using syslog in Common Event Format (CEF). This add-on extracts CyberArk real-time privileged account activities (such as individual user activity when using shared accounts) into the Splunk platform and Splunk Enterprise Security, providing a single place to analyze unusual account activity.
-
-This add-on provides the inputs and CIM-compatible knowledge to use with other Splunk apps, such as Splunk Enterprise Security and the Splunk App for PCI Compliance.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/94167714-be54-11f1-860e-f2d838dab173.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Wed, 07 Oct 2026 03:00:55 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/2891/#v2.0.0</guid>
     </item>
     <item>
       <title>Splunk Attack Analyzer Connector for Splunk SOAR - v2.2.10 [Version Update]</title>
@@ -1954,80 +2106,6 @@ Filigran (www.filigran.io) provides open-source cybersecurity solutions covering
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Fri, 02 Oct 2026 14:22:33 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5875/#v3.0.2</guid>
-    </item>
-    <item>
-      <title>OpenCTI for Splunk Enterprise - v1.1.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8431/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Add file hash support (MD5, SHA-1, SHA-256, SHA-512) to the Create Sighting alert action
-* Add TLP:AMBER+STRICT marking option to all alert actions
-* Add an app-specific User-Agent to requests sent to OpenCTI
-* Fix proxy settings not being applied to alert actions
-* Fix distinct incidents being merged when raised in the same second
-* Fix file\_hash being dropped by CIM observable extraction
-* Fix File observables using the hash value as file name
-* Improve error logging in alert actions (invalid hash value or TLP)
-* Update dependencies: splunktaucclib 8.2.0, solnlib 8.1.1&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;OpenCTI is an open-source platform developed by Filigran to help organizations manage their cyber threat intelligence and observables. It enables cybersecurity teams to efficiently organize, store, and operationalize threat information across technical, operational, and strategic levels.
-
-OpenCTI for Splunk Enterprise enables Splunk users to interconnect Splunk with OpenCTI and to leverage threat information to improve detection capabilities and response to security incidents.
-
-This new application represents a major evolution from the previous version (OpenCTI Add-On) and stands out through:
-- The ability to import multiple object types, not just indicators
-- An optimized architecture for clustered Splunk environments and Splunk Cloud, enabling the feeding of a Splunk Index and the use of saved searches to populate KV Stores
-- A migration to the UCC (Universal Configuration Console) framework that implements best practices in development
-
-Key features:
-- Modular inputs for ingesting OpenCTI data via the OpenCTI Stream API
-- Ability to trigger OpenCTI actions in response to Alerts and to investigate them directly in OpenCTI
--Support for multiple object types (Indicators, Observables, Relationships, Sightings)
-About Filigran
-Filigran (www.filigran.io ) provides open-source cybersecurity solutions covering threat intelligence management, breach and attack simulation, and cyber risk management.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a27d8ad8-be52-11f1-a5bf-620486c92853.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Filigran</dc:creator>
-      <pubDate>Fri, 02 Oct 2026 11:21:57 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8431/#v1.1.1</guid>
-    </item>
-    <item>
-      <title>Japanese Hankaku/Zenkaku Character Converter - v2.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5695/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;変換エンジンを Cython バイナリの mojimoji から純 Python ライブラリの jaconv に置き換えたリリースです。コマンドの文法、オプション、出力フィールドは 1.2.x から変わりません。
-
-コンパイル済みバイナリ (.so) を同梱しなくなりました。Splunk は 10.0.0 以降、Splunk アプリでの binary Python module の使用を非推奨としています。2.0.0 はこの方針に沿った実装です。
-
-プラットフォームと Python のバージョンに依存しません。x86\_64 と AArch64 のどちらでも、また Python 3.9 と 3.13 のどちらでも同一のパッケージで動作します。
-
-対応環境は Splunk Enterprise 9.3 以上および Splunk Cloud Platform、Python 3.9 と 3.13 です。
-
-同梱ライブラリは jaconv (MIT License) と Splunk Enterprise SDK for Python (Apache License 2.0) です。本アプリは Apache License 2.0 の下で配布されます。&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;日本語の半角と全角を相互変換するサーチコマンド han2zen / zen2han を提供します。2.0.0 以降は純 Python 実装で、プラットフォームや Python のバージョンに依存しません。&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;日本語の半角 (Hankaku) と全角 (Zenkaku) を相互変換するカスタムサーチコマンド han2zen と zen2han を提供します。Splunk Enterprise と Splunk Cloud Platform のどちらでも利用できます。
-
-2.0.0 以降は変換エンジンに純 Python ライブラリの jaconv を使用しているため、プラットフォームや Python のバージョンに依存しません。1.2.x 系は Cython バイナリの mojimoji を同梱しているため Linux 専用で、対応する Python バージョンごとにバイナリが必要になります。新規に導入する場合は 2.0.0 系を推奨します。&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/cd1cbeee-be39-11f1-9dee-0a4926d78739.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">h n</dc:creator>
-      <pubDate>Fri, 02 Oct 2026 08:37:38 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5695/#v2.0.0</guid>
-    </item>
-    <item>
-      <title>TA Publish to Confluence - v1.0.5 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7595/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Minor updates for AppInspect compliance.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Have you ever wanted to update Confluence with data from Splunk? This app lets you do exactly that! Update a Confluence page on a schedule with this alert action. A known Confluence page will be updated with the results, or the whole page contents will be replaced with the latest search results.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/42de36ce-be28-11f1-a69b-e232c4951a1a.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Spavin</dc:creator>
-      <pubDate>Fri, 02 Oct 2026 06:20:28 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7595/#v1.0.5</guid>
-    </item>
-    <item>
-      <title>CrowdStrike OAuth API - v7.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5786/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Replace the IOA rule and rule-group update actions' `enabled` checkbox with a `preserve` (default), `enable`, or `disable` choice. This prevents an unchecked SOAR checkbox from silently disabling a rule or group. Legacy Boolean inputs remain accepted as explicit enable or disable requests. The action parameter and output type change requires a major release.
-* Bound pagination and stop when an API page makes no progress.
-* Report when list-process results are truncated from the API's authoritative total.
-* Bound command-result polling by time, sequence count, and response size.
-* Report detonation polling timeouts as action failures while preserving the resource ID for follow-up.
-* Reject device lookup metacharacters and verify resolved device identities before device actions.
-* Fail batch device and indicator operations when the API reports any item errors.
-* Escape dynamic values before embedding them in widget JavaScript string literals.
-* Render action widgets with Jinja inheritance first, before any HTML comments.
-* Validate generic query endpoints as canonical query paths before dispatch [PAPP-37947]
-* Require approval for generic query actions and report process-result truncation accurately.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with CrowdStrike OAuth2 authentication standard to implement querying of endpoint security data&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/33bcfce0-be21-11f1-860e-f2d838dab173.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Fri, 02 Oct 2026 05:22:04 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5786/#v7.0.0</guid>
     </item>
   </channel>
 </rss>
