@@ -6,7 +6,83 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Tue, 13 Oct 2026 23:32:01 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 14 Oct 2026 02:49:31 +0000</lastBuildDate>
+    <item>
+      <title>PolySwarm Malware Threat Intelligence App - v1.2.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9745/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;md5, sha1 and network addresses are looked up now. Until this release the app
+refused all three and attached a note explaining that the platform's artifact
+search takes a sha256, so there was no endpoint to call. That explanation was
+wrong: the md5 and sha1 endpoints exist and answer, and an address answers
+through URL search as a bare host, exactly as a bare domain already did. All
+three are pinned by live recordings like every other endpoint in this app. An
+email address is the one recognised type that still returns unknown, now for a
+measured reason. Plan for the cost: an md5 and a sha1 each spend a request and a
+limit slot where they used to be free, and one file reached by three digests is
+three cache keys and three requests.
+
+A verdict on a URL, a domain or an address now comes from the engines rather
+than from the PolyScore. The platform returns the same score for every URL
+artifact, measured identically across five values including two an engine called
+malicious, while the detection counts vary per value and are correct. The app
+banded from the score, so it reported benign for hosts engines had convicted.
+Those answers now come from the counts: no coverage is unknown, no malicious
+assertion is benign, unanimous is malicious, and a split is suspicious. A verdict
+on a file is untouched, because a file's score tracks its engines across the full
+range, and the dashboards band exactly as the search commands do. If you have
+saved searches or alerts keyed on polyswarm_verdict for URL or domain
+indicators, read them before upgrading: rows that used to say benign can now say
+suspicious or malicious.
+
+Proxy support. The app can be pointed at an HTTP proxy from its setup page, with
+an optional user name and password. The password goes to the same encrypted
+credential storage as the API key, never to a configuration file and never into
+the proxy address. The credential is presented on the CONNECT request, which is
+the only point an HTTPS request can present one. Certificate verification is
+always on and nothing in this app turns it off. If you already route this
+instance with the http_proxy and https_proxy environment variables, nothing
+changes: with the app's proxy switched off, no opener is installed and the
+request path is what it was. A proxy demanding Digest, NTLM or Kerberos is
+refused with an error naming HTTP 407; no pure Python Splunk app can answer
+those schemes, and the remedy is an authentication exemption for
+api.polyswarm.network on port 443.
+
+A matching search, shipped. The app now ships a saved search that joins your own
+events to the threat intel the scheduled pull writes and carries the verdict,
+the PolyScore, the detections, the families and the report link through to the
+alert, so an analyst sees why a match matters rather than only that one
+happened. It ships disabled with a schedule attached, so enabling it is one
+switch, and it reads indexed events only, so it spends no PolySwarm quota. Three
+macros carry what the app cannot know: the index holding your own events, the
+index the intel pull writes to, and how far back to read the feed. Set them
+before enabling.
+
+The feed carries every digest you can match on. Until this release the scheduled
+pull wrote each artifact's sha256 and dropped the md5 and the sha1 that arrive in
+the same document, so a correlation against the feed from events that log an md5,
+which is most endpoint products, matched nothing and said nothing. Feed events now
+carry all three and the matching search correlates on any of them. Your events do
+not have to be normalised to file_hash first: the search reads a bare sha256,
+sha1 or md5 field as well.
+
+Triage opens on any indicator the app can answer for, not only a hash. A hash, a
+host meaning a domain or an IP address, or a URL. Anything else is refused by
+naming the three shapes it takes.
+
+The app has a longer name, PolySwarm Malware Threat Intelligence App. The app
+id, the directory, every command, every field name and every saved object are
+unchanged, so an upgrade carries everything over and nothing written against
+this app needs editing.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;PolySwarm malware threat intelligence and file reputation for Splunk Enterprise and Splunk Cloud Platform. Hash lookup and IOC enrichment for file hashes, URLs and domains: crowd-sourced verdicts from many engines, malware family attribution, sandbox detonation, and an opt-in threat intel feed.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The PolySwarm App integrates crowd-sourced malware threat intelligence into Splunk by enriching indicators of compromise, or IOCs, with verdicts derived from multiple detection engines. It is a file reputation and hash lookup source for the SOC: the app processes hashes, URLs, and domains found in Splunk events, annotating them with threat scores, verdict classifications, and detection counts sourced from the PolySwarm platform.
+
+It extracts and refangs indicators from raw text fields within the search head environment, at no cost and with no API key, and submits artifacts to a cloud-based sandbox for behavioral analysis. Search results are augmented with metadata including malware family attribution, file type classification, and aggregated security vendor assessments.
+
+The app operates entirely on the search head tier and relies on a key-value store to cache verdict data, track sandbox task state, and maintain modular input checkpoints. Enrichment occurs through five specialized search commands that query the PolySwarm API: the indicators being looked up are sent to PolySwarm, and nothing else from the deployment is transmitted. A local verdict cache means a repeated indicator costs nothing, and every metered request carries an explicit ceiling.
+
+Events tagged with the polyswarm:artifact source type represent threat intel pulled from the PolySwarm feed and from sandbox task results. Three dashboards cover enrichment activity and entitlement, sandbox detonations, and per-indicator triage, and opening any of them is free because no panel calls PolySwarm. Four workflow actions give an analyst one-click enrichment from a search result&amp;#x27;s field menu, enrichment with attribution, direct navigation to the PolySwarm portal, and the Triage page opened on that indicator.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a94c630e-c73d-11f1-af5f-a24df39d4ff6.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Erick Ingleby</dc:creator>
+      <pubDate>Wed, 14 Oct 2026 01:25:46 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9745/#v1.2.0</guid>
+    </item>
     <item>
       <title>TA Studio - v1.9.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8932/</link>
@@ -155,50 +231,6 @@ Filigran (www.filigran.io ) provides open-source cybersecurity solutions coverin
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Filigran</dc:creator>
       <pubDate>Tue, 13 Oct 2026 19:46:54 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8431/#v1.2.0</guid>
-    </item>
-    <item>
-      <title>PolySwarm Malware Threat Intelligence App - v1.1.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/9745/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;The three dashboards were rebuilt to the approved design: new panels, the brand
-palette, and a per-engine swarm drawing on Overview and Triage. Two changes are
-behaviour rather than appearance and matter before you upgrade. **Triage is now
-a per-indicator detail page.** The free-text base search box is gone; run
-`polyswarmsearch` in the ordinary search bar over your own search, then open
-Triage on one indicator from that result's field menu, through the new Triage in
-PolySwarm workflow action on a hash field. The hash field, indicator limit and
-time range inputs went with the box. **`polyswarmusage` gained a `refresh`
-option**, so the Overview entitlement panel reads the stored answer instead of
-showing an unrendered panel on a fresh install, and reaches PolySwarm only when
-you select Refresh now. A search that enriches nothing no longer needs a stored
-credential. Opening any page in the app now costs nothing under any
-circumstances: the only panel on any dashboard that can reach PolySwarm is
-Overview's entitlement refresh, and it does so only when you select Refresh now.
-No role, permission or capability changed, and every search a 1.0.0 install runs
-today runs the same way.
-
-Two smaller things to know on upgrade. **The page background files were
-renamed.** Splunk serves them with a one year cache at an address that carries
-no version, so an upgrading install would otherwise have kept 1.0.0's artwork
-for up to a year; the names now change whenever the artwork does, and your
-browser fetches the new art on first open. **Four readings came off the Overview
-entitlement panels**, the plan name, the trial flag, the overage and the plan
-period, because ten columns in that space left each one narrower than its own
-sort control. All four are still returned by the searches behind those panels,
-so `polyswarmusage` in the search bar still reports every one of them. Two
-panels were also corrected after the first render against a populated cache: the
-engine swarm's centre now reports the detection count PolySwarm published rather
-than recounting it from the assertions, so it agrees with the Verdict panel
-beside it, and the artifact origins chart draws one bar per country instead of
-plotting country names on a numeric scale.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;PolySwarm malware threat intelligence and file reputation for Splunk Enterprise and Splunk Cloud Platform. Hash lookup and IOC enrichment for file hashes, URLs and domains: crowd-sourced verdicts from many engines, malware family attribution, sandbox detonation, and an opt-in threat intel feed.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The PolySwarm App integrates crowd-sourced malware threat intelligence into Splunk by enriching indicators of compromise, or IOCs, with verdicts derived from multiple detection engines. It is a file reputation and hash lookup source for the SOC: the app processes hashes, URLs, and domains found in Splunk events, annotating them with threat scores, verdict classifications, and detection counts sourced from the PolySwarm platform.
-
-It extracts and refangs indicators from raw text fields within the search head environment, at no cost and with no API key, and submits artifacts to a cloud-based sandbox for behavioral analysis. Search results are augmented with metadata including malware family attribution, file type classification, and aggregated security vendor assessments.
-
-The app operates entirely on the search head tier and relies on a key-value store to cache verdict data, track sandbox task state, and maintain modular input checkpoints. Enrichment occurs through five specialized search commands that query the PolySwarm API: the indicators being looked up are sent to PolySwarm, and nothing else from the deployment is transmitted. A local verdict cache means a repeated indicator costs nothing, and every metered request carries an explicit ceiling.
-
-Events tagged with the polyswarm:artifact source type represent threat intel pulled from the PolySwarm feed and from sandbox task results. Three dashboards cover enrichment activity and entitlement, sandbox detonations, and per-indicator triage, and opening any of them is free because no panel calls PolySwarm. Four workflow actions give an analyst one-click enrichment from a search result&amp;#x27;s field menu, enrichment with attribution, direct navigation to the PolySwarm portal, and the Triage page opened on that indicator.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a94c630e-c73d-11f1-af5f-a24df39d4ff6.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Erick Ingleby</dc:creator>
-      <pubDate>Tue, 13 Oct 2026 19:41:57 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9745/#v1.1.0</guid>
     </item>
     <item>
       <title>NVD CVE Add-on - v1.0.3 [Version Update]</title>
