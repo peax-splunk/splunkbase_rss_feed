@@ -6,7 +6,86 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Fri, 16 Oct 2026 02:22:40 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 16 Oct 2026 07:42:28 +0000</lastBuildDate>
+    <item>
+      <title>ROVIX Universal API Add-on for Splunk - v1.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10004/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## Version 1.0.1
+
+**First public release on Splunkbase.**
+
+### Highlights
+
+* Collect data from any REST/JSON API into Splunk from the UI, without writing code.
+* Define an account (credentials and authentication) once and reuse it across many inputs.
+
+### Authentication
+
+* OAuth 2.0: client credentials, authorization code with automatic refresh-token rotation, and password grant
+* JWT: bearer grant, private\_key\_jwt client assertion, and signed-JWT tokens (RS/PS/ES/HS algorithms; a Google service-account JSON can be pasted directly)
+* Session login with the token returned in the JSON body, a response header or cookies
+* HMAC request signing with a configurable string-to-sign, algorithm, encoding and headers
+* API key (header, query parameter or cookie), static bearer token, Basic and Digest
+* Mutual TLS client certificates, custom CA bundles and SSL verification control for every method
+* Tokens stored encrypted in Splunk's credential store, refreshed before expiry, shared across inputs, and renewed automatically on HTTP 401
+
+### Data collection
+
+* Pagination: offset/limit, page number, cursor, Link header (rel\=&quot;next&quot;) and next-URL-in-body, with parameters in the query string or JSON request body
+* Checkpoints stored in the KV Store: last run time, highest event timestamp or highest numeric ID. The checkpoint advances only after a fully successful run
+* Event time taken from the checkpoint timestamp field
+* Template variables in URLs, parameters, headers and bodies: `{{checkpoint}}`, `{{now}}`, `{{now_epoch}}`, `{{now_epoch_ms}}`
+* Automatic retries with back-off on HTTP 429 and 5xx, honouring Retry-After
+* Option to reset a checkpoint from the input form; checkpoints are removed when an input is deleted
+
+### Operations
+
+* Save-time validation of accounts and inputs with clear error messages
+* Monitoring Dashboard and per-input log files
+* Hardened against corrupt certificates in the Windows certificate store
+
+### Licensing
+
+* 30-day evaluation with all features, starting at first use
+* Per-server license keys, verified offline, activated from Configuration &gt; License (no restart needed)
+* 14-day expiry warning in Splunk Messages and a 7-day grace period; configuration and checkpoints are kept
+
+### Changes since 1.0.0 (pre-release build)
+
+* ROVIX branding: app icon, License page with logo and support contact
+* End User License Agreement and privacy statement included in the package
+* &quot;Add Account&quot; dialog title
+* Update checks enabled, so Splunk shows when a new version is available on Splunkbase
+
+### Compatibility
+
+* Splunk Enterprise 9.0 and later, and Splunk Cloud Platform
+* Python 3 (Splunk's bundled Python 3.7, 3.9 or 3.13); platform independent
+
+### Support
+
+Rovix Technologies Pvt. Ltd. – info@RovixTechnologies.com&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects data from any REST or JSON API through a modular input with comprehensive authentication support, configurable pagination, and KV Store checkpointing.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;ROVIX Universal API Add-on for Splunk lets you bring data from any REST/JSON API into Splunk by filling in forms. No code or custom scripts are needed.
+
+The problem it solves
+
+Security and IT teams need data from dozens of cloud services: identity providers, EDR tools, SaaS platforms, threat-intelligence feeds and internal APIs. Many of these have no Splunk add-on, or the add-on is outdated or limited. The usual workarounds are custom Python scripts or one-off modular inputs. Each one handles OAuth tokens, pagination and “what did I already collect?” differently, breaks when a token expires, and is hard to maintain or hand over.
+
+What the add-on does
+
+One place for every API. Define an account (credentials and authentication) once, then create as many inputs as you need. Each input has its own endpoint, interval, index and sourcetype.
+Handles authentication for you. Supports OAuth 2.0 (client credentials, authorization code with automatic refresh-token rotation, password grant), JWT bearer and private_key_jwt (including Google service accounts), session login, HMAC request signing, API key, bearer token, Basic and Digest, plus mTLS. Tokens are stored encrypted in Splunk, refreshed before they expire, and renewed automatically if the API rejects them.
+Collects everything, exactly once. Built-in pagination (offset, page, cursor, Link header, next URL) fetches every page. Checkpoints in the KV Store pick up where the last run stopped, and only move forward after a run completes successfully, so data isn’t skipped.
+Built to keep running. Retries with back-off on rate limits (HTTP 429) and server errors, honouring Retry-After. A monitoring dashboard and per-input logs make problems easy to see.
+
+Who it’s for: Splunk admins and SOC teams who need to onboard API-based data sources quickly and reliably on Splunk Enterprise or Splunk Cloud Platform, without writing and maintaining code.
+
+Licensing: a 30-day free evaluation with all features is included, then a per-server license key, verified offline. The add-on runs entirely inside your Splunk environment and sends no data to Rovix Technologies.
+
+Developed by Rovix Technologies Pvt. Ltd. Contact: info@RovixTechnologies.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/5fe8f6a2-c425-11f1-ada4-e27b573a05bb.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Roshan Chandel</dc:creator>
+      <pubDate>Fri, 16 Oct 2026 06:19:40 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10004/#v1.0.1</guid>
+    </item>
     <item>
       <title>Splunk AI Assistant - v2.3.6 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7245/</link>
@@ -335,85 +414,6 @@ Smart Assistants (new assistants with revamped UI and better ml pipeline/experim
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
       <pubDate>Thu, 15 Oct 2026 14:02:52 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7186/#v1.4.6</guid>
-    </item>
-    <item>
-      <title>ROVIX Universal API Add-on for Splunk - v1.0.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10004/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## Version 1.0.1
-
-**First public release on Splunkbase.**
-
-### Highlights
-
-* Collect data from any REST/JSON API into Splunk from the UI, without writing code.
-* Define an account (credentials and authentication) once and reuse it across many inputs.
-
-### Authentication
-
-* OAuth 2.0: client credentials, authorization code with automatic refresh-token rotation, and password grant
-* JWT: bearer grant, private\_key\_jwt client assertion, and signed-JWT tokens (RS/PS/ES/HS algorithms; a Google service-account JSON can be pasted directly)
-* Session login with the token returned in the JSON body, a response header or cookies
-* HMAC request signing with a configurable string-to-sign, algorithm, encoding and headers
-* API key (header, query parameter or cookie), static bearer token, Basic and Digest
-* Mutual TLS client certificates, custom CA bundles and SSL verification control for every method
-* Tokens stored encrypted in Splunk's credential store, refreshed before expiry, shared across inputs, and renewed automatically on HTTP 401
-
-### Data collection
-
-* Pagination: offset/limit, page number, cursor, Link header (rel\=&quot;next&quot;) and next-URL-in-body, with parameters in the query string or JSON request body
-* Checkpoints stored in the KV Store: last run time, highest event timestamp or highest numeric ID. The checkpoint advances only after a fully successful run
-* Event time taken from the checkpoint timestamp field
-* Template variables in URLs, parameters, headers and bodies: `{{checkpoint}}`, `{{now}}`, `{{now_epoch}}`, `{{now_epoch_ms}}`
-* Automatic retries with back-off on HTTP 429 and 5xx, honouring Retry-After
-* Option to reset a checkpoint from the input form; checkpoints are removed when an input is deleted
-
-### Operations
-
-* Save-time validation of accounts and inputs with clear error messages
-* Monitoring Dashboard and per-input log files
-* Hardened against corrupt certificates in the Windows certificate store
-
-### Licensing
-
-* 30-day evaluation with all features, starting at first use
-* Per-server license keys, verified offline, activated from Configuration &gt; License (no restart needed)
-* 14-day expiry warning in Splunk Messages and a 7-day grace period; configuration and checkpoints are kept
-
-### Changes since 1.0.0 (pre-release build)
-
-* ROVIX branding: app icon, License page with logo and support contact
-* End User License Agreement and privacy statement included in the package
-* &quot;Add Account&quot; dialog title
-* Update checks enabled, so Splunk shows when a new version is available on Splunkbase
-
-### Compatibility
-
-* Splunk Enterprise 9.0 and later, and Splunk Cloud Platform
-* Python 3 (Splunk's bundled Python 3.7, 3.9 or 3.13); platform independent
-
-### Support
-
-Rovix Technologies Pvt. Ltd. – info@RovixTechnologies.com&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects data from any REST or JSON API through a modular input with comprehensive authentication support, configurable pagination, and KV Store checkpointing.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;ROVIX Universal API Add-on for Splunk lets you bring data from any REST/JSON API into Splunk by filling in forms. No code or custom scripts are needed.
-
-The problem it solves
-
-Security and IT teams need data from dozens of cloud services: identity providers, EDR tools, SaaS platforms, threat-intelligence feeds and internal APIs. Many of these have no Splunk add-on, or the add-on is outdated or limited. The usual workarounds are custom Python scripts or one-off modular inputs. Each one handles OAuth tokens, pagination and “what did I already collect?” differently, breaks when a token expires, and is hard to maintain or hand over.
-
-What the add-on does
-
-One place for every API. Define an account (credentials and authentication) once, then create as many inputs as you need. Each input has its own endpoint, interval, index and sourcetype.
-Handles authentication for you. Supports OAuth 2.0 (client credentials, authorization code with automatic refresh-token rotation, password grant), JWT bearer and private_key_jwt (including Google service accounts), session login, HMAC request signing, API key, bearer token, Basic and Digest, plus mTLS. Tokens are stored encrypted in Splunk, refreshed before they expire, and renewed automatically if the API rejects them.
-Collects everything, exactly once. Built-in pagination (offset, page, cursor, Link header, next URL) fetches every page. Checkpoints in the KV Store pick up where the last run stopped, and only move forward after a run completes successfully, so data isn’t skipped.
-Built to keep running. Retries with back-off on rate limits (HTTP 429) and server errors, honouring Retry-After. A monitoring dashboard and per-input logs make problems easy to see.
-
-Who it’s for: Splunk admins and SOC teams who need to onboard API-based data sources quickly and reliably on Splunk Enterprise or Splunk Cloud Platform, without writing and maintaining code.
-
-Licensing: a 30-day free evaluation with all features is included, then a per-server license key, verified offline. The add-on runs entirely inside your Splunk environment and sends no data to Rovix Technologies.
-
-Developed by Rovix Technologies Pvt. Ltd. Contact: info@RovixTechnologies.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/5fe8f6a2-c425-11f1-ada4-e27b573a05bb.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Roshan Chandel</dc:creator>
-      <pubDate>Thu, 15 Oct 2026 13:00:17 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10004/#v1.0.1</guid>
     </item>
     <item>
       <title>Doppel - v1.1.0 [Version Update]</title>
