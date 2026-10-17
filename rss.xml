@@ -6,9 +6,59 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sat, 17 Oct 2026 11:52:02 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 17 Oct 2026 14:41:30 +0000</lastBuildDate>
     <item>
-      <title>Threat Hunting Essentials - v1.3.141 [Version Update]</title>
+      <title>Custom Viz - HTML Renderer - v1.0.7 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8815/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Release notes: https://github.com/livehybrid/viz-html-renderer/releases/tag/v1.0.7&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Render arbitrary HTML inside a Dashboard Studio panel. Supports `{{field}}` interpolation from search results, theme-aware CSS variables, inline SVG, and optional (off-by-default) script execution. Ideal for branded headers, status badges, rich tables, callouts and bespoke layouts Studio can&amp;#x27;t otherwise produce.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Dashboard Studio&amp;#x27;s markdown panel is deliberately limited — no styled spans, no inline SVG, no data-driven HTML. **HTML Renderer** fills that gap with a custom visualization that renders a HTML template you control, optionally populated from your search results.
+
+Use it for branded dashboard headers, &amp;quot;● LIVE&amp;quot; status badges, colour-coded callouts, custom legends, KPI ribbons, inline SVG diagrams/floor-plans, and any rich layout the native panels can&amp;#x27;t express. Values from the primary data source can be injected with simple `{{field}}` placeholders, so the HTML can reflect live search results (e.g. `Last update: {{latest_time}}`).
+
+The renderer is **theme-aware** — it exposes Splunk&amp;#x27;s CSS variables so your markup automatically matches light/dark dashboards. Script execution is **disabled by default** and only enabled via an explicit, clearly-labelled &amp;quot;Allow Scripts (DANGEROUS)&amp;quot; option, so the default behaviour is safe static HTML.
+
+Standard `studio_visualization` custom viz, dependency-free.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a60d78b0-ca38-11f1-a495-12dbbc6c7195.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Will Searle</dc:creator>
+      <pubDate>Sat, 17 Oct 2026 14:40:40 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8815/#v1.0.7</guid>
+    </item>
+    <item>
+      <title>Custom Viz - Airspace Radar - v1.0.7 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8813/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Release notes: https://github.com/livehybrid/viz-airspace-radar/releases/tag/v1.0.7&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;An animated phosphor radar scope for Dashboard Studio. Each result row is one aircraft (`hex, callsign, lat, lon, altitude_ft, heading, speed_kts`), drawn with a rotating sweep, range rings, callsign labels and heading vectors. Pairs with the TA-airspace-watch ADS-B modular input.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;**Airspace Radar** turns a table of aircraft positions into a live, animated radar scope inside Dashboard Studio — a rotating phosphor sweep, range rings, centre cross-hair, per-aircraft callsign labels and heading vectors. It&amp;#x27;s a striking way to present ADS-B / flight-tracking data, geospatial point movement, or any &amp;quot;things on a scope&amp;quot; dataset.
+
+The data contract is simple: **one row per aircraft**, with fields `hex`, `callsign`, `lat`, `lon`, `altitude_ft`, `heading`, `speed_kts`. Drive it from a live ADS-B feed (it pairs naturally with the companion **TA-airspace-watch** modular input that polls a tar1090/dump1090 receiver), from historical flight data, or from any search that produces those columns.
+
+Standard `studio_visualization` custom viz, theme-aware, dependency-free.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a19b011c-ca38-11f1-a495-12dbbc6c7195.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Will Searle</dc:creator>
+      <pubDate>Sat, 17 Oct 2026 14:40:33 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8813/#v1.0.7</guid>
+    </item>
+    <item>
+      <title>Chart Screenshot alert action - v1.1.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8817/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Release notes: https://github.com/livehybrid/viz-alert-snapshot/releases/tag/v1.1.1&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Send rich notifications containing screenshots of your visualisations&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Turn a Splunk alert&amp;#x27;s results into a real Splunk visualization image and deliver it where your team actually looks, with email, Telegram, Slack and Teams notifications - rendered server-side with Splunk&amp;#x27;s own bundled headless Chromium. No external browser, no bundled binary.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Will Searle</dc:creator>
+      <pubDate>Sat, 17 Oct 2026 14:40:30 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8817/#v1.1.1</guid>
+    </item>
+    <item>
+      <title>Custom Viz - Realtime Clock - v1.0.8 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8816/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Release notes: https://github.com/livehybrid/viz-realtime-clock/releases/tag/v1.0.8&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Two animated clock visualizations for Splunk Dashboard Studio: a smooth **analog** clock face (with optional digital readout) and a seven-segment **digital** LCD clock. Timezone-aware, themable colours, optional phosphor glow. No data required — drop one on any dashboard for a live, always-current clock.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Dashboard Studio has no built-in clock, yet operations walls, NOC status boards, world-clock panels and &amp;quot;as of now&amp;quot; headers all want a live, ticking time display. **Realtime Clock** adds two purpose-built custom visualizations that render the current time entirely client-side at 60fps — no streaming data, no scheduled searches, no backend.
+
+**Analog Clock** — a smooth analog face with sweeping hands, tick marks, an optional digital readout and day/date line, and a configurable phosphor glow. Hand, second-hand and tick colours are all configurable.
+
+**Digital Clock** — a seven-segment LCD-style display with a blinking colon, 12/24-hour modes, optional seconds, a date line, ghost (unlit) segments for an authentic LCD look, and a phosphor glow.
+
+Both support **local time, UTC, or any IANA timezone** (e.g. `Europe/London`, `America/New_York`, `Asia/Tokyo`), so a single dashboard can show a row of world clocks. Because the time is computed in the browser, the clocks stay accurate to the second regardless of search refresh intervals.
+
+Built as standard `studio_visualization` custom viz, themable to light/dark, and dependency-free.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f3c26c6a-ca37-11f1-8350-f2679e34b0bd.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Will Searle</dc:creator>
+      <pubDate>Sat, 17 Oct 2026 14:35:42 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8816/#v1.0.8</guid>
+    </item>
+    <item>
+      <title>Threat Hunting Essentials - v1.3.142 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7633/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
 
@@ -42,8 +92,8 @@ Information Use: Your email address is used to improve detection logic based on 
 
 For Premium Version - Contact sales https://www.avertpoint.com/contactus.html&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/1a0b4a82-ca1e-11f1-8032-36f6174c67e5.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
-      <pubDate>Sat, 17 Oct 2026 11:30:40 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.141</guid>
+      <pubDate>Sat, 17 Oct 2026 12:02:57 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.142</guid>
     </item>
     <item>
       <title>AWS Trusted Advisor Aggregator - v1.2.2+b000f21 [Version Update]</title>
@@ -1729,31 +1779,6 @@ Feel free to write to us at support@avotrix.com&lt;/p&gt;&lt;img height=&quot;36
       <guid>https://splunkbase.splunk.com/app/5243/#v2.3.4</guid>
     </item>
     <item>
-      <title>Nozomi Networks Universal Add-on - v2.2.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/6905/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Release Notes - Nozomi Networks Universal Add-on
-
-Features:
-This compatibility enables users to effortlessly retrieve data from both N2OS and Vantage through a single interface.
-This streamlined approach simplifies the monitoring and analysis of operational network data.
-
-Nozomi Networks is committed to enhancing the add-on based on user feedback and evolving industry requirements.
-
-For further information, assistance, or feedback, please contact Nozomi Networks support at [support@nozominetworks.com](mailto:support@nozominetworks.com).
-
-We hope you enjoy using the Nozomi Networks Universal Add-on and find its capabilities valuable in retrieving data from N2OS and Vantage.
-
-The 2.0.0 migrates to the ucc framework
-The 2.1.0 improves health\_log and audit\_log CIM mapping
-The 2.1.1 update internal conf as requested by Splunk
-The 2.2.0 variable input send also updates&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Nozomi Networks Universal add-on for Splunk provides organizations with a unified solution to retrieve data from Sensors (Guardian), CMC (Central Management Console), and Vantage, streamlining the data collection process. This add-on seamlessly integrates with Splunk to enhance cybersecurity and operational visibility in industrial control system (ICS) and operational technology (OT) environments.
-
-The Nozomi Networks Universal Add-on works with N2OS version 24 and higher.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/21464606-c3ef-11f1-aea0-0a229fcae80d.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Nozomi Networks</dc:creator>
-      <pubDate>Mon, 12 Oct 2026 08:41:26 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6905/#v2.2.0</guid>
-    </item>
-    <item>
       <title>Splunk Add-on for Cisco ESA - v1.8.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/1761/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**New Features**
@@ -1874,35 +1899,6 @@ More details: https://github.com/kaledaljebur/suricata-soc-investigation&lt;/p&g
       <guid>https://splunkbase.splunk.com/app/8559/#v2.1.1</guid>
     </item>
     <item>
-      <title>UXM - Indexer app - v26.10.9 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7535/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Indexer app that creates indexes, transforms and props.
-
-Part of UXM:
-UXM provides real-time understanding of how your customers and users experience the many websites, enterprise applications, SaaS services, VDI technologies such as Citrix and even critical collaboration platforms such as Teams, Skype, and SharePoint needed to get things done.
-
-UXM delivers the following key technical benefits:
-​​
-- A fully hosted Software-as-a-Service (SaaS) via cloud or as an on-premise installation
-- Lightweight agents for data collection that are centrally managed via web console
-- Supported platforms for both real-user &amp;amp; synthetic monitoring:
-​​- Any web browser application e.g. Office365 , Microsoft Dynamics, Oracle, SAP, ServiceNow, Salesforce, SharePoint or custom build
-- Any Windows desktop application e.g. Office365, .NET, Java, SAP, Oracle, Microsoft Dynamics or custom build
-- Voice/Video e.g. Teams or Skype for Business
-- Virtual application or desktop e.g. Citrix, RDS or VMware
-- Application APIs
-- Configurable endpoint device resource monitoring and event log data collection
-- Automatic analytics reporting based on IT performance expert knowledge and big data machine learning
-. All reporting is available via Splunk web portal or mobile app (Android or IOS) providing highly customizable dashboards
-- The solution can provide proactive alerting if performance problems occur. Standard integration into systems like ex. ServiceNow
-- Subscription-based, pay-as-you-go pricing​​
-
-See more at www.uxmapp.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/16b3a5b2-c3e0-11f1-aea0-0a229fcae80d.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Systemslab ApS</dc:creator>
-      <pubDate>Sat, 10 Oct 2026 03:01:47 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7535/#v26.10.9</guid>
-    </item>
-    <item>
       <title>Splunk App for Jenkins - v2.1.8 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/3332/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk App for Jenkins provides deep insights into your Jenkins master and slave infrastructure, job and build details such as console logs, status, artifacts, and an incredibly efficient way to analyze test results. The app provides out-of-the-box dashboards and search capabilities to enable organizations to run a high performing Jenkins cluster and bring operational intelligence into the software development life cycle.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/bd24da30-c406-11f1-bd65-0e6ab12b3d16.png&quot;&gt;</description>
@@ -1917,37 +1913,6 @@ See more at www.uxmapp.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOCRadar Cyber Intelligence</dc:creator>
       <pubDate>Fri, 09 Oct 2026 15:21:42 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7871/#v1.9.32</guid>
-    </item>
-    <item>
-      <title>SOCRadar Incidents MSSP - v1.0.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/9879/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Reliability improvements.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collect SOCRadar incidents for all your companies with one input. See alarms per company and update alarm status from Splunk.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;SOCRadar Incidents MSSP brings SOCRadar incidents for all the companies you manage into Splunk. You create one input. It uses your MSSP API Key and your Multi-Tenant ID. Every alarm keeps the company it belongs to. The MSSP Overview dashboard shows alarms, severities and trends per company. You can filter the dashboards by company. You can also update an alarm&amp;#x27;s status in SOCRadar from Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/7b8c3210-c3f4-11f1-b4ac-0a3489423fc7.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">burak goger</dc:creator>
-      <pubDate>Fri, 09 Oct 2026 15:21:39 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9879/#v1.0.2</guid>
-    </item>
-    <item>
-      <title>Bitdefender GravityZone for Splunk Dashboard App - v1.0.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7660/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Splunk cloud compatibility fixes&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Bitdefender GravityZone for Splunk App allows you to view dashboards, generate reports and search for events generated by the Bitdefender GravityZone platform. It provides you access to data, events and notifications gathered from GravityZone and all its managed endpoints. The app works together with the [Bitdefender GravityZone Add-on for Splunk](https://splunkbase.splunk.com/app/7660), which provides source mapping, data extractions and transformations. Integration is available for both Cloud and On Premises environments.
-
-**About GravityZone**
-
-GravityZone is a business security solution built from ground-up for virtualization and cloud to deliver security services to physical endpoints, virtual machines in public cloud and Exchange mail servers.
-
-GravityZone is one product with a unified management console available in the cloud, hosted by Bitdefender, or as one virtual appliance to be installed on company&amp;#x27;s premises, and it provides a single point for deploying, enforcing and managing security policies for any number of endpoints and of any type, in any location.
-
-GravityZone delivers multiple layers of security for endpoints and for Microsoft Exchange mail servers: antimalware with behavioral monitoring, zero day threat protection, application blacklisting and sandboxing, firewall, device control, content control, anti-phishing and antispam.
-
-Documentation
--------------
-
-[Cloud documentation](https://www.bitdefender.com/business/support/en/77211-171475-splunk.html)
-
-[On Premises documentation](https://www.bitdefender.com/business/support/en/77212-171475-splunk.html)&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/704eb2b6-c3df-11f1-89d4-72910eebafd2.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Alexandru Gurita</dc:creator>
-      <pubDate>Fri, 09 Oct 2026 12:49:32 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7660/#v1.0.2</guid>
     </item>
   </channel>
 </rss>
