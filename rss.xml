@@ -6,7 +6,111 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sat, 17 Oct 2026 02:15:13 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 17 Oct 2026 07:20:21 +0000</lastBuildDate>
+    <item>
+      <title>Supporting App for Expressway CDR - v0.5.4 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8593/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- New fields connected_at and disconnected_at, so that concurrency and duration_elapsed in Investigate Calls now work for Expressway CDR data, where they were always empty.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;This app implements various field extraction configuration and Sideview conventions so as to allow syslog-formatted Expressway CDR data to be not only searched in Splunk effectively, but also to be pulled into Sideview&amp;#x27;s commercial &amp;quot;Cisco CDR Reporting and Analytics&amp;quot; solution on Splunk and investigated and analyzed there.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app implements various field extraction configuration and Sideview conventions so as to allow syslog-formatted Expressway CDR data to be not only searched in Splunk effectively, but also to be pulled into Sideview&amp;#x27;s commercial &amp;quot;Cisco CDR Reporting and Analytics&amp;quot; solution on Splunk and investigated and analyzed there.
+
+NOTE that this Supporting App is designed to be always deployed with Sideview&amp;#x27;s &amp;quot;Supporting Add-on for Expressway CDR&amp;quot; ALSO deployed on the Indexing tier. That &amp;quot;Add-on&amp;quot; component contains crucial index-time configuration to index the CDR into Splunk correctly, and that index-time configuration is NOT duplicated in this app here.  Therefore if you intend to set up a standalone deployment you will need both the TA and the SA.
+
+These two apps are furthermore designed to work with Sideview&amp;#x27;s commercial &amp;quot;Cisco CDR Reporting and Analytics&amp;quot; app. When all three components are present and deployed to the right tiers, users can navigate, troubleshoot and build ad-hoc charts and reports around the Expressway data, within the the Cisco CDR app&amp;#x27;s complex user interfaces.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b3458eba-c9f6-11f1-9d40-36b247d8a94b.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
+      <pubDate>Sat, 17 Oct 2026 06:48:48 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8593/#v0.5.4</guid>
+    </item>
+    <item>
+      <title>Supporting App for Oracle SBC CDR - v1.0.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7051/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- Removed the incoming_call_reference_id and outgoing_call_reference_id fields. Nothing used them since the app moved to joining Oracle SBC records to CUCM by the full ciscoguid.
+- New fields connected_at and disconnected_at, so that concurrency and duration_elapsed in Investigate Calls now work for Oracle SBC data, where they were always empty.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app provides the Splunk configuration to ingest the CDR data from Oracle SBC.     It is intended to work for both Oracle Session Router CDR and Oracle SBC CDR, although some unknowns remain as of this writing. 
+
+It is also designed to work as a Supporting App alongside Sideview&amp;#x27;s commercial &amp;quot;Cisco CDR Reporting and Analytics&amp;quot; app.  
+When used in conjunction with the Cisco CDR app, the Oracle SBC data can be used in that app alongside the CUCM data.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/5e38461a-c9f6-11f1-9eaf-de83f1e47b6b.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
+      <pubDate>Sat, 17 Oct 2026 06:46:24 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7051/#v1.0.2</guid>
+    </item>
+    <item>
+      <title>Sideview Supporting App for Webex - v0.8.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8429/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;\- The index-time settings for Webex data have moved out of this app into a new add-on, TA\_sideview\_webex. Install it wherever Cisco's Webex add-on runs its inputs. Without it you will be affected by several bugs. For example long meeting quality records would be cut off at 10,000 bytes and lost.
+
+\- Fixed call\_id for Webex calls, which was different on every leg, so a forwarded or simultaneous-ring call showed as several calls. call\_id now comes from the Correlation ID, which all legs of a call share.
+
+\- A meeting's schedule, the meeting itself and its quality records now share one call\_id, and the meeting usage and attendee reports now appear in Investigate Calls.
+
+\- The duration on meeting usage and attendee reports is now in seconds, like every other duration in the app, rather than whole minutes.
+
+\- A scheduled meeting now shows as one row with the meeting that took place. A scheduled meeting nobody joined shows on its own, with no participants.
+
+\- New fields connected\_at and disconnected\_at, so that concurrency and duration\_elapsed in Investigate Calls now work for Webex calls and meetings, where they were always empty.
+
+\- Worked around a Splunk defect in which a field that Webex reports as an empty string could make stats list(), values() and dc() silently drop values, or run two values together separated by a semicolon. Any panel that listed or counted such a field - serverRegion, clientType, osType and a number of others - could show both the wrong values and the wrong number of them. Those fields now arrive absent rather than empty, which Splunk handles correctly. One visible change: a value that used to appear as a blank is now simply not there.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This Supporting App adapts data indexed via Splunk&amp;#x27;s &amp;quot;Cisco Webex Add-on for Splunk&amp;quot; allowing users to leverage that data within Sideview&amp;#x27;s commercial app &amp;quot;Cisco CDR Reporting and Analytics&amp;quot;.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/effaccfe-c9f5-11f1-960f-1eedfafce045.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
+      <pubDate>Sat, 17 Oct 2026 06:44:13 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8429/#v0.8.0</guid>
+    </item>
+    <item>
+      <title>Cisco CDR Reporting and Analytics - v9.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/669/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- **Important** - CUBE legs now join the CUCM legs of the same call only when &quot;merge by ciscoguid&quot; is selected on Investigate &gt; Calls. The old automatic join on the first 8 characters of the guid is gone.
+- **Important** - This app no longer contains any CUBE configuration. For CUBE data install SA_cube 0.8.0 on the search head and TA_cube 0.8.0 on the indexers.
+- Removed the old hidden guids and guid_detail views. The guid diagnostics page no longer reports on call_reference_id.
+- call_reference_id, incoming_call_reference_id and outgoing_call_reference_id are deprecated and no longer used by the app. They are still extracted so saved searches keep working, and will be removed in a future release.
+- **Functionality** - Major improvements to the conversationId chaining feature. The prior implementation only performed a partial join in some cases.
+- Merging on Investigate &gt; Calls is now done by a new mergecalls search command, which merges whole calls, follows chains of linked calls of any length, and holds only a few hours of calls in memory at a time.
+- **Functionality** - New &quot;merge across SME by session id&quot; option on Investigate &gt; Calls (experimental), which joins the legs of a call on either side of an SME by their RFC 7989 session ID.
+- **Functionality** - New &quot;merge by ciscoguid&quot; option on Investigate &gt; Calls. Unlike the conversationId and session id options it is not CUCM-only: ciscoguid means the same thing on CUCM, CUBE, CVP and SBC records, so it merges a call across clusters and across technologies.
+- **Functionality** - In all versions of Investigate Calls prior to this release the concurrency and duration_elapsed fields were always empty for every data type except CUCM and CUBE. Both now work for all of them.
+- **Performance** - The Investigate &gt; Devices page is dramatically faster, commonly 5x to 10x, and more on larger deployments, as a result of eliminating an mvexpand in the SPL.
+- **Performance** - Investigate &gt; Calls, and every other search that uses the devices lookup, is commonly 2x faster or more, because that lookup no longer allows wildcards.
+- **Important** - A &quot;*&quot; in the clusterId column of the devices lookup no longer matches any cluster. A new health check lists such rows, and the new App Settings &gt; General page can turn wildcards back on.
+- **Important** - A CUCM node that is upgraded or reinstalled can reuse old call ids, merging unrelated calls. A new health check finds this, and the new call_id_resets lookup keeps them apart. Each warning includes a search you can run once to record the reset.
+- On Investigate &gt; Calls, legs of one call that connect in the same second are now always listed in origination order, rather than sometimes in arbitrary order.
+- On Investigate &gt; Calls, a leg with no value in a text column, or in duration, no longer shifts the values below it up a row, against the wrong leg. This was most common on calls that cross CUCM, CUBE, Oracle SBC and CVP. Other numeric columns, and the CMR quality columns, are not lined up with the legs yet.
+- **Functionality** - The field gallery now documents the Oracle SBC CDR fields, about 230 of them, so they appear in the field picker with descriptions when Oracle SBC is selected. It also fills in 50 CUBE fields that were missing.
+- The home page's Explore fields panel now samples CUBE and Oracle SBC data separately from CUCM, so their fields no longer show as not in your data. Each field now also says which data types it is found in, and the search box matches on that too.
+- Eleven fields are now treated as numbers rather than as categories, including the CUCM audio and video bandwidth fields, CUBE's h323_voice_quality and charged_units, and the CMR's videoOneWayDelay.
+- The Extension, Outside Party and Huntgroup detail pages no longer mix CUBE records into some of their panels. Those panels counted a call through both CUBE and CUCM twice and disagreed with the rest of the page. For CUBE, use Investigate &gt; Calls.
+- The Call Detail page now labels legs from the cube_cdr_compact sourcetype with their CUBE direction and activity, as it already did for cube_cdr.
+- On Investigate &gt; Calls, selecting some but not all clusters no longer hides every CUBE, Oracle SBC and CVP leg. The cluster filters now apply only to CUCM records.
+- **Functionality** - CVP calls now show on Investigate &gt; Calls with CVP selected, one leg per SIP INVITE, and join their CUCM call under &quot;merge by ciscoguid&quot;. Needs SA_cisco_ucce 0.2.0.
+- **Critical** - On a Splunk Free license the app's first-time-run script never ran at all, because Splunk cannot honor passAuth = splunk-system-user there. None of the app's editable lookups were ever created.
+- Expanded the field gallery descriptions for the directory URI party fields.
+- The gallery now also notes that a directory URI whose host is an IP address is the SIP URI as signaled, which incidentally is the same form Expressway, Cisco Meeting Server and SBC records use.
+- Expanded the gallery descriptions for the RFC 7989 session ID fields and the IMS charging fields (ICID and the IOI pair), which are purpose-built cross- system correlators rather than addresses.
+- Fixed a bug in the search filters field, where a tab character preceding a field=value searchterm would be handled incorrectly triggering a parse error from splunkd.
+- The callquality command no longer fails the entire search when call_quality_thresholds.csv is absent. It falls back to the shipped default thresholds and warns.
+- The two &quot;Other calls to/from&quot; panels on the CUBE call detail view now show whole calls, rather than only the legs that carried one of the parties, and no longer collapse identical legs into one.
+- Fixed a bug where the call detail page found no CUBE legs at all for a call whose guid begins with a zero, roughly one call in sixteen. It matched the zero-padded call_reference_id against the guid text, which is not padded.
+- The call detail page now finds a call's CUBE legs by ciscoguid. Before, a CUBE leg reached through a CUCM trunk-to-trunk leg was missing there, even when Investigate Calls showed it.
+- The call detail page has its own data type selector, set from Investigate Calls, and brings in a call's records from every selected system that carries its ciscoguid: CUBE, Oracle SBC, CVP, UCCE and CCCSP.
+- On Investigate Calls, a call that went through CUCM and an Oracle SBC now has one &quot;view call details&quot; link, to the main call detail page, as CUBE calls already did. The Oracle SBC detail view remains for calls that never touched CUCM.
+- The call flow diagram on the call detail page now draws a call's Oracle SBC and CUBE hops alongside its CUCM legs, with each box named the way it is named in CUCM.
+- In the call detail page's legs table, every non-CUCM row now gets the alternate background, the note above the table names which systems those rows came from, and data_type is now a default column.
+- The &quot;other data sources&quot; panel on the call detail page now also searches the app's own indexes, and recognizes a call's ciscoguid in each of the forms those systems write it.
+- Fixed a bug where if you had the conversationId merging option on, CUBE and Cisco Meeting Server legs fell out of any call that merged, and showed up as a separate call carrying a CUCM call id.
+- The health checks for required Splunk and app versions are now one check each, covering every installed Sideview app, in place of the eight near- identical copies the apps used to ship. Six fewer searches run when the health checks page loads.
+- Those two checks also now work for roles without the rest_access_server_endpoints capability, where previously they failed outright rather than reporting anything.
+- A sourcetypes list in sideview_data_types.conf may now be comma-separated as well as space-separated. Before, a comma silently hid that data type's events.
+- The devices lookup health check no longer fails when extra columns have been added to the lookup. Extra columns are now reported as INFO, and only missing columns fail the check.
+- The call_failed field no longer counts ordinary human outcomes as failures: wrong numbers (including SIP 404, 410, 484 and 604), no answer, busy (including SIP 486 and 600), declined (603), the caller hanging up while it rang (487), answered on another phone, or a party dropped from a conference.
+- Calls ending in SIP 420 Bad Extension or cause 155 &quot;DCC Allowed Percentage Exceeded&quot; previously had no call_failed value at all. Both now count as failed calls.
+- New fields connected_at and disconnected_at, defined the same way on every supported data type: when each call leg connected (empty if it never did) and when it ended.
+- Fixed duration_elapsed showing 0 for a call that did connect, when one of its CUCM legs never connected.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This commercial app is available as a 60 day trial and is compatible with both Splunk Enterprise and Splunk Cloud.  The app gives your team greatly increased visibility, monitoring, and reporting functionality around Cisco Unified Communications (aka CUCM / CallManager), whether you&amp;#x27;re a small organization with a hundred phones or one of the largest companies in the world.
+
+Whether troubleshooting individual calls or building high level reporting, it helps you visualize and understand in all areas: agents, users, and huntgroups; concurrency and utilization; call flow; call quality; call volume; devices; failed calls; locations and sites; and audits and compliance.
+
+Your team can trust it as their day-to-day tool for navigating call data from your Cisco CallManager deployment, and it can also become their main tool for building custom reports, alerts and dashboards around that data. This is true whether it’s a standard report you’d expect or a custom report that nothing else has been able to provide.
+
+Note that this isn&amp;#x27;t a package of content, but more a tank that allows you to drive around in your data.  You won’t find a leftnav full of canned CDR reports to click on (that &amp;quot;don&amp;#x27;t quite fit&amp;quot;).  Instead, you get an open flexible framework to investigate anything, drill down into anything, report on anything, over anything, by anything (occasionally with hands-on help from Sideview Support =).
+
+It is available as a free 60-day trial, and you can download and set it up today in less than 30 minutes.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/1e9b5138-c9f5-11f1-820c-f28545bf4612.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
+      <pubDate>Sat, 17 Oct 2026 06:40:58 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/669/#v9.0.0</guid>
+    </item>
     <item>
       <title>TA-Alerts for SplunkAdmins - v1.0.10 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/6518/</link>
@@ -780,23 +884,6 @@ The app is intended for network operations, security operations, IT operations, 
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Field Solutions</dc:creator>
       <pubDate>Wed, 14 Oct 2026 20:58:39 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/9257/#v1.0.60</guid>
-    </item>
-    <item>
-      <title>Metrics Explorer - v1.0.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/9996/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Find metrics and generate basic searches through a dashboard&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Rich telemetry is key to operational observability, but having too many metrics makes finding the right one a hassle.
-
-Metrics Explorer makes that easier. In a Splunk dashboard, it helps you:
-
-1. find available metrics,
-2. filter metrics to what you want,
-3. see the dimensions and sources for each metric, and
-4. build a mstats search.
-
-Once metrics and dimensions are selected, the dashboard&amp;#x27;s output is a base search that can be used directly in Search.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/98602798-c368-11f1-b4ac-0a3489423fc7.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Outcold Solutions LLC</dc:creator>
-      <pubDate>Wed, 14 Oct 2026 15:58:43 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9996/#v1.0.1</guid>
     </item>
     <item>
       <title>Search for AWS - v1.0.0 [New App Release]</title>
@@ -1679,24 +1766,6 @@ The Nozomi Networks Universal Add-on works with N2OS version 24 and higher.&lt;/
       <guid>https://splunkbase.splunk.com/app/7869/#v1.3.0</guid>
     </item>
     <item>
-      <title>Splunk Add-on Builder - v4.5.4 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/2962/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Add-on Builder is a Splunk app that helps you build and validate technology add-ons for your Splunk Enterprise deployment. 
-
-The goals of the Splunk Add-on Builder are to:
-* Guide you through all of the necessary steps of creating an add-on
-* Build alert actions and adaptive response actions for Splunk Enterprise Security
-* Reduce development and testing time
-* Follow best practices and naming conventions
-* Maintain CIM compliance
-* Maintain quality of add-ons
-*  Validate and test the add-on, helping you to check for certification readiness and to identify any limitations such as compatibilities and dependencies
-* Maintain a consistent look and feel while still making it easy for you to add branding&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b6f72dfc-c3cf-11f1-aea0-0a229fcae80d.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Mon, 12 Oct 2026 06:57:43 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/2962/#v4.5.4</guid>
-    </item>
-    <item>
       <title>Splunk Add-on for Cisco ESA - v1.8.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/1761/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**New Features**
@@ -1815,96 +1884,6 @@ More details: https://github.com/kaledaljebur/suricata-soc-investigation&lt;/p&g
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Kaled Aljebur</dc:creator>
       <pubDate>Sat, 10 Oct 2026 10:37:01 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8559/#v2.1.1</guid>
-    </item>
-    <item>
-      <title>UXM - Waterfall visualization app - v26.6.18 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7533/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**New features:**
-
-* \[WebVitals] Display web-vitals LCP in waterfall (#5)
-
-**Bug fixes:**
-
-* Timeline is partly hidden (#7)
-
-**Security fixes:**
-
-* \[Security] Upgrade underscore.js to fix 1x High severity (cve-2026-27601) (#8)
-
-
-
-**Versions in release:**
-
-| Framework                 | Type       | Version | License |
-| ------------------------- | ---------- | ------- | ------- |
-| jquery                    | JavaScript | 3.6.0   | MIT     |
-| underscore                | JavaScript | 1.13.8  | MIT     |
-| chart.js                  | JavaScript | 3.7.1   | MIT     |
-| chartjs-plugin-annotation | JavaScript | 1.4.0   | MIT     |&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Visualization app to display UXM Web Agent and UXM Browser Extension data in a waterfall.
-
-Part of UXM:
-UXM provides real-time understanding of how your customers and users experience the many websites, enterprise applications, SaaS services, VDI technologies such as Citrix and even critical collaboration platforms such as Teams, Skype, and SharePoint needed to get things done.
-
-UXM delivers the following key technical benefits:
-​​
-- A fully hosted Software-as-a-Service (SaaS) via cloud or as an on-premise installation
-- Lightweight agents for data collection that are centrally managed via web console
-- Supported platforms for both real-user &amp;amp; synthetic monitoring:
-​​- Any web browser application e.g. Office365 , Microsoft Dynamics, Oracle, SAP, ServiceNow, Salesforce, SharePoint or custom build
-- Any Windows desktop application e.g. Office365, .NET, Java, SAP, Oracle, Microsoft Dynamics or custom build
-- Voice/Video e.g. Teams or Skype for Business
-- Virtual application or desktop e.g. Citrix, RDS or VMware
-- Application APIs
-- Configurable endpoint device resource monitoring and event log data collection  
-- Automatic analytics reporting based on IT performance expert knowledge and big data machine learning
-. All reporting is available via Splunk web portal or mobile app (Android or IOS) providing highly customizable dashboards
-- The solution can provide proactive alerting if performance problems occur. Standard integration into systems like ex. ServiceNow
-- Subscription-based, pay-as-you-go pricing​​
-
-See more at www.uxmapp.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0b4f7406-c3c4-11f1-a583-aab41c1734bb.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Systemslab ApS</dc:creator>
-      <pubDate>Sat, 10 Oct 2026 03:01:47 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7533/#v26.6.18</guid>
-    </item>
-    <item>
-      <title>UXM - Worldmap visualization app - v26.10.9 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7534/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**Security fixes:**
-
-* \[Security] Update underscore javascript to fix 1x High vulnerability (#19)
-* \[Security] Upgrade js-yaml from 3.13.1 to 4.1.1 or 3.14.2 to fix CVE-2025-64718 (MEDIUM ) (#18)
-
-**Versions in release:**
-
-| Framework  | Type       | Version | License |
-| ---------- | ---------- | ------- | :------ |
-| jquery     | JavaScript | 3.7.1   | MIT     |
-| underscore | JavaScript | 1.13.8  | MIT     |
-| leaflet    | JavaScript | 1.9.4   | BSD 2   |&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Visualization app to display UXM Endpoint Agent, UXM Web Agent and UXM Browser Extension data in a worldmap with calculated Apdex score per country.
-
-Part of UXM:
-UXM provides real-time understanding of how your customers and users experience the many websites, enterprise applications, SaaS services, VDI technologies such as Citrix and even critical collaboration platforms such as Teams, Skype, and SharePoint needed to get things done.
-
-UXM delivers the following key technical benefits:
-​​
-- A fully hosted Software-as-a-Service (SaaS) via cloud or as an on-premise installation
-- Lightweight agents for data collection that are centrally managed via web console
-- Supported platforms for both real-user &amp;amp; synthetic monitoring:
-​​- Any web browser application e.g. Office365 , Microsoft Dynamics, Oracle, SAP, ServiceNow, Salesforce, SharePoint or custom build
-- Any Windows desktop application e.g. Office365, .NET, Java, SAP, Oracle, Microsoft Dynamics or custom build
-- Voice/Video e.g. Teams or Skype for Business
-- Virtual application or desktop e.g. Citrix, RDS or VMware
-- Application APIs
-- Configurable endpoint device resource monitoring and event log data collection  
-- Automatic analytics reporting based on IT performance expert knowledge and big data machine learning
-. All reporting is available via Splunk web portal or mobile app (Android or IOS) providing highly customizable dashboards
-- The solution can provide proactive alerting if performance problems occur. Standard integration into systems like ex. ServiceNow
-- Subscription-based, pay-as-you-go pricing​​
-
-See more at www.uxmapp.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/032cfe96-c3c0-11f1-9280-ba71dc432e4e.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Systemslab ApS</dc:creator>
-      <pubDate>Sat, 10 Oct 2026 03:01:47 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7534/#v26.10.9</guid>
     </item>
     <item>
       <title>UXM - Indexer app - v26.10.9 [Version Update]</title>
