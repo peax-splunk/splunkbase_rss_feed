@@ -6,41 +6,65 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Tue, 20 Oct 2026 06:53:18 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 20 Oct 2026 12:24:51 +0000</lastBuildDate>
     <item>
-      <title>CrowdStrike OAuth API - v7.0.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5786/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Fixed detonation actions failing while waiting for Falcon Sandbox analysis results.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with CrowdStrike OAuth2 authentication standard to implement querying of endpoint security data&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0a81f384-cbfb-11f1-8032-36f6174c67e5.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Mon, 19 Oct 2026 20:24:11 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5786/#v7.0.2</guid>
-    </item>
-    <item>
-      <title>Microsoft OneDrive - v3.1.3 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5815/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Regenerate the locked dependencies for the SDKfied app.
-* Updated dependencies.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with Microsoft OneDrive to execute various generic actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9e377f50-cbfa-11f1-9d40-36b247d8a94b.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Mon, 19 Oct 2026 20:21:09 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5815/#v3.1.3</guid>
-    </item>
-    <item>
-      <title>BigPanda for Splunk - v2.2.4 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5084/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Add debugging information when BigPanda action cannot be applied to or removed from an alert.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The BigPanda App for Splunk allows you to trigger BigPanda incidents from Saved-Search Alerts by using the Custom Alert Actions capability in Splunk. This provides a dashboard to manage your Splunk alerts sending to BigPanda all of your Splunk alerts, making it easier than ever to correlate all of your alerts in BigPanda.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/5e02f8e2-cbf5-11f1-9d40-36b247d8a94b.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">BigPanda Integrations</dc:creator>
-      <pubDate>Mon, 19 Oct 2026 20:09:15 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5084/#v2.2.4</guid>
-    </item>
-    <item>
-      <title>Splunk Add-on for AWS Security Hub - v1.1.3 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8642/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Updated dependent packages&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Use the Splunk Add-on for AWS Security Hub to ingest real-time events from AWS Security Hub and convert them into findings and intermediate findings in Splunk Enterprise Security. Consolidating findings in Splunk Enterprise Security helps to centralize data management across AWS Cloud platforms and services and leverage the threat detection capabilities of Splunk Enterprise Security.
+      <title>Kubernetes Search - v1.2.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8858/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- New: A license covers a number of users, the Splunk users holding `run_k8s_search` (Splunk administrators are not counted), and registers any number of clusters. The License tab shows the licensed users beside the users holding the capability; more users than the license covers raise a warning there and in a bulletin message, and searches keep running.
+- Security: Built with Go 1.27.2, which fixes vulnerabilities in the Go standard library that scanners report against Go 1.27.1, in the HTTP/1 and HTTP/2 client and server, TLS and MIME header parsing
+- Security: A link that sets a dashboard input in its URL (`?form.namespace=…`) can no longer add arguments or commands to the dashboard's searches
+- Security: A link that sets the cluster in its URL can no longer show a link or an image of its own in the Incident Snapshot heading
+- The free tier serves one user, the first to run a search, which an admin can change on the License tab: 1.1 allowed any number of users
+- Bug fix: On Splunk Free every Kubernetes Search command that reads a cluster, and adding a cluster, failed with a capability error, and the health check logged an error every 5 minutes. Splunk Free's admin, which Splunk reports with no capabilities, now holds the app's capabilities, and the health check skips with one INFO line
+- Bug fix: Resource Hygiene's Admission Control tab showed a webhook configuration with no webhooks as a webhook with `failurePolicy` Fail
+- Bug fix: The Events dashboard counts a warning about an object with `oom-kill` in its name, such as a back-off of a pod named `cb-oom-kill-web`, as an OOM kill
+- Bug fix: The Node and Pod Definition tabs and the CoreDNS Corefile panel on System Components show no heading, and the Corefile panel's description is missing
+- Bug fix: Splunk reports `auth_server_fingerprint` in `kubeclusters.conf` and `kubeauth.conf` as an invalid key every time it starts&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Query your Kubernetes clusters live from the Splunk search bar - like kubectl, as SPL. List resources, stream pod logs, read events, and describe objects across every registered cluster. Read-only and RBAC-controlled. No in-cluster agent, no ingestion, no index storage. Free tier for one cluster; a paid license unlocks multi-cluster and per-user access.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Kubernetes Search brings live, read-only access to the Kubernetes API into the Splunk search bar. Instead of switching to a terminal and kubectl, you run SPL - | k8s kind=pods namespace=payments - and Splunk queries the cluster&amp;#x27;s API server directly and streams the current state into your search.
 
-Splunk Add-on for AWS Security Hub is a premium security solution requiring a subscription to Splunk via AWS Security Hub Extended.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d570350a-cbe3-11f1-8350-f2679e34b0bd.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Mon, 19 Oct 2026 17:59:03 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8642/#v1.1.3</guid>
+The problem it solves: when something breaks in a cluster, the question is usually &amp;quot;what is true right now?&amp;quot; - is the pod still crash-looping, what do its events say, is the node Ready. Answering that has meant leaving Splunk, holding cluster credentials, and running kubectl by hand. Ingestion pipelines give you history, but at the cost of storage and license volume, and they show the cluster only as of the last sample. Kubernetes Search answers the live question from inside Splunk, with no credentials handed out and every query recorded in the Splunk audit log.
+
+How it works:
+- Five search commands cover the common kubectl verbs: | k8s (list or get any resource), | k8slogs (stream pod logs), | k8sevents (cluster events), | k8sdescribe (an object plus its events), and | k8syaml (format JSON as YAML).
+- Everything runs on the search head and is strictly read-only - it never applies, scales, or deletes anything.
+- Nothing is indexed: no storage cost, no license volume, no source types, no field extractions. Results exist only for the life of your search.
+- Register many clusters and fan out with context=* - each row carries a cluster field, so you query and aggregate across your whole fleet from one pane.
+- Access is gated by a Splunk capability and a per-cluster credential model (shared, per-user, or Kubernetes impersonation), so analysts get controlled, audited read access without being handed kubectl or cluster credentials.
+- A short-lived on-disk cache keeps dashboards from hammering your API servers; Secrets are never cached.
+
+There is no agent to install in your cluster - only a network route from the search head to the API server and a credential. The app installs on search heads only and writes nothing to any index.
+
+It pairs naturally with ingestion: use Monitoring Kubernetes or OpenTelemetry for history and trends, and Kubernetes Search for the live picture - in the same Splunk session.
+
+Kubernetes Search runs on a free tier with no license key (one user and one cluster, on a single standalone search head). A paid license, priced per user, covers your whole team and unlocks multiple clusters, search head clustering, per-user credentials, and impersonation.
+
+Built and supported by Outcold Solutions. Documentation: https://www.outcoldsolutions.com/docs/kubernetes-search/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/91e4c604-cc7c-11f1-82a7-d6d9b35825f2.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Outcold Solutions LLC</dc:creator>
+      <pubDate>Tue, 20 Oct 2026 12:23:06 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8858/#v1.2.0</guid>
+    </item>
+    <item>
+      <title>Search for AWS - v1.0.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10022/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Initial release&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Query live AWS from the Splunk search bar, with nothing ingested: list any resource over Cloud Control, tail CloudWatch logs, chart CloudWatch metrics, read CloudTrail, run Athena, and pull Cost Explorer data across every account and region you register, with a dashboard per AWS service.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Search for AWS brings your AWS accounts into Splunk search, live. Its SPL commands call the AWS APIs as you search and stream the answer into the pipeline, so you join AWS with everything Splunk already holds, and nothing is ingested or indexed.
+
+Any resource, every account. | awsget lists any resource kind Cloud Control can list, from EC2 instances to IAM roles. account=* fans out in parallel across the accounts you register and region=* across each account&amp;#x27;s allowed regions; an account or region that fails does not stop the others, and the search says which failed.
+
+Logs, metrics, activity and cost. | awslogs tails CloudWatch Logs and runs Logs Insights, | awsmetrics charts CloudWatch metrics and reads alarms and their history, | awscloudtrail looks up management events, | awscost reads Cost Explorer, | awsathena, | awsglue and | awstag cover the rest, and | awsjson expands the JSON they return.
+
+More than thirty dashboards. Compute, Networking, Storage, Databases, App Integration, Analytics, Security, Observability and Management, grouped the way the AWS console groups them, each with a page per resource, plus an Overview that opens on what needs attention, a Metrics Explorer, Log Tail, Logs Insights, CloudTrail explorers, and Cost &amp;amp; Usage.
+
+Your credentials, your boundary. Access keys, a cross-account role to assume with an external ID, or the EC2 instance role, with every secret kept in Splunk&amp;#x27;s encrypted credential store, and per-user credentials for analysts who should search as themselves. AWS IAM stays the boundary, and by default an assumed role&amp;#x27;s session names the Splunk user in CloudTrail.
+
+Costs in view. The docs say what AWS bills for each command, and a short-lived cache keeps a repeated search from calling AWS again.
+
+Free for one account. The free tier runs one account, with access keys or the instance role, on a standalone search head, with no license key. A license adds more accounts, search head clustering, assumed roles and per-user credentials.
+
+Works on Splunk Enterprise 9.4, 10.0, 10.2, 10.4 and 10.6 and on Splunk Cloud, on a search head. The app sends no telemetry.
+
+Documentation: https://www.outcoldsolutions.com/docs/aws-search/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/3be788f8-cc7d-11f1-ba08-b269a7c57f9b.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Outcold Solutions LLC</dc:creator>
+      <pubDate>Tue, 20 Oct 2026 11:56:41 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10022/#v1.0.0</guid>
     </item>
     <item>
       <title>Threat Hunting Essentials - v1.3.144 [Version Update]</title>
@@ -75,10 +99,75 @@ You can easily configure the scan interval in the app’s settings. The real-tim
 
 Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.
 
-For Premium Version - Contact sales https://www.avertpoint.com/contactus.html&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/6f5a5882-cbb0-11f1-84f2-6a7dc70e9d5d.png&quot;&gt;</description>
+For Premium Version - Contact sales https://www.avertpoint.com/contactus.html&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/995c6700-cc79-11f1-9d6a-9204712b30b5.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
-      <pubDate>Mon, 19 Oct 2026 16:52:39 +0000</pubDate>
+      <pubDate>Tue, 20 Oct 2026 11:31:45 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7633/#v1.3.144</guid>
+    </item>
+    <item>
+      <title>Genesys Cloud Add-on for Splunk - v0.4.3 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9730/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Added supported python version(s) to `globalConfig.json` as required by Splunk v10.1 and above
+* Added CIM 5.x compliance to inputs `audit_query` and `edges_metrics`&amp;#x20;
+* Minor bug fixes among multiple inputs
+* General refactoring
+
+Check [release notes](https://github.com/splunk/genesys_cloud_ta/releases/tag/v0.4.3. &quot;release notes&quot;) for more details.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Genesys Cloud Add-on for Splunk integrates with Genesys Cloud to collect metrics, service statuses and operational events.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2edf3efe-cb9b-11f1-960f-1eedfafce045.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Field Solutions</dc:creator>
+      <pubDate>Tue, 20 Oct 2026 10:17:38 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9730/#v0.4.3</guid>
+    </item>
+    <item>
+      <title>Miro App for Splunk - v3.3.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5677/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Miro App for Splunk 3.3.0
+
+* New input: Miro AI Logs (Beta) collects Miro AI interaction logs. It needs the Enterprise Guard add-on, an admin who turned on &quot;Collect AI interaction logs&quot; in the Miro Admin console, and a token with the `aiinteractionlogs:read` scope.
+* All inputs re-read the last few minutes (&quot;Overlap&quot;, default 5) to catch late records, skip records they already indexed, and save their checkpoint after every page. An AI log backlog older than a month is collected month by month.
+* The Interval field accepts a CRON expression, `-1`, `0` or a decimal value on the first run.
+* Long AI log events are indexed whole.
+* The access-token help explains that the SIEM toggle in Miro issues one token for every log scope, and that turning the toggle off invalidates it in every input.
+* After upgrading from 3.2.0, the first poll may index up to the overlap's worth of records a second time.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Miro App for Splunk enables comprehensive log ingestion from your Miro Enterprise account. Audit Logs are available to all Enterprise accounts. Content Logs are available with an Enterprise Guard subscription.
+
+You can optionally configure visualization dashboards for User Activity and Security Activity based on Audit logs by importing dashboard XML files from our https://help.miro.com/hc/en-us/articles/4404745057170-Miro-app-for-Splunk&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a4fb2182-cc6a-11f1-ac39-5e5a6ed47dae.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Miro Enterprise Integrations</dc:creator>
+      <pubDate>Tue, 20 Oct 2026 09:49:16 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5677/#v3.3.0</guid>
+    </item>
+    <item>
+      <title>CrowdStrike OAuth API - v7.0.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5786/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Fixed detonation actions failing while waiting for Falcon Sandbox analysis results.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with CrowdStrike OAuth2 authentication standard to implement querying of endpoint security data&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0a81f384-cbfb-11f1-8032-36f6174c67e5.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Mon, 19 Oct 2026 20:24:11 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5786/#v7.0.2</guid>
+    </item>
+    <item>
+      <title>Microsoft OneDrive - v3.1.3 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5815/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Regenerate the locked dependencies for the SDKfied app.
+* Updated dependencies.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with Microsoft OneDrive to execute various generic actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9e377f50-cbfa-11f1-9d40-36b247d8a94b.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Mon, 19 Oct 2026 20:21:09 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5815/#v3.1.3</guid>
+    </item>
+    <item>
+      <title>BigPanda for Splunk - v2.2.4 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5084/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Add debugging information when BigPanda action cannot be applied to or removed from an alert.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The BigPanda App for Splunk allows you to trigger BigPanda incidents from Saved-Search Alerts by using the Custom Alert Actions capability in Splunk. This provides a dashboard to manage your Splunk alerts sending to BigPanda all of your Splunk alerts, making it easier than ever to correlate all of your alerts in BigPanda.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/5e02f8e2-cbf5-11f1-9d40-36b247d8a94b.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">BigPanda Integrations</dc:creator>
+      <pubDate>Mon, 19 Oct 2026 20:09:15 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5084/#v2.2.4</guid>
+    </item>
+    <item>
+      <title>Splunk Add-on for AWS Security Hub - v1.1.3 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8642/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Updated dependent packages&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Use the Splunk Add-on for AWS Security Hub to ingest real-time events from AWS Security Hub and convert them into findings and intermediate findings in Splunk Enterprise Security. Consolidating findings in Splunk Enterprise Security helps to centralize data management across AWS Cloud platforms and services and leverage the threat detection capabilities of Splunk Enterprise Security.
+
+Splunk Add-on for AWS Security Hub is a premium security solution requiring a subscription to Splunk via AWS Security Hub Extended.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d570350a-cbe3-11f1-8350-f2679e34b0bd.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Mon, 19 Oct 2026 17:59:03 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8642/#v1.1.3</guid>
     </item>
     <item>
       <title>Dashboard Health Checker - v1.0.6 [Version Update]</title>
@@ -130,14 +219,6 @@ Data is delivered in STIX 2.1 format and mapped to the Authentication and Threat
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Dave Bullough</dc:creator>
       <pubDate>Mon, 19 Oct 2026 13:21:04 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8955/#v1.2.0</guid>
-    </item>
-    <item>
-      <title>Genesys Cloud Add-on for Splunk - v0.4.3 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/9730/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Genesys Cloud Add-on for Splunk integrates with Genesys Cloud to collect metrics, service statuses and operational events.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2edf3efe-cb9b-11f1-960f-1eedfafce045.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Field Solutions</dc:creator>
-      <pubDate>Mon, 19 Oct 2026 10:23:45 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9730/#v0.4.3</guid>
     </item>
     <item>
       <title>Splunk Add-on for Carbon Black - v3.0.1 [Version Update]</title>
@@ -1025,30 +1106,6 @@ The app is intended for network operations, security operations, IT operations, 
       <guid>https://splunkbase.splunk.com/app/9257/#v1.0.60</guid>
     </item>
     <item>
-      <title>Search for AWS - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10022/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Initial release&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Query live AWS from the Splunk search bar, with nothing ingested: list any resource over Cloud Control, tail CloudWatch logs, chart CloudWatch metrics, read CloudTrail, run Athena, and pull Cost Explorer data across every account and region you register, with a dashboard per AWS service.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Search for AWS brings your AWS accounts into Splunk search, live. Its SPL commands call the AWS APIs as you search and stream the answer into the pipeline, so you join AWS with everything Splunk already holds, and nothing is ingested or indexed.
-
-Any resource, every account. | awsget lists any resource kind Cloud Control can list, from EC2 instances to IAM roles. account=* fans out in parallel across the accounts you register and region=* across each account&amp;#x27;s allowed regions; an account or region that fails does not stop the others, and the search says which failed.
-
-Logs, metrics, activity and cost. | awslogs tails CloudWatch Logs and runs Logs Insights, | awsmetrics charts CloudWatch metrics and reads alarms and their history, | awscloudtrail looks up management events, | awscost reads Cost Explorer, | awsathena, | awsglue and | awstag cover the rest, and | awsjson expands the JSON they return.
-
-More than thirty dashboards. Compute, Networking, Storage, Databases, App Integration, Analytics, Security, Observability and Management, grouped the way the AWS console groups them, each with a page per resource, plus an Overview that opens on what needs attention, a Metrics Explorer, Log Tail, Logs Insights, CloudTrail explorers, and Cost &amp;amp; Usage.
-
-Your credentials, your boundary. Access keys, a cross-account role to assume with an external ID, or the EC2 instance role, with every secret kept in Splunk&amp;#x27;s encrypted credential store, and per-user credentials for analysts who should search as themselves. AWS IAM stays the boundary, and by default an assumed role&amp;#x27;s session names the Splunk user in CloudTrail.
-
-Costs in view. The docs say what AWS bills for each command, and a short-lived cache keeps a repeated search from calling AWS again.
-
-Free for one account. The free tier runs one account, with access keys or the instance role, on a standalone search head, with no license key. A license adds more accounts, search head clustering, assumed roles and per-user credentials.
-
-Works on Splunk Enterprise 9.4, 10.0, 10.2, 10.4 and 10.6 and on Splunk Cloud, on a search head. The app sends no telemetry.
-
-Documentation: https://www.outcoldsolutions.com/docs/aws-search/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/fd7d12ec-c71b-11f1-84f2-6a7dc70e9d5d.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Outcold Solutions LLC</dc:creator>
-      <pubDate>Wed, 14 Oct 2026 15:58:18 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10022/#v1.0.0</guid>
-    </item>
-    <item>
       <title>TA-osquery - v1.0.5 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8574/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Splunk Cloud compatibility fix: removed `state_change_requires_restart` from app.conf. No changes to parsing or CIM mappings.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;A Splunk Technology Add-ON that ingests, parses, and CIM maps osquery host telemetry for use in Splunk security apps.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TA-osqueryv1 is a Splunk Technology Add-On that collects and normalizes host telemetry from osquery. It parses osquery&amp;#x27;s JSON log output, fixes timestamps, and maps process and file activity events to Splunk&amp;#x27;s CIM Endpoint data model - making the data immediately usable in Splunk ES and other security apps. No custom code - purely configuration-driven.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/4ee0d2bc-c7db-11f1-9eaf-de83f1e47b6b.png&quot;&gt;</description>
@@ -1765,36 +1822,6 @@ Feel free to write to us at support@avotrix.com&lt;/p&gt;&lt;img height=&quot;36
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">marlin arnall</dc:creator>
       <pubDate>Sun, 11 Oct 2026 19:56:18 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7795/#v1.0.4</guid>
-    </item>
-    <item>
-      <title>Wind Compass - v0.5.3 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/9969/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Animated wind compass for Splunk Dashboard Studio. Works instantly with live Open-Meteo data by city, or bind your own search. Direction, speed, temperature, and weather icon on Clean, Marine, and Instrument skins.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Wind Compass is a custom visualization for Splunk Dashboard Studio (Splunk 10.4+) that renders an animated compass showing wind direction, speed, and weather condition — with no search required.
-
-Animated wind compass for Splunk Dashboard Studio. Works instantly with live Open-Meteo data by city, or bind your own search. Direction, speed, temperature, and weather icon on Clean, Marine, and Instrument skins.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ee741c00-c4c8-11f1-aea0-0a229fcae80d.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Tomas Baublys</dc:creator>
-      <pubDate>Sat, 10 Oct 2026 16:56:15 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9969/#v0.5.3</guid>
-    </item>
-    <item>
-      <title>Whiteboard App - v0.3.75 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8908/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**Splunkbase AppInspect fixes**
-
-* Cleared the &quot;public IP `3.57.65.44`&quot; rejection. There is no address: SVG path data lets numbers run together, because a second decimal point always begins a new number, so that run is the three coordinates `3.57`, `0.65` and `0.44`. All 20 hits came from icon artwork inside Excalidraw.
-* The build now separates those runs at a boundary the parser already recognised, leaving rendering untouched — across the 14 affected paths the parsed number sequences are identical before and after. `scripts/space-svg-path-numbers.py` is confined to `d=&quot;...&quot;` attributes and **fails the build** if an IP-shaped string survives outside path data.
-* Removed `[install] state_change_requires_restart`, which forced a splunkd restart on every enable/disable. No `[triggers]` stanza replaces it: that is only for an app's own custom conf files, and configuring it for `collections.conf`/`transforms.conf` is itself an AppInspect failure.
-
-**Shape library**
-
-* Inserts as **SVG Icon** by default, listed first, with *Elements* relabelled **Text**. Sticky notes and zones have no icon artwork and still insert as editable elements.
-* The toggle row wraps instead of compressing: `all: unset` strips the buttons' sizing, so without `flex-shrink: 0` the label spilled out of its own highlight.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collaborative Excalidraw whiteboard inside Splunk for platform architecture and workshop diagrams. Splunk shapes, example boards, and KV Store persistence — no external infrastructure.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Whiteboard App is a native Splunk canvas for architecture and workshop diagrams — no external database or middleware. Draw inside Splunk Web with Excalidraw, Splunk infrastructure shapes, and ready-made example boards; boards persist in KV Store. New boards are private by default; share with everyone on the instance when you are ready. Export PNG/SVG/JSON or walk through designs step-by-step in Present mode. Built for architects, SEs, and facilitators who sketch where their audience already works.
-
-
-Requires Splunk Enterprise or Splunk Cloud (Victoria) 9.0.0 or later. Source: https://github.com/bautt/splunk-whiteboard-app&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b985efd4-c4c6-11f1-bd65-0e6ab12b3d16.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Tomas Baublys</dc:creator>
-      <pubDate>Sat, 10 Oct 2026 16:36:59 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8908/#v0.3.75</guid>
     </item>
   </channel>
 </rss>
