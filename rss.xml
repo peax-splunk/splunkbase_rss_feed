@@ -6,7 +6,508 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Wed, 21 Oct 2026 10:52:04 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 21 Oct 2026 15:45:01 +0000</lastBuildDate>
+    <item>
+      <title>Threat Hunting Essentials - v1.3.146 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7633/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
+
+It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
+
+Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
+
+1. Backdoor.
+2. Worms.
+3. Ransomware.
+4. Bots.
+5. Trojan horses.
+6. Keyloggers.
+7. Rootkits.
+8. Spyware.
+9. Fileless malware.
+10. Cryptojacking.
+11. Wiper malware.
+12. Adware.
+14. Viruses
+15. P2P-Worm
+16. Internet Worms
+17. Net-worm
+18. Clickjacking
+19. Cryptominer
+20. Fileless malware
+
+You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
+
+Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.
+
+For Premium Version - Contact sales https://www.avertpoint.com/contactus.html&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c3a30338-cd42-11f1-af0d-aae1c68431d4.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
+      <pubDate>Wed, 21 Oct 2026 14:21:06 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.146</guid>
+    </item>
+    <item>
+      <title>OS AI Agent - v1.1.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9973/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Security: Built with Go 1.27.3, which refuses server certificates issued by eight eMudhra intermediate certificate authorities revoked for a key compromise
+* Set `context_window` on every provider to the context length its model is loaded with. The agent now starts summarizing older tool results as a conversation nears it, and sizes the default reply length from it on Anthropic providers and for Claude 4 and later models on Bedrock. Without it, providers on Anthropic's own API and Claude models on Bedrock count as 200,000 tokens and every other provider as 32,768, so a model loaded with less can run out of context
+* Bug fix: Long investigations re-ran their own searches and could spend their budget without writing an answer, because older tool results were hidden from the model after two rounds. Tool results are now sent in full until the conversation nears the provider's context window, then summarized with the values the agent used
+* Bug fix: Long answers stopped mid-sentence on Claude Opus 5.5 and Sonnet 5.5 through the Anthropic provider, and on Claude 4 and later models on Bedrock, because thinking counts against the 4,096-token default reply length. The default is now 32,000 tokens, or a quarter of the provider's context window when that is under 128,000 tokens, and `default_max_tokens` still overrides it; set it for a Bedrock application inference profile, which keeps Bedrock's default. An answer cut off at that limit, at the model's context window, or by the provider's `request_timeout` while it is being written is kept, says which, and is recorded as truncated in the activity trail; one cut off by the timeout used to fail the turn
+* Bug fix: One request could make more than a thousand model calls over about an hour, because its limit of 128 calls started again each time a long request continued in the background. The limit now covers the whole request, with one call more only when the background time budget interrupts the last, and that last call writes an answer from what was found so far, saying it was cut short, instead of the request failing with none; an investigation stopped this way writes no decision event, as before
+* Bug fix: In one investigation the agent could run the same search many times over, each time costing a search. A call identical to an earlier successful one in the same request now gets that result back without running again, the chat marks its card as a repeat, and after three rounds of nothing but repeats the agent is asked for its answer
+* Bug fix: The Bedrock model list offered base model IDs that Bedrock refuses for current Claude models; it now offers their inference profiles, such as `global.` and `us.`. The docs name the IAM permissions a Bedrock provider needs, including `bedrock:CallWithBearerToken` for a Bedrock API key and `bedrock:ListInferenceProfiles` for the model list
+* Bug fix: A date given to the agent, such as the &quot;observed 2025-08-01 to 2025-08-14&quot; of a threat report, was refused by Splunk as a search time bound, and the agent searched the last 24 hours instead. A date, a date-time with or without an offset, and Splunk's MM/DD/YYYY now work as `earliest` and `latest`, in the user's Splunk timezone, with `latest` on a date including that whole day
+* Bug fix: The agent took &quot;now&quot; in the search head's timezone, usually UTC, while Splunk shows each user search results in their own timezone, so it misread the times in results and shifted its relative time ranges by the difference. It now uses the user's Splunk timezone preference (the run-as user's in an alert investigation or `| osai task=`), and the search head's when the user has set none&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Bring your own LLM to Splunk. OS AI Agent runs inside Splunk with OpenAI, Anthropic, Azure OpenAI, AWS Bedrock, DeepSeek or a local model: ask in plain English and it searches your data, writes and verifies SPL, builds dashboards and alerts once you approve them, and investigates alerts on its own, read-only, always within each user&amp;#x27;s Splunk permissions.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;OS AI Agent is an AI assistant that runs inside Splunk, with the model you choose. Point it at the provider you already pay for, or at a model on your own hardware, and ask in plain English: it explores your indexes, writes and verifies SPL, shows every search it ran, and answers with the numbers.
+
+Bring your own model. Any OpenAI-compatible endpoint (OpenAI, DeepSeek, OpenRouter, Groq, and local servers such as LM Studio, Ollama, vLLM or llama.cpp), Anthropic, Azure OpenAI and AWS Bedrock, with retries, failover between providers, prompt caching and Splunk&amp;#x27;s proxy settings. A local model on your laptop costs nothing per question.
+
+It builds, with your approval. Ask for a Dashboard Studio dashboard, a report or an alert. In Chat, anything that writes pauses on an approval card that shows exactly what will be created; approve it, deny it with a reason, or edit it first.
+
+It investigates when you are not watching. The &amp;quot;Ask OS AI Agent&amp;quot; alert action and the `| osai` command run read-only investigations from alerts and scheduled searches, and can record a decision, from answers you define, as an event your next alert can act on.
+
+**It knows your deployment.** It reads your macros, lookups, data models and installed commands as the signed-in user, follows your query templates and situational guidance, and uses the add-on commands an administrator allows, such as Kubernetes Search or Search for AWS, for data that is in no index.
+
+It runs as you. Every tool runs with the calling user&amp;#x27;s own Splunk permissions, provider keys stay in Splunk&amp;#x27;s credential store, and an activity trail records every turn, tool call, refusal and configuration change. Token Usage, Activity Trail and Health dashboards show cost per user and provider, what the agent did, and how it is running. Spend limits and a concurrency cap keep a budget a budget.
+
+Free to start. The free tier runs one provider for one user, for non-commercial use, with no license key. A license, priced per user, lifts both limits.
+
+Works on Splunk Enterprise 9.4, 10.0, 10.2, 10.4 and 10.6 and on Splunk Cloud, on a search head with KV Store, including search head clusters. The app sends no telemetry.
+
+Documentation: https://www.outcoldsolutions.com/docs/ai-agent/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e264c8b2-cd59-11f1-8cb7-26edc7cceb33.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Outcold Solutions LLC</dc:creator>
+      <pubDate>Wed, 21 Oct 2026 14:18:36 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9973/#v1.1.1</guid>
+    </item>
+    <item>
+      <title>Splunk ES Content Update - v6.9.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/3449/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;GitHub - [https://github.com/splunk/security_content/releases/tag/v6.9.0](https://github.com/splunk/security_content/releases/tag/v6.9.0)
+
+Release Notes - [https://help.splunk.com/en/splunk-enterprise-security-8/security-content-update/release-notes/6.9](https://help.splunk.com/en/splunk-enterprise-security-8/security-content-update/release-notes/6.9)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk ES Content Update (ESCU) app delivers pre-packaged Security Content. ESCU provides regular Security Content updates to help security practitioners address ongoing time-sensitive threats, attack methods, and other security issues.
+
+Security Content consists of tactics, techniques, and methodologies that help with detection, investigation, and response. Security Content enables security teams to directly operationalize detection searches, investigative searches, and other supporting details. ESCU can generate Notable/Risk Events in Splunk Enterprise Security. Security Content also contains easy-to-read background information and guidance, for key context on motivations and risks associated with attack techniques, as well as pragmatic advice on how to combat those techniques.
+
+The analytic stories and their searches are also available at - https://github.com/splunk/security_content.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9f61a0a0-cd16-11f1-8163-be63c42e4a4c.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Wed, 21 Oct 2026 14:12:31 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/3449/#v6.9.0</guid>
+    </item>
+    <item>
+      <title>Dataminr CTTI for Splunk Enterprise and Splunk Cloud - v1.0.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10087/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## **Version 1.0.0**
+
+\* Added support for collecting Dataminr CTTI alerts through the Alert Stream input.
+
+\* Added support for a one-time historical pull of alerts through the Alert Backfill input, using either a backfill window or a saved search ID.
+
+\* Added support for mirroring Dataminr CTTI cyber entities through the Entities Stream input.
+
+\* Added support for extracting cyber entities nested on alerts into their own per-type sourcetypes.
+
+\* Added support for CIM data models for Dataminr CTTI alert and vulnerability events.
+
+\* Added Dataminr Alert Overview, Cyber Threat Overview, IOC Overview, Malware Intelligence, Triggered Alerts, Digital Risk, Third Party Risk, Vulnerability Intel and Monitored Alerts dashboards.
+
+\* Added scheduled alerts for critical alerts, exploitable CVEs, new IOCs, ingestion health and schema version mismatches.
+
+\* Added the \`DataminrCTTI\` data model, providing a \`tstats\`-accelerable view of the collected data with one root object per sourcetype.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Bring Dataminr Client-Tailored Threat Intelligence into Splunk. Ingest alerts and cyber entities, triage with purpose-built dashboards, and drive detection and response in Splunk Enterprise Security.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Intelligence tailored to you, inside Splunk
+
+Dataminr Client-Tailored Threat Intelligence (CTTI) for Splunk Enterprise and Splunk Cloud delivers threat intelligence shaped to your organization, your sector, and your attack surface directly into Splunk. Alerts and cyber entities arrive normalized and ready to correlate, so your security operations center (SOC) can detect, prioritize, and respond where it already works.
+
+The app collects alerts and cyber entities from the Dataminr CTTI Public API and maps them to the Splunk Common Information Model (CIM). Purpose-built dashboards give SOC, threat intelligence, vulnerability, and risk teams a clear view of what matters. For Splunk Enterprise Security (ES) customers, CTTI alerts become risk-scored notables, CTTI indicators feed ES threat intelligence, and analysts get live Dataminr context on a notable when they need it.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/03587b60-cc63-11f1-ac39-5e5a6ed47dae.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Dataminr</dc:creator>
+      <pubDate>Wed, 21 Oct 2026 14:10:24 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10087/#v1.0.0</guid>
+    </item>
+    <item>
+      <title>ProActive File Analysis Connector - v1.0.3 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/7914/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Enhanced Splunk 9.x &amp; SLIM Compliance
+  * Updated app.manifest schema configuration to adhere strictly to Splunk Packaging Toolkit (SLIM) auto-vetting and AppInspect standards.
+* Dashboard &amp; Drilldown Fixes
+  * Fixed URL-encoding issues affecting custom search drilldowns in Dashboard Studio tables in later Splunk versions.
+* KVStore &amp; Data Pipeline Enhancements
+  * Resolved underlying key-value lookup exceptions in the alert pipeline by properly handling the sources field for cached events.
+* Added new netclean_alert_action role
+  * This handles permissions outside of the admin roles &amp; will allow users with this role to run the alert action.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Enrich the SHA-1 file hashes already in your Splunk environment with NetClean’s verified risk intelligence on human insider risk, a specialized area within insider risk. Each hash is analyzed through the ProActive File Analysis API and returns a match or no match. A match is a verified, high-confidence insider risk signal that calls for investigation.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The ProActive File Analysis Connector for Splunk enriches the SHA-1 file hashes already in your Splunk environment with NetClean’s verified risk intelligence on human insider risk, a specialized area within insider risk. The connector submits the hashes to the ProActive File Analysis API and stores the result in Splunk together with contextual metadata, ready to use in your searches, alerts, dashboards and response workflows.
+
+A match means that a file corresponds to a risk indicator verified by trusted sources. It is a verified event, not a heuristic alert, and gives your insider risk program a high-confidence insider risk signal that calls for investigation. A match describes the content, not the person, so an investigation is always needed to understand the situation.
+
+A built-in alert and dashboard are included, and the connector works with the data and tools you already run.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a829cf82-cb95-11f1-960f-1eedfafce045.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Kim Andersson</dc:creator>
+      <pubDate>Wed, 21 Oct 2026 13:56:42 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7914/#v1.0.3</guid>
+    </item>
+    <item>
+      <title>Perseeva LakeView Add-on - v1.0.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10063/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;First public release. Tested on Splunk Enterprise 10.4.3 and Splunk Cloud Platform 10.4.2604.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Search-ready settings for LakeView building device data sent to Splunk® software over HEC.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Perseeva LakeView Add-on is a free add-on for use with Splunk® Enterprise and Splunk® Cloud Platform. LakeView, from Perseeva, discovers and monitors BACnet building devices such as HVAC controllers, VAV boxes and meters. LakeView sends device readings, device states, alerts and a device inventory to the Splunk platform through HTTP Event Collector (HEC). This add-on gives that data its source types, search-time fields, event types and tags, so facilities and security teams can search it right away, and it builds a device asset list in the Splunk® Enterprise Security asset format. Field names follow the Operational Telemetry data model in the Splunk® Operational Technology Intelligence (OTI) app, so LakeView data can appear on the Overview, Metrics, States and Events dashboards in that app. The add-on holds settings and one scheduled search: no data inputs, no scripts and no stored credentials. It is built and supported by Perseeva, not by Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/47c99d2a-c997-11f1-8032-36f6174c67e5.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Raymond Sevier</dc:creator>
+      <pubDate>Wed, 21 Oct 2026 13:47:40 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10063/#v1.0.0</guid>
+    </item>
+    <item>
+      <title>Perseeva LakeView App - v1.0.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10064/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;First public release. Tested on Splunk Enterprise 10.4.3 and Splunk Cloud Platform 10.4.2604.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Two dashboards and five ready-made alerts for LakeView building device data in Splunk® software.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Perseeva LakeView App is a free app for use with Splunk® Enterprise and Splunk® Cloud Platform. It adds two Dashboard Studio dashboards for LakeView building device data: an Overview of what needs attention now (devices in alert or warning, and points held overridden or out of service) and a Setup page for the Splunk admin (data arriving per site, what LakeView sends, and data checks). It also adds five ready-made alerts that ship switched off: device in alert, new device, firmware changed, point on manual for a day, and data stopped. Clicking a device opens its 7-day history in Splunk search. The app holds searches only: no data inputs, no scripts, no custom JavaScript and no stored credentials. It needs the Perseeva LakeView Add-on. It is built and supported by Perseeva, not by Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/6cf3647a-c99a-11f1-a495-12dbbc6c7195.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Raymond Sevier</dc:creator>
+      <pubDate>Wed, 21 Oct 2026 13:47:38 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10064/#v1.0.0</guid>
+    </item>
+    <item>
+      <title>Umbrella_Multi_Org_dashboard_add_on - v1.8.13 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10089/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Prepared for public distribution with English installation and configuration documentation.
+
+* Removed deployment-specific credentials, server paths, and backup files.
+* Added configuration examples for data inputs and indexes.
+* Added explicit errors for duplicate provider credentials in live search commands.
+* Updated Python runtime declarations and marked refresh/retry commands as risky.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Visualize Cisco Umbrella multi-organization deployment health and security activity. Includes Overview and Security Summary dashboards. Requires Umbrella Multi Org Add-on.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Monitor Cisco Umbrella deployment health and security activity across managed organizations in Splunk. View Networks, Roaming Computers, and Virtual Appliances in Overview, and explore security activity by organization, category, destination, and application.
+
+Requires Umbrella Multi Org Add-on (TA_umbrella_msp) 1.8.13 for data collection and live search commands. Cisco Umbrella provider API access is required.
+
+Independent community integration. Not an official Cisco or Splunk product.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/01de90ba-cbe8-11f1-820c-f28545bf4612.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">bong choi</dc:creator>
+      <pubDate>Wed, 21 Oct 2026 13:47:36 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10089/#v1.8.13</guid>
+    </item>
+    <item>
+      <title>Umbrella_Multi_Org_dashboard - v1.12.11 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10091/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Release information
+Provide key details about your app release, including release notes and compatibility information.
+
+Required fields are marked with an asterisk ( \* ).
+
+App version number
+Splunkbase extracts the app version directly from your uploaded app package. The version must follow the Semantic Versioning 2.0.0 format.
+
+1.12.11
+Release notes
+Provide release notes that describe important changes in your app functionality.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Visualize Cisco Umbrella multi-organization deployment health and security activity. Includes Overview and Security Summary dashboards. Requires Umbrella Multi Org Add-on.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Monitor Cisco Umbrella deployment health and security activity across managed organizations in Splunk. View Networks, Roaming Computers, and Virtual Appliances in Overview, and explore security activity by organization, category, destination, and application.
+
+Requires Umbrella Multi Org Add-on (TA_umbrella_msp) 1.8.13 for data collection and live search commands. Cisco Umbrella provider API access is required.
+
+Independent community integration. Not an official Cisco or Splunk product.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/23d63140-cbe9-11f1-8032-36f6174c67e5.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">bong choi</dc:creator>
+      <pubDate>Wed, 21 Oct 2026 13:47:34 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10091/#v1.12.11</guid>
+    </item>
+    <item>
+      <title>SmarterMail Add-on - v1.0.2 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10111/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Version 1.0.0
+
+\- Initial release of the SmarterMail Technology Add-on (TA) for Splunk.
+
+\- Added support for ingesting SmarterMail (Windows) logs with the sourcetype \`smartermail:log\`.
+
+\- Implemented field extractions for multiple log types including SMTP, Delivery, IMAP, POP, Administrative, General Errors, Spam Checks, and Activation logs.
+
+\- Added full CIM (Common Information Model) Email Data Model alignment for Splunk Enterprise Security (ES).
+
+\- Normalized key fields such as \`action\`, \`protocol\`, \`src\`, \`src_user\`, \`recipient\`, \`dest\`, and \`message_id\` to ensure compatibility with ES correlation searches.
+
+\- Included lookup files for accurate mapping of raw delivery statuses and protocol names to CIM-compliant values.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Field extractions and CIM Email alignment for SmarterMail logs. Enables Splunk ES correlation searches and email security monitoring.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The SmarterMail Add-on for Splunk provides field extractions and Common Information Model (CIM) Email data model mappings for SmarterMail email server logs on Windows. This technology add-on processes and normalizes log data from multiple SmarterMail log types including SMTP, IMAP, POP, delivery, administrative, spam checks, general errors, and activation logs. All events are processed with the sourcetype smartermail:log. The add-on extracts key email-related fields such as sender and recipient addresses, message IDs, delivery actions, protocols, source and destination hosts, message sizes, and subjects. By mapping these fields to the CIM Email data model, the add-on enables correlation searches in Splunk Enterprise Security and facilitates email security monitoring, compliance reporting, and operational troubleshooting across SmarterMail infrastructure.
+
+&amp;quot;Note: To ensure proper CIM compliance and use with Splunk Enterprise Security, users must rebuild the Email Data Model Acceleration after installation.&amp;quot;&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/bd7d41b8-cc74-11f1-9b0a-7a636623da55.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Mohammad Shahpasandi</dc:creator>
+      <pubDate>Wed, 21 Oct 2026 13:43:35 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10111/#v1.0.2</guid>
+    </item>
+    <item>
+      <title>Data Migration Toolkit for Splunk - v0.7.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/10046/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Fixes from a real Windows to Linux move into AWS.
+
+* Import checks that it can write to the staging folder before it places anything, and prints the fix if not.
+* The plan uses the target’s Splunk version and free disk from target discovery, and warns when the typed version differs. Test connection fills in the target version.
+* A target indexer entered as its IP or management address matches the server found by discovery.
+* The run steps on the Setup and run page show real paths, systemctl where systemd runs Splunk, ownership of the staging folder, a dry run before import, and PowerShell commands for Windows sources.
+* Empty staging folders default to C:\smig\_staging or /opt/smig\_staging.
+* Discovery records whether systemd runs Splunk and which user Splunk runs as.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Move Splunk index data between deployments and prove nothing was lost. Windows to Linux, single instance or distributed to an indexer cluster, cluster to cluster, and several deployments into one. Read only discovery, a bucket by bucket plan, checksummed copies, and per index validation.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Moving indexed data from one Splunk deployment to another is usually a long, manual, error prone job: copying buckets by hand, renaming them for a cluster, fixing Windows paths, guessing at disk space, and hoping the counts match afterwards.
+
+Data Migration Toolkit for Splunk automates that work and shows you every step before anything moves.
+
+Supported paths:
+* Windows to Linux, in any topology
+* Single instance or distributed indexers to an indexer cluster
+* Indexer cluster to a single instance or to non clustered indexers
+* Indexer cluster to indexer cluster, including into a cluster that already holds data
+* Several deployments merged into one target
+* Like for like moves to new hardware or a new data center
+
+How it works:
+1. Discover: read only REST and search queries inventory indexes, buckets, versions, sizes and readiness problems (index names Linux will not accept, missing journals, Windows paths in configuration, SmartStore, corrupt buckets).
+2. Plan: a dry run report shows where every bucket goes, its new name, capacity per target indexer, size limit checks, the generated indexes.conf, and a runbook with the exact command for each host. Nothing moves until you approve it.
+3. Copy: export and import are resumable, check a SHA256 for every bucket, never overwrite anything on the target, and never change the source except rolling hot buckets at cutover.
+4. Validate: event counts per index per UTC day are compared on both sides, with an HTML report you can hand to the change approver.
+
+Dashboards on the target show live progress per plan, index and host. The source stays intact, so rollback is pointing forwarders back at it.
+
+A free browser based planner at augustschell.com builds the same plan from a discovery manifest, without uploading it.
+
+Not supported: SmartStore indexes and Splunk Cloud as a source or target.
+
+Free, by August Schell. Licensed under Apache 2.0.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a5e85cc6-c978-11f1-9eaf-de83f1e47b6b.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Alex Maier</dc:creator>
+      <pubDate>Wed, 21 Oct 2026 13:22:09 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10046/#v0.7.2</guid>
+    </item>
+    <item>
+      <title>IEV Evaluation by August Schell - v1.2.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10048/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;1.2.1: Initial Splunkbase release.
+
+* IEV Overview, Opportunities, History, and Settings and About dashboards.
+* Eligible sourcetype lookup built from the Splunk IEV documentation (10.6).
+* Three data source modes: license usage, event estimate (tstats counts times sampled event size) and auto, plus an optional demo mode with synthetic data.
+* History and event size profile stored in KV store, so they survive app upgrades.
+* Settings stored as search macros, editable by admin or sc\_admin.
+* Search time only: no Python, custom JavaScript, modular inputs, data models or external calls. Splunk Cloud compatible.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;See how much of your Splunk ingest is IEV eligible Cisco data, your effective license consumption at the 0.5x weight, and Cisco data on ineligible sourcetypes.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;IEV Evaluation by August Schell shows what Splunk Integrated Enterprise Value (IEV) for Cisco data is worth in your environment. Under IEV, eligible Cisco data ingested with a supported sourcetype counts at a 0.5x weight against applicable ingest entitlement. Most organizations do not know how much of their ingest qualifies. This app measures it.
+
+The app matches your ingest by sourcetype against the list of IEV eligible sourcetypes published by Splunk, then shows actual ingest, eligible Cisco ingest, effective license consumption and estimated savings. It also finds Cisco data that is not landing on an eligible sourcetype, so you can see value being left on the table before your renewal.
+
+Volume can come from license usage (license_usage.log), from an estimate based on tstats event counts and sampled event sizes when license data is not visible, or from built in demo data. The app runs entirely at search time with no Python, custom JavaScript, modular inputs, data models or external network calls, so it works in air gapped and FIPS environments and in Splunk Cloud Platform.
+
+Results are estimates for planning. Splunk validates eligible usage and determines actual IEV treatment under your order and applicable terms.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9383175c-c896-11f1-8350-f2679e34b0bd.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Alex Maier</dc:creator>
+      <pubDate>Wed, 21 Oct 2026 13:21:19 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10048/#v1.2.1</guid>
+    </item>
+    <item>
+      <title>Sideview Supporting Add-on for Webex - v1.0.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10065/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- First release.  Index-time settings for the Webex data pulled in by Cisco's Webex add-on, which previously lived in SA\_sideview\_webex.
+
+- The event timestamp now comes from each record's own time field, so the same records read back from a file land where the add-on puts them.
+
+- A Webex call's \_time is now when it was answered, or if it never was, when it was released, the same as CUCM CDR.  Applies to newly indexed data only.
+
+- Raised the 10,000-byte truncation limit on every Webex sourcetype.  Long meeting quality records were being cut off and lost.
+
+- call\_id is now written as an index-time field.  For Webex calls it is the Correlation ID, which all legs of one call share, and for meetings the scheduled occurrence, which the schedule, the meeting itself and its quality records share.  Applies to newly indexed data only.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This Supporting App makes some small index-time modifications to the data ingested via Splunk&amp;#x27;s &amp;quot;Cisco Webex Add-on for Splunk&amp;quot;.  This patches some problems in that app and also allows for various improved functionality.  It is designed for use with our SA_sideview_webex which you install on your Search Head tier.
+
+Both of those apps uses together allow users to leverage all of this webex data within Sideview&amp;#x27;s commercial app &amp;quot;Cisco CDR Reporting and Analytics&amp;quot;&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c7b3363a-c9bb-11f1-a495-12dbbc6c7195.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
+      <pubDate>Wed, 21 Oct 2026 13:14:29 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10065/#v1.0.0</guid>
+    </item>
+    <item>
+      <title>Training Lens - v1.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10069/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Version 1.0.1 enables app update checks to meet package validation requirements. Package metadata and release filenames now use 1.0.1, and a regression test guards against disabling update checks.
+
+Dashboards and ingestion work as before. All 63 tests pass, and AppInspect reports no errors or failures.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Private Strava training analytics in Splunk: explore activity history, performance trends, heart rate, gear usage, and privacy-masked geography.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Training Lens turns Strava exports into private, searchable training insights in Splunk Enterprise. It helps athletes understand long-term progress, compare sports and equipment, and investigate activities without manually combining spreadsheets. Drop export ZIP files into the configured inbox to refresh dashboards covering training volume, pace, speed, cadence, exercise heart rate, gear usage, and privacy-masked geography. Explore trends across years and switch related metrics with consistent labels and units. Reconciled import snapshots prevent overlapping exports from inflating dashboard totals. Training Lens keeps analysis under your control and clearly distinguishes recorded measurements from unavailable data, supporting informed comparisons across your training history.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Tau Liang</dc:creator>
+      <pubDate>Wed, 21 Oct 2026 13:13:19 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10069/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>Keykhosro Active Directory Security and Audit - v1.0.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10070/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Monitors Active Directory security and operations through specialized dashboards for authentication events, account changes, group policy modifications, LDAP hygiene, and attack path analysis.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Active Directory is one of the most targeted systems in enterprise attacks. Privileged group changes, GPO modifications, and unusual logon patterns are often the first sign of compromise — but AD audit data is scattered across Domain Controllers and rarely combined with direct LDAP configuration checks.
+
+This app brings both views into one Splunk app:
+
+• Event-driven monitoring of DC security logs — user/group changes, GPO changes, membership churn, authentication activity.
+• LDAP-based security checks — attribute misconfiguration detection and per-object investigation.
+• A health check dashboard that verifies add-ons, indexes, DCs, and audit event codes before you rely on the data.
+
+Built for AD admins, SOC analysts, and compliance teams who want AD security visibility in Splunk without writing every search from scratch.
+
+Open source, MIT licensed:
+https://github.com/keykhosro/splunk_activedirectory_dashboard&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a2d81488-ca70-11f1-a495-12dbbc6c7195.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">keykhosro khosravani</dc:creator>
+      <pubDate>Wed, 21 Oct 2026 13:12:05 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10070/#v1.0.0</guid>
+    </item>
+    <item>
+      <title>Nikhil Chawla Add-on for Cisco Secure Firewall eStreamer (FMC) - v2.1.3 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10081/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;2.1.3 - first release on Splunkbase
+
+\- Collects Secure Firewall Management Center (FMC) connection events over eStreamer as sourcetype cisco:sfw:estreamer, with the field names the Cisco Security Cloud app uses
+
+\- Built-in eStreamer decoder, Python standard library only; reads connection data blocks 160 to 174 (FMC 6.x and 7.x)
+
+\- Inputs page for inputs and client certificates (PKCS12 or PEM, stored encrypted in Splunk's credential store), and a Status dashboard
+
+\- Policy names: FirewallPolicy, PrefilterPolicy and TunnelRule
+
+\- Resumes from a bookmark after restarts; disk buffer with a size cap; files are deleted once Splunk has read them&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;High-volume collector for Cisco Secure Firewall (FMC) connection events over eStreamer. Indexes them as cisco:sfw:estreamer with the Cisco Security Cloud app&amp;#x27;s field names, so its CIM mappings and dashboards work. Inputs, certificates and status are managed in Splunk Web. Independent project, not affiliated with Cisco.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects connection events from a Cisco Secure Firewall Management Center (FMC) over eStreamer and indexes them as sourcetype cisco:sfw:estreamer, with the field names the Cisco Security Cloud app uses for that sourcetype (InitiatorIP, ResponderIP, FirewallRule, AC_RuleAction, ...). That app&amp;#x27;s field aliases, CIM mappings and dashboards therefore work on these events, and existing searches keep working.
+
+Busy FMCs send thousands of connection events per second. This add-on is built for that volume: each input decodes in parallel processes, keeps events on disk until Splunk has read them, and resumes from a bookmark after a restart, so a restart does not skip events.
+
+- One input per FMC, several FMCs per heavy forwarder
+- Inputs page in Splunk Web: add, edit, enable, disable and restart inputs, and upload the eStreamer client certificate (the PKCS12 file from the FMC, or PEM). Certificates are stored encrypted in Splunk&amp;#x27;s credential store.
+- Status dashboard: throughput, minutes behind the FMC, connects and errors, indexed volume and index delay per FMC
+- Names from the FMC&amp;#x27;s metadata: rules, access control policy (FirewallPolicy), prefilter policy (PrefilterPolicy), tunnel/prefilter rule (TunnelRule), zones, interfaces, devices, applications, URL categories and countries
+- host is a name you choose for each FMC; the FMC&amp;#x27;s address is in every event as SourceHost
+- Disk buffer with a size cap: files are deleted once Splunk has read them; when the buffer is full, delete the oldest files or pause
+- Python standard library only, no third-party packages
+
+Connection events only. Intrusion, file/malware and packet events can come from the Cisco Security Cloud app.
+
+Independent project, not affiliated with or endorsed by Cisco. Cisco, Cisco Secure Firewall, Firepower and FMC are trademarks of Cisco Systems, Inc.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/17b4d0d2-cbcc-11f1-8032-36f6174c67e5.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Nikhil Chawla</dc:creator>
+      <pubDate>Wed, 21 Oct 2026 13:09:31 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10081/#v2.1.3</guid>
+    </item>
+    <item>
+      <title>Cisco Secure Access Add-on for Splunk - v1.0.57 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/7569/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;1. Added v17 logs and v16 Logs version support
+2. Added Proxy Support for S3 log rotation
+3. Updated CIM Mapping
+4. Bug fixes&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Cisco Secure Access Add-on for Splunk gives you the ability to get your Cisco Secure Access or Cisco Umbrella logs into Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a19a5732-cd4c-11f1-bf68-62bc40b4ad45.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco Systems, Inc.</dc:creator>
+      <pubDate>Wed, 21 Oct 2026 12:53:17 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7569/#v1.0.57</guid>
+    </item>
+    <item>
+      <title>Cisco Secure Access App for Splunk - v1.0.60 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5558/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Updates include:
+
+1. Revamped dashboards to include the ability to compare timeframes
+2. Added Multi Tenancy Dashboards
+3. Bug fixes&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Cisco Secure Access App for Splunk integrates cloud security data with event data from Splunk to drive improved network visibility, faster threat detection, and mitigation response.
+
+This App:
+1. Provides visualizations using Cloud Security APIs (Secure Access and Umbrella).
+2. Gives SOC’s/Threat Hunting teams the ability to learn more about destinations using the Investigate API.
+3. Enables SOCs to block destinations using APIs.
+4. Provides visibility into Applications used (API).
+4. Lets teams manage Cloudlock CASB incidents.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d908584a-cd4c-11f1-8cb2-8ea77e3b9a9e.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco Systems, Inc.</dc:creator>
+      <pubDate>Wed, 21 Oct 2026 12:49:28 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5558/#v1.0.60</guid>
+    </item>
+    <item>
+      <title>TA for open-appsec WAF and NGINX Proxy Manager - v1.1.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10097/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Parses and CIM-normalizes open-appsec WAF events (Intrusion Detection) and NGINX Proxy Manager access logs (Web) for Splunk Enterprise and Enterprise Security.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free add-on for Splunk Enterprise and Enterprise Security that parses and CIM-normalizes logs from open-appsec WAF and NGINX Proxy Manager (NPM).
+
+open-appsec security events (detected and prevented attacks) are mapped to the Intrusion Detection data model. NPM access logs are mapped to the Web data model. NPM error logs are parsed.
+
+Use it to investigate web application attacks, monitor WAF blocking activity, and analyze HTTP traffic through NPM. It also correlates WAF events with NPM proxy hosts.
+
+Contains configuration files only: no UI, no scripts, no external dependencies.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f759ca2e-cc41-11f1-820c-f28545bf4612.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyberfox DEVELOPER</dc:creator>
+      <pubDate>Wed, 21 Oct 2026 12:47:51 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10097/#v1.1.1</guid>
+    </item>
+    <item>
+      <title>Infigo SOC Content - v4.5.120261020112407 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8057/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;h2. Saved Searches
+* *Rule ID:* _END131_
+* *Rule name:* _Rule - Endpoint - Windows - Winrs Local Command Execution_
+* *Change type:* Added
+* *Summary:* Added a detection rule for local command execution using WinRS.exe when the command targets localhost or omits a remote target, indicating possible proxy execution for stealth or lateral movement.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This application is part of the Infigo SIEM package: https://splunkbase.splunk.com/app/7147
+It provides an additional set of Infigo security rules, developed by the Infigo SOC team to enhance the capabilities of Infigo SIEM.
+For more details, visit the official Infigo SIEM website: www.infigosiem.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/02f48660-cd4d-11f1-8cb2-8ea77e3b9a9e.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Infigo  IS</dc:creator>
+      <pubDate>Wed, 21 Oct 2026 12:47:28 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8057/#v4.5.120261020112407</guid>
+    </item>
+    <item>
+      <title>TA for Proxmox Mail Gateway - v1.0.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10098/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Parses and CIM-normalizes Proxmox Mail Gateway mail logs (Email, Delivery, Filtering) and pmgproxy Web/API access logs (Web) for Splunk Enterprise and Enterprise Security.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free add-on for Splunk Enterprise and Enterprise Security that parses and CIM-normalizes Proxmox Mail Gateway (PMG) logs.
+
+Mail events from Postfix and PMG services (SMTP connections, delivery, queue, postscreen, PMG rules, SpamAssassin scores, sender/recipient, message IDs) are mapped to the Email data model, including Delivery and Filtering. PMG Web/API access logs from pmgproxy are mapped to the Web data model.
+
+Use it to track mail flow, investigate spam and blocked messages, and audit access to the PMG admin interface.
+
+Contains search-time knowledge objects only: no data inputs, no UI, no scripts.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/749856c2-cc51-11f1-960f-1eedfafce045.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyberfox DEVELOPER</dc:creator>
+      <pubDate>Wed, 21 Oct 2026 12:46:34 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10098/#v1.0.0</guid>
+    </item>
+    <item>
+      <title>Splunk Add-on for Salesforce - v7.0.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/3549/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;*** Important: Read upgrade instructions and test your add-on update before deploying to production ***
+Version 2.0.0 of the Splunk Add-on for Salesforce introduces breaking changes. To avoid data loss or data duplication, follow the documented upgrade instructions in detail. If your are upgrading an earlier version of the Splunk Add-on for Salesforce, a best practice is to test your update in a non-production environment before deploying to production.
+
+The Splunk Add-on for Salesforce allows a Splunk software administrator to collect different types of data from Salesforce using REST APIs. The data includes:
+
+* Event log file data, https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/using_resources_event_log_files.htm.
+* Output of Salesforce object queries (SOQL). 
+
+This add-on provides the inputs and CIM-compatible knowledge to use with other Splunk apps, such as Splunk Enterprise Security, the Splunk App for PCI Compliance, and Splunk IT Service Intelligence.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/fae6f9fa-cd45-11f1-b111-8ea77e3b9a9e.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Wed, 21 Oct 2026 12:00:03 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/3549/#v7.0.2</guid>
+    </item>
+    <item>
+      <title>Splunk Add-on for Cisco UCS - v5.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/2731/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Add-on for Cisco UCS allows a Splunk software administrator to collect UCS fault, inventory, and performance data from Cisco UCS servers using the UCS API. This add-on provides the inputs and CIM-compatible knowledge to use with other Splunk Enterprise apps, such as Splunk Enterprise Security and the Splunk App for PCI Compliance.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c12e10be-cd44-11f1-b4d9-a6e2033276af.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Wed, 21 Oct 2026 11:51:04 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/2731/#v5.0.0</guid>
+    </item>
+    <item>
+      <title>Splunk Add-on for Java Management Extensions - v6.0.4 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/2647/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Add-on for Java Management Extensions (JMX) allows a Splunk software administrator to poll local or remote JMX Management Servers running in Java Virtual Machines and index MBean attributes, outputs from MBean operations, and MBean notifications. This add-on provides modular inputs and CIM-compatible knowledge to use with other Splunk apps, such as Splunk Enterprise Security, the Splunk App for PCI Compliance, and Splunk IT Service Intelligence.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/34dd8460-cd20-11f1-8509-c697e9f45906.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Wed, 21 Oct 2026 11:43:35 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/2647/#v6.0.4</guid>
+    </item>
+    <item>
+      <title>Splunk Remote Upgrader for Linux Universal Forwarders - v1.0.10 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7699/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* A `local_config` in the monitored directory can no longer set `SPLUNK_HOME`. Instead, set `SPLUNK_HOME` in the updater's own `config/local_config`, or run `install.sh --splunk-home &lt;path&gt;` again.
+* Security fixes.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Remote Upgrader for Linux Universal Forwarders is used to remotely upgrade your universal forwarder for Linux. You install the upgrader on the same Linux instance as your universal forwarder. The upgrader then monitors for new universal forwarder packages in a predefined folder and if a new universal forwarder package is found, the upgrader upgrades the universal forwarder with that package.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Wed, 21 Oct 2026 11:36:28 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7699/#v1.0.10</guid>
+    </item>
+    <item>
+      <title>Unifi Cloud Add-on for Splunk - v1.0.6+64daf92 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7494/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Release notes: https://github.com/livehybrid/TA-unifi-cloud/releases/tag/v1.0.6&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collect Unifi cloud data directly into Splunk!
+Unifi Cloud API is in Beta and currently supports:
+* Devices
+* Hosts
+* Sites&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9b0b07f6-cd40-11f1-9d84-26edc7cceb33.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Will Searle</dc:creator>
+      <pubDate>Wed, 21 Oct 2026 11:16:13 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7494/#v1.0.6+64daf92</guid>
+    </item>
+    <item>
+      <title>UK Open Data inputs - v1.0.5+f7c53b7 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8812/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Release notes: https://github.com/livehybrid/TA-uk-open-data/releases/tag/v1.0.5&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Modular inputs for open UK datasets, with a configuration UI. Ingests UK Carbon Intensity (api.carbonintensity.org.uk — half-hourly national intensity + generation mix) and NHS England monthly A&amp;amp;E attendance statistics. No API key. Idempotent, checkpoint-based, safe to run on any interval.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;**UK Open Data** is a UCC-framework built add-on that brings two well-known open UK datasets into Splunk with no API key and no external dependencies beyond outbound HTTPS.
+
+
+**Carbon Intensity** — polls the National Grid ESO Carbon Intensity API (`api.carbonintensity.org.uk`) and indexes, per half-hourly settlement period, the national forecast/actual gCO₂/kWh and intensity band (`carbonintensity:national`) plus the generation mix by fuel type (`carbonintensity:generation`). Ideal for carbon-aware scheduling, ESG dashboards and &amp;quot;greenest time to run&amp;quot; decisions.
+
+
+**NHS A&amp;amp;E (monthly)** — scans the NHS England &amp;quot;A&amp;amp;E Attendances and Emergency Admissions&amp;quot; pages, downloads each monthly CSV you haven&amp;#x27;t already loaded, and indexes one event per provider plus a national TOTAL row (`nhs:ae:monthly`) — type 1/2/other attendances, 4-hour performance and over-4hr counts. Great for healthcare performance and public-sector analytics.
+
+
+Both inputs are **idempotent**: they checkpoint what they&amp;#x27;ve already indexed, so they&amp;#x27;re safe to run on any interval without creating duplicates. Carbon re-emits only un-settled recent periods until their actual value lands; NHS only loads months it hasn&amp;#x27;t seen.
+
+
+Built with the Splunk UCC framework — full configuration UI, per-input index/interval settings, and standard logging.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/cd5045e2-cd3f-11f1-9d84-26edc7cceb33.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Will Searle</dc:creator>
+      <pubDate>Wed, 21 Oct 2026 11:10:28 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8812/#v1.0.5+f7c53b7</guid>
+    </item>
+    <item>
+      <title>NextDNS API Collector for Splunk - v1.1.5+d3b4944 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7537/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Release notes: https://github.com/livehybrid/TA-nextdns-api/releases/tag/v1.1.5&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collect stats and even per-request logs from your NextDNS account using the NextDNS API!
+Grab your API key from https://my.nextdns.io/account to get started.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/088885bc-cd3f-11f1-9d84-26edc7cceb33.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Will Searle</dc:creator>
+      <pubDate>Wed, 21 Oct 2026 11:04:58 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7537/#v1.1.5+d3b4944</guid>
+    </item>
     <item>
       <title>Hexnode UEM Add-on for Splunk - v1.0.1 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/9951/</link>
@@ -320,41 +821,6 @@ Polls the Activity Feed, organizations/users/groups/roles, Claude.ai projects, a
       <guid>https://splunkbase.splunk.com/app/8758/#v1.2.0</guid>
     </item>
     <item>
-      <title>endoflife.ai EOL Risk - v0.1.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10020/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;0.1.0, first release.
-
-The `eollookup` streaming search command (cycles and full patch versions, split-line refusal with candidates), the EOL Risk Overview dashboard, four example reports (none scheduled), a setup page that stores the API key in Splunk's encrypted credential store, and the `endoflife_products` name-to-slug lookup with the `endoflife_normalize` macro. The lookup is a snapshot taken when this version was built.
-
-Bundles the Splunk Enterprise SDK for Python 2.1.1. Verified on Splunk Enterprise 10.6 (Python 3.13); `commands.conf` declares Python 3.9 and 3.13.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Add end-of-life dates, support status, EOL Risk Scores and CISA KEV exposure to the software inventory you already have in Splunk.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Most inventories can tell you what is installed. Few can tell you what the maker has stopped patching. This app adds that answer to the software and operating-system inventory you already collect in Splunk.
-
-The eollookup search command takes a product and a version from each row and adds:
-
-- whether the version is still supported, close to its end, or past end of life
-- the end-of-life date, with days remaining or days past
-- the EOL Risk Score (0 to 100) and its letter grade
-- whether the product has an entry in CISA&amp;#x27;s Known Exploited Vulnerabilities catalog
-- where the date comes from, as a link you can open
-
-Full patch versions work: 18.19.0 is answered for the Node.js 18 line, 8.6 for RHEL 8. When a build could belong to more than one support line (SQL Server service packs, Firefox standard and ESR) the app does not pick one. It says so and lists the candidates. Nothing is guessed.
-
-Included:
-
-- eollookup, a streaming search command that batches lookups, so a search over many hosts makes few API calls
-- an overview dashboard: past end of life, ending within 180 days, past end of life with a CISA KEV entry, and rows that could not be matched
-- four example reports, none scheduled
-- a setup page that stores your API key in Splunk&amp;#x27;s encrypted credential store
-
-Coverage is 700+ products: operating systems, databases, language runtimes, frameworks, network and security appliances. Every date names its source.
-
-What leaves your environment: product names and version strings, sent over HTTPS to api.endoflife.ai when the command runs. No host names, users, IP addresses or event data.
-
-The app works without an API key at the anonymous limits until November 16, 2026; from then the API needs a key for every lookup. A free key (150 requests a day, no expiry) is enough to evaluate it: https://endoflife.ai/api#free-key. Keys and their limits are published at https://endoflife.ai/api.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d30d795a-c6c3-11f1-984c-ea78c3800ec7.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Scott Bissett</dc:creator>
-      <pubDate>Tue, 20 Oct 2026 19:48:39 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10020/#v0.1.0</guid>
-    </item>
-    <item>
       <title>Webtools Add-on Professional Edition - v4.0.4 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8850/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Version 4.0.4:
@@ -483,88 +949,12 @@ Three dashboards cover enrichment activity and entitlement, sandbox detonations,
       <guid>https://splunkbase.splunk.com/app/9745/#v1.4.0</guid>
     </item>
     <item>
-      <title>Threat Hunting Essentials - v1.3.145 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7633/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
-
-It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
-
-Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
-
-1. Backdoor.
-2. Worms.
-3. Ransomware.
-4. Bots.
-5. Trojan horses.
-6. Keyloggers.
-7. Rootkits.
-8. Spyware.
-9. Fileless malware.
-10. Cryptojacking.
-11. Wiper malware.
-12. Adware.
-14. Viruses
-15. P2P-Worm
-16. Internet Worms
-17. Net-worm
-18. Clickjacking
-19. Cryptominer
-20. Fileless malware
-
-You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
-
-Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.
-
-For Premium Version - Contact sales https://www.avertpoint.com/contactus.html&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/995c6700-cc79-11f1-9d6a-9204712b30b5.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
-      <pubDate>Tue, 20 Oct 2026 15:59:36 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.145</guid>
-    </item>
-    <item>
       <title>Splunk Remote Upgrader for Windows Universal Forwarders - v1.0.10 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7920/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk Remote Upgrader for Windows Universal Forwarders&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Tue, 20 Oct 2026 15:45:03 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7920/#v1.0.10</guid>
-    </item>
-    <item>
-      <title>Splunk Remote Upgrader for Linux Universal Forwarders - v1.0.10 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7699/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Remote Upgrader for Linux Universal Forwarders is used to remotely upgrade your universal forwarder for Linux. You install the upgrader on the same Linux instance as your universal forwarder. The upgrader then monitors for new universal forwarder packages in a predefined folder and if a new universal forwarder package is found, the upgrader upgrades the universal forwarder with that package.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 20 Oct 2026 15:42:03 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7699/#v1.0.10</guid>
-    </item>
-    <item>
-      <title>OS AI Agent - v1.1.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/9973/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- New: A license covers a number of users, the Splunk users holding `use_os_ai_agent` (Splunk administrators are not counted), and no longer caps providers. The License tab shows the licensed users beside the users holding the capability, counted every 5 minutes; more users than the license covers is a warning on the License tab and a bulletin message, and nobody is refused
-- New: The Health dashboard and the health check report decision events Splunk dropped because their decision index does not exist or is disabled, which a run otherwise reports as written while the alert meant to act on it never fires; the alert action's and `| osai`'s docs say the index must exist first
-- Security: Built with Go 1.27.2, which fixes vulnerabilities in the Go standard library that scanners report against Go 1.27.1, in the HTTP/1 and HTTP/2 client and server, TLS and MIME header parsing
-- Bug fix: On Splunk Free every page and `| osai` refused with a capability error, and the health check logged an error every 5 minutes. Splunk Free's admin, which Splunk reports with no capabilities, now holds the app's capabilities, the health check skips with one INFO line, and `| osai run_as=` fails, saying Splunk Free has no token authentication; see Splunk Free in the app's README
-- Bug fix: An Ask OS AI Agent alert whose investigation was refused (a budget, the active-job cap, the free tier's seat) left an empty conversation in the run-as user's Chat for every firing
-- Bug fix: On Splunk 9.4 and 10.0 the agent could build a dashboard with a timeline panel, which those releases do not have, with no warning; the panel showed &quot;splunk.timeline is not defined&quot;. The approval card, the result and `verify_dashboard` now warn and give a stacked column chart that draws on every supported release
-- Bug fix: Alert investigations need token authentication on Splunk Cloud too: it is off by default on new Splunk Cloud stacks, as on Splunk Enterprise. The app's docs said Splunk Cloud had it on, and the message a failed investigation shows named only Splunk Enterprise&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Bring your own LLM to Splunk. OS AI Agent runs inside Splunk with OpenAI, Anthropic, Azure OpenAI, AWS Bedrock, DeepSeek or a local model: ask in plain English and it searches your data, writes and verifies SPL, builds dashboards and alerts once you approve them, and investigates alerts on its own, read-only, always within each user&amp;#x27;s Splunk permissions.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;OS AI Agent is an AI assistant that runs inside Splunk, with the model you choose. Point it at the provider you already pay for, or at a model on your own hardware, and ask in plain English: it explores your indexes, writes and verifies SPL, shows every search it ran, and answers with the numbers.
-
-Bring your own model. Any OpenAI-compatible endpoint (OpenAI, DeepSeek, OpenRouter, Groq, and local servers such as LM Studio, Ollama, vLLM or llama.cpp), Anthropic, Azure OpenAI and AWS Bedrock, with retries, failover between providers, prompt caching and Splunk&amp;#x27;s proxy settings. A local model on your laptop costs nothing per question.
-
-It builds, with your approval. Ask for a Dashboard Studio dashboard, a report or an alert. In Chat, anything that writes pauses on an approval card that shows exactly what will be created; approve it, deny it with a reason, or edit it first.
-
-It investigates when you are not watching. The &amp;quot;Ask OS AI Agent&amp;quot; alert action and the `| osai` command run read-only investigations from alerts and scheduled searches, and can record a decision, from answers you define, as an event your next alert can act on.
-
-**It knows your deployment.** It reads your macros, lookups, data models and installed commands as the signed-in user, follows your query templates and situational guidance, and uses the add-on commands an administrator allows, such as Kubernetes Search or Search for AWS, for data that is in no index.
-
-It runs as you. Every tool runs with the calling user&amp;#x27;s own Splunk permissions, provider keys stay in Splunk&amp;#x27;s credential store, and an activity trail records every turn, tool call, refusal and configuration change. Token Usage, Activity Trail and Health dashboards show cost per user and provider, what the agent did, and how it is running. Spend limits and a concurrency cap keep a budget a budget.
-
-Free to start. The free tier runs one provider for one user, for non-commercial use, with no license key. A license, priced per user, lifts both limits.
-
-Works on Splunk Enterprise 9.4, 10.0, 10.2, 10.4 and 10.6 and on Splunk Cloud, on a search head with KV Store, including search head clusters. The app sends no telemetry.
-
-Documentation: https://www.outcoldsolutions.com/docs/ai-agent/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/73c4c240-cc7d-11f1-9b0a-7a636623da55.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Outcold Solutions LLC</dc:creator>
-      <pubDate>Tue, 20 Oct 2026 12:30:43 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9973/#v1.1.0</guid>
     </item>
     <item>
       <title>Search for AWS - v1.1.0 [Version Update]</title>
@@ -772,47 +1162,6 @@ Note: In order to get the Carbon Black Server data into JSON format, you need to
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Qualys Inc.</dc:creator>
       <pubDate>Mon, 19 Oct 2026 07:28:44 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/2964/#v1.13.1</guid>
-    </item>
-    <item>
-      <title>Unifi Cloud Add-on for Splunk - v1.0.5+21b0b11 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7494/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Release notes: https://github.com/livehybrid/TA-unifi-cloud/releases/tag/v1.0.5&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collect Unifi cloud data directly into Splunk!
-Unifi Cloud API is in Beta and currently supports:
-* Devices
-* Hosts
-* Sites&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8f7fa62e-cae5-11f1-9d40-36b247d8a94b.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Will Searle</dc:creator>
-      <pubDate>Sun, 18 Oct 2026 11:19:27 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7494/#v1.0.5+21b0b11</guid>
-    </item>
-    <item>
-      <title>NextDNS API Collector for Splunk - v1.1.4+a1ea083 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7537/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Release notes: https://github.com/livehybrid/TA-nextdns-api/releases/tag/v1.1.4&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collect stats and even per-request logs from your NextDNS account using the NextDNS API!
-Grab your API key from https://my.nextdns.io/account to get started.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/60ef54bc-cae5-11f1-9d40-36b247d8a94b.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Will Searle</dc:creator>
-      <pubDate>Sun, 18 Oct 2026 11:18:10 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7537/#v1.1.4+a1ea083</guid>
-    </item>
-    <item>
-      <title>UK Open Data inputs - v1.0.4 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8812/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Release notes: https://github.com/livehybrid/TA-uk-open-data/releases/tag/v1.0.4&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Modular inputs for open UK datasets, with a configuration UI. Ingests UK Carbon Intensity (api.carbonintensity.org.uk — half-hourly national intensity + generation mix) and NHS England monthly A&amp;amp;E attendance statistics. No API key. Idempotent, checkpoint-based, safe to run on any interval.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;**UK Open Data** is a UCC-framework built add-on that brings two well-known open UK datasets into Splunk with no API key and no external dependencies beyond outbound HTTPS.
-
-
-**Carbon Intensity** — polls the National Grid ESO Carbon Intensity API (`api.carbonintensity.org.uk`) and indexes, per half-hourly settlement period, the national forecast/actual gCO₂/kWh and intensity band (`carbonintensity:national`) plus the generation mix by fuel type (`carbonintensity:generation`). Ideal for carbon-aware scheduling, ESG dashboards and &amp;quot;greenest time to run&amp;quot; decisions.
-
-
-**NHS A&amp;amp;E (monthly)** — scans the NHS England &amp;quot;A&amp;amp;E Attendances and Emergency Admissions&amp;quot; pages, downloads each monthly CSV you haven&amp;#x27;t already loaded, and indexes one event per provider plus a national TOTAL row (`nhs:ae:monthly`) — type 1/2/other attendances, 4-hour performance and over-4hr counts. Great for healthcare performance and public-sector analytics.
-
-
-Both inputs are **idempotent**: they checkpoint what they&amp;#x27;ve already indexed, so they&amp;#x27;re safe to run on any interval without creating duplicates. Carbon re-emits only un-settled recent periods until their actual value lands; NHS only loads months it hasn&amp;#x27;t seen.
-
-
-Built with the Splunk UCC framework — full configuration UI, per-input index/interval settings, and standard logging.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2f191cc0-cae5-11f1-8350-f2679e34b0bd.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Will Searle</dc:creator>
-      <pubDate>Sun, 18 Oct 2026 11:16:46 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8812/#v1.0.4</guid>
     </item>
     <item>
       <title>TrackMe - v2.4.20 [Version Update]</title>
@@ -1304,72 +1653,6 @@ Fixed
       <guid>https://splunkbase.splunk.com/app/7540/#v1.5.2</guid>
     </item>
     <item>
-      <title>Bitdefender GravityZone Data Collector - v1.0.6 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8267/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;# Version 1.0.6
-
-A maintenance release: a fix that matters on busy systems, a safeguard, and a small addition. It installs over 1.0.5 or 1.0.4 and keeps your inputs and settings.
-
-## Fixed
-
-* **Change lists no longer leave changes out.** *Recent changes* on Incident Overview and the change feed on Incident Changes now list every change of every update. In 1.0.5, once the selected period held a few hundred updates, the search behind them reached Splunk's memory limit for expanding results (`mvexpand`, 500 MB by default): Splunk showed a warning and silently dropped most of the changes. The search now carries only each incident's summary fields while listing its changes.&amp;#x20;
-
-## Improved
-
-* **Most active incidents**, on Incident Changes, shows each incident's type, EDR or XDR, like the other incident lists.
-
-## Upgrading
-
-* **From 1.0.5:** install 1.0.6 over it and restart Splunk. There is nothing to reconfigure, and data already indexed is unaffected.
-* **From 1.0.4:** the same, but read the version 1.0.5 release notes first: incident collection changed in 1.0.5, and the licence volume grows.
-* If you edited one of the add-on's dashboards in Splunk, your edited copy replaces the add-on's own and does not receive these changes.
-
-## Requirements
-
-Unchanged from 1.0.5: Splunk Enterprise 8.1 or later, and a GravityZone API key with access to the Incidents API (`getIncidentsList`, `getIncidentsByIds`) and the Accounts API (`getActivityLogsForCompany`).&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects Bitdefender GravityZone security incidents (EDR and XDR) and the complete console activity log into Splunk. Every change to an incident is indexed with a readable summary of what changed, console actions on incidents are linked to the incidents they affected, and four dashboards cover triage, incident history, response times and ingestion health.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Bitdefender GravityZone Data Collector brings GravityZone security incidents and console activity into Splunk.
-
-GravityZone incidents do not stand still: alerts are added, more endpoints become involved, severity changes, and analysts assign, prioritise, comment on and close them. The add-on collects that whole history, so you can triage, investigate and report on GravityZone incidents alongside the rest of your security data.
-
-It collects two kinds of data through the GravityZone API, one input per GravityZone company, so a single Splunk deployment can follow many companies, as partners and managed service providers need. The first is security incidents, both endpoint (EDR) and extended (XDR): every time an incident changes, the add-on indexes the new version with a field-level diff and a short, readable summary of what changed. The second is console activity: every entry of the company&amp;#x27;s GravityZone user activity log, such as sign-ins and failed sign-ins, changes to users and companies, tasks, quarantine actions and actions on incidents, each indexed as its own searchable event. Actions on incidents are also linked to the incidents they affected.
-
-Four dashboards are included. Incident Overview shows what is open, how serious it is, who owns it, who initiated it and what GravityZone did about it. Incident Changes is a filterable feed of changes, with severity and priority escalations and re-opened incidents. Incident Detail shows the current state and full history of one incident, with its alerts, nodes and notes, the incidents GravityZone grouped with it, and who changed it in the console. SLA and Ingestion Health shows the time taken to assign and to resolve incidents, open work by owner, and whether every input is collecting.
-
-The dashboards focus on incidents; the complete console activity log is available to your own searches, selected by gz_event_type=activity_log. All data uses the bitdefender:gravityzone sourcetype, with plain summary fields named gz_* that keep your own searches simple and fast.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e927642a-c70a-11f1-8cc4-12dbbc6c7195.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Bitdefender LLC</dc:creator>
-      <pubDate>Thu, 15 Oct 2026 15:20:34 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8267/#v1.0.6</guid>
-    </item>
-    <item>
-      <title>Python for Scientific Computing (for Mac Apple Silicon) - v4.3.5 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6785/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Upgraded two libraries to address vulnerabilities and fixed a bug in AITK 4.3.5.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This add-on contains a Python interpreter bundled with the following scientific and machine learning libraries: numpy, scipy, pandas, scikit-learn, and statsmodels. With this add-on, you can import these powerful libraries in your own custom search commands, custom rest endpoints, modular inputs, and so forth.
-
-This add-on is available for Linux (64-bit), Windows (64-bit) and Mac. Make sure you install the appropriate one for your Splunk deployment.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Thu, 15 Oct 2026 15:15:21 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6785/#v4.3.5</guid>
-    </item>
-    <item>
-      <title>Python for Scientific Computing (for Linux 64-bit) - v4.3.5 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/2882/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Upgraded two libraries to address vulnerabilities and fixed a bug in AITK 4.3.5&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This add-on contains a Python interpreter bundled with the following scientific and machine learning libraries: numpy, scipy, pandas, scikit-learn, and statsmodels. With this add-on, you can import these powerful libraries in your own custom search commands, custom rest endpoints, modular inputs, and so forth.
-
-This add-on is available for Linux (64-bit), Windows (64-bit) and Mac. Make sure you install the appropriate one for your Splunk deployment.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Thu, 15 Oct 2026 15:13:23 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/2882/#v4.3.5</guid>
-    </item>
-    <item>
-      <title>Python for Scientific Computing (for Windows 64-bit) - v4.3.5 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/2883/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Upgraded two libraries to address vulnerabilities and fixed a bug in AITK 4.3.5&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This add-on contains a Python interpreter bundled with the following scientific and machine learning libraries: numpy, scipy, pandas, scikit-learn, and statsmodels. With this add-on, you can import these powerful libraries in your own custom search commands, custom rest endpoints, modular inputs, and so forth.
-
-This add-on is available for Linux (64-bit), Windows (64-bit) and Mac. Make sure you install the appropriate one for your Splunk deployment.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Thu, 15 Oct 2026 15:12:57 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/2883/#v4.3.5</guid>
-    </item>
-    <item>
       <title>Splunk AI Toolkit - v6.2.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/2890/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;This release introduces Agent Launchpad V3, with chat-based agent invocation and clearer conversation history that shows tool calls and loaded Skills. It adds configurable email notifications for human-in-the-loop approval requests, expands the API reference for agents and related services, and improves anomaly detection with Cisco Deep Time Series Model for custom and out-of-order time-series data. CDTSM now uses up to 30,720 past data points by default, instead of 512, giving it more history to identify unusual patterns.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk AI Toolkit delivers new SPL commands, custom visualizations, assistants, and examples to explore a variety of ML concepts.
@@ -1507,14 +1790,6 @@ Versions listed in Splunkbase exist for upgrade purposes only. For combinations 
       <guid>https://splunkbase.splunk.com/app/3411/#v8.7.1</guid>
     </item>
     <item>
-      <title>Service Tree Viz - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10028/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Initial version&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Service Tree Viz is a Dashboard Studio visualization that draws your Splunk ITSI services as a dependency tree, colored by health. Replay recent history on a timeline to see what changed, click a service for its KPIs and dependencies.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;A Dashboard Studio visualization that draws your Splunk ITSI services as a dependency tree, colored by health, with a replay timeline to see how health changed over time.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/53eff61c-c767-11f1-8cc4-12dbbc6c7195.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Spavin</dc:creator>
-      <pubDate>Wed, 14 Oct 2026 21:28:59 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10028/#v1.0.0</guid>
-    </item>
-    <item>
       <title>Splunk Secure Networking Essentials (Beta) - v1.0.60 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/9257/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;### Setup
@@ -1550,15 +1825,6 @@ The app is intended for network operations, security operations, IT operations, 
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Rod Soto</dc:creator>
       <pubDate>Wed, 14 Oct 2026 14:32:55 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8574/#v1.0.5</guid>
-    </item>
-    <item>
-      <title>BXTI Add-on for Method Security - v1.0.9 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10025/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collect Method Security audit events, targets, findings and exposure issues natively in Splunk, with configurable polling, encrypted credential storage, resumable collection and scoped CIM mappings.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;BXTI Add-on for Method Security collects audit events, targeting runs, findings and exposure issues directly through Method Security APIs—without Torq. Configure accounts, data types, destination indexes and polling intervals within Splunk.
-The add-on preserves original JSON, supports checkpointed collection and provides search-time field aliases and normalization for selected CIM Authentication, Change and Vulnerabilities use cases. Finding and exposure discovery is limited to records linked to accessible targets or explicitly configured IDs.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/fb1a3a48-c73e-11f1-8cc4-12dbbc6c7195.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benedict Tawiah</dc:creator>
-      <pubDate>Wed, 14 Oct 2026 12:40:50 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10025/#v1.0.9</guid>
     </item>
     <item>
       <title>Zscaler OneAPI - v1.1.0 [Version Update]</title>
@@ -1640,390 +1906,6 @@ https://content.vectra.ai/rs/748-MCE-447/images/ProductCompanyOverview_2019_Cogn
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Vectra AI</dc:creator>
       <pubDate>Wed, 14 Oct 2026 07:02:11 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/4471/#v2.0.0</guid>
-    </item>
-    <item>
-      <title>Network Topology Dashboard - v1.1.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5612/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Version 1.1.1 modernizes the Network Topology Dashboard and makes the application fully self-contained.
-The custom Network Topology visualization is now included directly in the app, so the separate **Network Topology - Custom Visualization (app 3762)** dependency is no longer required.
-The visualization was also updated to remove outdated and vulnerable JavaScript libraries, improving overall security and compatibility with current Splunk Enterprise versions.
-Additional improvements include updated application metadata and icons, improved installation and configuration documentation, and clarification that the included SNMP/CDP collector is designed for **Cisco network devices**.
-The scheduled lookup-generation search is now disabled by default to prevent bundled demo data from being overwritten before a real topology data source is configured.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This application is used to visualize the topology of an enterprise network. 
-Using the application, you can visualize a graph representing the relationship between different nodes, flexible filtering by sites and subnets.
-This dashboard has 5 panels:
-1) Visualization of network topology
-2) All events of the network node
-3) Description of the network node (ip address, host name, product name, serial number, version)
-4) The last commands entered by the administrator on the network node
-5) Graphics of incoming events by hosts
-
-This application comes with a script using the SNMP protocol to collect data about network nodes based on Cisco and instruction for creating a report in which the data is divided by sites, subnets, and devices.
-For the working of application, you need to install the &amp;quot;Network Topology - Custom Visualization (https://splunkbase.splunk.com/app/3762/)&amp;quot; application, the functionality of which is the basis.
-
-Detailed instructions for using the application in the README.txt file.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d22928f8-c705-11f1-8cc4-12dbbc6c7195.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyberfox DEVELOPER</dc:creator>
-      <pubDate>Wed, 14 Oct 2026 03:02:07 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5612/#v1.1.1</guid>
-    </item>
-    <item>
-      <title>TA Studio - v1.9.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8932/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- Tested on Splunk 10.6.0.5.
-- Menu links: built add-ons now get a Search link in their menu automatically. Reports, Alerts and Dashboards links are optional checkboxes on the Build page.
-- Your chosen menu links are kept even when the add-on has no menu of its own.
-- Fixed a crash when building imported add-ons on Linux.
-- Safer shell inputs: a value typed into an input or setup page can no longer sneak in and run extra commands.
-- Safer job lookups: a crafted request can no longer read or change files on the Splunk server.
-- No more deleting the wrong add-on: opening an add-on whose name differs only in capital letters (e.g. TA_Foo vs ta_foo) no longer wipes the other one's workspace.
-- Deploy won't overwrite your own project, for add-ons opened straight from Splunk's apps folder.
-- Settings files keep their line breaks: long .conf lines split with a backslash are no longer mangled when saved.
-- Removing a library really removes it from the add-on.
-- Renaming inputs and alerts works properly: you get a clear error if the name is taken, and a renamed alert keeps its script and settings.
-- No more lost edits when two saves happen at the same time.
-- New &quot;Special Thanks&quot; card on the About page for people who report bugs or suggest features.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Build, import, validate, and package Splunk add-ons through a visual browser UI — no CLI. Create inputs (REST/shell/Python), alert actions, source types, field extractions, CIM mappings, lookups, and setup pages on the UCC Framework, run inputs and alerts in the browser to inspect their output, validate with AppInspect, and package for Splunkbase in one click.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TA Studio is a browser-based visual workbench for building Splunk® add-ons (TAs) on the Universal Configuration Console (UCC) Framework — without touching the command line.
-
-Authoring a quality add-on normally means working with the ucc-gen CLI, hand-editing globalConfig.json and a web of .conf files, and running AppInspect and packaging from a terminal. TA Studio replaces that workflow with a guided, point-and-click interface that runs entirely inside your own Splunk instance.
-
-From one UI you can create and manage data inputs (REST API, shell command, or Python modular inputs), alert actions (including Enterprise Security adaptive response), source types, field extractions with a live regex builder, CIM data model mappings, setup pages (accounts, proxy, logging), CSV lookups, and event types. You can import existing Splunk Add-on Builder and conf-based add-ons to modernize them, run inputs and alert actions right in the browser to inspect the events and output they produce, validate with AppInspect (including cloud checks) and review the results, then package a Splunkbase-ready archive in one click.
-
-TA Studio also includes built-in AI assistance to help you generate and refine input and alert-action code as you work. It otherwise runs entirely within your local Splunk environment: your add-on projects are not collected, transmitted, or stored outside your instance, and AI features send only the content you choose to submit to your selected AI provider.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ff49fc0c-c74d-11f1-af5f-a24df39d4ff6.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Joshua Specht</dc:creator>
-      <pubDate>Tue, 13 Oct 2026 21:39:56 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8932/#v1.9.0</guid>
-    </item>
-    <item>
-      <title>HTTP - v4.0.3 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5904/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Restore HTTP and HTTPS proxy support with standard redirect handling when the proxy resolves destination DNS.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This App facilitates making HTTP requests as actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/44bbf8ce-c74b-11f1-8cc4-12dbbc6c7195.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 13 Oct 2026 21:15:52 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5904/#v4.0.3</guid>
-    </item>
-    <item>
-      <title>Avanan Splunk - v1.0.8 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5720/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Fixed an invalid reload trigger value to maintain Splunk Cloud Platform compatibility. No functional changes.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Avanan is an enterprise AI-based cloud security platform that prevents phishing, malware, data leakage, account takeover, &amp;amp; shadow IT for full-suite cloud applications like Office 365. Avanan is the only solution that can fully secure your cloud email and communication, with a unique architecture built specifically for the cloud. Avanan Splunk add-on allows to collect security events generated by the Avanan security platform, and perform actions on the collected events.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a27c32d8-c748-11f1-9eaf-de83f1e47b6b.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Avanan Inc.</dc:creator>
-      <pubDate>Tue, 13 Oct 2026 21:02:11 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5720/#v1.0.8</guid>
-    </item>
-    <item>
-      <title>OpenCTI for Splunk Enterprise - v1.2.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8431/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**OpenCTI for Splunk Enterprise 1.2.0**
-
-**FEATURES**
-
-* Create Sighting: sighting of an existing indicator (#67)
-  New &quot;Indicator STIX ID&quot; option in Sighting of Type. Pass the STIX ID of an indicator that already exists in OpenCTI (indicator--\&lt;uuid&gt;, for example from the opencti\_indicators KV Store): the sighting references the indicator directly, so OpenCTI rules such as &quot;Raise incident based on sighting&quot; apply. Configure the alert with Trigger: For each result.
-* The app registers in OpenCTI only when needed (#79)
-  The alert actions no longer register the app as an OpenCTI connector before each push. The app registers on its first push, or again if the connector was deleted in OpenCTI, and logs it.
-
-**BUG FIXES**
-
-* Multivalue tokens in Labels (#77)
-  A token pointing to a multivalue field (for example the labels of the matched indicators) created a single composite label in OpenCTI. Labels are now split on commas and line breaks in Create Incident, Create Incident Response and Create Sighting.
-* OpenCTI errors are no longer reported as successes (#19)
-  When OpenCTI rejected a push with an error, the alert action still logged &quot;STIX bundle has been sent successfully&quot;. The error is now logged.
-* Create Sighting: clearer errors (#67)
-  An invalid indicator ID, or an empty or unsupported Sighting of Type, is logged with an explicit message and the event is skipped.
-
-Full release notes: [https://github.com/OpenCTI-Platform/splunk-enterprise-add-on/releases/tag/1.2.0](https://github.com/OpenCTI-Platform/splunk-enterprise-add-on/releases/tag/1.2.0)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;OpenCTI is an open-source platform developed by Filigran to help organizations manage their cyber threat intelligence and observables. It enables cybersecurity teams to efficiently organize, store, and operationalize threat information across technical, operational, and strategic levels.
-
-OpenCTI for Splunk Enterprise enables Splunk users to interconnect Splunk with OpenCTI and to leverage threat information to improve detection capabilities and response to security incidents.
-
-This new application represents a major evolution from the previous version (OpenCTI Add-On) and stands out through:
-- The ability to import multiple object types, not just indicators
-- An optimized architecture for clustered Splunk environments and Splunk Cloud, enabling the feeding of a Splunk Index and the use of saved searches to populate KV Stores
-- A migration to the UCC (Universal Configuration Console) framework that implements best practices in development
-
-Key features:
-- Modular inputs for ingesting OpenCTI data via the OpenCTI Stream API
-- Ability to trigger OpenCTI actions in response to Alerts and to investigate them directly in OpenCTI
--Support for multiple object types (Indicators, Observables, Relationships, Sightings)
-About Filigran
-Filigran (www.filigran.io ) provides open-source cybersecurity solutions covering threat intelligence management, breach and attack simulation, and cyber risk management.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/98e6e324-c722-11f1-8cc4-12dbbc6c7195.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Filigran</dc:creator>
-      <pubDate>Tue, 13 Oct 2026 19:46:54 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8431/#v1.2.0</guid>
-    </item>
-    <item>
-      <title>NVD CVE Add-on - v1.0.3 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7946/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This is an add-on to pull CVE records from the NIST CVE database. It offers customization of checkpoint type (based on publish time, modify time, index, or none), keyword searches, data fields of the CVEs to display, languages in the CVE description, and any other field supported by the NIST CVE API. It also supports proxies.
-
-NOTE: This product uses the NVD API but is not endorsed or certified by NIST or the NVD.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/081ffbac-c67b-11f1-ba3a-b69af59b06d0.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">marlin arnall</dc:creator>
-      <pubDate>Tue, 13 Oct 2026 18:08:37 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7946/#v1.0.3</guid>
-    </item>
-    <item>
-      <title>Slack Notification Alert - v3.1.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/2878/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Added:
-
-* default/props.conf, which assigns the slack\_alerts:log sourcetype to all logs generated by this app.
-
-Changed
-
-* The alert action logs to slack\_alerts\_alert.log.
-
-Fixed
-
-* Alert action logs landing in the cim\_modactions index on search heads that run the Splunk Common Information Model add-on.
-
-Upgrade notes
-
-* Point saved searches and alerts that monitor this app at index\=\_internal sourcetype\=slack\_alerts:log, or source\=\*slack\_alerts\_alert.log for the alert action.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Sends Splunk alert messages to Slack channels using OAuth tokens or webhook URLs with support for custom messages and attachments.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Send Splunk alert results to a Slack channel through a Slack App OAuth token (chat.postMessage) or an incoming webhook URL.
-
-- Stores the Slack App OAuth token and webhook URL encrypted.
-- Set the channel, message, attachment, and fields per alert.
-- Override the token, webhook URL, or proxy per alert.
-- Sends through a proxy.
-
-Source code and issues: https://github.com/splunk/slack-alerts&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/56f06200-c71e-11f1-876f-f29e67cfea79.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Security Center of Excellence</dc:creator>
-      <pubDate>Tue, 13 Oct 2026 17:28:42 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/2878/#v3.1.1</guid>
-    </item>
-    <item>
-      <title>Deslicer AI Insights Add-on - v1.1.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8558/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;[](https://github.com/deslicer/deslicer-ai-insights-for-splunk/blob/development/CHANGELOG.md#111--2026-10-07)
-
-### Fixed
-
-[](https://github.com/deslicer/deslicer-ai-insights-for-splunk/blob/development/CHANGELOG.md#fixed-4)
-
-* **Splunk Cloud / AppInspect:** Package-time injection of `python.required = 3.13` for the Deslicer Investigate alert action (resolves AppInspect `check_alert_actions_conf_python_required`; required to maintain Splunkbase Cloud compatibility after the 1.1.0 listing window).
-* **Search head clustering:** `conf_replication_include.enrollment = false` in `server.conf` so enrollment tokens are not replicated across SHC members.
-* Deslicer Investigate alert action: UCC Python path setup and alert-parameter schema fixes for the saved-search API token field.
-
-### Changed
-
-[](https://github.com/deslicer/deslicer-ai-insights-for-splunk/blob/development/CHANGELOG.md#changed-2)
-
-* **Removed packaged default modular-input instance** (`[deslicer_ai_insights://default]` from `default/inputs.conf`). The package retains scheme-level metadata only. Operators must create a named instance via the Inputs UI or an operator-chosen stanza in `local/inputs.conf` (Deployment Server).
-* **Upgrade decision: delete (no disabled tombstone).** Splunk app upgrades replace package `default/` files; a removed default-layer stanza does not persist unless copied into `local/`. A one-release disabled tombstone would re-ship a package-owned named instance and is reserved only if a real Splunk 9.x/10.x upgrade E2E proves unexpected retention.
-* **Non-destructive local-input guarantee:** package upgrades never delete or edit `local/inputs.conf`. Customer and UCC-created stanzas remain byte-for-byte.
-
-### Added
-
-[](https://github.com/deslicer/deslicer-ai-insights-for-splunk/blob/development/CHANGELOG.md#added-2)
-
-* **Observer connection probe** on the Configuration tab — on-demand HTTPS reachability check to the configured Observer API URL before saving accounts.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;The real-time configuration observation layer for the Deslicer Automation Platform. Every Splunk Enterprise host streams live, CIM-compliant configuration state — enabling drift detection, AI-driven recommendations, and safe audited deployments across your entire fleet.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Deslicer AI Insights Add-on is the real-time configuration observation layer for the Deslicer Automation Platform (DAP) — giving Splunk administrators live visibility into the configuration state of every host in their deployment, and unlocking AI-driven automation across the entire Splunk estate.
-
-The Insights Add-on runs on all Splunk Enterprise hosts — indexers, search heads, heavy forwarders, and cluster managers — continuously observing and reporting configuration state to the DAP Observer. This real-time stream of configuration intelligence is what enables DAP to detect drift the moment it happens, power AI-driven change recommendations, and safely execute audited deployments with human approval at every step.
-
-All events are indexed with CIM-compliant field extractions (sourcetype: deslicer:insights:node), mapped to the Change, Authentication, and Application State data models — ready for Enterprise Security, custom correlation searches, and CIM-based reporting out of the box.
-
-On search heads and SHC members, enable the add-on in Splunk Web to access the Insights Node Monitoring dashboard — visibility into the health, activity, and status of every collector node across your fleet.
-
-Deslicer AI connects directly to this live configuration data stream, giving purpose-built agents real Splunk context — not guesses. Agents automate daily health checks, GDI onboarding, deployment planning, and more. Every change requires explicit human approval with cryptographic signing and a full audit trail.
-
-Deslicer runs fully on-premises (Kubernetes, Docker, air-gapped) or as SaaS — your data stays inside your perimeter when required.
-
-Sign up at https://deslicer.ai to connect your Splunk deployment and unlock the full value of real-time configuration intelligence.
-
-Splunk EMEA Technology Innovation Partner 2025.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/95f78824-c706-11f1-84f2-6a7dc70e9d5d.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Deslicer AB</dc:creator>
-      <pubDate>Tue, 13 Oct 2026 13:15:26 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8558/#v1.1.1</guid>
-    </item>
-    <item>
-      <title>Luminar IOCs and leaked credentials - v2.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6346/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Version 2.0.0
-
-2.0.0 is a major release. It changes the event format, so read &quot;Upgrading from 1.1.x&quot; before you upgrade.
-
-NEW
-
-* Cyber feeds: the input now also collects Luminar finished intelligence reports and the threat actors, campaigns, malware, vulnerabilities (CVEs), targeted sectors and locations they cover.
-* New event format: one JSON event per STIX object, with ready-to-use IOC fields (ioc\_type, ioc\_value, ip, domain, url, file\_hash, email), the feed name (luminar\_feed) and Luminar context such as luminar.score.
-* Lookups: ten saved searches build lookups after each collection. They include active IOCs (KV Store) with expiry and a minimum score (luminar\_min\_score macro, default 60), IOC attribution to threat actors and malware, report context, a domain lookup that also matches subdomains, CVE intelligence with Luminar exploitation flags and CVSS, and leaked accounts.
-* Detection rules: six correlation searches, shipped disabled. They cover connections to malicious IPs, web requests to malicious URLs, malicious file hashes on endpoints, DNS queries to malicious domains and their subdomains, successful logins by leaked accounts, and scanner CVEs that Luminar reports on.
-  * They read the CIM data models by default; each rule's log-source macro can point it at your own data instead.
-  * In Splunk Enterprise Security they appear as correlation searches, with the notable event settings already filled in.
-* Alert history: the detection rules write every alert to the luminar\_alerts index. The new Detection Matches dashboard shows them by rule, severity, threat actor, malware and affected asset.
-* Allowlist: stop alerts on known false positives, such as CDN IP addresses or test accounts, for all rules or one rule, with an expiry date and a reason.
-* New dashboards: Threat Intel Overview, Threat Profiles, Leaked Credentials, Cyberfeeds, Luminar Report, Ingest Health, Detection Matches, Allowlist and Log Sources. The Main Dashboard adds cyber feeds panels and an ingest-time filter.
-* Field menu actions: look up an IP address, domain, URL, file hash, account or CVE in Luminar from any search result, and open threat actor, malware and campaign profiles and reports.
-* New input settings:
-  * &quot;Mask Leaked Passwords&quot;, on by default: leaked passwords keep only their first and last character, and the clear text is never written to Splunk.
-  * &quot;Rebuild Lookups After Collection&quot;, on by default.
-* Credentials are checked when an input is saved. If Luminar rejects them, or the host cannot be reached, the input is not saved and the reason is shown on the form.
-
-CHANGES AND FIXES
-
-* Each feed keeps its own checkpoint, so an interrupted run resumes from its last batch.
-* Indicators that have already expired when they are collected are no longer ingested.
-* Deleting an input also deletes its checkpoints, so an input re-created with the same name starts from its initial fetch date.
-* Searches, lookups and the new dashboards read the Luminar index through the luminar\_index macro (default: index\=main).
-
-UPGRADING FROM 1.1.x
-
-1. Review your own searches, reports and alerts on Luminar data. Events are now one per STIX object, with new field names (for example, indicator\_type is now ioc\_type). Events collected by 1.1.x keep their old format.
-2. If your input writes to an index other than main, set the luminar\_index macro to that index (Settings &gt; Advanced search &gt; Search macros).
-3. Existing inputs continue from their 1.1.x checkpoint; you do not need to re-create them. The new cyber feeds start from the same point.
-4. The lookups and dashboards fill after the first collection that follows the upgrade. To build them sooner, run the saved searches &quot;Luminar - 01&quot; to &quot;Luminar - 10&quot; in order.
-5. To use the detection rules:
-   a. Create the luminar\_alerts index.
-   b. Point the rules' log-source macros at your data (the Log Sources dashboard tests them).
-   c. Enable the rules.
-   See &quot;Detection rules&quot; in the README.
-
-REQUIREMENTS
-
-* Splunk Enterprise with Python 3.13 (tested on Splunk Enterprise 10.6), with the KV Store enabled.
-* Optional, for the detection rules as shipped: the Splunk Common Information Model add-on and CIM-mapped data.
-
-Support: this add-on is developer supported by Cognyte. Contact [luminar@cognyte.com](mailto:luminar@cognyte.com).&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects intelligence-based IOCs and leaked credential records from Cognyte&amp;#x27;s Luminar cybersecurity intelligence platform via API.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This connector allows integration of intelligence-based IOC data and customer-related leaked records identified by Luminar.
-
-Luminar is an asset-based cybersecurity intelligence platform that empowers enterprise organizations to build and maintain a proactive threat intelligence operation that enables to anticipate and mitigate cyber threats, reduce risk and enhance security resilience. Luminar enables security teams to define a customized, dynamic monitoring plan to uncover malicious activity in its earliest stages on all layers of the Web.
-
-Cognyte is a global leader in security analytics software that empowers governments and enterprises with Actionable Intelligence for a safer world. Our open software fuses, analyzes and visualizes disparate data sets at scale to help security organizations find the needles in the haystacks. Over 1,000 government and enterprise customers in more than 100 countries rely on Cognyte’s solutions to accelerate security investigations and connect the dots to successfully identify, neutralize, and prevent threats to national security, business continuity and cyber security.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c2a3dde0-c68a-11f1-984c-ea78c3800ec7.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cognyte Technologies Israel Ltd</dc:creator>
-      <pubDate>Tue, 13 Oct 2026 10:16:21 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6346/#v2.0.0</guid>
-    </item>
-    <item>
-      <title>OT Security Add-on for Splunk - v3.0.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5151/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Updates to dependent packages for vulnerabilities&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;NOTE: Final Release.  After 31 January 2027, The OT Security Add-on will be removed from Splunkbase.
-
-The OT Security Add-on for Splunk enables organizations that operate assets, networks, and facilities across both IT and OT environments to better apply the globally proven SIEM, Splunk Enterprise Security, to improve threat detection, incident investigation, and response. The OT Security Add-on for Splunk expands the capabilities of Splunk’s platform to monitor for threats and attacks, compliance, incident investigation, forensics, and incident response across the broad spectrum of assets and topologies - from email servers to PLCs -  that define modern manufacturing, energy, and public sector organizations.
-
-Components of this solution include:
-OT Security Overview
-Perimeter Monitoring
-Infrastructure Monitoring
-Centralized view across partner technologies.
-NERC CIP Compliance Reporting
-Correlation Rules including mapping to security frameworks like MITRE ATT&amp;amp;CK for ICS, CIS 20, and others
-Integration with Enterprise Security
-Dashboards designed to help you identify misconfigurations and missing data
-
-The OT Security Add-on for Splunk REQUIRES Splunk Enterprise Security.
-
-For any OT related sales conversations, please contact otsecurity@splunk.com
-
-NOTE: Versions 2.3.5 and earlier are only compatible with ES 8.0.3 or earlier, version 3.0.1 is compatible with ES 8.0.4+&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/7a5d07e4-c664-11f1-99ee-fe7aa3bb27ad.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
-      <pubDate>Mon, 12 Oct 2026 21:10:55 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5151/#v3.0.2</guid>
-    </item>
-    <item>
-      <title>Add-On for HaveIBeenPwned - v2.3.5 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5050/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Fixed bug in config&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Queries the haveibeenpwned.com API to identify domains and email addresses compromised in known data breaches.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;A Splunk® add-on providing a custom search command &amp;quot;haveibeenpwned&amp;quot; to query Troy Hunt&amp;#x27;s Have I Been Pwned API (https://haveibeenpwned.com/api/v3/) for known breaches of your (company&amp;#x27;s) domains or your friends&amp;#x27;/family&amp;#x27;s/enemies&amp;#x27;/hardly distantly related someone&amp;#x27;s/employees&amp;#x27;/colleagues&amp;#x27; mail adresses.
-
-Please respect people&amp;#x27;s privacy and adhere to the service&amp;#x27;s acceptable use (https://haveibeenpwned.com/API/v3#AcceptableUse). I tried respecting the limits posed on the API&amp;#x27;s use in the command&amp;#x27;s source code, which is why you&amp;#x27;ll have to have a little patience when querying for large amounts of mail addresses.
-
-I was unsatisfied with the publicly available Splunk add-ons already providing this functionality as they either didn&amp;#x27;t allow control over what and how is queried for or didn&amp;#x27;t format the output to my wishes. So I came up with my own Splunk add-on implementing these missing features.
-
-Cross-compatible with Python 2 and 3. Tested on Splunk Enterprise 10.0 on Windows, Linux and Splunk Cloud.
-
-Licensed under http://www.apache.org/licenses/LICENSE-2.0.
-
-Feel free to submit issues via https://github.com/hRun/SA-haveibeenpwned/issues.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/bd9cc484-c67a-11f1-984c-ea78c3800ec7.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Harun Kuessner</dc:creator>
-      <pubDate>Mon, 12 Oct 2026 20:40:19 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5050/#v2.3.5</guid>
-    </item>
-    <item>
-      <title>Add-On for Encryption and Encoding - v2.5.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5062/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Added optional ivfield and ivextract arguments to crypt for per-event AES IVs (field-provided or prepended to base64 ciphertext)
-
-AES key files may contain key-only material when using dynamic IV options
-
-Dropped Python 2 compatibility
-
-Fixed config bug&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Provides custom search commands for encrypting, decrypting, hashing, ciphering, and encoding Splunk data at search time using RSA, AES, SHA, MD5, Base64, and other cryptographic algorithms.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;A Splunk® Add-On providing the custom search commands cipher, crypt, encode, and hash for ciphering/deciphering, encrypting/decrypting, encoding/decoding and hashing fields and events at search time.
-
-* Cipher/decipher fields or complete events during search time using RC4, ROT13, ROT47, XOR
-* Encrypt/decrypt fields or complete events during search time using RSA, AES-128/192/256-CBC or AES-128/192/256-OFB
-* Encode/decode fields or complete events during search time using Base32, Base58, Base62, Base64, Binary, Decimal, Hex, Octal
-* Hash fields or complete events during search time using MD5, SHA1, SHA2 (224, 256, 384, 512), SHA3 (224, 256, 384, 512), Blake2
-* Manage access to encryption and decryption functionality on a per-user or per-role basis via two shipped roles
-* Manage usable encryption/decryption keys on a per-user or per-role basis via the app&amp;#x27;s configuration screen
-
-Cross-compatible with Python 2 and 3. Tested on Splunk Enterprise 10.0 on Windows and Linux (64-bit).
-
-Licensed under http://creativecommons.org/licenses/by-nc-sa/4.0/.
-
-Shoutout to some contributors: Windu Sayles, (back in the days also: Simon Balz, Mika Borner, Christoph Dittmann)
-
-Feel free to submit discovered issues or enhancement requests via https://github.com/hRun/TA-cryptosuite/issues.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/738356b0-c67a-11f1-bf8e-9200b94d2843.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Harun Kuessner</dc:creator>
-      <pubDate>Mon, 12 Oct 2026 20:39:03 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5062/#v2.5.0</guid>
-    </item>
-    <item>
-      <title>1Password CLI Tool - v1.0.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8099/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app uses the 1Password CLI tool to regularly pull lists of users and groups. This can be useful if you want to track seat usage, user or group growth, or calculate statistics on which active users have signed in recently.
-
-Special thanks to Martin Müller for his help troubleshooting this add-on.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f940903c-c67b-11f1-bf8e-9200b94d2843.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">marlin arnall</dc:creator>
-      <pubDate>Mon, 12 Oct 2026 20:34:12 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8099/#v1.0.1</guid>
-    </item>
-    <item>
-      <title>Atlas Software Platform for Splunk - v5.2.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5614/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;[Review our Documentation Online!](https://docs.atlas.kinneygroup.com/docs/references/release-notes#atlas-version-510 &quot;Review our Documentation Online!&quot;)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Assess, govern, optimize, and extend your Splunk environment with purpose-built tools from Presidio.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Atlas Software Platform for Splunk by Presidio helps organizations operate, optimize, and get more value from Splunk.
-
-Built from experience across hundreds of Splunk engagements, Atlas turns proven Splunk expertise into practical software that helps teams understand their environments, improve data and search practices, accelerate investigations, and identify opportunities for optimization.
-
-Whether you are managing Splunk Enterprise, Splunk Cloud, or a complex environment spanning multiple use cases, Atlas gives administrators and engineering teams greater visibility and control over their Splunk environment.
-
-WHAT&amp;#x27;S INCLUDED
-
-Atlas Assessment
-
-Quickly evaluate the health and configuration of your Splunk environment. Atlas Assessment identifies opportunities for improvement, highlights potential risks, and provides actionable insights that help teams prioritize where to focus.
-
-Power Utilities
-
-Power Utilities are focused applications designed to address common operational and security use cases. They provide ready-to-use dashboards and workflows that help teams get value from their Splunk data faster.
-
-LICENSED ATLAS CAPABILITIES
-
-Atlas also includes advanced capabilities available through Presidio&amp;#x27;s Splunk Subscription Services.
-
-Data Hub
-
-Gain greater visibility and control over the data flowing into Splunk. Data Hub helps teams understand data sources, monitor ingestion, identify data-quality and utilization issues, and make more informed decisions about their Splunk data.
-
-Search Hub
-
-Understand, govern, and optimize how searches and dashboards are used across Splunk. Search Hub helps identify inefficient, expensive, or underutilized content so teams can improve performance, strengthen governance, and reduce unnecessary resource consumption.
-
-ATLAS HELPS SPLUNK TEAMS
-
-- Improve visibility into the health and operation of their Splunk environment
-- Strengthen search and data governance
-- Identify opportunities to improve performance and efficiency
-- Accelerate troubleshooting and investigation
-- Reduce the effort required to build common Splunk use cases
-- Apply proven Splunk practices consistently across the environment
-
-Atlas combines Presidio&amp;#x27;s deep Splunk expertise with purpose-built software to help organizations move beyond simply running Splunk to operating it more effectively.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/98730468-c678-11f1-868b-16690388630d.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Presidio - Key Partner Acct</dc:creator>
-      <pubDate>Mon, 12 Oct 2026 20:21:17 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5614/#v5.2.0</guid>
-    </item>
-    <item>
-      <title>Twilio Alert Action - v3.2.15 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/5672/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Cloud compatibility&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Twilio Alert Action lets you send SMS with the help of messaging API’s. With Twilio, you can send notifications, alerts, and marketing messages on multiple channels with one API that has software for managing phone numbers, deliverability, compliance, and replies.
-
-Twilio Alert Action can provide an SMS notification to the registered number when the alert is triggered. Twilio Message client API is invoked when alert action is set. Dashboard represents visualization to track no. of alert actions triggered via Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/fb4bdc82-c65e-11f1-be88-bae49ac5dfb6.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Avotrix Inc</dc:creator>
-      <pubDate>Mon, 12 Oct 2026 17:09:33 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5672/#v3.2.15</guid>
     </item>
   </channel>
 </rss>
