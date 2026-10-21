@@ -6,7 +6,32 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Wed, 21 Oct 2026 19:47:42 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 21 Oct 2026 22:54:18 +0000</lastBuildDate>
+    <item>
+      <title>DV AI Assistant - v1.1.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9491/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Redesigned provider configuration for simpler connection and model management.
+* Added multiple models per connection with model-specific request parameters.
+* Improved custom and local LLM integration, including OpenAI-compatible endpoints and Anthropic Messages gateways.
+* Unified provider request and response handling across AI Chat, Triage and connection tests.
+* Added individual conversation deletion.
+* Added Copy Answer, Copy Chat and Markdown export.
+* Automatically executed SPL is hidden by default and can be displayed when requested.
+* Improved provider credential handling and application stability.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;AI-powered Splunk security operations with natural-language SPL, Splunk ES notable-event triage, autonomous triage, multi-LLM support, knowledge-base context, guarded actions, role-based access, and firewall-ready IP block lists.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;DV AI Assistant is an AI-powered security operations application for Splunk designed to help SOC teams investigate security events, generate and execute SPL, and triage Splunk Enterprise Security notable events.
+
+The application provides an AI Command Center for natural-language interaction with Splunk data and an AI Triage Center for manual or autonomous notable-event analysis. It supports multiple LLM providers including Ollama, OpenAI, Google Gemini, and custom endpoints, and can use a configurable knowledge base to provide environment-specific context to the AI.
+
+DV AI Assistant includes security controls for AI-generated actions and searches. Generated SPL is passed through guardrails before autonomous execution to prevent write or side-effecting commands. IP block and unblock actions require explicit confirmation and the block_ip capability. Built-in admin and sc_admin roles receive this capability by default, while the dv_ai_action role can be assigned separately when block/unblock permission is required.
+
+Blocked IP addresses are maintained by the application and exported as a plain-text firewall-consumable list, allowing external firewalls or security controls to retrieve the current block list.
+
+The application also includes an autonomous triage worker. When Auto Triage is enabled, the scripted input runs every 60 seconds by default, identifies eligible unprocessed Splunk ES notable events, sends the complete event context for AI analysis, and writes the resulting triage report back to the notable event.
+
+Role-based access is provided through dv_ai_user, dv_ai_admin, and dv_ai_action roles. Standard users can access AI Chat and AI Alert Triage, while administrative configuration areas such as AI Providers, Data Context Mapping, Audit, and App Settings are restricted to authorized administrators.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c6c7b646-cd90-11f1-9474-725fefdae175.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Mustafa YILMAZ</dc:creator>
+      <pubDate>Wed, 21 Oct 2026 21:37:47 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9491/#v1.1.1</guid>
+    </item>
     <item>
       <title>Forescout Technology Add-on for Splunk - v3.0.7 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/3382/</link>
@@ -1848,75 +1873,6 @@ The app is intended for network operations, security operations, IT operations, 
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Wed, 14 Oct 2026 10:21:53 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/9483/#v1.1.0</guid>
-    </item>
-    <item>
-      <title>Vectra Cognito Detect - v2.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4471/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**Vectra App for Splunk, v2.0.0 Release Notes**
-*Release date: 14 Oct 2016*
-
-**Overview**
-Version 2.0.0 is a major UI release. Every dashboard has been redesigned for readability, with no changes needed to your data inputs or the add-ons.
-
-**What’s new**
-
-* **Redesigned dashboards:** Entities, Detections, Campaigns, Lockdown, Match, Health and Audit now have KPI summary cards, cleaner charts and a consistent look.
-* **Easier-to-read tables:** severity, category, result, direction, state and similar fields appear as colored pills. Threat and Certainty show as score badges, and timestamps use a consistent format.
-* **Entities:** summary cards by severity, a Threat vs Certainty scatter chart, a data source mix chart and a 24-hour change table.
-* **Detections:** KPI cards for total detections, behaviors, high-risk detections and the last 24 hours, a full-width Detection Categories over Time chart, and a Data Source column.
-* **Source Device column:** added to the Health and Audit dashboards, so each event shows which device it came from.
-* **Match:** KPI cards, a full-width trend chart, taller Top Signatures chart and a Protocol column in the alerts table.
-* **Simplified navigation:** Match, Health and Audit are now direct links instead of single-item dropdowns.
-
-**Improvements**
-
-* Dashboards now run one shared search per page instead of one per panel, which should load faster.
-* Pivot to Vectra links replace raw URLs in the Entities, Detections, Campaigns and Lockdown tables.
-
-**Fixes**
-
-* Fixed a search syntax error in the Lockdown history tables.
-* Fixed broken drilldowns in Lockdown, Campaigns and Detections, which pointed to a view that doesn’t exist.
-* Fixed incorrect column renames in Lockdown (Hostname) and a mismatched field in the Campaigns drilldown.
-* Fixed the Assignment color rule in Entities, which grayed out unrelated names.
-* Fixed Match table fields that were missing or mismatched.
-
-**Compatibility**
-
-* Technology Add-On for Vectra Detect (JSON) 1.2.0 or later.
-
-**Upgrade notes**
-
-* Install over v1.5.0. No data, macro or index changes are required.
-* Restart Splunk (or open `/debug/refresh`) and hard-refresh your browser (Ctrl+Shift+R) so the new styling loads.
-
-The README already has a shorter 2.0.0 entry. If you want, I’ll replace it with this text, and fill in the release date.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Cognito Detect: surface hidden threats from cloud to enterprise
-
-The power of AI to detect and prioritize in-progress attacks in real-time
-- Automate manual processes and consolidate thousands of events and historical context to pinpoint hosts and accounts that pose the biggest threat
-- High-fidelity visibility into attacker behaviors across all public clouds, private data centers and enterprise environments
-- Unique context eliminates the endless hunt-and-search for threats and enables immediate action
-
-Identify known and unknown threats
-- Visibility into internal recon and lateral movement attack behaviors
-- Identify devices and workloads at the center of an attack
-- Detect intrusions without the limitations of signatures
-
-Security analyst in software
-- Automate a chain of events into a single incident
-- Instantly triage the highest-risk threats
-- Behavioral context with every detection
-
-https://www.vectra.ai/product/cognito-detect
-
-Splunk integration with Vectra solutions sheet:
-https://content.vectra.ai/rs/748-MCE-447/images/ProductIntegration_2017_Integrating_Cognito_with_Splunk_English.pdf
-
-Cognito Detect solutions sheet:
-https://content.vectra.ai/rs/748-MCE-447/images/ProductCompanyOverview_2019_Cognito_Detect_AI-powered_attacker_detection_English.pdf&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/89648fd0-c79c-11f1-af5f-a24df39d4ff6.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Vectra AI</dc:creator>
-      <pubDate>Wed, 14 Oct 2026 07:02:11 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4471/#v2.0.0</guid>
     </item>
   </channel>
 </rss>
