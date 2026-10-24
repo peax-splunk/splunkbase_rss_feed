@@ -6,7 +6,94 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sat, 24 Oct 2026 05:14:09 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 24 Oct 2026 10:00:54 +0000</lastBuildDate>
+    <item>
+      <title>ROVIX Universal API Add-on for Splunk - v1.0.3 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10004/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Version 1.0.3 - reliability and bug-fix release
+
+
+
+Fixes
+
+\- Cursor pagination no longer stops early when the API returns a cursor value of 0.
+
+\- Malformed Retry-After headers no longer stop collection.
+
+\- {{checkpoint}} and other placeholders are now URL-encoded in the URL and form-encoded in form bodies (fixes timestamps with &quot;+&quot; offsets).
+
+\- JSON bodies with unquoted placeholders, e.g. {&quot;min_id&quot;: {{checkpoint}}}, are now accepted; an empty value is sent as null.
+
+\- Short-lived OAuth tokens (under 60 seconds) are reused instead of being requested before every call.
+
+\- Temporary token-endpoint errors (429, 5xx, network) are retried automatically.
+
+\- Very large numeric IDs are stored exactly (no rounding).
+
+\- If a page fails partway through a run, events already collected are not collected again (oldest-first APIs).
+
+\- Checkpoints keep working when KV Store is disabled or unavailable (local file fallback).
+
+\- Windows: token refresh no longer times out when two inputs share an account.
+
+\- License notices no longer reappear in Splunk Messages on every run.
+
+
+
+Improvements
+
+\- Warning in the logs when the Events path is not found, listing the fields the API returned.
+
+\- Fewer token-store lookups per run.
+
+\- Python settings updated for Splunk 10.2 and later; earlier versions remain supported.
+
+
+
+Upgrade: install over the previous version. Accounts, inputs, checkpoints and license keys are kept.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects data from any REST or JSON API through a modular input with comprehensive authentication support, configurable pagination, and KV Store checkpointing.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;ROVIX Universal API Add-on for Splunk lets you bring data from any REST/JSON API into Splunk by filling in forms. No code or custom scripts are needed.
+
+The problem it solves
+
+Security and IT teams need data from dozens of cloud services: identity providers, EDR tools, SaaS platforms, threat-intelligence feeds and internal APIs. Many of these have no Splunk add-on, or the add-on is outdated or limited. The usual workarounds are custom Python scripts or one-off modular inputs. Each one handles OAuth tokens, pagination and “what did I already collect?” differently, breaks when a token expires, and is hard to maintain or hand over.
+
+What the add-on does
+
+One place for every API. Define an account (credentials and authentication) once, then create as many inputs as you need. Each input has its own endpoint, interval, index and sourcetype.
+Handles authentication for you. Supports OAuth 2.0 (client credentials, authorization code with automatic refresh-token rotation, password grant), JWT bearer and private_key_jwt (including Google service accounts), session login, HMAC request signing, API key, bearer token, Basic and Digest, plus mTLS. Tokens are stored encrypted in Splunk, refreshed before they expire, and renewed automatically if the API rejects them.
+Collects everything, exactly once. Built-in pagination (offset, page, cursor, Link header, next URL) fetches every page. Checkpoints in the KV Store pick up where the last run stopped, and only move forward after a run completes successfully, so data isn’t skipped.
+Built to keep running. Retries with back-off on rate limits (HTTP 429) and server errors, honouring Retry-After. A monitoring dashboard and per-input logs make problems easy to see.
+
+Who it’s for: Splunk admins and SOC teams who need to onboard API-based data sources quickly and reliably on Splunk Enterprise or Splunk Cloud Platform, without writing and maintaining code.
+
+Licensing: a 30-day free evaluation with all features is included, then a per-server license key, verified offline. The add-on runs entirely inside your Splunk environment and sends no data to Rovix Technologies.
+
+Developed by Rovix Technologies Pvt. Ltd. Contact: info@RovixTechnologies.com&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/aeb22f4c-cf1a-11f1-97a1-3686de334cf2.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Roshan Chandel</dc:creator>
+      <pubDate>Sat, 24 Oct 2026 08:31:15 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10004/#v1.0.3</guid>
+    </item>
+    <item>
+      <title>SmarterMail Add-on - v1.0.2 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10111/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Version 1.0.0
+
+\- Initial release of the SmarterMail Technology Add-on (TA) for Splunk.
+
+\- Added support for ingesting SmarterMail (Windows) logs with the sourcetype \`smartermail:log\`.
+
+\- Implemented field extractions for multiple log types including SMTP, Delivery, IMAP, POP, Administrative, General Errors, Spam Checks, and Activation logs.
+
+\- Added full CIM (Common Information Model) Email Data Model alignment for Splunk Enterprise Security (ES).
+
+\- Normalized key fields such as \`action\`, \`protocol\`, \`src\`, \`src_user\`, \`recipient\`, \`dest\`, and \`message_id\` to ensure compatibility with ES correlation searches.
+
+\- Included lookup files for accurate mapping of raw delivery statuses and protocol names to CIM-compliant values.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Field extractions and CIM Email alignment for SmarterMail logs. Enables Splunk ES correlation searches and email security monitoring.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The SmarterMail Add-on for Splunk provides field extractions and Common Information Model (CIM) Email data model mappings for SmarterMail email server logs on Windows. This technology add-on processes and normalizes log data from multiple SmarterMail log types including SMTP, IMAP, POP, delivery, administrative, spam checks, general errors, and activation logs. All events are processed with the sourcetype smartermail:log. The add-on extracts key email-related fields such as sender and recipient addresses, message IDs, delivery actions, protocols, source and destination hosts, message sizes, and subjects. By mapping these fields to the CIM Email data model, the add-on enables correlation searches in Splunk Enterprise Security and facilitates email security monitoring, compliance reporting, and operational troubleshooting across SmarterMail infrastructure.
+
+&amp;quot;Note: To ensure proper CIM compliance and use with Splunk Enterprise Security, users must rebuild the Email Data Model Acceleration after installation.&amp;quot;&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/bd7d41b8-cc74-11f1-9b0a-7a636623da55.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Mohammad Shahpasandi</dc:creator>
+      <pubDate>Sat, 24 Oct 2026 07:52:10 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10111/#v1.0.2</guid>
+    </item>
     <item>
       <title>Splunk MCP Server - v2.1.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7931/</link>
@@ -3359,46 +3446,6 @@ A built-in alert and dashboard are included, and the connector works with the da
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Kim Andersson</dc:creator>
       <pubDate>Wed, 21 Oct 2026 13:56:42 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7914/#v1.0.3</guid>
-    </item>
-    <item>
-      <title>SmarterMail Add-on - v1.0.2 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10111/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Version 1.0.0
-
-\- Initial release of the SmarterMail Technology Add-on (TA) for Splunk.
-
-\- Added support for ingesting SmarterMail (Windows) logs with the sourcetype \`smartermail:log\`.
-
-\- Implemented field extractions for multiple log types including SMTP, Delivery, IMAP, POP, Administrative, General Errors, Spam Checks, and Activation logs.
-
-\- Added full CIM (Common Information Model) Email Data Model alignment for Splunk Enterprise Security (ES).
-
-\- Normalized key fields such as \`action\`, \`protocol\`, \`src\`, \`src_user\`, \`recipient\`, \`dest\`, and \`message_id\` to ensure compatibility with ES correlation searches.
-
-\- Included lookup files for accurate mapping of raw delivery statuses and protocol names to CIM-compliant values.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Field extractions and CIM Email alignment for SmarterMail logs. Enables Splunk ES correlation searches and email security monitoring.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The SmarterMail Add-on for Splunk provides field extractions and Common Information Model (CIM) Email data model mappings for SmarterMail email server logs on Windows. This technology add-on processes and normalizes log data from multiple SmarterMail log types including SMTP, IMAP, POP, delivery, administrative, spam checks, general errors, and activation logs. All events are processed with the sourcetype smartermail:log. The add-on extracts key email-related fields such as sender and recipient addresses, message IDs, delivery actions, protocols, source and destination hosts, message sizes, and subjects. By mapping these fields to the CIM Email data model, the add-on enables correlation searches in Splunk Enterprise Security and facilitates email security monitoring, compliance reporting, and operational troubleshooting across SmarterMail infrastructure.
-
-&amp;quot;Note: To ensure proper CIM compliance and use with Splunk Enterprise Security, users must rebuild the Email Data Model Acceleration after installation.&amp;quot;&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/bd7d41b8-cc74-11f1-9b0a-7a636623da55.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Mohammad Shahpasandi</dc:creator>
-      <pubDate>Wed, 21 Oct 2026 13:43:35 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10111/#v1.0.2</guid>
-    </item>
-    <item>
-      <title>Sideview Supporting Add-on for Webex - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10065/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- First release.  Index-time settings for the Webex data pulled in by Cisco's Webex add-on, which previously lived in SA\_sideview\_webex.
-
-- The event timestamp now comes from each record's own time field, so the same records read back from a file land where the add-on puts them.
-
-- A Webex call's \_time is now when it was answered, or if it never was, when it was released, the same as CUCM CDR.  Applies to newly indexed data only.
-
-- Raised the 10,000-byte truncation limit on every Webex sourcetype.  Long meeting quality records were being cut off and lost.
-
-- call\_id is now written as an index-time field.  For Webex calls it is the Correlation ID, which all legs of one call share, and for meetings the scheduled occurrence, which the schedule, the meeting itself and its quality records share.  Applies to newly indexed data only.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This Supporting App makes some small index-time modifications to the data ingested via Splunk&amp;#x27;s &amp;quot;Cisco Webex Add-on for Splunk&amp;quot;.  This patches some problems in that app and also allows for various improved functionality.  It is designed for use with our SA_sideview_webex which you install on your Search Head tier.
-
-Both of those apps uses together allow users to leverage all of this webex data within Sideview&amp;#x27;s commercial app &amp;quot;Cisco CDR Reporting and Analytics&amp;quot;&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c7b3363a-c9bb-11f1-a495-12dbbc6c7195.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
-      <pubDate>Wed, 21 Oct 2026 13:14:29 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10065/#v1.0.0</guid>
     </item>
     <item>
       <title>Training Lens - v1.0.1 [New App Release]</title>
