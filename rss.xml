@@ -6,7 +6,93 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sat, 24 Oct 2026 00:08:46 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 24 Oct 2026 05:14:09 +0000</lastBuildDate>
+    <item>
+      <title>Splunk MCP Server - v2.1.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7931/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**Splunk MCP Server 2.1.0**
+
+Splunk MCP Server 2.1.0 adds tools for retrieving fired alert results, checking alert action status, and finding silent alerts. It also introduces self-service encrypted token management, updated management pages, stronger authentication, and improved telemetry.
+
+**What's New**
+
+**Alert Investigation**
+
+Added three tools for investigating Splunk alerts:
+
+* splunk_get_fired_alert_results
+* splunk_get_alert_action_status
+* splunk_find_silent_alerts
+
+Use these tools to retrieve retained search results for a specific alert firing, check recorded alert action outcomes, and find enabled alerts with no recorded firings.
+Fired alert results and silent alert discovery support pagination. Silent alert discovery also supports app filtering and a lookback window of up to 90 days.
+
+**Encrypted Token Management**
+
+* Added self-service token management for non-admin users with the mcp_edit_tokens_own capability. Creating, activating, deactivating, and deleting tokens also requires Splunk’s edit_tokens_own capability.
+* Users can create, list, activate, deactivate, and delete tokens they create for themselves, and view token status, expiration, and recorded last-use information.
+* Administrators can manage tokens across users, subject to native Splunk token permissions, and generate or delete the shared encryption key pair.
+* All encrypted MCP tokens use the public key from this administrator-managed key pair.
+* Added configurable key expiration, with a default validity of 180 days and a maximum of 365 days. Newly created tokens cannot outlive the key.
+
+&amp;#xA;**Management Interface Improvements**
+
+* Updated the Tools page with search, sorting, filters, and bulk activation and deactivation.
+* Updated the Usage dashboard and changed its default time range to 7 days.
+* Moved allowed SPL commands and server settings into separate Commands and Server pages.
+* Added support for Splunk light and dark themes.
+
+&amp;#xA;**Security and Telemetry Improvements**
+
+* Strengthened authentication for tool-management operations.
+* Added token audit events and more context to administrative logs.
+* Improved logging for SPL errors and failed tool calls.
+
+&amp;#xA;**Issues Fixed**
+
+* Fixed splunk_get_indexes to include search-peer indexes while preserving pagination.
+* Fixed Gemini compatibility with alert severity schemas.
+* Fixed request recovery after increasing the MCP request timeout.
+* Fixed an endpoint URL locale mismatch that affected OAuth connections.
+* Fixed cleanup after failed encrypted-token registration.
+
+&amp;#xA;**Upgrade Considerations**
+
+* Direct MCP bearer-token connections now require credentials encrypted with the current server key. Plaintext and previous-key support are removed, along with the require_encrypted_token and legacy_token_grace_days settings.
+* Existing keys without expiration receive 180-day validity when initialized after upgrade. Existing expiration dates are preserved.
+* Deactivate all non-expired registered tokens before deleting the shared encryption key pair. After generating a replacement pair, issue new tokens and update clients.
+* Non-admin users need mcp_edit_tokens_own to access self-service token management and edit_tokens_own to create, activate, deactivate, or delete their own tokens.
+* Existing tokens are not automatically added to the new registry. The self-service token list shows tokens created by the current user.
+* Token API integrations must use /services/mcp_token/tokens and /services/mcp_token/key-pair instead of the previous creation and rotation operations at /services/mcp_token.
+* splunk_find_silent_alerts requires access to \_audit. splunk_get_alert_action_status requires access to the relevant \_internal action logs.
+* splunk_get_fired_alert_results requires retained search-job results. Expired results are reported as unavailable.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;MCP Server for Splunk Platform
+The Model Context Protocol (MCP) is an open standard and framework that enables seamless, secure, and standardized two-way communication between AI applications (like large language models) and external data sources or tools. It acts as a universal adapter allowing AI systems to access, execute, and integrate functionalities from diverse systems through a common protocol, simplifying data sharing and tool interoperability without custom coding for each integration.
+
+Splunk&amp;#x27;s Model Context Protocol (MCP) server leverages this to provide a standardized, secure, and scalable interface to connect AI assistants, agents, and other intelligent systems with data in the Splunk platform for both Enterprise &amp;amp; Cloud customers in beta.
+
+🔑 Key Features
+
+- Universal Connectivity
+Seamlessly connects AI agents and tools to Splunk data resources in a secure and efficient manner.
+- Enterprise-Grade Security
+Includes built-in authentication, authorization, and Role-Based Access Control (RBAC).
+- Rapid Deployment
+Offers a plug-and-play solution, eliminating the need for custom integrations.
+
+⚙️ Core Capabilities
+
+- Explore the Data
+Navigate and interact with Splunk data effortlessly.
+- Discover Knowledge Objects
+Identify and access relevant saved searches, lookups, and other knowledge assets.
+- Execute Searches
+Run powerful Splunk queries to extract insights and drive intelligent workflows.
+- Leverage AI capabilities from Splunk’s AI Assistant for SPL &amp;amp; MLTK
+SPL search generation from natural language, search optimization, search explanation, retrieve MLTK models and algorithms.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b15d3f9a-cf63-11f1-97a1-3686de334cf2.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Sat, 24 Oct 2026 04:55:15 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7931/#v2.1.0</guid>
+    </item>
     <item>
       <title>Splunk ES Content Update - v6.9.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/3449/</link>
@@ -4271,17 +4357,6 @@ For details of the support we offer for our Apps , browse to : https://www.baboo
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">BaboonBones Ltd</dc:creator>
       <pubDate>Sat, 17 Oct 2026 01:36:19 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5242/#v1.1.2</guid>
-    </item>
-    <item>
-      <title>Supporting App for Cisco Meeting Server - v0.6.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8413/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- **Important** - Record times were being read in the Splunk indexer's own timezone rather than the UTC that Cisco Meeting Server writes, so every CMS event was indexed wrong by that offset. Fixed. Data indexed before this release keeps its original timestamps, so it will disagree with anything indexed after it until that data is reindexed.
-- Added the stylesheet the app's pages ask for, which was missing.
-- Fixed the Splunkbase link on the &quot;Canary app is required but missing&quot; page, which pointed at this app rather than at Canary.
-- New fields connected_at and disconnected_at, so that concurrency and duration_elapsed in Investigate Calls now work for Cisco Meeting Server data if you have at least Cisco CDR 9.0.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This is a Supporting App designed to be deployed alongside Sideview&amp;#x27;s commercial &amp;quot;Cisco CDR Reporting and Analytics&amp;quot; app.  It provides the Splunk configuration to ingest the CDR data from Cisco Meeting Server. Additionally it contains various pieces of Splunk configuration and logic that are used by Cisco CDR Reporting and Analytics, to make the CMS CDR work within its user interfaces.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/300b8a62-c9bb-11f1-820c-f28545bf4612.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
-      <pubDate>Fri, 16 Oct 2026 23:42:56 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8413/#v0.6.2</guid>
     </item>
   </channel>
 </rss>
