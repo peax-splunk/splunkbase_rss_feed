@@ -6,7 +6,78 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sun, 25 Oct 2026 05:31:35 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 25 Oct 2026 10:25:48 +0000</lastBuildDate>
+    <item>
+      <title>MQTT Topics Ingestor - v1.0.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7575/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* compatibility with latest splunk versions
+* update Splunk Enterprise SDK for Python and requirements for python version&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Welcome to the MQTT Topics Ingestor, a specialized Technology Add-on (TA) for Splunk designed to bridge the gap between your MQTT data streams and Splunk&amp;#x27;s powerful data analytics platform. This add-on enables real-time ingestion of MQTT messages from various topics securely and efficiently into Splunk, providing you with immediate insights and the ability to act on your IoT data.
+
+With support for both one-way and two-way SSL/TLS authentication, the MQTT Topics Ingestor ensures that your data remains encrypted during transmission, providing a secure pathway from your MQTT brokers to Splunk. Configured for optimal performance and security, this TA is flexible enough to fit into any infrastructure, scalable to meet growing data demands, and fully compliant with best practice standards.
+
+Step into a world of streamlined data analysis where MQTT and Splunk work in tandem to drive informed decision-making and operational intelligence.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/1349f3ac-d058-11f1-97a1-3686de334cf2.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Gary Croker</dc:creator>
+      <pubDate>Sun, 25 Oct 2026 09:46:04 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7575/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>TheHive/Cortex - v5.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5329/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;# v5.0.0 - &quot;The Hive Inspection&quot;
+
+Major release. Same commands, alert actions and parameters, but several
+behaviours were wrong and are now corrected, which changes what you see.
+
+## Compatibility
+
+|         | Minimum                  | Tested with       |
+| :------ | :----------------------- | :---------------- |
+| TheHive | 5.2.0                    | 5.8.1             |
+| Cortex  | 3.0.0                    | 4.2.0             |
+| Splunk  | 9.3 (Python 3.9 or 3.13) | Enterprise 10.2.1 |
+
+## Before you upgrade
+
+1. **Sourcetypes of the add-on logs.** 23 of 27 log files had no sourcetype
+   since v4.0.0. The fix needs a manual step: in
+   `$SPLUNK_HOME/etc/apps/learned/local/props.conf`, remove every stanza whose
+   source is a `TA-thehive-cortex_*.log` or `*_modalert.log` file, then restart
+   Splunk. Events indexed before the upgrade keep their old sourcetype; to
+   search both, use `index=_internal source=*TA-thehive-cortex_*.log`.
+2. **The datatypes lookup moved to the KV store.** `| inputlookup thehive_datatypes`
+   is unchanged; drop the `.csv` from `| inputlookup thehive_datatypes.csv`.
+   Existing rows are migrated on the first alert action after the upgrade.
+3. **Fifteen log identifiers changed** (each designated two events at once).
+   A correspondence table is in the full release notes.
+4. **Dashboard CREATE dropdowns** now have sensible defaults instead of
+   creating CRITICAL, TLP:WHITE objects. Alert actions are unaffected.
+
+## Fixed
+
+* The three Cortex commands could not run in v4.2.2.
+* `cortexjobs` no longer confuses &quot;running&quot; with &quot;empty&quot;.
+* The Cortex job action sent its TLP and PAP one level too high.
+* Cortex ignored the configured CA bundle.
+* The `TheHive: Statistics` and `TheHive: Alerts` dashboards displayed nothing;
+  `Audit Logs` had three panels querying a sourcetype never produced.
+* Alert actions reported success as failure; a refused TTP no longer fails an
+  alert that was created.
+* Two debug lines wrote credentials into the logs.
+
+## New
+
+* Settings: **HTTP Timeout (seconds)** and **Cortex Job Max Wait (seconds)**.
+* The Audit view refreshes itself.
+
+Full release notes: see `release_notes/v5.0.0.md` in the repository.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This TA allows to add interaction features between TheHive or Cortex (https://www.strangebee.com/) and Splunk. It allows to retrieve all kind of information from TheHive/Cortex and to perform actions on these instances using Splunk, from a search or from a predefined dashboard.
+
+This TA is supporting only TheHive 5. For having an app supporting TheHive 3 or 4, please check the oldest releases. It&amp;#x27;s also supporting the Cortex 3 version.
+
+More information here: https://github.com/LetMeR00t/TA-thehive-cortex&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/3d4d02f2-d03a-11f1-a2a6-ea0247c9da21.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Alexandre Demeyer</dc:creator>
+      <pubDate>Sun, 25 Oct 2026 06:27:03 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5329/#v5.0.0</guid>
+    </item>
     <item>
       <title>Service Tree Viz - v1.0.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/10028/</link>
@@ -4339,76 +4410,6 @@ When used in conjunction with the Cisco CDR app, the Oracle SBC data can be used
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
       <pubDate>Sat, 17 Oct 2026 06:44:13 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8429/#v0.8.0</guid>
-    </item>
-    <item>
-      <title>Cisco CDR Reporting and Analytics - v9.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/669/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- **Important** - CUBE legs now join the CUCM legs of the same call only when &quot;merge by ciscoguid&quot; is selected on Investigate &gt; Calls. The old automatic join on the first 8 characters of the guid is gone.
-- **Important** - This app no longer contains any CUBE configuration. For CUBE data install SA_cube 0.8.0 on the search head and TA_cube 0.8.0 on the indexers.
-- Removed the old hidden guids and guid_detail views. The guid diagnostics page no longer reports on call_reference_id.
-- call_reference_id, incoming_call_reference_id and outgoing_call_reference_id are deprecated and no longer used by the app. They are still extracted so saved searches keep working, and will be removed in a future release.
-- **Functionality** - Major improvements to the conversationId chaining feature. The prior implementation only performed a partial join in some cases.
-- Merging on Investigate &gt; Calls is now done by a new mergecalls search command, which merges whole calls, follows chains of linked calls of any length, and holds only a few hours of calls in memory at a time.
-- **Functionality** - New &quot;merge across SME by session id&quot; option on Investigate &gt; Calls (experimental), which joins the legs of a call on either side of an SME by their RFC 7989 session ID.
-- **Functionality** - New &quot;merge by ciscoguid&quot; option on Investigate &gt; Calls. Unlike the conversationId and session id options it is not CUCM-only: ciscoguid means the same thing on CUCM, CUBE, CVP and SBC records, so it merges a call across clusters and across technologies.
-- **Functionality** - In all versions of Investigate Calls prior to this release the concurrency and duration_elapsed fields were always empty for every data type except CUCM and CUBE. Both now work for all of them.
-- **Performance** - The Investigate &gt; Devices page is dramatically faster, commonly 5x to 10x, and more on larger deployments, as a result of eliminating an mvexpand in the SPL.
-- **Performance** - Investigate &gt; Calls, and every other search that uses the devices lookup, is commonly 2x faster or more, because that lookup no longer allows wildcards.
-- **Important** - A &quot;*&quot; in the clusterId column of the devices lookup no longer matches any cluster. A new health check lists such rows, and the new App Settings &gt; General page can turn wildcards back on.
-- **Important** - A CUCM node that is upgraded or reinstalled can reuse old call ids, merging unrelated calls. A new health check finds this, and the new call_id_resets lookup keeps them apart. Each warning includes a search you can run once to record the reset.
-- On Investigate &gt; Calls, legs of one call that connect in the same second are now always listed in origination order, rather than sometimes in arbitrary order.
-- On Investigate &gt; Calls, a leg with no value in a text column, or in duration, no longer shifts the values below it up a row, against the wrong leg. This was most common on calls that cross CUCM, CUBE, Oracle SBC and CVP. Other numeric columns, and the CMR quality columns, are not lined up with the legs yet.
-- **Functionality** - The field gallery now documents the Oracle SBC CDR fields, about 230 of them, so they appear in the field picker with descriptions when Oracle SBC is selected. It also fills in 50 CUBE fields that were missing.
-- The home page's Explore fields panel now samples CUBE and Oracle SBC data separately from CUCM, so their fields no longer show as not in your data. Each field now also says which data types it is found in, and the search box matches on that too.
-- Eleven fields are now treated as numbers rather than as categories, including the CUCM audio and video bandwidth fields, CUBE's h323_voice_quality and charged_units, and the CMR's videoOneWayDelay.
-- The Extension, Outside Party and Huntgroup detail pages no longer mix CUBE records into some of their panels. Those panels counted a call through both CUBE and CUCM twice and disagreed with the rest of the page. For CUBE, use Investigate &gt; Calls.
-- The Call Detail page now labels legs from the cube_cdr_compact sourcetype with their CUBE direction and activity, as it already did for cube_cdr.
-- On Investigate &gt; Calls, selecting some but not all clusters no longer hides every CUBE, Oracle SBC and CVP leg. The cluster filters now apply only to CUCM records.
-- **Functionality** - CVP calls now show on Investigate &gt; Calls with CVP selected, one leg per SIP INVITE, and join their CUCM call under &quot;merge by ciscoguid&quot;. Needs SA_cisco_ucce 0.2.0.
-- **Critical** - On a Splunk Free license the app's first-time-run script never ran at all, because Splunk cannot honor passAuth = splunk-system-user there. None of the app's editable lookups were ever created.
-- Expanded the field gallery descriptions for the directory URI party fields.
-- The gallery now also notes that a directory URI whose host is an IP address is the SIP URI as signaled, which incidentally is the same form Expressway, Cisco Meeting Server and SBC records use.
-- Expanded the gallery descriptions for the RFC 7989 session ID fields and the IMS charging fields (ICID and the IOI pair), which are purpose-built cross- system correlators rather than addresses.
-- Fixed a bug in the search filters field, where a tab character preceding a field=value searchterm would be handled incorrectly triggering a parse error from splunkd.
-- The callquality command no longer fails the entire search when call_quality_thresholds.csv is absent. It falls back to the shipped default thresholds and warns.
-- The two &quot;Other calls to/from&quot; panels on the CUBE call detail view now show whole calls, rather than only the legs that carried one of the parties, and no longer collapse identical legs into one.
-- Fixed a bug where the call detail page found no CUBE legs at all for a call whose guid begins with a zero, roughly one call in sixteen. It matched the zero-padded call_reference_id against the guid text, which is not padded.
-- The call detail page now finds a call's CUBE legs by ciscoguid. Before, a CUBE leg reached through a CUCM trunk-to-trunk leg was missing there, even when Investigate Calls showed it.
-- The call detail page has its own data type selector, set from Investigate Calls, and brings in a call's records from every selected system that carries its ciscoguid: CUBE, Oracle SBC, CVP, UCCE and CCCSP.
-- On Investigate Calls, a call that went through CUCM and an Oracle SBC now has one &quot;view call details&quot; link, to the main call detail page, as CUBE calls already did. The Oracle SBC detail view remains for calls that never touched CUCM.
-- The call flow diagram on the call detail page now draws a call's Oracle SBC and CUBE hops alongside its CUCM legs, with each box named the way it is named in CUCM.
-- In the call detail page's legs table, every non-CUCM row now gets the alternate background, the note above the table names which systems those rows came from, and data_type is now a default column.
-- The &quot;other data sources&quot; panel on the call detail page now also searches the app's own indexes, and recognizes a call's ciscoguid in each of the forms those systems write it.
-- Fixed a bug where if you had the conversationId merging option on, CUBE and Cisco Meeting Server legs fell out of any call that merged, and showed up as a separate call carrying a CUCM call id.
-- The health checks for required Splunk and app versions are now one check each, covering every installed Sideview app, in place of the eight near- identical copies the apps used to ship. Six fewer searches run when the health checks page loads.
-- Those two checks also now work for roles without the rest_access_server_endpoints capability, where previously they failed outright rather than reporting anything.
-- A sourcetypes list in sideview_data_types.conf may now be comma-separated as well as space-separated. Before, a comma silently hid that data type's events.
-- The devices lookup health check no longer fails when extra columns have been added to the lookup. Extra columns are now reported as INFO, and only missing columns fail the check.
-- The call_failed field no longer counts ordinary human outcomes as failures: wrong numbers (including SIP 404, 410, 484 and 604), no answer, busy (including SIP 486 and 600), declined (603), the caller hanging up while it rang (487), answered on another phone, or a party dropped from a conference.
-- Calls ending in SIP 420 Bad Extension or cause 155 &quot;DCC Allowed Percentage Exceeded&quot; previously had no call_failed value at all. Both now count as failed calls.
-- New fields connected_at and disconnected_at, defined the same way on every supported data type: when each call leg connected (empty if it never did) and when it ended.
-- Fixed duration_elapsed showing 0 for a call that did connect, when one of its CUCM legs never connected.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This commercial app is available as a 60 day trial and is compatible with both Splunk Enterprise and Splunk Cloud.  The app gives your team greatly increased visibility, monitoring, and reporting functionality around Cisco Unified Communications (aka CUCM / CallManager), whether you&amp;#x27;re a small organization with a hundred phones or one of the largest companies in the world.
-
-Whether troubleshooting individual calls or building high level reporting, it helps you visualize and understand in all areas: agents, users, and huntgroups; concurrency and utilization; call flow; call quality; call volume; devices; failed calls; locations and sites; and audits and compliance.
-
-Your team can trust it as their day-to-day tool for navigating call data from your Cisco CallManager deployment, and it can also become their main tool for building custom reports, alerts and dashboards around that data. This is true whether it’s a standard report you’d expect or a custom report that nothing else has been able to provide.
-
-Note that this isn&amp;#x27;t a package of content, but more a tank that allows you to drive around in your data.  You won’t find a leftnav full of canned CDR reports to click on (that &amp;quot;don&amp;#x27;t quite fit&amp;quot;).  Instead, you get an open flexible framework to investigate anything, drill down into anything, report on anything, over anything, by anything (occasionally with hands-on help from Sideview Support =).
-
-It is available as a free 60-day trial, and you can download and set it up today in less than 30 minutes.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/1e9b5138-c9f5-11f1-820c-f28545bf4612.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
-      <pubDate>Sat, 17 Oct 2026 06:40:58 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/669/#v9.0.0</guid>
-    </item>
-    <item>
-      <title>TA-Alerts for SplunkAdmins - v1.0.10 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6518/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Removed dependency on six.py as per issue [https://github.com/gjanders/TA-SplunkAdmins/issues/3](https://github.com/gjanders/TA-SplunkAdmins/issues/3) (PacaAlpaca).&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This application accompanies the Alerts for SplunkAdmins application on SplunkBase.
-This TA provides the lookup watcher modular input along with the streamfilter and streamfilterwildcard custom commands. These custom commands are used by a few searches within the Alerts for SplunkAdmins application
-Additionally this TA provides dashboards and custom commands for changing TTL values of savedsearches via the UI&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/29ace73a-c9cd-11f1-960f-1eedfafce045.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Gareth Anderson</dc:creator>
-      <pubDate>Sat, 17 Oct 2026 01:51:59 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6518/#v1.0.10</guid>
     </item>
   </channel>
 </rss>
