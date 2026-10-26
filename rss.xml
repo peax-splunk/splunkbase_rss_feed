@@ -6,54 +6,62 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Mon, 26 Oct 2026 17:58:31 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 26 Oct 2026 22:21:16 +0000</lastBuildDate>
     <item>
-      <title>Miro App for Splunk - v3.3.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5677/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Miro App for Splunk 3.3.1
+      <title>Akamai SIEM Integration - v1.4.25 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4310/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Changes include:&amp;#x20;
 
-* The input for AI Interaction logs (Beta) is now named &quot;Miro AI Interaction Logs (Beta)&quot; on the app's Inputs page.
-* The app description uses the full feature name: Audit Logs, Content Logs and AI Interaction logs.
-* Only names and descriptions change. The inputs collect the same data, and the input's internal name (miro_ai_logs) and sourcetype (miro-ai-logs) stay the same.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Miro App for Splunk enables comprehensive log ingestion from your Miro Enterprise account. Audit Logs are available to all Enterprise accounts. Content Logs are available with an Enterprise
-  Guard subscription. AI Interaction logs (Beta) are available with the Enterprise Guard add-on, once a Miro admin turns on their collection.
+\- Resolve issues affecting Splunk Cloud Platform compatibility.
+
+\- Upgrade libraries to fix vulnerabilities.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;It’s common for companies with mature security organizations to have a Security Operations Center (SOC) that leverages security information and event management (SIEM) tools. SIEM provides a centralized view for security teams to easily access and analyze security information from a large number of sources, and prioritize mitigation efforts based on risk profiles.
+
+SIEM Integration is a comprehensive solution for capture, retention, and delivery of security information and events in real-time to SIEM applications. Customers using Kona Site Defender, Client Reputation, Web Application, or Bot Manager (BETA) can analyze security events generated on the Akamai platform and correlate them with security events generated from other sources.
+
+System Requirements
+
+Akamai’s Splunk Connector requires Oracle JRE 1.8+. Download the latest from the Oracle Java site (Java Platform, Standard Edition) or install it from a software distribution package on Linux.
+
+You must have Java installed on the host running Splunk Enterprise https://java.com/en/download/
+
+Also, check to make sure that splunk forwarder is NOT installed on your Splunk Enterprise host machine.
+
+Proxy server
+
+To access the SIEM API from behind a proxy server, ensure that your proxy:
+
+whitelists the domains *.cloudsecurity.akamaiapis.net and *.luna.akamaiapis.net
+does not interfere with HTTP request headers for those domains. If, due to a strict enterprise security policy, your proxy does change these headers, make sure that at a minimum you allow and don&amp;#x27;t change the Host and Authorization headers.
+Hardware Requirements
+
+This application is has been tested with the following operating systems:
+
+CentOS 7
+Windows Server 2012 R2
+Mac OS X El Capitan Version 10.11.6
+Some additional hardware requirements:
+
+4 CPU cores
+16 GB RAM
+2GB Free Disk Space&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/af97633e-d17f-11f1-9edc-ee3617590748.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Akamai Technologies Inc.</dc:creator>
+      <pubDate>Mon, 26 Oct 2026 21:01:07 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4310/#v1.4.25</guid>
+    </item>
+    <item>
+      <title>Miro App for Splunk - v3.3.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5677/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Miro App for Splunk 3.3.2
+
+* The AI Interaction Logs input now uses the full feature name everywhere: its internal name is `miro_ai_interaction_logs` (this is also the `source` of its events) and its default sourcetype is `miro-ai-interaction-logs`. Earlier releases used `miro_ai_logs` and `miro-ai-logs`.
+* After upgrading from 3.3.1 or earlier, an AI Interaction Logs input created by that release stops collecting. Create a new input with the &quot;Miro AI Interaction Logs (Beta)&quot; option under the same name: it continues from the old input's checkpoint, so no data is skipped. The old stanza `[miro_ai_logs://&lt;name&gt;]` stays inactive in the app's `local/inputs.conf` and can be removed there.
+* The Audit Logs and Content Logs inputs are unchanged.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Miro App for Splunk enables comprehensive log ingestion from your Miro Enterprise account. Audit Logs are available to all Enterprise accounts. Content Logs are available with an Enterprise
+  Guard subscription. AI Interaction Logs (Beta) are available with the Enterprise Guard add-on, once a Miro admin turns on their collection.
 
 You can optionally configure visualization dashboards for User Activity and Security Activity based on Audit logs by importing dashboard XML files from our https://help.miro.com/hc/en-us/articles/4404745057170-Miro-app-for-Splunk&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2f8e6606-d166-11f1-8a52-b632633ff168.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Miro Enterprise Integrations</dc:creator>
-      <pubDate>Mon, 26 Oct 2026 17:55:18 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5677/#v3.3.1</guid>
-    </item>
-    <item>
-      <title>NetFlow and SNMP Analytics for Splunk (Preview) - v0.1.5 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/9133/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Fixed: Dashboards now detect Network Conversations data without indexed-field extraction, resolving compatibility issues across Splunk deployments.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Get the network traffic and device health data Splunk can&amp;#x27;t see on its own. NetFlow Optimizer turns raw NetFlow, IPFIX, sFlow, and SNMP telemetry into enriched, analysis-ready data in Splunk across on-premises and multi-cloud, closing blind spots in network, security, and device-health monitoring.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;NetFlow and SNMP Analytics for Splunk (Preview), built by NetFlow Logic, an official Splunk Partner, is the next-generation redesign of our network and security analytics app, rebuilt on Splunk Dashboard Studio. It gives network and security teams the network traffic and device health data Splunk can&amp;#x27;t see on its own, with real-time visibility across on-premises and multi-cloud environments.
-
-Powered by NetFlow Optimizer (NFO), the app processes all major flow formats (NetFlow v5/v9, sFlow, IPFIX) and cloud flow logs from AWS, Microsoft Azure, Google Cloud Platform, and Oracle Cloud Infrastructure. NFO enriches and filters this telemetry before it reaches Splunk, turning raw flow and SNMP data into analysis-ready intelligence and doing it efficiently, so you close the blind spots in your monitoring without a spike in ingest.
-
-What&amp;#x27;s new in this Preview:
-
-- Rebuilt on Dashboard Studio:  a modern, faster, dark-mode interface
-- Streamlined navigation: consolidated from ~80 legacy dashboards into 19 focused, production-quality dashboards
-- Interactive network topology: walk-the-graph exploration built on Splunk 10.4&amp;#x27;s native network graph visualization
-- Unified device health and TCP health views
-- Same NFO-powered enrichment and multi-cloud coverage you rely on today
-
-What you can do with this app:
-
-- Monitor your entire network in one place — unified visibility across on-premises infrastructure and all major cloud platforms
-- Detect threats faster — correlate flow data with IP reputation, GeoIP, user identity, and application context to surface anomalies and suspicious activity
-- Reduce Splunk ingest costs — filter and aggregate flows upstream in NFO so only enriched, relevant data reaches Splunk
-- Optimize network performance — identify overloaded interfaces, bandwidth hogs, and congestion before they impact users
-- Monitor device health with SNMP — poll devices and receive traps (SNMPv2c and v3) for real-time CPU, memory, and interface monitoring
-- Enrich your data automatically — DNS names, VM names, GeoIP, application identification, and user identity added at ingest
-
-Solution areas: Traffic overview and executive dashboards · NetFlow and flow analysis (v5/v9, sFlow, IPFIX) · Cloud flow analytics (AWS, Azure, GCP, OCI) · SNMP device and interface health · Security and threat detection · Administration and configuration
-
-Requirements: NetFlow Optimizer (NFO) 2.12.1 or later is required. Compatible with Splunk Enterprise and Splunk Cloud, Splunk ES, and Splunk ITSI (via the Content Pack for SNMP and NetFlow).
-
-Start a free 60-day trial at netflowlogic.com/free-trial — or request a demo to see the app running against live network data.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0d742e40-d164-11f1-9edc-ee3617590748.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">NetFlow Logic</dc:creator>
-      <pubDate>Mon, 26 Oct 2026 17:52:34 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9133/#v0.1.5</guid>
+      <pubDate>Mon, 26 Oct 2026 18:08:45 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5677/#v3.3.2</guid>
     </item>
     <item>
       <title>CIM Assessment Toolkit (CAT) - v2.13.0 [Version Update]</title>
@@ -90,10 +98,47 @@ Start a free 60-day trial at netflowlogic.com/free-trial — or request a demo t
 
 \- **\*\*Exclusions report enriched\*\*** -- \`cim_sourcetype_exclusions_search\` now joins each excluded sourcetype to \`cim_sourcetype_inventory\` (tech category, scope, security relevance, data models, vendor, description, expanded description, provenance) so exclusions can be reviewed in context. Sourcetypes missing from the inventory still appear with blank enrichment columns.
 
-\- **\*\*CIM Coverage honors sourcetype inventory\*\*** -- The CIM Coverage KPI, its daily trend collection, and the report counted a sourcetype as mapped only when it mapped to a model in the selected scope's category, so a security sourcetype mapped only to an operational model counted as unmapped and the KPI disagreed with the Unmapped Data tab. All three now count by the sourcetype's inventory scope, and mapped means mapped to any CIM model. Sourcetypes missing from the inventory fall back to the categories of the models they map to; the Unmapped Data tab applies the same fallback.&amp;#xA;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Measure and validate Splunk CIM compliance at the data model and dataset level — with field-mapping quality scoring, unmapped data discovery, prescribed-value validation, remediation priorities, data model testing, and automated reporting.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The CIM Assessment Toolkit (CAT) measures and validates Common Information Model (CIM) compliance across your Splunk data models at the data model + dataset level. It scores field-mapping quality, data quality, and prescribed-value compliance; surfaces unmapped sourcetypes and impact-ranked remediation priorities; monitors data model acceleration health; and generates professional Word-document reports with optional scheduled email delivery.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e3160802-d164-11f1-8315-6a27473d333e.png&quot;&gt;</description>
+\- **\*\*CIM Coverage honors sourcetype inventory\*\*** -- The CIM Coverage KPI, its daily trend collection, and the report counted a sourcetype as mapped only when it mapped to a model in the selected scope's category, so a security sourcetype mapped only to an operational model counted as unmapped and the KPI disagreed with the Unmapped Data tab. All three now count by the sourcetype's inventory scope, and mapped means mapped to any CIM model. Sourcetypes missing from the inventory fall back to the categories of the models they map to; the Unmapped Data tab applies the same fallback.&amp;#xA;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Measure and validate Splunk CIM compliance at the data model and dataset level — with field-mapping quality scoring, unmapped data discovery, prescribed-value validation, remediation priorities, data model testing, TA sourcetype coverage and inventory, and automated reporting.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The CIM Assessment Toolkit (CAT) measures and validates Common Information Model (CIM) compliance across your Splunk data models at the data model + dataset level.
+
+CAT scores field-mapping quality, data quality, and prescribed-value compliance; surfaces unmapped sourcetypes and impact-ranked remediation priorities; monitors data model acceleration health; and generates professional Word-document reports with optional scheduled email delivery.
+
+A new feature is four TA Inventory tables which reveal what TAs cover which sourcetypes for CIM normalization and their versions - essential information for maintaining CIM normalization coverage.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e3160802-d164-11f1-8315-6a27473d333e.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">James Baxter</dc:creator>
-      <pubDate>Mon, 26 Oct 2026 17:51:25 +0000</pubDate>
+      <pubDate>Mon, 26 Oct 2026 18:02:09 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8962/#v2.13.0</guid>
+    </item>
+    <item>
+      <title>NetFlow and SNMP Analytics for Splunk (Preview) - v0.1.5 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9133/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Fixed: Dashboards now detect Network Conversations data without indexed-field extraction, resolving compatibility issues across Splunk deployments.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Get the network traffic and device health data Splunk can&amp;#x27;t see on its own. NetFlow Optimizer turns raw NetFlow, IPFIX, sFlow, and SNMP telemetry into enriched, analysis-ready data in Splunk across on-premises and multi-cloud, closing blind spots in network, security, and device-health monitoring.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;NetFlow and SNMP Analytics for Splunk (Preview), built by NetFlow Logic, an official Splunk Partner, is the next-generation redesign of our network and security analytics app, rebuilt on Splunk Dashboard Studio. It gives network and security teams the network traffic and device health data Splunk can&amp;#x27;t see on its own, with real-time visibility across on-premises and multi-cloud environments.
+
+Powered by NetFlow Optimizer (NFO), the app processes all major flow formats (NetFlow v5/v9, sFlow, IPFIX) and cloud flow logs from AWS, Microsoft Azure, Google Cloud Platform, and Oracle Cloud Infrastructure. NFO enriches and filters this telemetry before it reaches Splunk, turning raw flow and SNMP data into analysis-ready intelligence and doing it efficiently, so you close the blind spots in your monitoring without a spike in ingest.
+
+What&amp;#x27;s new in this Preview:
+
+- Rebuilt on Dashboard Studio:  a modern, faster, dark-mode interface
+- Streamlined navigation: consolidated from ~80 legacy dashboards into 19 focused, production-quality dashboards
+- Interactive network topology: walk-the-graph exploration built on Splunk 10.4&amp;#x27;s native network graph visualization
+- Unified device health and TCP health views
+- Same NFO-powered enrichment and multi-cloud coverage you rely on today
+
+What you can do with this app:
+
+- Monitor your entire network in one place — unified visibility across on-premises infrastructure and all major cloud platforms
+- Detect threats faster — correlate flow data with IP reputation, GeoIP, user identity, and application context to surface anomalies and suspicious activity
+- Reduce Splunk ingest costs — filter and aggregate flows upstream in NFO so only enriched, relevant data reaches Splunk
+- Optimize network performance — identify overloaded interfaces, bandwidth hogs, and congestion before they impact users
+- Monitor device health with SNMP — poll devices and receive traps (SNMPv2c and v3) for real-time CPU, memory, and interface monitoring
+- Enrich your data automatically — DNS names, VM names, GeoIP, application identification, and user identity added at ingest
+
+Solution areas: Traffic overview and executive dashboards · NetFlow and flow analysis (v5/v9, sFlow, IPFIX) · Cloud flow analytics (AWS, Azure, GCP, OCI) · SNMP device and interface health · Security and threat detection · Administration and configuration
+
+Requirements: NetFlow Optimizer (NFO) 2.12.1 or later is required. Compatible with Splunk Enterprise and Splunk Cloud, Splunk ES, and Splunk ITSI (via the Content Pack for SNMP and NetFlow).
+
+Start a free 60-day trial at netflowlogic.com/free-trial — or request a demo to see the app running against live network data.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0d742e40-d164-11f1-9edc-ee3617590748.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">NetFlow Logic</dc:creator>
+      <pubDate>Mon, 26 Oct 2026 17:52:34 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9133/#v0.1.5</guid>
     </item>
     <item>
       <title>Cyderes-Depot - v2026.10.26 [Version Update]</title>
@@ -4618,18 +4663,6 @@ Data is delivered in STIX 2.1 format and mapped to the Authentication and Threat
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Dave Bullough</dc:creator>
       <pubDate>Mon, 19 Oct 2026 13:21:04 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8955/#v1.2.0</guid>
-    </item>
-    <item>
-      <title>Splunk Add-on for Carbon Black - v3.0.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/2790/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Fixed Carbon Black EDR account creation, update, and deletion mappings to the CIM Change data model, including `status=success` for HTTP 200, 201, and 204 responses.
-* Fixed inbound network connection mappings so `src` and `src_ip` both identify the remote source. Outbound mappings are unchanged.
-* Updated HEC setup and troubleshooting guidance to use the raw endpoint and retain TLS certificate verification.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Add-on for Carbon Black (formerly Splunk Add-on for Bit9 Carbon Black) allows a Splunk® Enterprise administrator to collect notifications and event data in JSON format from  Carbon Black servers over a pub/sub bus. The add-on collects watchlist hit, feed hit, new binary instance, and binary file upload complete notifications, as well as raw endpoint events. This add-on provides the inputs and CIM-compatible knowledge to use with other Splunk Enterprise apps, such as the Splunk App for Enterprise Security and the Splunk App for PCI Compliance.
-
-Note: In order to get the Carbon Black Server data into JSON format, you need to download and run a script from Carbon Black.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/af50c468-cba5-11f1-820c-f28545bf4612.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Mon, 19 Oct 2026 10:23:37 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/2790/#v3.0.1</guid>
     </item>
   </channel>
 </rss>
