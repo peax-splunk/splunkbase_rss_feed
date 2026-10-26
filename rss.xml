@@ -6,7 +6,35 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sun, 25 Oct 2026 22:56:29 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 26 Oct 2026 00:56:11 +0000</lastBuildDate>
+    <item>
+      <title>Deslicer AI Insights Add-on - v1.2.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8558/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## 1.2.0
+
+### Fixed
+
+- **Test DAP connection** on Configuration → Add Connection works when the Observer API URL is already filled
+- Connection probe uses your Splunk Web locale path (for example `en-GB`) instead of always using `en-US`
+- App icons and logos show in the Splunk app nav bar and home&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;The real-time configuration observation layer for the Deslicer Automation Platform. Every Splunk Enterprise host streams live, CIM-compliant configuration state — enabling drift detection, AI-driven recommendations, and safe audited deployments across your entire fleet.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Deslicer AI Insights Add-on is the real-time configuration observation layer for the Deslicer Automation Platform (DAP) — giving Splunk administrators live visibility into the configuration state of every host in their deployment, and unlocking AI-driven automation across the entire Splunk estate.
+
+The Insights Add-on runs on all Splunk Enterprise hosts — indexers, search heads, heavy forwarders, and cluster managers — continuously observing and reporting configuration state to the DAP Observer. This real-time stream of configuration intelligence is what enables DAP to detect drift the moment it happens, power AI-driven change recommendations, and safely execute audited deployments with human approval at every step.
+
+All events are indexed with CIM-compliant field extractions (sourcetype: deslicer:insights:node), mapped to the Change, Authentication, and Application State data models — ready for Enterprise Security, custom correlation searches, and CIM-based reporting out of the box.
+
+On search heads and SHC members, enable the add-on in Splunk Web to access the Insights Node Monitoring dashboard — visibility into the health, activity, and status of every collector node across your fleet.
+
+Deslicer AI connects directly to this live configuration data stream, giving purpose-built agents real Splunk context — not guesses. Agents automate daily health checks, GDI onboarding, deployment planning, and more. Every change requires explicit human approval with cryptographic signing and a full audit trail.
+
+Deslicer runs fully on-premises (Kubernetes, Docker, air-gapped) or as SaaS — your data stays inside your perimeter when required.
+
+Sign up at https://deslicer.ai to connect your Splunk deployment and unlock the full value of real-time configuration intelligence.
+
+Splunk EMEA Technology Innovation Partner 2025.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/5cadb8aa-d0c9-11f1-9556-02b989290f01.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Deslicer AB</dc:creator>
+      <pubDate>Sun, 25 Oct 2026 23:46:18 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8558/#v1.2.0</guid>
+    </item>
     <item>
       <title>MQTT Topics Ingestor - v1.0.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7575/</link>
@@ -4390,26 +4418,6 @@ When used in conjunction with the Cisco CDR app, the Oracle SBC data can be used
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
       <pubDate>Sat, 17 Oct 2026 06:46:24 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7051/#v1.0.2</guid>
-    </item>
-    <item>
-      <title>Sideview Supporting App for Webex - v0.8.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8429/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;\- The index-time settings for Webex data have moved out of this app into a new add-on, TA\_sideview\_webex. Install it wherever Cisco's Webex add-on runs its inputs. Without it you will be affected by several bugs. For example long meeting quality records would be cut off at 10,000 bytes and lost.
-
-\- Fixed call\_id for Webex calls, which was different on every leg, so a forwarded or simultaneous-ring call showed as several calls. call\_id now comes from the Correlation ID, which all legs of a call share.
-
-\- A meeting's schedule, the meeting itself and its quality records now share one call\_id, and the meeting usage and attendee reports now appear in Investigate Calls.
-
-\- The duration on meeting usage and attendee reports is now in seconds, like every other duration in the app, rather than whole minutes.
-
-\- A scheduled meeting now shows as one row with the meeting that took place. A scheduled meeting nobody joined shows on its own, with no participants.
-
-\- New fields connected\_at and disconnected\_at, so that concurrency and duration\_elapsed in Investigate Calls now work for Webex calls and meetings, where they were always empty.
-
-\- Worked around a Splunk defect in which a field that Webex reports as an empty string could make stats list(), values() and dc() silently drop values, or run two values together separated by a semicolon. Any panel that listed or counted such a field - serverRegion, clientType, osType and a number of others - could show both the wrong values and the wrong number of them. Those fields now arrive absent rather than empty, which Splunk handles correctly. One visible change: a value that used to appear as a blank is now simply not there.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This Supporting App adapts data indexed via Splunk&amp;#x27;s &amp;quot;Cisco Webex Add-on for Splunk&amp;quot; allowing users to leverage that data within Sideview&amp;#x27;s commercial app &amp;quot;Cisco CDR Reporting and Analytics&amp;quot;.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/effaccfe-c9f5-11f1-960f-1eedfafce045.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
-      <pubDate>Sat, 17 Oct 2026 06:44:13 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8429/#v0.8.0</guid>
     </item>
   </channel>
 </rss>
