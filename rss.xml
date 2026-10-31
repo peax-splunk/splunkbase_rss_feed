@@ -6,7 +6,147 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sat, 31 Oct 2026 01:15:47 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 31 Oct 2026 07:46:08 +0000</lastBuildDate>
+    <item>
+      <title>Omnissa Workspace ONE UEM (AirWatch) Device Location (GPS) Add-on - v1.0.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/10147/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Renamed to &quot;Omnissa Workspace ONE UEM (AirWatch) Device Location (GPS) Add-on&quot;. No other changes: the app ID stays TA-airwatch-uem, so upgrades, inputs, OAuth clients and checkpoints are not affected.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Device GPS locations from Workspace ONE UEM (AirWatch), with each device&amp;#x27;s user and the nearest city, as JSON events in Splunk (sourcetype airwatch:gps) and optionally as CEF files. OAuth clients, inputs and status are managed in Splunk Web. Independent project, not affiliated with the product&amp;#x27;s vendor.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects device GPS locations from Workspace ONE UEM (AirWatch) over its REST API and indexes them as JSON events, sourcetype airwatch:gps. Each sample gets the device&amp;#x27;s serial number, friendly name, user name and e-mail address, and the nearest city, county, state and country from a bundled GeoNames city list (offline, no lookups to outside services).
+
+- One input per console, several consoles per heavy forwarder
+- Inputs page in Splunk Web: add OAuth clients (client secrets stored encrypted in Splunk&amp;#x27;s credential store) and inputs; test, enable, disable, and run now (for schedules in seconds)
+- Status dashboard: last run per input, devices and samples per run, errors, indexed samples per hour
+- Optional CEF output: one CEF file per run, for a syslog agent to forward to another SIEM
+- Each run picks up where the last good run ended, with an overlap; each sample is written once
+- Read-only towards the console: an OAuth token, the device list and the GPS search
+- Python standard library only, no third-party packages
+
+These events hold the positions of named people. Limit who can search the index.
+
+Independent project, not affiliated with or endorsed by the product&amp;#x27;s vendor. AirWatch and Workspace ONE are trademarks of their owners. City data: GeoNames, CC BY 4.0.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/5ecf1d74-d4d7-11f1-b71e-f277a1e54dbc.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Nikhil Chawla</dc:creator>
+      <pubDate>Sat, 31 Oct 2026 03:18:51 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10147/#v1.0.2</guid>
+    </item>
+    <item>
+      <title>eStreamer Add-on for Cisco Secure Firewall (FMC/Firepower) - v2.2.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/10081/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Renamed to &quot;eStreamer Add-on for Cisco Secure Firewall (FMC/Firepower)&quot;. No other changes: the app ID stays TA-fmc-estreamer, so upgrades, inputs, certificates and bookmarks are not affected.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;High-volume collector for Cisco Secure Firewall (FMC) connection events over eStreamer. Indexes them as cisco:sfw:estreamer with the Cisco Security Cloud app&amp;#x27;s field names, so its CIM mappings and dashboards work. Inputs, certificates and status are managed in Splunk Web. Independent project, not affiliated with Cisco.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects connection events from a Cisco Secure Firewall Management Center (FMC) over eStreamer and indexes them as sourcetype cisco:sfw:estreamer, with the field names the Cisco Security Cloud app uses for that sourcetype (InitiatorIP, ResponderIP, FirewallRule, AC_RuleAction, ...). That app&amp;#x27;s field aliases, CIM mappings and dashboards therefore work on these events, and existing searches keep working.
+
+Busy FMCs send thousands of connection events per second. This add-on is built for that volume: each input decodes in parallel processes, keeps events on disk until Splunk has read them, and resumes from a bookmark after a restart, so a restart does not skip events.
+
+- One input per FMC, several FMCs per heavy forwarder
+- Inputs page in Splunk Web: add, edit, enable, disable and restart inputs, and upload the eStreamer client certificate (the PKCS12 file from the FMC, or PEM). Certificates are stored encrypted in Splunk&amp;#x27;s credential store.
+- Status dashboard: throughput, minutes behind the FMC, connects and errors, indexed volume and index delay per FMC
+- Names from the FMC&amp;#x27;s metadata: rules, access control policy (FirewallPolicy), prefilter policy (PrefilterPolicy), tunnel/prefilter rule (TunnelRule), zones, interfaces, devices, applications, URL categories and countries
+- host is a name you choose for each FMC; the FMC&amp;#x27;s address is in every event as SourceHost
+- Disk buffer with a size cap: files are deleted once Splunk has read them; when the buffer is full, delete the oldest files or pause
+- Python standard library only, no third-party packages
+
+Connection events only. Intrusion, file/malware and packet events can come from the Cisco Security Cloud app.
+
+Independent project, not affiliated with or endorsed by Cisco. Cisco, Cisco Secure Firewall, Firepower and FMC are trademarks of Cisco Systems, Inc.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/bc328c1c-d4d7-11f1-b71e-f277a1e54dbc.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Nikhil Chawla</dc:creator>
+      <pubDate>Sat, 31 Oct 2026 03:18:38 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10081/#v2.2.2</guid>
+    </item>
+    <item>
+      <title>Absolute Secure Endpoint SIEM Events and Inventory Add-on - v1.0.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/10148/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Renamed to &quot;Absolute Secure Endpoint SIEM Events and Inventory Add-on&quot;. No other changes: the app ID stays TA-absolute-secure-endpoint, so upgrades, accounts, inputs and checkpoints are not affected.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects Absolute Secure Endpoint SIEM events (device, console and alert activity) and device inventory from the Absolute API, with CIM mappings (Authentication, Change, Alerts, Data Access, Inventory) and an ES asset lookup. Accounts, inputs and status are managed in Splunk Web. Independent project, not affiliated with Absolute Software.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects Absolute Secure Endpoint data from the Absolute API and maps it to the Splunk Common Information Model.
+
+- SIEM events (sourcetype absolute:events): what devices report (applications installed, removed and updated; hardware, network, OS and user changes; location and geofence changes; encryption, antivirus and application-persistence status), what console users do (sign-ins, account and role changes, rules, geofences, policy groups, device freeze, disable and unenroll, location lookups), and alerts (alert rules that fired, connections blocked in restricted regions). The same events Absolute&amp;#x27;s SIEM Connector sends to a syslog server, read straight from the API, with each event&amp;#x27;s id and as JSON.
+- Devices (sourcetype absolute:devices): an inventory snapshot, one event per device: hardware, OS, users, agent, addresses, encryption, antivirus, location.
+
+CIM: Authentication, Change (Account_Management, Endpoint_Changes), Alerts, Data Access and Inventory. A saved search builds an Enterprise Security asset lookup from the device inventory.
+
+- Inputs page in Splunk Web: Absolute accounts (API host, token ID and secret key, optional proxy; stored encrypted in Splunk&amp;#x27;s credential store; a Test button checks the token) and inputs: add, edit, enable, disable, run now, delete.
+- SIEM events are collected from a checkpoint in overlapping windows and de-duplicated by event id: restarts and failures do not lose events. If Splunk stops a run part-way (input disabled or restarted), the next run continues from the checkpoint; at most the window it was cut off in is sent again.
+- Status dashboard: last run, events and devices collected, minutes behind, errors, how late events arrive. Overview dashboard: event types, console activity, alerts, posture changes, devices by OS, agent, encryption and antivirus.
+- Python standard library only, no third-party packages.
+
+Independent project, not affiliated with or endorsed by Absolute Software. Absolute and Absolute Secure Endpoint are trademarks of Absolute Software Corporation.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/72ecd3bc-d4d4-11f1-98fa-6e8254e71485.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Nikhil Chawla</dc:creator>
+      <pubDate>Sat, 31 Oct 2026 03:18:23 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10148/#v1.0.2</guid>
+    </item>
+    <item>
+      <title>LiveAction App for Splunk - v26.3.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7217/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app provides customized dashboards for NetOps and SecOps use cases based on data produced by your LiveWires. Customers can also click through on certain elements to interact directly with your LiveWire devices, performing Forensic Searches and downloading packets from the source.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0542098a-d47b-11f1-97e3-ba9ca3771672.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">K G</dc:creator>
+      <pubDate>Sat, 31 Oct 2026 03:02:36 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7217/#v26.3.0</guid>
+    </item>
+    <item>
+      <title>LiveAction LiveWire Add-On for Splunk - v26.3.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7216/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This Add-On provides translations for IPFIX records being sent from your LiveWire devices. The LiveAction LiveWire Add-On for Splunk gives customers the power to create searches on the over 100 different fields that LiveWire exports. This add-on should be installed on your forwarder.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b2a1ec74-d478-11f1-bfed-3e140f35c817.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">K G</dc:creator>
+      <pubDate>Sat, 31 Oct 2026 03:02:36 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7216/#v26.3.0</guid>
+    </item>
+    <item>
+      <title>MQTT Topics Ingestor - v1.0.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7575/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* compatibility with latest splunk versions
+* update Splunk Enterprise SDK for Python and requirements for python version&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Welcome to the MQTT Topics Ingestor, a specialized Technology Add-on (TA) for Splunk designed to bridge the gap between your MQTT data streams and Splunk&amp;#x27;s powerful data analytics platform. This add-on enables real-time ingestion of MQTT messages from various topics securely and efficiently into Splunk, providing you with immediate insights and the ability to act on your IoT data.
+
+With support for both one-way and two-way SSL/TLS authentication, the MQTT Topics Ingestor ensures that your data remains encrypted during transmission, providing a secure pathway from your MQTT brokers to Splunk. Configured for optimal performance and security, this TA is flexible enough to fit into any infrastructure, scalable to meet growing data demands, and fully compliant with best practice standards.
+
+Step into a world of streamlined data analysis where MQTT and Splunk work in tandem to drive informed decision-making and operational intelligence.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/1349f3ac-d058-11f1-97a1-3686de334cf2.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Gary Croker</dc:creator>
+      <pubDate>Sat, 31 Oct 2026 03:02:14 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7575/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>MITRE ATTCK Heatmap for Splunk - v1.11.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5742/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;### v1.11.0
+
+**New**
+- A new look: flat tactic headers with a coverage figure and gauge, connected cells, hatching for techniques with no value, and a tooltip and legend that follow Splunk's light and dark themes
+- Color bands (3, 5, 7 or 9) with a legend that has a *No data* entry, a *Palette* option (Default, Risk, Sequential blues, Viridis) and perceptual color blending
+- A new tooltip with the band and rank, the other tactics a technique is in, and clickable sub-techniques; click a cell to pin it
+- Search that also matches sub-technique names, descriptions and tactic names; keyboard navigation; messages for empty results, unmatched IDs and rows without values
+- Search text, the pinned band, tactic or tooltip, and the scroll position are kept when the search refreshes
+- Map result columns by name (*ID field*, *Value field*, *Description field*, *Status field*)
+- *Roll up sub-techniques*, *Color bounds: From data*, status-based coloring, and an ATT&amp;CK Navigator export button
+- *Matrix data: Imported*, with a scripted input and a report that download newer ATT&amp;CK versions
+- *Wall mode* for display walls
+- Bundled data updated to ATT&amp;CK v20.0
+- Dashboard Studio: defaults match classic dashboards, and the export shows a copy box
+
+**Changed**
+- D3FEND follows the current ontology: seven tactic columns (Model, Harden, Detect, Isolate, Deceive, Evict, Restore), 30 techniques and 241 sub-techniques with their own IDs. Dashboards that match on D3FEND tactic names or IDs in drilldown tokens need updating (for example `d3f:Harden`)
+- ATT&amp;CK v20 replaced the Enterprise tactic *Defense Evasion* with *Stealth* and *Defense Impairment*; drilldowns that match on that name need updating
+- The default panel height is 1200 pixels (it was 2700)
+- Panels that are too small now scroll instead of squeezing the columns
+- *Sort by* now defaults to Value, Descending
+- The entrance animation is always on, once when the panel first loads
+- The legend title is always the value field's name; the menu is smaller and grouped into Data, Display, Colors, Scale and Export
+
+**Removed**
+- The *Theme* option (the heatmap follows the dashboard's theme), the *Animate* and *Duration* options, *Legend title*, and the sweeping highlight animation
+
+**Fixed**
+- Enterprise tactic order for v20, several heatmaps on one dashboard affecting each other, *Hide empty* removing sub-techniques that have values, zero and decimal values in tooltips, searching for names that contain `&amp;`, one click sending several drilldowns, and several platform choices that showed an empty matrix
+- Text built from field names in the legend is now escaped&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Custom visualization that renders MITRE ATT&amp;amp;CK and D3FEND matrices as interactive heatmaps, coloring techniques by search result values to reveal detection coverage, gaps, and hot spots.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The MITRE ATT&amp;amp;CK Heatmap for Splunk is a custom visualization that transforms search results into interactive MITRE ATT&amp;amp;CK or D3FEND matrices. The visualization colors each technique based on numeric values returned by a search query, enabling security teams to visualize detection coverage, identify gaps, and highlight areas of concentrated activity. The app supports the ATT&amp;amp;CK Enterprise, ICS, and Mobile frameworks, as well as the D3FEND framework. It ships with bundled matrix data (ATT&amp;amp;CK v20.0 and D3FEND v1.6.0) and includes an optional scripted input that automatically imports newer ATT&amp;amp;CK versions from the MITRE GitHub repository. The visualization integrates with both Simple XML and Dashboard Studio, providing drilldown capabilities and export options. Users format the heatmap by selecting the framework, domain, color scale bounds, and whether to use bundled or imported matrix data.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8265e8b2-d487-11f1-98fa-6e8254e71485.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Mohammed Latif</dc:creator>
+      <pubDate>Sat, 31 Oct 2026 03:02:09 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5742/#v1.11.0</guid>
+    </item>
+    <item>
+      <title>Splunk Network Intelligence - v26.10.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9913/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;[https://help.splunk.com/en/supported-add-ons/splunk-supported-add-ons/network-intelligence-application/release-history-for-the-splunk-network-intelligence-application](https://help.splunk.com/en/supported-add-ons/splunk-supported-add-ons/network-intelligence-application/release-history-for-the-splunk-network-intelligence-application)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Network Intelligence unifies topology, health, and alerts from across your entire network, helping network teams understand device relationships, identify issues, assess impact, and troubleshoot faster.
+
+Documentation: https://help.splunk.com/en/supported-add-ons/splunk-supported-add-ons/network-intelligence-application&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Network Intelligence unifies topology, health, and alerts from across your entire network, helping network teams understand device relationships, identify issues, assess impact, and troubleshoot faster.
+
+Documentaton: https://help.splunk.com/en/supported-add-ons/splunk-supported-add-ons/network-intelligence-application&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d58f1034-d3da-11f1-8671-a64bcc939448.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Sat, 31 Oct 2026 03:00:59 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9913/#v26.10.0</guid>
+    </item>
     <item>
       <title>Splunk Add-On for OpenTelemetry Collector - v0.164.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7125/</link>
@@ -51,61 +191,12 @@ To learn more about how Splunk Observability Cloud works with your environment t
       <guid>https://splunkbase.splunk.com/app/8704/#v0.164.0</guid>
     </item>
     <item>
-      <title>Splunk Network Intelligence - v26.10.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/9913/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Network Intelligence unifies topology, health, and alerts from across your entire network, helping network teams understand device relationships, identify issues, assess impact, and troubleshoot faster.
-
-Documentation: https://help.splunk.com/en/supported-add-ons/splunk-supported-add-ons/network-intelligence-application&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Network Intelligence unifies topology, health, and alerts from across your entire network, helping network teams understand device relationships, identify issues, assess impact, and troubleshoot faster.
-
-Documentaton: https://help.splunk.com/en/supported-add-ons/splunk-supported-add-ons/network-intelligence-application&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d58f1034-d3da-11f1-8671-a64bcc939448.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Fri, 30 Oct 2026 20:24:41 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9913/#v26.10.0</guid>
-    </item>
-    <item>
       <title>verkada add-on - v1.2.17 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/6971/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;verkada add-on for verkada insights and verkada notifications&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d2211c7a-d494-11f1-98fa-6e8254e71485.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">splunk verkada</dc:creator>
       <pubDate>Fri, 30 Oct 2026 19:09:35 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6971/#v1.2.17</guid>
-    </item>
-    <item>
-      <title>MITRE ATTCK Heatmap for Splunk - v1.11.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5742/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;### v1.11.0
-
-**New**
-- A new look: flat tactic headers with a coverage figure and gauge, connected cells, hatching for techniques with no value, and a tooltip and legend that follow Splunk's light and dark themes
-- Color bands (3, 5, 7 or 9) with a legend that has a *No data* entry, a *Palette* option (Default, Risk, Sequential blues, Viridis) and perceptual color blending
-- A new tooltip with the band and rank, the other tactics a technique is in, and clickable sub-techniques; click a cell to pin it
-- Search that also matches sub-technique names, descriptions and tactic names; keyboard navigation; messages for empty results, unmatched IDs and rows without values
-- Search text, the pinned band, tactic or tooltip, and the scroll position are kept when the search refreshes
-- Map result columns by name (*ID field*, *Value field*, *Description field*, *Status field*)
-- *Roll up sub-techniques*, *Color bounds: From data*, status-based coloring, and an ATT&amp;CK Navigator export button
-- *Matrix data: Imported*, with a scripted input and a report that download newer ATT&amp;CK versions
-- *Wall mode* for display walls
-- Bundled data updated to ATT&amp;CK v20.0
-- Dashboard Studio: defaults match classic dashboards, and the export shows a copy box
-
-**Changed**
-- D3FEND follows the current ontology: seven tactic columns (Model, Harden, Detect, Isolate, Deceive, Evict, Restore), 30 techniques and 241 sub-techniques with their own IDs. Dashboards that match on D3FEND tactic names or IDs in drilldown tokens need updating (for example `d3f:Harden`)
-- ATT&amp;CK v20 replaced the Enterprise tactic *Defense Evasion* with *Stealth* and *Defense Impairment*; drilldowns that match on that name need updating
-- The default panel height is 1200 pixels (it was 2700)
-- Panels that are too small now scroll instead of squeezing the columns
-- *Sort by* now defaults to Value, Descending
-- The entrance animation is always on, once when the panel first loads
-- The legend title is always the value field's name; the menu is smaller and grouped into Data, Display, Colors, Scale and Export
-
-**Removed**
-- The *Theme* option (the heatmap follows the dashboard's theme), the *Animate* and *Duration* options, *Legend title*, and the sweeping highlight animation
-
-**Fixed**
-- Enterprise tactic order for v20, several heatmaps on one dashboard affecting each other, *Hide empty* removing sub-techniques that have values, zero and decimal values in tooltips, searching for names that contain `&amp;`, one click sending several drilldowns, and several platform choices that showed an empty matrix
-- Text built from field names in the legend is now escaped&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Custom visualization that renders MITRE ATT&amp;amp;CK and D3FEND matrices as interactive heatmaps, coloring techniques by search result values to reveal detection coverage, gaps, and hot spots.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The MITRE ATT&amp;amp;CK Heatmap for Splunk is a custom visualization that transforms search results into interactive MITRE ATT&amp;amp;CK or D3FEND matrices. The visualization colors each technique based on numeric values returned by a search query, enabling security teams to visualize detection coverage, identify gaps, and highlight areas of concentrated activity. The app supports the ATT&amp;amp;CK Enterprise, ICS, and Mobile frameworks, as well as the D3FEND framework. It ships with bundled matrix data (ATT&amp;amp;CK v20.0 and D3FEND v1.6.0) and includes an optional scripted input that automatically imports newer ATT&amp;amp;CK versions from the MITRE GitHub repository. The visualization integrates with both Simple XML and Dashboard Studio, providing drilldown capabilities and export options. Users format the heatmap by selecting the framework, domain, color scale bounds, and whether to use bundled or imported matrix data.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8265e8b2-d487-11f1-98fa-6e8254e71485.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Mohammed Latif</dc:creator>
-      <pubDate>Fri, 30 Oct 2026 18:49:36 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5742/#v1.11.0</guid>
     </item>
     <item>
       <title>Salesforce - v4.0.0 [Version Update]</title>
@@ -196,22 +287,6 @@ COMPLIANCE, FEDERAL &amp;amp; AIR-GAPPED DEPLOYMENT
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">GIC Engineering Consultants, Inc.</dc:creator>
       <pubDate>Fri, 30 Oct 2026 16:17:25 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8814/#v1.2.18</guid>
-    </item>
-    <item>
-      <title>LiveAction LiveWire Add-On for Splunk - v26.3.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7216/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This Add-On provides translations for IPFIX records being sent from your LiveWire devices. The LiveAction LiveWire Add-On for Splunk gives customers the power to create searches on the over 100 different fields that LiveWire exports. This add-on should be installed on your forwarder.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b2a1ec74-d478-11f1-bfed-3e140f35c817.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">K G</dc:creator>
-      <pubDate>Fri, 30 Oct 2026 16:06:35 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7216/#v26.3.0</guid>
-    </item>
-    <item>
-      <title>LiveAction App for Splunk - v26.3.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7217/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app provides customized dashboards for NetOps and SecOps use cases based on data produced by your LiveWires. Customers can also click through on certain elements to interact directly with your LiveWire devices, performing Forensic Searches and downloading packets from the source.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0542098a-d47b-11f1-97e3-ba9ca3771672.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">K G</dc:creator>
-      <pubDate>Fri, 30 Oct 2026 16:05:08 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7217/#v26.3.0</guid>
     </item>
     <item>
       <title>Mattermost - v4.0.0 [Version Update]</title>
@@ -3608,22 +3683,6 @@ Key features:
       <guid>https://splunkbase.splunk.com/app/10120/#v0.0.0+0aa836e</guid>
     </item>
     <item>
-      <title>Lenggenhager IT Credentials Hunting App - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10142/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Credential Hunter 1.0.0 — first public release
-
-Credential Hunter searches the raw data of the indexes you already have for secrets that were indexed by accident: cleartext passwords, API keys, tokens, private keys and password hashes. It is not a data source and it ingests nothing — it works on what is already in Splunk.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Scans Splunk indexes for accidentally indexed credentials using two-stage term-index prefiltering and regex verification, with configurable pattern catalogs and continuous monitoring.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Credential Hunter app scans raw data in existing Splunk indexes to identify credentials that were indexed by accident, including cleartext passwords, API keys, tokens, and private keys.
-
-It employs a two-stage detection approach that combines term-index prefiltering in Splunk with regex verification in Python to minimize performance impact while maintaining accuracy.
-
-The app supports both full historical scans and continuous monitoring modes, with a configurable pattern catalog that allows administrators to enable or disable specific credential types based on their environment. Findings are stored in KV store collections and presented through dedicated dashboards for investigation, false positive management, and pattern tuning.
-
-The scanner operates as a scripted input that runs continuously but performs actual scans at administrator-defined intervals of 30 or 60 minutes. Configuration is managed through a Control room dashboard where scan intervals, event slack hours for late-arriving data, and retention policies can be adjusted without editing configuration files.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9621e9f0-ced3-11f1-97a1-3686de334cf2.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Martin Lenggenhager</dc:creator>
-      <pubDate>Wed, 28 Oct 2026 13:43:37 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10142/#v1.0.0</guid>
-    </item>
-    <item>
       <title>sport - v1.1.0 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/10162/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;\### 1.1.0
@@ -4565,43 +4624,6 @@ To ease the transition, the CiscoSecurityCloud 3.x branch will be actively maint
       <guid>https://splunkbase.splunk.com/app/7404/#v3.7.3</guid>
     </item>
     <item>
-      <title>Monitoring Docker and Podman - Metrics and Log Forwarding - v26.10.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/3723/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Monitoring Docker 26.10.1 opens on an Overview that says what needs fixing, lets each team pick its alerts from an Alert Catalog, and reads your stats from the events index or a Splunk metrics index.
-
-- New [Overview](https://www.outcoldsolutions.com/docs/monitoring-docker/dashboards/#overview): whether anything on the fleet needs attention, with a row per host
-- New [Alert Catalog](https://www.outcoldsolutions.com/docs/monitoring-docker/alert-catalog/): 61 templates each team scopes to its clusters and creates as its own saved searches; the shipped alerts keep running, marked deprecated
-- [Metrics index](https://www.outcoldsolutions.com/docs/monitoring-docker/metrics-index/): every stats dashboard has a twin that reads a Splunk metrics index, chosen on the new Configuration page
-- New [Compose Projects and Inventory](https://www.outcoldsolutions.com/docs/monitoring-docker/dashboards/) dashboards
-- [Docker Swarm](https://www.outcoldsolutions.com/docs/monitoring-docker/objects/#docker-swarm): Collectord reads the Swarm's services, tasks and nodes on the leader, and Swarm Services shows them
-- [Rootless Podman](https://www.outcoldsolutions.com/docs/monitoring-docker/installation/#rootless-podman): users' containers are monitored, and containers run by Quadlet or systemd now have CPU, memory and I/O metrics
-- [Logging drivers](https://www.outcoldsolutions.com/docs/monitoring-docker/installation/#pre-requirements): each container's logs are read through its own driver, `json-file` or `journald`, so a container started with its own `--log-driver` is no longer missed
-- Privileged Containers is rebuilt around processes running as root or holding Linux capabilities, and Host and Hosts add load, pressure stalls, TCP and UDP health, and the clock
-- [Enterprise Security](https://www.outcoldsolutions.com/docs/monitoring-docker/cim/): hosts, container restarts and CPU vulnerabilities map to the Common Information Model
-- [Fewer events](https://www.outcoldsolutions.com/docs/collectord/log-volume/), off by default: repeated lines as one counted event, storms of alike lines folded into a summary a minute, and a report of the heaviest log patterns
-
-Full release history: [Release history](https://www.outcoldsolutions.com/docs/monitoring-docker/release-history/). Upgrading from 26.04: upgrade the app first, then Collectord, and choose the dashboards once on **Setup › Configuration**; the steps are in [Upgrade](https://www.outcoldsolutions.com/docs/monitoring-docker/upgrade/). The app supports Collectord for Docker 26.10.x and earlier.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;See your Docker, Compose, Swarm, Podman and Amazon ECS hosts in Splunk: container and host logs and Docker events in an events index, host, container and process stats in the events index or a metrics index. Dashboards that lead to what needs fixing, and 61 alert templates each team scopes to its own clusters. One Collectord container per host.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Monitoring Docker brings the hosts that run your containers into Splunk: Docker hosts and Compose projects, Docker Swarm clusters, Podman hosts, and Amazon ECS container instances.
-
-Containers fail in ways their logs alone don&amp;#x27;t explain. A container restarts in a loop, is OOM killed, or fails its health check. A Swarm service runs fewer tasks than it should, and the reason is in the Swarm&amp;#x27;s services, tasks and nodes, which only a manager can read. The Docker data root fills up with images, writable layers and json-file logs. Some containers run their processes as root or hold Linux capabilities. The answers are spread over every host, in the logs, the cgroups, /proc and the Docker API.
-
-Monitoring Docker shows what Collectord forwards from each host, where it runs as one container. Collectord sends container and host logs, the Docker daemon&amp;#x27;s events, and the containers, images, volumes and Swarm objects it reads from the API to an events index. Host, container, process, network, filesystem and disk stats go to the same events index, to a Splunk metrics index, or to both while you compare. The containers of rootless Podman users are monitored too.
-
-The app opens on an Overview that says whether anything needs attention and where: hosts whose stats went silent, Collectord problems, and containers OOM killed, in a restart loop, unhealthy or exited with a non-zero code. From there it drills down to hosts, containers and processes, Compose projects, Swarm services and nodes, ECS services, privileged containers, the network, filesystems, disk I/O and CPU throttling. Every stats dashboard has a twin that reads the metrics index, and the Configuration page chooses which set the menu shows. Name each cluster, such as prod or staging, and the dashboards and alerts filter by it.
-
-Alerts come from an Alert Catalog of 61 templates, written for Splunk admins, the platform team and application teams. Each team picks the alerts it needs and creates them as its own saved searches, scoped to its own clusters.
-
-Container labels configure one container at a time: its index and Splunk output, field extraction, multi-line events, masking, log files from its volumes, and Prometheus endpoints. Three features, off by default, send fewer events: repeated lines as one counted event, storms of alike lines folded into a summary a minute, and a report of each stream&amp;#x27;s heaviest log patterns.
-
-Install the app on your search heads, create an HTTP Event Collector token, and start Collectord on each host with docker run, Docker Compose, a Swarm stack, Podman, or an Amazon ECS daemon service.
-
-The app requires Collectord and a license key from Outcold Solutions. Evaluation and developer keys are free.
-
-Documentation: https://www.outcoldsolutions.com/docs/monitoring-docker/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/7d60bdba-cee2-11f1-8ec5-d689c8d161ac.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Outcold Solutions LLC</dc:creator>
-      <pubDate>Mon, 26 Oct 2026 12:44:43 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/3723/#v26.10.1</guid>
-    </item>
-    <item>
       <title>Monitoring Linux - Metrics and Log Forwarding - v26.10.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/4768/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;The first Splunkbase release since 5.21.411, now on Collectord's calendar versions (YY.MM). Supports collectorforlinux 26.10.x and below.
@@ -4635,41 +4657,6 @@ Documentation: https://www.outcoldsolutions.com/docs/monitoring-linux/&lt;/p&gt;
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Outcold Solutions LLC</dc:creator>
       <pubDate>Mon, 26 Oct 2026 12:44:03 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/4768/#v26.10.1</guid>
-    </item>
-    <item>
-      <title>Monitoring OpenShift - Metrics and Log Forwarding - v26.10.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/3836/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Monitoring OpenShift 26.10.1 opens on an Overview that leads to the cause, reads the stats from an events index or a Splunk metrics index, and gives each team its own alerts from the Alert Catalog.
-
-- New Overview: one health verdict for the fleet and a row per cluster, with the Workloads menu moved into it as tabs ([Dashboards](https://www.outcoldsolutions.com/docs/monitoring-openshift/dashboards/))
-- New Alert Catalog: 117 alert templates you scope to clusters and projects; the shipped alerts keep running, marked deprecated ([Alert Catalog](https://www.outcoldsolutions.com/docs/monitoring-openshift/alert-catalog/))
-- Every stats input can send to a Splunk metrics index, and the new Configuration page switches the menu to the dashboards' metrics-index twins ([Metrics index](https://www.outcoldsolutions.com/docs/monitoring-openshift/metrics-index/))
-- New Audit menu: the API servers' audit logs from detections to forensics, OAuth logins included ([Audit logs](https://www.outcoldsolutions.com/docs/monitoring-openshift/audit/))
-- New Workload Declarations, Node Inventory and CoreDNS dashboards, and the cluster DNS is scraped by default
-- Menus reorganized: Review is now Cluster, Top moves under Monitoring, and Hosts, Host and Top: Hosts are now Nodes, Node and Top: Nodes
-- The Splunk Usage Report reads Splunk's license meter, and Collectord usage lists silent Collectord instances and stale license checks
-- Nodes, the API server audit, OAuth logins and CPU vulnerabilities map to the Common Information Model for Splunk Enterprise Security ([Common Information Model](https://www.outcoldsolutions.com/docs/monitoring-openshift/cim/))
-- Collectord runs as one DaemonSet instead of two, under the built-in priority classes, and the Helm chart and the manifest pull it from `registry.outcold.solutions`
-- New in Collectord, off until you turn them on: repeated lines go out as one counted event, storms of alike lines fold into one summary a minute, and a report names each stream's heaviest log patterns ([Reduce log volume](https://www.outcoldsolutions.com/docs/collectord/log-volume/))
-
-Full release history: https://www.outcoldsolutions.com/docs/monitoring-openshift/release-history/ · Upgrading from 26.04: https://www.outcoldsolutions.com/docs/monitoring-openshift/upgrade/#upgrade-from-version-2604-to-2610&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;See your OpenShift clusters in Splunk: container logs, the journal, audit logs, events and objects, with node to process stats and control-plane metrics in an events or a metrics index. An Overview that leads to the cause, an Audit menu, and 117 alert templates. Install Collectord with one Helm chart; a Red Hat certified image is available.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Monitoring OpenShift brings your OpenShift clusters into Splunk: for the platform team that runs them, the application teams that deploy to them, and the security team that audits them.
-
-When a release goes wrong on OpenShift, the evidence is spread out: container logs on every node, the journal, events the API server keeps for about three hours, the audit logs of four API and OAuth servers, and the control plane&amp;#x27;s Prometheus endpoints. On a cluster many teams share, each team also needs its own data and its own alerts, and the platform team needs rules that hold for every project.
-
-Monitoring OpenShift shows what Collectord forwards from each cluster. Collectord runs as a DaemonSet on every node, masters included, and one addon pod. It sends container and application logs, the journal, the audit logs, and OpenShift events and objects to an events index, and node, pod, container, process, network and disk stats and the control plane&amp;#x27;s Prometheus metrics to an events index or a Splunk metrics index. Annotations change what it does for one project, workload or pod: an index or a HEC token per team, field extraction, multi-line events, masking and hashing, application log files and Prometheus scrapes. A Configuration resource sets the platform team&amp;#x27;s rules for the whole cluster. New features, off until you turn them on, group repeated lines and fold storms of alike lines, for fewer events and less noise.
-
-The dashboards open on an Overview with one verdict for the fleet, Healthy, Warning, Critical or Unknown, the numbers behind it and a row per cluster, and its tiles and rows drill down to the page that shows the cause. From there they cover nodes down to a single process; crash loops, OOM kills and failing probes, each a click from the pod&amp;#x27;s logs; capacity, quotas and what the Pod specs declare; the API server, etcd and the cluster DNS; pod security posture; and an Audit menu from detections to the timeline of one object, OAuth logins included. The stats dashboards come in two sets that look the same, one for each kind of index.
-
-Alerts come from an Alert Catalog of 117 templates, written for Splunk admins, the platform team, security and application teams. Each team picks the alerts it needs and creates them as its own saved searches, scoped to its clusters and projects.
-
-Install the app on your search heads, then Collectord with one Helm chart or the manifest rendered from it, on OpenShift 4.11 or later. It sends to Splunk Enterprise or Splunk Cloud over the HTTP Event Collector. A Red Hat certified image is available from registry.connect.redhat.com, and FIPS 140 images are published beside the standard ones.
-
-The app requires Collectord and a license key from Outcold Solutions. Evaluation and developer keys are free.
-
-Documentation: https://www.outcoldsolutions.com/docs/monitoring-openshift/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/52e79b4e-cee2-11f1-9896-ea0247c9da21.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Outcold Solutions LLC</dc:creator>
-      <pubDate>Mon, 26 Oct 2026 12:28:28 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/3836/#v26.10.1</guid>
     </item>
     <item>
       <title>Monitoring Kubernetes - Metrics and Log Forwarding - v26.10.1 [Version Update]</title>
@@ -4751,19 +4738,6 @@ Splunk EMEA Technology Innovation Partner 2025.&lt;/p&gt;&lt;img height=&quot;36
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Deslicer AB</dc:creator>
       <pubDate>Sun, 25 Oct 2026 23:46:18 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8558/#v1.2.0</guid>
-    </item>
-    <item>
-      <title>MQTT Topics Ingestor - v1.0.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7575/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* compatibility with latest splunk versions
-* update Splunk Enterprise SDK for Python and requirements for python version&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Welcome to the MQTT Topics Ingestor, a specialized Technology Add-on (TA) for Splunk designed to bridge the gap between your MQTT data streams and Splunk&amp;#x27;s powerful data analytics platform. This add-on enables real-time ingestion of MQTT messages from various topics securely and efficiently into Splunk, providing you with immediate insights and the ability to act on your IoT data.
-
-With support for both one-way and two-way SSL/TLS authentication, the MQTT Topics Ingestor ensures that your data remains encrypted during transmission, providing a secure pathway from your MQTT brokers to Splunk. Configured for optimal performance and security, this TA is flexible enough to fit into any infrastructure, scalable to meet growing data demands, and fully compliant with best practice standards.
-
-Step into a world of streamlined data analysis where MQTT and Splunk work in tandem to drive informed decision-making and operational intelligence.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/1349f3ac-d058-11f1-97a1-3686de334cf2.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Gary Croker</dc:creator>
-      <pubDate>Sun, 25 Oct 2026 20:50:07 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7575/#v1.0.1</guid>
     </item>
     <item>
       <title>Service Tree Viz - v1.0.1 [Version Update]</title>
