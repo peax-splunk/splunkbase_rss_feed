@@ -6,7 +6,46 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sun, 01 Nov 2026 01:41:27 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 01 Nov 2026 08:27:02 +0000</lastBuildDate>
+    <item>
+      <title>AssetDB - v1.6.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6115/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;### 1.6.0
+
+#### Breaking changes in 1.6.0
+
+Read these before upgrading from 1.5.7 or earlier.
+
+* **Splunk 10.2 or later is required.** The merge command now needs Python 3.13, which older versions cannot use for search commands. Upgrade Splunk first.
+* **Your merge search is updated on your first save.** After upgrading, scheduled runs keep using the old search until you save something on the Configure page (for example, change a setting and save). Run *Run preview* on the Pipeline tab before the next scheduled run to see what will change.
+* **You may get fewer, larger assets.** Earlier versions silently failed to join records that were far apart in a large input. They now join.
+* **Some data is skipped by default.** A key found in more than 50 rows is no longer used for matching, and a built-in list of placeholder values (for example `0.0.0.0`, `unknown`, `n/a`, all-zero MAC addresses) is ignored in key fields. Change both in Settings.
+* **Bad runs are blocked.** A run that produces fewer than half of the last run's assets is not saved, and a run with no assets never replaces the asset list. If your inventory legitimately shrinks by more than half, lower *Minimum size vs last run*.
+* **Multivalue fields keep the most recent values.** When a field has more values than *Max values*, it used to keep the first ones alphabetically. Set *Value order* to *Alphabetical* to get the old result. *Max values* is now limited to 1 to 100.
+* **Fill null works differently.** It now fills only assets that have no value in any source. Before, it competed with real values.
+* **Keep original case** cannot be combined with the host name, FQDN, user name, email or operating system normalizers. Change one of the two if a field uses both.
+* **Five macros are removed:** `retain_adb_lookup`, `ageout_adb_lookup`, `join_mv_fields`, `split_mv_fields` and `host_from_dns`. The merge did not use them. If your own searches do, copy their definitions from version 1.5.7.
+* **Two macros behave differently.** `input_adb_lookup` also sets `source_lookup`, and `normalize_mac` now returns lowercase.
+* **Only `admin` can change the app.** The `power` role could change app-level objects before.
+* **The Search entry is gone from the app menu.** Use the Search app.
+* **The asset list has new columns:** `source`, `source_lookup`, `last_seen`, `scope` and `conflicts`. Existing columns are unchanged, and your existing field configuration still works.
+
+#### New
+
+* A rewritten Configure page: Sources, Fields, Pipeline and Settings tabs, a status strip, and edits that are saved only when you click *Save*.
+* *Run preview*: see how many assets a run would add, remove or change before you run it.
+* Run history, with counts for each run and the groups that were too big to merge.
+* Options for sources (role, scope, max row age, row filter, field mapping) and for fields (normalizers, validation, ignore lists, merge methods, conflict flags).
+* Scoped keys, so the same address in two sites does not merge.
+* Safety checks: key blocklist, *Max rows per key*, and blocking of runs that look wrong.
+* A CIM preset for the standard asset fields, and macros to add asset details to events (`adb_enrich` and related).
+* Seven disabled saved searches that build source lookups.
+* A new app icon and logo, and help text in tooltips.
+* A faster merge (about 45% on a large test input).&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Merges asset records from multiple lookup sources into a unified database by linking records that share MAC addresses, IP addresses, or hostnames.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;AssetDB combines asset records from several lookups into one list of assets. Records that share an identifier, such as a MAC address, an IP address or a host name, become one asset, and their fields are merged. You can search the result and use it to add asset details to your events. It does not need Splunk Enterprise Security.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/42188760-d595-11f1-b71e-f277a1e54dbc.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Mohammed Latif</dc:creator>
+      <pubDate>Sun, 01 Nov 2026 03:02:31 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6115/#v1.6.0</guid>
+    </item>
     <item>
       <title>Threat Hunting Essentials - v1.3.157 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7633/</link>
@@ -4622,41 +4661,6 @@ To ease the transition, the CiscoSecurityCloud 3.x branch will be actively maint
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cisco Systems, Inc.</dc:creator>
       <pubDate>Mon, 26 Oct 2026 13:21:03 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7404/#v3.7.3</guid>
-    </item>
-    <item>
-      <title>Monitoring Linux - Metrics and Log Forwarding - v26.10.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4768/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;The first Splunkbase release since 5.21.411, now on Collectord's calendar versions (YY.MM). Supports collectorforlinux 26.10.x and below.
-
-- New [Alert Catalog](https://www.outcoldsolutions.com/docs/monitoring-linux/alert-catalog/): 45 alert templates for Splunk admins, the platform team, security and application teams; the shipped alerts keep running, marked deprecated
-- Every stats dashboard comes in two sets, for the events index or a [Splunk metrics index](https://www.outcoldsolutions.com/docs/monitoring-linux/metrics-index/); the new Configuration page chooses one
-- New [Services dashboard](https://www.outcoldsolutions.com/docs/monitoring-linux/dashboards/#infrastructure): failed, restarting and OOM-killed systemd units with their logs, and the logins sshd accepted or refused
-- New [Inventory dashboard](https://www.outcoldsolutions.com/docs/monitoring-linux/dashboards/#overview): each host's distribution, kernel, architecture, CPU, memory, hypervisor and pending package updates
-- Host adds CPU in cores, load, pressure stalls, paging, TCP and UDP health and a Kernel tab; Network is rebuilt around interfaces, connections and listening ports; new Disk I/O dashboard
-- Hosts map to the [Common Information Model](https://www.outcoldsolutions.com/docs/monitoring-linux/cim/) for Splunk Enterprise Security: sshd and sudo, performance, inventory and pending updates
-- Collectord installs from signed apt and yum repositories, for amd64 and arm64, and an upgrade keeps your `002-user.conf` ([Installation](https://www.outcoldsolutions.com/docs/monitoring-linux/installation/))
-- Collectord names the [systemd unit](https://www.outcoldsolutions.com/docs/monitoring-linux/forwarding/#fields-on-journal-entries) of every journal entry and process, and reports failed units every minute and pending updates every hour
-- New, off by default: repeated log lines as one counted event, storms of alike lines folded, and a report of the heaviest log patterns, for [fewer events and less noise](https://www.outcoldsolutions.com/docs/collectord/log-volume/)
-- Bug fix: the Collectord service did not start on amd64 hosts since 5.21.410, or on RHEL 8, Ubuntu 20.04 or Debian 10 and 11; it now needs glibc 2.28
-
-Full list: [Release history](https://www.outcoldsolutions.com/docs/monitoring-linux/release-history/). Upgrading from 5.21: upgrade the app, choose the events-index dashboards on Setup › Configuration with Legacy alerts reading &quot;Upgrading&quot; ([Choose the dashboards](https://www.outcoldsolutions.com/docs/monitoring-linux/installation/#choose-the-dashboards)), then [upgrade Collectord](https://www.outcoldsolutions.com/docs/monitoring-linux/installation/#upgrade-collectord).&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;See your Linux servers in Splunk: the systemd journal with each entry&amp;#x27;s unit named, log files, failed units and pending updates, and host, process, network, filesystem and disk stats in an events or a metrics index. Dashboards for hosts, services, inventory and network, and 45 alert templates. Install one package on each host from our signed apt and yum repositories.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Monitoring Linux brings your Linux servers into Splunk: the hosts your services run on, from RHEL and its rebuilds, Debian and Ubuntu to Fedora, Amazon Linux 2023 and SUSE, on amd64 and arm64.
-
-A service fails and systemd restarts it in a loop, and nobody notices. A host slows down, and nobody can tell whether it is CPU, memory pressure, I/O or one runaway process. A filesystem fills up, the connection tracking table fills and the kernel drops new connections, or security updates wait for weeks on a host nobody remembers. The answers sit in each host&amp;#x27;s journal and /proc, one host at a time.
-
-Monitoring Linux shows what Collectord forwards from each host. Collectord runs as a systemd service and sends the journal, the log files under /var/log and your applications&amp;#x27; own log files to a Splunk events index, with the systemd unit of every journal entry and every process named, so a log line or a CPU spike is one search away from its service. It also reports the units in the failed state every minute and the pending package updates every hour. Host, process, network, filesystem and disk stats go to the same events index or to a Splunk metrics index, your choice: the app has a set of dashboards for each, and they look the same.
-
-The dashboards start from Hosts: one row per host with its CPU, memory, load and stall, and the alerts that fired. From there they go to one host in depth, its processes, the fleet&amp;#x27;s inventory and pending updates, the systemd services that failed, restart or were OOM-killed with their logs a click away, the network&amp;#x27;s interfaces, connections and listening ports, filesystems and disk I/O. Give each group of hosts a cluster name, such as prod or staging, and the dashboards and the Alert Catalog filter by it.
-
-Alerts come from an Alert Catalog of 45 templates, written for Splunk admins, the platform team, security and application teams. Each team picks the alerts it needs and creates them as its own saved searches, scoped to its own clusters. For Splunk Enterprise Security, the app maps SSH logins, sudo, host performance, inventory and pending updates to the Common Information Model.
-
-Install the collectorforlinux package on each host from our signed apt and yum repositories, or the tarball on any other distribution, set the HEC URL, token and license key in 002-user.conf, and enable the service. Upgrades keep your configuration. The app goes on your search heads, on Splunk Enterprise 9.2 or later or Splunk Cloud Platform.
-
-The app requires Collectord and a license key from Outcold Solutions. Evaluation and developer keys are free.
-
-Documentation: https://www.outcoldsolutions.com/docs/monitoring-linux/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/831ae726-cee2-11f1-97a1-3686de334cf2.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Outcold Solutions LLC</dc:creator>
-      <pubDate>Mon, 26 Oct 2026 12:44:03 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4768/#v26.10.1</guid>
     </item>
     <item>
       <title>Monitoring Kubernetes - Metrics and Log Forwarding - v26.10.1 [Version Update]</title>
