@@ -6,7 +6,24 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Thu, 05 Nov 2026 01:10:20 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 05 Nov 2026 08:45:40 +0000</lastBuildDate>
+    <item>
+      <title>HPE Aruba Networking EdgeConnect SD-WAN Security App for Splunk - v1.1.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6302/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Fixed the THREATS doughnut chart on the EdgeConnect IDS and EdgeConnect IPS dashboards. In Splunk 10.x the bottom of the chart was cut off. The chart now keeps a fixed height and stays fully visible inside its panel.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The HPE Aruba Networking EdgeConnect SD-WAN Security App for Splunk provides a dashboard view of all security event
+notifications exported from EdgeConnect devices within an enterprise’s SD-WAN.
+Customers can easily configure any EdgeConnect device (including virtualized and cloud-hosted)
+to forward security event notifications to Splunk,
+providing a convenient way to centralize logging, visualization,
+and analysis of security events alongside other telemetry or network events.
+
+From Splunk, users can filter, sort, navigate, and view the collective security event notifications generated across the SD-WAN,
+overall trends, and top talkers, to help customers pinpoint network events that warrant further investigation.
+The Aruba EdgeConnect Security App for Splunk requires ECOS release 9.1 or later.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/cb3076fe-d8e0-11f1-9e51-9224fd2fe130.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Aruba Networks</dc:creator>
+      <pubDate>Thu, 05 Nov 2026 06:31:04 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6302/#v1.1.2</guid>
+    </item>
     <item>
       <title>Canary - v2.3.5 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/4697/</link>
@@ -1290,36 +1307,6 @@ More information here: https://github.com/LetMeR00t/TA-thehive-cortex&lt;/p&gt;&
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Hurricane Labs</dc:creator>
       <pubDate>Tue, 03 Nov 2026 17:22:33 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7450/#v1.3.0</guid>
-    </item>
-    <item>
-      <title>Group-IB Digital Risk Protection - v1.3.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7970/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;### Highlights
-
-* **New configuration pages:** Accounts, DRP API, Proxy, Logging and Data Inputs. Accounts are checked against Group-IB when saved.
-* **Two data inputs:** *Violations* (confirmed violations by default) and *Typosquatting* (look-alike domain candidates), each with its own position and a Start From choice (last N days or a date).
-* **One event per revision** with the record's own timestamp; unchanged re-deliveries are not indexed again. The current-state store behind the dashboards holds confirmed violations only.
-* **Dashboards and alerts:** Overview, Violations, Typosquatting, Brands, Takedown &amp; Approval, Action Audit, Ingestion Health; alerts for stopped collection, new confirmed violations, reactivated violations and unanswered approvals.
-* **Commands:** `gibdrpapprove`, `gibdrpupload`, `gibdrpbrands`, `gibdrpsubscription`, `gibdrpresync`, `gibdrpcleanup`, `gibdrploaddemo`; writes rehearse by default (`dry_run=true`) and need an administrator.
-
-### Upgrading from 1.2.1
-
-* Your API key is adopted on the first run of a new input that names your account's e-mail address.
-* Collection stops until you create a new input; the 1.2.1 input and the `gibget*`/`gibsetstatus` commands are removed. Delete the old `[drp://&lt;name&gt;]` stanza from `local/inputs.conf`.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Splunk application that collects your Group-IB Digital Risk
-Protection portfolio as structured events, with dashboards that show what is
-true now and what changed, and commands that act on it at Group-IB&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Group-IB Digital Risk Protection watches the internet for abuse of your brands — phishing pages, fake shops, counterfeit listings, impersonating social accounts, rogue mobile apps — and runs the takedowns. This application brings that portfolio into Splunk beside the rest of your security data.
-
-This Splunk integration allows you to:
-
-- Collect two feeds, each with its own data input and sourcetype: Violations (confirmed violations) and Typosquatting (look-alike domain candidates).
-- Keep a change history, not duplicates: one event per revision, and a current-state store that answers &amp;quot;what is true now&amp;quot; in one lookup.
-- Watch the portfolio on seven dashboards, and be told by six alerts — among them Group-IB DRP - Collection has stopped — when an input fails, a takedown does not hold, or Group-IB is waiting on you.
-- Act from the search bar: approve, reject or declare a violation with `| gibdrpapprove`, submit new ones with `| gibdrpupload`, read your brands and entitlements with `| gibdrpbrands` and `| gibdrpsubscription`, and maintain the app with `| gibdrpresync`, `| gibdrpcleanup` and `| gibdrploaddemo`. Every change sent to Group-IB is audited locally.
-
-To use this application you need an active Group-IB Digital Risk Protection subscription, a portal account with an API key, and Splunk Enterprise 9.2+ or Splunk Cloud.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/fd1e07a6-d79d-11f1-ad06-8eae5fc2a369.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Group-IB  Integration</dc:creator>
-      <pubDate>Tue, 03 Nov 2026 16:55:37 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7970/#v1.3.0</guid>
     </item>
     <item>
       <title>BXTI Add-on for Global Relay - v1.0.2 [Version Update]</title>
