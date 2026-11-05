@@ -6,7 +6,55 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Wed, 04 Nov 2026 20:08:57 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 05 Nov 2026 01:10:20 +0000</lastBuildDate>
+    <item>
+      <title>Canary - v2.3.5 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4697/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Fixed a bug in the AutoRefresh module where a refreshEvery longer than about 24 days overflowed the browser's timer and refreshed continuously instead of waiting.
+* CSS fixes for padding and font consistency across Canary's core 'form element' modules - TextField, Pulldown, CheckboxPulldown and TimePicker. Some of this is in response to recent shifts in Chrome's own CSS defaults and rendering.
+* Pages in the Sideview UI now print cleanly. On paper they drop the navigation and on-screen controls, tables print every row, side-by-side panels each get the full width of the page, and dark-theme pages print as dark text on white.
+* The SearchControls module can now be configured with only its print button and placed anywhere in a view, for example in the page header. Its print button also no longer looks disabled before a search has run.
+* Fixed a bug where a 401 that logging in again could not fix sent the browser into an endless login redirect loop.
+* Fixed a bug where Table and Chart kept saying the search was still running after the job was paused.
+* Fixed a bug on Splunk instances running Python 3.7, where a bad trust store gave a confusing error instead of our message saying so.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Canary is essentially an alternate User Interface framework for Splunk.  It implements its own extensible view creation slash dashboarding system that other apps can use.   
+  
+It is a descendant of the old Sideview Utils (defunct for years now) but whereas Sideview Utils ran on top of Splunk’s “Advanced XML” systems, Canary does not.
+For a great deal more information about Canary, see our website ( https://sideviewapps.com/documentation/canary )
+
+NOTE: This app runs in python3 without any problems and without any changes required.  Splunk&amp;#x27;s &amp;quot;Upgrade Readiness App&amp;quot; may erroneously state that our apps do not run in python3 but it is wrong and please contact us if you have any questions about this.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e9eb3b48-d8a3-11f1-bbe0-9af77629291f.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
+      <pubDate>Wed, 04 Nov 2026 23:05:21 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4697/#v2.3.5</guid>
+    </item>
+    <item>
+      <title>Supporting App for Oracle SBC CDR - v1.0.3 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7051/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- New fields legs and oracle_sbc_legs, one per oracle_cdr_end record (start and interim records describe the same leg). Requires Cisco CDR Reporting and Analytics 9.0.1, which sums them per call on Investigate Calls.
+- call_failed and cause_description now use the SIP response code when there is no specific Q.850 cause, so a 488 or 408 counts as failed and a 487 or 486 does not.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app provides the Splunk configuration to ingest the CDR data from Oracle SBC.     It is intended to work for both Oracle Session Router CDR and Oracle SBC CDR, although some unknowns remain as of this writing. 
+
+It is also designed to work as a Supporting App alongside Sideview&amp;#x27;s commercial &amp;quot;Cisco CDR Reporting and Analytics&amp;quot; app.  
+When used in conjunction with the Cisco CDR app, the Oracle SBC data can be used in that app alongside the CUCM data.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f293d806-d8a1-11f1-852f-2edcba1bbb9a.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
+      <pubDate>Wed, 04 Nov 2026 22:50:06 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7051/#v1.0.3</guid>
+    </item>
+    <item>
+      <title>Supporting App for Cisco Meeting Server - v0.6.3 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8413/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* **Important** - legs used to be the meeting's completed-leg count (callLegsCompleted), present only on callEnd records. It is now 1 per participant leg, so Investigate Calls can add it up per meeting, and cisco_cms_legs is the same count. A participant leg is a callLegStart, except a Lync or Teams client's instant-messaging and application-sharing sub-legs, so a Lync participant counts once rather than three times. The completed-leg count is still in records.record.call.callLegsCompleted. Requires Cisco CDR Reporting and Analytics 9.0.1, which sums them per call on Investigate Calls.
+* Fixed a bug where the src_ip and dest_ip fields held SIP addresses rather  than IP addresses. src_ip is now the participant's IP address, and dest_ip  is no longer extracted.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This is a Supporting App designed to be deployed alongside Sideview&amp;#x27;s commercial &amp;quot;Cisco CDR Reporting and Analytics&amp;quot; app.  It provides the Splunk configuration to ingest the CDR data from Cisco Meeting Server. Additionally it contains various pieces of Splunk configuration and logic that are used by Cisco CDR Reporting and Analytics, to make the CMS CDR work within its user interfaces.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/bfa85ea4-d8a0-11f1-88a3-7a990e942529.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
+      <pubDate>Wed, 04 Nov 2026 22:42:38 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8413/#v0.6.3</guid>
+    </item>
+    <item>
+      <title>Microsoft 365 - v1.4.6 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8612/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Accept category arrays in update email while preserving existing string outputs.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app enables MS Graph API-based email ingestion and investigative actions on Microsoft 365, replacing the Microsoft Graph for Office 365 app.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/4800189a-d89d-11f1-9bc0-9aa49d434472.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Wed, 04 Nov 2026 22:15:47 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8612/#v1.4.6</guid>
+    </item>
     <item>
       <title>Carbon 9 Compliance M-26-14 - v1.55.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/9196/</link>
@@ -753,14 +801,6 @@ This app is not yet available for self-service installation on Splunk Cloud. Ple
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Wed, 04 Nov 2026 14:14:47 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5846/#v2.13.0</guid>
-    </item>
-    <item>
-      <title>Fledge App for Splunk - v0.9.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10209/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Fledge for Splunk connects your Fledge IoT edge gateways to Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Manage Fledge IoT edge gateways and pull south-plugin telemetry — IEC 104, OPC UA, Modbus and more — into Splunk indexes. No Fledge north plugin required.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/166e3d24-d38f-11f1-a9f9-06cd90e66257.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Andrei Cheremkin</dc:creator>
-      <pubDate>Wed, 04 Nov 2026 14:08:07 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10209/#v0.9.1</guid>
     </item>
     <item>
       <title>UniFi Security Add-on - v0.2.4 [New App Release]</title>
@@ -2336,64 +2376,6 @@ Key Capabilities:
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Thu, 29 Oct 2026 19:13:19 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5755/#v3.0.4</guid>
-    </item>
-    <item>
-      <title>WHOIS - v3.0.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5867/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Keep domain lookups working when the optional public suffix cache cannot be saved.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app implements investigative actions that query the whois database&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d4082d8c-d3c5-11f1-a001-4aa651988d5c.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Thu, 29 Oct 2026 18:23:25 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5867/#v3.0.1</guid>
-    </item>
-    <item>
-      <title>Corelight App For Splunk - v2.6.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/3884/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## Version 2.6.2
-
-### New Features
-
-* **Corelight Agentic Defense**
-  * A new AI-driven triage view that surfaces the highest-risk entities, ranked by confidence score from Corelight’s Agentic Defense System. It automatically investigates network alerts, scores each investigation, and surfaces the supporting evidence so analysts can focus on the entities that need human judgment.
-  * **Risk-ranked entities**
-    * A prioritized list of investigated entities, each with a numeric risk score, an AI verdict (e.g., **Needs Human Review**, **Suspicious**, **Likely Benign**), and a count of key findings.
-  * **Per-entity reports**
-    * AI analysis summary and detailed assessment, the investigation window, and the full set of key findings for each entity.
-  * **Evidence and re-executable queries**
-    * Each key finding includes its justification, the raw evidence collected by Corelight’s Agentic Defense System, and one or more &quot;View in Splunk&quot; links that reopen that evidence in Splunk search.
-  * **Recommended responses**
-    * Suggested next steps, including recommendations for isolation or blocking as containment callouts when flagged by the report.
-  * **Note:** This view requires Corelight agentic defense reports to be present in your environment&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Corelight App for Splunk enables incident responders and threat hunters who use Splunk® and Splunk Enterprise Security to work faster and more effectively. The app and required TA extracts information and knowledge from Zeek (formerly known as Bro) via Corelight Sensors or open-source Zeek, resulting in powerful security insights through key traffic dashboards such as:
-
-Intel: Find IOCs from external sources matched in network traffic.
-
-Notices: See situations flagged by the Notice policy for further investigation.
-
-IP Interrogation: Identify anomalies by reviewing top protocol usage, internal vs. external connections, top connections by bytes transferred and more.
-
-Log Hunting: Accelerate your hunt by narrowing down many logs to only the logs that matter.
-
-Detections: Find and respond to off-port protocol usage, IOC matches, and other potentially interesting events.
-
-Connections: Gain situational awareness using lists of top services, ports, dataflows, originators, and responders.
-
-HTTP: Find suspicious HTTP transactions by reviewing a list of top host headers, originators, rare user agents and rare host headers.
-
-DNS: Detect DNS exfiltration by spotting queries to non-existent domains and high connection counts.
-
-Files: Find executables hidden in benign extensions and compressed files.
-
-Corelight Egress Monitor: Find risky North/South user connections to weak SSL versions.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/59029028-d3bb-11f1-8671-a64bcc939448.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Corelight Inc</dc:creator>
-      <pubDate>Thu, 29 Oct 2026 17:35:10 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/3884/#v2.6.2</guid>
-    </item>
-    <item>
-      <title>TA for Corelight - v2.6.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/3885/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Please see [https://splunkbase.splunk.com/app/3884](https://splunkbase.splunk.com/app/3884) for full release notes.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This is the Indexer TA for the Corelight App.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/5430105c-d3bb-11f1-8495-ce2641f157be.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Corelight Inc</dc:creator>
-      <pubDate>Thu, 29 Oct 2026 17:10:53 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/3885/#v2.6.2</guid>
     </item>
   </channel>
 </rss>
