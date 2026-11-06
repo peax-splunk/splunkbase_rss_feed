@@ -6,7 +6,109 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Fri, 06 Nov 2026 17:44:39 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 06 Nov 2026 22:32:46 +0000</lastBuildDate>
+    <item>
+      <title>Rubrik Security Cloud Add-on for Splunk - v1.0.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10269/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**### Version 1.0.0**
+
+\* Added support for collecting Rubrik events through webhook.
+
+\* Added feature to generate finding/notable events in Enterprise Security.
+
+\* Added support for enrichment of Rubrik data.
+
+\* Added support for Turbo and Advanced Threat Hunt.
+
+\* Added support for CIM data models for Rubrik events.
+
+\* Added Enrichment, Compliance, Executive Summary and Cyber Resilience Dashboards.
+
+\* Added automated file quarantine for DSPM violations.
+
+\* Added Identity Resilience violation detection and remediation with comprehensive comment enrichment.
+
+\* Added violation status synchronization between Splunk and Rubrik.
+
+\* Added file owner enrichment and remediation logs extraction for violation quarantine.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Rubrik Security Cloud Add-on for Splunk allows customers to send events and alerts to Splunk Enterprise. This add-on includes dashboards and queries so that customers can have executive level and summary level views of their hybrid infrastructure and where sensitive data resides.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/70dfbd22-d7a5-11f1-b796-ba2b64500931.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Peter Nguyen</dc:creator>
+      <pubDate>Fri, 06 Nov 2026 21:25:55 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10269/#v1.0.0</guid>
+    </item>
+    <item>
+      <title>Splunk Add-on for AWS Security Hub - v1.1.4 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8642/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Dependency updates for security and miscellaneous bug fixes&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Use the Splunk Add-on for AWS Security Hub to ingest real-time events from AWS Security Hub and convert them into findings and intermediate findings in Splunk Enterprise Security. Consolidating findings in Splunk Enterprise Security helps to centralize data management across AWS Cloud platforms and services and leverage the threat detection capabilities of Splunk Enterprise Security.
+
+Splunk Add-on for AWS Security Hub is a premium security solution requiring a subscription to Splunk via AWS Security Hub Extended.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/894ecce4-da26-11f1-bba6-9e2f359bf1f9.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Fri, 06 Nov 2026 21:15:42 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8642/#v1.1.4</guid>
+    </item>
+    <item>
+      <title>Hurricane Labs Add-on for Windows PowerShell Transcript - v0.2.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4984/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;\## 0.2.0
+
+Tested on Splunk Enterprise 9.4.3, 10.4.1 and 10.6.1. Supports Windows PowerShell 5.1 and PowerShell 7.x transcripts.
+
+\### Fixes
+
+\- Events are now timestamped with the session's Start time instead of the transcript file's last-modified time.
+
+\- PowerShell 7 transcripts (&quot;PowerShell transcript start&quot;) now split into one event per session, and their end blocks are dropped. CRLF and LF files both work.
+
+\- Transcripts in other languages now parse: Windows PowerShell 5.1 on non-English Windows and PowerShell 7.6.6+ translate the header, so parsing now goes by the header's layout instead of English words.
+
+\- user, domain, username, runas_user and runas_domain keep dots, spaces and $ in names, and handle NT AUTHORITY\SYSTEM.
+
+\- std_out now starts after the header for both PowerShell versions.
+
+\- computer/dest no longer spans several lines when the machine name is blank.
+
+\### Eventtype changes (search time)
+
+\- powershell_encoded_command matches every -EncodedCommand abbreviation (-e, -ec, -enc ...) and the / forms (/e, /enc ...), but only when followed by a base64 UTF-16LE payload. -Encoding abbreviations and other tools' -e (docker, git, sed) no longer match.
+
+\- powershell_command needs -Command (or -c, -com ...) on a line that runs powershell or pwsh. -ComputerName, -ComObject, Invoke-Command, Get-Command, python -c and bash -c no longer match.
+
+\- powershell_nslookup_txt also matches -type\=txt and -querytype\=txt.
+
+\- powershell_registry also matches Get-ItemProperty -Path HK... and Set-Location HK...
+
+\### New
+
+\- CIM Endpoint.Processes field names: dest, process, process_id, process_path, process_name, action.
+
+\- powershell_transcript_session eventtype for opting in to the CIM Endpoint data model (no data model tags by default; see the README).
+
+\- Splunk Cloud readiness: \[id] stanza in app.conf and sc_admin write access.
+
+\### Upgrade notes
+
+\- Timestamp, line-breaking and end-block changes apply only to newly indexed data.
+
+\- Eventtype changes apply at search time, so they change what existing saved searches and alerts on these eventtypes match.
+
+\- Events are now dated by session start, which can be well before Splunk receives them. Scheduled searches with short lookbacks should search by arrival time, e.g. \_index_earliest\=-20m.
+
+\- Transcript times have no time zone. A single forwarder reading transcripts from several time zones needs a per-host TZ (see the README).
+
+\### Known limitations
+
+\- A session is one event, and Splunk drops everything past 256 KB (TRUNCATE), so commands after very long output aren't indexed.
+
+\- Command output that reproduces a transcript header (e.g. Get-Content of another transcript) splits the session there, and later commands take that header's fields and start time.
+
+\- Full list in the README.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app provides knowledge objects for working with Windows PowerShell transcript logs.  In addition to field extractions, a number of event types are included to support threat hunting use cases. 
+
+You will need to configure your Windows systems to log PowerShell transcripts in order to benefit from this app.  This logging is not enabled by default in Windows.  These logs, once generated, should be collected via a file input and forwarded to Splunk.  Additional information on the configuration of this app is available here: www.hurricanelabs.com/splunk-tutorials/splunk-tutorial-powershell-transcription-logging
+
+This app is also available on GitHub: https://github.com/HurricaneLabs/TA-powershell_transcript&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/09f9278a-da19-11f1-a23e-ded2b8f984af.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Hurricane Labs</dc:creator>
+      <pubDate>Fri, 06 Nov 2026 19:37:55 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4984/#v0.2.0</guid>
+    </item>
     <item>
       <title>Eventgen Manager - v2.0.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/9245/</link>
@@ -262,34 +364,6 @@ This application provides advanced maintenance management capabilities while ens
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sylvain Berthaud</dc:creator>
       <pubDate>Thu, 05 Nov 2026 19:41:44 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7678/#v1.3.7</guid>
-    </item>
-    <item>
-      <title>Rubrik Security Cloud Add-on for Splunk - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10269/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**### Version 1.0.0**
-
-\* Added support for collecting Rubrik events through webhook.
-
-\* Added feature to generate finding/notable events in Enterprise Security.
-
-\* Added support for enrichment of Rubrik data.
-
-\* Added support for Turbo and Advanced Threat Hunt.
-
-\* Added support for CIM data models for Rubrik events.
-
-\* Added Enrichment, Compliance, Executive Summary and Cyber Resilience Dashboards.
-
-\* Added automated file quarantine for DSPM violations.
-
-\* Added Identity Resilience violation detection and remediation with comprehensive comment enrichment.
-
-\* Added violation status synchronization between Splunk and Rubrik.
-
-\* Added file owner enrichment and remediation logs extraction for violation quarantine.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Rubrik Security Cloud Add-on for Splunk allows customers to send events and alerts to Splunk Enterprise. This add-on includes dashboards and queries so that customers can have executive level and summary level views of their hybrid infrastructure and where sensitive data resides.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/70dfbd22-d7a5-11f1-b796-ba2b64500931.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Peter Nguyen</dc:creator>
-      <pubDate>Thu, 05 Nov 2026 17:20:09 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10269/#v1.0.0</guid>
     </item>
     <item>
       <title>Cisco DC Networking - v2.0.0 [Version Update]</title>
@@ -1619,18 +1693,6 @@ It is pure SPL: no scripts, no inputs, no network calls and no custom JavaScript
       <guid>https://splunkbase.splunk.com/app/10262/#v1.0.0</guid>
     </item>
     <item>
-      <title>Machine Data Lab - v2.1.10 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8697/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Register yourself and watch the global Splunk community grow, one pin on the map at a time.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Machine Data Lab is a community-driven app built by Border Innovation, where Splunk users from around the world register and leave their mark.
-
-Sign up in seconds and watch as a global map comes alive with registrations from fellow users across every corner of the planet.
-
-See who&amp;#x27;s joining, when, and from where — as the Splunk community grows, one registration at a time.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Border Innovation</dc:creator>
-      <pubDate>Wed, 04 Nov 2026 10:52:33 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8697/#v2.1.10</guid>
-    </item>
-    <item>
       <title>Splunk Add-on for Juniper - v1.7.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/2847/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;adds support for Junos OS 25.4 firewall events, including RT_FLOW session create, close, and deny events; RT_SCREEN events; structured antivirus events; and permitted or blocked web-filter events. It expands field extraction and CIM mappings, including normalization that leaves placeholder VRF values unset. The release also supports self-service installation in Splunk Cloud without a platform restart. The add-on provides search-time parsing and mapping; syslog collection is configured separately.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Add-on for Juniper allows a Splunk software administrator to pull system logs and traffic statistics from Juniper NetScreen Firewall and Junos OS using syslog. This add-on provides the inputs and CIM-compatible knowledge to use with other Splunk apps, such as Splunk Enterprise Security and the Splunk App for PCI Compliance.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/141e612a-d83a-11f1-9409-4e5f387c62a1.png&quot;&gt;</description>
@@ -2267,27 +2329,6 @@ https://github.com/prewinthomas/SplunkIssues&lt;/p&gt;&lt;img height=&quot;36px&
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Prewin Thomas</dc:creator>
       <pubDate>Mon, 02 Nov 2026 19:37:05 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5132/#v1.2.0</guid>
-    </item>
-    <item>
-      <title>Threat Intel Enrichment AI App for Splunk - v1.1.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8073/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;### Fixed
-- `| enrich` command now works (it could not run in 1.0.0).
-- `| enrichioc` keeps the original event fields, runs on the search head only, and accepts `field=`, file hashes, IPv6 and defanged values; private IPs are never sent to external APIs.
-- AbuseIPDB categories, ASN (from OTX) and actor attribution now populate correctly; campaigns are merged instead of overwritten.
-- `ioc_enrich_dispatch` is now scheduled (every 10 minutes) so `index=ti_enrich` fills; `indexes.conf` fixed.
-- Dashboard tokens and time filters fixed.
-
-### Security
-- API keys moved to Splunk's encrypted credential store (storage/passwords); 1.0.0 keys migrate automatically and the clear-text copy is removed. New setup page with password fields.
-- All outbound calls use HTTPS with certificate verification, timeouts and retry/backoff.
-
-### Upgrade notes
-- Users who run `enrichioc`/`enrich` need the `list_storage_passwords` capability.
-- Create the `ti_enrich` index on Splunk Cloud before enabling the dispatch search.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This Splunk App enriches Indicators of Compromise (IOCs) (IPs, domains, URLs, file hashes) by querying multiple external threat intelligence sources, then correlates enriched IOCs into campaigns. A key feature of this app is its use of AI‑driven natural language generation to produce clear, human‑readable IOC summaries and campaign summaries, making threat intelligence more accessible to both analysts and decision‑makers.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/df8548a0-d6f1-11f1-98fa-6e8254e71485.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Prewin Thomas</dc:creator>
-      <pubDate>Mon, 02 Nov 2026 19:34:26 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8073/#v1.1.0</guid>
     </item>
   </channel>
 </rss>
