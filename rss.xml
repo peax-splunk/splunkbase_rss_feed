@@ -6,7 +6,98 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Fri, 06 Nov 2026 02:58:12 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 06 Nov 2026 10:25:28 +0000</lastBuildDate>
+    <item>
+      <title>Inno AI Report - v1.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10252/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**Restore now returns the dashboard to its exact original layout.**
+
+* Dashboard Studio: after Restore, the canvas height and width, the tab bar added by the wizard, and empty default tokens no longer stay behind.
+* If you enlarged a panel after the AI tab was added, Restore keeps the larger height instead of clipping the panel.
+* Dashboards set up with the earlier private build (`netops_ai_kit`) now restore to their original layout, using that build's backup.
+* Re-applying to a Dashboard Studio dashboard keeps the domain, language and description chosen earlier.
+
+After upgrading, run `/&lt;locale&gt;/_bump` once so browsers load the new wizard code.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Add an AI situation-analysis tab to any Splunk dashboard. Press one button and the app reads the panel results already on screen, sends them to Splunk AI Toolkit, and returns a graded report with likely causes, recommended actions and the team to contact. No dashboard rewriting. Free.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Inno AI Report attaches an &amp;quot;AI Situation Analysis&amp;quot; tab to a Splunk dashboard you already have. When a user presses the button, the app collects the results that are currently on screen, summarises them, and asks your Splunk AI Toolkit connection to interpret them together.
+
+The report gives a status grade (Normal / Warning / Critical / Undetermined), a panel-by-panel reading, ranked cause hypotheses with supporting and contradicting evidence, recommended actions with the responsible team, impact scope and urgency, and the data gaps that limited the analysis.
+
+It does not need to know what your dashboard searches do. Panel results are generalised into field=value lines without depending on particular field names, so the app attaches to dashboards it has never seen. A wizard does the work: pick an app and a dashboard, choose the business domain and the report language, press one button. The original dashboard is backed up automatically and can be restored from the same wizard.
+
+Six business-domain presets (network, security, infrastructure, application, business and general) change the analyst role, what is cited as evidence, which team is named in each action, and how to verify. Reports can be produced in Korean, English or Japanese.
+
+Nothing is sent to the vendor. The model runs wherever your AI Toolkit connection points, and the app calls it only when a user presses the button, so a dashboard carrying the tab costs nothing until it is used.
+
+Generated analysis can be wrong or incomplete. It is meant to support operational decisions, not to replace them.
+
+More from inno software: Inno AI Chat lets you ask the follow-up question in plain language, and Inno Observability brings multi-vendor network, infrastructure, application and database monitoring, log anomaly detection and eBPF tracing onto your on-premises Splunk platform. See the Details tab.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ea29db08-d9ae-11f1-95a9-628e68fce73d.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Inno Software</dc:creator>
+      <pubDate>Fri, 06 Nov 2026 07:29:26 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10252/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>Log Continuity Manager for Splunk - v1.2.7 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8958/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## Version 1.2.7
+
+### Text Reliability Improvements
+
+* Improved monitoring persistence resilience when parsed records contain invalid or corrupted text.
+* Invalid parsed records are now isolated so unaffected monitoring records can continue updating.
+* Added field-specific validation for corrupted replacement characters, malformed UTF-8 text and unpaired surrogates.
+* Valid Turkish UTF-8 characters remain fully supported.
+* Improved Manage Targets error reporting for invalid text fields.
+* Added the same text-validation protections to Email Subject Settings.
+* All six notification subject templates are validated before configuration is written.
+* Existing corrupt target fields can be corrected without deleting or recreating the target.
+* No automatic text replacement, transliteration or legacy encoding fallback is performed.
+
+### Compatibility
+
+* No KV Store schema changes.
+* No Search Head Cluster behavior changes.
+* No scheduler cadence changes.
+* No runtime lock or retry behavior changes.
+* Existing target IDs and KV records remain compatible.
+
+### Known Limitation
+
+Undecodable command input streams that fail before row parsing still abort the invocation and require upstream encoding correction.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Log Continuity Manager provides KV Store-backed log interruption monitoring, recovery tracking, notification workflows, Mass Interruption policies and Dashboard Studio-based operational visibility for Splunk Enterprise environments.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Log Continuity Manager for Splunk helps teams detect, manage and investigate log ingestion interruptions across monitored hosts, indexes, sources and sourcetypes.
+
+The app supports target-based continuity monitoring, interruption detection, recovery tracking, maintenance and redundancy-aware handling, and operational dashboards for monitoring status and history.
+
+Version 1.2.1 adds Mass Interruption monitoring with Host Count and Percentage thresholds, scoped policies for host_index, host_index_source and host_index_sourcetype targets, interruption/reminder/recovery email notifications, notification delivery visibility, KV Store-backed runtime state, and improved Search Head Cluster readiness.
+
+The app is designed for Splunk Enterprise environments where continuous log visibility and rapid identification of ingestion gaps are operationally important.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b78ffe52-d9a4-11f1-95a9-628e68fce73d.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Furkan KILINC</dc:creator>
+      <pubDate>Fri, 06 Nov 2026 05:44:59 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8958/#v1.2.7</guid>
+    </item>
+    <item>
+      <title>Service Tree Viz - v1.0.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/10028/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Minor update for Splunk Cloud compliance due to Splunk Inspect rule.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Service Tree Viz is a Dashboard Studio visualization that draws your Splunk ITSI services as a dependency tree, colored by health. Replay recent history on a timeline to see what changed, click a service for its KPIs and dependencies.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;A Dashboard Studio visualization that draws your Splunk ITSI services as a dependency tree, colored by health, with a replay timeline to see how health changed over time.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/1a13199a-d9a2-11f1-85e0-e6b89c9d8ac5.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Spavin</dc:creator>
+      <pubDate>Fri, 06 Nov 2026 05:23:56 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10028/#v1.0.2</guid>
+    </item>
+    <item>
+      <title>Xpanse Technical Add-on - v5.4.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4622/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**Release 5.4.2:**
+
+* Removed Python 2 references.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Xpanse&amp;#x27;s Technical Add-on for Splunk allows you to consume and access Issues Updates, Assets, and Services data through Splunk. You can configure your own Expander data as a Splunk data input, configure the add-on to use a proxy, search your Expander data through the Splunk UI using Splunk data queries, and more.
+
+This allows you to:
+- Ease-of-use for data querying in a commonly-used SIEM
+- Centralize alerting
+- Have a single source-of-truth for security-related data
+- Correlate Expander Issues Updates data to internal events tracked in Splunk
+- Create custom reporting, dashboards, and visualizations
+- Gain context for IPs, Domains, Certificates, and related Issues observed on your network perimeter&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/058b94e6-d99a-11f1-ac53-f687532b8143.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Expanse Co</dc:creator>
+      <pubDate>Fri, 06 Nov 2026 04:30:40 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4622/#v5.4.2</guid>
+    </item>
     <item>
       <title>Microsoft OneDrive - v3.1.5 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5815/</link>
@@ -1981,32 +2072,6 @@ Documentation: https://docs.thedutchdatadifference.nl/adjutant-ai/&lt;/p&gt;&lt;
       <guid>https://splunkbase.splunk.com/app/8747/#v2.7.6</guid>
     </item>
     <item>
-      <title>Log Continuity Manager for Splunk - v1.2.6 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8958/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Version 1.2.6
-
-
-
-\- Added a read-only Runtime Lock Health dashboard and lcmlockhealth command.
-
-\- Added visibility into runtime lock age, stale-lock indicators, retry successes, budget exhaustion, release failures and non-contention failures.
-
-\- Added a lightweight Runtime Lock Health scheduled check with configurable diagnostic thresholds.
-
-\- Improved operational observability without changing existing lock acquisition, retry, owner-fencing or release behavior.
-
-\- No automatic stale-lock cleanup, lock stealing, KV schema changes or SHC behavior changes were introduced.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Log Continuity Manager provides KV Store-backed log interruption monitoring, recovery tracking, notification workflows, Mass Interruption policies and Dashboard Studio-based operational visibility for Splunk Enterprise environments.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Log Continuity Manager for Splunk helps teams detect, manage and investigate log ingestion interruptions across monitored hosts, indexes, sources and sourcetypes.
-
-The app supports target-based continuity monitoring, interruption detection, recovery tracking, maintenance and redundancy-aware handling, and operational dashboards for monitoring status and history.
-
-Version 1.2.1 adds Mass Interruption monitoring with Host Count and Percentage thresholds, scoped policies for host_index, host_index_source and host_index_sourcetype targets, interruption/reminder/recovery email notifications, notification delivery visibility, KV Store-backed runtime state, and improved Search Head Cluster readiness.
-
-The app is designed for Splunk Enterprise environments where continuous log visibility and rapid identification of ingestion gaps are operationally important.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f60c9a66-d6e1-11f1-b92a-e2db52be78d5.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Furkan KILINC</dc:creator>
-      <pubDate>Tue, 03 Nov 2026 11:30:50 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8958/#v1.2.6</guid>
-    </item>
-    <item>
       <title>USTA Malware and C2 Intelligence for Splunk - v1.0.5 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7582/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Introducing the USTA Malware and C2 Intelligence for Splunk app, a powerful integration designed to ingest threat intelligence data from the USTA solution. This app enables organizations to seamlessly import Indicators of Compromise (IOCs), including malware, malicious URLs, and phishing sites, into Splunk. Provided by PRODAFT.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/13e2b9a6-d770-11f1-98e1-ca24e73a1663.png&quot;&gt;</description>
@@ -2215,41 +2280,6 @@ The add-on preserves original JSON, supports checkpointed collection and provide
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Mon, 02 Nov 2026 15:17:32 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6414/#v1.0.7</guid>
-    </item>
-    <item>
-      <title>Jira - v4.1.7 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5806/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Replace direct state-file access with BaseConnector `load_state()` and `save_state()` methods for HA-compatible state handling.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with JIRA to perform several ticket management actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/249eb380-d6d0-11f1-b59b-c68cf42701a4.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Mon, 02 Nov 2026 15:14:48 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5806/#v4.1.7</guid>
-    </item>
-    <item>
-      <title>Splunk Add-on for Google Workspace - v5.1.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5556/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Adds Google Meet audit activity collection through the **Activity** input, using sourcetype `gws:reports:meet`.
-* Adds Google Workspace Secure LDAP audit activity collection, including bind, search, and unbind operations, through the **Activity** input, using sourcetype `gws:reports:ldap`.
-* Adds a configurable **Lookback Offset** to the **Gmail Logs Migrated** input. The default is 600 seconds (10 minutes), and values from 600 through 216000 seconds are allowed. Increase this value to give delayed BigQuery data more time to become available.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk Add-on for Google Workspace lets a Splunk administrator collect Google Workspace event data using Google Workspace APIs, and provides CIM-compatible knowledge to use with other Splunk apps.
-
-Version 2.8.1 of the Splunk Add-on for Google Workspace has the following new features:
-Fixed issues with gmail_logs_migrated input
-
-From version 2.8.0, Splunk Add-on for Google Workspace contains the following new sourcetypes:
-
-gws:reports:chat
-gws:reports:mobile
-gws:reports:chrome&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b0e9e512-d6b7-11f1-ab03-7235843d4f1b.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Mon, 02 Nov 2026 15:10:01 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5556/#v5.1.0</guid>
-    </item>
-    <item>
-      <title>Varonis SaaS - v1.0.18 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7449/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Fixed alert collection errors after daylight saving time changes, and removed a delay in alert delivery on servers in timezones behind UTC.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Access Varonis&amp;#x27; enriched, data-centric alerts directly within Splunk for faster triage, investigation, and remediation — without opening another interface. When integrated with Splunk, Varonis’ unique insights are contextualized alongside other security events, providing a unified picture of data risk that will help you catch and respond to threats. Bi-directional communication features also enable Varonis alerts to be viewed and closed from within Splunk, accelerating incident resolution and reducing manual effort.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2b7cd538-d6cb-11f1-9b12-e2b08c72e87b.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">App Varonis</dc:creator>
-      <pubDate>Mon, 02 Nov 2026 14:41:55 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7449/#v1.0.18</guid>
     </item>
   </channel>
 </rss>
