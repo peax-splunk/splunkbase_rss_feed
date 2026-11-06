@@ -6,7 +6,128 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Fri, 06 Nov 2026 10:25:28 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 06 Nov 2026 17:44:39 +0000</lastBuildDate>
+    <item>
+      <title>Eventgen Manager - v2.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9245/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Eventgen Manager 2.0.0 generates events itself. SA-Eventgen is no longer required.
+
+NEW
+
+Built-in generation engine (eventgen_manager_engine modular input). Pure Python, runs on Linux, macOS, and Windows, on x86 and ARM.
+
+Configuration changes apply within seconds. No restart needed.
+
+Send test events from the editor to the real destination without turning the configuration on.
+
+Live status per configuration: state, events generated, last batch, and the reason for any failure.
+
+Automatic timestamps, with a new &quot;Timestamp to write&quot; option: generated time, or current time for testing detections that search the last few minutes.
+
+New random values: weighted, ipv4private, email, useragent, uuid. New seqfile replacement. Rated replacements now work.
+
+Counters continue from their last value after a restart.
+
+verifySSL setting for HEC and Splunk REST receivers.
+
+Rebuilt Throughput dashboard: events per second, projected daily volume, failed batches, and configured against measured rates.
+
+New Tutorial page with a complete, step-by-step guide.
+
+The engine can also run from the command line, outside Splunk.
+
+UPGRADING FROM SA-EVENTGEN
+
+Existing eventgen.conf configurations work unchanged.
+
+If SA-Eventgen is running, the built-in engine waits on standby so events are not doubled. Use &quot;Switch to the built-in engine&quot; on the Generator control page.
+
+CHANGED
+
+Syslog output now uses TCP. UDP output is removed, as UDP is not allowed on Splunk Cloud or under app certification.
+
+To send to indexers over splunktcp, keep the output on modinput and set up forwarding in outputs.conf on the instance running the app.
+
+Settings that only tuned SA-Eventgen's worker pools, plugins, and templates are removed from the editor. Existing values are kept in eventgen.conf.
+
+FIXED
+
+The structured application log starter wrote local time with a &quot;Z&quot; (UTC) suffix. It now sets timezone \= 0000.
+
+Tutorial: [https://github.com/genai-telemetry/eventgen-manager/blob/main/Eventgen_Manager_Tutorial.pdf](https://github.com/genai-telemetry/eventgen-manager/blob/main/Eventgen_Manager_Tutorial.pdf)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Configure, preview, and generate realistic test data in Splunk from the browser. A built-in engine runs eventgen.conf configurations directly, with a guided editor, live preview, and throughput monitoring.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Eventgen Manager configures, previews, and generates realistic test data in Splunk from the browser. Since version 2.0 it includes its own generation engine, so SA-Eventgen is no longer required, and existing eventgen.conf configurations run unchanged.
+
+A guided editor covers the eventgen.conf settings, so you never hand-edit the file. Pick a sample file, set how often and how many events to send, choose what to replace in each line, and watch a live preview with every generated value highlighted before anything reaches an index. Send test events to the real destination with one click to confirm the index, sourcetype, and output are right.
+
+The built-in engine is pure Python and runs on Linux, macOS, and Windows, on x86 and ARM. Changes apply within seconds with no restart. Output goes to the local index, HTTP Event Collector, Splunk REST, files, spool folders, raw TCP, or syslog over TCP. On a heavy forwarder, events are forwarded to your indexers through outputs.conf.
+
+Use it for demos, dashboard development, detection and alert testing, training, and load testing. A Throughput dashboard shows events per second, projected daily volume, failed batches, and configured against measured rates.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/adfd45ea-da06-11f1-85e0-e6b89c9d8ac5.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">kamal singh bisht</dc:creator>
+      <pubDate>Fri, 06 Nov 2026 17:38:11 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9245/#v2.0.0</guid>
+    </item>
+    <item>
+      <title>MS Graph for Active Directory - v3.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6395/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Migrate the connector to the Splunk SOAR SDK. Requires Python 3.13.
+* Move OAuth callbacks from the legacy REST handler to asset webhooks. Enable incoming webhooks and register the new redirect URI in Microsoft Entra before reauthorizing. See the app documentation for upgrade steps.
+* Add **make request** for authenticated Microsoft Graph API calls.
+* Replace custom result views with tables.
+* Add `odata.*` aliases while retaining original `@odata.*` fields. Correct output datapaths, data types, list counts and summaries. See the app documentation for playbook upgrade guidance.
+* **Disable tokens** now includes Microsoft Graph's response in action data.
+* Keep earlier records when a later page fails. Include non-sensitive parameters in handled failure results.
+* Reject expired OAuth callbacks and refresh delegated tokens when **generate token** is run.
+* Preserve cached tokens until actual expiry and retain usable legacy sessions with unknown expiry during upgrade.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Connects to Microsoft Active Directory using MS Graph REST API services to support various generic and investigative actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/1f65aca4-d9fd-11f1-84aa-7edc0cae3ce4.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Fri, 06 Nov 2026 16:14:22 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6395/#v3.0.0</guid>
+    </item>
+    <item>
+      <title>PostgreSQL - v5.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6146/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Converted the connector to the Splunk SOAR SDK while retaining the existing PostgreSQL actions and query result widget. The app continues to use the SOAR platform's PostgreSQL driver.
+* Added per-asset POSTGRESQL_DISABLE_TLS support, allowing PostgreSQL connections without TLS when explicitly enabled in the asset Advanced settings. TLS remains enabled by default.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app supports investigative actions against a PostgreSQL database&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/6f5af55e-d9ec-11f1-a23e-ded2b8f984af.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Fri, 06 Nov 2026 14:14:54 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6146/#v5.0.0</guid>
+    </item>
+    <item>
+      <title>Threat Hunting Essentials - v1.3.163 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7633/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
+
+It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
+
+Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
+
+1. Backdoor.
+2. Worms.
+3. Ransomware.
+4. Bots.
+5. Trojan horses.
+6. Keyloggers.
+7. Rootkits.
+8. Spyware.
+9. Fileless malware.
+10. Cryptojacking.
+11. Wiper malware.
+12. Adware.
+14. Viruses
+15. P2P-Worm
+16. Internet Worms
+17. Net-worm
+18. Clickjacking
+19. Cryptominer
+20. Fileless malware
+
+You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
+
+Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.
+
+For Premium Version - Contact sales https://www.avertpoint.com/contactus.html&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/6ae2dc88-d9d5-11f1-84aa-7edc0cae3ce4.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
+      <pubDate>Fri, 06 Nov 2026 12:38:09 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.163</guid>
+    </item>
     <item>
       <title>Inno AI Report - v1.0.1 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/10252/</link>
@@ -513,44 +634,6 @@ Customizable Dashboards: Includes a default dashboard optimized for faster loadi
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Thu, 05 Nov 2026 16:16:31 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5792/#v4.0.0</guid>
-    </item>
-    <item>
-      <title>Threat Hunting Essentials - v1.3.162 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7633/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
-
-It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
-
-Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
-
-1. Backdoor.
-2. Worms.
-3. Ransomware.
-4. Bots.
-5. Trojan horses.
-6. Keyloggers.
-7. Rootkits.
-8. Spyware.
-9. Fileless malware.
-10. Cryptojacking.
-11. Wiper malware.
-12. Adware.
-14. Viruses
-15. P2P-Worm
-16. Internet Worms
-17. Net-worm
-18. Clickjacking
-19. Cryptominer
-20. Fileless malware
-
-You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
-
-Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.
-
-For Premium Version - Contact sales https://www.avertpoint.com/contactus.html&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/4055f12c-d90c-11f1-b5b5-46baaf509440.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
-      <pubDate>Thu, 05 Nov 2026 14:58:36 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.162</guid>
     </item>
     <item>
       <title>Zscaler OneAPI - v1.1.1 [Version Update]</title>
@@ -2205,81 +2288,6 @@ https://github.com/prewinthomas/SplunkIssues&lt;/p&gt;&lt;img height=&quot;36px&
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Prewin Thomas</dc:creator>
       <pubDate>Mon, 02 Nov 2026 19:34:26 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8073/#v1.1.0</guid>
-    </item>
-    <item>
-      <title>NetFlow and SNMP Analytics for Splunk (Preview) - v0.2.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/9133/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**New:**&amp;#x20;
-
-* Device Health now reads SNMP polling data (Module 10103, nfc_id 20103) from a metrics index as well as an events index, detecting automatically where the data lives.
-
-**Fixed:**
-
-* Removed a false “No Network Conversations data found” warning that appeared on Splunk 9.4 while data was present and panels were populating.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Get the network traffic and device health data Splunk can&amp;#x27;t see on its own. NetFlow Optimizer turns raw NetFlow, IPFIX, sFlow, and SNMP telemetry into enriched, analysis-ready data in Splunk across on-premises and multi-cloud, closing blind spots in network, security, and device-health monitoring.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;NetFlow and SNMP Analytics for Splunk (Preview), built by NetFlow Logic, an official Splunk Partner, is the next-generation redesign of our network and security analytics app, rebuilt on Splunk Dashboard Studio. It gives network and security teams the network traffic and device health data Splunk can&amp;#x27;t see on its own, with real-time visibility across on-premises and multi-cloud environments.
-
-Powered by NetFlow Optimizer (NFO), the app processes all major flow formats (NetFlow v5/v9, sFlow, IPFIX) and cloud flow logs from AWS, Microsoft Azure, Google Cloud Platform, and Oracle Cloud Infrastructure. NFO enriches and filters this telemetry before it reaches Splunk, turning raw flow and SNMP data into analysis-ready intelligence and doing it efficiently, so you close the blind spots in your monitoring without a spike in ingest.
-
-What&amp;#x27;s new in this Preview:
-
-- Rebuilt on Dashboard Studio:  a modern, faster, dark-mode interface
-- Streamlined navigation: consolidated from ~80 legacy dashboards into 19 focused, production-quality dashboards
-- Interactive network topology: walk-the-graph exploration built on Splunk 10.4&amp;#x27;s native network graph visualization
-- Unified device health and TCP health views
-- Same NFO-powered enrichment and multi-cloud coverage you rely on today
-
-What you can do with this app:
-
-- Monitor your entire network in one place — unified visibility across on-premises infrastructure and all major cloud platforms
-- Detect threats faster — correlate flow data with IP reputation, GeoIP, user identity, and application context to surface anomalies and suspicious activity
-- Reduce Splunk ingest costs — filter and aggregate flows upstream in NFO so only enriched, relevant data reaches Splunk
-- Optimize network performance — identify overloaded interfaces, bandwidth hogs, and congestion before they impact users
-- Monitor device health with SNMP — poll devices and receive traps (SNMPv2c and v3) for real-time CPU, memory, and interface monitoring
-- Enrich your data automatically — DNS names, VM names, GeoIP, application identification, and user identity added at ingest
-
-Solution areas: Traffic overview and executive dashboards · NetFlow and flow analysis (v5/v9, sFlow, IPFIX) · Cloud flow analytics (AWS, Azure, GCP, OCI) · SNMP device and interface health · Security and threat detection · Administration and configuration
-
-Requirements: NetFlow Optimizer (NFO) 2.12.1 or later is required. Compatible with Splunk Enterprise and Splunk Cloud, Splunk ES, and Splunk ITSI (via the Content Pack for SNMP and NetFlow).
-
-Start a free 60-day trial at netflowlogic.com/free-trial — or request a demo to see the app running against live network data.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/fa9a6ce6-d6de-11f1-bfed-3e140f35c817.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">NetFlow Logic</dc:creator>
-      <pubDate>Mon, 02 Nov 2026 17:12:09 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9133/#v0.2.0</guid>
-    </item>
-    <item>
-      <title>BXTI Add-on for Method Security - v2.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/10025/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## Version 2.0.0
-
-### New and improved
-
-* Exposure collection now uses Method’s `/v2/findings/search` API directly, removing reliance on target-linked finding discovery, webhooks, or Torq.
-* Added initial backfill options: **No backfill, 7 days, 14 days, or 30 days**.
-* Added validation-status filtering for exposure collection.
-* Added resumable pagination and checkpointing so larger collections continue across polling cycles.
-* Suppresses unchanged findings while collecting meaningful updates.
-* Simplified new-input configuration to **Exposure** and **Target**. Target collection remains unchanged.
-* Preserved compatibility aliases, including `finding_id` and `issueDetailsLink`.
-* Improved collection diagnostics for scan progress, emitted records, and unchanged findings.
-
-### Upgrade notes
-
-* Requires **Python 3.13**.
-* Before upgrading from 1.x, disable existing Exposure inputs, install the update, select the desired backfill, then re-enable collection.
-* Backfill uses a fixed initial `firstSeen` cutoff. **No backfill excludes findings first seen before activation**, including later updates to those older findings.
-* Existing Audit and Finding inputs are preserved for upgrade safety but are no longer offered when creating new inputs. Disable legacy inputs where appropriate to avoid unwanted or overlapping collection.
-* Review local configuration overrides and alerts. Select the latest record per finding before filtering by status or severity.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collect Method Security audit events, targets, findings and exposure issues natively in Splunk, with configurable polling, encrypted credential storage, resumable collection and scoped CIM mappings.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;BXTI Add-on for Method Security collects audit events, targeting runs, findings and exposure issues directly through Method Security APIs—without Torq. Configure accounts, data types, destination indexes and polling intervals within Splunk.
-The add-on preserves original JSON, supports checkpointed collection and provides search-time field aliases and normalization for selected CIM Authentication, Change and Vulnerabilities use cases. Finding and exposure discovery is limited to records linked to accessible targets or explicitly configured IDs.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/1cbfb5ba-d6df-11f1-8b30-3601010d7412.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benedict Tawiah</dc:creator>
-      <pubDate>Mon, 02 Nov 2026 17:07:46 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10025/#v2.0.0</guid>
-    </item>
-    <item>
-      <title>Fidelis Network - v1.0.7 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6414/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Replace direct state-file access with the BaseConnector `load_state` and `save_state` methods to support HA-compatible state handling and SDK migration.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with Fidelis Network to execute various investigate and generic actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/860e2d3a-d6d0-11f1-98fa-6e8254e71485.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Mon, 02 Nov 2026 15:17:32 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6414/#v1.0.7</guid>
     </item>
   </channel>
 </rss>
