@@ -6,7 +6,85 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sat, 07 Nov 2026 09:26:13 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 07 Nov 2026 15:58:30 +0000</lastBuildDate>
+    <item>
+      <title>CIM Assessment Toolkit (CAT) - v2.14.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8962/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**Director-level report, TA Inventory view, and scope fixes since 2.11.0.**
+
+**New in the report (2.14.0, 2.14.1)**
+
+* Coverage by Data Model: every in-scope CIM model with datasets, sourcetypes, 7-day volume, acceleration state, and a Covered / Partial / No data verdict; counts surface in the Executive Summary.
+* CIM Coverage trend from the daily coverage snapshots (needs two or more days).
+* Unmapped volume share stated in one line, in the body and the Executive Summary.
+* Acceleration risk flags: retention shorter than the detection window (new macro cim_report_detection_window, default 7 days), conflicting acceleration.earliest_time between apps, errors, incomplete acceleration.
+* Field-Level Gaps rolled up to one row per model; the full list, the mapped sourcetypes, and the installed apps are attached as CSVs (CIM_Field_Gaps\_\*, CIM_Mapped_Sourcetypes\_\*, Splunk_Installed_Apps\_\*).
+* Appendix A Observed CIM Coverage and Appendix B Installed Splunk Apps with app hygiene counts. Appendix C Engineering Detail is opt-in (--detail or param.detail).
+* Scope line on every cover, scope-aware wording, Required Tags full tag chain (cim_required_tags macro), Remediation Priorities intro.
+
+**New in the dashboard (2.12.1, 2.13.0)**
+
+* TA Inventory view: Observed CIM Coverage, Configured CIM Coverage, Sourcetypes Missing from Inventory, Installed Splunk Apps, all exportable.
+* Collection records observed CIM tags per model/dataset/index/sourcetype with no extra search jobs.
+* Data Model Health: effective retention from the summarization endpoint with a Retention Conflict column, correct app column, Earliest/Latest on ISO 8601 search heads, run times without \_internal access.
+* Data Model Test: Results columns match the Generated SPL, with REQ, REC, OPT tier markers and the common base-search fields.
+* cim_validator_send_report_now report to email the assessment on demand.
+
+**Fixes**
+
+* Scope filter and CIM Coverage honor the sourcetype inventory scope, falling back to model category only when a sourcetype is missing from the inventory (2.11.1).
+* Report searches dispatch in the CAT app context so App-shared lookups resolve; report coverage now matches the dashboard (2.13.1).
+* Coverage collection window matches the dashboard's Last 24 hours default (2.13.1).
+* email_report.py exits nonzero on SMTP failure so scheduled runs log as failed (2.13.0).
+* Exclusions report enriched with every inventory column (2.11.1).
+
+**Upgrade**: install over the existing version. Lookup schemas are unchanged since 2.10.0; custom exclusions, inventory, and CIM catalog overrides in local/transforms.conf are preserved. Set cim_report_detection_window to the longest lookback your correlation searches use.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Measure and validate Splunk CIM compliance at the data model and dataset level — with field-mapping quality scoring, unmapped data discovery, prescribed-value validation, remediation priorities, data model testing, TA sourcetype coverage and inventory, and automated reporting.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The CIM Assessment Toolkit (CAT) measures and validates Common Information Model (CIM) compliance across your Splunk data models at the data model + dataset level.
+
+CAT scores field-mapping quality, data quality, and prescribed-value compliance; surfaces unmapped sourcetypes and impact-ranked remediation priorities; monitors data model acceleration health; and generates professional Word-document reports with optional scheduled email delivery.
+
+A new feature is four TA Inventory tables which reveal what TAs cover which sourcetypes for CIM normalization and their versions - essential information for maintaining CIM normalization coverage.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2dd84254-dac2-11f1-95a9-628e68fce73d.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">James Baxter</dc:creator>
+      <pubDate>Sat, 07 Nov 2026 15:56:19 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8962/#v2.14.1</guid>
+    </item>
+    <item>
+      <title>Threat Hunting Essentials - v1.3.164 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7633/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
+
+It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
+
+Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
+
+1. Backdoor.
+2. Worms.
+3. Ransomware.
+4. Bots.
+5. Trojan horses.
+6. Keyloggers.
+7. Rootkits.
+8. Spyware.
+9. Fileless malware.
+10. Cryptojacking.
+11. Wiper malware.
+12. Adware.
+14. Viruses
+15. P2P-Worm
+16. Internet Worms
+17. Net-worm
+18. Clickjacking
+19. Cryptominer
+20. Fileless malware
+
+You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
+
+Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.
+
+For Premium Version - Contact sales https://www.avertpoint.com/contactus.html&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/951ee34c-da9e-11f1-8782-0a7471defe44.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
+      <pubDate>Sat, 07 Nov 2026 13:17:33 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.164</guid>
+    </item>
     <item>
       <title>MS Graph for Active Directory - v3.1.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/6395/</link>
@@ -208,44 +286,6 @@ Use it for demos, dashboard development, detection and alert testing, training, 
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Fri, 06 Nov 2026 14:14:54 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6146/#v5.0.0</guid>
-    </item>
-    <item>
-      <title>Threat Hunting Essentials - v1.3.163 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7633/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
-
-It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
-
-Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
-
-1. Backdoor.
-2. Worms.
-3. Ransomware.
-4. Bots.
-5. Trojan horses.
-6. Keyloggers.
-7. Rootkits.
-8. Spyware.
-9. Fileless malware.
-10. Cryptojacking.
-11. Wiper malware.
-12. Adware.
-14. Viruses
-15. P2P-Worm
-16. Internet Worms
-17. Net-worm
-18. Clickjacking
-19. Cryptominer
-20. Fileless malware
-
-You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
-
-Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.
-
-For Premium Version - Contact sales https://www.avertpoint.com/contactus.html&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/6ae2dc88-d9d5-11f1-84aa-7edc0cae3ce4.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
-      <pubDate>Fri, 06 Nov 2026 12:38:09 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.163</guid>
     </item>
     <item>
       <title>Inno AI Report - v1.0.1 [New App Release]</title>
@@ -1956,24 +1996,6 @@ For more details, visit the official Infigo SIEM website: www.infigosiem.com&lt;
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Will Searle</dc:creator>
       <pubDate>Tue, 03 Nov 2026 11:53:34 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/9301/#v1.0.3+a71d3d5</guid>
-    </item>
-    <item>
-      <title>RSS Feeder for Splunk - v1.1.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8127/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;### Fixed
-- Event timestamps were off by the server's UTC offset.
-- `verify_ssl = false` now takes effect; per-input proxy/timeout no longer leak to other inputs.
-- Feeds are no longer dropped on harmless parser warnings; items without guid/link/date are de-duplicated.
-- Dashboard index/author filters and link drilldowns fixed.
-
-### Improved
-- Conditional GET (ETag/Last-Modified), retries with backoff, response size limit, rotating log with feed health panel.
-- New fields: `published_epoch`, `feed_title`, `feed_url`, `guid`, `updated`, `input_name`. `published` is unchanged.
-- New optional settings: `max_bytes`, `retries`, `ca_bundle`. Package size halved.
-- Existing checkpoints are imported on upgrade, so items are not re-indexed.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;RSS Feeder for Splunk Fetch and index RSS/Atom feeds directly into Splunk. This modular input lets you monitor security advisories, news, blogs, or any other RSS source in near real‑time, with dashboards to visualize feed activity, top authors, tags, and more.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a9323b7c-d6f2-11f1-98fa-6e8254e71485.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Prewin Thomas</dc:creator>
-      <pubDate>Tue, 03 Nov 2026 11:39:52 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8127/#v1.1.0</guid>
     </item>
     <item>
       <title>Splunk Add-on for Cisco Identity Services - v5.0.1 [Version Update]</title>
