@@ -6,7 +6,294 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sun, 08 Nov 2026 03:31:37 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 08 Nov 2026 10:55:00 +0000</lastBuildDate>
+    <item>
+      <title>NetApp Cloud Insights SaaS Log Onboarding to Splunk - v1.1.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/7771/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&amp;#x20; Version 1.1.0 – rebuilt add-on
+
+
+
+&amp;#x20; \- Rebuilt on the Splunk UCC framework, replacing the Add-on Builder version
+
+&amp;#x20; \- Each alert is ingested once, and again only when it changes (for example its status). 1.0.x re-ingested up to a week of alerts whenever a new one arrived
+
+&amp;#x20; \- Pages through all alerts in the API's one-week window
+
+&amp;#x20; \- Account-based setup: Tenant URL and API access token (stored encrypted, tested when you save)
+
+&amp;#x20; \- CIM Alerts data model mapping (eventtype netapp_cloud_secure_alert, tag alert)
+
+&amp;#x20; \- Automatic retries with backoff; HTTP and SOCKS5 proxy support
+
+&amp;#x20; \- Python 3.9 and 3.13 support; Splunk Cloud compatible
+
+
+
+&amp;#x20; Upgrading from 1.0.x: add an account (the old REST URL can be pasted as the Tenant URL), then delete the old input and create a new one.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects and normalizes security alert data from NetApp Cloud Insights Secure via REST API for centralized monitoring in Splunk.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The NetApp Cloud Insights Secure Add-on for Splunk collects security alert data from NetApp Cloud Insights Secure through its REST API. The add-on retrieves alert events and normalizes them to the netapp:cloud_secure:alerts source type, enabling centralized monitoring and analysis of NetApp Cloud Insights security alerts within Splunk. It includes configuration and input dashboards that allow administrators to manage API credentials and data collection settings. The add-on is built using Python 3 and supports modular input architecture for reliable data ingestion.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/034fe412-da48-11f1-9176-f29c1c18bf5f.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Gaurav Malik</dc:creator>
+      <pubDate>Sun, 08 Nov 2026 09:30:59 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7771/#v1.1.0</guid>
+    </item>
+    <item>
+      <title>Secure Endpoint (AMP) Events and Audit Logs Add-on for Cisco - v1.0.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10276/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;First release.
+
+\- Events, audit logs, compromises, top malware threats, computers and vulnerabilities, each a checkbox with its own schedule.
+
+\- Event types, audit log types and groups loaded live from the API: All (includes ones added later), Only selected, All except selected.
+
+\- cisco:se in the Cisco Security Cloud app's format (API JSON + EndpointDataType + group names).
+
+\- cisco:se:audit with CIM mappings (Authentication, Change).
+
+\- Checkpoints with overlap and duplicate removal, rate-limit back-off, Run now, proxy support, Status dashboard.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects Cisco Secure Endpoint (AMP for Endpoints) events, audit logs, compromises, computers, vulnerabilities and top malware threats from the API. Event types, audit log types and groups are picked from live lists. Same cisco:se format as the Cisco Security Cloud app; audit logs CIM-mapped. Not affiliated with Cisco.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects Cisco Secure Endpoint (formerly AMP for Endpoints) data from the Secure Endpoint API v1 and maps the audit logs to the Splunk Common Information Model.
+
+- Events (sourcetype cisco:se): detections, quarantines, scans, isolation, updates and faults, in the same format the Cisco Security Cloud app indexes (the API&amp;#x27;s JSON plus EndpointDataType and group names), so its field extractions, CIM mappings and searches apply.
+- Audit logs (sourcetype cisco:se:audit): console sign-ins and changes to policies, groups, exclusions, users, API credentials, computers and isolation sessions. CIM: Authentication, Change (Account_Management, Endpoint_Changes).
+- Optional, each with its own schedule: compromises (new or changed only), top malware threats, computers (inventory snapshot) and vulnerabilities (snapshot).
+
+- Event types, audit log types and groups are picked on the Inputs page from lists read live from the API, as a searchable multi-select: All (includes types and groups added later), Only selected, or All except selected. No reconfiguration when Secure Endpoint changes.
+- Inputs page in Splunk Web: accounts (API host for North America, Europe or Asia Pacific, client ID and API key, optional proxy; stored encrypted in Splunk&amp;#x27;s credential store; a Test button checks the credential) and inputs: add, edit, enable, disable, run now, delete.
+- Events and audit logs are collected from checkpoints with an overlap and de-duplicated, so restarts and failures do not lose data. Rate limits are respected with back-off.
+- Status dashboard: collections per data type, records written, minutes behind, errors, how late data arrives.
+- Python standard library only, no third-party packages.
+
+Independent project, not affiliated with or endorsed by Cisco. Cisco and Cisco Secure Endpoint are trademarks of Cisco Systems, Inc.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/703e6634-d7dc-11f1-9ba3-2e31957ef7ed.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Nikhil Chawla</dc:creator>
+      <pubDate>Sun, 08 Nov 2026 09:02:47 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10276/#v1.0.0</guid>
+    </item>
+    <item>
+      <title>Inno AI Report - v1.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10252/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**Restore now returns the dashboard to its exact original layout.**
+
+* Dashboard Studio: after Restore, the canvas height and width, the tab bar added by the wizard, and empty default tokens no longer stay behind.
+* If you enlarged a panel after the AI tab was added, Restore keeps the larger height instead of clipping the panel.
+* Dashboards set up with the earlier private build (`netops_ai_kit`) now restore to their original layout, using that build's backup.
+* Re-applying to a Dashboard Studio dashboard keeps the domain, language and description chosen earlier.
+
+After upgrading, run `/&lt;locale&gt;/_bump` once so browsers load the new wizard code.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Add an AI situation-analysis tab to any Splunk dashboard. Press one button and the app reads the panel results already on screen, sends them to Splunk AI Toolkit, and returns a graded report with likely causes, recommended actions and the team to contact. No dashboard rewriting. Free.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Inno AI Report attaches an &amp;quot;AI Situation Analysis&amp;quot; tab to a Splunk dashboard you already have. When a user presses the button, the app collects the results that are currently on screen, summarises them, and asks your Splunk AI Toolkit connection to interpret them together.
+
+The report gives a status grade (Normal / Warning / Critical / Undetermined), a panel-by-panel reading, ranked cause hypotheses with supporting and contradicting evidence, recommended actions with the responsible team, impact scope and urgency, and the data gaps that limited the analysis.
+
+It does not need to know what your dashboard searches do. Panel results are generalised into field=value lines without depending on particular field names, so the app attaches to dashboards it has never seen. A wizard does the work: pick an app and a dashboard, choose the business domain and the report language, press one button. The original dashboard is backed up automatically and can be restored from the same wizard.
+
+Six business-domain presets (network, security, infrastructure, application, business and general) change the analyst role, what is cited as evidence, which team is named in each action, and how to verify. Reports can be produced in Korean, English or Japanese.
+
+Nothing is sent to the vendor. The model runs wherever your AI Toolkit connection points, and the app calls it only when a user presses the button, so a dashboard carrying the tab costs nothing until it is used.
+
+Generated analysis can be wrong or incomplete. It is meant to support operational decisions, not to replace them.
+
+More from inno software: Inno AI Chat (https://splunkbase.splunk.com/app/9779) lets you ask the follow-up question in plain language, and Inno Observability brings multi-vendor network, infrastructure, application and database monitoring, log anomaly detection and eBPF tracing onto your on-premises Splunk platform. See the Details tab.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ea29db08-d9ae-11f1-95a9-628e68fce73d.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Inno Software</dc:creator>
+      <pubDate>Sun, 08 Nov 2026 06:25:27 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10252/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>Whisper Security Infrastructure Graph Add-on - v2.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8695/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;\# 2.0.0 release notes
+
+
+
+\## What 2.0.0 does
+
+
+
+Whisper Security Infrastructure Graph Add-on 2.0.0 turns the hostnames, IPs and URLs already in your Splunk into who runs them and what shares their infrastructure, and never shows &quot;we have nothing on this&quot; as &quot;clean&quot;.
+
+
+
+\- \*\*\`whisperlookup\`\*\* returns a verdict for each indicator in your results: its band, the evidence behind it, and the network that runs it. Every row says what Whisper knows (\`whisper_coverage\`) and whether the call completed (\`whisper_status\`), so a missing answer is never a blank cell.
+
+\- \*\*\`whisperenrich\`\*\* adds who runs each indicator: its network and prefix, the organisation that runs that network, its nameservers, how many other names share its address, and the threat feeds that list it.
+
+\- \*\*The Investigate dashboard\*\* opens one indicator: its verdict, the threat feeds that list it and why, its network, and the neighbourhood of names that share its address.
+
+\- \*\*Seven investigation macros\*\*: a verdict, an explanation, the registered look-alike domains of a brand, a subdomain-takeover check, registration history, and CNAME and SPF chains.
+
+\- \*\*\`whisperquery\` and \`whisperschema\`\*\* run Cypher directly against the graph and describe what it holds, for anything the other commands do not cover.
+
+\- \*\*Setup in one step\*\*: no index to create, no modular input to enable and no scheduled search to switch on. Accept the egress statement, paste your API key, and test the connection.
+
+
+
+\## Before anything else: this release asks
+
+
+
+The first thing a 2.0.0 install does, fresh or upgraded in place, is ask whether it may send anything to the Whisper Graph API at all. Every command that sends -- \`whisperlookup\`, \`whisperquery\`, \`whisperschema\` and \`whisperenrich\` -- reports \`consent-required\` until an administrator acknowledges the egress statement under \*\*Configuration › Account\*\*, and sends nothing before that.
+
+
+
+\*\*If you are upgrading from 1.0.0, that includes your key.\*\* 2.0.0 stores the account in a new place, so the key you typed into 1.0.0 does not carry forward. After upgrading, re-accept the egress statement and re-paste your API key under \*\*Configuration › Account\*\*. One save is enough: after it, \`whisperlookup\` answers on the first attempt.
+
+
+
+\## Before you upgrade
+
+
+
+Disable the three 1.0.0 modular inputs (\*\*Whisper Threat Intel\*\*, \*\*Whisper Attack Surface Baseline\*\*, \*\*Whisper Watchlist\*\*) before installing this build over 1.0.0. 2.0.0 collects nothing on a schedule, but an in-place install leaves 1.0.0's inputs behind, and one left enabled keeps running and failing. The user guide's troubleshooting page shows how to remove them.
+
+
+
+\*\*Export \`whisper_watchlist\` now, before you upgrade, not after.\*\* All five of 1.0.0's KV Store collections, \`whisper_watchlist\` included, are dropped in 2.0.0, and once 2.0.0 is installed their contents can no longer be read. From the \`search\` app, before you upgrade:
+
+
+
+\`\`\`
+
+\| inputlookup whisper_watchlist | outputlookup create_empty\=false whisper_watchlist_export_2026.csv
+
+\`\`\`
+
+
+
+\`whisper_dns_baseline\`, 1.0.0's other named collection, needs no export: 1.0.0 never stored anything in it.
+
+
+
+\## Commands
+
+
+
+\- \`| whisperevict\` is deprecated and is removed in 2.1.0. Use \`| whisperflush mode\=expired\` instead, which does the same thing.
+
+\- \`| whisperflush\` now requires \`mode\=expired\` or \`mode\=all\`. A bare \`| whisperflush\` deletes nothing and says so. \`collection\=\` is accepted for this release only, as a deprecated synonym, and is removed in 2.1.0.
+
+\- \`| whisperlookup\`'s five 1.0.0 options (\`include_cname\`, \`add_prefix\`, \`include_threat_intel\`, \`include_nameserver\`, \`include_feeds\`) are still accepted, so existing saved searches keep running, and no longer change anything: each one still set on a search produces one warning, once per search.
+
+\- \`| whisperlookup\` and \`| whisperenrich\` always run on the search head now, never on a remote search peer in a distributed deployment. Options, defaults, output fields and error text are unchanged.
+
+
+
+\## \`mode\=enrich\` is now \`mode\=context\`
+
+
+
+\`| whisperlookup mode\=enrich\` stopped parsing in this release; the option is now \`mode\=context\` (the default) or \`mode\=verdict\`, with no alias for the old spelling. Nothing the add-on ships used the old name, so only your own saved searches can be affected.
+
+
+
+\## Retired \`whisperlookup\` fields
+
+
+
+Nine fields moved off \`whisperlookup\` in this release: \`whisper_risk_score\`, \`whisper_risk_level\`, \`whisper_risk_components\`, \`whisper_risk_factors_list\`, \`whisper_threat_score\`, \`whisper_threat_level\`, \`whisper_is_c2\`, \`whisper_cohost_count\`, \`whisper_threat_sources\`. All nine still exist: \`whisperenrich\` returns every one of them.
+
+
+
+\*\*There is no numeric equivalent of \`whisper_risk_score\` on \`whisperlookup\`.\*\* The field it maps onto, \`whisper_band\`, is a six-step label (\`NONE\`, \`INFO\`, \`LOW\`, \`MEDIUM\`, \`HIGH\`, \`CRITICAL\`), with \`whisper_band_rank\` as a comparable integer, and \`whisperlookup\` emits no alias for any of the nine. On your first save after upgrading, the Configuration page's Account tab counts the saved searches, dashboards and macros in your deployment that reference a name this release withdrew.
+
+
+
+\## \`whisperschema\`: one field per value
+
+
+
+\`| whisperschema\` in \`mode\=labels\` (the default), \`mode\=relationships\` and \`mode\=properties\`, and the property-key rows of \`mode\=full\`, used to return every value twice: under its original column name and under a \`whisper\_\` field. 2.0.0 returns the \`whisper\_\` field only. \*\*These columns are removed from those rows\*\*, and a saved search or dashboard that reads one stops matching:
+
+
+
+\| Removed column | Use instead |
+
+\|---|---|
+
+\| \`label\` (\`labels\`), \`type\` (\`relationships\`), \`propertyKey\` (\`properties\`) | \`whisper_name\` |
+
+\| \`count\` | \`whisper_count\` |
+
+\| \`declaredButEmpty\` | \`whisper_declared_but_empty\`, written \`true\`/\`false\` instead of \`1\`/\`0\` |
+
+\| \`sourceLabels\`, \`targetLabels\` | \`whisper_from_labels\`, \`whisper_to_labels\` (multivalue fields, not JSON text) |
+
+
+
+\`aliasOf\` and \`sparseSourceLabels\` stay on \`relationships\` rows. \`mode\=schema\` is unchanged, as are the schema rows of \`mode\=full\`. Check your own saved searches and dashboards for these column names; the Account tab's count does not look for them.
+
+
+
+\## What this release removes
+
+
+
+\- \*\*Three modular inputs and the Inputs page\*\*: \`whisper_threat_intel\`, \`whisper_baseline\`, \`whisper_watchlist\`. This release declares no Inputs page at all.
+
+\- \*\*\`savedsearches.conf\` entirely.\*\* This release ships no saved search of any kind. The enrichment cache now clears its own expired rows, so nothing needs scheduling.
+
+\- \*\*The \`whisper_enrich\` adaptive response action\*\*, with the alert-action configuration that shipped it.
+
+\- \*\*Five CSV lookups\*\*: \`whisper_high_risk_asns\`, \`whisper_cdn_asns\`, \`whisper_dns_providers\`, \`whisper_org_asns\`, \`whisper_risk_factors\`. A saved search that reads one directly, such as \`| inputlookup whisper_org_asns\`, stops working when you upgrade, without a warning.
+
+\- \*\*The Common Information Model mapping.\*\* The add-on indexes nothing, so it declares no Common Information Model mapping and ships no event types or tags.
+
+\- \*\*Four dashboards\*\*: \`whisper_attack_surface_timeline\`, \`whisper_compliance_summary\`, \`whisper_mail_config\`, \`whisper_spf_compliance\`.
+
+
+
+\*\*An in-place install leaves these files behind.\*\* Splunk adds and overwrites files during an upgrade but never deletes them, so an installation upgraded from 1.0.0 keeps 1.0.0's dashboards, Inputs page, saved searches, alert action, input types, event types, tags and lookup files until you remove them, and most of them no longer work. The user guide's troubleshooting page lists every file, and what to do on Splunk Cloud instead.
+
+
+
+\## The \`whisper_user\` role
+
+
+
+\`whisper_user\` now grants read access to \`\_internal\` only, where the add-on's own log is indexed. It previously also granted, and defaulted to, an index named \`whisper\`, which the add-on no longer writes to. If your own searches read that index, grant it on a role of your own.
+
+
+
+\## Supported platforms
+
+
+
+Splunk 10.2 and 10.4, with \`python.required \= 3.13\` only, unchanged from the previous release. Splunk 9.4 and 10.0 do not provide Python 3.13, so the add-on does not run there.
+
+
+
+\## Settings tab
+
+
+
+The legacy \`proxy_url\` field is hidden and is read only while \`proxy_host\` is empty, so a 1.0.0 proxy URL keeps working until you set a proxy host. It is removed in 2.1.0. The \`timeout\` field is gone from the page; a 1.0.0 value in it is ignored.
+
+
+
+\## After upgrading
+
+
+
+If the Configuration page still shows 1.0.0's form after upgrading, hard-refresh the Configuration page once in your browser.
+
+
+
+\## Support bundles
+
+
+
+\`splunk diag --collect app:TA-whisper-graph\` writes the add-on's part of a support bundle: its configuration, with stored secrets and proxy credentials left out, and its own log.
+
+
+
+\## Display name
+
+
+
+This release changes the app's display name to \*\*Whisper Security Infrastructure Graph Add-on\*\*. The package id is unchanged (\`TA-whisper-graph\`), so installing over 1.0.0 is an upgrade, not a new install.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Answer who runs an IP or domain, what shares its infrastructure and whether anyone has reported it, from the Splunk search bar. Five search commands, eight macros and one dashboard over Whisper Security&amp;#x27;s graph of internet infrastructure. No index, no scheduled search, no modular input. Needs a free API key.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;An IP address or a domain lands in your search results and you have ten minutes to decide whether it matters. Who runs it. What else sits on the same infrastructure. Whether anyone has reported it before.
+
+This add-on answers those three questions from the Splunk search bar, against Whisper Security&amp;#x27;s graph of internet infrastructure: DNS, BGP, WHOIS, hosting, mail records and threat feeds, joined as one connected structure rather than a set of separate lookups.
+
+**What you get.** Five search commands. `whisperlookup` puts a coverage-qualified verdict on events you already have. `whisperenrich` attaches the infrastructure behind an indicator to those same events: routing and network, hosting, and feed listings. `whisperquery` runs a parameterised Cypher query and returns the rows as events. `whisperschema` describes what is in the graph. `whisperflush` manages the local cache. Eight macros answer the next questions without any Cypher: the verdict for one indicator and the graph&amp;#x27;s own explanation of it, registered look-alike domains, whether a hostname&amp;#x27;s CNAME points at a service nobody holds any more, registration history, and the CNAME and SPF chains. The eighth makes no call: it turns the two fields below into a word for a results table. One dashboard, Investigate, opens a single hostname, IP address or URL in three bands: the verdict and what it rests on, the network that routes it, and the neighbouring hosts that share its address.
+
+**What it needs.** A Whisper Security API key, free from https://console.whisper.security/sign-up?source=splunk-addon-listing. Outbound HTTPS to graph.whisper.security on port 443. Splunk 10.2 or later, on a search head. Setup is one page: enter the key, tick the box that authorises indicators to leave your deployment, save. The key is held in Splunk&amp;#x27;s encrypted storage/passwords and nowhere else.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/cf9ba6f8-db1c-11f1-95a9-628e68fce73d.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Whisper Security</dc:creator>
+      <pubDate>Sun, 08 Nov 2026 03:34:20 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8695/#v2.0.0</guid>
+    </item>
     <item>
       <title>CIM Assessment Toolkit (CAT) - v2.14.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8962/</link>
@@ -288,33 +575,6 @@ Use it for demos, dashboard development, detection and alert testing, training, 
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Fri, 06 Nov 2026 14:14:54 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6146/#v5.0.0</guid>
-    </item>
-    <item>
-      <title>Inno AI Report - v1.0.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10252/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**Restore now returns the dashboard to its exact original layout.**
-
-* Dashboard Studio: after Restore, the canvas height and width, the tab bar added by the wizard, and empty default tokens no longer stay behind.
-* If you enlarged a panel after the AI tab was added, Restore keeps the larger height instead of clipping the panel.
-* Dashboards set up with the earlier private build (`netops_ai_kit`) now restore to their original layout, using that build's backup.
-* Re-applying to a Dashboard Studio dashboard keeps the domain, language and description chosen earlier.
-
-After upgrading, run `/&lt;locale&gt;/_bump` once so browsers load the new wizard code.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Add an AI situation-analysis tab to any Splunk dashboard. Press one button and the app reads the panel results already on screen, sends them to Splunk AI Toolkit, and returns a graded report with likely causes, recommended actions and the team to contact. No dashboard rewriting. Free.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Inno AI Report attaches an &amp;quot;AI Situation Analysis&amp;quot; tab to a Splunk dashboard you already have. When a user presses the button, the app collects the results that are currently on screen, summarises them, and asks your Splunk AI Toolkit connection to interpret them together.
-
-The report gives a status grade (Normal / Warning / Critical / Undetermined), a panel-by-panel reading, ranked cause hypotheses with supporting and contradicting evidence, recommended actions with the responsible team, impact scope and urgency, and the data gaps that limited the analysis.
-
-It does not need to know what your dashboard searches do. Panel results are generalised into field=value lines without depending on particular field names, so the app attaches to dashboards it has never seen. A wizard does the work: pick an app and a dashboard, choose the business domain and the report language, press one button. The original dashboard is backed up automatically and can be restored from the same wizard.
-
-Six business-domain presets (network, security, infrastructure, application, business and general) change the analyst role, what is cited as evidence, which team is named in each action, and how to verify. Reports can be produced in Korean, English or Japanese.
-
-Nothing is sent to the vendor. The model runs wherever your AI Toolkit connection points, and the app calls it only when a user presses the button, so a dashboard carrying the tab costs nothing until it is used.
-
-Generated analysis can be wrong or incomplete. It is meant to support operational decisions, not to replace them.
-
-More from inno software: Inno AI Chat lets you ask the follow-up question in plain language, and Inno Observability brings multi-vendor network, infrastructure, application and database monitoring, log anomaly detection and eBPF tracing onto your on-premises Splunk platform. See the Details tab.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ea29db08-d9ae-11f1-95a9-628e68fce73d.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Inno Software</dc:creator>
-      <pubDate>Fri, 06 Nov 2026 07:29:26 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10252/#v1.0.1</guid>
     </item>
     <item>
       <title>Log Continuity Manager for Splunk - v1.2.7 [Version Update]</title>
@@ -1632,36 +1892,6 @@ The analytic stories and their searches are also available at - https://github.c
       <guid>https://splunkbase.splunk.com/app/3449/#v6.10.0</guid>
     </item>
     <item>
-      <title>Secure Endpoint (AMP) Events and Audit Logs Add-on for Cisco - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10276/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;First release.
-
-\- Events, audit logs, compromises, top malware threats, computers and vulnerabilities, each a checkbox with its own schedule.
-
-\- Event types, audit log types and groups loaded live from the API: All (includes ones added later), Only selected, All except selected.
-
-\- cisco:se in the Cisco Security Cloud app's format (API JSON + EndpointDataType + group names).
-
-\- cisco:se:audit with CIM mappings (Authentication, Change).
-
-\- Checkpoints with overlap and duplicate removal, rate-limit back-off, Run now, proxy support, Status dashboard.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects Cisco Secure Endpoint (AMP for Endpoints) events, audit logs, compromises, computers, vulnerabilities and top malware threats from the API. Event types, audit log types and groups are picked from live lists. Same cisco:se format as the Cisco Security Cloud app; audit logs CIM-mapped. Not affiliated with Cisco.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects Cisco Secure Endpoint (formerly AMP for Endpoints) data from the Secure Endpoint API v1 and maps the audit logs to the Splunk Common Information Model.
-
-- Events (sourcetype cisco:se): detections, quarantines, scans, isolation, updates and faults, in the same format the Cisco Security Cloud app indexes (the API&amp;#x27;s JSON plus EndpointDataType and group names), so its field extractions, CIM mappings and searches apply.
-- Audit logs (sourcetype cisco:se:audit): console sign-ins and changes to policies, groups, exclusions, users, API credentials, computers and isolation sessions. CIM: Authentication, Change (Account_Management, Endpoint_Changes).
-- Optional, each with its own schedule: compromises (new or changed only), top malware threats, computers (inventory snapshot) and vulnerabilities (snapshot).
-
-- Event types, audit log types and groups are picked on the Inputs page from lists read live from the API, as a searchable multi-select: All (includes types and groups added later), Only selected, or All except selected. No reconfiguration when Secure Endpoint changes.
-- Inputs page in Splunk Web: accounts (API host for North America, Europe or Asia Pacific, client ID and API key, optional proxy; stored encrypted in Splunk&amp;#x27;s credential store; a Test button checks the credential) and inputs: add, edit, enable, disable, run now, delete.
-- Events and audit logs are collected from checkpoints with an overlap and de-duplicated, so restarts and failures do not lose data. Rate limits are respected with back-off.
-- Status dashboard: collections per data type, records written, minutes behind, errors, how late data arrives.
-- Python standard library only, no third-party packages.
-
-Independent project, not affiliated with or endorsed by Cisco. Cisco and Cisco Secure Endpoint are trademarks of Cisco Systems, Inc.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/703e6634-d7dc-11f1-9ba3-2e31957ef7ed.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Nikhil Chawla</dc:creator>
-      <pubDate>Wed, 04 Nov 2026 15:57:22 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10276/#v1.0.0</guid>
-    </item>
-    <item>
       <title>Upstream Security for AI and API Cybersecurity Alerts - v1.0.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8507/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;This Upstream Security Splunk native dashboard serves as the central &amp;quot;Security Posture&amp;quot; view, providing Security Operations Center (SOC) analysts with real-time visibility into the runtime security status of connected vehicles and physical AI with rich AI and API behavior analysis using our digital twin technology.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This Upstream Security Splunk native dashboard serves as the central &amp;quot;Security Posture&amp;quot; view, providing Security Operations Center (SOC) analysts with runtime security status of connected vehicles, IoT devices, API endpoints, Physical AI and consumers. It enables ingestion of cybersecurity alerts and telematics events from the Upstream Security platform into Splunk. We build a digital twin that determines agentic behavior in context and understands intent. It provides a modular input that polls the Upstream API and checkpoints progress to avoid duplicate events.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/4636d34c-d865-11f1-bc13-6abeeb0e76e5.png&quot;&gt;</description>
@@ -2307,46 +2537,6 @@ https://github.com/prewinthomas/SplunkIssues&lt;/p&gt;&lt;img height=&quot;36px&
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Prewin Thomas</dc:creator>
       <pubDate>Mon, 02 Nov 2026 19:38:44 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5743/#v1.2.0</guid>
-    </item>
-    <item>
-      <title>Spl Health Status Overview - v1.1.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5131/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- Brought to feature parity with Health Status Overview-Splunk 1.2.0: valid Simple XML 1.1 dashboards, fixed SPL, new health/license/queue/KV store panels, Add-on Builder leftovers and restart requirement removed.
-- Fixed the hardware tile (missing lookup) and the empty bundled lookups.
-- Note: this app and Health Status Overview-Splunk share macro names; install only one.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This is a Splunk health status overview App.
-
-This application is broke into two categories - System health overview and Search data overview.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2988dd26-d6f3-11f1-bfed-3e140f35c817.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Prewin Thomas</dc:creator>
-      <pubDate>Mon, 02 Nov 2026 19:37:54 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5131/#v1.1.0</guid>
-    </item>
-    <item>
-      <title>Health Status Overview-Splunk - v1.2.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5132/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;### Fixed
-- Dashboards are valid Simple XML 1.1 (a dashboard was nested inside a form).
-- Disk usage panel showed only a demo host; sourcetype lookup search read a missing file; skipped-search macro divided by zero.
-- REST calls limited to the local search head where appropriate.
-
-### Added
-- Panels for splunkd health, KV store status, license usage vs quota, indexing queues, crashes/restarts, timestamp issues and silent sourcetypes.
-- Time picker, host and server-role filters, drilldowns.
-- Four alerts (disabled by default, no notification actions) and overridable CPU/memory threshold macros.
-
-### Removed
-- Add-on Builder leftovers and the restart-on-install requirement.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This is a Splunk health status overview App.
-
-This application is broke into two categories - System health overview and Search data overview.
-
-
-
-
-
-Support
-https://github.com/prewinthomas/SplunkIssues&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/ec845662-d6f2-11f1-b92a-e2db52be78d5.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Prewin Thomas</dc:creator>
-      <pubDate>Mon, 02 Nov 2026 19:37:05 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5132/#v1.2.0</guid>
     </item>
   </channel>
 </rss>
