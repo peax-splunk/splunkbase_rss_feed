@@ -6,7 +6,185 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Mon, 09 Nov 2026 18:00:07 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 10 Nov 2026 01:20:28 +0000</lastBuildDate>
+    <item>
+      <title>TrackMe - v2.4.24 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4621/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**TrackMe 2.4.24 — Splunk Forwarder Collectors, a new tenant type for the forwarders that collect your data, and TrackMe Broker, which takes TrackMe on Splunk Cloud to your on-premises destinations.**
+
+* **Splunk Forwarder Collectors.** A new dedicated tenant type for the forwarders used as collection points: DB Connect, cloud and API add-ons, scripted and modular inputs, and the forwarders that monitor the files written by rsyslog or syslog-ng. Every input is listed as it is configured, for any add-on, and TrackMe answers two questions separately: does it run, and does it work. Errors and rhythm are judged against each input’s own past, nothing is installed on the collectors, and the tenant brings the findings model of the other dedicated tenants with its own AI Agent. See [Splunk Forwarder Collectors](https://docs.trackme-solutions.com/latest/splunk_forwarder_collectors.html#splunk-forwarder-collectors).
+* **TrackMe Broker.** TrackMe on Splunk Cloud cannot open a connection into your network. An add-on on a Heavy Forwarder inside it now opens every connection itself and carries TrackMe’s calls, so remote Splunk accounts, self-managed Cribl Leaders and webhook receivers can be reached from Splunk Cloud or from a tightly controlled network. Pairing uses a short-lived code and a fingerprint check, every call is signed, requests are sealed, and several forwarders form one broker. See [TrackMe Broker](https://docs.trackme-solutions.com/latest/product_guide/integ_broker.html#pg-integ-broker) and the [add-on release notes](https://docs.trackme-solutions.com/latest/releasenotes_trackme_broker.html).
+* **Splunk S2S, Splunk UF Fleet and Splunk HEC.** An Inventory with stop and resume monitoring of any instance, Splunk’s own health report as a Health column, Open in search on every setup discovery, and no more false findings from Splunk 9.4 telemetry. Collection reads no longer stop at a row ceiling, so Splunk UF Fleet keeps working on estates above 100,000 agents. See [Splunk UF Fleet](https://docs.trackme-solutions.com/latest/splunk_uf_fleet.html#splunk-uf-fleet).
+* **At scale.** Every scheduled search has what is left of its run’s time instead of a fixed number of seconds, a Splunk UF Fleet inventory rebuild reads only what changes by the hour (four to six searches instead of eleven), and a Cribl Stream tenant no longer stops at 20,000 monitored objects.
+* **User Activity Monitoring.** No false partial coverage from an Activity scope, and a coverage chip and time budget help that match what the runs did. See [User Activity Monitoring](https://docs.trackme-solutions.com/latest/product_guide/components_uam.html#pg-components-uam).
+* **Security and platform.** Everything TrackMe computes itself uses SHA-256 or stronger, for FIPS deployments. Turning Verify SSL certificate off no longer raises a Configuration Guardian alert, and dependencies carry every available security fix.
+
+See: [https://docs.trackme-solutions.com/latest/releasenotes.html#version-2-4-24-build-1794268494-10-11-2026](https://docs.trackme-solutions.com/latest/releasenotes.html#version-2-4-24-build-1794268494-10-11-2026)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TrackMe for Splunk provides visibility and operational excellence to monitor at scale your Splunk data sources availability and quality, and many more. 
+
+With a rich set of features and a powerful workflow, TrackMe empowers you day after day to get the most from your Splunk investments and deliver the five stars quality of service your users deserve.
+
+Discover TrackMe: https://trackme-solutions.com/discover
+
+Documentation: https://docs.trackme-solutions.com
+
+You can subscribe to our newsletter, and receive important communications from us.
+We will send notifications for instance when publishing new releases, so we can you let you know the cool and powerful things we&amp;#x27;ve been working on!
+
+https://trackme-solutions.com/subscribe/
+
+TrackMe has transitioned to a new licensing model.
+The Free Community Edition has been discontinued.
+
+What this means for you:
+
+- Existing licensed customers are not impacted. Your current license continues unchanged.
+- Community users are automatically upgraded to a Foundation Edition trial for 90 days, with full functionality enabled.
+
+After the trial period:
+
+- TrackMe remains active and fully usable for monitoring
+- The platform enters read-only mode
+
+You can continue to view data, dashboards, alerts, and history
+Creation of new tenants, trackers, or entities will be disabled
+
+To continue using TrackMe with full capabilities after the trial, a Foundation license is required.
+
+Buy Foundation Edition: https://trackme-solutions.com/get-foundation/
+
+See all plans: https://trackme-solutions.com/pricing/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9994a910-dc9d-11f1-9745-0e5d6900736f.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Trackme Limited</dc:creator>
+      <pubDate>Tue, 10 Nov 2026 01:08:10 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4621/#v2.4.24</guid>
+    </item>
+    <item>
+      <title>AWS-DFD-Visualizer - v2.8.8 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8628/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## Overview
+
+Version 2.8.8 delivers critical DoD Impact Level 5 (IL5) cryptographic hardening, full CI/CD pipeline supply chain enforcement, proactive Application Security Posture Management (ASPM), and 100% CodeQL SAST remediation:
+- **Full CodeQL SAST &amp; Code Scanning Remediation (LL-012)**: Remediated all 18 open CodeQL static analysis findings across JavaScript/TypeScript and Python, achieving 0 open alerts in GitHub Code Scanning. Fixed regex character class duplication on composite emoji variation selectors (`\uFE0F`), removed useless local variable assignments, and purged unused variables and legacy flags while preserving React/D3 state integrity.
+- **DoD IL5 Cryptographic Hardening (LL-010)**: Eliminated insecure TLS flags (`SPLUNK_INSECURE_TLS`) and unvalidated certificate overrides (`ssl.CERT_NONE`) from all test harnesses and automation scripts (`test-drilldown.py`, `test-spl.py`), enforcing fail-closed TLS verification. Added native support for DoD PKI Root CA bundles (`SPLUNK_CA_BUNDLE`), Mutual TLS (mTLS) client certificates (`SPLUNK_CLIENT_CERT`, `SPLUNK_CLIENT_KEY`), and Bearer token authentication (`SPLUNK_TOKEN`). Release packages now generate companion SHA-256 and SHA-512 cryptographic checksum sidecars for NIST SI-7 supply chain verification.
+- **CI/CD Supply Chain Hardening &amp; Action Pinning (LL-010)**: Pinned all GitHub Actions across `splunk-ci.yml` and `codeql.yml` to immutable 40-character commit SHAs. Upgraded to GitHub CodeQL Action v4 for automated SAST scanning across JavaScript/TypeScript and Python with `security-and-quality` suites.
+- **Dev Tooling &amp; Supply Chain Remediation (ASPM)**: Remediated all transitive devDependencies via `npm audit fix`, resolving 5 GitHub Dependabot security advisories (`launch-editor`, `follow-redirects`, `fast-uri`, `body-parser`, `systeminformation`). Maintained 0 production runtime vulnerabilities (`npm audit --omit=dev`) and 0 dev vulnerabilities.
+- **Repository Governance &amp; Compliance Documentation**: Added automated weekly dependency scanning via `.github/dependabot.yml`, mandatory maintainer review gates via `.github/CODEOWNERS`, updated vulnerability disclosure contact to `security.report@suhlabs.com`, and formalized the DISA CC SRG IL5 / FedRAMP High Shared Responsibility Model in `SECURITY.md`.
+
+**Framework:** Splunk Unified Dashboard Framework (Dashboard Studio) &amp; Classic SimpleXML
+**Target Environment:** DoD Impact Level 5 (IL5) / NIST 800-53 / Zero-Trust Architecture
+**License:** MIT (Copyright (c) 2026 suhlabs)
+
+---
+
+## Overview
+
+Version 2.8.7 delivers visual asset parity, AppInspect cloud operations compliance, and formal open-source licensing:
+- **Splunk 10.4.x Apps Menu Icons (`appIconAlt.png`)**: Added dedicated 36×36 and 72×72 `appIconAlt.png` and `appIconAlt_2x.png` assets to both `static/` and `appserver/static/` to resolve blank/missing icons in the Splunk Web top navigation Apps dropdown.
+- **High-Contrast Visualization Tab Preview (`preview.png`)**: Restored the high-contrast vector icon preview in `appserver/static/visualizations/AWS-DFD-Visualizer/preview.png` and `src/main/webapp/visualizations/AWS-DFD-Visualizer/preview.png`, replacing the washed-out full-screen diagram screenshot that degraded legibility in the Splunk Visualization Picker.
+- **User Guide Interactive Hierarchy Blueprint Restoration**: Restored the comprehensive Zero-Trust Hierarchy layout demonstration in `default/data/ui/views/user_guide.xml` featuring `Developer User` (`AWS::IAM::User`) in the Identity Plane with its companion live inspector table panel.
+- **Splunk Cloud Operations AppInspect Compliance**: Enforced strict root `static/` directory hygiene by removing nested subdirectories, achieving a clean 0 errors, 0 failures AppInspect certification gate.
+- **Official MIT Open-Source License**: Ingested the standard MIT `LICENSE` file (Copyright (c) 2026 suhlabs) and synchronized licensing metadata across `package.json`, `splunk-app-manifest.json`, and `README.MD`.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Multi-cloud interactive Data Flow Diagram (DFD) visualizer for Splunk. Renders AWS, Azure, and GCP Config topologies as Zero-Trust blueprint diagrams with nested VPC/Subnet enclosures, and SSH/22 compliance violation paths. Designed for DoD IL5 / NIST 800-53 / Zero-Trust Architecture environments.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;### Purpose &amp;amp; Background
+Auditing complex cloud infrastructure for compliance — DoD Impact Level 5 (IL5), NIST 800-53, or NIST 800-207 Zero-Trust Architectures — is extremely challenging. While cloud accounts (AWS, Azure, GCP) generate high-volume telemetry from AWS Config, Azure Resource Manager, GCP Asset Inventory, VPC Flow Logs, and GuardDuty, reviewing these configurations in flat Splunk tables makes it difficult for security teams, system auditors, and DevSecOps engineers to analyze isolation boundaries, spot structural gaps, or verify access routes.
+
+**AWS DFD Visualizer** transforms your live Splunk search results into interactive, audit-ready Data Flow Diagrams directly inside Splunk — no external tools required.
+
+### 🤝 The Complete Solution: Companion + Visualizer
+
+The AWS Zero-Trust topology solution consists of two complementary apps designed to work seamlessly together:
+
+&amp;gt; **&amp;quot;Companion produces the table; Visualizer draws the diagram.&amp;quot;**
+
+- **AWS-DFD-Companion (v1.1.6)**: The data preparation utility. Ingests raw AWS Config, CloudWatch VPC Flow Logs, and inventory telemetry, packaging pre-built CIM macros to produce normalized DFD table rows (`from`, `to`, `edge_label`, `status`).
+- **AWS-DFD-Visualizer (v2.8.6)**: The presentation canvas. Renders those rows into interactive, audit-ready Zero-Trust blueprints with DoD IL5 compliance boundaries, nested VPC/Subnet containers, and drilldown capabilities.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/62a445d6-dc9e-11f1-993f-ee2b1ae01032.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Young Suh</dc:creator>
+      <pubDate>Tue, 10 Nov 2026 00:47:34 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8628/#v2.8.8</guid>
+    </item>
+    <item>
+      <title>Splunk Cisco App Navigator (SCAN) - v1.0.50 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8566/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* **Catalog compatibility** — Updated product definitions can be synchronized by Navigator 1.0.26 and newer. Older interfaces may not display every newer feature.
+* **Introducing Splunk Secure Networking Essentials recommendations** — Discover dashboards and reusable searches for your Cisco networking and security data directly from supported product cards. Navigator now highlights relevant Essentials content and helps you install the app or open it when available. Essentials is an optional visualization app that uses data collected by your existing integrations; your collection add-ons and other visualization choices remain available.
+* **Theme and navigation** — Follow the Splunk user theme for Products and User Guide, improve Free/Premium/Installed badge contrast, and restore the visible Search navigation item.
+* **Accurate guidance** — Scope SC4S recommendations to declared syslog support, use documented add-on placement, and review legacy integrations before removal.
+* **Sync reporting** — Distinguish a catalog file update from a failed configuration reload, and explain why an update was skipped. A TLS hostname mismatch still requires correcting the local management endpoint or certificate.
+* **User Guide** — Refresh the three-column reading layout and add expandable release history with search, section links and print support.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Unified product catalog and integration guide for 50+ Cisco products in Splunk — find the right add-ons, check compatibility, and streamline deployment across Enterprise and Cloud.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk Cisco App Navigator (SCAN) is the front door to the Cisco–Splunk ecosystem. It provides a unified product catalog of 50+ Cisco integrations with interactive cards that show which Splunk add-ons are available for each product, along with platform compatibility, sourcetype coverage, real-time data-flow detection, deployment guidance, and direct links to Splunkbase and documentation.
+
+SCAN solves a persistent problem for Splunk administrators and Cisco engineers: figuring out which Cisco add-ons to install, whether they are compatible with your Splunk version and platform (Enterprise or Cloud), whether the data is actually flowing, and how the pieces fit together. Instead of searching Splunkbase and cross-referencing documentation manually, SCAN puts everything in one place and validates it against your live environment.
+
+The interactive catalog is organized across Security, Networking, Observability, and Collaboration with 19 subcategories. Each card shows required add-ons, sourcetype counts, integration badges for SC4S, NetFlow, Enterprise Security, SOAR, and ITSI, version intelligence, and live data-flow status — a single search validates 320 sourcetypes at once so every card knows whether data is actually arriving.
+
+Beyond the catalog, SCAN ships an Ecosystem Intelligence dashboard for portfolio analytics, Indexer Tier Detection that validates add-ons are deployed on the correct tier in clustered deployments, a Magic Eight Audit that deep-inspects props.conf parsing settings to catch ingestion problems early, context-aware integration guidance modals for SC4S, NetFlow/IPFIX, Enterprise Security, SOAR, and ITSI, and pre-built reports covering catalog analysis, sourcetype coverage, compatibility, and deployment readiness.
+
+SCAN is fully theme-aware with a three-state toggle (Light, Dark, Auto) and is designed for Splunk administrators, Cisco sales engineers, partner teams, and anyone who needs to navigate the Cisco–Splunk integration landscape quickly and confidently.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a0c017f6-dc7f-11f1-945a-5a5c378c864c.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Field Solutions</dc:creator>
+      <pubDate>Mon, 09 Nov 2026 21:02:30 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8566/#v1.0.50</guid>
+    </item>
+    <item>
+      <title>Eventgen Manager - v2.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9245/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Eventgen Manager 2.0.0 generates events itself. SA-Eventgen is no longer required.
+
+NEW
+
+Built-in generation engine (eventgen_manager_engine modular input). Pure Python, runs on Linux, macOS, and Windows, on x86 and ARM.
+
+Configuration changes apply within seconds. No restart needed.
+
+Send test events from the editor to the real destination without turning the configuration on.
+
+Live status per configuration: state, events generated, last batch, and the reason for any failure.
+
+Automatic timestamps, with a new &quot;Timestamp to write&quot; option: generated time, or current time for testing detections that search the last few minutes.
+
+New random values: weighted, ipv4private, email, useragent, uuid. New seqfile replacement. Rated replacements now work.
+
+Counters continue from their last value after a restart.
+
+verifySSL setting for HEC and Splunk REST receivers.
+
+Rebuilt Throughput dashboard: events per second, projected daily volume, failed batches, and configured against measured rates.
+
+New Tutorial page with a complete, step-by-step guide.
+
+The engine can also run from the command line, outside Splunk.
+
+UPGRADING FROM SA-EVENTGEN
+
+Existing eventgen.conf configurations work unchanged.
+
+If SA-Eventgen is running, the built-in engine waits on standby so events are not doubled. Use &quot;Switch to the built-in engine&quot; on the Generator control page.
+
+CHANGED
+
+Syslog output now uses TCP. UDP output is removed, as UDP is not allowed on Splunk Cloud or under app certification.
+
+To send to indexers over splunktcp, keep the output on modinput and set up forwarding in outputs.conf on the instance running the app.
+
+Settings that only tuned SA-Eventgen's worker pools, plugins, and templates are removed from the editor. Existing values are kept in eventgen.conf.
+
+FIXED
+
+The structured application log starter wrote local time with a &quot;Z&quot; (UTC) suffix. It now sets timezone \= 0000.
+
+Tutorial: [https://github.com/genai-telemetry/eventgen-manager/blob/main/Eventgen_Manager_Tutorial.pdf](https://github.com/genai-telemetry/eventgen-manager/blob/main/Eventgen_Manager_Tutorial.pdf)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Configure, preview, and generate realistic test data in Splunk from the browser. A built-in engine runs eventgen.conf configurations directly, with a guided editor, live preview, and throughput monitoring.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Eventgen Manager configures, previews, and generates realistic test data in Splunk from the browser.
+A guided editor covers the eventgen.conf settings, so you never hand-edit the file. Pick a sample file, set how often and how many events to send, choose what to replace in each line, and watch a live preview with every generated value highlighted before anything reaches an index. Send test events to the real destination with one click to confirm the index, sourcetype, and output are right.
+
+The built-in engine is pure Python and runs on Linux, macOS, and Windows, on x86 and ARM. Changes apply within seconds with no restart. Output goes to the local index, HTTP Event Collector, Splunk REST, files, spool folders, raw TCP, or syslog over TCP. On a heavy forwarder, events are forwarded to your indexers through outputs.conf.
+
+Use it for SIEM data , dashboard development, detection and alert testing, training, and load testing. A Throughput dashboard shows events per second, projected daily volume, failed batches, and configured against measured rates.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/adfd45ea-da06-11f1-85e0-e6b89c9d8ac5.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">kamal singh bisht</dc:creator>
+      <pubDate>Mon, 09 Nov 2026 19:53:03 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9245/#v2.0.0</guid>
+    </item>
+    <item>
+      <title>Genesys Cloud Add-on for Splunk - v0.5.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9730/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Genesys Cloud Add-on for Splunk integrates with Genesys Cloud to collect metrics, service statuses and operational events.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/853b98f8-dc4c-11f1-9e62-46334327810e.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Field Solutions</dc:creator>
+      <pubDate>Mon, 09 Nov 2026 19:25:48 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9730/#v0.5.0</guid>
+    </item>
     <item>
       <title>Insights Suite for Splunk (IS4S) - v1.4.7 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7186/</link>
@@ -99,53 +277,6 @@ This add-on enables Cato telemetry to integrate seamlessly with CIM-based applic
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cato Networks</dc:creator>
       <pubDate>Mon, 09 Nov 2026 17:26:09 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8563/#v1.0.86</guid>
-    </item>
-    <item>
-      <title>TrackMe - v2.4.23 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4621/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**TrackMe 2.4.23 — a hotfix release: Splunk UF Fleet, Splunk S2S and Splunk HEC collection at scale, and User Activity Monitoring Data usage linked to any VOL or DSM tenant.**
-
-* **Splunk UF Fleet and Splunk S2S: collection as dedicated jobs.** At scale, every live run of a Splunk UF Fleet tenant failed with `search_timeout`: each search had a fixed cap of 60 seconds, one read past it cancelled the run, and the next run repeated the same read. The reads now run as dedicated jobs, each with its own report, schedule, time budget and Collection health line, and no search has a fixed timeout any more on Splunk UF Fleet, Splunk S2S or Splunk HEC: a search may use what is left of its job’s budget. A live run never builds the directory, and the day-long reads run hourly or every 15 minutes instead of every 5 minutes. See [Splunk UF Fleet](https://docs.trackme-solutions.com/2.4.23/splunk_uf_fleet.html#splunk-uf-fleet) and [Splunk S2S](https://docs.trackme-solutions.com/2.4.23/splunk_s2s.html#splunk-s2s).
-* **Splunk S2S, Splunk UF Fleet and Splunk HEC: a short setup discovery.** The creation wizards ran up to eight searches over 24 hours to 60 days, and the first timeout failed the whole discovery. They now run at most two searches per product over the last 15 minutes and answer with counts and roles. **Propose groups** is its own action in the Splunk UF Fleet settings. See [Splunk HEC](https://docs.trackme-solutions.com/2.4.23/splunk_hec.html#splunk-hec).
-* **User Activity Monitoring: Data usage links any VOL or DSM tenant.** The Data usage settings list every VOL and DSM tenant you can see, whatever account it collects through, and select one VOL tenant and every DSM tenant automatically; a VOL tenant on a remote account now returns its volume and cost. See [Data usage](https://docs.trackme-solutions.com/2.4.23/product_guide/components_uam.html#pg-components-uam-data-usage).
-
-See: [https://docs.trackme-solutions.com/latest/releasenotes.html](https://docs.trackme-solutions.com/latest/releasenotes.html)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TrackMe for Splunk provides visibility and operational excellence to monitor at scale your Splunk data sources availability and quality, and many more. 
-
-With a rich set of features and a powerful workflow, TrackMe empowers you day after day to get the most from your Splunk investments and deliver the five stars quality of service your users deserve.
-
-Discover TrackMe: https://trackme-solutions.com/discover
-
-Documentation: https://docs.trackme-solutions.com
-
-You can subscribe to our newsletter, and receive important communications from us.
-We will send notifications for instance when publishing new releases, so we can you let you know the cool and powerful things we&amp;#x27;ve been working on!
-
-https://trackme-solutions.com/subscribe/
-
-TrackMe has transitioned to a new licensing model.
-The Free Community Edition has been discontinued.
-
-What this means for you:
-
-- Existing licensed customers are not impacted. Your current license continues unchanged.
-- Community users are automatically upgraded to a Foundation Edition trial for 90 days, with full functionality enabled.
-
-After the trial period:
-
-- TrackMe remains active and fully usable for monitoring
-- The platform enters read-only mode
-
-You can continue to view data, dashboards, alerts, and history
-Creation of new tenants, trackers, or entities will be disabled
-
-To continue using TrackMe with full capabilities after the trial, a Foundation license is required.
-
-Buy Foundation Edition: https://trackme-solutions.com/get-foundation/
-
-See all plans: https://trackme-solutions.com/pricing/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Trackme Limited</dc:creator>
-      <pubDate>Mon, 09 Nov 2026 15:57:11 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4621/#v2.4.23</guid>
     </item>
     <item>
       <title>Torq Add-on for Splunk - v3.1.0 [Version Update]</title>
@@ -625,64 +756,6 @@ Splunk Add-on for AWS Security Hub is a premium security solution requiring a su
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Fri, 06 Nov 2026 21:15:42 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8642/#v1.1.4</guid>
-    </item>
-    <item>
-      <title>Eventgen Manager - v2.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/9245/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Eventgen Manager 2.0.0 generates events itself. SA-Eventgen is no longer required.
-
-NEW
-
-Built-in generation engine (eventgen_manager_engine modular input). Pure Python, runs on Linux, macOS, and Windows, on x86 and ARM.
-
-Configuration changes apply within seconds. No restart needed.
-
-Send test events from the editor to the real destination without turning the configuration on.
-
-Live status per configuration: state, events generated, last batch, and the reason for any failure.
-
-Automatic timestamps, with a new &quot;Timestamp to write&quot; option: generated time, or current time for testing detections that search the last few minutes.
-
-New random values: weighted, ipv4private, email, useragent, uuid. New seqfile replacement. Rated replacements now work.
-
-Counters continue from their last value after a restart.
-
-verifySSL setting for HEC and Splunk REST receivers.
-
-Rebuilt Throughput dashboard: events per second, projected daily volume, failed batches, and configured against measured rates.
-
-New Tutorial page with a complete, step-by-step guide.
-
-The engine can also run from the command line, outside Splunk.
-
-UPGRADING FROM SA-EVENTGEN
-
-Existing eventgen.conf configurations work unchanged.
-
-If SA-Eventgen is running, the built-in engine waits on standby so events are not doubled. Use &quot;Switch to the built-in engine&quot; on the Generator control page.
-
-CHANGED
-
-Syslog output now uses TCP. UDP output is removed, as UDP is not allowed on Splunk Cloud or under app certification.
-
-To send to indexers over splunktcp, keep the output on modinput and set up forwarding in outputs.conf on the instance running the app.
-
-Settings that only tuned SA-Eventgen's worker pools, plugins, and templates are removed from the editor. Existing values are kept in eventgen.conf.
-
-FIXED
-
-The structured application log starter wrote local time with a &quot;Z&quot; (UTC) suffix. It now sets timezone \= 0000.
-
-Tutorial: [https://github.com/genai-telemetry/eventgen-manager/blob/main/Eventgen_Manager_Tutorial.pdf](https://github.com/genai-telemetry/eventgen-manager/blob/main/Eventgen_Manager_Tutorial.pdf)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Configure, preview, and generate realistic test data in Splunk from the browser. A built-in engine runs eventgen.conf configurations directly, with a guided editor, live preview, and throughput monitoring.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Eventgen Manager configures, previews, and generates realistic test data in Splunk from the browser. Since version 2.0 it includes its own generation engine, so SA-Eventgen is no longer required, and existing eventgen.conf configurations run unchanged.
-
-A guided editor covers the eventgen.conf settings, so you never hand-edit the file. Pick a sample file, set how often and how many events to send, choose what to replace in each line, and watch a live preview with every generated value highlighted before anything reaches an index. Send test events to the real destination with one click to confirm the index, sourcetype, and output are right.
-
-The built-in engine is pure Python and runs on Linux, macOS, and Windows, on x86 and ARM. Changes apply within seconds with no restart. Output goes to the local index, HTTP Event Collector, Splunk REST, files, spool folders, raw TCP, or syslog over TCP. On a heavy forwarder, events are forwarded to your indexers through outputs.conf.
-
-Use it for demos, dashboard development, detection and alert testing, training, and load testing. A Throughput dashboard shows events per second, projected daily volume, failed batches, and configured against measured rates.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/adfd45ea-da06-11f1-85e0-e6b89c9d8ac5.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">kamal singh bisht</dc:creator>
-      <pubDate>Fri, 06 Nov 2026 17:38:11 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9245/#v2.0.0</guid>
     </item>
     <item>
       <title>PostgreSQL - v5.0.0 [Version Update]</title>
@@ -1861,38 +1934,6 @@ For more details, visit the official Infigo SIEM website: www.infigosiem.com&lt;
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Infigo  IS</dc:creator>
       <pubDate>Tue, 03 Nov 2026 13:44:41 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8057/#v4.6.120261103130759</guid>
-    </item>
-    <item>
-      <title>AirSpace Watch TA (tar1090 / dump1090) - v1.0.3+a71d3d5 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/9301/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Release notes: https://github.com/livehybrid/TA-airspace-watch/releases/tag/v1.0.3&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Splunk modular input that polls a local tar1090 / dump1090-fa receiver and emits one Splunk event per aircraft on every poll cycle. It is the production data source for our AirspaceWatch dashboard but could be used for a variety of logging/monitoring of Air traffic with an external ADS-B device &amp;amp; tar1090 and/or Vessel traffic if integrated with AIS.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk modular input that polls a local tar1090 / dump1090-fa receiver and emits one Splunk event per aircraft on every poll cycle. It is the production data source for our AirspaceWatch dashboard but could be used for a variety of logging/monitoring of Air traffic with an external ADS-B device &amp;amp; tar1090 and/or Vessel traffic if integrated with AIS.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Will Searle</dc:creator>
-      <pubDate>Tue, 03 Nov 2026 11:53:34 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9301/#v1.0.3+a71d3d5</guid>
-    </item>
-    <item>
-      <title>Splunk Add-on for Cisco Identity Services - v5.0.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/1915/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Fixes:
-
-* Improved multiline parsing for Cisco ISE syslog events, including plain, PRI-prefixed, relay-prefixed, and RFC3339 headers.
-* Preserved continuation lines within the same Cisco ISE event.
-* Corrected MESSAGE_CODE `34165` extraction to use `OperationMessageText` for `description` and set `type=warning`.
-* Corrected raw `UserType` mapping to CIM `user_type`.
-* Removed synthetic `user_type` values derived from `AdminName`.
-* Corrected MESSAGE_CODE `60085` mapping to the Change data model.
-* Updated the Inventory dashboard to avoid unavailable CIM-tag warnings while retaining Inventory event counts.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Add-on for Cisco ISE allows a Splunk software administrator to collect Cisco Identity Service Engine (ISE) syslog data. You can use the Splunk platform to analyze these logs directly or use them as a contextual data source to correlate with other communication and authentication data in the Splunk platform. This add-on provides the inputs and CIM-compatible knowledge to use with other Splunk apps, such as Splunk Enterprise Security and the Splunk App for PCI Compliance.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/31e6fff4-d778-11f1-a60f-eade65887576.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 03 Nov 2026 11:35:21 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/1915/#v5.0.1</guid>
-    </item>
-    <item>
-      <title>USTA Malware and C2 Intelligence for Splunk - v1.0.5 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7582/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Introducing the USTA Malware and C2 Intelligence for Splunk app, a powerful integration designed to ingest threat intelligence data from the USTA solution. This app enables organizations to seamlessly import Indicators of Compromise (IOCs), including malware, malicious URLs, and phishing sites, into Splunk. Provided by PRODAFT.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/13e2b9a6-d770-11f1-98e1-ca24e73a1663.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">PRODAFT Intelligence</dc:creator>
-      <pubDate>Tue, 03 Nov 2026 11:21:16 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7582/#v1.0.5</guid>
     </item>
   </channel>
 </rss>
