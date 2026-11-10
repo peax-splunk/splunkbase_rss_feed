@@ -6,7 +6,35 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Tue, 10 Nov 2026 16:50:26 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 10 Nov 2026 22:03:51 +0000</lastBuildDate>
+    <item>
+      <title>NetBrain Automation Integration - v2.0.3 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8090/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## Version 2.0.3
+
+### Splunk Cloud compatibility
+- All alert actions now declare their supported Python versions (`python.required = 3.9, 3.13`), as required by the latest Splunk Cloud vetting rules. Splunk runs each alert action on the newest supported Python version available.
+
+### Fixes
+- **NetBrain TAF Automation alert action:** the last field is now correctly labeled **Custom Data**. It was previously mislabeled as a second &quot;Interface Name&quot;.
+- **NetBrain TAF Automation alert action:** fixed the spelling of **Category** in the field label and help text.
+- **Setup page:** the **Tenant Name** and **Domain Name** fields were previously labeled &quot;Tenant ID&quot; and &quot;Domain ID&quot;. Enter the tenant and domain names exactly as they appear in NetBrain; the app looks up the IDs automatically.
+- **Setup page:** fixed the spelling of **ServicesAPI** in the Endpoint, Account and Password labels.
+
+### Upgrade notes
+- No configuration changes are needed. Your existing settings, stored credentials and saved alert actions are kept when you upgrade.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Trigger NetBrain next-gen no-code automation built on Intents and ADT directly from Splunk alerts. Designed for single-domain deployments, it automates troubleshooting, mapping, and path analysis.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2a19b504-dd4b-11f1-b664-a6233478abc5.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Netbrain Technologies</dc:creator>
+      <pubDate>Tue, 10 Nov 2026 21:20:53 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8090/#v2.0.3</guid>
+    </item>
+    <item>
+      <title>SMTP - v3.3.9 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5847/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Skip all sanitization unless enabled, decoding HTML character references once when template sanitization is disabled.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app provides the ability to send email using SMTP&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/7a7bd612-dd32-11f1-9c6f-9eb221e641b1.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Tue, 10 Nov 2026 18:13:51 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5847/#v3.3.9</guid>
+    </item>
     <item>
       <title>TrendAI Vision One for Splunk (XDR) - v6.3.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5364/</link>
@@ -838,36 +866,6 @@ The app works without an API key at the anonymous limits until November 16, 2026
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Gaurav Malik</dc:creator>
       <pubDate>Sun, 08 Nov 2026 09:30:59 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7771/#v1.1.0</guid>
-    </item>
-    <item>
-      <title>Secure Endpoint (AMP) Events and Audit Logs Add-on for Cisco - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10276/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;First release.
-
-\- Events, audit logs, compromises, top malware threats, computers and vulnerabilities, each a checkbox with its own schedule.
-
-\- Event types, audit log types and groups loaded live from the API: All (includes ones added later), Only selected, All except selected.
-
-\- cisco:se in the Cisco Security Cloud app's format (API JSON + EndpointDataType + group names).
-
-\- cisco:se:audit with CIM mappings (Authentication, Change).
-
-\- Checkpoints with overlap and duplicate removal, rate-limit back-off, Run now, proxy support, Status dashboard.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects Cisco Secure Endpoint (AMP for Endpoints) events, audit logs, compromises, computers, vulnerabilities and top malware threats from the API. Event types, audit log types and groups are picked from live lists. Same cisco:se format as the Cisco Security Cloud app; audit logs CIM-mapped. Not affiliated with Cisco.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects Cisco Secure Endpoint (formerly AMP for Endpoints) data from the Secure Endpoint API v1 and maps the audit logs to the Splunk Common Information Model.
-
-- Events (sourcetype cisco:se): detections, quarantines, scans, isolation, updates and faults, in the same format the Cisco Security Cloud app indexes (the API&amp;#x27;s JSON plus EndpointDataType and group names), so its field extractions, CIM mappings and searches apply.
-- Audit logs (sourcetype cisco:se:audit): console sign-ins and changes to policies, groups, exclusions, users, API credentials, computers and isolation sessions. CIM: Authentication, Change (Account_Management, Endpoint_Changes).
-- Optional, each with its own schedule: compromises (new or changed only), top malware threats, computers (inventory snapshot) and vulnerabilities (snapshot).
-
-- Event types, audit log types and groups are picked on the Inputs page from lists read live from the API, as a searchable multi-select: All (includes types and groups added later), Only selected, or All except selected. No reconfiguration when Secure Endpoint changes.
-- Inputs page in Splunk Web: accounts (API host for North America, Europe or Asia Pacific, client ID and API key, optional proxy; stored encrypted in Splunk&amp;#x27;s credential store; a Test button checks the credential) and inputs: add, edit, enable, disable, run now, delete.
-- Events and audit logs are collected from checkpoints with an overlap and de-duplicated, so restarts and failures do not lose data. Rate limits are respected with back-off.
-- Status dashboard: collections per data type, records written, minutes behind, errors, how late data arrives.
-- Python standard library only, no third-party packages.
-
-Independent project, not affiliated with or endorsed by Cisco. Cisco and Cisco Secure Endpoint are trademarks of Cisco Systems, Inc.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/703e6634-d7dc-11f1-9ba3-2e31957ef7ed.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Nikhil Chawla</dc:creator>
-      <pubDate>Sun, 08 Nov 2026 09:02:47 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10276/#v1.0.0</guid>
     </item>
     <item>
       <title>CIM Assessment Toolkit (CAT) - v2.14.1 [Version Update]</title>
@@ -2004,31 +2002,6 @@ Versions listed in Splunkbase exist for upgrade purposes only. For combinations 
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Wed, 04 Nov 2026 00:56:02 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6361/#v8.8.0</guid>
-    </item>
-    <item>
-      <title>Splunk App for SOAR Export - v8.8.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/3411/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;[Splunk App for SOAR Export release notes](https://help.splunk.com/en/?resourceId=SOARExport_UserGuide_ReleaseNotes &quot;Splunk App for SOAR Export release notes&quot;)
-
-8.8.0 fixes the app failing on FIPS-enabled hosts, incorrect cef.event_id values on forwarded events, and event-forwarding migration during upgrade. Adding, updating, and testing a SOAR server no longer depends on other configured servers.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This is the official Splunk app that integrates Splunk Enterprise or Splunk Cloud with Splunk SOAR. This app, formerly known as the “Phantom App for Splunk,” is responsible for sending data from your Splunk Enterprise/Cloud instances to Splunk SOAR. Once that data is in Splunk SOAR, you can perform automated actions with over 350+ different security tools.
-
-Also included with this app is an integration with Splunk Enterprise Security, allowing you to send ES data to SOAR.
-
-Splunk SOAR is a Security Automation and Orchestrated Response (SOAR) platform that integrates with your existing security tools in order to provide a layer of “connective tissue” between them. Splunk SOAR streamlines security operations through the execution of digital “Playbooks” to achieve in seconds what may normally take minutes or hours to accomplish with the dozens of products that you use every day.
-
-Splunk SOAR doesn’t replace existing security products, but instead makes your investment in them smarter, faster and stronger.
-
-(Formerly known as Phantom App for Splunk)
-
-Documentation: https://help.splunk.com/en/splunk-soar/splunk-app-for-soar-export/
-
-Versions listed in Splunkbase exist for upgrade purposes only. For combinations of versions tested for functionality, refer to the prerequisites in the Splunk App for SOAR Export documentation for Splunk Enterprise or for Splunk Cloud Platform.
-
-- Splunk Enterprise: https://help.splunk.com/?resourceId=SOARExport_UserGuide_Requirements
-- Splunk Cloud Platform: https://help.splunk.com/?resourceId=SOARExport_UserGuide_splunk_product_compatibility_matrix&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c91a96e8-d7e0-11f1-947e-1240c485042a.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Wed, 04 Nov 2026 00:54:41 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/3411/#v8.8.0</guid>
     </item>
   </channel>
 </rss>
