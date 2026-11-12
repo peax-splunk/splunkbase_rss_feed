@@ -6,7 +6,306 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Thu, 12 Nov 2026 17:25:49 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 12 Nov 2026 22:59:24 +0000</lastBuildDate>
+    <item>
+      <title>FMC Syslog and Audit Log Add-on for Cisco Secure Firewall - v1.0.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10306/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;First release.
+
+\- Field extractions for the FMC audit log: logins, policy saves and commits, policy deployments, intrusion rule changes, rule updates and API calls.
+
+\- CIM mappings: Authentication and Change (audit log), Alerts (correlation events).
+
+\- Event types and tags, exported to all apps.
+
+\- Search-time only: install on search heads, including Splunk Cloud and Enterprise Security.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Search-time fields and CIM mappings for Cisco Secure Firewall Management Center (FMC) syslog. Audit log (cisco:fmc:audit): logins, configuration changes, deployments and rule updates for Authentication and Change. Correlation events (cisco:fmc:syslog): Alerts. Works with Enterprise Security. Not affiliated with Cisco.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Adds search-time field extractions, CIM mappings, event types and tags for the syslog that Cisco Secure Firewall Management Center (FMC) sends: the audit log and correlation events.
+
+- Authentication (cisco:fmc:audit): login success and failure, with the user and, when the FMC logged one, the client address.
+- Change (cisco:fmc:audit): policy saves and commits, policy deployments, intrusion rule changes, rule update and SRU installs, and API writes, with who made the change and what changed.
+- Alerts (cisco:fmc:syslog): correlation events, with the rule, policy, source and destination, ports, countries, protocol and severity.
+- Other audit records (page views, reports, API reads, logouts) get fields and a category but no CIM tags, so they stay out of the data models.
+
+- Search-time only: no inputs, index-time settings or dashboards. Install on search heads, including Splunk Cloud and Enterprise Security.
+- The add-on does not collect data. Send the FMC&amp;#x27;s syslog to Splunk with these sourcetypes; Installation has the steps.
+
+Independent project, not affiliated with or endorsed by Cisco.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/36acc3a0-d964-11f1-9176-f29c1c18bf5f.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Nikhil Chawla</dc:creator>
+      <pubDate>Thu, 12 Nov 2026 22:58:33 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10306/#v1.0.0</guid>
+    </item>
+    <item>
+      <title>Tenable Vulnerability Management Audit Log Add-on - v1.0.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10326/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;1.0.0: First release. Authentication (password, API key, MFA sign-ins) and Change (Account_Management) mappings for tenable:io:audit_logs.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Search-time CIM mappings for Tenable Vulnerability Management (formerly Tenable.io) audit logs, sourcetype tenable:io:audit_logs. Password, API key and MFA sign-ins map to Authentication, and user account changes map to Change (Account_Management). Works with Enterprise Security. Not affiliated with Tenable.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;CIM mappings (Authentication, Change) for Tenable Vulnerability Management audit logs collected by the Tenable Add-on for Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/de0411a6-dc6d-11f1-a840-9ee9728272ee.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Nikhil Chawla</dc:creator>
+      <pubDate>Thu, 12 Nov 2026 22:57:59 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10326/#v1.0.0</guid>
+    </item>
+    <item>
+      <title>Palo Alto Cortex Audit Logs Add-on - v1.0.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10311/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Initial release.
+
+
+
+\- Two inputs for the Palo Alto Networks Cortex public API:
+
+&amp;#x20; \- Audit management logs (sourcetype cortex:audit:management_logs)
+
+&amp;#x20; \- Agent audit reports (sourcetype cortex:audit:agent_reports), with optional category filter (audit / monitoring / status)
+
+\- Standard and Advanced API key support; credentials are validated on save and stored in Splunk's encrypted credential store
+
+\- HTTP and SOCKS5 proxy support
+
+\- Gap-free collection with KV Store checkpointing, configurable start time and ingestion delay
+
+\- Automatic retries with backoff for rate limits and server errors
+
+\- CIM Authentication data model mapping for console login events
+
+\- Requires Splunk Enterprise / Splunk Cloud Platform 10.2 or later (Python 3.13)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects audit management logs and agent reports from the Palo Alto Networks Cortex public API and maps authentication events to the CIM Authentication data model.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Palo Alto Cortex Audit Logs Add-on collects audit management logs and agent audit reports from the Palo Alto Networks Cortex public API. The add-on retrieves audit data through two dedicated API endpoints: management logs and agent reports. It provides field extractions for both data sources and maps Cortex authentication events to the CIM Authentication data model. The add-on handles data collection in time-windowed increments, maintaining checkpoints to ensure no audit data is skipped during collection cycles. Events are indexed with sourcetypes cortex:audit:management_logs and cortex:audit:agent_reports, making it straightforward to search and analyze Cortex audit activity within Splunk. The add-on assigns event timestamps from the AUDIT_INSERT_TIME field for management logs and the TIMESTAMP field for agent reports. Management log events with AUDIT_ENTITY=AUTH are automatically tagged for the CIM Authentication data model, enabling correlation with other authentication data sources.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9223f666-da42-11f1-8782-0a7471defe44.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Gaurav Malik</dc:creator>
+      <pubDate>Thu, 12 Nov 2026 22:36:02 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10311/#v1.0.0</guid>
+    </item>
+    <item>
+      <title>Cloud Discovery Add-on for Palo Alto Networks Prisma Cloud - v1.1.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8367/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Version 1.1.1
+
+
+
+\- Renamed to &quot;Cloud Discovery Add-on for Palo Alto Networks Prisma Cloud&quot; to follow the Splunkbase naming conventions. The listing name now matches the app's label.
+
+\- No functional changes. App ID (TA-prisma-cloud-discovery), input (prisma_cloud_discovery) and sourcetype (prisma:cloud_discovery) are unchanged, so existing installs upgrade in place.
+
+
+
+Includes everything from 1.1.0:
+
+\- Rebuilt on the Splunk UCC framework
+
+\- TLS certificate verification always on
+
+\- Account-based setup: Console URL, Access Key ID, Secret Key (stored encrypted, tested when you save) and API version, replacing the token and two full URLs per input
+
+\- Collects discovered cloud entities (CSV download) and cloud discovery scan results (all pages); each can be turned on or off
+
+\- Every event has a record_type field
+
+\- Fixed proxy handling; API errors are logged instead of silently ending collection
+
+\- Daily default interval; automatic retries with backoff
+
+\- Python 3.9 and 3.13 support; Splunk Cloud compatible
+
+
+
+Upgrading from 1.0.0: add an account with your access key ID and secret key, then delete the old input and create a new one. Upgrading from 1.1.0 needs no changes.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;See every cloud resource Prisma Cloud Compute has discovered across your accounts, and which ones are protected by Defenders. Collects discovered cloud entities and cloud discovery scan results from SaaS or self-hosted Consoles. Splunk Cloud compatible.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collect Prisma Cloud Compute cloud discovery data into Splunk: discovered cloud entities and discovery scan results.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8c863336-dba0-11f1-9176-f29c1c18bf5f.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Gaurav Malik</dc:creator>
+      <pubDate>Thu, 12 Nov 2026 22:35:34 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8367/#v1.1.1</guid>
+    </item>
+    <item>
+      <title>NetApp Cloud Insights SaaS Log Onboarding to Splunk - v1.1.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/7771/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&amp;#x20; Version 1.1.0 – rebuilt add-on
+
+
+
+&amp;#x20; \- Rebuilt on the Splunk UCC framework, replacing the Add-on Builder version
+
+&amp;#x20; \- Each alert is ingested once, and again only when it changes (for example its status). 1.0.x re-ingested up to a week of alerts whenever a new one arrived
+
+&amp;#x20; \- Pages through all alerts in the API's one-week window
+
+&amp;#x20; \- Account-based setup: Tenant URL and API access token (stored encrypted, tested when you save)
+
+&amp;#x20; \- CIM Alerts data model mapping (eventtype netapp_cloud_secure_alert, tag alert)
+
+&amp;#x20; \- Automatic retries with backoff; HTTP and SOCKS5 proxy support
+
+&amp;#x20; \- Python 3.9 and 3.13 support; Splunk Cloud compatible
+
+
+
+&amp;#x20; Upgrading from 1.0.x: add an account (the old REST URL can be pasted as the Tenant URL), then delete the old input and create a new one.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects and normalizes security alert data from NetApp Cloud Insights Secure via REST API for centralized monitoring in Splunk.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The NetApp Cloud Insights Secure Add-on for Splunk collects security alert data from NetApp Cloud Insights Secure through its REST API. The add-on retrieves alert events and normalizes them to the netapp:cloud_secure:alerts source type, enabling centralized monitoring and analysis of NetApp Cloud Insights security alerts within Splunk. It includes configuration and input dashboards that allow administrators to manage API credentials and data collection settings. The add-on is built using Python 3 and supports modular input architecture for reliable data ingestion.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/034fe412-da48-11f1-9176-f29c1c18bf5f.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Gaurav Malik</dc:creator>
+      <pubDate>Thu, 12 Nov 2026 22:34:50 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7771/#v1.1.0</guid>
+    </item>
+    <item>
+      <title>Claude Activity Feed Add-on - v1.0.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10313/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Version 1.0.0 – initial release
+
+
+
+\- Collects the Anthropic Compliance API Activity Feed (Claude audit events) into Splunk, sourcetype anthropic:claude:activity
+
+\- Works with a Claude Console Admin API key (sk-ant-admin01-...); a Claude Enterprise Compliance Access Key also works
+
+\- Activity Feed only: no chat content, files, user directory or session transcripts are read
+
+\- Gap-free collection using Anthropic's recommended window polling: closed windows behind real time, a 10-minute overlap for late-indexed activities, and de-duplication on activity ID
+
+\- KV Store checkpoint that only moves forward after a full window is written; catch-up runs resume automatically
+
+\- Optional first-run start time, adjustable ingestion delay, and an activity type filter
+
+\- Search-time fields: user, user_id, src, http_user_agent, signature, actor_type, vendor_product
+
+\- API key stored encrypted and tested when you save
+
+\- HTTP and SOCKS5 proxy support; automatic retries with backoff that respect API rate limits
+
+\- Python 3.9 and 3.13 support; Splunk Enterprise 9.0+ and Splunk Cloud Platform&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Bring Claude audit events into Splunk with nothing more than a Claude Console Admin API key. Collects the Anthropic Compliance API Activity Feed (sign-ins, admin and settings changes, API key lifecycle, member management, and chat, file and project activity) with gap-free, de-duplicated polling. Splunk 9.0+ and Splunk Cloud compatible.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Lightweight Splunk add-on that collects the Anthropic Claude Activity Feed (audit events) using a Claude Console Admin API key.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8817664e-da51-11f1-b858-ba0837ecebbb.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Gaurav Malik</dc:creator>
+      <pubDate>Thu, 12 Nov 2026 22:14:36 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10313/#v1.0.0</guid>
+    </item>
+    <item>
+      <title>Defender Inventory Add-on for Palo Alto Networks Prisma Cloud - v1.1.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8369/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Version 1.1.1
+
+
+
+\- Renamed to &quot;Defender Inventory Add-on for Palo Alto Networks Prisma Cloud&quot; to follow the Splunkbase naming conventions. The listing name now matches the app's label.
+
+\- No functional changes. App ID (TA-prisma-defender), input (prisma_defender) and sourcetype (prisma:defender) are unchanged, so existing installs upgrade in place.
+
+
+
+Includes everything from 1.1.0:
+
+\- Rebuilt on the Splunk UCC framework
+
+\- TLS certificate verification always on
+
+\- Account-based setup: Console URL, Access Key ID, Secret Key (stored encrypted, tested when you save) and API version
+
+\- Collects every Defender, connected and disconnected, across all pages (1.0.0 returned at most 50 connected Defenders)
+
+\- Registry scan progress for every registry, plus a totals event
+
+\- Fixed proxy handling
+
+\- Every event has a record_type field; each collection can be turned on or off
+
+\- Hourly default interval; automatic retries with backoff
+
+\- Python 3.9 and 3.13 support; Splunk Cloud compatible
+
+
+
+Upgrading from 1.0.0: add an account with your access key ID and secret key, then delete the old input and create a new one. Upgrading from 1.1.0 needs no changes.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Monitor Prisma Cloud Compute (Twistlock) Defenders in Splunk: every Defender with its connection status, version, cluster, cloud and feature health, Defender counts per category, and registry scan progress. Works with SaaS and self-hosted Consoles and is Splunk Cloud compatible.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collect Prisma Cloud Compute Defender inventory, Defender health summary and registry scan progress into Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a0edeb08-db9f-11f1-bba6-9e2f359bf1f9.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Gaurav Malik</dc:creator>
+      <pubDate>Thu, 12 Nov 2026 22:14:06 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8369/#v1.1.1</guid>
+    </item>
+    <item>
+      <title>Specialist Stats Add-on for VeeOne - v1.1.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8361/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Version 1.1.1
+
+
+
+\- Renamed to &quot;Specialist Stats Add-on for VeeOne&quot; to follow the Splunkbase naming conventions. The listing name now matches the app's label.
+
+\- No functional changes. App ID (TA-veeone), input (veeone_logs) and sourcetype (veeone:logs) are unchanged, so existing installs upgrade in place.
+
+
+
+Includes everything from 1.1.0:
+
+\- Rebuilt on the Splunk UCC framework
+
+\- Working collection from the VeeOne open API (GET /api/v2/specialist/stats); one JSON event per specialist
+
+\- API key stored encrypted and tested when you save
+
+\- Each run is a full snapshot; daily default interval
+
+\- Automatic retries with backoff; HTTP and SOCKS5 proxy support
+
+\- Python 3.9 and 3.13 support; Splunk Cloud compatible&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Bring VeeOne specialist data into Splunk: a daily snapshot of every specialist record from the VeeOne open API, with the API key stored encrypted. Splunk Cloud compatible.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collect VeeOne specialist stats from the VeeOne open API into Splunk as daily snapshots, with the API key stored encrypted.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0662ea72-db98-11f1-bba6-9e2f359bf1f9.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Gaurav Malik</dc:creator>
+      <pubDate>Thu, 12 Nov 2026 22:13:33 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8361/#v1.1.1</guid>
+    </item>
+    <item>
+      <title>Eventgen Manager - v2.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9245/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Eventgen Manager 2.0.0 generates events itself. SA-Eventgen is no longer required.
+
+NEW
+
+Built-in generation engine (eventgen_manager_engine modular input). Pure Python, runs on Linux, macOS, and Windows, on x86 and ARM.
+
+Configuration changes apply within seconds. No restart needed.
+
+Send test events from the editor to the real destination without turning the configuration on.
+
+Live status per configuration: state, events generated, last batch, and the reason for any failure.
+
+Automatic timestamps, with a new &quot;Timestamp to write&quot; option: generated time, or current time for testing detections that search the last few minutes.
+
+New random values: weighted, ipv4private, email, useragent, uuid. New seqfile replacement. Rated replacements now work.
+
+Counters continue from their last value after a restart.
+
+verifySSL setting for HEC and Splunk REST receivers.
+
+Rebuilt Throughput dashboard: events per second, projected daily volume, failed batches, and configured against measured rates.
+
+New Tutorial page with a complete, step-by-step guide.
+
+The engine can also run from the command line, outside Splunk.
+
+UPGRADING FROM SA-EVENTGEN
+
+Existing eventgen.conf configurations work unchanged.
+
+If SA-Eventgen is running, the built-in engine waits on standby so events are not doubled. Use &quot;Switch to the built-in engine&quot; on the Generator control page.
+
+CHANGED
+
+Syslog output now uses TCP. UDP output is removed, as UDP is not allowed on Splunk Cloud or under app certification.
+
+To send to indexers over splunktcp, keep the output on modinput and set up forwarding in outputs.conf on the instance running the app.
+
+Settings that only tuned SA-Eventgen's worker pools, plugins, and templates are removed from the editor. Existing values are kept in eventgen.conf.
+
+FIXED
+
+The structured application log starter wrote local time with a &quot;Z&quot; (UTC) suffix. It now sets timezone \= 0000.
+
+Tutorial: [https://github.com/genai-telemetry/eventgen-manager/blob/main/Eventgen_Manager_Tutorial.pdf](https://github.com/genai-telemetry/eventgen-manager/blob/main/Eventgen_Manager_Tutorial.pdf)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Configure, preview, and generate realistic test data in Splunk from the browser. A built-in engine runs eventgen.conf configurations directly, with a guided editor, live preview, and throughput monitoring.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Eventgen Manager configures, previews, and generates realistic test data in Splunk from the browser.
+A guided editor covers the eventgen.conf settings, so you never hand-edit the file. Pick a sample file, set how often and how many events to send, choose what to replace in each line, and watch a live preview with every generated value highlighted before anything reaches an index. Send test events to the real destination with one click to confirm the index, sourcetype, and output are right.
+
+The built-in engine is pure Python and runs on Linux, macOS, and Windows, on x86 and ARM. Changes apply within seconds with no restart. Output goes to the local index, HTTP Event Collector, Splunk REST, files, spool folders, raw TCP, or syslog over TCP. On a heavy forwarder, events are forwarded to your indexers through outputs.conf.
+
+Use it for SIEM data , dashboard development, detection and alert testing, training, and load testing. A Throughput dashboard shows events per second, projected daily volume, failed batches, and configured against measured rates.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/adfd45ea-da06-11f1-85e0-e6b89c9d8ac5.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">kamal singh bisht</dc:creator>
+      <pubDate>Thu, 12 Nov 2026 21:30:36 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9245/#v2.0.0</guid>
+    </item>
+    <item>
+      <title>MCP/Macro Tool Builder - vnull [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/10359/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Organize Splunk macros as MCP tools and constrain agents to predetermined searches&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;DVD is a small admin tool that organizes query macros and exposes them as MCP tools. Each macro serves as the tool&amp;#x27;s SPL template, and the tool&amp;#x27;s properties map directly to the macro&amp;#x27;s variables. The LLM supplies arguments, and the query logic stays under your control.
+
+When to use it:
+- You want to organize queries as macros, including for use outside MCP contexts
+- You want to constrain the LLM to predetermined searches
+- You want to pass dynamic values through an MCP tool within the bounds of a macro
+- You have many macros you&amp;#x27;d like to map to MCP tools&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a624bee8-de0c-11f1-9573-0e13280fa3d4.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">David Williams</dc:creator>
+      <pubDate>Thu, 12 Nov 2026 19:14:11 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10359/#vnull</guid>
+    </item>
     <item>
       <title>Splunk app for Redundant or Inefficient Search Spotting - v1.0.22 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7300/</link>
@@ -142,90 +441,6 @@ For Premium Version - Contact sales https://www.avertpoint.com/contactus.html&lt
       <guid>https://splunkbase.splunk.com/app/10305/#v1.2.2</guid>
     </item>
     <item>
-      <title>FMC Syslog and Audit Log Add-on for Cisco Secure Firewall - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10306/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;First release.
-
-\- Field extractions for the FMC audit log: logins, policy saves and commits, policy deployments, intrusion rule changes, rule updates and API calls.
-
-\- CIM mappings: Authentication and Change (audit log), Alerts (correlation events).
-
-\- Event types and tags, exported to all apps.
-
-\- Search-time only: install on search heads, including Splunk Cloud and Enterprise Security.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Search-time fields and CIM mappings for Cisco Secure Firewall Management Center (FMC) syslog. Audit log (cisco:fmc:audit): logins, configuration changes, deployments and rule updates for Authentication and Change. Correlation events (cisco:fmc:syslog): Alerts. Works with Enterprise Security. Not affiliated with Cisco.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Adds search-time field extractions, CIM mappings, event types and tags for the syslog that Cisco Secure Firewall Management Center (FMC) sends: the audit log and correlation events.
-
-- Authentication (cisco:fmc:audit): login success and failure, with the user and, when the FMC logged one, the client address.
-- Change (cisco:fmc:audit): policy saves and commits, policy deployments, intrusion rule changes, rule update and SRU installs, and API writes, with who made the change and what changed.
-- Alerts (cisco:fmc:syslog): correlation events, with the rule, policy, source and destination, ports, countries, protocol and severity.
-- Other audit records (page views, reports, API reads, logouts) get fields and a category but no CIM tags, so they stay out of the data models.
-
-- Search-time only: no inputs, index-time settings or dashboards. Install on search heads, including Splunk Cloud and Enterprise Security.
-- The add-on does not collect data. Send the FMC&amp;#x27;s syslog to Splunk with these sourcetypes; Installation has the steps.
-
-Independent project, not affiliated with or endorsed by Cisco.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/36acc3a0-d964-11f1-9176-f29c1c18bf5f.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Nikhil Chawla</dc:creator>
-      <pubDate>Thu, 12 Nov 2026 13:50:11 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10306/#v1.0.0</guid>
-    </item>
-    <item>
-      <title>Palo Alto Cortex Audit Logs Add-on - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10311/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Initial release.
-
-
-
-\- Two inputs for the Palo Alto Networks Cortex public API:
-
-&amp;#x20; \- Audit management logs (sourcetype cortex:audit:management_logs)
-
-&amp;#x20; \- Agent audit reports (sourcetype cortex:audit:agent_reports), with optional category filter (audit / monitoring / status)
-
-\- Standard and Advanced API key support; credentials are validated on save and stored in Splunk's encrypted credential store
-
-\- HTTP and SOCKS5 proxy support
-
-\- Gap-free collection with KV Store checkpointing, configurable start time and ingestion delay
-
-\- Automatic retries with backoff for rate limits and server errors
-
-\- CIM Authentication data model mapping for console login events
-
-\- Requires Splunk Enterprise / Splunk Cloud Platform 10.2 or later (Python 3.13)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects audit management logs and agent reports from the Palo Alto Networks Cortex public API and maps authentication events to the CIM Authentication data model.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Palo Alto Cortex Audit Logs Add-on collects audit management logs and agent audit reports from the Palo Alto Networks Cortex public API. The add-on retrieves audit data through two dedicated API endpoints: management logs and agent reports. It provides field extractions for both data sources and maps Cortex authentication events to the CIM Authentication data model. The add-on handles data collection in time-windowed increments, maintaining checkpoints to ensure no audit data is skipped during collection cycles. Events are indexed with sourcetypes cortex:audit:management_logs and cortex:audit:agent_reports, making it straightforward to search and analyze Cortex audit activity within Splunk. The add-on assigns event timestamps from the AUDIT_INSERT_TIME field for management logs and the TIMESTAMP field for agent reports. Management log events with AUDIT_ENTITY=AUTH are automatically tagged for the CIM Authentication data model, enabling correlation with other authentication data sources.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9223f666-da42-11f1-8782-0a7471defe44.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Gaurav Malik</dc:creator>
-      <pubDate>Thu, 12 Nov 2026 13:49:26 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10311/#v1.0.0</guid>
-    </item>
-    <item>
-      <title>Claude Activity Feed Add-on - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10313/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Version 1.0.0 – initial release
-
-
-
-\- Collects the Anthropic Compliance API Activity Feed (Claude audit events) into Splunk, sourcetype anthropic:claude:activity
-
-\- Works with a Claude Console Admin API key (sk-ant-admin01-...); a Claude Enterprise Compliance Access Key also works
-
-\- Activity Feed only: no chat content, files, user directory or session transcripts are read
-
-\- Gap-free collection using Anthropic's recommended window polling: closed windows behind real time, a 10-minute overlap for late-indexed activities, and de-duplication on activity ID
-
-\- KV Store checkpoint that only moves forward after a full window is written; catch-up runs resume automatically
-
-\- Optional first-run start time, adjustable ingestion delay, and an activity type filter
-
-\- Search-time fields: user, user_id, src, http_user_agent, signature, actor_type, vendor_product
-
-\- API key stored encrypted and tested when you save
-
-\- HTTP and SOCKS5 proxy support; automatic retries with backoff that respect API rate limits
-
-\- Python 3.9 and 3.13 support; Splunk Enterprise 9.0+ and Splunk Cloud Platform&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Bring Claude audit events into Splunk with nothing more than a Claude Console Admin API key. Collects the Anthropic Compliance API Activity Feed (sign-ins, admin and settings changes, API key lifecycle, member management, and chat, file and project activity) with gap-free, de-duplicated polling. Splunk 9.0+ and Splunk Cloud compatible.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Lightweight Splunk add-on that collects the Anthropic Claude Activity Feed (audit events) using a Claude Console Admin API key.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8817664e-da51-11f1-b858-ba0837ecebbb.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Gaurav Malik</dc:creator>
-      <pubDate>Thu, 12 Nov 2026 13:46:49 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10313/#v1.0.0</guid>
-    </item>
-    <item>
       <title>ShadowTrackr - v1.2.0 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/10317/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Bring your external attack surface into Splunk. ShadowTrackr finds your internet-facing hosts, websites, certificates, CVEs, lookalike domains and suppliers; this app puts them in dashboards, detections and Enterprise Security, and adds attack surface context to your firewall, proxy and auth logs with one command.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;**See your organization the way attackers do, right inside Splunk.**
@@ -302,14 +517,6 @@ Documentation: https://docs.trackme-solutions.com/product_guide/integ_broker.htm
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Trackme Limited</dc:creator>
       <pubDate>Thu, 12 Nov 2026 13:44:14 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/10323/#v1.1.2</guid>
-    </item>
-    <item>
-      <title>Tenable Vulnerability Management Audit Log Add-on - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10326/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;1.0.0: First release. Authentication (password, API key, MFA sign-ins) and Change (Account_Management) mappings for tenable:io:audit_logs.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Search-time CIM mappings for Tenable Vulnerability Management (formerly Tenable.io) audit logs, sourcetype tenable:io:audit_logs. Password, API key and MFA sign-ins map to Authentication, and user account changes map to Change (Account_Management). Works with Enterprise Security. Not affiliated with Tenable.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;CIM mappings (Authentication, Change) for Tenable Vulnerability Management audit logs collected by the Tenable Add-on for Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/de0411a6-dc6d-11f1-a840-9ee9728272ee.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Nikhil Chawla</dc:creator>
-      <pubDate>Thu, 12 Nov 2026 13:42:26 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10326/#v1.0.0</guid>
     </item>
     <item>
       <title>LogChecker - v1.0.0 [New App Release]</title>
@@ -400,20 +607,6 @@ Data is sent to the Splunk HTTP Event Collector from the EasySMF Events software
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Andrew Rowley</dc:creator>
       <pubDate>Thu, 12 Nov 2026 13:37:53 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/10349/#v1.0.0</guid>
-    </item>
-    <item>
-      <title>MCP/Macro Tool Builder - vnull [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/10359/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Organize Splunk macros as MCP tools and constrain agents to predetermined searches&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;DVD is a small admin tool that organizes query macros and exposes them as MCP tools. Each macro serves as the tool&amp;#x27;s SPL template, and the tool&amp;#x27;s properties map directly to the macro&amp;#x27;s variables. The LLM supplies arguments, and the query logic stays under your control.
-
-When to use it:
-- You want to organize queries as macros, including for use outside MCP contexts
-- You want to constrain the LLM to predetermined searches
-- You want to pass dynamic values through an MCP tool within the bounds of a macro
-- You have many macros you&amp;#x27;d like to map to MCP tools&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a624bee8-de0c-11f1-9573-0e13280fa3d4.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">David Williams</dc:creator>
-      <pubDate>Thu, 12 Nov 2026 13:37:06 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10359/#vnull</guid>
     </item>
     <item>
       <title>WhoisFreaks for Splunk - v1.0.0 [New App Release]</title>
@@ -1075,114 +1268,6 @@ The Lookout Mobile Threat Defense for Splunk App collects data from the Lookout 
       <guid>https://splunkbase.splunk.com/app/4961/#v1.2.7</guid>
     </item>
     <item>
-      <title>Specialist Stats Add-on for VeeOne - v1.1.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/8361/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Version 1.1.1
-
-
-
-\- Renamed to &quot;Specialist Stats Add-on for VeeOne&quot; to follow the Splunkbase naming conventions. The listing name now matches the app's label.
-
-\- No functional changes. App ID (TA-veeone), input (veeone_logs) and sourcetype (veeone:logs) are unchanged, so existing installs upgrade in place.
-
-
-
-Includes everything from 1.1.0:
-
-\- Rebuilt on the Splunk UCC framework
-
-\- Working collection from the VeeOne open API (GET /api/v2/specialist/stats); one JSON event per specialist
-
-\- API key stored encrypted and tested when you save
-
-\- Each run is a full snapshot; daily default interval
-
-\- Automatic retries with backoff; HTTP and SOCKS5 proxy support
-
-\- Python 3.9 and 3.13 support; Splunk Cloud compatible&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Bring VeeOne specialist data into Splunk: a daily snapshot of every specialist record from the VeeOne open API, with the API key stored encrypted. Splunk Cloud compatible.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collect VeeOne specialist stats from the VeeOne open API into Splunk as daily snapshots, with the API key stored encrypted.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0662ea72-db98-11f1-bba6-9e2f359bf1f9.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Gaurav Malik</dc:creator>
-      <pubDate>Tue, 10 Nov 2026 07:46:17 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8361/#v1.1.1</guid>
-    </item>
-    <item>
-      <title>Cloud Discovery Add-on for Palo Alto Networks Prisma Cloud - v1.1.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8367/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Version 1.1.1
-
-
-
-\- Renamed to &quot;Cloud Discovery Add-on for Palo Alto Networks Prisma Cloud&quot; to follow the Splunkbase naming conventions. The listing name now matches the app's label.
-
-\- No functional changes. App ID (TA-prisma-cloud-discovery), input (prisma_cloud_discovery) and sourcetype (prisma:cloud_discovery) are unchanged, so existing installs upgrade in place.
-
-
-
-Includes everything from 1.1.0:
-
-\- Rebuilt on the Splunk UCC framework
-
-\- TLS certificate verification always on
-
-\- Account-based setup: Console URL, Access Key ID, Secret Key (stored encrypted, tested when you save) and API version, replacing the token and two full URLs per input
-
-\- Collects discovered cloud entities (CSV download) and cloud discovery scan results (all pages); each can be turned on or off
-
-\- Every event has a record_type field
-
-\- Fixed proxy handling; API errors are logged instead of silently ending collection
-
-\- Daily default interval; automatic retries with backoff
-
-\- Python 3.9 and 3.13 support; Splunk Cloud compatible
-
-
-
-Upgrading from 1.0.0: add an account with your access key ID and secret key, then delete the old input and create a new one. Upgrading from 1.1.0 needs no changes.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;See every cloud resource Prisma Cloud Compute has discovered across your accounts, and which ones are protected by Defenders. Collects discovered cloud entities and cloud discovery scan results from SaaS or self-hosted Consoles. Splunk Cloud compatible.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collect Prisma Cloud Compute cloud discovery data into Splunk: discovered cloud entities and discovery scan results.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8c863336-dba0-11f1-9176-f29c1c18bf5f.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Gaurav Malik</dc:creator>
-      <pubDate>Tue, 10 Nov 2026 07:46:15 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8367/#v1.1.1</guid>
-    </item>
-    <item>
-      <title>Defender Inventory Add-on for Palo Alto Networks Prisma Cloud - v1.1.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8369/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Version 1.1.1
-
-
-
-\- Renamed to &quot;Defender Inventory Add-on for Palo Alto Networks Prisma Cloud&quot; to follow the Splunkbase naming conventions. The listing name now matches the app's label.
-
-\- No functional changes. App ID (TA-prisma-defender), input (prisma_defender) and sourcetype (prisma:defender) are unchanged, so existing installs upgrade in place.
-
-
-
-Includes everything from 1.1.0:
-
-\- Rebuilt on the Splunk UCC framework
-
-\- TLS certificate verification always on
-
-\- Account-based setup: Console URL, Access Key ID, Secret Key (stored encrypted, tested when you save) and API version
-
-\- Collects every Defender, connected and disconnected, across all pages (1.0.0 returned at most 50 connected Defenders)
-
-\- Registry scan progress for every registry, plus a totals event
-
-\- Fixed proxy handling
-
-\- Every event has a record_type field; each collection can be turned on or off
-
-\- Hourly default interval; automatic retries with backoff
-
-\- Python 3.9 and 3.13 support; Splunk Cloud compatible
-
-
-
-Upgrading from 1.0.0: add an account with your access key ID and secret key, then delete the old input and create a new one. Upgrading from 1.1.0 needs no changes.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Monitor Prisma Cloud Compute (Twistlock) Defenders in Splunk: every Defender with its connection status, version, cluster, cloud and feature health, Defender counts per category, and registry scan progress. Works with SaaS and self-hosted Consoles and is Splunk Cloud compatible.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collect Prisma Cloud Compute Defender inventory, Defender health summary and registry scan progress into Splunk.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a0edeb08-db9f-11f1-bba6-9e2f359bf1f9.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Gaurav Malik</dc:creator>
-      <pubDate>Tue, 10 Nov 2026 07:46:12 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8369/#v1.1.1</guid>
-    </item>
-    <item>
       <title>Cloud Sentry - v1.2.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/10180/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**Requirements**
@@ -1301,63 +1386,6 @@ The AWS Zero-Trust topology solution consists of two complementary apps designed
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Young Suh</dc:creator>
       <pubDate>Tue, 10 Nov 2026 00:47:34 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8628/#v2.8.8</guid>
-    </item>
-    <item>
-      <title>Eventgen Manager - v2.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/9245/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Eventgen Manager 2.0.0 generates events itself. SA-Eventgen is no longer required.
-
-NEW
-
-Built-in generation engine (eventgen_manager_engine modular input). Pure Python, runs on Linux, macOS, and Windows, on x86 and ARM.
-
-Configuration changes apply within seconds. No restart needed.
-
-Send test events from the editor to the real destination without turning the configuration on.
-
-Live status per configuration: state, events generated, last batch, and the reason for any failure.
-
-Automatic timestamps, with a new &quot;Timestamp to write&quot; option: generated time, or current time for testing detections that search the last few minutes.
-
-New random values: weighted, ipv4private, email, useragent, uuid. New seqfile replacement. Rated replacements now work.
-
-Counters continue from their last value after a restart.
-
-verifySSL setting for HEC and Splunk REST receivers.
-
-Rebuilt Throughput dashboard: events per second, projected daily volume, failed batches, and configured against measured rates.
-
-New Tutorial page with a complete, step-by-step guide.
-
-The engine can also run from the command line, outside Splunk.
-
-UPGRADING FROM SA-EVENTGEN
-
-Existing eventgen.conf configurations work unchanged.
-
-If SA-Eventgen is running, the built-in engine waits on standby so events are not doubled. Use &quot;Switch to the built-in engine&quot; on the Generator control page.
-
-CHANGED
-
-Syslog output now uses TCP. UDP output is removed, as UDP is not allowed on Splunk Cloud or under app certification.
-
-To send to indexers over splunktcp, keep the output on modinput and set up forwarding in outputs.conf on the instance running the app.
-
-Settings that only tuned SA-Eventgen's worker pools, plugins, and templates are removed from the editor. Existing values are kept in eventgen.conf.
-
-FIXED
-
-The structured application log starter wrote local time with a &quot;Z&quot; (UTC) suffix. It now sets timezone \= 0000.
-
-Tutorial: [https://github.com/genai-telemetry/eventgen-manager/blob/main/Eventgen_Manager_Tutorial.pdf](https://github.com/genai-telemetry/eventgen-manager/blob/main/Eventgen_Manager_Tutorial.pdf)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Configure, preview, and generate realistic test data in Splunk from the browser. A built-in engine runs eventgen.conf configurations directly, with a guided editor, live preview, and throughput monitoring.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Eventgen Manager configures, previews, and generates realistic test data in Splunk from the browser.
-A guided editor covers the eventgen.conf settings, so you never hand-edit the file. Pick a sample file, set how often and how many events to send, choose what to replace in each line, and watch a live preview with every generated value highlighted before anything reaches an index. Send test events to the real destination with one click to confirm the index, sourcetype, and output are right.
-
-The built-in engine is pure Python and runs on Linux, macOS, and Windows, on x86 and ARM. Changes apply within seconds with no restart. Output goes to the local index, HTTP Event Collector, Splunk REST, files, spool folders, raw TCP, or syslog over TCP. On a heavy forwarder, events are forwarded to your indexers through outputs.conf.
-
-Use it for SIEM data , dashboard development, detection and alert testing, training, and load testing. A Throughput dashboard shows events per second, projected daily volume, failed batches, and configured against measured rates.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/adfd45ea-da06-11f1-85e0-e6b89c9d8ac5.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">kamal singh bisht</dc:creator>
-      <pubDate>Mon, 09 Nov 2026 19:53:03 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9245/#v2.0.0</guid>
     </item>
     <item>
       <title>Genesys Cloud Add-on for Splunk - v0.5.0 [Version Update]</title>
@@ -1618,34 +1646,6 @@ The app works without an API key at the anonymous limits until November 16, 2026
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Scott Bissett</dc:creator>
       <pubDate>Sun, 08 Nov 2026 11:12:06 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/10020/#v0.1.1</guid>
-    </item>
-    <item>
-      <title>NetApp Cloud Insights SaaS Log Onboarding to Splunk - v1.1.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/7771/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;&amp;#x20; Version 1.1.0 – rebuilt add-on
-
-
-
-&amp;#x20; \- Rebuilt on the Splunk UCC framework, replacing the Add-on Builder version
-
-&amp;#x20; \- Each alert is ingested once, and again only when it changes (for example its status). 1.0.x re-ingested up to a week of alerts whenever a new one arrived
-
-&amp;#x20; \- Pages through all alerts in the API's one-week window
-
-&amp;#x20; \- Account-based setup: Tenant URL and API access token (stored encrypted, tested when you save)
-
-&amp;#x20; \- CIM Alerts data model mapping (eventtype netapp_cloud_secure_alert, tag alert)
-
-&amp;#x20; \- Automatic retries with backoff; HTTP and SOCKS5 proxy support
-
-&amp;#x20; \- Python 3.9 and 3.13 support; Splunk Cloud compatible
-
-
-
-&amp;#x20; Upgrading from 1.0.x: add an account (the old REST URL can be pasted as the Tenant URL), then delete the old input and create a new one.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects and normalizes security alert data from NetApp Cloud Insights Secure via REST API for centralized monitoring in Splunk.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The NetApp Cloud Insights Secure Add-on for Splunk collects security alert data from NetApp Cloud Insights Secure through its REST API. The add-on retrieves alert events and normalizes them to the netapp:cloud_secure:alerts source type, enabling centralized monitoring and analysis of NetApp Cloud Insights security alerts within Splunk. It includes configuration and input dashboards that allow administrators to manage API credentials and data collection settings. The add-on is built using Python 3 and supports modular input architecture for reliable data ingestion.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/034fe412-da48-11f1-9176-f29c1c18bf5f.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Gaurav Malik</dc:creator>
-      <pubDate>Sun, 08 Nov 2026 09:30:59 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7771/#v1.1.0</guid>
     </item>
     <item>
       <title>CIM Assessment Toolkit (CAT) - v2.14.1 [Version Update]</title>
