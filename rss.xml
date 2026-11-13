@@ -6,7 +6,99 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Thu, 12 Nov 2026 22:59:24 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 13 Nov 2026 03:15:04 +0000</lastBuildDate>
+    <item>
+      <title>Splunk app for Redundant or Inefficient Search Spotting - v1.0.22 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7300/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Update removes some unused code and unused knowledge objects that were accidentally shipped in older versions of the app.&amp;#x20;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk app for Redundant or Inefficient Search Spotting helps you identify and remove redundant workload in your system and clean up the knowledge objects that are no longer useful. The app leverages powerful correlation logic to determine when a scheduled report/alert is likely useless and should be removed. Similarly, the app identifies knowledge objects that have not been used across an extended period of time, and therefore should be assessed for removal from the system to keep your Splunk environment clean and running smoothly.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/fcc19abc-deb8-11f1-ae8b-1a25dca16a71.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
+      <pubDate>Fri, 13 Nov 2026 03:02:31 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7300/#v1.0.22</guid>
+    </item>
+    <item>
+      <title>Canary - v2.3.6 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4697/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- A sideview_ui_theme argument in a page's URL now pins that page's theme, ahead of the user's preference.
+- Fixed a bug where a URL argument given more than once, such as several CheckboxPulldown selections, had its values reversed every time the page read its URL.
+- Fixed a bug in the URLLoader module where a value held back from an earlier change could overwrite a newer one in the URL.
+- Printing a page in the dark theme now keeps its dark backgrounds. The print button in SearchControls warns about this first.
+- New &quot;schedulePDF&quot; option for the SearchControls module. It lets users schedule a PDF or PNG of the page, with its current form values, to be emailed on a schedule. Requires Splunk 9.3 or later.
+- A sideview_ui_tz argument in a page's URL now makes all of that page's searches run in that timezone.
+- New prepopulateOnce param for the ResultsValueSetter module. When set to True, form elements downstream take its values once, and the user's later edits to them are no longer undone.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Canary is essentially an alternate User Interface framework for Splunk.  It implements its own extensible view creation slash dashboarding system that other apps can use.   
+  
+It is a descendant of the old Sideview Utils (defunct for years now) but whereas Sideview Utils ran on top of Splunk’s “Advanced XML” systems, Canary does not.
+For a great deal more information about Canary, see our website ( https://sideviewapps.com/documentation/canary )
+
+NOTE: This app runs in python3 without any problems and without any changes required.  Splunk&amp;#x27;s &amp;quot;Upgrade Readiness App&amp;quot; may erroneously state that our apps do not run in python3 but it is wrong and please contact us if you have any questions about this.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/18cfaab2-def7-11f1-9c6f-9eb221e641b1.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
+      <pubDate>Fri, 13 Nov 2026 00:19:57 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4697/#v2.3.6</guid>
+    </item>
+    <item>
+      <title>Supporting App for AXL - v1.2.11 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4640/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- **Important** - The stored AXL credentials are now readable only by admins, and only within this app. Before, any user with list_storage_passwords could  read them, from any app if this app was shared globally.
+- Fixed a bug where non-admin users saw a Python traceback instead of realtime device status on the Device Detail page. The ciscoris command now works for  every user, without letting them read the AXL credentials.
+- The ciscoris command now gives up after 30 seconds if a CUCM doesn't answer,  rather than after about two minutes.
+- When the ciscoris command times out, it now shows a short error message  instead of a long Python traceback.
+- If one of several CUCMs doesn't answer, the ciscoris command now still  returns realtime status from the others, with a warning naming the one that  didn't.
+- Improved clarity of our error messages when a 403 response comes back from a CUCM publisher.
+- New &quot;ciscoaxlhealth&quot; command that checks each AXL connection and reports the CUCM version and the AXL user's access control groups and roles.
+- The get_devices_example search's lastActive field was really the  registration row's last-modified time. It now pulls CUCM's actual Last  Active time.
+- get_devices_example now writes lastActive, lastSeen, lastKnownIP and lastKnownUCM to the devices lookup (needs Cisco CDR 9.1.0). Older copies  can't fetch them, so replace your scheduled copy's text with this version and keep your outputlookup.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This is a Supporting Add-on designed to be used with Sideview&amp;#x27;s App &amp;quot;Cisco CDR Reporting and Analytics&amp;quot;.  
+
+This app uses Cisco AXL to retrieve device information from CUCM for all devices known to the system, including users (names, departments, email addresses, etc...) and lines associated with the devices, model name, security profile and calling search space, protocol, and more.
+
+This app also provides 2 custom search commands,  &amp;quot;ciscoaxl&amp;quot; and &amp;quot;ciscoaxlquery&amp;quot; that could be used more generically to query and retrieve any information you can get from AXL.
+
+NOTE:  You can install this app from Splunkbase but in order to use it, you&amp;#x27;ll have to contact Sideview to get a 90 day trial license.  https://sideviewapps.com/documentation/supporting-axl-for-cisco-cdr-reporting-analytics-installation-and-setup
+
+Contact us with any questions!&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/77a5e2be-def6-11f1-b4fb-a6a11c215295.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
+      <pubDate>Fri, 13 Nov 2026 00:10:49 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4640/#v1.2.11</guid>
+    </item>
+    <item>
+      <title>Cisco CDR Reporting and Analytics - v9.1.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/669/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- **Functionality** - New Admin &gt; Indexes page, to set which index(es) the app searches for CDR data, and the optional syslog, AXL lookup and other indexes.
+- **Functionality** - App Settings &gt; Sites has a new &quot;IP addresses&quot; tab. It can find each party's site from the media IP instead of the signaling IP, which suits deployments using SME.
+- **Functionality** - The tables that display calls on the Extension, Huntgroup, Outside Party, Site, Device and Gateway detail pages now have &quot;Save Report&quot; and &quot;Create Dashboard Panel&quot; buttons.
+- **Performance** - Pages showing area code, exchange, country or location fields now parse phone numbers about 5x faster, using a new parsephonenumbers command.
+- A new search on the Calls page now runs for 20 seconds before pausing itself, rather than pausing as soon as it had found a handful of calls. The heading now says when the search is paused.
+- The parse_phone_numbers lookup is deprecated in favor of the parsephonenumbers command. It still works, so saved searches that use it are unaffected.
+- As of this release updating the app will run the app's internal migration script, regardless of whether Splunk is also restarted.
+- Fixed a bug in Investigate Calls, introduced in 6.6, where using right-click to open certain action menu options in a new tab would result in the new tab being loaded incorrectly, ie without the correct form fields set to the corresponding values.
+- The &quot;Dashboards&quot; tab on the app's landing page now lists the dashboards label and id, rather than only their id.
+- The devices lookup has four new columns, lastActive, lastSeen, lastKnownIP and lastKnownUCM, for a later Supporting App for AXL to fill. For customers updating from previous versions the app will run migration after your update to add these columns.
+- Fixed a bug where the calls table on the Gateway Detail and Outside Party Detail pages showed empty origSite, destSite and IP address columns.
+- The setting for wildcard matching in the devices lookup has moved from App Settings &gt; General to a new &quot;Allow wildcards&quot; tab in App Settings &gt; Devices.
+- Fixed a bug where, for customers finding sites by media IP, the call summary on Call Detail showed no sites.
+- The health check for CDR data in unexpected indexes, and the index list on Admin &gt; Set up data inputs, now look at every index again, without using index=*.
+- The customizable_other_notable_indexes macro now defaults to your CDR index, rather than two placeholder index names.
+- Fixed a bug where sorting the &quot;About your data&quot; panel on the homepage by its records column sorted the numbers as text.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This commercial app is available as a 60 day trial and is compatible with both Splunk Enterprise and Splunk Cloud.  The app gives your team greatly increased visibility, monitoring, and reporting functionality around Cisco Unified Communications (aka CUCM / CallManager), whether you&amp;#x27;re a small organization with a hundred phones or one of the largest companies in the world.
+
+Whether troubleshooting individual calls or building high level reporting, it helps you visualize and understand in all areas: agents, users, and huntgroups; concurrency and utilization; call flow; call quality; call volume; devices; failed calls; locations and sites; and audits and compliance.
+
+Your team can trust it as their day-to-day tool for navigating call data from your Cisco CallManager deployment, and it can also become their main tool for building custom reports, alerts and dashboards around that data. This is true whether it’s a standard report you’d expect or a custom report that nothing else has been able to provide.
+
+Note that this isn&amp;#x27;t a package of content, but more a tank that allows you to drive around in your data.  You won’t find a leftnav full of canned CDR reports to click on (that &amp;quot;don&amp;#x27;t quite fit&amp;quot;).  Instead, you get an open flexible framework to investigate anything, drill down into anything, report on anything, over anything, by anything (occasionally with hands-on help from Sideview Support =).
+
+It is available as a free 60-day trial, and you can download and set it up today in less than 30 minutes.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/df994638-def4-11f1-a9ab-faea391a6fd9.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
+      <pubDate>Fri, 13 Nov 2026 00:08:35 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/669/#v9.1.0</guid>
+    </item>
+    <item>
+      <title>Hurricane Labs Add-on for Anthropic Compliance API - v1.2.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8758/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Updates the API version to version 2026-10-21&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Splunk Technology Add-on that ingests data from the Anthropic Compliance API for audit, eDiscovery, DLP, insider-risk, and governance use cases.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk Technology Add-on that ingests data from the Anthropic Compliance API for audit, eDiscovery, DLP, insider-risk, and governance use cases.
+
+Polls the Activity Feed, organizations/users/groups/roles, Claude.ai projects, and Claude.ai chats. Adds the `| claudechats` streaming command for ad-hoc, user-scoped chat retrieval. Ships CIM mappings for Authentication and Change plus an overview dashboard.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/bbe7f078-deee-11f1-ae8b-1a25dca16a71.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Hurricane Labs</dc:creator>
+      <pubDate>Thu, 12 Nov 2026 23:17:52 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8758/#v1.2.1</guid>
+    </item>
     <item>
       <title>FMC Syslog and Audit Log Add-on for Cisco Secure Firewall - v1.0.0 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/10306/</link>
@@ -305,14 +397,6 @@ When to use it:
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">David Williams</dc:creator>
       <pubDate>Thu, 12 Nov 2026 19:14:11 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/10359/#vnull</guid>
-    </item>
-    <item>
-      <title>Splunk app for Redundant or Inefficient Search Spotting - v1.0.22 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7300/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Update removes some unused code and unused knowledge objects that were accidentally shipped in older versions of the app.&amp;#x20;&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk app for Redundant or Inefficient Search Spotting helps you identify and remove redundant workload in your system and clean up the knowledge objects that are no longer useful. The app leverages powerful correlation logic to determine when a scheduled report/alert is likely useless and should be removed. Similarly, the app identifies knowledge objects that have not been used across an extended period of time, and therefore should be assessed for removal from the system to keep your Splunk environment clean and running smoothly.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/fcc19abc-deb8-11f1-ae8b-1a25dca16a71.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Works</dc:creator>
-      <pubDate>Thu, 12 Nov 2026 16:59:54 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7300/#v1.0.22</guid>
     </item>
     <item>
       <title>EventLab - v1.0.3 [New App Release]</title>
@@ -2045,44 +2129,6 @@ This application provides advanced maintenance management capabilities while ens
       <guid>https://splunkbase.splunk.com/app/5925/#v4.0.1</guid>
     </item>
     <item>
-      <title>Splunk Add-on for Microsoft Security - v5.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6207/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* **Breaking change:** Migrated Defender Advanced Hunting to Microsoft Graph. Grant the `ThreatHunting.Read.All` application permission and administrator consent before upgrading. Re-select DoD for existing DoD alert actions.
-* **Breaking change:** Updated CIM field mappings, timestamp formats, and Graph filesystem size units. Review affected searches, dashboards, and alerts using the migration guide.
-* Added Advanced Hunting support for Microsoft Graph Commercial/GCC, GCC High, and DoD environments.
-* Added alert-evidence `detection_status` and multivalue `file_hashes` fields containing available MD5, SHA1, and SHA256 hashes.
-* Added Inventory Network mappings and scalar IPv4/IPv6 address and MAC fields for Defender machines.
-* Improved Microsoft Graph incident and alert pagination so failed query windows remain eligible for retry.
-* Fixed Windows Python 3.13 native-library imports, Event Hub proxy authentication, and runtime-library handling after in-place upgrades.
-* Strengthened configuration validation, security auditing, and collection resource controls; updated bundled third-party security dependencies.
-* Review the full release notes for required migration steps and known limitations.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Add-on for Microsoft Security collects incidents and alerts from Microsoft 365 Defender OR alerts from Microsoft Defender for Endpoint. 
-
-Customers currently utilizing Microsoft 365 Defender Add-on for Splunk are strongly recommended to migrate to this new Splunk supported add-on after reading the migration section of the documentation. https://docs.splunk.com/Documentation/AddOns/released/MSSecurity/Migrate
-
-Customers migrating from Microsoft 365 Defender Add-on for Splunk who would like to continue using the dashboards it includes should install Microsoft 365 App for Splunk, as the functionality has been moved there.
-https://splunkbase.splunk.com/app/3786/
-
-Microsoft 365 Defender Incidents
-* Incident (impossible travel, activity from Tor IP, suspicious inbox forwarding, successful logon using potentially stolen credentials, etc.)
-* Assignee
-* Classification
-* Severity
-* Status
-* Alerts associated with the Incident
-
-Microsoft Defender for Endpoint Alerts
-* Categories (Malware, Initial Access, Execution, etc.)
-* Detection source
-* Evidence
-* Computer name
-* Related user
-* Severity
-* Status&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/baf532f2-d91c-11f1-8b6c-f6bf42a14ea5.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Thu, 05 Nov 2026 13:40:45 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6207/#v5.0.0</guid>
-    </item>
-    <item>
       <title>Salesforce - v4.0.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5930/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Fix intermittent SOAR authentication timeouts by updating the Splunk SOAR SDK to 7.1.2. [SOARHELP-7374]&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app implements actions to manage objects on Salesforce&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/7b47cd0c-d91e-11f1-abfa-3666d937ff4e.svg&quot;&gt;</description>
@@ -2105,30 +2151,6 @@ Microsoft Defender for Endpoint Alerts
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Thu, 05 Nov 2026 13:34:26 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5848/#v4.0.8</guid>
-    </item>
-    <item>
-      <title>AD LDAP - v3.0.5 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5755/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Fix intermittent SOAR authentication timeouts by updating the Splunk SOAR SDK to 7.1.2. [SOARHELP-7374]&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;App specifically designed for interacting with Microsoft Active Directory&amp;#x27;s LDAP Implementation&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/38cafcd4-d91d-11f1-b5bb-865cf0aa09bb.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Thu, 05 Nov 2026 13:31:37 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5755/#v3.0.5</guid>
-    </item>
-    <item>
-      <title>Microsoft 365 Defender - v2.1.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6563/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Fix intermittent SOAR authentication timeouts by updating the Splunk SOAR SDK to 7.1.2. [SOARHELP-7374]&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with Microsoft 365 Defender to execute various generic and investigative actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c6efeaa2-d91c-11f1-a1b8-3a9229e21928.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Thu, 05 Nov 2026 13:28:25 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6563/#v2.1.2</guid>
-    </item>
-    <item>
-      <title>Microsoft 365 - v1.4.7 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8612/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Fix intermittent SOAR authentication timeouts by updating the Splunk SOAR SDK to 7.1.2. [SOARHELP-7374]&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app enables MS Graph API-based email ingestion and investigative actions on Microsoft 365, replacing the Microsoft Graph for Office 365 app.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/6e490a3c-d91c-11f1-bf76-9e16f17c0ac6.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Thu, 05 Nov 2026 13:25:57 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8612/#v1.4.7</guid>
     </item>
   </channel>
 </rss>
