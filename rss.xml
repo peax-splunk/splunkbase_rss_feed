@@ -6,7 +6,48 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sat, 14 Nov 2026 00:10:28 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 14 Nov 2026 07:12:52 +0000</lastBuildDate>
+    <item>
+      <title>ShadowTrackr - v1.2.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10317/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Bring your external attack surface into Splunk. ShadowTrackr finds your internet-facing hosts, websites, certificates, CVEs, lookalike domains and suppliers; this app puts them in dashboards, detections and Enterprise Security, and adds attack surface context to your firewall, proxy and auth logs with one command.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;**See your organization the way attackers do, right inside Splunk.**
+
+Most breaches start at the edge: a forgotten test server, an expired certificate, an exposed RDP port, a website running vulnerable software, or a lookalike domain set up for phishing. ShadowTrackr (External Attack Surface Management) continuously discovers and monitors everything you have on the internet. This app brings all of it into Splunk, so your SOC can alert on it, correlate it with your own logs and act on it in the tools it already uses.
+
+**What you get**
+
+- **Events and alerts.** Every ShadowTrackr finding (new open ports, vulnerabilities, certificate problems, blacklistings, leaked data, phishy domains) arrives as CIM-mapped events. Optionally, ShadowTrackr alerts push straight into Splunk by webhook within seconds.
+- **A full asset inventory in the KV Store.** Hosts, websites, domains, certificates, DNS, software and CVEs, cloud providers, exposed email addresses, phishy domains and suppliers, refreshed automatically.
+- **Six dashboards.** A posture overview, vulnerabilities and software (CVSS, CISA KEV, NCSC NL, known exploited), certificates, supplier dependency, a live search explorer, and Asset 360, which pivots from one asset to your own firewall, proxy, WAF, authentication and IDS logs.
+- **Ready-made detections.** 12 detections and 3 health checks, all shipped disabled so you choose. Examples: an attack on an asset with known CVEs, a successful login from the internet on an exposed remote access service, users visiting lookalikes of your domains, a risky port that opens, a certificate about to expire.
+- **Enterprise Security.** Correlation searches with notable events, risk-based alerting and MITRE ATT&amp;amp;CK annotations, plus an ES asset lookup of your internet-facing assets.
+- **Enrich any search.** `| stenrich field=dest_ip` tells you whether an IP or hostname is one of your internet-facing assets, and what is open, vulnerable or misconfigured on it. It uses only the local lookups and makes no API calls.
+- **Supplier dependency.** See which suppliers hold your assets, where they are headquartered and controlled from (Sovereign European, Fully European, European subsidiary, Non-European), and how many are outside the EU. Useful for NIS2 and digital sovereignty.
+
+**Built for production.** API keys are stored encrypted in the Splunk credential store. Read-only keys and MSSP group keys are supported, as are proxies, checkpointing and automatic backfill. The app passes Splunk AppInspect, including the Splunk Cloud checks.
+
+Requires a ShadowTrackr Business or Enterprise subscription for API access. Start a free trial at https://shadowtrackr.com.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c57bc6aa-dcaa-11f1-b6ab-aaf1a940f6ed.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">ShadowTrackr Ltd</dc:creator>
+      <pubDate>Sat, 14 Nov 2026 04:39:29 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10317/#v1.2.0</guid>
+    </item>
+    <item>
+      <title>Sideview Supporting App for Webex - v0.8.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8429/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- New fields legs and webex_legs, one per Webex Calling record
+  (call:detailed_history) and one per meeting participant
+  (meeting:attendee:reports). Requires Cisco CDR Reporting and Analytics
+  9.0.1, which sums them per call on Investigate Calls.
+- Removed pointless &quot;.000000&quot; microsecond granularity from the duration field.
+- Each per-minute quality series now also comes as single-valued summaries
+  named after the field with the statistic last, for example audioInLatencyAvg
+  and audioInLatencyMax: 70 in all. They drop the -1 placeholder samples, so
+  averages no longer go negative, and they chart and filter without the
+  100-value limit of the raw series.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This Supporting App adapts data indexed via Splunk&amp;#x27;s &amp;quot;Cisco Webex Add-on for Splunk&amp;quot; allowing users to leverage that data within Sideview&amp;#x27;s commercial app &amp;quot;Cisco CDR Reporting and Analytics&amp;quot;.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/aef2ef0e-dfbf-11f1-956f-0af1fa65ce4c.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
+      <pubDate>Sat, 14 Nov 2026 00:23:01 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8429/#v0.8.1</guid>
+    </item>
     <item>
       <title>Sideview Supporting Add-on for Webex - v1.0.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/10065/</link>
@@ -756,30 +797,6 @@ OAuth authentication method implemented for the API&lt;/p&gt;&lt;br&gt;&lt;p&gt;
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cynamics Inc</dc:creator>
       <pubDate>Thu, 12 Nov 2026 13:51:38 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/10305/#v1.2.2</guid>
-    </item>
-    <item>
-      <title>ShadowTrackr - v1.2.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10317/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Bring your external attack surface into Splunk. ShadowTrackr finds your internet-facing hosts, websites, certificates, CVEs, lookalike domains and suppliers; this app puts them in dashboards, detections and Enterprise Security, and adds attack surface context to your firewall, proxy and auth logs with one command.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;**See your organization the way attackers do, right inside Splunk.**
-
-Most breaches start at the edge: a forgotten test server, an expired certificate, an exposed RDP port, a website running vulnerable software, or a lookalike domain set up for phishing. ShadowTrackr (External Attack Surface Management) continuously discovers and monitors everything you have on the internet. This app brings all of it into Splunk, so your SOC can alert on it, correlate it with your own logs and act on it in the tools it already uses.
-
-**What you get**
-
-- **Events and alerts.** Every ShadowTrackr finding (new open ports, vulnerabilities, certificate problems, blacklistings, leaked data, phishy domains) arrives as CIM-mapped events. Optionally, ShadowTrackr alerts push straight into Splunk by webhook within seconds.
-- **A full asset inventory in the KV Store.** Hosts, websites, domains, certificates, DNS, software and CVEs, cloud providers, exposed email addresses, phishy domains and suppliers, refreshed automatically.
-- **Six dashboards.** A posture overview, vulnerabilities and software (CVSS, CISA KEV, NCSC NL, known exploited), certificates, supplier dependency, a live search explorer, and Asset 360, which pivots from one asset to your own firewall, proxy, WAF, authentication and IDS logs.
-- **Ready-made detections.** 12 detections and 3 health checks, all shipped disabled so you choose. Examples: an attack on an asset with known CVEs, a successful login from the internet on an exposed remote access service, users visiting lookalikes of your domains, a risky port that opens, a certificate about to expire.
-- **Enterprise Security.** Correlation searches with notable events, risk-based alerting and MITRE ATT&amp;amp;CK annotations, plus an ES asset lookup of your internet-facing assets.
-- **Enrich any search.** `| stenrich field=dest_ip` tells you whether an IP or hostname is one of your internet-facing assets, and what is open, vulnerable or misconfigured on it. It uses only the local lookups and makes no API calls.
-- **Supplier dependency.** See which suppliers hold your assets, where they are headquartered and controlled from (Sovereign European, Fully European, European subsidiary, Non-European), and how many are outside the EU. Useful for NIS2 and digital sovereignty.
-
-**Built for production.** API keys are stored encrypted in the Splunk credential store. Read-only keys and MSSP group keys are supported, as are proxies, checkpointing and automatic backfill. The app passes Splunk AppInspect, including the Splunk Cloud checks.
-
-Requires a ShadowTrackr Business or Enterprise subscription for API access. Start a free trial at https://shadowtrackr.com.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/c57bc6aa-dcaa-11f1-b6ab-aaf1a940f6ed.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Bas van Schaik</dc:creator>
-      <pubDate>Thu, 12 Nov 2026 13:46:24 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10317/#v1.2.0</guid>
     </item>
     <item>
       <title>Scheduler Cron Optimizer - v2.1.0 [New App Release]</title>
@@ -2242,14 +2259,6 @@ This application provides advanced maintenance management capabilities while ens
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Thu, 05 Nov 2026 14:13:54 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5937/#v4.0.1</guid>
-    </item>
-    <item>
-      <title>urlscan.io - v5.1.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5861/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Fix intermittent SOAR authentication timeouts by updating the Splunk SOAR SDK to 7.1.2. [SOARHELP-7374]&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app supports investigative actions on urlscan.io&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/740fd018-d921-11f1-abfa-3666d937ff4e.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Thu, 05 Nov 2026 14:01:54 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5861/#v5.1.1</guid>
     </item>
   </channel>
 </rss>
