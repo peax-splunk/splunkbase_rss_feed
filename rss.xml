@@ -6,7 +6,62 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sat, 14 Nov 2026 23:31:19 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 15 Nov 2026 03:56:29 +0000</lastBuildDate>
+    <item>
+      <title>Vyrux Security - v1.1.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10348/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Vyrux 1.1.0 is the largest release yet: a new way to collect logs, scans that hold up on the biggest estates, and a console that reads as one product.
+
+**New: API Studio**
+
+- Collect from any REST API that has no Splunk add-on. Paste the vendor's documentation and Chuka writes the collector, then lists anything the documentation does not say.
+- One tested collector engine: API keys, basic, bearer, OAuth client credentials, OAuth with a one-time sign-in and client certificates, with every common paging style, new events only, duplicates removed and rate limits honoured.
+- A collector turns on only after it passes a test on the real API, including a restart that must lose and repeat nothing. Credentials go only to the host they were entered for.
+- Runs on the search head, one cluster member at a time, or on a heavy forwarder. Health, field changes and failures are shown and alerted, and a collector running in two places is caught.
+- One add-on gives the ad hoc search head the same fields, CIM mapping and tags as the Enterprise Security search head.
+
+**Parsing Studio**
+
+- CSV logs with no header line: every column in its place, named in place or from the vendor's documented layout, and deployed so a quoted comma stays in one field.
+- A deployment that fails part way is undone, and a rollback restores what was there before.
+
+**Scale and reliability**
+
+- Scans grow with the size of the estate, not its square. Tested on a model estate of 10,000 sourcetypes and 5,000 saved searches.
+- Background reads return every row, and large scans are kept compressed, so later visits open at once.
+- An alert fires again when a fault comes back, and a mass failure arrives as one message.
+- Two people working on one issue no longer overwrite each other.
+
+**Trust**
+
+- A Vyrux admin manages the licence, connectors and proxy without a Splunk admin role.
+- Field settings Chuka writes are never run as searches. Evidence and the Vyrux log are protected from change by members.
+
+**A calmer, consistent console**
+
+- One main button style, one date format, one colour scale for scores, readable banners, text on one type scale, and help on every figure.
+- Every word reviewed: true statements only, empty states and errors that say what to do next, and one term for one thing.
+
+The full guide, with every change in this release: https://vyrux-docs.pages.dev&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Know that your Splunk works. Prove your logs arrive, your rules can fire and your ATT&amp;amp;CK coverage is real, then fix every gap.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Every SOC pays for its logs and writes its detections. Few can show, on any given morning, that the logs arrived, that the parsing still holds and that the correlation searches they rely on can still fire. That gap stays hidden until an incident review finds it.
+
+Vyrux closes it inside your own Splunk. Every 15 minutes it checks each log, each rule and each ATT&amp;amp;CK technique you count as covered. It explains what broke, traces it to its root cause and turns it into owned work, with a fix your engineers test before anything changes in Splunk. Chuka, the built-in AI detection engineer, explains, fixes and drafts rules from your real fields, and Splunk checks everything Chuka writes before anyone can use it.
+
+Vyrux is one app on the search head, including the Enterprise Security search head. It is not SaaS. It reads Splunk with each person&amp;#x27;s own permissions, keeps its records in your KV store, and your log data stays with you.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/10b23b1e-e088-11f1-b664-a6233478abc5.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Reginald Molokwu</dc:creator>
+      <pubDate>Sun, 15 Nov 2026 00:16:45 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10348/#v1.1.0</guid>
+    </item>
+    <item>
+      <title>Cynamics AI NDR Add-on - v1.3.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10305/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Three detection types: **Detection**, **Alert** and **Endpoint**. `category` is `Detection`, `Alert` or `Endpoint`, and `detection_type` is `detection`, `alert` or `endpoint`.
+* Reads the type from the new `cynamics.type` field and maps events already indexed in the same way, so the dashboard and searches cover old and new events.
+* `Agent Detection` and `AI Detection` are now `Detection`, and `Endpoint Detection` is now `Endpoint`. Saved searches and alerts on the old values need updating.
+* The data input’s Detection types are `detection`, `alert` and `endpoint`. Inputs set up with an earlier version keep working unchanged&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Parses Cynamics AI NDR detections (sourcetype cynamics:detection) and maps them to the CIM Intrusion Detection and Alerts data models. Includes an overview dashboard, and a data input that pulls the detections from the Cynamics API.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Cynamics AI NDR Add-on brings Cynamics AI NDR detections into Splunk Enterprise and Splunk Cloud Platform as first-class security events. It parses the cynamics:detection sourcetype and maps each detection to the Common Information Model&amp;#x27;s Intrusion Detection and Alerts data models, so Splunk Enterprise Security and other CIM-based apps see Cynamics detections next to your other intrusion detections and alerts. Detections arrive either from Cynamics, which sends them to your HTTP Event Collector, or from the add-on&amp;#x27;s data input, which pulls them from the Cynamics API with an API key, for a Splunk that Cynamics can&amp;#x27;t reach. An overview dashboard and an Open in Cynamics action take analysts from a detection to its page in Cynamics.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b9a026a6-e087-11f1-9c6f-9eb221e641b1.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cynamics Inc</dc:creator>
+      <pubDate>Sun, 15 Nov 2026 00:13:18 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10305/#v1.3.0</guid>
+    </item>
     <item>
       <title>Threat Hunting Essentials - v1.3.171 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7633/</link>
@@ -785,20 +840,6 @@ OAuth authentication method implemented for the API&lt;/p&gt;&lt;br&gt;&lt;p&gt;
       <guid>https://splunkbase.splunk.com/app/7248/#v3.0.15</guid>
     </item>
     <item>
-      <title>Cynamics AI NDR Add-on - v1.2.2 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10305/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;First Splunkbase release of the Cynamics AI NDR Add-on.
-
-\- CIM mapping of Cynamics AI NDR detections (sourcetype cynamics:detection) to the Intrusion Detection and Alerts data models.
-
-\- The Cynamics AI NDR Overview dashboard, and the Open in Cynamics event action.
-
-\- The Cynamics AI NDR detections data input, which pulls detections from the Cynamics API with an API key (Splunk Enterprise 9.3 or later).&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Parses Cynamics AI NDR detections (sourcetype cynamics:detection) and maps them to the CIM Intrusion Detection and Alerts data models. Includes an overview dashboard, and a data input that pulls the detections from the Cynamics API.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Cynamics AI NDR Add-on brings Cynamics AI NDR detections into Splunk Enterprise and Splunk Cloud Platform as first-class security events. It parses the cynamics:detection sourcetype and maps each detection to the Common Information Model&amp;#x27;s Intrusion Detection and Alerts data models, so Splunk Enterprise Security and other CIM-based apps see Cynamics detections next to your other intrusion detections and alerts. Detections arrive either from Cynamics, which sends them to your HTTP Event Collector, or from the add-on&amp;#x27;s data input, which pulls them from the Cynamics API with an API key, for a Splunk that Cynamics can&amp;#x27;t reach. An overview dashboard and an Open in Cynamics action take analysts from a detection to its page in Cynamics.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/005a8e0c-d95c-11f1-9176-f29c1c18bf5f.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cynamics Inc</dc:creator>
-      <pubDate>Thu, 12 Nov 2026 13:51:38 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10305/#v1.2.2</guid>
-    </item>
-    <item>
       <title>Scheduler Cron Optimizer - v2.1.0 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/10320/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Cadence policy: run every N minutes, at least every N, or no more often than N, with automatic earliest/latest realignment
@@ -901,24 +942,6 @@ Requires a Darwin account with an API client and Splunk 10.2 or later.&lt;/p&gt;
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Théophile Diot</dc:creator>
       <pubDate>Thu, 12 Nov 2026 13:39:25 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/10342/#v1.0.1</guid>
-    </item>
-    <item>
-      <title>Vyrux Security - v1.0.4 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10348/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Testing you can trust: every test (Tuning Lab, rule fixes, Content Hub, new rules, approvals) now runs the search 12 times across 7, 14 or 30 days, each over the rule's own window, as Splunk runs it. It shows results per run and runs that fired, explains what a zero does and does not mean, and checks that every field the search uses is in recent events.
-
-Scenarios: after the replay stops at the first gap, continue the attack to the end to see every seen and unseen step.
-
-Attack tests: a clear choice of attack simulation or replay, evidence required, plain buttons (It alerted, It did not alert), and records can be removed by their author or an admin.
-
-Integrations: every test result stays on the card. A test email that cannot be sent says so in plain words and what to set. Notifications that fail in the background show on their card.
-
-CIM validator: the PDF is a full evidence report. Ask Chuka sends the failing fields, the fields present, the rules and five sample events.
-
-Chuka: each answer shows exactly what was sent and what came back. In the Content Hub, Chuka suggests detections from your own logs beyond the library.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Telemetry and detection assurance for Splunk: prove your logs arrive, your detections can fire, and your ATT&amp;amp;CK coverage is real.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Vyrux Security checks the things a SOC usually takes on trust. It proves your logs are arriving and parsed, tests whether each detection can actually fire, shows how much of your alerting is noise, and measures MITRE ATT&amp;amp;CK coverage based on rules that work rather than rules that exist. When something breaks, Vyrux raises an issue with the likely cause and the steps to fix it. Chuka, the built-in AI agent, explains issues, proposes fixes and tuning, and drafts rules, with sensitive values masked before anything leaves your Splunk. Monthly, quarterly and annual report decks are produced on a schedule you choose. Vyrux runs inside your own Splunk. It is not SaaS, and your log data stays with you.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/4ef6728e-de2e-11f1-b664-a6233478abc5.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Reginald Molokwu</dc:creator>
-      <pubDate>Thu, 12 Nov 2026 13:38:48 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10348/#v1.0.4</guid>
     </item>
     <item>
       <title>EasySMF for CICS - v1.0.0 [New App Release]</title>
