@@ -6,7 +6,90 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sun, 15 Nov 2026 18:15:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 15 Nov 2026 23:16:49 +0000</lastBuildDate>
+    <item>
+      <title>Riskability - v1.5.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9583/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;# Riskability 1.5.1
+
+What changed since 1.4.1, the version on Splunkbase today. Grouped by what you will notice, not by commit. Nothing has been removed that you were using.
+
+## In one paragraph
+
+1.5.1 adds an Executive summary page that prints as three A4 landscape sheets, a count of new findings that opens the list behind it, and rebuilds the Routes page around the question it was always meant to answer: of the jumps the firewall has seen, which could an attacker actually take, and how far. Every jump is now graded by what taking it would need, a crash-only flaw no longer counts as a way in, and the graph is walked once an hour so it draws an estate of thousands. It also fixes a Routes page where every click said &quot;No results found&quot;, and a Feed administration page that looked idle while an import was most of the way through.
+
+## New: Executive summary
+
+A page for the people who ask how exposed the organisation is, in the order they ask it: known exploited vulnerabilities open, of those how many answer the network, systems with an open vulnerability, risks consciously accepted, how long serious findings stay open, and how far to trust the figures. Then the reachability matrix, the severity ring, thirty days of movement and the five things to fix first.
+
+Every figure is the linked page's own query against the same hourly roll-ups, so a number here always matches the page it links to. There is no composite score, because the app cannot defend one.
+
+Print or save as PDF. Splunk's Export to PDF leaves out every custom chart, and an air-gapped search head has no server-side renderer, so the page prints in the reader's own browser: three landscape sheets, always the same shape, with the charts redrawn as vector graphics in a light palette so they stay sharp at any size. Checked in Chromium-based browsers and in Safari; in Safari, pick landscape in the print dialog.
+
+## New: a count of new findings, and the list behind it
+
+Start here has a New findings tile: open findings first reported in the last seven days, accepted risks left out, at every confidence. Click the number and Findings opens on those findings, through two new filters, First reported (24 hours, 7 days, 30 days or any time) and Accepted risks (shown or hidden), and a First reported column.
+
+New means the first time the app reported the finding, not when the host's inventory was collected. A feed update that flags software nobody has touched in months produces findings that are new today, and those are the ones this tile exists for. Findings recorded before this release have no such date and count by their inventory date instead, which is never later than the truth, so nothing old is passed off as new.
+
+## Routes: graded by what an attacker would need
+
+A permitted flow is a path, not an exploit, and the page used to draw every jump the same way, coloured by known-exploited and EPSS, which say nothing about whether a flaw can be reached over this wire. Every jump is now graded from the CVSS vectors of the findings open on the listener it lands on:
+
+* CVE-enabled, solid red: reachable over the network, with no account and no user action, and a high impact on confidentiality or integrity. That is the shape of code execution, an authentication bypass or stolen secrets.
+* Needs a foothold, solid amber: reachable, but it wants credentials or a click.
+* Unrated, dashed amber: an open finding has no CVSS vector, so the app cannot say.
+* Permitted only, dashed grey: nothing usable over the network is open there, so the jump needs a zero-day or permissions.
+
+A flaw whose only impact is availability opens no jump. CVE-2024-0760 in BIND, a TCP flood that makes the server unstable while it lasts, can crash the listener but cannot put anyone on the host, and neither can HTTP/2 Rapid Reset, so a DNS or web server carrying only those is not drawn as a way in. A low impact alone, a minor leak or change, does not open one either. The findings panel says which of these each CVE is, in an &quot;Over the wire&quot; column: no foothold needed, needs credentials or a click, only to take it down, only a minor leak or change.
+
+Every host an attacker can reach from an entry point on CVE-enabled jumps alone is ringed red. A new table lists every path from an entry point, worst first: how many jumps, how far the CVE-only stretch goes, the jump where it stops, and the CVEs behind each jump.
+
+The software is on the jump. Each jump is labelled with its protocol, the port it landed on and the software listening there, the first jump from an entry point included. Hovering a jump lists every port it was seen on and what is open behind each, and clicking it opens the findings on those ports rather than the whole host's.
+
+## Routes: drawn at estate size
+
+The page used to walk the graph inside its own search on every load, which worked on fifteen hosts and would have taken minutes on five thousand, and hit a limits.conf ceiling before that without saying so. An hourly job now walks it once, with a breadth-first search in a dedicated search command, and the page reads the result. It opens on CVE-enabled jumps and twenty-five hosts per hop, keeps the worst, and says how many it left out. Paths are capped by the job, two thousand at most, and every row says when a cap cut the list.
+
+The panel grows with the densest hop instead of packing a large graph into 640 pixels, and a panel resized in the dashboard editor redraws at its new height without a reload.
+
+## Fixed
+
+Every click on the Routes graph said &quot;No results found&quot;. The click reported its kind with the column prefix still on it, and the findings search compared that against the bare kind.
+
+Every edge tooltip on Routes read &quot;N CVEs through this hop&quot; with N being the session count. The label and class were built and then dropped before the chart drew them.
+
+Feed administration looked idle during an import. The staged-bundles list redraws every few seconds, and the bundle being imported came back each time with a fresh Import button, so it read as &quot;nothing started&quot; while the import was most of the way through. That bundle now says it is importing and cannot be deleted mid-import, no other bundle can start an import until it finishes, and the percentage counts advisories as well as ranges, so it no longer sits at 99 percent for the whole advisory phase.
+
+Explain in depth was refused on Splunk Free. Free has no access control and reports no capabilities for anyone, which the AI page read as &quot;not allowed&quot;. On a licensed Splunk the riskability_ai_explain capability decides, exactly as before.
+
+On a CVE's page, &quot;Matching hosts in this fleet&quot; came seventh, after five panels of feed text. It now follows the headline figures directly.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Correlate the software your fleet already reports against offline CVE databases on a search head with no internet access. Ranks findings by exploitation likelihood and by whether the network can actually reach them. Track software that is already or soon becoming End Of Life!&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Most vulnerability tooling cannot run where it is needed most. A search head with no route to the internet cannot call an API, pull a feed on a schedule or fetch a score on demand. Riskability is built for that machine. It takes the software inventory your hosts already report, correlates it against databases you carry across the air gap yourself, and answers what a CVE count never does: of everything found, what should somebody do tonight? CVSS says how bad a flaw would be if exploited, not how likely that is, and never whether your copy is reachable.
+
+WHAT THIS APP ADDS
+
+Exploitation likelihood. Findings are ranked by EPSS, the published probability of exploitation in the wild, and by the CISA KEV catalogue of vulnerabilities already exploited. Both arrive in the feed you import, never fetched live.
+
+Reachability, measured on the host. The collector reports listening ports and the process behind each, so findings answering a network address are separated from those answering only loopback or nothing. On a test fleet that turned 10,206 open findings into 11 that answer the network. It reorders the work. It never shortens it.
+
+Reachability, observed at the boundary. With your firewall logs in Splunk, the app can also say whether a permitted flow from the internet or an admin network has actually reached a port, and draw the jumps from entry point to the findings at the end. A site without firewall logs loses nothing.
+
+End of support. A CVE says a thing is broken; end of support says nobody will fix it again, which no advisory states. The app names software with no supported release.
+
+Rules your fleet needs. A risk the scoring signals cannot see can be written as a rule raising a finding one tier. Rules ship off, and a replay shows what each would move first.
+
+Optional AI explanation. A model on your own hardware writes the reasoning beside each finding: why it ranks where it does, what to do, which ATT&amp;amp;CK techniques apply. The score is arithmetic from measured facts and the model cannot change it. Where an answer contradicts the evidence, the row says so.
+
+WHAT IT REFUSES TO GUESS
+
+Every finding carries a confidence level describing the evidence, not the severity. A distribution that backports fixes without changing the version is reported as informational rather than asserted. A Coverage dashboard lists what the data cannot speak to, because a gap in visibility is not an absence of risk. Accepted risks go to an audit index written once, never rewritten.
+
+NO UNINTENTIONAL DATA OUT
+
+Nothing goes out unless you set up AI, and the recommended shape is a model in the same location as this Splunk instance, so nothing leaves the organisation. You build a feed bundle on a connected machine, carry it across and import it.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/72f4cc0c-e131-11f1-a9ab-faea391a6fd9.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Christian Haugan</dc:creator>
+      <pubDate>Sun, 15 Nov 2026 20:25:19 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9583/#v1.5.1</guid>
+    </item>
     <item>
       <title>Threat Hunting Essentials - v1.3.172 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7633/</link>
@@ -2273,15 +2356,6 @@ This application provides advanced maintenance management capabilities while ens
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SOAR Community</dc:creator>
       <pubDate>Thu, 05 Nov 2026 14:16:40 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/9495/#v2.0.2</guid>
-    </item>
-    <item>
-      <title>Tanium REST - v4.0.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5937/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Fix intermittent SOAR authentication timeouts by updating the Splunk SOAR SDK to 7.1.2. [SOARHELP-7374]
-* Preserve Safe Mode eligibility for read-only query actions when upgrading from SDK 3.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app supports investigative and generic actions on Tanium&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2140b1f2-d923-11f1-bc1d-b6efb071b28d.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Thu, 05 Nov 2026 14:13:54 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5937/#v4.0.1</guid>
     </item>
   </channel>
 </rss>
