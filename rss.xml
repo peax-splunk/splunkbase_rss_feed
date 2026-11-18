@@ -6,36 +6,57 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Tue, 17 Nov 2026 22:05:11 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 18 Nov 2026 03:57:52 +0000</lastBuildDate>
     <item>
-      <title>Log10x App - v1.2.1 [Version Update]</title>
+      <title>Splunk Add-on for Check Point Log Exporter - v1.2.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/5478/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Fixed URL Filtering events with event_action\=Accept and connection metadata to map to CIM action\=allowed.
+* Fixed Anti-Malware event source mapping so missing destination values no longer fall back to the origin field.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Add-on for Check Point Log Exporter allows a Splunk software administrator to collect data from Checkpoint Log Exporter over Syslog.
+
+This add-on provides the inputs and  CIM-compatible knowledge to use with other Splunk apps such as Splunk Enterprise Security and Splunk App for PCI Compliance&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/82612278-e283-11f1-a21c-92ce80dbc4fb.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Wed, 18 Nov 2026 03:01:54 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5478/#v1.2.1</guid>
+    </item>
+    <item>
+      <title>Log10x App - v1.2.5 [New App Release]</title>
       <link>https://splunkbase.splunk.com/app/9866/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;\- The new \`txf\` macro, written where \`tx\` goes, gives an expanded event the search-time fields of its original sourcetype as its add-on defines them. It applies to compact events that carry the indexed field \`tenx_sourcetype\`. Checked with the Windows, AWS and FortiGate add-ons.
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;\- The field map tool generates maps for Windows Security as classic text (\`WinEventLog:Security\`), FortiGate and Palo Alto Networks, beside Windows Security as rendered XML and CloudTrail. With a FortiGate map, the Network_Traffic data model, \`tstats\` and the Splunk Security Content (ESCU) detections give the same results as on raw events. With a Palo Alto map, the Network_Traffic and Change data models, \`tstats\` and ESCU detections give the same results on compact PAN-OS traffic and system events as on raw ones; threat events are passed whole.
 
-\- The new field map tool, \`bin/tenx_field_map.py\`, generates an app that writes a compact event's original fields as indexed fields, so data models, their accelerations and detections read them without \`tx\`. Checked on Windows Security and CloudTrail events with their add-ons.
+\- The field map's \`check\` also counts the compact events indexed without their fields and those Splunk dropped because it could not load the map's lookup file, and fails with the count. When its probe arrives late, \`check\` keeps the template list unless Splunk's log shows events of the map dropped. The new Field Map Dropped Events alert reports dropped events by node every five minutes.
 
-\- \`tx\` finds the events that hold a time written in the search, such as \`&quot;20:11:45.936&quot;\`, a word with \`\~\`, such as \`PROGRA\~1\`, and a quoted Windows path, and an IPv4 address narrows the events it expands.
+\- The new search report, \`bin/tenx_search_report.py\`, reads a search head's saved searches, alerts and dashboards and says which run unchanged when a source moves to compact events, which need \`tx\`, \`txf\` or a field map, and which meet a limit the README states. The report changes nothing and starts no search.
 
-\- \`tx\` and \`txf\` select every event a search can match when it holds a comparison written with a space after the operator (\`SignatureStatus!\= Valid\`, \`bytes\&lt; 500000\`) or with a quoted field name (\`&quot;usr&quot;!\=root\`, \`&quot;user&quot; IN (alice)\`) or a field name holding \`/\` (\`kubernetes.labels.app.kubernetes.io/name!\= prometheus\`), a word or wildcard that a printed timestamp can match (\`2026\*\`, \`Nov\*\`), or a \`host::\` or \`source::\` term. A term the app cannot read with certainty does not narrow the search.
+\- Word searches through \`tx\`, dashboards and compiled alerts find the events of every stored template, including templates stored in the last few minutes. Outside \`NOT\`, a wildcard inside a word (\`Se\*Privilege\`), \`TERM()\` of part of a longer term and \`CASE()\` of a word with a wildcard inside it match as on the original lines.
 
-\- \`| tx\`, \`| tenxsearch\`, classic dashboards and compiled alerts stop with a message naming the sourcetype to add when a search over compact events names no compact sourcetype; a compiled alert is stored for review with that reason.
+\- \`tx\` and \`txf\` expand an event whose values begin or end with white space or a carriage return, such as a Windows event with CR LF line ends, to its full text, and a carriage return inside an event comes back in place.
 
-\- A search that names an event's original sourcetype in place of the compact one stops with a message that says how to write it. \`txf\` is set up for every original sourcetype, whatever the dates of its events.
+\- \`tx\` expands events whose template appears twice in the indexers' copy of the template collection. An event \`tx\` cannot expand keeps its compact text and says why in \`tenx_expand_refused\`.
 
-\- Classic dashboards, \`| tx\`, \`tenxsearch\` and compiled alerts accept \`TERM()\` and \`CASE()\`, and give expanded events their key\=value fields when the search names no field.
+\- The Consume KV search stores every template record indexed since the last one it stored, a burst of new templates included, and its first run after an install or an upgrade reads every template record in the index. \`tx\` and \`txf\` warn when Consume KV failed, is still loading, or has not run for fifteen minutes.
 
-\- Templates are stored whatever time their records carry. A template record takes the time it is indexed, and the Consume KV search selects records by index time. Records sent with the time of an older event, as Fluent Bit's \`splunk\` output sends them, are stored on the next run, and their events expand.
+\- Alerts compiled in the Compile Alert view find their events when the scheduler runs them, including events of templates whose hash contains \`$\`. The recompile pass rewrites alerts compiled with an earlier version within 15 minutes of the upgrade, unless someone has edited them since.
 
-\- \`tx\`, \`| tx\`, \`tenxsearch\`, dashboards and compiled alerts select every event of a template whose hash contains \`\*\`, also when the search compares a field such as \`host\=\` or \`sourcetype\=\`.
+\- An epoch-seconds timestamp with a fraction, such as \`msg\=audit(1723042099.699:13369)\`, expands as written and sets the event's time.
 
-\- After upgrading, run \`index\=tenx_dml sourcetype\=tenx_dml_raw_json earliest\=0 | sendalert tenx_dml_to_kv\` once, so that templates whose records arrived with an older time are stored.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Send Splunk the logs that sampling and filters keep out to fit the license, on that same license. Compact events take a fraction of the volume and expand back byte-identical at search time; classic dashboards keep their SPL, and one command covers the search bar, saved searches, alerts and the REST API.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;With the Log10x App, Splunk can index compact log events and still search, chart and alert on the original lines. The 10x Receiver stores each event as a template hash plus the values that change, so a stream of repeated patterns takes less of the license. On the OpenTelemetry demo, Splunk&amp;#x27;s license meter counted 63.91% fewer bytes, encoded events and templates included, and every line expanded back byte-identical with the Receiver settings in the installation steps (measurement: https://github.com/log-10x/benchmarks/tree/main/splunk-license). The same license then holds more: sources that were sampled, filtered or kept out of Splunk to stay under the limit can come back, or the license can be smaller.
+\- Beside a heavy forwarder, the Receiver can write compact events to files that the heavy forwarder reads and sends to the indexers with its own outputs, with no HTTP Event Collector or token. The \`\_indexers\` package gives each event back its host, source, index and time, and field maps run on the heavy forwarder.
+
+\- \`tx\` expands the events a FortiGate field map leaves under the compact sourcetype, such as FortiGate lines the add-on does not type, and a field map keeps the time of an event marked \`tenx_time\=sender\`.
+
+\- \`tx\` and \`txf\` run inside \`| union \[...]\`, in a search, a dashboard panel and a saved search, as they do inside \`multisearch\`, \`append\` and \`join\`.
+
+\- A search that holds more than one \`tx\` or \`txf\`, such as two arms of a \`multisearch\` or \`union\`, finds every event of each arm.
+
+\- \`| tx\` and \`| tenxsearch\` return their events inside \`append\`, \`join\` and \`union\`, and an unexpected error shows on the search instead of an empty result.
+
+\- Requires the Log10x Receiver at release 1.1.181 or later and Splunk Enterprise 9.4 through 10.6. After upgrading where a field map is installed, give the role of the token \`activate\` and \`check\` use search access to \`\_internal\`, and schedule \`check\` every minute. A map that \`gen\` generates again after the upgrade can carry a new index-time rule; install both of its apps again whole before running \`activate\`.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Send Splunk the logs that sampling and filters keep out to fit the license, on that same license. Compact events take a fraction of the volume and expand back byte-identical at search time; classic dashboards keep their SPL, and one command covers the search bar, saved searches, alerts and the REST API.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;With the Log10x App, Splunk can index compact log events and still search, chart and alert on the original lines. The 10x Receiver stores each event as a template hash plus the values that change, so a stream of repeated patterns takes less of the license. On the OpenTelemetry demo, Splunk&amp;#x27;s license meter counted 63.91% fewer bytes, encoded events and templates included, and every line expanded back byte-identical with the Receiver settings in the installation steps (measurement: https://github.com/log-10x/benchmarks/tree/main/splunk-license). The same license then holds more: sources that were sampled, filtered or kept out of Splunk to stay under the limit can come back, or the license can be smaller.
 
 To search by what the lines say, write the tx macro in front of an ordinary search: index=my_index `tx` &amp;quot;payment failed&amp;quot; NOT retry. It runs as native SPL in the search bar, Dashboard Studio, saved searches and alerts, and NOT, OR, groups, phrases, field conditions, and values such as IP addresses and hostnames behave as they do on the original data. Classic dashboards keep their SPL: the browser sends each panel&amp;#x27;s search to the app, which rewrites it on the server. An alert created in the app&amp;#x27;s Compile Alert view is compiled once into a native saved search.
 
-The 10x Receiver produces compact events, and it is free on up to 10 nodes (https://www.log10x.com/pricing). No sign-up is required: with no license token it runs the full product on up to 10 nodes, air-gapped, with no expiry (https://doc.log10x.com/manage/license/). The app itself is open source under the MIT license.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e93c2232-e2d2-11f1-aedd-4a364c1fdff5.png&quot;&gt;</description>
+The 10x Receiver produces compact events, and it is free on up to 10 nodes (https://www.log10x.com/pricing). No sign-up is required: with no license token it runs the full product on up to 10 nodes, air-gapped, with no expiry (https://doc.log10x.com/manage/license/). The app itself is open source under the MIT license.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d5c016c2-e2d8-11f1-ad84-76ffe10016da.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Tal Weiss</dc:creator>
-      <pubDate>Tue, 17 Nov 2026 22:04:51 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9866/#v1.2.1</guid>
+      <pubDate>Tue, 17 Nov 2026 22:52:21 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9866/#v1.2.5</guid>
     </item>
     <item>
       <title>Splunk Add-On for OpenTelemetry Collector - v0.165.0 [Version Update]</title>
@@ -233,17 +254,6 @@ See Details for Product Downloads&lt;/p&gt;&lt;img height=&quot;36px&quot; width
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Tue, 17 Nov 2026 16:04:05 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/3463/#v5.4.6</guid>
-    </item>
-    <item>
-      <title>Splunk Add-on for Check Point Log Exporter - v1.2.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/5478/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Fixed URL Filtering events with event_action\=Accept and connection metadata to map to CIM action\=allowed.
-* Fixed Anti-Malware event source mapping so missing destination values no longer fall back to the origin field.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Add-on for Check Point Log Exporter allows a Splunk software administrator to collect data from Checkpoint Log Exporter over Syslog.
-
-This add-on provides the inputs and  CIM-compatible knowledge to use with other Splunk apps such as Splunk Enterprise Security and Splunk App for PCI Compliance&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/82612278-e283-11f1-a21c-92ce80dbc4fb.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Tue, 17 Nov 2026 14:54:02 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5478/#v1.2.1</guid>
     </item>
     <item>
       <title>Splunk WLM Resource Protection App - v1.0.4 [Version Update]</title>
