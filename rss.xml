@@ -6,7 +6,72 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Thu, 19 Nov 2026 02:52:54 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 19 Nov 2026 10:56:49 +0000</lastBuildDate>
+    <item>
+      <title>Elasticsearch - v5.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5895/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Migrated the Elasticsearch connector to the Splunk SOAR SDK.
+* The minimum supported Splunk SOAR version is now 7.0.0.
+* Added the make request action for authenticated requests to Elasticsearch endpoints.
+* For run query and get config, JSON API errors are now reported in the action message instead of including structured error data and input parameters in failed action results.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app integrates with an Elasticsearch installation to implement ingestion and investigative actions&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/acc78038-e3f1-11f1-aedd-4a364c1fdff5.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Thu, 19 Nov 2026 08:17:46 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5895/#v5.0.0</guid>
+    </item>
+    <item>
+      <title>DIA Data Integrity App - v2.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/10438/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;2.0.0
+
+\- First Splunkbase release as &quot;DIA Data Integrity App&quot; (app ID dda_data_integrity).
+
+\- New pages: Data Model Fields (CIM field fill rate, empty recommended fields, non-standard and malformed values), Field Anomalies (broken field names, malformed values, timestamp and type problems), Source Detail and Setup &amp; Health. The original dashboard is the Overview.
+
+\- New scheduled analysis: CIM field reference read from the installed data models, CIM field profile per data model and source, field anomaly checks per source, time zone offset detection.
+
+\- Every setting is a search macro (scope, mapping window default 7 days, summariesonly default true, sample window and sizes, pair limits); the Overview shows p90 job run times with tuning recommendations and lists data models that are not measured.
+
+\- Readable only by admin and sc_admin by default, because the lookups contain sample values.
+
+\- English user interface and Splunkbase packaging.
+
+\- Upgrade from 1.x (app ID DA-DataIntegrity): remove the old app and install this one; the lookups are rebuilt automatically.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;DIA Data Integrity App gives Splunk and data administrators detailed control panels for one question: is the data in every index and sourcetype correct and usable by CIM-based content such as correlation searches, dashboards and Splunk Enterprise Security?
+
+Data model mapping, verified: for 28 CIM data models the app runs tstats by index and sourcetype and records which sources really land in each data model. The verdict comes from tstats, not from CIM index macros or tags alone. Acceleration coverage and cim_*_indexes macros are checked too.
+
+CIM field profile: for every data model and source the app samples events and measures each CIM field - how often it is filled, how often it only holds placeholders such as unknown or -, and whether its values follow the CIM definition (expected values, number type, port, IP, hash and MAC shapes). Recommended fields that a source never fills are listed per source. Field definitions are read from the data models installed on your search head, so custom models and newer CIM versions are covered automatically.
+
+Field anomalies: every extracted field of every source is checked for broken names (generic CEF cs1/cn1 fields with their real name suggested from the label, positional field3 names, values used as field names, case-variant duplicates), malformed values (key=value inside a value, leftover quotes, spaces, unparsed JSON/XML, encoding artefacts), mixed number/text types, mostly empty fields and timestamp fields that cannot be parsed or disagree with _time.
+
+Parsing and time: unparsed and partially parsed sources, multi-line and future-dated events, indexing latency and likely time zone offsets. Recommendations for unmapped sources suggest the data model, tags, key CIM fields and the add-on to use.
+
+No setup is needed: after install, first-run searches build the analysis automatically within minutes and scheduled searches refresh it every 4 hours. Defaults are light (7 days, acceleration summaries only, 200-300 sampled events per source); every window, sample size and limit is a macro, and the Overview shows the p90 run time of each job with tuning recommendations. The app is read-only for your data and never changes props, transforms, data models or macros.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/1fe16d5c-e3e5-11f1-ad84-76ffe10016da.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">mehmet ali canpolat</dc:creator>
+      <pubDate>Thu, 19 Nov 2026 06:49:06 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10438/#v2.0.0</guid>
+    </item>
+    <item>
+      <title>Credentials Hunting App - v1.1.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/10142/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;\- Masking configuration: a props.conf with one SEDCMD line per pattern, per finding or filter.
+
+\- A false positive can now be scoped to this value in this index and sourcetype.
+
+\- A pattern can be counted per index and sourcetype, for a value that rotates.
+
+\- New findings go to any alert action your installation has, without the captured value.
+
+\- The catalog ships 112 patterns in 11 categories.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Scans Splunk indexes for accidentally indexed credentials using two-stage term-index prefiltering and regex verification, with configurable pattern catalogs and continuous monitoring.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Credential Hunter app scans raw data in existing Splunk indexes to identify credentials that were indexed by accident, including cleartext passwords, API keys, tokens, and private keys.
+
+It employs a two-stage detection approach that combines term-index prefiltering in Splunk with regex verification in Python to minimize performance impact while maintaining accuracy.
+
+The app supports both full historical scans and continuous monitoring modes, with a configurable pattern catalog that allows administrators to enable or disable specific credential types based on their environment. Findings are stored in KV store collections and presented through dedicated dashboards for investigation, false positive management, and pattern tuning.
+
+The scanner operates as a scripted input that runs continuously but performs actual scans at administrator-defined intervals of 30 or 60 minutes. Configuration is managed through a Control room dashboard where scan intervals, event slack hours for late-arriving data, and retention policies can be adjusted without editing configuration files.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f8453ecc-e3da-11f1-ad84-76ffe10016da.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Martin Lenggenhager</dc:creator>
+      <pubDate>Thu, 19 Nov 2026 06:24:52 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10142/#v1.1.0</guid>
+    </item>
     <item>
       <title>Splunk Add-On for OpenTelemetry Collector - v0.165.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7125/</link>
@@ -380,38 +445,6 @@ When upgrading an existing deployment, preserve your local storage and retention
       <guid>https://splunkbase.splunk.com/app/10406/#v1.0.1</guid>
     </item>
     <item>
-      <title>DIA Data Integrity App - v2.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10438/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;2.0.0
-
-\- First Splunkbase release as &quot;DIA Data Integrity App&quot; (app ID dda_data_integrity).
-
-\- New pages: Data Model Fields (CIM field fill rate, empty recommended fields, non-standard and malformed values), Field Anomalies (broken field names, malformed values, timestamp and type problems), Source Detail and Setup &amp; Health. The original dashboard is the Overview.
-
-\- New scheduled analysis: CIM field reference read from the installed data models, CIM field profile per data model and source, field anomaly checks per source, time zone offset detection.
-
-\- Every setting is a search macro (scope, mapping window default 7 days, summariesonly default true, sample window and sizes, pair limits); the Overview shows p90 job run times with tuning recommendations and lists data models that are not measured.
-
-\- Readable only by admin and sc_admin by default, because the lookups contain sample values.
-
-\- English user interface and Splunkbase packaging.
-
-\- Upgrade from 1.x (app ID DA-DataIntegrity): remove the old app and install this one; the lookups are rebuilt automatically.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;DIA Data Integrity App gives Splunk and data administrators detailed control panels for one question: is the data in every index and sourcetype correct and usable by CIM-based content such as correlation searches, dashboards and Splunk Enterprise Security?
-
-Data model mapping, verified: for 28 CIM data models the app runs tstats by index and sourcetype and records which sources really land in each data model. The verdict comes from tstats, not from CIM index macros or tags alone. Acceleration coverage and cim_*_indexes macros are checked too.
-
-CIM field profile: for every data model and source the app samples events and measures each CIM field - how often it is filled, how often it only holds placeholders such as unknown or -, and whether its values follow the CIM definition (expected values, number type, port, IP, hash and MAC shapes). Recommended fields that a source never fills are listed per source. Field definitions are read from the data models installed on your search head, so custom models and newer CIM versions are covered automatically.
-
-Field anomalies: every extracted field of every source is checked for broken names (generic CEF cs1/cn1 fields with their real name suggested from the label, positional field3 names, values used as field names, case-variant duplicates), malformed values (key=value inside a value, leftover quotes, spaces, unparsed JSON/XML, encoding artefacts), mixed number/text types, mostly empty fields and timestamp fields that cannot be parsed or disagree with _time.
-
-Parsing and time: unparsed and partially parsed sources, multi-line and future-dated events, indexing latency and likely time zone offsets. Recommendations for unmapped sources suggest the data model, tags, key CIM fields and the add-on to use.
-
-No setup is needed: after install, first-run searches build the analysis automatically within minutes and scheduled searches refresh it every 4 hours. Defaults are light (7 days, acceleration summaries only, 200-300 sampled events per source); every window, sample size and limit is a macro, and the Overview shows the p90 run time of each job with tuning recommendations. The app is read-only for your data and never changes props, transforms, data models or macros.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/418faa74-e2d0-11f1-ade6-da5314d65fb5.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">mehmet ali canpolat</dc:creator>
-      <pubDate>Wed, 18 Nov 2026 16:27:14 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10438/#v2.0.0</guid>
-    </item>
-    <item>
       <title>LogChecker - v1.0.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/10327/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;LogChecker 1.0.1 expands CrowdStrike Falcon coverage from one module to six, opens validation schedules for the module you’re viewing, and makes it clear when a completed run could not be saved to Validation History.
@@ -465,14 +498,6 @@ For Splunk Enterprise indexer clusters, see the Installation tab for the compani
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Daniel Wilson</dc:creator>
       <pubDate>Wed, 18 Nov 2026 15:38:30 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/10376/#v0.3.1</guid>
-    </item>
-    <item>
-      <title>Audit Logs Add-on for LangSmith - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10375/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Initial release: LangSmith audit logs (OCSF API Activity) for US, EU, APAC, AWS US and self-hosted deployments; windowed collection with overlap and event-id de-duplication; cursor paging; encrypted, validated API key; proxy support; CIM Authentication and Change mapping; Python 3.9 and 3.13; Splunk Cloud compatible.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Brings LangSmith logins, API key, role, member, SSO/SCIM and configuration changes into Splunk for security monitoring and compliance.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects LangSmith Enterprise audit logs (OCSF API Activity) into Splunk with CIM Authentication and Change mappings.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/7754a76a-dedc-11f1-b664-a6233478abc5.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Gaurav Malik</dc:creator>
-      <pubDate>Wed, 18 Nov 2026 14:56:07 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10375/#v1.0.0</guid>
     </item>
     <item>
       <title>Visualization Toolbox - v0.5.0 [Version Update]</title>
@@ -1703,16 +1728,6 @@ It is available as a free 60-day trial, and you can download and set it up today
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
       <pubDate>Fri, 13 Nov 2026 00:08:35 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/669/#v9.1.0</guid>
-    </item>
-    <item>
-      <title>Hurricane Labs Add-on for Anthropic Compliance API - v1.2.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8758/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Updates the API version to version 2026-10-21&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Splunk Technology Add-on that ingests data from the Anthropic Compliance API for audit, eDiscovery, DLP, insider-risk, and governance use cases.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk Technology Add-on that ingests data from the Anthropic Compliance API for audit, eDiscovery, DLP, insider-risk, and governance use cases.
-
-Polls the Activity Feed, organizations/users/groups/roles, Claude.ai projects, and Claude.ai chats. Adds the `| claudechats` streaming command for ad-hoc, user-scoped chat retrieval. Ships CIM mappings for Authentication and Change plus an overview dashboard.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/bbe7f078-deee-11f1-ae8b-1a25dca16a71.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Hurricane Labs</dc:creator>
-      <pubDate>Thu, 12 Nov 2026 23:17:52 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8758/#v1.2.1</guid>
     </item>
   </channel>
 </rss>
