@@ -6,7 +6,183 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sat, 21 Nov 2026 00:31:27 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 21 Nov 2026 07:52:45 +0000</lastBuildDate>
+    <item>
+      <title>URL Toolbox - v1.9.5 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/2734/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## \[1.9.5] - 2026-11-17
+
+[](https://github.com/splunk-platform-apps/url_toolbox/blob/main/CHANGELOG.md#195---2026-11-17)
+
+### Changed
+
+[](https://github.com/splunk-platform-apps/url_toolbox/blob/main/CHANGELOG.md#changed)
+
+* Declare `python.required = 3.13` on all 8 external lookups, so the Python interpreter is explicit. Lookup results are unchanged.
+* The project moved from `splunk/utbox` to `splunk-platform-apps/url_toolbox` with its full commit history, and follows the organization structure and pipelines. The app ID is still `utbox`.
+* The documentation is in `docs/readme.md`. It replaces the PDF product guide.
+
+### Fixed
+
+[](https://github.com/splunk-platform-apps/url_toolbox/blob/main/CHANGELOG.md#fixed)
+
+* Remove a stray `print()` in `ut_presets.py` that wrote to the standard output inside an external lookup. In 1.9.4 and earlier, `ut_suites` wrote each preset name of its `set` argument into the lookup output between the CSV rows. Nothing should depend on that output; lookup results are otherwise unchanged.
+* Use raw strings for four regular expressions to avoid invalid escape sequence warnings on newer Python versions.
+
+### Added
+
+[](https://github.com/splunk-platform-apps/url_toolbox/blob/main/CHANGELOG.md#added)
+
+* `app.manifest`.
+* Unit tests with pytest, and a smoke test that runs all lookups and macros on a Splunk instance.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Provides modular macros and external lookups for URL parsing, entropy calculation, character analysis, Levenshtein distance, and Bayesian scoring to support URL-based investigations.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;UTBox is a set of building blocks for Splunk specially created for URL manipulation.
+
+UTBox has been created to be modular, easy to use and easy to deploy in any Splunk environments. It only needs to be deployed on Splunk Search Heads and the bundles will automatically be sent to your Splunk Indexers.
+
+One of the core feature of UTBox is to correctly parse URLs and complicated TLDs (Top Level Domain) using the Mozilla Suffix List. Other functions like shannon entropy, counting, suites, meaning ratio, bayesian analysis, etc, are also available.
+
+UTBox has firstly be created for security analysts but may fit other needs as it&amp;#x27;s a set of building blocks. Enterprise Security users will need to modify the import statement to use UTBox.
+
+You should also take a look at URLParser for efficient URL parsing: https://splunkbase.splunk.com/app/3396/
+
+🐞 For assistance, create issue on: https://github.com/splunk/utbox/issues/new
+
+Maintainer: GSS FDSE @ Splunk&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9d4e2b00-e4e3-11f1-bb14-6e6cca5b51f6.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Field Solutions</dc:creator>
+      <pubDate>Sat, 21 Nov 2026 06:29:40 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/2734/#v1.9.5</guid>
+    </item>
+    <item>
+      <title>Attack Path Intelligence App - v2.3.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9348/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Dashboard hotfix.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Map attack paths to your crown jewels (Crown Jewel → Attack Surface → Attack Vector), prioritize them with a configurable risk score and measure detection coverage by MITRE ATT&amp;amp;CK technique using Splunk ES correlation searches or your own detection inventory. Lookup-driven, with sample data included.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Attack Path Intelligence shows how an attacker could reach your organization&amp;#x27;s most critical assets, and whether your detections would catch them.
+
+The app models attack paths as Crown Jewel → Attack Surface → Attack Vector. Each path gets a priority score based on the crown jewel&amp;#x27;s criticality, the jewel-surface relationship, the vector&amp;#x27;s relevance, the surface&amp;#x27;s exposure and the evidence level. The evidence level says whether a vector was observed in logs, confirmed by a vulnerability scanner or only inferred from the architecture.
+
+Every vector is mapped to MITRE ATT&amp;amp;CK techniques, and the app matches those techniques against your detections. You can use Splunk Enterprise Security correlation searches, read through their MITRE annotations, or a detection inventory lookup for rules outside ES. The result is a coverage view per vector, per path and per crown jewel. It also gives you a ranked detection engineering backlog and a list of disabled detections that would increase coverage if enabled.
+
+Optional live panels use the CIM Network_Traffic and Web data models to show real activity against the assets of each attack surface.
+
+Everything is lookup-driven and configurable: scores, weights, risk thresholds, MITRE match weights, data sources and CIM fields. The app ships with sample content for a fictional organization, so you can explore the dashboards before modeling your own environment.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9f33582e-e573-11f1-a266-0a5e568f38a6.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Gabriel José Biudes Lino</dc:creator>
+      <pubDate>Sat, 21 Nov 2026 06:23:42 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9348/#v2.3.0</guid>
+    </item>
+    <item>
+      <title>Cloudflare Audit Logs Addon for Splunk - v1.1.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/6901/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Please provide a read-only API token for the Cloudflare account whose audit
+
+logs Splunk will collect. Grant Account / Account Settings / Read, and limit
+
+the account resource to the specific account. Supply its Account ID and send
+
+the token through our approved secret-sharing channel. If client-IP filtering
+
+is enabled, allow the actual outbound IPs of our Splunk collector. No write
+
+permission or Global API Key is requested.&quot;
+
+
+
+WHY THIS PERMISSION
+
+This TA calls GET /client/v4/accounts/{account_id}/audit_logs. The endpoint
+
+lists Account Settings Read or Account Settings Write as accepted permissions.
+
+Choose Read for least privilege; Write is not necessary for this integration.
+
+Source: Cloudflare's account audit log API reference:
+
+[https://developers.cloudflare.com/api/resources/audit_logs/methods/list/](https://developers.cloudflare.com/api/resources/audit_logs/methods/list/)
+
+
+
+Do not substitute Access: Audit Logs Read. That permission covers Cloudflare
+
+Access authentication logs, not the account audit endpoint used here. Zone /
+
+Logs / Read and Logpush permissions are not required for this TA's request.
+
+Permission definitions:
+
+[https://developers.cloudflare.com/fundamentals/api/reference/permissions/](https://developers.cloudflare.com/fundamentals/api/reference/permissions/)
+
+
+
+TOKEN SETUP
+
+1\. An authorized Cloudflare user opens My Profile &gt; API Tokens &gt; Create Token
+
+&amp;#x20;  and creates a custom token. Token creation does not give that user access
+
+&amp;#x20;  to accounts or privileges they did not already have.
+
+2\. Set policy type Account, permission Account Settings, access Read.
+
+3\. Limit Account Resources to the account(s) authorized for collection.
+
+&amp;#x20;  Prefer a dedicated token scoped to the single account for each input.
+
+4\. Choose an expiry/rotation policy. If IP filtering is used, allow the actual
+
+&amp;#x20;  collector egress IPs. The Splunk Web hostname's DNS address is not evidence
+
+&amp;#x20;  of its outbound/NAT IP. Obtain Cloud egress information from your Splunk
+
+&amp;#x20;  administrator or support team.
+
+5\. Store the displayed secret securely. Enter it directly in the TA's Bearer
+
+&amp;#x20;  Token field. Do not include &quot;Bearer &quot;, quotes or surrounding whitespace.
+
+6\. Use the 32-character Account ID, not a Zone ID or account display name.
+
+
+
+Cloudflare also offers account-owned tokens. Use them only after confirming
+
+support for this endpoint and your organization's token-creation policy.
+
+Neither a Cloudflare password nor a Global API Key is accepted by this TA.
+
+Instructions and resource scoping:
+
+[https://developers.cloudflare.com/fundamentals/api/get-started/create-token/](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/)
+
+
+
+VALIDATE THE ACTUAL ACCESS
+
+Saving the Splunk form validates its format and securely stores the token;
+
+it is not proof that Cloudflare authorized retrieval. Enable one input and
+
+check for &quot;Cloudflare poll completed&quot; in the internal logs. HTTP 200 with
+
+success\=true and result\=\[] means no records were returned. HTTP 401/403 means
+
+the credential/access checks above still need review. Token validity alone
+
+does not prove permission to the requested account.
+
+
+
+This release uses the v1 account endpoint, not the separate v2 /logs/audit,
+
+organization audit-log or Zero Trust Access authentication-log APIs.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Cloudflare Audit Logs  TA for Splunk is designed to integrate with your Cloudflare Cloud audit logs with the Splunk platform. This add-on focuses on data monitoring, enabling you to bring Cloudflare activities into Splunk in real-time.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d7587b68-e4ff-11f1-9195-f24058031f66.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Tawiah</dc:creator>
+      <pubDate>Sat, 21 Nov 2026 03:03:20 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6901/#v1.1.0</guid>
+    </item>
+    <item>
+      <title>Microsoft Exchange On-Premise EWS - v4.1.12 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5788/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Fix Get Email ingestion by Exchange Message ID and restore the contextual action and ingestion status in its widget.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app performs email ingestion, investigative and containment actions on an on-premise Exchange installation&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/fe6707c2-e542-11f1-ad84-76ffe10016da.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Sat, 21 Nov 2026 00:32:25 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5788/#v4.1.12</guid>
+    </item>
     <item>
       <title>Webex Add-on for Splunk - v1.6.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8365/</link>
@@ -127,114 +303,6 @@ Filigran (www.filigran.io ) provides open-source cybersecurity solutions coverin
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Field Solutions</dc:creator>
       <pubDate>Fri, 20 Nov 2026 16:54:32 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/7186/#v1.4.8</guid>
-    </item>
-    <item>
-      <title>Cloudflare Audit Logs Addon for Splunk - v1.1.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/6901/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Please provide a read-only API token for the Cloudflare account whose audit
-
-logs Splunk will collect. Grant Account / Account Settings / Read, and limit
-
-the account resource to the specific account. Supply its Account ID and send
-
-the token through our approved secret-sharing channel. If client-IP filtering
-
-is enabled, allow the actual outbound IPs of our Splunk collector. No write
-
-permission or Global API Key is requested.&quot;
-
-
-
-WHY THIS PERMISSION
-
-This TA calls GET /client/v4/accounts/{account_id}/audit_logs. The endpoint
-
-lists Account Settings Read or Account Settings Write as accepted permissions.
-
-Choose Read for least privilege; Write is not necessary for this integration.
-
-Source: Cloudflare's account audit log API reference:
-
-[https://developers.cloudflare.com/api/resources/audit_logs/methods/list/](https://developers.cloudflare.com/api/resources/audit_logs/methods/list/)
-
-
-
-Do not substitute Access: Audit Logs Read. That permission covers Cloudflare
-
-Access authentication logs, not the account audit endpoint used here. Zone /
-
-Logs / Read and Logpush permissions are not required for this TA's request.
-
-Permission definitions:
-
-[https://developers.cloudflare.com/fundamentals/api/reference/permissions/](https://developers.cloudflare.com/fundamentals/api/reference/permissions/)
-
-
-
-TOKEN SETUP
-
-1\. An authorized Cloudflare user opens My Profile &gt; API Tokens &gt; Create Token
-
-&amp;#x20;  and creates a custom token. Token creation does not give that user access
-
-&amp;#x20;  to accounts or privileges they did not already have.
-
-2\. Set policy type Account, permission Account Settings, access Read.
-
-3\. Limit Account Resources to the account(s) authorized for collection.
-
-&amp;#x20;  Prefer a dedicated token scoped to the single account for each input.
-
-4\. Choose an expiry/rotation policy. If IP filtering is used, allow the actual
-
-&amp;#x20;  collector egress IPs. The Splunk Web hostname's DNS address is not evidence
-
-&amp;#x20;  of its outbound/NAT IP. Obtain Cloud egress information from your Splunk
-
-&amp;#x20;  administrator or support team.
-
-5\. Store the displayed secret securely. Enter it directly in the TA's Bearer
-
-&amp;#x20;  Token field. Do not include &quot;Bearer &quot;, quotes or surrounding whitespace.
-
-6\. Use the 32-character Account ID, not a Zone ID or account display name.
-
-
-
-Cloudflare also offers account-owned tokens. Use them only after confirming
-
-support for this endpoint and your organization's token-creation policy.
-
-Neither a Cloudflare password nor a Global API Key is accepted by this TA.
-
-Instructions and resource scoping:
-
-[https://developers.cloudflare.com/fundamentals/api/get-started/create-token/](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/)
-
-
-
-VALIDATE THE ACTUAL ACCESS
-
-Saving the Splunk form validates its format and securely stores the token;
-
-it is not proof that Cloudflare authorized retrieval. Enable one input and
-
-check for &quot;Cloudflare poll completed&quot; in the internal logs. HTTP 200 with
-
-success\=true and result\=\[] means no records were returned. HTTP 401/403 means
-
-the credential/access checks above still need review. Token validity alone
-
-does not prove permission to the requested account.
-
-
-
-This release uses the v1 account endpoint, not the separate v2 /logs/audit,
-
-organization audit-log or Zero Trust Access authentication-log APIs.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Cloudflare Audit Logs  TA for Splunk is designed to integrate with your Cloudflare Cloud audit logs with the Splunk platform. This add-on focuses on data monitoring, enabling you to bring Cloudflare activities into Splunk in real-time.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d7587b68-e4ff-11f1-9195-f24058031f66.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Tawiah</dc:creator>
-      <pubDate>Fri, 20 Nov 2026 16:41:56 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6901/#v1.1.0</guid>
     </item>
     <item>
       <title>NetFlow and SNMP Analytics for Splunk (Preview) - v0.3.0 [Version Update]</title>
@@ -361,51 +429,6 @@ Developed by Cyble Inc&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px
       <guid>https://splunkbase.splunk.com/app/6960/#v1.4.5</guid>
     </item>
     <item>
-      <title>URL Toolbox - v1.9.5 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/2734/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## \[1.9.5] - 2026-11-17
-
-[](https://github.com/splunk-platform-apps/url_toolbox/blob/main/CHANGELOG.md#195---2026-11-17)
-
-### Changed
-
-[](https://github.com/splunk-platform-apps/url_toolbox/blob/main/CHANGELOG.md#changed)
-
-* Declare `python.required = 3.13` on all 8 external lookups, so the Python interpreter is explicit. Lookup results are unchanged.
-* The project moved from `splunk/utbox` to `splunk-platform-apps/url_toolbox` with its full commit history, and follows the organization structure and pipelines. The app ID is still `utbox`.
-* The documentation is in `docs/readme.md`. It replaces the PDF product guide.
-
-### Fixed
-
-[](https://github.com/splunk-platform-apps/url_toolbox/blob/main/CHANGELOG.md#fixed)
-
-* Remove a stray `print()` in `ut_presets.py` that wrote to the standard output inside an external lookup. In 1.9.4 and earlier, `ut_suites` wrote each preset name of its `set` argument into the lookup output between the CSV rows. Nothing should depend on that output; lookup results are otherwise unchanged.
-* Use raw strings for four regular expressions to avoid invalid escape sequence warnings on newer Python versions.
-
-### Added
-
-[](https://github.com/splunk-platform-apps/url_toolbox/blob/main/CHANGELOG.md#added)
-
-* `app.manifest`.
-* Unit tests with pytest, and a smoke test that runs all lookups and macros on a Splunk instance.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;UTBox is a set of building blocks for Splunk specially created for URL manipulation. 
-
-UTBox has been created to be modular, easy to use and easy to deploy in any Splunk environments. It only needs to be deployed on Splunk Search Heads and the bundles will automatically be sent to your Splunk Indexers.
-
-One of the core feature of UTBox is to correctly parse URLs and complicated TLDs (Top Level Domain) using the Mozilla Suffix List. Other functions like shannon entropy, counting, suites, meaning ratio, bayesian analysis, etc, are also available.
-
-UTBox has firstly be created for security analysts but may fit other needs as it&amp;#x27;s a set of building blocks. Enterprise Security users will need to modify the import statement to use UTBox.
-
-You should also take a look at URLParser for efficient URL parsing: https://splunkbase.splunk.com/app/3396/
-
-🐞 For assistance, create issue on: https://github.com/splunk/utbox/issues/new
-
-Maintainer: GSS FDSE @ Splunk
-Code Commiters: FDSE, Daniel, Mayur, Cedric, and Ian.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9d4e2b00-e4e3-11f1-bb14-6e6cca5b51f6.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Field Solutions</dc:creator>
-      <pubDate>Fri, 20 Nov 2026 13:14:49 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/2734/#v1.9.5</guid>
-    </item>
-    <item>
       <title>Gigamon - CIM - v1.5.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7509/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Mapped more than 190 Gigamon metadata attributes to the Splunk CIM data model.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Gigamon CIM  Add-On is a specialized extension for Splunk designed to streamline the integration and normalization of Gigamon data (Data ingested in JSON format)  within the Common Information Model (CIM). This add-on facilitates the mapping of Gigamon-specific fields to the corresponding CIM data model, enhancing the overall visibility and comprehension of Gigamon-generated data within the Splunk platform. As part this we have also created a new Datamodel named &amp;quot;Gigamon:  this has 4 new datasets 1) DNS 2) Certificates 3) web 4) Network Traffic. 
@@ -499,16 +522,6 @@ Versions listed in Splunkbase exist for upgrade purposes only. For combinations 
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Fri, 20 Nov 2026 00:37:49 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8610/#v1.1.12</guid>
-    </item>
-    <item>
-      <title>Microsoft Exchange On-Premise EWS - v4.1.11 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/5788/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Require Splunk SOAR SDK 7.3.0 to ingest email attachments while preserving threat-analysis and automation flags.
-* Report authentication and mailbox/folder setup failures with safe reason codes, without exposing server responses, credentials, or mailbox names. Network failures remain generic; existing polling checkpoints are preserved.
-* Use the SDK-owned polling diagnostic wrapper and exception; retain service-specific error classification.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app performs email ingestion, investigative and containment actions on an on-premise Exchange installation&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/114da20c-e47a-11f1-aedd-4a364c1fdff5.svg&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Fri, 20 Nov 2026 00:34:11 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5788/#v4.1.11</guid>
     </item>
     <item>
       <title>Microsoft 365 - v1.4.9 [Version Update]</title>
@@ -1870,23 +1883,6 @@ Vyrux is one app on the search head, including the Enterprise Security search he
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cynamics Inc</dc:creator>
       <pubDate>Sun, 15 Nov 2026 00:13:18 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/10305/#v1.3.0</guid>
-    </item>
-    <item>
-      <title>Sideview Supporting App for Webex - v0.8.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8429/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- New fields legs and webex_legs, one per Webex Calling record
-  (call:detailed_history) and one per meeting participant
-  (meeting:attendee:reports). Requires Cisco CDR Reporting and Analytics
-  9.0.1, which sums them per call on Investigate Calls.
-- Removed pointless &quot;.000000&quot; microsecond granularity from the duration field.
-- Each per-minute quality series now also comes as single-valued summaries
-  named after the field with the statistic last, for example audioInLatencyAvg
-  and audioInLatencyMax: 70 in all. They drop the -1 placeholder samples, so
-  averages no longer go negative, and they chart and filter without the
-  100-value limit of the raw series.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This Supporting App adapts data indexed via Splunk&amp;#x27;s &amp;quot;Cisco Webex Add-on for Splunk&amp;quot; allowing users to leverage that data within Sideview&amp;#x27;s commercial app &amp;quot;Cisco CDR Reporting and Analytics&amp;quot;.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/aef2ef0e-dfbf-11f1-956f-0af1fa65ce4c.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Sideview, LLC - Partner</dc:creator>
-      <pubDate>Sat, 14 Nov 2026 00:23:01 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8429/#v0.8.1</guid>
     </item>
   </channel>
 </rss>
