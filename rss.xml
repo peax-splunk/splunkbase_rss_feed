@@ -6,7 +6,158 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sun, 22 Nov 2026 09:05:38 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 22 Nov 2026 17:30:30 +0000</lastBuildDate>
+    <item>
+      <title>Inputs conf generator - DS addon - v1.1.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7675/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Inputs conf generator - DS addon (7675) 1.1.0
+
+1.1.0 - security release. Upgrade together with Inputs conf generator - SH app 1.1.0.
+
+\- The receive_payload endpoint now requires authentication and the input_conf_generator_write capability. It no longer accepts anonymous requests and is no longer exposed through Splunk Web.
+
+\- New role input_conf_generator_sender for the SH app's token (least privilege).
+
+\- Every field is validated before inputs.conf or serverclass.conf is written. Invalid requests get HTTP 400 with the list of problems.
+
+\- Fix: server classes are now created through the deployment server REST API. 1.0.x wrote them to an app folder the deployment server did not load, so forwarders never received the generated apps.
+
+\- Records the submitting Splunk user in inputs.conf and the add-on log.
+
+\- Reloads only the server classes that changed, including when only new sources were added (every 300 s).
+
+\- Python 3 only. Splunk Enterprise 9.4 - 10.6.
+
+Upgrade: create a DS user with only the input_conf_generator_sender role, create a token for it, and enter it on the SH app's setup page. Re-submit requests made with 1.0.x and delete etc/apps/input_conf_generator_serverclass. See the README.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;- Automate data onbaording from UF/HF agents and save your time fellow data admins. 
+- Refer details and installation section for more information&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f46e135a-e68c-11f1-ab09-22f8933da52d.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Vignesh Narendran</dc:creator>
+      <pubDate>Sun, 22 Nov 2026 16:03:28 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7675/#v1.1.0</guid>
+    </item>
+    <item>
+      <title>Inputs conf generator - SH app - v1.1.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7676/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Inputs conf generator - SH app (7676) 1.1.0
+
+1.1.0 - security release. Upgrade together with Inputs conf generator - DS addon 1.1.0.
+
+\- The DS token is stored encrypted in storage/passwords instead of ds_info.conf, and users never see it.
+
+\- Requests go through an authenticated endpoint limited to roles with the input_conf_generator_send capability (admin and power by default).
+
+\- TLS to the DS is verified (ssl_verify setting for private CAs).
+
+\- Setup page: pre-filled with saved settings, validates fields and tests the DS connection.
+
+\- Payload page: validates every field and lists the DS's deployment clients in the Hosts field.
+
+\- Fix: the Send result panel now shows the DS's answer (the | sendpayload command returned no row).
+
+\- Removed the scheduled full DS reload; the DS add-on now reloads only the classes it changed.
+
+\- Hourly connection check; no longer writes to index\=main.
+
+\- Python 3 only. Splunk Enterprise 9.4 - 10.6.
+
+Upgrade: re-run the setup page with the new token. Saving removes the old reload input and blanks the plain-text token in local/ds_info.conf.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;- Automate data onbaording from UF/HF agents and save your time fellow data admins. 
+- Refer details and installation section for more information&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e0616f1a-e68c-11f1-ab09-22f8933da52d.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Vignesh Narendran</dc:creator>
+      <pubDate>Sun, 22 Nov 2026 16:03:18 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7676/#v1.1.0</guid>
+    </item>
+    <item>
+      <title>Microsoft Public IP range download - Framework - v1.0.10 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6873/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;\## 1.0.10
+
+Maintenance and reliability release. Rebuilt for current Splunk platforms and Splunkbase/AppInspect requirements.
+
+\*\*Platform\*\*
+
+\- Rebuilt with Splunk Add-on Builder 4.5.4; bundled Splunk SDK for Python updated to 2.1.1.
+
+\- Runs on Python 3.13 (\`python.required \= 3.9, 3.13\` on the input and REST handlers).
+
+\- No compiled binaries: x86-only libraries were removed, so the add-on also installs on AArch64.
+
+\*\*Fixes\*\*
+
+\- A failed download or parse is logged and the input skips that run, instead of terminating the input process.
+
+\- The HTTP status of the downloaded file is checked, so error pages are no longer indexed.
+
+\- TLS certificate verification is enabled for all Microsoft requests.
+
+\- The internet check now uses the &quot;Internet check URL&quot; setting through the configured proxy, instead of a hard-coded connection to 8.8.8.8:53. Leave the setting empty to skip the check.
+
+\- CSV files are parsed with a standards-compliant CSV parser (quoted fields, files without a trailing newline), and the logged event count is correct.
+
+\- Events keep the collecting host instead of \`host\=localhost\`.
+
+\- The Download URL ID is validated as numeric when an input is saved.
+
+\- The Connection check dashboard's internet and Microsoft status panels now receive data.
+
+\*\*Changes\*\*
+
+\- Removed the unused Account tab from the Configuration page.
+
+\- README rewritten: external data sources, requirements, configuration, search examples, troubleshooting, support.
+
+\*\*Upgrade notes\*\*
+
+\- If your proxy performs TLS inspection, Splunk's Python must trust the proxy's CA certificate.
+
+\- Searches that filtered on \`host\=localhost\` need updating: events now carry the real host name.
+
+\- Event formats, sourcetype (\`info:public:ip\`) and source (\`microsoft://\&lt;input&gt;\`) are unchanged.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;- This could be used in coordination with Threat hunting.
+
+- You can download and index events from
+https://www.microsoft.com/en-in/download/details.aspx?id=*
+
+- Supports CSV , XML and JSON&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8c8bc6b6-e66d-11f1-9238-da4386ecacf8.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Vignesh Narendran</dc:creator>
+      <pubDate>Sun, 22 Nov 2026 13:47:38 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6873/#v1.0.10</guid>
+    </item>
+    <item>
+      <title>Threat Hunting Essentials - v1.3.181 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7633/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
+
+It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
+
+Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
+
+1. Backdoor.
+2. Worms.
+3. Ransomware.
+4. Bots.
+5. Trojan horses.
+6. Keyloggers.
+7. Rootkits.
+8. Spyware.
+9. Fileless malware.
+10. Cryptojacking.
+11. Wiper malware.
+12. Adware.
+14. Viruses
+15. P2P-Worm
+16. Internet Worms
+17. Net-worm
+18. Clickjacking
+19. Cryptominer
+20. Fileless malware
+
+You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
+
+Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.
+
+For Premium Version - Contact sales https://www.avertpoint.com/contactus.html&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/1107a24e-e668-11f1-8ad3-1a6c49f1aa99.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
+      <pubDate>Sun, 22 Nov 2026 11:30:40 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.181</guid>
+    </item>
     <item>
       <title>TA for WhoisXmlAPI - v1.8.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/4812/</link>
@@ -299,44 +450,6 @@ Documentation: https://docs.thedutchdatadifference.nl/adjutant-ai/&lt;/p&gt;&lt;
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Eduard Lekanne</dc:creator>
       <pubDate>Sat, 21 Nov 2026 22:31:04 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8747/#v2.8.3</guid>
-    </item>
-    <item>
-      <title>Threat Hunting Essentials - v1.3.181 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7633/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
-
-It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
-
-Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
-
-1. Backdoor.
-2. Worms.
-3. Ransomware.
-4. Bots.
-5. Trojan horses.
-6. Keyloggers.
-7. Rootkits.
-8. Spyware.
-9. Fileless malware.
-10. Cryptojacking.
-11. Wiper malware.
-12. Adware.
-14. Viruses
-15. P2P-Worm
-16. Internet Worms
-17. Net-worm
-18. Clickjacking
-19. Cryptominer
-20. Fileless malware
-
-You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
-
-Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.
-
-For Premium Version - Contact sales https://www.avertpoint.com/contactus.html&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/466c43d0-e5a6-11f1-8d49-ee4dddeaaf0a.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
-      <pubDate>Sat, 21 Nov 2026 12:27:43 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.181</guid>
     </item>
     <item>
       <title>URL Toolbox - v1.9.5 [Version Update]</title>
@@ -1458,44 +1571,6 @@ Code is available on Github -&amp;gt; https://github.com/hman-78/visualization_t
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Björn Hamann</dc:creator>
       <pubDate>Wed, 18 Nov 2026 14:54:41 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6675/#v0.5.0</guid>
-    </item>
-    <item>
-      <title>BlueCat Micetro Add-on for Splunk - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10389/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects IPAM data from BlueCat Micetro via its REST API: IP address ranges (containers, subnets and from-to ranges) and IP addresses with their state, DNS hosts, DHCP reservations and leases, and discovery information.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The BlueCat Micetro Add-on for Splunk brings IPAM data into Splunk. The IP Address Ranges input collects every IP address range from Micetro: containers, subnets and from-to ranges, with utilization, custom properties, DHCP scopes and discovery information. The IP Addresses input collects the IPAM records of every range: state, DNS hosts, DHCP reservations and leases, MAC address, last seen time and custom properties, each tagged with the range it belongs to.
-
-The add-on reads the data through the Micetro REST API with a read-only Micetro user and indexes a complete snapshot on every run (daily by default). Free addresses are skipped unless you ask for them, and optional Micetro filter expressions limit what is collected to the ranges, folders and addresses you need.
-
-Use the data to enrich security and network events with subnet, location and owner information, find stale or unknown addresses, track subnet utilization and compare DNS and DHCP data with what is seen on the network.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/39eb0ab4-e03e-11f1-b4fb-a6a11c215295.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Julian Kaufmann</dc:creator>
-      <pubDate>Wed, 18 Nov 2026 13:59:13 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10389/#v1.0.0</guid>
-    </item>
-    <item>
-      <title>Pi-hole Technology Add-on for Splunk - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10390/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Initial release for Pi-hole v6.
-
-- REST API modular input with application password: DNS queries (incremental, checkpointed), statistics, upstreams, system and FTL health, diagnosis messages, lists, domains, groups, clients, DHCP leases, network devices, blocking status.
-- Log file support for pihole.log (standard and extraLogging format), DHCP (DHCPv4 and DHCPv6), FTL.log and webserver.log.
-- CIM 8 mapping for Network_Resolution (DNS) and Network_Sessions (DHCP); tested with Enterprise Security and ES Content Update DNS detections.
-- Python 3.13 runtime and Splunk SDK for Python 3.x; requires Splunk 10.2 or later.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collect Pi-hole v6 DNS queries, DHCP, system health and blocklist data through the REST API and log files, mapped to CIM Network Resolution and Network Sessions.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Pi-hole Technology Add-on for Splunk collects and normalizes data from Pi-hole v6 (FTL v6 and later) DNS sinkholes. It reads the Pi-hole REST API with an application password (DNS queries, statistics, upstream servers, system health, adlists, domains and regex filters, groups, clients, DHCP leases, network devices and blocking status) and parses the dnsmasq query log, DHCP log, FTL log and web server log. DNS queries are mapped to the CIM Network_Resolution data model and DHCP events to Network_Sessions, so Splunk Enterprise Security and ES Content Update DNS detections work with Pi-hole data. A companion app, Pi-hole App for Splunk, provides dashboards. Compatible with Splunk Enterprise and Splunk Cloud Platform 10.2 and later (Python 3.13 runtime).&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/106a4292-e04b-11f1-82b6-5a6fc6e919ff.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Tahsin Güner</dc:creator>
-      <pubDate>Wed, 18 Nov 2026 13:58:05 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10390/#v1.0.0</guid>
-    </item>
-    <item>
-      <title>Pi-hole Insights for Splunk - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10391/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Initial release for Pi-hole v6.
-
-- Seven Dashboard Studio dashboards: Overview, Query Explorer, Client Activity, Server Health, Lists &amp; Filters, DHCP &amp; Devices, Data &amp; CIM Check, with drilldowns between them.
-- Alert templates: Blocking Disabled, Diagnosis Messages, Gravity Not Updated, FTL Errors; client name lookup generator.
-- Macros for index, DNS source (API or log file) and CIM acceleration.
-- Requires the Pi-hole Technology Add-on for Splunk and Splunk 10.2 or later.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Dashboards and alerts for Pi-hole v6: DNS overview, query explorer, client activity, server health, blocklist effectiveness and DHCP. Requires the Pi-hole Technology Add-on for Splunk.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Pi-hole Insights for Splunk turns Pi-hole v6 data into ready-to-use Dashboard Studio dashboards: DNS volume and blocking overview, a filterable query explorer, per-client activity, server health (versions, gravity, CPU, memory, temperature, upstreams, FTL messages), adlist and regex filter effectiveness, and DHCP leases and network devices. Dashboards drill down from overview to individual clients and queries. It also ships alert templates for disabled blocking, new Pi-hole diagnosis messages, stale gravity lists and FTL errors. The data is collected and CIM-normalized by the Pi-hole Technology Add-on for Splunk (TA-pihole6), from the Pi-hole REST API or log files. Compatible with Splunk Enterprise and Splunk Cloud Platform 10.2 and later.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/db9ffa94-e04e-11f1-82b6-5a6fc6e919ff.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Tahsin Güner</dc:creator>
-      <pubDate>Wed, 18 Nov 2026 13:57:49 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10391/#v1.0.0</guid>
     </item>
     <item>
       <title>A2Z AI Builder - v1.0.0 [New App Release]</title>
