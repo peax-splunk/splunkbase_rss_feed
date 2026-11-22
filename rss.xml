@@ -6,7 +6,286 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sat, 21 Nov 2026 21:21:07 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 22 Nov 2026 01:48:58 +0000</lastBuildDate>
+    <item>
+      <title>Adjutant AI - v2.8.3 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/8747/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;# Adjutant AI (formerly AI Workbench) — Release notes
+
+**Last updated:** 2026-11-21
+
+Full release notes: https://docs.thedutchdatadifference.nl/adjutant-ai/admin/release-notes
+
+---
+
+## 2.8.3
+
+An Explain SPL command agent, a support report before your first question, and safer license handling.
+
+**New**
+
+- Explain SPL command: a search command explained, with an example run on made-up rows.
+- Explain a SPL search offers it for the core commands in your search.
+- Report an issue works before your first question, also when locked out.
+- The package adds your access, license state, browser errors and server calls.
+- Asking to change a hand-made dashboard shows the differences; it is replaced after you confirm.
+- Dashboard Studio treemaps (Studio 1.28, Splunk 10.6), and one small chart per value of a field.
+- Settings › Unattended runs: a default LLM connection for unattended runs, and a connection per job.
+
+**Changed**
+
+- The License page shows the key masked; re-validating asks for it again, checked from your browser.
+- A user whose Splunk role imports admin is an administrator in Adjutant AI.
+- Agent Observability and Change Forensics are under Tools.
+- The AI changes dashboards only through a checked revise, never by writing their XML directly.
+
+**Upgrade**
+
+- Power users can no longer change itmip_ai_workbench.conf; grant write in local.meta if you relied on it.
+
+**Fixed**
+
+- The License page no longer reloads the license continuously while it is open.
+- A free-tier administrator other than the first user opens on License, not a greyed Settings page.
+- Gemini connections run unattended agents, and Gemini tool use no longer fails on the second call.
+- Calls are recorded and priced as the model that ran, even when the Console picks another.
+- Dashboards, saved searches and alerts refuse a search that writes.
+
+**Security**
+
+- The full license key never leaves the server.
+- Credentials, also keys named &quot;token&quot;, stay out of history, exports and the AI.
+- Fraud ring scan values are checked (2.8.0, 2.8.1).
+- Cribl, Edge Processor and ITSI RCA checks respect your access (2.8.0, 2.8.1).
+
+**Known issues**
+
+- A cancelled heavy search can keep using Splunk's processing for up to a minute.
+
+---
+
+## 2.8.1
+
+Edit schedules, alerts and their actions in Adjutant, safer dashboard filters, and searches that stop on time.
+
+**New**
+
+- Edit schedule and Edit alert, with trigger actions, in the Knowledge Objects ⋮ menu.
+- An Owner column and filter in Splunk Knowledge Objects.
+
+**Changed**
+
+- Splunk Knowledge Objects shows Splunk's own type icons; scheduled reports carry a clock.
+- Old Outcome Ledger and Integration Ledger links with a filter in clause form show no data.
+- The Knowledge Objects ⋮ menu works by keyboard and with a screen reader.
+
+**Fixed**
+
+- Shared objects you own can be made private or deleted again.
+- An alert whose schedule is off is listed as an Alert, tagged as not scheduled.
+- Security: a value in a link for a dashboard filter can no longer run a search.
+- Unattended searches and flow reads stop when the run's time runs out.
+- Agent Observability: Send test trace shows the ID of the trace it sent.
+- Answers say Adjutant's compiler rewrote a search, not Splunk.
+- Links on the light themes use a darker blue that is easier to read.
+- An answer can say why a dashboard differs from what was asked.
+- Making a shared object private no longer reports a false failure.
+- Adding alert actions no longer shows a false 'changed in Splunk' conflict.
+
+**Known issues**
+
+- A cancelled heavy search can keep using Splunk's processing for up to a minute.
+
+---
+
+## 2.8.0
+
+Agents that ask before they guess, your own Splunk objects in one place, and steadier dashboards.
+
+**New**
+
+- Question cards: choices as buttons; one click, or type your own answer.
+- History has a Splunk Knowledge Objects tab with Visibility and Delete, in every edition.
+- Agent Observability: traces to Splunk Observability Cloud or OpenTelemetry (Professional and higher; metadata only).
+- Change Forensics: what changed before it broke, ranked (Splunk Platform edition, Enterprise or higher).
+- Splunk Enterprise 10.6 is supported.
+- Unattended agents run on OpenAI, Azure OpenAI and other OpenAI-compatible connections.
+- Connections can follow a model family; one on a retired model is switched.
+- Agents know which indexes you can search, from a daily index catalogue.
+- Dashboard base searches and alerts run as tstats where equivalent, with Run original.
+- Integration Ledger, Integration Status and CMDB Quality dashboards, read from integration evidence.
+- Integrations as flows; records deleted in ServiceNow are held until you decide.
+- No AI model available: users see whom to ask; administrators are offered the setup.
+- Dashboards: one on which every panel is empty is checked before it is published.
+- Build a Dashboard Studio dashboard is out of preview.
+
+**Changed**
+
+- An agent your licence does not cover is refused when it starts.
+- Fraud Rule Builder and Fraud Command Center run in the Console only.
+- `llm_derive` is no longer a mapping operation; derived fields come from rules.
+
+**Fixed**
+
+- Security: outside tool results and macro text reach the model as untrusted data.
+- Security: searches cannot read the credential store; tool results lose their secrets.
+- Security: the licence key stays out of KV Store and indexes; typed URL passwords are refused.
+- Editing a dashboard the agent built changes that dashboard; a dashboard can show two time windows.
+- Users with only the user role, matched by an Organisation, are no longer shown as unassigned.
+- Tools disabled for an Organisation stay disabled for every role; unreadable settings offer no tools.
+- Time words such as &quot;today&quot; or &quot;last week&quot; set a dashboard's time range.
+
+**Upgrade notes**
+
+- Re-sign your scheduled jobs once on the Unattended tab; until then they do not run.
+- A job set up outside the Unattended tab must be recreated there.
+
+**Known issues**
+
+- On Splunk 10.6, limit `_internal` to administrators: KV Store records can land there.
+
+---
+
+## 2.7.6
+
+A maintenance release: dashboards built in one compile call, a clearer Audit tab, safe behaviour
+when the KV Store does not answer, and fixes to knowledge, agents and dashboards.
+
+**New**
+
+- Build a Simple XML dashboard compiles in one call; empty panels are reported, not blocked.
+- Build a Dashboard Studio dashboard (admin preview): brand canvas, 1920 wallboard, verification strip; Splunk 10.2, 10.4.
+- Charts over time zoom the time range: drag in Dashboard Studio, click in Simple XML.
+- The Data quality header on compiled dashboards includes Splunk's ingestion check.
+- A banner says when Org DFLT has no audit index.
+- Dashboard Studio dashboards can have tabs; a panel can open another tab (Splunk 10.2, 10.4).
+- The Dashboard Studio JSON builder is retired; use the Build a Dashboard Studio dashboard agent.
+- The Audit tab shows one row per request, with a Model calls column.
+- An unattended agent run is one Audit row, labelled Agent run.
+- The Audit tab shows up to 200 rows and says when there are more.
+- Scheduled and triggered agent runs use their agent's skills.
+
+**Fixed**
+
+- Stop ends a dashboard build; nothing more is written after it.
+- A drilldown token without a default is refused at publish.
+- The audit check confirms written entries reliably, also right after a restart.
+- When the KV Store does not answer, background jobs say so and overwrite nothing.
+- A deleted default Organisation or Business Unit is restored at startup.
+- An agent job with an unusable tool list is refused when you save it.
+- An alert that fires again after a failed agent run starts a new run.
+- Only Operational knowledge is used; a deleted shipped rule or entry stays deleted.
+- A knowledge weight, priority or threshold of 0 is used as 0.
+- A knowledge search answers at its deadline, even when a source is slow.
+- A dashboard with a base search handles a refused change without looping.
+- A saved search that claims to count errors or warnings must select them.
+- Your request never blocks a save; the answer says what the search does not filter on.
+- Overwrite set to &quot;true&quot; asks you to confirm, then replaces the dashboard.
+- The Tool calls panel shows when it waits for your approval.
+- Outcomes, Resource Consumption, Knowledge Layer Health and RCA Investigation show correct figures.
+- Observability pack tools are installed once per change, never twice.
+
+**Known issue**
+
+- Splunk 10.6 is not yet supported: `_internal` can hold conversations and the licence key. Use 10.4.x.
+
+---
+
+## 2.7.0
+
+Governed agents, a panel to watch and stop each request, stricter checks, and multi-source
+reconciliation as a Preview.
+
+**New**
+
+- Playbooks are now agents, switched on per mode: triggered, scheduled, integration or MCP.
+- The Tool calls panel shows each step of a request; you can stop it.
+- Edit dialogs keep your work and behave the same everywhere.
+- Connect a self-hosted or in-house model as an OpenAI-compatible endpoint.
+- Reconcile several sources into one reviewed view (Preview).
+- Write the reconciled view to ServiceNow, after a preview and approval (Preview).
+- Records deleted in ServiceNow outside Adjutant AI are reported.
+- Compare, check and save contract versions on the integration page.
+- A count over indexed fields runs as tstats, and is much faster.
+- Large searches answer from a sample when that gives the same answer, and say so.
+- A proof dashboard is built only when you ask for one.
+- Unattended runs write a searchable log.
+- The support bundle shows where a run spent its time.
+
+**Changed**
+
+- Integrations need an Enterprise or MSP licence; nothing is deleted.
+- The four MCP tools are renamed; update connected MCP clients.
+- A user in no Organisation is refused everywhere.
+- Only the requester or an administrator may approve a blocked integration write.
+- A run that names no LLM connection stops before any model call.
+
+**Fixed**
+
+- Editing an agent or skill keeps who can see it.
+- A custom tool's connection details are shown to administrators only.
+- Domain Workspace model edits stay within their own Organisation.
+- Dashboards render for non-admin users on Splunk 10.4.
+- Searches that cannot work, such as tstats on a search-time field, are refused.
+- An AI Toolkit model is not saved from too few or unvarying training rows.
+- Backups of collections over 5,000 rows contain each row exactly once.
+- Overwriting a shared dashboard, saved search or alert updates it, not a private copy.
+- The sign-in check passes only when it recognises the provider.
+- A ServiceNow integration reads only the records its mapping selects.
+- A run in which ServiceNow refused a record is not reported as verified.
+
+---
+
+## Earlier releases
+
+- **2.7.5** — Maintenance release: the AI Activity dashboard, a Console model allow-list, community model prices, connections that keep who may use them.
+- **2.7.1 – 2.7.3** — Maintenance releases: dashboard publishing on Splunk 10.2, connections behind a corporate proxy, the setup wizard.
+- **2.5** — Setup wizard, one connection for several tenants, private endpoints, a readable RCA report.
+- **2.4** — Integrations, connectivity fixes, and a data-correctness fix.
+- **2.2** — Explain a SPL search.
+- **2.1** — The Fraud capability.
+- **2.0** — ITSI Root Cause Analysis, resource-consumption monitoring, memory and governed integrations.
+- **1.8** — CIM Coverage Audit, Outcome Ledger, OCSF export, content packs, security hardening.
+- **1.7** — ServiceNow integration.
+- **1.5** — Data Foundation and MCP OAuth.
+- **1.0 – 1.4** — Knowledge layer, multi-tenancy, audit logging and edition licensing.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;AI agents that run inside your own Splunk, on the model you choose, including a local model with Ollama, so nothing has to leave your network. Ask in plain words and get a search, dashboard or alert that is run before it is saved. Once you switch it on, an agent investigates the moment an alert, ES notable or ITSI episode fires. Free for one user, no licence key.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Your Splunk team can do far more than it has time for. Adjutant AI gives them that time.
+
+Adjutant AI puts governed AI agents on the Splunk you already run. It ships with 67 ready-made agent templates, so you install it and start the same day: no prompts to write, no project to run.
+
+What changes for your team
+
+- Security analysts get back to the hard cases. Agents triage Enterprise Security notables and alerts with asset, identity and risk context, so your people start where the agent stopped.
+- Everyone else stops waiting for the SPL expert. Describe what you need in plain words and get a working search, dashboard or alert, checked on your own Splunk and owned by you.
+- The Splunk admin team finds problems sooner, and at lower cost. Agents check feed health, data quality and CIM coverage, explain any search with real row counts, and trace an ITSI service problem to its root cause from the data itself.
+- Managers can see what happened. Every step is shown live and can be stopped, every action is gated, and on Enterprise every run is audited.
+
+Your first week
+
+1. Install the app and connect the AI model you choose: a cloud provider, or a local model on your own network for air-gapped sites.
+2. Open the Console and run a ready-made agent on your own data: build a dashboard, explain a slow search, check a feed.
+3. Switch on the agents that should work by themselves. When an alert, a notable or an ITSI episode fires, the investigation is already waiting when someone opens it.
+
+Be the team that got there first
+
+Splunk is one of the most valuable platforms in your organisation. Adjutant AI lets you show it: requests handled on the spot instead of in a ticket queue, investigations that start by themselves, and a Splunk team known for what it delivers. While others are still deciding whether AI belongs in their Splunk, you are already using it, under control.
+
+Built to be trusted
+
+Each agent works with the asking person&amp;#x27;s own Splunk permissions. Your keys stay on your side, and your data goes to no model but the one you choose. Runs on Splunk Enterprise and Splunk Cloud, alongside Enterprise Security, ITSI, the AI Toolkit, TrackMe and ServiceNow. Some agents need the Professional or Enterprise edition.
+
+Free for one user to build searches, dashboards and alerts, with no licence key needed.
+
+Your model, your network: Ollama or another local model, Azure OpenAI, Anthropic, OpenAI, Gemini, Bedrock and more. Keys stay in Splunk&amp;#x27;s secret store, and nothing is sent to us.
+
+Get started in three steps: install, connect your model with the setup wizard, ask your first question.
+
+Free for one user. For your team, request a 30-day Professional key: https://www.thedutchdatadifference.nl/contact/.
+
+Documentation: https://docs.thedutchdatadifference.nl/adjutant-ai/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d196e07e-e5fa-11f1-8ad3-1a6c49f1aa99.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Eduard Lekanne</dc:creator>
+      <pubDate>Sat, 21 Nov 2026 22:31:04 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8747/#v2.8.3</guid>
+    </item>
     <item>
       <title>Threat Hunting Essentials - v1.3.181 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7633/</link>
@@ -1179,18 +1458,6 @@ Code is available on Github -&amp;gt; https://github.com/hman-78/visualization_t
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Björn Hamann</dc:creator>
       <pubDate>Wed, 18 Nov 2026 14:54:41 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6675/#v0.5.0</guid>
-    </item>
-    <item>
-      <title>Secutec SecureSight Add-on for Splunk - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10388/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Initial release version 1.0.0&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects assets and threats from Secutec SecureSight via the SecureSight Customer API, incrementally and without duplicates, with threats mapped to the CIM Vulnerabilities data model.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Secutec SecureSight Add-on for Splunk collects your organization&amp;#x27;s assets and threats through the SecureSight Customer API. The Assets input indexes the asset inventory, including assets that were removed. The Threats input indexes every threat with its status, severity, CVSS score and the affected asset.
-
-Both inputs read the API&amp;#x27;s delta streams on a schedule you choose (every 15 minutes by default). The first run indexes the current state of every asset and threat; after that, a checkpoint makes sure each run only indexes what changed, such as a new threat or a status change, and that nothing is indexed twice or lost after an outage.
-
-Threats are mapped to the Vulnerabilities data model of the Common Information Model (CIM), so they work with Splunk Enterprise Security and other CIM-based content right away.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0a9e9a0c-e03c-11f1-b664-a6233478abc5.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Julian Kaufmann</dc:creator>
-      <pubDate>Wed, 18 Nov 2026 13:59:38 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10388/#v1.0.0</guid>
     </item>
     <item>
       <title>BlueCat Micetro Add-on for Splunk - v1.0.0 [New App Release]</title>
