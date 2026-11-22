@@ -6,7 +6,596 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sun, 22 Nov 2026 17:30:30 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 22 Nov 2026 22:59:29 +0000</lastBuildDate>
+    <item>
+      <title>Monitoring Linux - Metrics and Log Forwarding - v26.10.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4768/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- New: the Host page's Kernel tab shows the hardware's temperature and the processor's thermal throttling, and the Alert Catalog has a Host hardware running hot template
+- Bug fix: in a row of single values, a title that wrapped to more lines than its neighbours' pushed its value below theirs
+
+Collectord updates:
+
+- New (beta): `[output.otlp]` sends logs and metrics over OTLP/HTTP or OTLP/gRPC to an OpenTelemetry Collector or a backend that takes OTLP, alone or beside the Splunk output; `continuesFrom = splunk` carries the file and journal positions over when the receiver forwards into the same Splunk, an `[output.splunk::otlp]` section must be renamed, as the OTLP output takes that name, and a release before this output refuses `defaultOutput = otlp`
+- New (beta): `[output.s2s]` sends events and metrics-index records to Splunk indexers over Splunk-to-Splunk (Splunk 9.1 or later), with indexer acknowledgements, TLS, optional compression and indexer discovery; `continuesFrom = splunk` carries the file and journal positions over when S2S replaces HEC for the same Splunk, and an `[output.splunk::s2s]` section must be renamed, as the S2S output takes that name
+- New: with several Splunk HEC `urls`, Collectord moves to the next one every `loadBalanceFrequency` (5 minutes by default), with `ackEnabled = true` as well, so the load spreads across the HEC endpoints again after they restart one by one; `loadBalanceFrequency = 0` moves only after a failure, as before
+- New: on physical machines the host stats report the hottest temperature sensor, how close a sensor is to its limit, and how often the processor throttled for heat (`temperature_max_celsius`, `temperature_margin_celsius`, `thermal_throttle_core_events_per_sec`, `thermal_throttle_package_events_per_sec`); virtual machines have no sensors and report none
+- Updated Go runtime to 1.27.4
+- Updated SQLite Library to 3.54.1
+- New: a client certificate (`clientCertPath`, `clientKeyPath`) or CA bundle (`caPath`; not yet the S2S output's, which needs a restart for a new CA) replaced on disk, such as a renewed certificate in a mounted Secret, is used for new connections within a minute, without restarting Collectord; a replacement that cannot be loaded keeps the previous one and logs a warning
+- New: `maxConnAge` in `[output.splunk]` and `[output.otlp]` sets how long the output's connections take requests before Collectord opens new ones, so DNS or a load balancer that balances connections can pick another endpoint for a Collectord instance that would otherwise stay on the one it first reached; unset, connections are not replaced by age, as before, and it does not apply with `ackEnabled = true`
+- Bug fix: Collectord could take too long to stop, and be killed, when its destination did not answer
+- Bug fix: when Splunk HEC answered 503 &quot;Server is busy&quot; after taking part of a batch, the events it had taken were indexed twice
+- Bug fix: events were lost without a warning when the Splunk HEC `url` answered with a redirect to a page that returns 200, such as the sign-in page of an SSO gateway in front of it; the events are now held and retried
+- Bug fix: TLS connections through some firewalls, such as Palo Alto Networks, were reset or timed out
+- Bug fix: a burst of records for an output other than the pipeline's own, such as the metrics-index copies `indexType = both` sends to `metricsOutput`, could be dropped (`multioutput_dropped_events`) while that output was still taking them
+- Bug fix: `timestampPrecision` of 7 to 9 on the Splunk HEC output sent rounding noise in the last digits of an event's time; it now sends the event's exact digits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;See your Linux servers in Splunk: the systemd journal with each entry&amp;#x27;s unit named, log files, failed units and pending updates, and host, process, network, filesystem and disk stats in an events or a metrics index. Dashboards for hosts, services, inventory and network, and 45 alert templates. Install one package on each host from our signed apt and yum repositories.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Monitoring Linux brings your Linux servers into Splunk: the hosts your services run on, from RHEL and its rebuilds, Debian and Ubuntu to Fedora, Amazon Linux 2023 and SUSE, on amd64 and arm64.
+
+A service fails and systemd restarts it in a loop, and nobody notices. A host slows down, and nobody can tell whether it is CPU, memory pressure, I/O or one runaway process. A filesystem fills up, the connection tracking table fills and the kernel drops new connections, or security updates wait for weeks on a host nobody remembers. The answers sit in each host&amp;#x27;s journal and /proc, one host at a time.
+
+Monitoring Linux shows what Collectord forwards from each host. Collectord runs as a systemd service and sends the journal, the log files under /var/log and your applications&amp;#x27; own log files to a Splunk events index, with the systemd unit of every journal entry and every process named, so a log line or a CPU spike is one search away from its service. It also reports the units in the failed state every minute and the pending package updates every hour. Host, process, network, filesystem and disk stats go to the same events index or to a Splunk metrics index, your choice: the app has a set of dashboards for each, and they look the same.
+
+The dashboards start from Hosts: one row per host with its CPU, memory, load and stall, and the alerts that fired. From there they go to one host in depth, its processes, the fleet&amp;#x27;s inventory and pending updates, the systemd services that failed, restart or were OOM-killed with their logs a click away, the network&amp;#x27;s interfaces, connections and listening ports, filesystems and disk I/O. Give each group of hosts a cluster name, such as prod or staging, and the dashboards and the Alert Catalog filter by it.
+
+Alerts come from an Alert Catalog of 45 templates, written for Splunk admins, the platform team, security and application teams. Each team picks the alerts it needs and creates them as its own saved searches, scoped to its own clusters. For Splunk Enterprise Security, the app maps SSH logins, sudo, host performance, inventory and pending updates to the Common Information Model.
+
+Install the collectorforlinux package on each host from our signed apt and yum repositories, or the tarball on any other distribution, set the HEC URL, token and license key in 002-user.conf, and enable the service. Upgrades keep your configuration. The app goes on your search heads, on Splunk Enterprise 9.2 or later or Splunk Cloud Platform.
+
+The app requires Collectord and a license key from Outcold Solutions. Evaluation and developer keys are free.
+
+Documentation: https://www.outcoldsolutions.com/docs/monitoring-linux/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/da28ed38-e698-11f1-91c4-ca30cb54ef38.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Outcold Solutions LLC</dc:creator>
+      <pubDate>Sun, 22 Nov 2026 22:49:27 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4768/#v26.10.2</guid>
+    </item>
+    <item>
+      <title>Monitoring Docker and Podman - Metrics and Log Forwarding - v26.10.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/3723/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- Bug fix: in a row of single values, a title that wrapped to more lines than its neighbours' pushed its value below theirs
+- The metrics-index Compose Projects, Swarm Services, ECS Services, Container and Top Containers dashboards and the container alert templates read the labels of data sent over `[output.otlp]` through a gateway into Splunk (such as the OpenTelemetry Collector), which stores a container's labels as one value: the Compose, Swarm and ECS pages were empty for it, picking a project or service matched nothing, and the alert templates lost the project and service of a container; the Alert Catalog page offers the update to installed alerts
+
+Collectord updates:
+
+- New (beta): `[output.otlp]` sends logs and metrics over OTLP/HTTP or OTLP/gRPC to an OpenTelemetry Collector or a backend that takes OTLP, alone or beside the Splunk output; `continuesFrom = splunk` carries the file and journal positions over when the receiver forwards into the same Splunk, an `[output.splunk::otlp]` section must be renamed, as the OTLP output takes that name, an annotation or extraction can no longer name a field `k8s_namespace_name`, `k8s_pod_name`, `k8s_pod_uid` or `k8s_container_name`, and a release before this output refuses `defaultOutput = otlp`
+- New (beta): `[output.s2s]` sends events and metrics-index records to Splunk indexers over Splunk-to-Splunk (Splunk 9.1 or later), with indexer acknowledgements, TLS, optional compression and indexer discovery; `continuesFrom = splunk` carries the file and journal positions over when S2S replaces HEC for the same Splunk, and an `[output.splunk::s2s]` section must be renamed, as the S2S output takes that name
+- New: with several Splunk HEC `urls`, Collectord moves to the next one every `loadBalanceFrequency` (5 minutes by default), with `ackEnabled = true` as well, so the load spreads across the HEC endpoints again after they restart one by one; `loadBalanceFrequency = 0` moves only after a failure, as before
+- New: on physical machines the host stats report the hottest temperature sensor, how close a sensor is to its limit, and how often the processor throttled for heat (`temperature_max_celsius`, `temperature_margin_celsius`, `thermal_throttle_core_events_per_sec`, `thermal_throttle_package_events_per_sec`); virtual machines have no sensors and report none
+- A container whose logging driver Collectord doesn't read (`local`, `syslog`, `splunk` and the like) is named in a warning in Collectord's log; its logs were skipped silently before
+- Updated Go runtime to 1.27.4
+- Updated SQLite Library to 3.54.1
+- New: a client certificate (`clientCertPath`, `clientKeyPath`) or CA bundle (`caPath`; not yet the S2S output's, which needs a restart for a new CA) replaced on disk, such as a renewed certificate in a mounted Secret, is used for new connections within a minute, without restarting Collectord; a replacement that cannot be loaded keeps the previous one and logs a warning
+- New: `maxConnAge` in `[output.splunk]` and `[output.otlp]` sets how long the output's connections take requests before Collectord opens new ones, so DNS or a load balancer that balances connections can pick another endpoint for a Collectord instance that would otherwise stay on the one it first reached; unset, connections are not replaced by age, as before, and it does not apply with `ackEnabled = true`
+- Bug fix: a restart of Collectord (a `rollout restart`, an upgrade, `docker restart`) sent about one line of each running container's log again; a stop now sends what the running containers' pipelines hold, apart from a multi-line event a container is still writing, and waits for the acknowledgements, so it can take up to fifteen seconds while the destination is down: give `docker stop` more than its default 10 s with `-t` where that may happen
+- Bug fix: Collectord could take too long to stop, and be killed, when its destination did not answer
+- Bug fix: when Splunk HEC answered 503 &quot;Server is busy&quot; after taking part of a batch, the events it had taken were indexed twice
+- Bug fix: events were lost without a warning when the Splunk HEC `url` answered with a redirect to a page that returns 200, such as the sign-in page of an SSO gateway in front of it; the events are now held and retried
+- Bug fix: TLS connections through some firewalls, such as Palo Alto Networks, were reset or timed out
+- Bug fix: a burst of records for an output other than the pipeline's own, such as the metrics-index copies `indexType = both` sends to `metricsOutput`, could be dropped (`multioutput_dropped_events`) while that output was still taking them
+- Bug fix: an output endpoint, or a proxy or load balancer in front of it, that refuses chunked request bodies answered every batch with HTTP 411; batches now carry a Content-Length
+- Bug fix: `timestampPrecision` of 7 to 9 on the Splunk HEC output sent rounding noise in the last digits of an event's time; it now sends the event's exact digits
+- Bug fix: `collectord verify` reported the POST checks as FAILED for a Splunk output with `compressionLevel = nocompression`, though Collectord delivered to it&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;See your Docker, Compose, Swarm, Podman and Amazon ECS hosts in Splunk: container and host logs and Docker events in an events index, host, container and process stats in the events index or a metrics index. Dashboards that lead to what needs fixing, and 61 alert templates each team scopes to its own clusters. One Collectord container per host.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Monitoring Docker brings the hosts that run your containers into Splunk: Docker hosts and Compose projects, Docker Swarm clusters, Podman hosts, and Amazon ECS container instances.
+
+Containers fail in ways their logs alone don&amp;#x27;t explain. A container restarts in a loop, is OOM killed, or fails its health check. A Swarm service runs fewer tasks than it should, and the reason is in the Swarm&amp;#x27;s services, tasks and nodes, which only a manager can read. The Docker data root fills up with images, writable layers and json-file logs. Some containers run their processes as root or hold Linux capabilities. The answers are spread over every host, in the logs, the cgroups, /proc and the Docker API.
+
+Monitoring Docker shows what Collectord forwards from each host, where it runs as one container. Collectord sends container and host logs, the Docker daemon&amp;#x27;s events, and the containers, images, volumes and Swarm objects it reads from the API to an events index. Host, container, process, network, filesystem and disk stats go to the same events index, to a Splunk metrics index, or to both while you compare. The containers of rootless Podman users are monitored too.
+
+The app opens on an Overview that says whether anything needs attention and where: hosts whose stats went silent, Collectord problems, and containers OOM killed, in a restart loop, unhealthy or exited with a non-zero code. From there it drills down to hosts, containers and processes, Compose projects, Swarm services and nodes, ECS services, privileged containers, the network, filesystems, disk I/O and CPU throttling. Every stats dashboard has a twin that reads the metrics index, and the Configuration page chooses which set the menu shows. Name each cluster, such as prod or staging, and the dashboards and alerts filter by it.
+
+Alerts come from an Alert Catalog of 61 templates, written for Splunk admins, the platform team and application teams. Each team picks the alerts it needs and creates them as its own saved searches, scoped to its own clusters.
+
+Container labels configure one container at a time: its index and Splunk output, field extraction, multi-line events, masking, log files from its volumes, and Prometheus endpoints. Three features, off by default, send fewer events: repeated lines as one counted event, storms of alike lines folded into a summary a minute, and a report of each stream&amp;#x27;s heaviest log patterns.
+
+Install the app on your search heads, create an HTTP Event Collector token, and start Collectord on each host with docker run, Docker Compose, a Swarm stack, Podman, or an Amazon ECS daemon service.
+
+The app requires Collectord and a license key from Outcold Solutions. Evaluation and developer keys are free.
+
+Documentation: https://www.outcoldsolutions.com/docs/monitoring-docker/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d1ec0984-e698-11f1-ab09-22f8933da52d.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Outcold Solutions LLC</dc:creator>
+      <pubDate>Sun, 22 Nov 2026 22:49:20 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/3723/#v26.10.2</guid>
+    </item>
+    <item>
+      <title>Monitoring OpenShift - Metrics and Log Forwarding - v26.10.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/3836/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- New: a GPU (NVIDIA DCGM) dashboard shows every NVIDIA GPU and MIG instance the GPU Operator's dcgm-exporter reports, with the pod using each one, and the CPU, memory and GPU of every pod that holds a GPU side by side
+- Bug fix: in a row of single values, a title that wrapped to more lines than its neighbours' pushed its value below theirs
+- Bug fix: on the events-index control plane dashboards (etcd, API server, scheduler, controller manager, kubelet, CoreDNS), a latency panel could show too many observations and no p95 or p99
+- Bug fix: on the Audit: Resource Mutations dashboard, the Mutations by Tool panel was always empty
+- Bug fix: on the metrics-index control plane dashboards (etcd, API server, scheduler, controller manager), the panels with the CPU and memory of the control plane container were always empty
+- The label pickers and label columns of the metrics-index dashboards list single labels for data sent over `[output.otlp]` through a gateway into Splunk (such as the OpenTelemetry Collector), which stores a set of labels as one value
+
+Collectord updates:
+
+- New (beta): `[output.otlp]` sends logs and metrics over OTLP/HTTP or OTLP/gRPC to an OpenTelemetry Collector or a backend that takes OTLP, alone or beside the Splunk output; `continuesFrom = splunk` carries the file and journal positions over when the receiver forwards into the same Splunk, an `[output.splunk::otlp]` section must be renamed, as the OTLP output takes that name, an annotation or extraction can no longer name a field `k8s_namespace_name`, `k8s_pod_name`, `k8s_pod_uid` or `k8s_container_name`, and a release before this output refuses `defaultOutput = otlp`
+- New (beta): `[output.s2s]` sends events and metrics-index records to Splunk indexers over Splunk-to-Splunk (Splunk 9.1 or later), with indexer acknowledgements, TLS, optional compression and indexer discovery; `continuesFrom = splunk` carries the file and journal positions over when S2S replaces HEC for the same Splunk, and an `[output.splunk::s2s]` section must be renamed, as the S2S output takes that name
+- New: with several Splunk HEC `urls`, Collectord moves to the next one every `loadBalanceFrequency` (5 minutes by default), with `ackEnabled = true` as well, so the load spreads across the HEC endpoints again after they restart one by one; `loadBalanceFrequency = 0` moves only after a failure, as before
+- New: `collectord.daemonset.updateStrategy` in the charts sets how the DaemonSet rolls out, for example `rollingUpdate.maxUnavailable: 10%` to upgrade more than one node at a time
+- New: Collectord scrapes the NVIDIA GPU Operator's dcgm-exporter on every GPU node (`[input.prometheus::dcgm]`, pods labelled `app=nvidia-dcgm-exporter` in the `gpu-operator` namespace, `nvidia-gpu-operator` on OpenShift) with no configuration, and forwards the seven metrics the dashboard reads; a GPU Operator installed in another namespace sets `podNamespace`, and `whitelist` takes more metrics
+- New: on physical machines the host stats report the hottest temperature sensor, how close a sensor is to its limit, and how often the processor throttled for heat (`temperature_max_celsius`, `temperature_margin_celsius`, `thermal_throttle_core_events_per_sec`, `thermal_throttle_package_events_per_sec`); virtual machines have no sensors and report none
+- Security: with the `onvolumedatabase` annotation, Collectord followed links a workload left on its volume, so a pod could have files on the node removed or overwritten
+- Security: a pod that names an `[input.prometheus_auto]` `authorization.&lt;key&gt;` in its `prometheus.&lt;n&gt;-authorizationkey` annotation is sent that key's `Authorization` header, whatever namespace it runs in; the new `authorizationNamespaces.&lt;key&gt; = &lt;namespace&gt;,&lt;namespace&gt;` (`authorizationNamespaces` in the Splunk charts' `prometheusAuto` values) limits a key to the pods of the namespaces it lists, and `collectord verify` warns about a key any pod can ask for
+- The charts pull the image with `image.pullPolicy: IfNotPresent` instead of `Always`
+- Updated Go runtime to 1.27.4
+- Updated SQLite Library to 3.54.1
+- New: a client certificate (`clientCertPath`, `clientKeyPath`) or CA bundle (`caPath`; not yet the S2S output's, which needs a restart for a new CA) replaced on disk, such as a renewed certificate in a mounted Secret, is used for new connections within a minute, without restarting Collectord; a replacement that cannot be loaded keeps the previous one and logs a warning
+- New: `maxConnAge` in `[output.splunk]` and `[output.otlp]` sets how long the output's connections take requests before Collectord opens new ones, so DNS or a load balancer that balances connections can pick another endpoint for a Collectord instance that would otherwise stay on the one it first reached; unset, connections are not replaced by age, as before, and it does not apply with `ackEnabled = true`
+- Bug fix: a restart of Collectord (a `rollout restart`, an upgrade, `docker restart`) sent about one line of each running container's log again; a stop now sends what the running containers' pipelines hold, apart from a multi-line event a container is still writing, and waits for the acknowledgements, so it can take up to fifteen seconds while the destination is down (within the default 30 s termination grace period)
+- Bug fix: Collectord could take too long to stop, and be killed, when its destination did not answer
+- Bug fix: when Splunk HEC answered 503 &quot;Server is busy&quot; after taking part of a batch, the events it had taken were indexed twice
+- Bug fix: events were lost without a warning when the Splunk HEC `url` answered with a redirect to a page that returns 200, such as the sign-in page of an SSO gateway in front of it; the events are now held and retried
+- Bug fix: TLS connections through some firewalls, such as Palo Alto Networks, were reset or timed out
+- Bug fix: a burst of records for an output other than the pipeline's own, such as the metrics-index copies `indexType = both` sends to `metricsOutput`, could be dropped (`multioutput_dropped_events`) while that output was still taking them
+- Bug fix: logs and metrics of a pod owned by another pod (a Spark executor, a CI job pod started by its runner pod) carried the owner's pod name, id and labels; they carry the pod's own now, and the owner's are in `openshift_owner_pod_name`, `openshift_owner_pod_id` and `openshift_owner_pod_labels`
+- Bug fix: in the Helm charts, `excludeFields` written as a map (`{kubernetes_pod_ip: true}`, as the configuration file spells it) rendered `excludeFields.true = true` and the field was still sent; the charts now take a list or a map
+- Bug fix: an output endpoint, or a proxy or load balancer in front of it, that refuses chunked request bodies answered every batch with HTTP 411; batches now carry a Content-Length
+- Bug fix: `timestampPrecision` of 7 to 9 on the Splunk HEC output sent rounding noise in the last digits of an event's time; it now sends the event's exact digits
+- Bug fix: a `SplunkOutput` object without `token` or `tokenFromSecret` sent with the token of `[output.splunk]`, and one that set `url` still took `urls`, `ackUrl` and `ackUrls` from it; an object without its own token is now refused (its workloads fall back to the default output, with a warning), and one with its own `url` sends only there, without indexer acknowledgements, which Collectord logs once where `ackEnabled = true`
+- Bug fix: `collectord verify` reported the POST checks as FAILED for a Splunk output with `compressionLevel = nocompression`, though Collectord delivered to it
+- Bug fix: Prometheus could not scrape Collectord's `/metrics/prometheus` endpoint and reported the target down when an `[input.kubernetes_watch::*]` input watched an API group other than the core one (on OpenShift the shipped `clusterresourcequota` watch does), or one namespace with a `-` in its name: the input's counter had the `.`, `/` or `-` in its name; each is now `_`, as in `openshift_watch_quota_openshift_io_v1_clusterresourcequota__count`
+- Bug fix: a pod whose workload is owned by a cluster-scoped object (on OpenShift the DaemonSets of the DNS and Network operators) was missing that owner's id, labels and annotations, and Collectord asked the API server for the owner, and was answered 404, each time such a pod changed; a 404 for an owner deleted before its pods is now remembered for five minutes instead of asked for again on each change&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;See your OpenShift clusters in Splunk: container logs, the journal, audit logs, events and objects, with node to process stats and control-plane metrics in an events or a metrics index. An Overview that leads to the cause, an Audit menu, and 117 alert templates. Install Collectord with one Helm chart; a Red Hat certified image is available.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Monitoring OpenShift brings your OpenShift clusters into Splunk: for the platform team that runs them, the application teams that deploy to them, and the security team that audits them.
+
+When a release goes wrong on OpenShift, the evidence is spread out: container logs on every node, the journal, events the API server keeps for about three hours, the audit logs of four API and OAuth servers, and the control plane&amp;#x27;s Prometheus endpoints. On a cluster many teams share, each team also needs its own data and its own alerts, and the platform team needs rules that hold for every project.
+
+Monitoring OpenShift shows what Collectord forwards from each cluster. Collectord runs as a DaemonSet on every node, masters included, and one addon pod. It sends container and application logs, the journal, the audit logs, and OpenShift events and objects to an events index, and node, pod, container, process, network and disk stats and the control plane&amp;#x27;s Prometheus metrics to an events index or a Splunk metrics index. Annotations change what it does for one project, workload or pod: an index or a HEC token per team, field extraction, multi-line events, masking and hashing, application log files and Prometheus scrapes. A Configuration resource sets the platform team&amp;#x27;s rules for the whole cluster. New features, off until you turn them on, group repeated lines and fold storms of alike lines, for fewer events and less noise.
+
+The dashboards open on an Overview with one verdict for the fleet, Healthy, Warning, Critical or Unknown, the numbers behind it and a row per cluster, and its tiles and rows drill down to the page that shows the cause. From there they cover nodes down to a single process; crash loops, OOM kills and failing probes, each a click from the pod&amp;#x27;s logs; capacity, quotas and what the Pod specs declare; the API server, etcd and the cluster DNS; pod security posture; and an Audit menu from detections to the timeline of one object, OAuth logins included. The stats dashboards come in two sets that look the same, one for each kind of index.
+
+Alerts come from an Alert Catalog of 117 templates, written for Splunk admins, the platform team, security and application teams. Each team picks the alerts it needs and creates them as its own saved searches, scoped to its clusters and projects.
+
+Install the app on your search heads, then Collectord with one Helm chart or the manifest rendered from it, on OpenShift 4.11 or later. It sends to Splunk Enterprise or Splunk Cloud over the HTTP Event Collector. A Red Hat certified image is available from registry.connect.redhat.com, and FIPS 140 images are published beside the standard ones.
+
+The app requires Collectord and a license key from Outcold Solutions. Evaluation and developer keys are free.
+
+Documentation: https://www.outcoldsolutions.com/docs/monitoring-openshift/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e0b418da-e698-11f1-bb14-6e6cca5b51f6.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Outcold Solutions LLC</dc:creator>
+      <pubDate>Sun, 22 Nov 2026 22:49:11 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/3836/#v26.10.2</guid>
+    </item>
+    <item>
+      <title>Monitoring Kubernetes - Metrics and Log Forwarding - v26.10.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/3743/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- New: a GPU (NVIDIA DCGM) dashboard shows every NVIDIA GPU and MIG instance the GPU Operator's dcgm-exporter reports, with the pod using each one, and the CPU, memory and GPU of every pod that holds a GPU side by side
+- Bug fix: in a row of single values, a title that wrapped to more lines than its neighbours' pushed its value below theirs
+- Bug fix: on the events-index control plane dashboards (etcd, API server, scheduler, controller manager, kubelet, kube-proxy, CoreDNS), a latency panel could show too many observations and no p95 or p99
+- Bug fix: on the Audit: Resource Mutations dashboard, the Mutations by Tool panel was always empty
+- The label pickers and label columns of the metrics-index dashboards list single labels for data sent over `[output.otlp]` through a gateway into Splunk (such as the OpenTelemetry Collector), which stores a set of labels as one value
+
+Collectord updates:
+
+- New (beta): `[output.otlp]` sends logs and metrics over OTLP/HTTP or OTLP/gRPC to an OpenTelemetry Collector or a backend that takes OTLP, alone or beside the Splunk output; `continuesFrom = splunk` carries the file and journal positions over when the receiver forwards into the same Splunk, an `[output.splunk::otlp]` section must be renamed, as the OTLP output takes that name, an annotation or extraction can no longer name a field `k8s_namespace_name`, `k8s_pod_name`, `k8s_pod_uid` or `k8s_container_name`, and a release before this output refuses `defaultOutput = otlp`
+- New (beta): `[output.s2s]` sends events and metrics-index records to Splunk indexers over Splunk-to-Splunk (Splunk 9.1 or later), with indexer acknowledgements, TLS, optional compression and indexer discovery; `continuesFrom = splunk` carries the file and journal positions over when S2S replaces HEC for the same Splunk, and an `[output.splunk::s2s]` section must be renamed, as the S2S output takes that name
+- New: with several Splunk HEC `urls`, Collectord moves to the next one every `loadBalanceFrequency` (5 minutes by default), with `ackEnabled = true` as well, so the load spreads across the HEC endpoints again after they restart one by one; `loadBalanceFrequency = 0` moves only after a failure, as before
+- New: `collectord.daemonset.updateStrategy` in the charts sets how the DaemonSet rolls out, for example `rollingUpdate.maxUnavailable: 10%` to upgrade more than one node at a time
+- New: Collectord scrapes the NVIDIA GPU Operator's dcgm-exporter on every GPU node (`[input.prometheus::dcgm]`, pods labelled `app=nvidia-dcgm-exporter` in the `gpu-operator` namespace, `nvidia-gpu-operator` on OpenShift) with no configuration, and forwards the seven metrics the dashboard reads; a GPU Operator installed in another namespace sets `podNamespace`, and `whitelist` takes more metrics
+- New: on physical machines the host stats report the hottest temperature sensor, how close a sensor is to its limit, and how often the processor throttled for heat (`temperature_max_celsius`, `temperature_margin_celsius`, `thermal_throttle_core_events_per_sec`, `thermal_throttle_package_events_per_sec`); virtual machines have no sensors and report none
+- Security: with the `onvolumedatabase` annotation, Collectord followed links a workload left on its volume, so a pod could have files on the node removed or overwritten
+- Security: a pod that names an `[input.prometheus_auto]` `authorization.&lt;key&gt;` in its `prometheus.&lt;n&gt;-authorizationkey` annotation is sent that key's `Authorization` header, whatever namespace it runs in; the new `authorizationNamespaces.&lt;key&gt; = &lt;namespace&gt;,&lt;namespace&gt;` (`authorizationNamespaces` in the Splunk charts' `prometheusAuto` values) limits a key to the pods of the namespaces it lists, and `collectord verify` warns about a key any pod can ask for
+- The charts pull the image with `image.pullPolicy: IfNotPresent` instead of `Always`
+- Updated Go runtime to 1.27.4
+- Updated SQLite Library to 3.54.1
+- New: a client certificate (`clientCertPath`, `clientKeyPath`) or CA bundle (`caPath`; not yet the S2S output's, which needs a restart for a new CA) replaced on disk, such as a renewed certificate in a mounted Secret, is used for new connections within a minute, without restarting Collectord; a replacement that cannot be loaded keeps the previous one and logs a warning
+- New: `maxConnAge` in `[output.splunk]` and `[output.otlp]` sets how long the output's connections take requests before Collectord opens new ones, so DNS or a load balancer that balances connections can pick another endpoint for a Collectord instance that would otherwise stay on the one it first reached; unset, connections are not replaced by age, as before, and it does not apply with `ackEnabled = true`
+- Bug fix: a restart of Collectord (a `rollout restart`, an upgrade, `docker restart`) sent about one line of each running container's log again; a stop now sends what the running containers' pipelines hold, apart from a multi-line event a container is still writing, and waits for the acknowledgements, so it can take up to fifteen seconds while the destination is down (within Kubernetes' default 30 s termination grace period)
+- Bug fix: Collectord could take too long to stop, and be killed, when its destination did not answer
+- Bug fix: when Splunk HEC answered 503 &quot;Server is busy&quot; after taking part of a batch, the events it had taken were indexed twice
+- Bug fix: events were lost without a warning when the Splunk HEC `url` answered with a redirect to a page that returns 200, such as the sign-in page of an SSO gateway in front of it; the events are now held and retried
+- Bug fix: TLS connections through some firewalls, such as Palo Alto Networks, were reset or timed out
+- Bug fix: a burst of records for an output other than the pipeline's own, such as the metrics-index copies `indexType = both` sends to `metricsOutput`, could be dropped (`multioutput_dropped_events`) while that output was still taking them
+- Bug fix: logs and metrics of a pod owned by another pod (a Spark executor, a CI job pod started by its runner pod) carried the owner's pod name, id and labels; they carry the pod's own now, and the owner's are in `kubernetes_owner_pod_name`, `kubernetes_owner_pod_id` and `kubernetes_owner_pod_labels`
+- Bug fix: in the Helm charts, `excludeFields` written as a map (`{kubernetes_pod_ip: true}`, as the configuration file spells it) rendered `excludeFields.true = true` and the field was still sent; the charts now take a list or a map
+- Bug fix: an output endpoint, or a proxy or load balancer in front of it, that refuses chunked request bodies answered every batch with HTTP 411; batches now carry a Content-Length
+- Bug fix: `timestampPrecision` of 7 to 9 on the Splunk HEC output sent rounding noise in the last digits of an event's time; it now sends the event's exact digits
+- Bug fix: a `SplunkOutput` object without `token` or `tokenFromSecret` sent with the token of `[output.splunk]`, and one that set `url` still took `urls`, `ackUrl` and `ackUrls` from it; an object without its own token is now refused (its workloads fall back to the default output, with a warning), and one with its own `url` sends only there, without indexer acknowledgements, which Collectord logs once where `ackEnabled = true`
+- Bug fix: `collectord verify` reported the POST checks as FAILED for a Splunk output with `compressionLevel = nocompression`, though Collectord delivered to it
+- Bug fix: Prometheus could not scrape Collectord's `/metrics/prometheus` endpoint and reported the target down when an `[input.kubernetes_watch::*]` input watched an API group other than the core one (on OpenShift the shipped `clusterresourcequota` watch does), or one namespace with a `-` in its name: the input's counter had the `.`, `/` or `-` in its name; each is now `_`, as in `openshift_watch_quota_openshift_io_v1_clusterresourcequota__count`
+- Bug fix: a pod whose workload is owned by a cluster-scoped object (on OpenShift the DaemonSets of the DNS and Network operators) was missing that owner's id, labels and annotations, and Collectord asked the API server for the owner, and was answered 404, each time such a pod changed; a 404 for an owner deleted before its pods is now remembered for five minutes instead of asked for again on each change&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;See your Kubernetes clusters in Splunk: container and host logs, events, objects and the API audit log in an events index, and node, pod, container, process and Prometheus metrics in the events index or a metrics index. Dashboards that lead to the cause, and 118 alert templates each team scopes to its clusters and namespaces. Deploy Collectord with Helm or one manifest.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Monitoring Kubernetes brings your Kubernetes clusters into Splunk, for the platform team that runs them, the application teams that deploy to them, and security.
+
+When something breaks in a cluster, the evidence is spread out and short-lived: container logs sit in files on each node until rotation overwrites them, and the API server holds Kubernetes events for about an hour. Dashboards that only show state leave you to work out what is wrong. And when one cluster serves many teams, one fixed set of alerts fires the same way for everyone, while each team&amp;#x27;s data has to stay in its own indexes.
+
+Monitoring Kubernetes shows what Collectord forwards from each cluster. Collectord runs as a DaemonSet on the nodes, control-plane nodes included, and a single addon Deployment, and enriches what it sends with Kubernetes metadata. Container logs, application log files, host logs, and Kubernetes events and objects go to an events index, and so does the API server audit log once you turn it on. The node, pod, container and process stats, and the Prometheus metrics of the control plane and your own pods, go to the same index or to a Splunk metrics index, your choice. Annotations on a namespace or pod send its data to its own index and HEC token, join multi-line stack traces and mask values, and can send repeated lines as one event that counts them, for fewer events and less noise.
+
+The app opens on an Overview with one verdict for all your clusters, the numbers behind it and a row per cluster, and its tiles drill down to the page that shows the cause. From there it covers nodes, pods, containers and processes; the Kubernetes events, where a click on a crash loop or an OOM kill opens that pod&amp;#x27;s logs; capacity, requests and limits; the control plane from the API server to etcd and CoreDNS; pod security posture and network connections; and an Audit menu that reads the API audit log, from detections to the timeline of one object. Every stats dashboard comes in two sets that look the same, one for each kind of index.
+
+Alerts come from an Alert Catalog of 118 templates, written for Splunk admins, the platform team, security and application teams. Each team picks the alerts it needs, scopes them to its clusters and namespaces, and creates them as its own saved searches, such as Kubernetes: Pod crash looping [cluster prod; namespace payments].
+
+Install the app on your search heads, create a HEC token, and deploy Collectord with the Helm chart or one manifest. It works with containerd, CRI-O and Docker on Kubernetes 1.24 and later, managed clusters such as EKS, GKE and AKS included. The app also maps your nodes and the API audit to the Common Information Model for Splunk Enterprise Security.
+
+The app requires Collectord and a license key from Outcold Solutions. Evaluation and developer keys are free.
+
+Documentation: https://www.outcoldsolutions.com/docs/monitoring-kubernetes/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d69fbae8-e698-11f1-ab09-22f8933da52d.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Outcold Solutions LLC</dc:creator>
+      <pubDate>Sun, 22 Nov 2026 22:49:02 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/3743/#v26.10.2</guid>
+    </item>
+    <item>
+      <title>Monitoring macOS - Metrics and Log Forwarding - v26.10.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/10093/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- Bug fix: in a row of single values, a title that wrapped to more lines than its neighbours' pushed its value below theirs
+
+Collectord updates:
+
+- New (beta): `[output.otlp]` sends logs and metrics over OTLP/HTTP or OTLP/gRPC to an OpenTelemetry Collector or a backend that takes OTLP, alone or beside the Splunk output; `continuesFrom = splunk` carries the file and journal positions over when the receiver forwards into the same Splunk, an `[output.splunk::otlp]` section must be renamed, as the OTLP output takes that name, and a release before this output refuses `defaultOutput = otlp`
+- New (beta): `[output.s2s]` sends events and metrics-index records to Splunk indexers over Splunk-to-Splunk (Splunk 9.1 or later), with indexer acknowledgements, TLS, optional compression and indexer discovery; `continuesFrom = splunk` carries the file and journal positions over when S2S replaces HEC for the same Splunk, and an `[output.splunk::s2s]` section must be renamed, as the S2S output takes that name
+- New: with several Splunk HEC `urls`, Collectord moves to the next one every `loadBalanceFrequency` (5 minutes by default), with `ackEnabled = true` as well, so the load spreads across the HEC endpoints again after they restart one by one; `loadBalanceFrequency = 0` moves only after a failure, as before
+- New: a log pack with `mode = raw` sends every entry its keys select, with no rate cap, pack cap or &quot;seen N times&quot;; while the output falls behind, its entries wait in memory up to `[input.macos_logs] rawQueueSize` (64 MB), then are dropped and counted in `macos_logs_raw_dropped_entries`, which `[input.collectord_metrics]` forwards when it names it
+- New: `--managed-preferences &lt;path&gt;` (or `none`) and `collectord diag --launchd-label`, for a second install under its own prefix and LaunchDaemon label that a configuration profile meant for the package's install should not steer
+- Updated Go runtime to 1.27.4
+- New: a client certificate (`clientCertPath`, `clientKeyPath`) or CA bundle (`caPath`; not yet the S2S output's, which needs a restart for a new CA) replaced on disk, such as a renewed certificate in a mounted Secret, is used for new connections within a minute, without restarting Collectord; a replacement that cannot be loaded keeps the previous one and logs a warning
+- New: `maxConnAge` in `[output.splunk]` and `[output.otlp]` sets how long the output's connections take requests before Collectord opens new ones, so DNS or a load balancer that balances connections can pick another endpoint for a Collectord instance that would otherwise stay on the one it first reached; unset, connections are not replaced by age, as before, and it does not apply with `ackEnabled = true`
+- Bug fix: Collectord could take too long to stop, and be killed, when its destination did not answer
+- Bug fix: when Splunk HEC answered 503 &quot;Server is busy&quot; after taking part of a batch, the events it had taken were indexed twice
+- Bug fix: events were lost without a warning when the Splunk HEC `url` answered with a redirect to a page that returns 200, such as the sign-in page of an SSO gateway in front of it; the events are now held and retried
+- Bug fix: TLS connections through some firewalls, such as Palo Alto Networks, were reset or timed out
+- Bug fix: `timestampPrecision` of 7 to 9 on the Splunk HEC output sent rounding noise in the last digits of an event's time; it now sends the event's exact digits
+- Bug fix: on a Mac with an M5 Pro or M5 Max, the `temperature` record's `cpu` group left out the twelve Performance cores, which it sent as the `memory` group; they are in `cpu` now, and such a Mac sends no `memory` group
+- Bug fix: a connection from a Mac to its own VPN address (the IPv4 address of a `utun` tunnel, such as Tailscale's) reported the `lo0` interface, though its traffic crossed the tunnel
+- Bug fix: on Homebrew 7, installing or upgrading the cask `outcoldsolutions/tap/collectorformacos` warned that it used a deprecated parameter of `url` (`verified`)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;See your Apple Silicon Macs in Splunk: hardware, power, process and security stats in a metrics index, and the unified log, crash reports, logins and setting changes in an events index. Dashboards for build fleets, VM hosts and laptops, and 42 alert templates. Install one package on each Mac, by hand, with Homebrew or through your MDM.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Monitoring macOS brings your Apple Silicon Macs into Splunk: build and CI fleets, Macs that host virtual machines, and the laptops IT looks after.
+
+Macs are often the one part of an estate that Splunk cannot see. A build farm slows down and nobody can tell whether it is thermals, memory pressure, a full disk or one runaway process. A laptop fleet drifts out of policy, with FileVault off, updates pending or the firewall disabled, and the first sign is an audit. The unified log holds the answers, but it is too large to forward as it is, and most of it is noise.
+
+Monitoring macOS shows what Collectord forwards from each Mac. Collectord runs as a LaunchDaemon and sends hardware, power, process and security stats to a Splunk metrics index, and the unified log, crash reports, launchd services, logins and setting changes to an events index. Log packs choose what to forward from the unified log, and a rate cap and a noise sampler keep its volume in check.
+
+The dashboards start from a Fleet Overview that says which Macs need attention and why: the ones that went silent, run hot, have FileVault off, updates pending or a volume nearly full. From there they drill down to hardware, processes, virtual machines, Xcode and CI, crashes and panics, updates and posture, compliance results, security events and the connections each application makes. Label each group of Macs, such as ci, build-farm or laptops, and every dashboard and alert filters by it.
+
+Alerts come from an Alert Catalog of 42 templates, written for Splunk admins, the platform team, security and application teams. Each team picks the alerts it needs and creates them as its own saved searches, scoped to its own Macs.
+
+Install one signed, notarized package on each Mac by hand, with Homebrew, or through your MDM with a configuration profile. Collectord needs no Full Disk Access and macOS asks the user nothing. It never reads the app in front, per-app usage time, Wi-Fi network names or location, and every source that names people or programs has its own switch.
+
+The app requires Collectord and a license key from Outcold Solutions. Evaluation and developer keys are free: https://www.outcoldsolutions.com/docs/monitoring-macos/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/dc5fa902-e698-11f1-bb14-6e6cca5b51f6.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Outcold Solutions LLC</dc:creator>
+      <pubDate>Sun, 22 Nov 2026 22:48:46 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10093/#v26.10.2</guid>
+    </item>
+    <item>
+      <title>GenAI Observability for Splunk - v3.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8308/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## RELEASE INFORMATION
+
+**Release version:** 3.0.0
+
+**Release notes:**
+
+Version 3.0.0 is a major release. It is the first big update since the last Splunkbase release (2.0.0). It adds Langfuse-style tracing and evaluation pages, built in plain JavaScript on top of your Splunk data and the app's KV store.
+
+**New pages**
+
+* Traces: search and filter traces by name, user, tag, environment, model, errors or free text. Click a trace to see its nested observation tree, timeline, inputs and outputs, tokens and cost per step.
+* Sessions and Users: every turn of a conversation, and per-user traces, tokens, cost and errors.
+* Scores: score overview, full score list with CSV export, and score configs for consistent human annotation.
+* Datasets: build test sets from production traces or by hand; import CSV, export CSV or JSONL.
+* Prompts: versioned prompt registry with labels (such as production), version diff, and per-version metrics from real traffic. Apps fetch the labelled version with get_prompt() in the genai-telemetry SDK.
+* Agent &amp; Tools dashboard: tool error rate and latency, agent run health, possible tool loops.
+
+**Other changes**
+
+* All navigation is in a left sidebar on every page; Splunk's app bar is hidden. The sidebar can be collapsed to a slim rail (« button or the \[ key).
+* Load demo data button creates realistic sample traces, sessions, scores, prompts and a dataset, so you can try the app without your own data (admin role needed).
+* Time to first token: uses the real ttft_ms value when the SDK sends it.
+* Time-based model pricing: add a dated row to genai_model_pricing_history.csv when a price changes, so past costs stay correct. A nightly search rebuilds the current-price lookup.
+* Four alerts (cost spike, error rate, P95 latency, token budget) with volume floors so they stay quiet until real traffic flows.
+* GenAI_Traces data model gained session, user, trace name, prompt, environment, release, TTFT, tool and agent fields.
+* Light and dark themes; filters and time range are kept in the page URL so views can be bookmarked.
+
+**Upgrade notes**
+
+* Use genai-telemetry 1.3.0 or later for nested traces, sessions, users, inputs/outputs and scores. Older SDK versions still work, but traces are flat.
+* If data model acceleration is on, rebuild it after upgrading.
+* If you edited genai_model_pricing.csv in local/, move your prices into genai_model_pricing_history.csv.
+* If the new menu does not appear, restart Splunk and delete local/data/ui/nav/default.xml if it exists.
+
+**Compatibility (suggested — check before publishing):**
+
+* Splunk Enterprise: 9.x
+* Splunk Cloud: Victoria and Classic (passes AppInspect cloud checks with 0 failures)
+* Platforms: Platform independent
+* CIM: not applicable (app does not map to CIM data models)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Trace, evaluate and improve LLM apps in Splunk: nested traces, sessions, users, scores, datasets and prompt versions, plus cost, latency and error dashboards.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;GenAI Observability for Splunk monitors GenAI and large language model applications by collecting and analyzing trace data for requests, latency, token usage, cost, errors, retrieval-augmented generation retrieval, and agent tool calls. The app ingests trace telemetry into custom indexes and provides trace exploration pages modeled , dashboards for performance and cost management, and a Python SDK for instrumenting applications. It tracks LLM operational metrics across models, workflows, users, and sessions, enabling administrators to identify cost spikes, latency regressions, error patterns, and inefficient prompt or retrieval strategies. The app includes a data model for acceleration at scale, a prompt registry with versioned metrics from production traffic, and scoring workflows for building evaluation datasets. Cost tracking is performed using a historical pricing lookup that administrators maintain and a nightly search that rebuilds current pricing. The included Python SDK provides decorators for instrumenting LLM calls, RAG pipelines, agents, and tools, and supports session tracking, user attribution, and score submission.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0667641a-e6bc-11f1-9238-da4386ecacf8.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">kamal singh bisht</dc:creator>
+      <pubDate>Sun, 22 Nov 2026 21:59:57 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8308/#v3.0.0</guid>
+    </item>
+    <item>
+      <title>TA-sensors - v1.0.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/10385/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects Linux hwmon (lm-sensors class) board health - CPU/core temperatures, fans, voltages, NVMe temps, power - from BMC-less hosts with zero dependencies. Stdlib python3 reads /sys/class/hwmon and emits JSON events, mstats-ready sensors.* metrics, and dashboards.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TA-sensors brings hardware health monitoring to the machines IPMI can&amp;#x27;t reach.
+
+Consumer desktops, gaming rigs, VMs, SBCs and other BMC-less hosts have no out-of-band management controller, so server-grade hardware telemetry (temperatures, fans, voltages, power) is invisible to Splunk. The Linux kernel already exposes all of it through the hwmon subsystem under /sys/class/hwmon - TA-sensors collects it natively, without a BMC, without ipmitool, and without even the lm-sensors package.
+
+Two stdlib-only python3 scripted inputs collect every registered hwmon chip (coretemp/k10temp, acpitz, nvme, r8169, mt7921, amdgpu, vendor drivers, and more):
+
+- sensors:status (index=main): one nested-JSON event per cycle with sensor_name, reading, reading_value, units and status for every sensor, including latched _alarm flags.
+- sensors:metrics (index=metrics): true metric events via METRIC-SCHEMA, named sensors._, ideal for mstats time-series, anomaly alerts and trend dashboards.
+
+Milli-scaled sysfs inputs are normalized (temp/in/power/current/humidity /1000, fan raw rpm), duplicate chip names are disambiguated with their hwmon number, and all names are sanitized so metric names stay clean and dashboard-safe.
+
+Included dashboards: Sensors Overview (per-host reporting, current readings, alarm table) and Sensors Metrics (CPU cores, temperatures, fans, voltages, power draw, live metric volume).
+
+TA-sensors is fully standalone, but pairs with TA-IPMI, which covers BMC-equipped servers - together they give complete hardware observability across a mixed fleet.
+
+Free and source-available for personal, educational and evaluation use; commercial use requires a paid license from BentleyPC LLC (see LICENSE).&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Sun, 22 Nov 2026 21:26:54 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10385/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>Linux Storage Pool Integrity Add-on (ZFS / md RAID / btrfs) - v1.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10454/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects storage-pool integrity from whatever is present: ZFS (zpool status/get), Linux md RAID (/pr&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects storage-pool integrity from whatever is present: ZFS (zpool status/get), Linux md RAID (/proc/mdstat + mdadm --detail) and btrfs (filesystem usage + device stats). Emits per-pool state (degraded, sync/rescan progress, reserved space, uncorrectable errors) as JSON events to index=main (sourcetype zfspool:status) and numeric zfspool.* metrics to index=metrics (sourcetype zfspool:metrics), with overview and metrics dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Sun, 22 Nov 2026 21:04:33 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10454/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>UPS Health Add-on (NUT / apcupsd) - v1.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10453/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects UPS health from Network UPS Tools (upsc) or apcupsd (apcaccess) when a UPS server is reacha&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects UPS health from Network UPS Tools (upsc) or apcupsd (apcaccess) when a UPS server is reachable: device model, online/off-battery status, battery charge, load and input voltage list. Emits JSON events to index=main (sourcetype ups:status) and ups.* metrics (device count, battery charge, on-battery flag) to index=metrics (sourcetype ups:metrics); hosts without a UPS server report &amp;#x27;absent&amp;#x27;.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Sun, 22 Nov 2026 21:04:08 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10453/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>CPU Frequency and Throttle Add-on (cpufreq sysfs + thermal throttle) - v1.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10452/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects CPU frequency state from /sys/devices/system/cpu (per-core current/min/max frequency, gover&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects CPU frequency state from /sys/devices/system/cpu (per-core current/min/max frequency, governor) and hardware thermal-throttle counters (package_throttle_count, mperf-based if present). Emits JSON events to index=main (sourcetype throttle:status) and throttle.* metrics to index=metrics (sourcetype throttle:metrics); alarm status when a thermal-throttle counter increases since the previous cycle.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Sun, 22 Nov 2026 21:03:43 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10452/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>Systemd Service Health Add-on (failed units) - v1.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10451/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects systemd service health: total/active/failed unit counts and the list of failed units (with&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects systemd service health: total/active/failed unit counts and the list of failed units (with substate) via systemctl. Emits JSON events to index=main (sourcetype service:status) every 60s and service.* metrics to index=metrics (sourcetype service:metrics) - total, active, failed counts - with alarm status when any unit is in a failed state, plus dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Sun, 22 Nov 2026 21:03:18 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10451/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>Storage Path Health Add-on (Device-Mapper Multipath / iSCSI) - v1.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10450/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects storage-path health from device-mapper-multipath (systool -C) and iSCSI sessions (iscsiadm)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects storage-path health from device-mapper-multipath (systool -C) and iSCSI sessions (iscsiadm): per-multipath active/failed path counts and path state, plus iSCSI session counts. Emits JSON events to index=main (sourcetype sanpath:status) and sanpath.* metrics to index=metrics (sourcetype sanpath:metrics). Hosts without multipath report &amp;#x27;absent&amp;#x27; so coverage stays visible.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Sun, 22 Nov 2026 21:02:29 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10450/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>Power and Energy Add-on (powercap RAPL + hwmon power readings) - v1.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10449/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects power telemetry from /sys/class/powercap (RAPL energy counters in microjoules, package/core&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects power telemetry from /sys/class/powercap (RAPL energy counters in microjoules, package/core domain limits) and, as a fallback, from hwmon power sensors (/sys/class/hwmon power*_input). Emits JSON events to index=main (sourcetype rapl:status) and rapl.* metrics (energy counters, current watts, counts) to index=metrics (sourcetype rapl:metrics), with dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Sun, 22 Nov 2026 21:02:04 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10449/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>Pressure Stall Information Add-on (PSI) - v1.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10448/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects PSI (pressure stall information) for CPU, memory and IO from /proc/pressure: some/full aver&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects PSI (pressure stall information) for CPU, memory and IO from /proc/pressure: some/full averages over 10s/60s/300s, including per-cgroup v2 pressure files when present. Emits JSON events to index=main (sourcetype psi:status) every 60s and psi_* metrics to index=metrics (sourcetype psi:metrics), with dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Sun, 22 Nov 2026 21:01:39 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10448/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>Patch Compliance Add-on (apt / dnf upgradable packages) - v1.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10447/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects patch compliance: upgradable package count (security vs total where distinguishable), days&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects patch compliance: upgradable package count (security vs total where distinguishable), days since the last successful apt/dnf transaction (from package-manager history logs), and the distro release. Emits JSON events to index=main (sourcetype patch:status) and patch.* metrics to index=metrics (sourcetype patch:metrics) hourly, with dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Sun, 22 Nov 2026 21:01:14 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10447/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>Network Link Quality Add-on (carrier speed errors drops) - v1.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10446/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects per-interface link quality from /sys/class/net and /proc/net/dev: carrier/operstate, negoti&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects per-interface link quality from /sys/class/net and /proc/net/dev: carrier/operstate, negotiated speed, MTU, cumulative RX/TX error and drop counters per physical interface (virtual/veth/lo excluded). Emits JSON events to index=main (sourcetype netqual:status) and netqual._* metrics to index=metrics (sourcetype netqual:metrics) at 60s cadence, with dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Sun, 22 Nov 2026 21:00:49 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10446/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>Memory Watchdog Add-on (leak / swap thrash / OOM early warning) - v1.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10444/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects early-warning memory signals from /proc/meminfo, /proc/vmstat and /proc/slabinfo: available&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects early-warning memory signals from /proc/meminfo, /proc/vmstat and /proc/slabinfo: available-memory percentage, swap usage, cumulative swap-in/out counters, cumulative oom_kill counter (with new-OOM detection via a state file), and the top memory-consuming kernel slab caches. Emits JSON events to index=main (sourcetype memwatch:status) and memwatch.* metrics to index=metrics (sourcetype memwatch:metrics) at 300s, with dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Sun, 22 Nov 2026 21:00:24 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10444/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>Kernel Crash-Readiness Add-on (kdump taint oops/panic) - v1.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10443/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects kernel crash-readiness and crash signals: kexec crash kernel loaded, kdump service state, k&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects kernel crash-readiness and crash signals: kexec crash kernel loaded, kdump service state, kernel taint state, uptime, and counts of NEW oops/panic/BUG lines in the kernel journal ring since the previous cycle. Emits JSON events to index=main (sourcetype kernel:status) and kernel.* metrics to index=metrics (sourcetype kernel:metrics); alarm status when new oops/panic/BUG lines are detected.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Sun, 22 Nov 2026 20:59:59 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10443/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>Journald Log-Plane Meta Add-on (disk usage file growth) - v1.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10457/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects journald log-plane metadata: journal disk usage (journalctl --disk-usage), journal file cou&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects journald log-plane metadata: journal disk usage (journalctl --disk-usage), journal file count under /var/log/journal, total journal size, age of the oldest journal file, and the journald service state. Emits JSON events to index=main (sourcetype journald:status) and journald.* metrics (disk_kb, size_mb, file_count) to index=metrics (sourcetype journald:metrics) every 300s, with dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Sun, 22 Nov 2026 20:59:34 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10457/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>Hardware RAID Controller State Add-on (MegaCLI/StorCLI SSAcli) - v1.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10441/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects hardware RAID controller state from storcli3/storcli (LSI/MegaRAID), ssacli (HP) or MegaCli&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects hardware RAID controller state from storcli3/storcli (LSI/MegaRAID), ssacli (HP) or MegaCli, if a controller is present: controller state, drive counts, failed/rebuilding drives and cache/battery state. Emits JSON events to index=main (sourcetype hwraid:status) and hwraid.* metrics to index=metrics (sourcetype hwraid:metrics). Hosts with no hardware RAID report &amp;#x27;absent&amp;#x27; with a zero controller count, so fleet coverage stays visible.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Sun, 22 Nov 2026 20:59:09 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10441/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>Linux Disk SMART and NVMe Health Add-on - v1.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10429/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects disk health from smartctl (SATA/ATA SMART + NVMe) and /sys/class/nvme: health status, power&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects disk health from smartctl (SATA/ATA SMART + NVMe) and /sys/class/nvme: health status, power-on hours, temperature, NVMe wear (percentage used, available spare), media errors and SMART raw counters (reallocated, uncorrected, CRC). Emits per-disk JSON events to index=main (sourcetype disk:status) and numeric disk.. metrics to index=metrics (sourcetype disk:metrics), with overview and metrics dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Sun, 22 Nov 2026 20:58:44 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10429/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>Device Inventory Delta Add-on (PCI/USB change detection) - v1.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10439/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects a PCI/USB device inventory signature (count + MD5 of the sorted device list via lspci/lsusb&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects a PCI/USB device inventory signature (count + MD5 of the sorted device list via lspci/lsusb) and reports new or removed devices versus the previous cycle using a local state file. Emits JSON events to index=main (sourcetype devfleet:status) and devfleet.* metrics (device counts, delta count) to index=metrics (sourcetype devfleet:metrics) hourly, with dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Sun, 22 Nov 2026 20:58:19 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10439/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>Scheduled Job Heartbeat Add-on (systemd timers cron) - v1.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10437/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects scheduled-job heartbeat data: all systemd timers (next elapsed, last elapsed, last-run time&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects scheduled-job heartbeat data: all systemd timers (next elapsed, last elapsed, last-run timestamps) via systemctl list-timers, plus a count of cron jobs from /etc/crontab and /etc/cron.d. Emits JSON events to index=main (sourcetype cronbeat:status) and cronbeat.* metrics (timer totals, stale timers, cron job count) to index=metrics (sourcetype cronbeat:metrics), with dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Sun, 22 Nov 2026 20:57:54 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10437/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>Security Baseline Add-on (SecureBoot lockdown sshd shadow auditd) - v1.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10436/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects a host security baseline from the kernel/filesystem: UEFI SecureBoot state, kernel lockdown&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects a host security baseline from the kernel/filesystem: UEFI SecureBoot state, kernel lockdown mode, SSH root-login and password-auth settings (sshd_config, including sshd.d), password aging policy (/etc/shadow), and auditd service state. Emits JSON events to index=main (sourcetype baseline:status) and baseline.* metrics to index=metrics (sourcetype baseline:metrics) hourly, with dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Sun, 22 Nov 2026 20:57:29 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10436/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>Backup Job Assurance Add-on (restic / borg / b2 / rclone) - v1.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10435/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects backup-system health: last snapshot age and count for restic and borg repositories (from a&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects backup-system health: last snapshot age and count for restic and borg repositories (from a config file), and active backup-related systemd timers (restic/borg/b2/rclone/duplicity/timeshift units). Emits JSON events to index=main (sourcetype backup:status) and backup.* metrics to index=metrics (sourcetype backup:metrics) - configured flag, snapshot counts, snapshot age in hours, active timer count - with dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Sun, 22 Nov 2026 20:57:04 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10435/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>Identity Client Add-on (nsswitch SSSD Kerberos) - v1.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10433/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects identity-client state: name-service lookup order from /etc/nsswitch.conf, SSSD service stat&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects identity-client state: name-service lookup order from /etc/nsswitch.conf, SSSD service state and configured domains, system Kerberos ticket cache count, and nscd/oddjob presence where installed. Emits JSON events to index=main (sourcetype authid:status) and authid.* metrics to index=metrics (sourcetype authid:metrics); local-auth-only hosts report the baseline without alarms.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Sun, 22 Nov 2026 20:56:39 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10433/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>AMD GPU Telemetry Add-on (/sys/class/drm + /sys/class/kfd) - v1.0.1 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10431/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects AMD GPU telemetry from /sys/class/drm/cardN/device (VRAM used/total, busy %, temperature vi&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects AMD GPU telemetry from /sys/class/drm/cardN/device (VRAM used/total, busy %, temperature via associated hwmon) and /sys/class/kfd (GPU count, memory info) when AMD GPUs are present. Emits JSON events to index=main (sourcetype amdgpu:status) and amdgpu.* metrics to index=metrics (sourcetype amdgpu:metrics); hosts without AMD GPUs report &amp;#x27;absent&amp;#x27;.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Sun, 22 Nov 2026 20:56:14 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10431/#v1.0.1</guid>
+    </item>
+    <item>
+      <title>CJIS Compliance App - v1.2.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10145/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;\# CJIS Compliance App 1.2.0: Release Notes
+
+Covers everything changed since version 1.0.22.
+
+\## Summary (short form for the Splunkbase release notes field)
+
+1.2.0 makes the app safe to trust out of the box and much more useful day to day. Every control now starts as &quot;not assessed&quot; instead of pre-marked. Findings no longer flood or duplicate. A new Setup and Data Readiness page shows what data the app is missing. Nine new dashboards add triage, incident logging, a policy-area scorecard, a gaps list, encryption in transit, network boundary, remote access, vulnerability and patch status, and source investigation. Detections were tightened, and in-app documentation was expanded. Requires the Splunk Common Information Model (CIM) add-on.
+
+\## New dashboards
+
+\*\*Compliance\*\*
+\- \*\*CJIS Policy Area Scorecard:\*\* posture and findings rolled up to the 13 CJIS Security Policy areas (5.1 to 5.13), with a click-through to each area's controls.
+\- \*\*Gaps and Actions:\*\* controls that are not implemented, with owner, due date and days overdue, plus controls whose review is overdue.
+\- \*\*Incident Log:\*\* an append-only record of reportable incidents and whether and when each was reported to the state CJIS Systems Agency (CJIS 5.3, NIST IR-6).
+\- \*\*Evidence Pack:\*\* one page for an auditor: posture summary, every control with status and findings, audit retention against your requirement, weekly snapshots and status history. Export to PDF or CSV.
+\- \*\*Setup and Data Readiness\*\* (first item in the menu): shows, for each CIM data model, whether it is accelerated and has data, which controls have the data they need, which scope lists are still empty, and which indexes are searched.
+
+\*\*Monitoring\*\*
+\- \*\*Encryption in Transit (SC-8 / SC-13):\*\* allowed connections over protocols that do not encrypt traffic, with a &quot;what to fix&quot; recommendation for each, and weak TLS versions when certificate data is present.
+\- \*\*Network Boundary (SC-7):\*\* allowed versus blocked traffic, reachable services, top blocked sources and ports, and firewall changes.
+\- \*\*Remote Access (AC-17):\*\* remote logons, most active remote users, failed logons by source, and users signing in from more than one country.
+\- \*\*Vulnerability and Patch Status (SI-2 / RA-5):\*\* open critical and high vulnerabilities, how long they have been open, and failed or pending updates.
+
+\*\*Investigation\*\*
+\- \*\*Finding Triage (IR-4 / IR-5):\*\* acknowledge, assign, close or mark a finding a false positive, with a note and a full history of who changed what and when.
+\- \*\*Source / IP Investigation:\*\* logons, firewall traffic, intrusion signatures and findings for a single address.
+
+\## Improvements
+
+\*\*Trustworthy defaults\*\*
+\- Every control now ships as \*\*not assessed\*\*. Nothing is pre-marked as implemented.
+\- Control status changes are recorded with who and when. The posture editor requires an owner and accepts an optional due date.
+\- A weekly \*\*Evidence Snapshot\*\* search records each control's status and findings over time (off by default).
+
+\*\*Findings\*\*
+\- Each condition is now \*\*one finding\*\* (for example, one source failing logons) that is updated on each run, with first seen and last seen times. Previously a persistent condition added a new finding every hour.
+\- Triage decisions are stored separately, so re-running a search never undoes them.
+\- Findings are kept for a configurable number of days (default 365).
+
+\*\*Detections\*\*
+\- \*\*Brute force then success:\*\* now checks that the success came after the failures. It replaces the separate Cross-System Correlation search, which duplicated it.
+\- \*\*Privileged group membership (AC-6):\*\* now works with classic Windows event logs, which it previously missed, and covers more groups plus removals.
+\- \*\*File integrity (SI-7):\*\* limited to watched locations (system files, startup and autorun keys, services) and ignores known noise, so it no longer floods. It stays off until you supply Sysmon data and change windows.
+\- \*\*Log source silent (AU-5):\*\* per-source limits, and silent hosts on the CJIS device list.
+\- \*\*Malicious code (SI-3):\*\* uses the CIM Malware data model instead of one vendor's data.
+\- \*\*MFA (IA-2):\*\* uses the CIM Authentication data model.
+\- \*\*Configuration changes (CM-3):\*\* reports changes outside approved change windows.
+\- \*\*New: cleartext protocols (SC-8):\*\* creates findings for high-risk unencrypted protocols such as FTP, Telnet, POP3, IMAP and LDAP without TLS.
+\- \*\*Account exclusions:\*\* machine and Windows system accounts are ignored by default, and you can add your own service accounts in \`cjis_account_exclusions_local.csv\`.
+\- The after-hours window, brute-force threshold and silent-source limit are now settings you can change.
+
+\*\*Dashboards and documentation\*\*
+\- Dashboards no longer show machine-account and logoff noise in the account-change and privileged-logon tables.
+\- Menu names now include their control numbers.
+\- New in-app documentation: Getting Started, Using Finding Triage, Using the Incident Log, Scorecard / Gaps and Actions / Evidence Pack, Monitoring and Investigation Pages, and a Settings Reference.
+
+\## Upgrading from 1.0.x
+
+\- \*\*Findings:\*\* findings written by earlier versions used a different key. After upgrading, old findings remain until they age out and can appear next to new ones. If you want a clean start, you can clear them by running \`| inputlookup cjis_findings | where 1\=0 | outputlookup cjis_findings\`. This deletes all findings.
+\- \*\*Control status:\*\* your existing status records are kept. Only new installs start as &quot;not assessed&quot;.
+\- \*\*Lookup files:\*\* Splunk keeps existing lookup files when an app is upgraded, so new rows in shipped CSVs do not appear on upgrade. Replace the file if you want them.
+\- \*\*New settings (macros):\*\* \`cjis_findings_retention_days\`, \`cjis_required_retention_days\`, \`cjis_review_interval_days\`, \`cjis_bf_threshold\`, \`cjis_silent_default_minutes\`, \`cjis_after_hours_start\`, \`cjis_after_hours_end\`, \`cjis_fim_scope\`, \`cjis_fim_noise\`, \`cjis_remote_access_filter\` and \`cjis_exclude_accounts\`. Defaults are in the Settings Reference.
+
+\## Requirements
+
+\- Splunk Enterprise or Splunk Cloud Platform 9.x or 10.x, on a search head.
+\- The Splunk Common Information Model (CIM) add-on with the data models you use (Authentication, Change, Intrusion_Detection, Network_Traffic, and optionally Malware, Vulnerabilities, Updates and Certificates). Accelerate the models for speed. The Setup and Data Readiness page tells you which are missing.
+
+\## Known limitations
+
+\- The finding triage and incident log pages write to the KV store, so Splunk shows a one-time &quot;risky commands&quot; warning. Review the search and choose Run Query Anyway.
+\- A closed finding stays closed if the same condition happens again. Check its last seen time and reopen it if needed.
+\- SI-7 needs Sysmon file and registry events and real rows in \`change_windows.csv\`.
+\- Status is a self-assessment by your team. The app records and reports it but cannot prove a control is implemented.
+\- Multi-agency scoping is not included in this release.
+\- Protocol detection in Encryption in Transit is by port number, so services on non-standard ports are not classified.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;CJIS Compliance maps the FBI CJIS Security Policy v6.0 to NIST SP 800-53 Rev. 5. It tracks which controls are implemented, monitors security data through CIM, and stores correlation findings for review without Enterprise Security.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;CJIS Compliance maps the FBI CJIS Security Policy v6.0 to NIST SP 800-53 Rev. 5. It is for teams that need to show which CJIS controls are in place, watch the security data those controls depend on, and review correlation findings without Enterprise Security. Posture covers the 13 CJIS policy areas. Each control can be marked implemented, partial, planned, not assessed, or not applicable.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/79c6778c-e6aa-11f1-a266-0a5e568f38a6.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunky Monkey</dc:creator>
+      <pubDate>Sun, 22 Nov 2026 19:46:52 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10145/#v1.2.0</guid>
+    </item>
+    <item>
+      <title>Threat Hunting Essentials - v1.3.182 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7633/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
+
+It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
+
+Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
+
+1. Backdoor.
+2. Worms.
+3. Ransomware.
+4. Bots.
+5. Trojan horses.
+6. Keyloggers.
+7. Rootkits.
+8. Spyware.
+9. Fileless malware.
+10. Cryptojacking.
+11. Wiper malware.
+12. Adware.
+14. Viruses
+15. P2P-Worm
+16. Internet Worms
+17. Net-worm
+18. Clickjacking
+19. Cryptominer
+20. Fileless malware
+
+You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
+
+Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.
+
+For Premium Version - Contact sales https://www.avertpoint.com/contactus.html&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/1107a24e-e668-11f1-8ad3-1a6c49f1aa99.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
+      <pubDate>Sun, 22 Nov 2026 18:26:06 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.182</guid>
+    </item>
     <item>
       <title>Inputs conf generator - DS addon - v1.1.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7675/</link>
@@ -119,44 +708,6 @@ https://www.microsoft.com/en-in/download/details.aspx?id=*
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Vignesh Narendran</dc:creator>
       <pubDate>Sun, 22 Nov 2026 13:47:38 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6873/#v1.0.10</guid>
-    </item>
-    <item>
-      <title>Threat Hunting Essentials - v1.3.181 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7633/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
-
-It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
-
-Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
-
-1. Backdoor.
-2. Worms.
-3. Ransomware.
-4. Bots.
-5. Trojan horses.
-6. Keyloggers.
-7. Rootkits.
-8. Spyware.
-9. Fileless malware.
-10. Cryptojacking.
-11. Wiper malware.
-12. Adware.
-14. Viruses
-15. P2P-Worm
-16. Internet Worms
-17. Net-worm
-18. Clickjacking
-19. Cryptominer
-20. Fileless malware
-
-You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
-
-Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.
-
-For Premium Version - Contact sales https://www.avertpoint.com/contactus.html&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/1107a24e-e668-11f1-8ad3-1a6c49f1aa99.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
-      <pubDate>Sun, 22 Nov 2026 11:30:40 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.181</guid>
     </item>
     <item>
       <title>TA for WhoisXmlAPI - v1.8.0 [Version Update]</title>
@@ -934,166 +1485,6 @@ Versions listed in Splunkbase exist for upgrade purposes only. For combinations 
       <guid>https://splunkbase.splunk.com/app/7164/#v2.2.400</guid>
     </item>
     <item>
-      <title>Journald Log-Plane Meta Add-on (disk usage file growth) - v1.0.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10457/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects journald log-plane metadata: journal disk usage (journalctl --disk-usage), journal file cou&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects journald log-plane metadata: journal disk usage (journalctl --disk-usage), journal file count under /var/log/journal, total journal size, age of the oldest journal file, and the journald service state. Emits JSON events to index=main (sourcetype journald:status) and journald.* metrics (disk_kb, size_mb, file_count) to index=metrics (sourcetype journald:metrics) every 300s, with dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Thu, 19 Nov 2026 22:50:46 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10457/#v1.0.1</guid>
-    </item>
-    <item>
-      <title>Linux Storage Pool Integrity Add-on (ZFS / md RAID / btrfs) - v1.0.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10454/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects storage-pool integrity from whatever is present: ZFS (zpool status/get), Linux md RAID (/pr&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects storage-pool integrity from whatever is present: ZFS (zpool status/get), Linux md RAID (/proc/mdstat + mdadm --detail) and btrfs (filesystem usage + device stats). Emits per-pool state (degraded, sync/rescan progress, reserved space, uncorrectable errors) as JSON events to index=main (sourcetype zfspool:status) and numeric zfspool.* metrics to index=metrics (sourcetype zfspool:metrics), with overview and metrics dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Thu, 19 Nov 2026 22:49:34 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10454/#v1.0.1</guid>
-    </item>
-    <item>
-      <title>UPS Health Add-on (NUT / apcupsd) - v1.0.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10453/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects UPS health from Network UPS Tools (upsc) or apcupsd (apcaccess) when a UPS server is reacha&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects UPS health from Network UPS Tools (upsc) or apcupsd (apcaccess) when a UPS server is reachable: device model, online/off-battery status, battery charge, load and input voltage list. Emits JSON events to index=main (sourcetype ups:status) and ups.* metrics (device count, battery charge, on-battery flag) to index=metrics (sourcetype ups:metrics); hosts without a UPS server report &amp;#x27;absent&amp;#x27;.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Thu, 19 Nov 2026 18:55:01 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10453/#v1.0.1</guid>
-    </item>
-    <item>
-      <title>CPU Frequency and Throttle Add-on (cpufreq sysfs + thermal throttle) - v1.0.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10452/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects CPU frequency state from /sys/devices/system/cpu (per-core current/min/max frequency, gover&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects CPU frequency state from /sys/devices/system/cpu (per-core current/min/max frequency, governor) and hardware thermal-throttle counters (package_throttle_count, mperf-based if present). Emits JSON events to index=main (sourcetype throttle:status) and throttle.* metrics to index=metrics (sourcetype throttle:metrics); alarm status when a thermal-throttle counter increases since the previous cycle.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Thu, 19 Nov 2026 18:53:47 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10452/#v1.0.1</guid>
-    </item>
-    <item>
-      <title>Systemd Service Health Add-on (failed units) - v1.0.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10451/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects systemd service health: total/active/failed unit counts and the list of failed units (with&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects systemd service health: total/active/failed unit counts and the list of failed units (with substate) via systemctl. Emits JSON events to index=main (sourcetype service:status) every 60s and service.* metrics to index=metrics (sourcetype service:metrics) - total, active, failed counts - with alarm status when any unit is in a failed state, plus dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Thu, 19 Nov 2026 18:52:33 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10451/#v1.0.1</guid>
-    </item>
-    <item>
-      <title>Storage Path Health Add-on (Device-Mapper Multipath / iSCSI) - v1.0.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10450/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects storage-path health from device-mapper-multipath (systool -C) and iSCSI sessions (iscsiadm)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects storage-path health from device-mapper-multipath (systool -C) and iSCSI sessions (iscsiadm): per-multipath active/failed path counts and path state, plus iSCSI session counts. Emits JSON events to index=main (sourcetype sanpath:status) and sanpath.* metrics to index=metrics (sourcetype sanpath:metrics). Hosts without multipath report &amp;#x27;absent&amp;#x27; so coverage stays visible.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Thu, 19 Nov 2026 18:51:19 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10450/#v1.0.1</guid>
-    </item>
-    <item>
-      <title>Power and Energy Add-on (powercap RAPL + hwmon power readings) - v1.0.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10449/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects power telemetry from /sys/class/powercap (RAPL energy counters in microjoules, package/core&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects power telemetry from /sys/class/powercap (RAPL energy counters in microjoules, package/core domain limits) and, as a fallback, from hwmon power sensors (/sys/class/hwmon power*_input). Emits JSON events to index=main (sourcetype rapl:status) and rapl.* metrics (energy counters, current watts, counts) to index=metrics (sourcetype rapl:metrics), with dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Thu, 19 Nov 2026 18:50:05 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10449/#v1.0.1</guid>
-    </item>
-    <item>
-      <title>Pressure Stall Information Add-on (PSI) - v1.0.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10448/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects PSI (pressure stall information) for CPU, memory and IO from /proc/pressure: some/full aver&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects PSI (pressure stall information) for CPU, memory and IO from /proc/pressure: some/full averages over 10s/60s/300s, including per-cgroup v2 pressure files when present. Emits JSON events to index=main (sourcetype psi:status) every 60s and psi_* metrics to index=metrics (sourcetype psi:metrics), with dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Thu, 19 Nov 2026 18:48:51 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10448/#v1.0.1</guid>
-    </item>
-    <item>
-      <title>Patch Compliance Add-on (apt / dnf upgradable packages) - v1.0.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10447/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects patch compliance: upgradable package count (security vs total where distinguishable), days&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects patch compliance: upgradable package count (security vs total where distinguishable), days since the last successful apt/dnf transaction (from package-manager history logs), and the distro release. Emits JSON events to index=main (sourcetype patch:status) and patch.* metrics to index=metrics (sourcetype patch:metrics) hourly, with dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Thu, 19 Nov 2026 18:47:36 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10447/#v1.0.1</guid>
-    </item>
-    <item>
-      <title>Network Link Quality Add-on (carrier speed errors drops) - v1.0.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10446/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects per-interface link quality from /sys/class/net and /proc/net/dev: carrier/operstate, negoti&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects per-interface link quality from /sys/class/net and /proc/net/dev: carrier/operstate, negotiated speed, MTU, cumulative RX/TX error and drop counters per physical interface (virtual/veth/lo excluded). Emits JSON events to index=main (sourcetype netqual:status) and netqual._* metrics to index=metrics (sourcetype netqual:metrics) at 60s cadence, with dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Thu, 19 Nov 2026 18:46:22 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10446/#v1.0.1</guid>
-    </item>
-    <item>
-      <title>Memory Watchdog Add-on (leak / swap thrash / OOM early warning) - v1.0.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10444/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects early-warning memory signals from /proc/meminfo, /proc/vmstat and /proc/slabinfo: available&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects early-warning memory signals from /proc/meminfo, /proc/vmstat and /proc/slabinfo: available-memory percentage, swap usage, cumulative swap-in/out counters, cumulative oom_kill counter (with new-OOM detection via a state file), and the top memory-consuming kernel slab caches. Emits JSON events to index=main (sourcetype memwatch:status) and memwatch.* metrics to index=metrics (sourcetype memwatch:metrics) at 300s, with dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Thu, 19 Nov 2026 18:45:08 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10444/#v1.0.1</guid>
-    </item>
-    <item>
-      <title>Kernel Crash-Readiness Add-on (kdump taint oops/panic) - v1.0.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10443/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects kernel crash-readiness and crash signals: kexec crash kernel loaded, kdump service state, k&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects kernel crash-readiness and crash signals: kexec crash kernel loaded, kdump service state, kernel taint state, uptime, and counts of NEW oops/panic/BUG lines in the kernel journal ring since the previous cycle. Emits JSON events to index=main (sourcetype kernel:status) and kernel.* metrics to index=metrics (sourcetype kernel:metrics); alarm status when new oops/panic/BUG lines are detected.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Thu, 19 Nov 2026 18:43:54 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10443/#v1.0.1</guid>
-    </item>
-    <item>
-      <title>Hardware RAID Controller State Add-on (MegaCLI/StorCLI SSAcli) - v1.0.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10441/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects hardware RAID controller state from storcli3/storcli (LSI/MegaRAID), ssacli (HP) or MegaCli&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects hardware RAID controller state from storcli3/storcli (LSI/MegaRAID), ssacli (HP) or MegaCli, if a controller is present: controller state, drive counts, failed/rebuilding drives and cache/battery state. Emits JSON events to index=main (sourcetype hwraid:status) and hwraid.* metrics to index=metrics (sourcetype hwraid:metrics). Hosts with no hardware RAID report &amp;#x27;absent&amp;#x27; with a zero controller count, so fleet coverage stays visible.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Thu, 19 Nov 2026 18:42:39 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10441/#v1.0.1</guid>
-    </item>
-    <item>
-      <title>Device Inventory Delta Add-on (PCI/USB change detection) - v1.0.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10439/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects a PCI/USB device inventory signature (count + MD5 of the sorted device list via lspci/lsusb&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects a PCI/USB device inventory signature (count + MD5 of the sorted device list via lspci/lsusb) and reports new or removed devices versus the previous cycle using a local state file. Emits JSON events to index=main (sourcetype devfleet:status) and devfleet.* metrics (device counts, delta count) to index=metrics (sourcetype devfleet:metrics) hourly, with dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Thu, 19 Nov 2026 18:41:25 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10439/#v1.0.1</guid>
-    </item>
-    <item>
-      <title>Scheduled Job Heartbeat Add-on (systemd timers cron) - v1.0.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10437/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects scheduled-job heartbeat data: all systemd timers (next elapsed, last elapsed, last-run time&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects scheduled-job heartbeat data: all systemd timers (next elapsed, last elapsed, last-run timestamps) via systemctl list-timers, plus a count of cron jobs from /etc/crontab and /etc/cron.d. Emits JSON events to index=main (sourcetype cronbeat:status) and cronbeat.* metrics (timer totals, stale timers, cron job count) to index=metrics (sourcetype cronbeat:metrics), with dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Thu, 19 Nov 2026 18:40:11 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10437/#v1.0.1</guid>
-    </item>
-    <item>
-      <title>Security Baseline Add-on (SecureBoot lockdown sshd shadow auditd) - v1.0.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10436/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects a host security baseline from the kernel/filesystem: UEFI SecureBoot state, kernel lockdown&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects a host security baseline from the kernel/filesystem: UEFI SecureBoot state, kernel lockdown mode, SSH root-login and password-auth settings (sshd_config, including sshd.d), password aging policy (/etc/shadow), and auditd service state. Emits JSON events to index=main (sourcetype baseline:status) and baseline.* metrics to index=metrics (sourcetype baseline:metrics) hourly, with dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Thu, 19 Nov 2026 18:38:57 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10436/#v1.0.1</guid>
-    </item>
-    <item>
-      <title>Backup Job Assurance Add-on (restic / borg / b2 / rclone) - v1.0.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10435/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects backup-system health: last snapshot age and count for restic and borg repositories (from a&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects backup-system health: last snapshot age and count for restic and borg repositories (from a config file), and active backup-related systemd timers (restic/borg/b2/rclone/duplicity/timeshift units). Emits JSON events to index=main (sourcetype backup:status) and backup.* metrics to index=metrics (sourcetype backup:metrics) - configured flag, snapshot counts, snapshot age in hours, active timer count - with dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Thu, 19 Nov 2026 18:37:42 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10435/#v1.0.1</guid>
-    </item>
-    <item>
-      <title>Identity Client Add-on (nsswitch SSSD Kerberos) - v1.0.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10433/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects identity-client state: name-service lookup order from /etc/nsswitch.conf, SSSD service stat&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects identity-client state: name-service lookup order from /etc/nsswitch.conf, SSSD service state and configured domains, system Kerberos ticket cache count, and nscd/oddjob presence where installed. Emits JSON events to index=main (sourcetype authid:status) and authid.* metrics to index=metrics (sourcetype authid:metrics); local-auth-only hosts report the baseline without alarms.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Thu, 19 Nov 2026 18:36:28 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10433/#v1.0.1</guid>
-    </item>
-    <item>
-      <title>AMD GPU Telemetry Add-on (/sys/class/drm + /sys/class/kfd) - v1.0.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10431/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects AMD GPU telemetry from /sys/class/drm/cardN/device (VRAM used/total, busy %, temperature vi&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects AMD GPU telemetry from /sys/class/drm/cardN/device (VRAM used/total, busy %, temperature via associated hwmon) and /sys/class/kfd (GPU count, memory info) when AMD GPUs are present. Emits JSON events to index=main (sourcetype amdgpu:status) and amdgpu.* metrics to index=metrics (sourcetype amdgpu:metrics); hosts without AMD GPUs report &amp;#x27;absent&amp;#x27;.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Thu, 19 Nov 2026 18:35:14 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10431/#v1.0.1</guid>
-    </item>
-    <item>
-      <title>Linux Disk SMART and NVMe Health Add-on - v1.0.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10429/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;v1.0.1: bespoke per-TA overview and metrics dashboards; verified AppInspect clean on 10.6.1.1.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects disk health from smartctl (SATA/ATA SMART + NVMe) and /sys/class/nvme: health status, power&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects disk health from smartctl (SATA/ATA SMART + NVMe) and /sys/class/nvme: health status, power-on hours, temperature, NVMe wear (percentage used, available spare), media errors and SMART raw counters (reallocated, uncorrected, CRC). Emits per-disk JSON events to index=main (sourcetype disk:status) and numeric disk.. metrics to index=metrics (sourcetype disk:metrics), with overview and metrics dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Thu, 19 Nov 2026 18:34:00 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10429/#v1.0.1</guid>
-    </item>
-    <item>
       <title>Cisco Enterprise Networking Add-on for Splunk - v4.0.70 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/7538/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* **SD-WAN syslog timestamps:** Corrected timestamps for wrapped RFC 5424 events. Install the add-on on each parsing tier and validate newly ingested events; existing indexed timestamps are unchanged.
@@ -1201,29 +1592,6 @@ Documentation: https://docs.trackme-solutions.com/product_guide/integ_broker.htm
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Trackme Limited</dc:creator>
       <pubDate>Thu, 19 Nov 2026 13:21:22 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/10323/#v1.1.3</guid>
-    </item>
-    <item>
-      <title>TA-sensors - v1.0.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/10385/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects Linux hwmon (lm-sensors class) board health - CPU/core temperatures, fans, voltages, NVMe temps, power - from BMC-less hosts with zero dependencies. Stdlib python3 reads /sys/class/hwmon and emits JSON events, mstats-ready sensors.* metrics, and dashboards.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TA-sensors brings hardware health monitoring to the machines IPMI can&amp;#x27;t reach.
-
-Consumer desktops, gaming rigs, VMs, SBCs and other BMC-less hosts have no out-of-band management controller, so server-grade hardware telemetry (temperatures, fans, voltages, power) is invisible to Splunk. The Linux kernel already exposes all of it through the hwmon subsystem under /sys/class/hwmon - TA-sensors collects it natively, without a BMC, without ipmitool, and without even the lm-sensors package.
-
-Two stdlib-only python3 scripted inputs collect every registered hwmon chip (coretemp/k10temp, acpitz, nvme, r8169, mt7921, amdgpu, vendor drivers, and more):
-
-- sensors:status (index=main): one nested-JSON event per cycle with sensor_name, reading, reading_value, units and status for every sensor, including latched _alarm flags.
-- sensors:metrics (index=metrics): true metric events via METRIC-SCHEMA, named sensors._, ideal for mstats time-series, anomaly alerts and trend dashboards.
-
-Milli-scaled sysfs inputs are normalized (temp/in/power/current/humidity /1000, fan raw rpm), duplicate chip names are disambiguated with their hwmon number, and all names are sanitized so metric names stay clean and dashboard-safe.
-
-Included dashboards: Sensors Overview (per-host reporting, current readings, alarm table) and Sensors Metrics (CPU cores, temperatures, fans, voltages, power draw, live metric volume).
-
-TA-sensors is fully standalone, but pairs with TA-IPMI, which covers BMC-equipped servers - together they give complete hardware observability across a mixed fleet.
-
-Free and source-available for personal, educational and evaluation use; commercial use requires a paid license from BentleyPC LLC (see LICENSE).&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Thu, 19 Nov 2026 13:20:48 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10385/#v1.0.1</guid>
     </item>
     <item>
       <title>GLPI Add-on for Splunk - v1.1.15 [Version Update]</title>
@@ -1571,139 +1939,6 @@ Code is available on Github -&amp;gt; https://github.com/hman-78/visualization_t
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Björn Hamann</dc:creator>
       <pubDate>Wed, 18 Nov 2026 14:54:41 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/6675/#v0.5.0</guid>
-    </item>
-    <item>
-      <title>A2Z AI Builder - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10392/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**1.0.0 — First public release**
-
-\- Splunk mode: dashboards, cockpits and a catalogue of every alert that fits your logs, built from plain-language requests, with filters on index, sourcetype, host and service, live preview, version history, SPL lint and server-side parsing.
-
-\- Observability mode: Splunk Observability Cloud dashboards and detectors in SignalFlow (Infrastructure, APM, RUM, Synthetics, Kubernetes, SLOs), preview, API deployment and Terraform export.
-
-\- Mixed mode: logs and metrics in one dashboard, correlated on host and service, with correlated alerts.
-
-\- Bring your own model: OpenAI-compatible endpoints (OpenAI, DeepSeek, OpenRouter, Groq, LM Studio, Ollama, vLLM, llama.cpp), Anthropic, Azure OpenAI and AWS Bedrock, with retries, failover between providers, prompt caching and Splunk proxy settings.
-
-\- Deployment to this stack, a remote stack, Splunk Observability Cloud, GitLab (merge request) or download.
-
-\- 318-icon library for KPI cards.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Describe a dashboard, cockpit or alert in plain language, preview it live on your data, refine it by chatting and deploy it to Splunk, Splunk Observability Cloud or GitLab. Bring your own LLM: OpenAI-compatible, local models, Anthropic, Azure or Bedrock.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;A2Z AI Builder turns a request written in plain language into a working Splunk dashboard, cockpit or alert, for use with Splunk® Enterprise and Splunk Cloud Platform. Building good dashboards and alerts takes time and SPL expertise; this app lets any analyst describe what they need, see the result running live on their own data with their own permissions, refine it by chatting, and deploy it in one click.
-
-Three modes:
-- Splunk (logs): Dashboard Studio or Simple XML cockpits built from the indexes you can search, with filters on index, sourcetype, host and service, every KPI your data allows, and a catalogue of every alert that fits your logs.
-- Observability: Splunk Observability Cloud dashboards and detectors in SignalFlow (Infrastructure, APM, RUM, Synthetics, Kubernetes, SLOs), previewed on your organisation and deployed through the API or exported as Terraform.
-- Mixed: logs and metrics in one Splunk dashboard, correlated on host and service, with correlated alerts.
-
-Bring your own model: any OpenAI-compatible endpoint (OpenAI, DeepSeek, OpenRouter, Groq, and local servers such as LM Studio, Ollama, vLLM or llama.cpp), Anthropic, Azure OpenAI and AWS Bedrock, with retries, failover between providers, prompt caching and Splunk&amp;#x27;s proxy settings.
-
-Security first: API keys stored in storage/passwords, admin-only settings, no event samples sent to the model by default, full audit trail in _internal, no telemetry.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9f6b28a2-e051-11f1-ae8b-1a25dca16a71.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">zemour Ali</dc:creator>
-      <pubDate>Wed, 18 Nov 2026 13:57:18 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10392/#v1.0.0</guid>
-    </item>
-    <item>
-      <title>Kafka Topic Consumer Add-on for Splunk - v1.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10394/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**1.0.0 - Initial release**
-
-\- Consume Apache Kafka, Amazon MSK and Confluent Cloud topics directly from Splunk, with no Kafka Connect and nothing installed on the Kafka side
-
-\- SASL_SSL, SSL/mTLS, SCRAM-SHA-512, SCRAM-SHA-256, PLAIN, private CA with hostname verification
-
-\- Optional SOCKS5 proxy per cluster (socks5/socks5h, with authentication)
-
-\- Topic list or regex pattern, offsets committed to a Kafka consumer group (at-least-once)
-
-\- Raw message or JSON envelope with Kafka metadata
-
-\- Run summaries with per-partition consumer lag in \_internal
-
-\- Guide page with recommended settings and troubleshooting&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Consume Apache Kafka, Amazon MSK and Confluent Cloud topics directly into Splunk Cloud Platform or Splunk Enterprise. No Kafka Connect, nothing installed on the Kafka side. SASL/SCRAM, TLS/mTLS, SOCKS5 proxy, consumer group offsets.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collecting Kafka topics into Splunk usually requires running and maintaining a separate Kafka Connect cluster, which is not always possible. This add-on removes that intermediary: Splunk itself consumes the topics directly from Apache Kafka, Amazon MSK or Confluent Cloud, with nothing to install on the Kafka side.
-
-The add-on connects with SASL_SSL (SCRAM-SHA-512 for Amazon MSK, SCRAM-SHA-256, PLAIN for Confluent Cloud) or TLS/mTLS, supports private certificate authorities and an optional SOCKS5 proxy. Offsets are committed to a standard Kafka consumer group only after events are written to Splunk, giving at-least-once delivery and a consumer lag visible with the usual Kafka tools.
-
-It works on Splunk Cloud Platform and Splunk Enterprise.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/25e0f050-e05d-11f1-82b6-5a6fc6e919ff.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">zemour Ali</dc:creator>
-      <pubDate>Wed, 18 Nov 2026 13:56:57 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10394/#v1.0.0</guid>
-    </item>
-    <item>
-      <title>A2Z Python Upgrade - v1.2.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10395/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**1.2.0 — Initial public release**
-
-
-
-\- Python 3.13 / jQuery readiness scan of every app on the stack (34 rules: removed Python modules and APIs, missing python.required, Python 2 code, bundled splunklib \&lt; 2.0.2, jQuery \&lt; 3.5, Simple XML version 1.1, app.conf metadata, Splunk Cloud permissions).
-
-\- Incremental per-app scan with readiness score, blockers / warnings / auto-fixable counts, CSV and JSON export.
-
-\- 3-step workflow: Scan -&gt; Select &amp; Fix (per-correction details, generated patched packages) -&gt; Deploy.
-
-\- Deployment targets: package download, Splunk Cloud via ACS (with automatic app vetting), in-place install on the Splunk Enterprise instance with backup, push to GitLab or GitHub (branch + merge/pull request).
-
-\- Splunk Enterprise sources supported: etc/apps, deployment-apps, manager-apps / master-apps, shcluster/apps.
-
-\- Proxy support (none / server.conf proxyConfig / custom proxy with authentication, no_proxy and CA bundle). Secrets stored in storage/passwords.
-
-\- Scan history, deployment history, rule catalog and built-in guide.
-
-\- Restricted to admin and sc_admin through the a2z_python_upgrade_admin capability.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Scan every installed Splunk app for Python 3.13, jQuery 3.5 and Splunk Cloud vetting blockers, get plain-English explanations, and generate patched packages you can download or deploy to Splunk Cloud (ACS), Splunk Enterprise or Git.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;A2Z Python Upgrade finds and fixes the Python 3.13, jQuery 3.5 and Splunk Cloud (AppInspect) blockers in every app installed on your Splunk platform.
-
-Splunk 10.2 introduced the Python 3.13 runtime and removed Node.js, and AppInspect now fails any Python extension point (inputs, search commands, REST handlers, alert actions, lookups) that does not declare python.required with 3.13. Many installed apps, especially unmaintained ones, are no longer compatible.
-
-The app scans all installed apps (and, on Splunk Enterprise, deployment server, cluster manager and SHC deployer apps) against 34 rules, explains every finding in plain English with the related AppInspect check, and generates a patched package with all safe fixes applied: python.required, splunklib upgrade, removed Python APIs, Simple XML version 1.1, bundled jQuery, packaging issues. Patched apps can be downloaded, installed through ACS on Splunk Cloud, installed on Splunk Enterprise, or pushed to GitLab/GitHub.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/5e0d5170-e05e-11f1-aeb0-4e177bd7d735.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">zemour Ali</dc:creator>
-      <pubDate>Wed, 18 Nov 2026 13:56:40 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10395/#v1.2.0</guid>
-    </item>
-    <item>
-      <title>OTel Fleet Monitor for AWS - v1.2.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10396/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**1.2.0 — First public release on Splunkbase.**
-
-
-
-Features
-
-\- Inventory of OpenTelemetry Collectors on Amazon EKS and ECS through read-only AWS APIs (ECS, EKS, SSM, STS) and the read-only Kubernetes API of each EKS cluster: DaemonSets, Deployments, StatefulSets, pods, ConfigMaps, OpenTelemetryCollector custom resources and EKS add-ons (ADOT). Clusters without any collector are reported.
-
-\- Health: silent collectors (running on AWS but not reporting), dropped data by stage, signal and component, exporter sending-queue saturation.
-
-\- Versions: CURRENT / OUTDATED / OBSOLETE / UNSUPPORTED / UNPINNED status per workload, based on a version policy fed by GitHub releases and AWS DescribeAddonVersions.
-
-\- Expected vs applied configuration: rules per account, cluster, namespace or workload (version, config hash, required or forbidden components), detection of instances still running an older configuration, best-practice findings including plaintext secrets.
-
-\- 9 dashboards (including a Home page with a quick-start guide), 9 alerts shipped disabled, KV store reference data.
-
-\- Outbound proxy support: per input, app-wide (Administration &gt; Proxy page, Splunk Cloud friendly), Splunk system proxy or environment variables. Proxy password and AWS secret key are stored encrypted in storage/passwords and masked.
-
-
-
-**Notes**
-
-\- Internal versions 1.0.0 and 1.1.0 were never published on Splunkbase.
-
-\- All AWS and Kubernetes calls are read-only. Python 3.7 to 3.14 compatible (Splunk Enterprise 9.x and 10.x, Splunk Cloud Platform).&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Inventory, health and configuration drift for OpenTelemetry Collectors on Amazon EKS and ECS, directly in Splunk Platform. Finds silent collectors, dropped telemetry, outdated versions, plaintext secrets and differences between expected and applied collector configuration.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;OpenTelemetry Collectors are now the backbone of telemetry pipelines on AWS, but most teams cannot answer basic questions about their own fleet: How many collectors run on EKS and ECS? Which ones stopped sending data? Which ones drop spans, metrics or logs? Which versions are outdated? Is the configuration that actually runs the one we expect?
-
-OTel Fleet Monitor for AWS answers these questions in Splunk Platform (Splunk Enterprise and Splunk Cloud Platform), without requiring Splunk Observability Cloud.
-
-1. Inventory
-A modular input calls read-only AWS APIs (ECS, EKS, SSM, STS) and the read-only Kubernetes API of each EKS cluster to discover every collector: ECS services and tasks, DaemonSets, Deployments, StatefulSets, pods, ConfigMaps, OpenTelemetryCollector custom resources and EKS add-ons such as ADOT. Clusters without any collector are reported.
-
-2. Health
-The inventory is cross-checked with the collector internal telemetry (otelcol_* metrics):
-- Silent collectors: running on AWS but no longer reporting (SILENT, NEVER_REPORTED, NOT_INVENTORIED).
-- Dropped data: refused, dropped and failed-to-export items by stage, signal and component, plus exporter sending-queue saturation.
-- Versions: CURRENT, OUTDATED, OBSOLETE, UNSUPPORTED or UNPINNED (latest tag), based on a version policy fed by GitHub releases and on AWS add-on versions.
-
-3. Expected vs applied configuration
-Define expected rules (version, config hash, required or forbidden components) per account, cluster, namespace or workload. The app compares them with the configuration really applied, detects instances still running an older configuration (previous task definition revision, pods started before the last ConfigMap change) and flags bad practices such as a missing memory_limiter, disabled retry or sending queue, disabled TLS verification and plaintext secrets.
-
-Included: 8 dashboards, 9 alerts (shipped disabled), KV store reference data, outbound proxy support. All AWS and Kubernetes calls are read-only; secrets are stored encrypted in Splunk and never indexed.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/6b3c7750-e07b-11f1-ae8b-1a25dca16a71.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">zemour Ali</dc:creator>
-      <pubDate>Wed, 18 Nov 2026 13:55:44 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10396/#v1.2.0</guid>
     </item>
     <item>
       <title>Quad Miners Network Blackbox Add-on for Splunk - v1.1.2 [New App Release]</title>
@@ -2087,144 +2322,6 @@ Using Splunk On-Call, teams resolve incidents faster to help minimize the impact
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Mon, 16 Nov 2026 10:32:27 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/3546/#v1.0.44</guid>
-    </item>
-    <item>
-      <title>Riskability - v1.5.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/9583/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;# Riskability 1.5.1
-
-What changed since 1.4.1, the version on Splunkbase today. Grouped by what you will notice, not by commit. Nothing has been removed that you were using.
-
-## In one paragraph
-
-1.5.1 adds an Executive summary page that prints as three A4 landscape sheets, a count of new findings that opens the list behind it, and rebuilds the Routes page around the question it was always meant to answer: of the jumps the firewall has seen, which could an attacker actually take, and how far. Every jump is now graded by what taking it would need, a crash-only flaw no longer counts as a way in, and the graph is walked once an hour so it draws an estate of thousands. It also fixes a Routes page where every click said &quot;No results found&quot;, and a Feed administration page that looked idle while an import was most of the way through.
-
-## New: Executive summary
-
-A page for the people who ask how exposed the organisation is, in the order they ask it: known exploited vulnerabilities open, of those how many answer the network, systems with an open vulnerability, risks consciously accepted, how long serious findings stay open, and how far to trust the figures. Then the reachability matrix, the severity ring, thirty days of movement and the five things to fix first.
-
-Every figure is the linked page's own query against the same hourly roll-ups, so a number here always matches the page it links to. There is no composite score, because the app cannot defend one.
-
-Print or save as PDF. Splunk's Export to PDF leaves out every custom chart, and an air-gapped search head has no server-side renderer, so the page prints in the reader's own browser: three landscape sheets, always the same shape, with the charts redrawn as vector graphics in a light palette so they stay sharp at any size. Checked in Chromium-based browsers and in Safari; in Safari, pick landscape in the print dialog.
-
-## New: a count of new findings, and the list behind it
-
-Start here has a New findings tile: open findings first reported in the last seven days, accepted risks left out, at every confidence. Click the number and Findings opens on those findings, through two new filters, First reported (24 hours, 7 days, 30 days or any time) and Accepted risks (shown or hidden), and a First reported column.
-
-New means the first time the app reported the finding, not when the host's inventory was collected. A feed update that flags software nobody has touched in months produces findings that are new today, and those are the ones this tile exists for. Findings recorded before this release have no such date and count by their inventory date instead, which is never later than the truth, so nothing old is passed off as new.
-
-## Routes: graded by what an attacker would need
-
-A permitted flow is a path, not an exploit, and the page used to draw every jump the same way, coloured by known-exploited and EPSS, which say nothing about whether a flaw can be reached over this wire. Every jump is now graded from the CVSS vectors of the findings open on the listener it lands on:
-
-* CVE-enabled, solid red: reachable over the network, with no account and no user action, and a high impact on confidentiality or integrity. That is the shape of code execution, an authentication bypass or stolen secrets.
-* Needs a foothold, solid amber: reachable, but it wants credentials or a click.
-* Unrated, dashed amber: an open finding has no CVSS vector, so the app cannot say.
-* Permitted only, dashed grey: nothing usable over the network is open there, so the jump needs a zero-day or permissions.
-
-A flaw whose only impact is availability opens no jump. CVE-2024-0760 in BIND, a TCP flood that makes the server unstable while it lasts, can crash the listener but cannot put anyone on the host, and neither can HTTP/2 Rapid Reset, so a DNS or web server carrying only those is not drawn as a way in. A low impact alone, a minor leak or change, does not open one either. The findings panel says which of these each CVE is, in an &quot;Over the wire&quot; column: no foothold needed, needs credentials or a click, only to take it down, only a minor leak or change.
-
-Every host an attacker can reach from an entry point on CVE-enabled jumps alone is ringed red. A new table lists every path from an entry point, worst first: how many jumps, how far the CVE-only stretch goes, the jump where it stops, and the CVEs behind each jump.
-
-The software is on the jump. Each jump is labelled with its protocol, the port it landed on and the software listening there, the first jump from an entry point included. Hovering a jump lists every port it was seen on and what is open behind each, and clicking it opens the findings on those ports rather than the whole host's.
-
-## Routes: drawn at estate size
-
-The page used to walk the graph inside its own search on every load, which worked on fifteen hosts and would have taken minutes on five thousand, and hit a limits.conf ceiling before that without saying so. An hourly job now walks it once, with a breadth-first search in a dedicated search command, and the page reads the result. It opens on CVE-enabled jumps and twenty-five hosts per hop, keeps the worst, and says how many it left out. Paths are capped by the job, two thousand at most, and every row says when a cap cut the list.
-
-The panel grows with the densest hop instead of packing a large graph into 640 pixels, and a panel resized in the dashboard editor redraws at its new height without a reload.
-
-## Fixed
-
-Every click on the Routes graph said &quot;No results found&quot;. The click reported its kind with the column prefix still on it, and the findings search compared that against the bare kind.
-
-Every edge tooltip on Routes read &quot;N CVEs through this hop&quot; with N being the session count. The label and class were built and then dropped before the chart drew them.
-
-Feed administration looked idle during an import. The staged-bundles list redraws every few seconds, and the bundle being imported came back each time with a fresh Import button, so it read as &quot;nothing started&quot; while the import was most of the way through. That bundle now says it is importing and cannot be deleted mid-import, no other bundle can start an import until it finishes, and the percentage counts advisories as well as ranges, so it no longer sits at 99 percent for the whole advisory phase.
-
-Explain in depth was refused on Splunk Free. Free has no access control and reports no capabilities for anyone, which the AI page read as &quot;not allowed&quot;. On a licensed Splunk the riskability_ai_explain capability decides, exactly as before.
-
-On a CVE's page, &quot;Matching hosts in this fleet&quot; came seventh, after five panels of feed text. It now follows the headline figures directly.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Correlate the software your fleet already reports against offline CVE databases on a search head with no internet access. Ranks findings by exploitation likelihood and by whether the network can actually reach them. Track software that is already or soon becoming End Of Life!&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Most vulnerability tooling cannot run where it is needed most. A search head with no route to the internet cannot call an API, pull a feed on a schedule or fetch a score on demand. Riskability is built for that machine. It takes the software inventory your hosts already report, correlates it against databases you carry across the air gap yourself, and answers what a CVE count never does: of everything found, what should somebody do tonight? CVSS says how bad a flaw would be if exploited, not how likely that is, and never whether your copy is reachable.
-
-WHAT THIS APP ADDS
-
-Exploitation likelihood. Findings are ranked by EPSS, the published probability of exploitation in the wild, and by the CISA KEV catalogue of vulnerabilities already exploited. Both arrive in the feed you import, never fetched live.
-
-Reachability, measured on the host. The collector reports listening ports and the process behind each, so findings answering a network address are separated from those answering only loopback or nothing. On a test fleet that turned 10,206 open findings into 11 that answer the network. It reorders the work. It never shortens it.
-
-Reachability, observed at the boundary. With your firewall logs in Splunk, the app can also say whether a permitted flow from the internet or an admin network has actually reached a port, and draw the jumps from entry point to the findings at the end. A site without firewall logs loses nothing.
-
-End of support. A CVE says a thing is broken; end of support says nobody will fix it again, which no advisory states. The app names software with no supported release.
-
-Rules your fleet needs. A risk the scoring signals cannot see can be written as a rule raising a finding one tier. Rules ship off, and a replay shows what each would move first.
-
-Optional AI explanation. A model on your own hardware writes the reasoning beside each finding: why it ranks where it does, what to do, which ATT&amp;amp;CK techniques apply. The score is arithmetic from measured facts and the model cannot change it. Where an answer contradicts the evidence, the row says so.
-
-WHAT IT REFUSES TO GUESS
-
-Every finding carries a confidence level describing the evidence, not the severity. A distribution that backports fixes without changing the version is reported as informational rather than asserted. A Coverage dashboard lists what the data cannot speak to, because a gap in visibility is not an absence of risk. Accepted risks go to an audit index written once, never rewritten.
-
-NO UNINTENTIONAL DATA OUT
-
-Nothing goes out unless you set up AI, and the recommended shape is a model in the same location as this Splunk instance, so nothing leaves the organisation. You build a feed bundle on a connected machine, carry it across and import it.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/72f4cc0c-e131-11f1-a9ab-faea391a6fd9.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Christian Haugan</dc:creator>
-      <pubDate>Sun, 15 Nov 2026 20:25:19 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9583/#v1.5.1</guid>
-    </item>
-    <item>
-      <title>Vyrux Security - v1.1.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10348/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Vyrux 1.1.0 is the largest release yet: a new way to collect logs, scans that hold up on the biggest estates, and a console that reads as one product.
-
-**New: API Studio**
-
-- Collect from any REST API that has no Splunk add-on. Paste the vendor's documentation and Chuka writes the collector, then lists anything the documentation does not say.
-- One tested collector engine: API keys, basic, bearer, OAuth client credentials, OAuth with a one-time sign-in and client certificates, with every common paging style, new events only, duplicates removed and rate limits honoured.
-- A collector turns on only after it passes a test on the real API, including a restart that must lose and repeat nothing. Credentials go only to the host they were entered for.
-- Runs on the search head, one cluster member at a time, or on a heavy forwarder. Health, field changes and failures are shown and alerted, and a collector running in two places is caught.
-- One add-on gives the ad hoc search head the same fields, CIM mapping and tags as the Enterprise Security search head.
-
-**Parsing Studio**
-
-- CSV logs with no header line: every column in its place, named in place or from the vendor's documented layout, and deployed so a quoted comma stays in one field.
-- A deployment that fails part way is undone, and a rollback restores what was there before.
-
-**Scale and reliability**
-
-- Scans grow with the size of the estate, not its square. Tested on a model estate of 10,000 sourcetypes and 5,000 saved searches.
-- Background reads return every row, and large scans are kept compressed, so later visits open at once.
-- An alert fires again when a fault comes back, and a mass failure arrives as one message.
-- Two people working on one issue no longer overwrite each other.
-
-**Trust**
-
-- A Vyrux admin manages the licence, connectors and proxy without a Splunk admin role.
-- Field settings Chuka writes are never run as searches. Evidence and the Vyrux log are protected from change by members.
-
-**A calmer, consistent console**
-
-- One main button style, one date format, one colour scale for scores, readable banners, text on one type scale, and help on every figure.
-- Every word reviewed: true statements only, empty states and errors that say what to do next, and one term for one thing.
-
-The full guide, with every change in this release: https://vyrux-docs.pages.dev&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Know that your Splunk works. Prove your logs arrive, your rules can fire and your ATT&amp;amp;CK coverage is real, then fix every gap.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Every SOC pays for its logs and writes its detections. Few can show, on any given morning, that the logs arrived, that the parsing still holds and that the correlation searches they rely on can still fire. That gap stays hidden until an incident review finds it.
-
-Vyrux closes it inside your own Splunk. Every 15 minutes it checks each log, each rule and each ATT&amp;amp;CK technique you count as covered. It explains what broke, traces it to its root cause and turns it into owned work, with a fix your engineers test before anything changes in Splunk. Chuka, the built-in AI detection engineer, explains, fixes and drafts rules from your real fields, and Splunk checks everything Chuka writes before anyone can use it.
-
-Vyrux is one app on the search head, including the Enterprise Security search head. It is not SaaS. It reads Splunk with each person&amp;#x27;s own permissions, keeps its records in your KV store, and your log data stays with you.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/10b23b1e-e088-11f1-b664-a6233478abc5.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Reginald Molokwu</dc:creator>
-      <pubDate>Sun, 15 Nov 2026 00:16:45 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10348/#v1.1.0</guid>
-    </item>
-    <item>
-      <title>Cynamics AI NDR Add-on - v1.3.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10305/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Three detection types: **Detection**, **Alert** and **Endpoint**. `category` is `Detection`, `Alert` or `Endpoint`, and `detection_type` is `detection`, `alert` or `endpoint`.
-* Reads the type from the new `cynamics.type` field and maps events already indexed in the same way, so the dashboard and searches cover old and new events.
-* `Agent Detection` and `AI Detection` are now `Detection`, and `Endpoint Detection` is now `Endpoint`. Saved searches and alerts on the old values need updating.
-* The data input’s Detection types are `detection`, `alert` and `endpoint`. Inputs set up with an earlier version keep working unchanged&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Parses Cynamics AI NDR detections (sourcetype cynamics:detection) and maps them to the CIM Intrusion Detection and Alerts data models. Includes an overview dashboard, and a data input that pulls the detections from the Cynamics API.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Cynamics AI NDR Add-on brings Cynamics AI NDR detections into Splunk Enterprise and Splunk Cloud Platform as first-class security events. It parses the cynamics:detection sourcetype and maps each detection to the Common Information Model&amp;#x27;s Intrusion Detection and Alerts data models, so Splunk Enterprise Security and other CIM-based apps see Cynamics detections next to your other intrusion detections and alerts. Detections arrive either from Cynamics, which sends them to your HTTP Event Collector, or from the add-on&amp;#x27;s data input, which pulls them from the Cynamics API with an API key, for a Splunk that Cynamics can&amp;#x27;t reach. An overview dashboard and an Open in Cynamics action take analysts from a detection to its page in Cynamics.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b9a026a6-e087-11f1-9c6f-9eb221e641b1.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cynamics Inc</dc:creator>
-      <pubDate>Sun, 15 Nov 2026 00:13:18 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10305/#v1.3.0</guid>
     </item>
   </channel>
 </rss>
