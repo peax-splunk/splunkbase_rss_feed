@@ -6,7 +6,75 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Sun, 22 Nov 2026 22:59:29 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 23 Nov 2026 03:34:37 +0000</lastBuildDate>
+    <item>
+      <title>Ableversity 4 Splunk Training - v1.0.5 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9330/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;1.0.5: Course pages now link to their current ableversity.com URLs (Getting Data In, Fields &amp; Extractions, Regular Expressions); Browse All Courses points to the Splunk Fundamentals hub. See CHANGELOG in repo github.com/bentleymi/ableversity&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Install Ableversity today and start learning for free&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Ableversity Splunk Training app delivers a comprehensive curriculum of Splunk training courses directly within the Splunk interface. It provides access to over twelve expert-led courses spanning core Splunk topics including fundamentals, administration, architecture, and development.
+
+The app features an interactive dashboard-based interface that organizes training content across multiple learning tracks. Users can access courses covering foundational concepts such as search fundamentals, field extractions, regular expressions, and data ingestion. Advanced topics include enterprise administration, system architecture, and developer-focused extension capabilities.
+
+The app includes exclusive enrollment coupons and certification preparation resources. The training content is structured across dedicated dashboards for each course topic, allowing users to navigate between different subject areas. A comparison dashboard helps users evaluate training options and select appropriate learning paths based on their skill level and objectives.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d24e2ebc-e6dd-11f1-81be-168581ea5bd9.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Mon, 23 Nov 2026 01:59:00 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9330/#v1.0.5</guid>
+    </item>
+    <item>
+      <title>Log10x App - v1.2.5 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/9866/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;\- The field map tool generates maps for Windows Security as classic text (\`WinEventLog:Security\`), FortiGate and Palo Alto Networks, beside Windows Security as rendered XML and CloudTrail. With a FortiGate map, the Network_Traffic data model, \`tstats\` and the Splunk Security Content (ESCU) detections give the same results as on raw events. With a Palo Alto map, the Network_Traffic and Change data models, \`tstats\` and ESCU detections give the same results on compact PAN-OS traffic and system events as on raw ones; threat events are passed whole.
+
+\- The field map's \`check\` also counts the compact events indexed without their fields and those Splunk dropped because it could not load the map's lookup file, and fails with the count. When its probe arrives late, \`check\` keeps the template list unless Splunk's log shows events of the map dropped. The new Field Map Dropped Events alert reports dropped events by node every five minutes.
+
+\- The new search report, \`bin/tenx_search_report.py\`, reads a search head's saved searches, alerts and dashboards and says which run unchanged when a source moves to compact events, which need \`tx\`, \`txf\` or a field map, and which meet a limit the README states. The report changes nothing and starts no search.
+
+\- Word searches through \`tx\`, dashboards and compiled alerts find the events of every stored template, including templates stored in the last few minutes. Outside \`NOT\`, a wildcard inside a word (\`Se\*Privilege\`), \`TERM()\` of part of a longer term and \`CASE()\` of a word with a wildcard inside it match as on the original lines.
+
+\- \`tx\` and \`txf\` expand an event whose values begin or end with white space or a carriage return, such as a Windows event with CR LF line ends, to its full text, and a carriage return inside an event comes back in place.
+
+\- \`tx\` expands events whose template appears twice in the indexers' copy of the template collection. An event \`tx\` cannot expand keeps its compact text and says why in \`tenx_expand_refused\`.
+
+\- The Consume KV search stores every template record indexed since the last one it stored, a burst of new templates included, and its first run after an install or an upgrade reads every template record in the index. \`tx\` and \`txf\` warn when Consume KV failed, is still loading, or has not run for fifteen minutes.
+
+\- Alerts compiled in the Compile Alert view find their events when the scheduler runs them, including events of templates whose hash contains \`$\`. The recompile pass rewrites alerts compiled with an earlier version within 15 minutes of the upgrade, unless someone has edited them since.
+
+\- An epoch-seconds timestamp with a fraction, such as \`msg\=audit(1723042099.699:13369)\`, expands as written and sets the event's time.
+
+\- Beside a heavy forwarder, the Receiver can write compact events to files that the heavy forwarder reads and sends to the indexers with its own outputs, with no HTTP Event Collector or token. The \`\_indexers\` package gives each event back its host, source, index and time, and field maps run on the heavy forwarder.
+
+\- \`tx\` expands the events a FortiGate field map leaves under the compact sourcetype, such as FortiGate lines the add-on does not type, and a field map keeps the time of an event marked \`tenx_time\=sender\`.
+
+\- \`tx\` and \`txf\` run inside \`| union \[...]\`, in a search, a dashboard panel and a saved search, as they do inside \`multisearch\`, \`append\` and \`join\`.
+
+\- A search that holds more than one \`tx\` or \`txf\`, such as two arms of a \`multisearch\` or \`union\`, finds every event of each arm.
+
+\- \`| tx\` and \`| tenxsearch\` return their events inside \`append\`, \`join\` and \`union\`, and an unexpected error shows on the search instead of an empty result.
+
+\- Requires the Log10x Receiver at release 1.1.181 or later and Splunk Enterprise 9.4 through 10.6. After upgrading where a field map is installed, give the role of the token \`activate\` and \`check\` use search access to \`\_internal\`, and schedule \`check\` every minute. A map that \`gen\` generates again after the upgrade can carry a new index-time rule; install both of its apps again whole before running \`activate\`.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Send Splunk the logs that sampling and filters keep out to fit the license, on that same license. Compact events take a fraction of the volume and expand back byte-identical at search time; classic dashboards keep their SPL, and one command covers the search bar, saved searches, alerts and the REST API.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;With the Log10x App, Splunk can index compact log events and still search, chart and alert on the original lines. The 10x Receiver stores each event as a template hash plus the values that change, so a stream of repeated patterns takes less of the license. On the OpenTelemetry demo, Splunk&amp;#x27;s license meter counted 63.91% fewer bytes, encoded events and templates included, and every line expanded back byte-identical with the Receiver settings in the installation steps (measurement: https://github.com/log-10x/benchmarks/tree/main/splunk-license). The same license then holds more: sources that were sampled, filtered or kept out of Splunk to stay under the limit can come back, or the license can be smaller.
+
+To search by what the lines say, write the tx macro in front of an ordinary search: index=my_index `tx` &amp;quot;payment failed&amp;quot; NOT retry. It runs as native SPL in the search bar, Dashboard Studio, saved searches and alerts, and NOT, OR, groups, phrases, field conditions, and values such as IP addresses and hostnames behave as they do on the original data. Classic dashboards keep their SPL: the browser sends each panel&amp;#x27;s search to the app, which rewrites it on the server. An alert created in the app&amp;#x27;s Compile Alert view is compiled once into a native saved search.
+
+The 10x Receiver produces compact events, and it is free on up to 10 nodes (https://www.log10x.com/pricing). No sign-up is required: with no license token it runs the full product on up to 10 nodes, air-gapped, with no expiry (https://doc.log10x.com/manage/license/). The app itself is open source under the MIT license.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d5c016c2-e2d8-11f1-ad84-76ffe10016da.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Tal Weiss</dc:creator>
+      <pubDate>Mon, 23 Nov 2026 01:27:14 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9866/#v1.2.5</guid>
+    </item>
+    <item>
+      <title>Datasource Validator - v1.1.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9171/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Validates that user-defined data sources grouped under platforms currently return at least one event, recording PASS/FAIL/ERROR/STALE status per source.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Data Source Validator app validates that user-defined data sources are currently returning at least one event in Splunk. Administrators define platforms such as Firewall or EDR, and under each platform create one or more data sources with an SPL search that should return events. A single sequential validation worker executes each data source&amp;#x27;s search on a schedule or on demand using a dedicated service account with minimal privileges. The app records PASS, FAIL, ERROR, or STALE status for each data source, and platform status rolls up from the status of its enabled child data sources. This provides visibility into which integrations have stopped receiving data. The app targets Splunk Cloud Platform and Splunk Enterprise 9.3 and later.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Adam Liquorish</dc:creator>
+      <pubDate>Mon, 23 Nov 2026 00:05:17 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9171/#v1.1.1</guid>
+    </item>
+    <item>
+      <title>Graphlens - v1.10.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9168/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Provides interactive, Neo4j-like relationship-graph exploration for data stored in Splunk, enabling visual entity relationship discovery with node expansion, filtering, path finding, and event drill-down.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;GraphLens provides interactive, Neo4j-like relationship-graph exploration for data already stored in Splunk. The app enables visual entity relationship discovery through an interactive graph interface with node expansion, filtering, path finding, and drill-down to supporting events. GraphLens is an independent, third-party Splunk application that does not require, embed, or connect to Neo4j or any other external graph database. Splunk itself serves as the data store, search engine, security boundary, and application platform. GraphLens adds browser-side rendering and state management along with a small set of bounded, pre-approved searches. The app supports use cases including security investigation, Splunk knowledge-object lineage, logging and detection-use-case catalogues, application dependency mapping, and identity relationship exploration. It functions as a generic graph explorer rather than a single hard-coded use case.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/194a8e8a-e6d1-11f1-81be-168581ea5bd9.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Adam Liquorish</dc:creator>
+      <pubDate>Mon, 23 Nov 2026 00:03:00 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9168/#v1.10.0</guid>
+    </item>
     <item>
       <title>Monitoring Linux - Metrics and Log Forwarding - v26.10.2 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/4768/</link>
@@ -1850,14 +1918,6 @@ IMPORTANT - first-time setup is required. Detection Fidelity works right after i
       <guid>https://splunkbase.splunk.com/app/10425/#v3.0.0</guid>
     </item>
     <item>
-      <title>Datasource Validator - v1.1.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/9171/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Validates that user-defined data sources grouped under platforms currently return at least one event, recording PASS/FAIL/ERROR/STALE status per source.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Data Source Validator app validates that user-defined data sources are currently returning at least one event in Splunk. Administrators define platforms such as Firewall or EDR, and under each platform create one or more data sources with an SPL search that should return events. A single sequential validation worker executes each data source&amp;#x27;s search on a schedule or on demand using a dedicated service account with minimal privileges. The app records PASS, FAIL, ERROR, or STALE status for each data source, and platform status rolls up from the status of its enabled child data sources. This provides visibility into which integrations have stopped receiving data. The app targets Splunk Cloud Platform and Splunk Enterprise 9.3 and later.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Adam Liquorish</dc:creator>
-      <pubDate>Wed, 18 Nov 2026 19:47:46 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9171/#v1.1.0</guid>
-    </item>
-    <item>
       <title>SPL Library - v3.8.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8837/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Provides a searchable library interface for storing and managing Splunk queries with category filtering, one-click execution, and KV Store persistence.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The SPL Library provides a modern interface for storing, searching, and managing Splunk queries within the Splunk environment. The application features a dark card-based user interface that displays saved queries in an organized, searchable format. Users can perform full-text searches across query titles, descriptions, tags, and SPL content, and apply category filters to narrow results by Security, Network, Application, Database, Performance, or Other classifications. Each query card can be expanded to view the complete SPL code, copied to the clipboard with one click, or executed directly in the Splunk Search app. The application stores all queries in the Splunk KV Store, ensuring compatibility with Splunk Cloud deployments. Query management capabilities include adding, editing, and deleting entries through a modal form interface with tag assignment functionality. The application automatically seeds four example queries on initial deployment and records metadata including author information and creation/modification timestamps for each stored query. The architecture avoids custom REST handlers, external dependencies, and inline JavaScript, relying exclusively on Splunk-provided libraries and standard KV Store mechanisms for data persistence.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e00774b8-e387-11f1-92d4-c29773c36ace.png&quot;&gt;</description>
@@ -2068,46 +2128,6 @@ This add-on provides the inputs and  CIM-compatible knowledge to use with other 
       <guid>https://splunkbase.splunk.com/app/5478/#v1.2.1</guid>
     </item>
     <item>
-      <title>Log10x App - v1.2.5 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/9866/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;\- The field map tool generates maps for Windows Security as classic text (\`WinEventLog:Security\`), FortiGate and Palo Alto Networks, beside Windows Security as rendered XML and CloudTrail. With a FortiGate map, the Network_Traffic data model, \`tstats\` and the Splunk Security Content (ESCU) detections give the same results as on raw events. With a Palo Alto map, the Network_Traffic and Change data models, \`tstats\` and ESCU detections give the same results on compact PAN-OS traffic and system events as on raw ones; threat events are passed whole.
-
-\- The field map's \`check\` also counts the compact events indexed without their fields and those Splunk dropped because it could not load the map's lookup file, and fails with the count. When its probe arrives late, \`check\` keeps the template list unless Splunk's log shows events of the map dropped. The new Field Map Dropped Events alert reports dropped events by node every five minutes.
-
-\- The new search report, \`bin/tenx_search_report.py\`, reads a search head's saved searches, alerts and dashboards and says which run unchanged when a source moves to compact events, which need \`tx\`, \`txf\` or a field map, and which meet a limit the README states. The report changes nothing and starts no search.
-
-\- Word searches through \`tx\`, dashboards and compiled alerts find the events of every stored template, including templates stored in the last few minutes. Outside \`NOT\`, a wildcard inside a word (\`Se\*Privilege\`), \`TERM()\` of part of a longer term and \`CASE()\` of a word with a wildcard inside it match as on the original lines.
-
-\- \`tx\` and \`txf\` expand an event whose values begin or end with white space or a carriage return, such as a Windows event with CR LF line ends, to its full text, and a carriage return inside an event comes back in place.
-
-\- \`tx\` expands events whose template appears twice in the indexers' copy of the template collection. An event \`tx\` cannot expand keeps its compact text and says why in \`tenx_expand_refused\`.
-
-\- The Consume KV search stores every template record indexed since the last one it stored, a burst of new templates included, and its first run after an install or an upgrade reads every template record in the index. \`tx\` and \`txf\` warn when Consume KV failed, is still loading, or has not run for fifteen minutes.
-
-\- Alerts compiled in the Compile Alert view find their events when the scheduler runs them, including events of templates whose hash contains \`$\`. The recompile pass rewrites alerts compiled with an earlier version within 15 minutes of the upgrade, unless someone has edited them since.
-
-\- An epoch-seconds timestamp with a fraction, such as \`msg\=audit(1723042099.699:13369)\`, expands as written and sets the event's time.
-
-\- Beside a heavy forwarder, the Receiver can write compact events to files that the heavy forwarder reads and sends to the indexers with its own outputs, with no HTTP Event Collector or token. The \`\_indexers\` package gives each event back its host, source, index and time, and field maps run on the heavy forwarder.
-
-\- \`tx\` expands the events a FortiGate field map leaves under the compact sourcetype, such as FortiGate lines the add-on does not type, and a field map keeps the time of an event marked \`tenx_time\=sender\`.
-
-\- \`tx\` and \`txf\` run inside \`| union \[...]\`, in a search, a dashboard panel and a saved search, as they do inside \`multisearch\`, \`append\` and \`join\`.
-
-\- A search that holds more than one \`tx\` or \`txf\`, such as two arms of a \`multisearch\` or \`union\`, finds every event of each arm.
-
-\- \`| tx\` and \`| tenxsearch\` return their events inside \`append\`, \`join\` and \`union\`, and an unexpected error shows on the search instead of an empty result.
-
-\- Requires the Log10x Receiver at release 1.1.181 or later and Splunk Enterprise 9.4 through 10.6. After upgrading where a field map is installed, give the role of the token \`activate\` and \`check\` use search access to \`\_internal\`, and schedule \`check\` every minute. A map that \`gen\` generates again after the upgrade can carry a new index-time rule; install both of its apps again whole before running \`activate\`.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Send Splunk the logs that sampling and filters keep out to fit the license, on that same license. Compact events take a fraction of the volume and expand back byte-identical at search time; classic dashboards keep their SPL, and one command covers the search bar, saved searches, alerts and the REST API.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;With the Log10x App, Splunk can index compact log events and still search, chart and alert on the original lines. The 10x Receiver stores each event as a template hash plus the values that change, so a stream of repeated patterns takes less of the license. On the OpenTelemetry demo, Splunk&amp;#x27;s license meter counted 63.91% fewer bytes, encoded events and templates included, and every line expanded back byte-identical with the Receiver settings in the installation steps (measurement: https://github.com/log-10x/benchmarks/tree/main/splunk-license). The same license then holds more: sources that were sampled, filtered or kept out of Splunk to stay under the limit can come back, or the license can be smaller.
-
-To search by what the lines say, write the tx macro in front of an ordinary search: index=my_index `tx` &amp;quot;payment failed&amp;quot; NOT retry. It runs as native SPL in the search bar, Dashboard Studio, saved searches and alerts, and NOT, OR, groups, phrases, field conditions, and values such as IP addresses and hostnames behave as they do on the original data. Classic dashboards keep their SPL: the browser sends each panel&amp;#x27;s search to the app, which rewrites it on the server. An alert created in the app&amp;#x27;s Compile Alert view is compiled once into a native saved search.
-
-The 10x Receiver produces compact events, and it is free on up to 10 nodes (https://www.log10x.com/pricing). No sign-up is required: with no license token it runs the full product on up to 10 nodes, air-gapped, with no expiry (https://doc.log10x.com/manage/license/). The app itself is open source under the MIT license.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d5c016c2-e2d8-11f1-ad84-76ffe10016da.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Tal Weiss</dc:creator>
-      <pubDate>Tue, 17 Nov 2026 22:52:21 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9866/#v1.2.5</guid>
-    </item>
-    <item>
       <title>Dataminr Threat Intelligence for Splunk Enterprise and Splunk Cloud - v3.1.3 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/6520/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Updated several libraries for improved Python 3.13 and Splunk 10.x support&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;From Alerts to Action—Inside Splunk
@@ -2302,26 +2322,6 @@ SCAN is fully theme-aware with a three-state toggle (Light, Dark, Auto) and is d
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Field Solutions</dc:creator>
       <pubDate>Mon, 16 Nov 2026 22:20:00 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8566/#v1.0.60</guid>
-    </item>
-    <item>
-      <title>Graphlens - v1.1.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/9168/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Provides interactive, Neo4j-like relationship-graph exploration for data stored in Splunk, enabling visual entity relationship discovery with node expansion, filtering, path finding, and event drill-down.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;GraphLens provides interactive, Neo4j-like relationship-graph exploration for data already stored in Splunk. The app enables visual entity relationship discovery through an interactive graph interface with node expansion, filtering, path finding, and drill-down to supporting events. GraphLens is an independent, third-party Splunk application that does not require, embed, or connect to Neo4j or any other external graph database. Splunk itself serves as the data store, search engine, security boundary, and application platform. GraphLens adds browser-side rendering and state management along with a small set of bounded, pre-approved searches. The app supports use cases including security investigation, Splunk knowledge-object lineage, logging and detection-use-case catalogues, application dependency mapping, and identity relationship exploration. It functions as a generic graph explorer rather than a single hard-coded use case.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0e202706-e1f7-11f1-a843-76ff6be71cdd.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Adam Liquorish</dc:creator>
-      <pubDate>Mon, 16 Nov 2026 19:53:03 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9168/#v1.1.2</guid>
-    </item>
-    <item>
-      <title>Splunk On-Call (VictorOps) - v1.0.44 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/3546/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Bug Fixes&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk On-Call extends the alerting and messaging from all Splunk products. This allows you to leverage your existing team contact, scheduling, and escalation policies for your Splunk alerts.
-
-Splunk On-Call is a hub for centralizing the flow of information throughout the incident lifecycle. Driven by IT and DevOps system data, Splunk On-Call provides a unified platform for real-time alerting, collaboration, and documentation.
-
-Using Splunk On-Call, teams resolve incidents faster to help minimize the impact of downtime and speed innovation.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/b35dc476-e1a7-11f1-83cc-ea2181db136d.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Mon, 16 Nov 2026 10:32:27 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/3546/#v1.0.44</guid>
     </item>
   </channel>
 </rss>
