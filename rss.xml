@@ -6,53 +6,74 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Tue, 24 Nov 2026 01:24:25 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 24 Nov 2026 11:50:40 +0000</lastBuildDate>
     <item>
-      <title>Aviatrix Security - v2.2.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8515/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- All seven dashboards rebuilt in Dashboard Studio: responsive grid layout that fills the screen, one dark design system, consistent outcome and severity colors. Requires Splunk 9.0+; tested on 9.4 and 10.6.
-- New &quot;Would block&quot; outcome: denies from monitor-mode rules shown separately from enforced blocks to expose policy rollout gaps.
-- Security Overview: KPI tiles with sparklines and a Notable activity table (scans/sweeps, internet ingress allowed by the DCF default rule, monitor-mode egress, IDS/IPS threats, logging/identity/policy changes, multi-country VPN logins, large VPN transfers, tunnels down).
-- Traffic Analysis: network-to-service-to-outcome flow, scan and sweep suspects. Threat Detection: Suricata plus L7 inline IPS, MITRE ATT&amp;CK tactics, affected hosts and external peers.
-- L7, Gateway Health (silent gateways, ENA allowance, tunnels), Audit Trail (security-relevant changes, AVXERR errors) and VPN (unusual sessions) expanded.
-- New Aviatrix_Traffic data model for fast long time ranges: enable its acceleration in Settings &gt; Data models (ships off).
-- Focused on Distributed Cloud Firewall: legacy FQDN egress events are deprecated and no longer shown.
-- Pair with Aviatrix Add-on for Splunk 2.2.0.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Security visibility and analytics for Aviatrix Distributed Cloud Firewall. Six pre-built dashboards for traffic analysis, threat detection, policy enforcement, gateway health, and audit trail monitoring. CIM-compliant with Network Traffic, Intrusion Detection, and Change Analysis data models.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Security visibility and analytics for Aviatrix Distributed Cloud Firewall in Splunk. Provides CIM-compliant field extractions and six pre-built dashboards for SIEM/SOC teams monitoring multi-cloud network security.
+      <title>Splunk Add-on for Microsoft Office 365 - v6.1.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4055/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Add-on for Microsoft Office 365 allows a Splunk software administrator to pull service status, service messages, and management activity logs from the Office 365 Management API. You can collect:
 
-Dashboards included:
-- Security Overview: Executive security posture with KPIs, threat timeline, top blocked destinations, and gateway block rates
-- Traffic Analysis: L4/L7/FQDN traffic patterns, top sources/destinations, and protocol breakdown
-- Threat Detection: IDS alert severity, Suricata signature analysis, and source/destination correlation
-- Policy Enforcement: L7 policy hits, allow/deny ratios, and domain analysis
-- Gateway Health: CPU, memory, disk, and network throughput monitoring per gateway
-- Audit Trail: Controller API changes, user activity, and success/failure tracking
+* Audit logs for Azure Active Directory, Sharepoint Online, and Exchange Online, supported by the Office 365 Management API. 
+* Historical and current service status, and service messages for the corresponding Microsoft Office 365 Management API.
+* Data Loss Prevention on Microsoft Office 365 Management API.
 
-Supported log types:
-- Aviatrix Cloud Firewall L4 micro-segmentation logs
-- Aviatrix Cloud Firewall L7 TLS/SNI inspection logs
-- Aviatrix Cloud Firewall IDS alerts (EVE JSON)
-- Gateway network and system statistics
-- Cloud Native Security Fabric API audit logs
-
-CIM data models supported: Network Traffic, Intrusion Detection, Change Analysis
-
-Requires the companion TA-aviatrix add-on for field extractions and CIM compliance. Logs are ingested via the Aviatrix SIEM Connector using Splunk HEC (HTTP Event Collector).&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e9294d2a-e7a4-11f1-909a-9a1cd4626359.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Chris McHenry</dc:creator>
-      <pubDate>Tue, 24 Nov 2026 01:22:01 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8515/#v2.2.0</guid>
+After the Splunk platform indexes the events, you can then directly analyze the data or use it as a contextual data feed to correlate with other data in the Splunk platform&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/27f94c6e-e7f8-11f1-91a2-32e59645a81b.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Tue, 24 Nov 2026 11:34:45 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4055/#v6.1.2</guid>
     </item>
     <item>
-      <title>Aviatrix Add-on for Splunk - v2.2.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8517/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- New: aviatrix:tunnel:status parsing (gateway, peer, cloud/region, up/down) and event types.
-- L4/L7: policy_mode (enforced/monitor), session_phase, l7_event_class (verdict, inline IPS drop, IDS alert/timeout, TLS check, SYN timeout), signature_id; L7 transport lowercased.
-- IDS: MITRE ATT&amp;CK tactic/technique fields from ET metadata, app, tls_sni.
-- Fix: FQDN deny-rule (blacklist) matches were action=allowed; now blocked via drop_reason.
-- Connector %{...} placeholders nulled in gateway stats, L4 and audit fields; audit dvc recovered from syslog; AVXERR error_code/error_message extracted.
-- Deprecated: legacy FQDN egress logs (aviatrix:firewall:fqdn). Still parsed and CIM-tagged via aviatrix_fqdn, removed from the combined firewall event types. Removal planned for 3.0.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Field extractions, CIM compliance, and data normalization for Aviatrix Cloud Firewall logs in Splunk.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Technology Add-on for Aviatrix Distributed Cloud Firewall logs. Provides field extractions, CIM-compliant data normalization, and lookup tables for Aviatrix security event data including L4/L7 firewall, FQDN egress filtering, Suricata IDS alerts, gateway telemetry, and controller audit logs. Maps to Network Traffic, Intrusion Detection, and Change Analysis CIM data models. Designed to work alongside the Aviatrix Security app for dashboards and visualizations.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d7431e56-e7a4-11f1-bbbb-66605a6fdc49.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Chris McHenry</dc:creator>
-      <pubDate>Tue, 24 Nov 2026 01:21:34 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8517/#v2.2.0</guid>
+      <title>Threat Hunting Essentials - v1.3.183 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7633/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
+
+It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
+
+Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
+
+1. Backdoor.
+2. Worms.
+3. Ransomware.
+4. Bots.
+5. Trojan horses.
+6. Keyloggers.
+7. Rootkits.
+8. Spyware.
+9. Fileless malware.
+10. Cryptojacking.
+11. Wiper malware.
+12. Adware.
+14. Viruses
+15. P2P-Worm
+16. Internet Worms
+17. Net-worm
+18. Clickjacking
+19. Cryptominer
+20. Fileless malware
+
+You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
+
+Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.
+
+For Premium Version - Contact sales https://www.avertpoint.com/contactus.html&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/65ee5404-e7fa-11f1-91a2-32e59645a81b.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
+      <pubDate>Tue, 24 Nov 2026 11:33:29 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.183</guid>
+    </item>
+    <item>
+      <title>Cisco Cyber Vision Splunk Add On - v2.2.3 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/5748/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Cyber Vision Splunk Add On provides the ability for organizations to pull information from Cisco Cyber Vision leveraging it&amp;#x27;s RESTful API Interface. Leveraging the Add On, organizations can configure and pull device information, sensor information, vulnerabilities, activities, flows, and events from Cyber Vision to be leveraged with the Cyber Vision Splunk App.  The Add On also formats the data for use with other Add Ons, including the Splunk OT Security Add On.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/82f744a6-e7e7-11f1-bdbb-26e7570dc0e4.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Vision</dc:creator>
+      <pubDate>Tue, 24 Nov 2026 10:11:33 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/5748/#v2.2.3</guid>
+    </item>
+    <item>
+      <title>Slack Add-on for Splunk - v3.1.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4986/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Add support for python 3.13&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This add-on is designed to provide comprehensive data collection and field extraction for Slack Enterprise Grid Organization Audit Logs.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f0e6f896-e7d1-11f1-ba7b-8e71e53cca11.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Field Solutions</dc:creator>
+      <pubDate>Tue, 24 Nov 2026 06:44:10 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4986/#v3.1.0</guid>
     </item>
     <item>
       <title>GenAI Observability for Splunk - v3.0.0 [Version Update]</title>
@@ -98,8 +119,314 @@ Version 3.0.0 is a major release. It is the first big update since the last Splu
 * Platforms: Platform independent
 * CIM: not applicable (app does not map to CIM data models)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Trace, evaluate and improve LLM apps in Splunk: nested traces, sessions, users, scores, datasets and prompt versions, plus cost, latency and error dashboards.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;GenAI Observability for Splunk monitors GenAI and large language model applications by collecting and analyzing trace data for requests, latency, token usage, cost, errors, retrieval-augmented generation retrieval, and agent tool calls. The app ingests trace telemetry into custom indexes and provides trace exploration pages modeled , dashboards for performance and cost management, and a Python SDK for instrumenting applications. It tracks LLM operational metrics across models, workflows, users, and sessions, enabling administrators to identify cost spikes, latency regressions, error patterns, and inefficient prompt or retrieval strategies. The app includes a data model for acceleration at scale, a prompt registry with versioned metrics from production traffic, and scoring workflows for building evaluation datasets. Cost tracking is performed using a historical pricing lookup that administrators maintain and a nightly search that rebuilds current pricing. The included Python SDK provides decorators for instrumenting LLM calls, RAG pipelines, agents, and tools, and supports session tracking, user attribution, and score submission.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0667641a-e6bc-11f1-9238-da4386ecacf8.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">kamal singh bisht</dc:creator>
-      <pubDate>Tue, 24 Nov 2026 00:30:20 +0000</pubDate>
+      <pubDate>Tue, 24 Nov 2026 05:00:14 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8308/#v3.0.0</guid>
+    </item>
+    <item>
+      <title>Webex Add-on for Splunk - v1.6.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8365/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Bumped the \`httplib2\` from 0.22.0 to the latest safe version&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;The Webex Add-on for Splunk collects data from Cisco Webex via its REST APIs and indexes it in Splunk.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Webex Add-on for Splunk collects data from Cisco Webex via its REST APIs and indexes it in Splunk. Inputs include Meeting Qualities, Meeting Summary Reports, Scheduled Meetings, Detailed Call History, Admin Audit Events, Security Audit Events, Contact Center Search, and a configurable Generic endpoint — giving administrators visibility into meeting quality, usage, and security activity for IT operations and compliance.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2ee3c356-e7c1-11f1-909a-9a1cd4626359.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Field Solutions</dc:creator>
+      <pubDate>Tue, 24 Nov 2026 04:45:19 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8365/#v1.6.1</guid>
+    </item>
+    <item>
+      <title>Datasource Validator - v1.1.3 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9171/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Validates that user-defined data sources grouped under platforms currently return at least one event, recording PASS/FAIL/ERROR/STALE status per source.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Data Source Validator app validates that user-defined data sources are currently returning at least one event in Splunk. Administrators define platforms such as Firewall or EDR, and under each platform create one or more data sources with an SPL search that should return events. A single sequential validation worker executes each data source&amp;#x27;s search on a schedule or on demand using a dedicated service account with minimal privileges. The app records PASS, FAIL, ERROR, or STALE status for each data source, and platform status rolls up from the status of its enabled child data sources. This provides visibility into which integrations have stopped receiving data. The app targets Splunk Cloud Platform and Splunk Enterprise 9.3 and later.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Adam Liquorish</dc:creator>
+      <pubDate>Tue, 24 Nov 2026 04:08:08 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9171/#v1.1.3</guid>
+    </item>
+    <item>
+      <title>Monitoring macOS - Metrics and Log Forwarding - v26.10.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/10093/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- Bug fix: in a row of single values, a title that wrapped to more lines than its neighbours' pushed its value below theirs
+
+Collectord updates:
+
+- New (beta): `[output.otlp]` sends logs and metrics over OTLP/HTTP or OTLP/gRPC to an OpenTelemetry Collector or a backend that takes OTLP, alone or beside the Splunk output; `continuesFrom = splunk` carries the file and journal positions over when the receiver forwards into the same Splunk, an `[output.splunk::otlp]` section must be renamed, as the OTLP output takes that name, and a release before this output refuses `defaultOutput = otlp`
+- New (beta): `[output.s2s]` sends events and metrics-index records to Splunk indexers over Splunk-to-Splunk (Splunk 9.1 or later), with indexer acknowledgements, TLS, optional compression and indexer discovery; `continuesFrom = splunk` carries the file and journal positions over when S2S replaces HEC for the same Splunk, and an `[output.splunk::s2s]` section must be renamed, as the S2S output takes that name
+- New: with several Splunk HEC `urls`, Collectord moves to the next one every `loadBalanceFrequency` (5 minutes by default), with `ackEnabled = true` as well, so the load spreads across the HEC endpoints again after they restart one by one; `loadBalanceFrequency = 0` moves only after a failure, as before
+- New: a log pack with `mode = raw` sends every entry its keys select, with no rate cap, pack cap or &quot;seen N times&quot;; while the output falls behind, its entries wait in memory up to `[input.macos_logs] rawQueueSize` (64 MB), then are dropped and counted in `macos_logs_raw_dropped_entries`, which `[input.collectord_metrics]` forwards when it names it
+- New: `--managed-preferences &lt;path&gt;` (or `none`) and `collectord diag --launchd-label`, for a second install under its own prefix and LaunchDaemon label that a configuration profile meant for the package's install should not steer
+- Updated Go runtime to 1.27.4
+- New: a client certificate (`clientCertPath`, `clientKeyPath`) or CA bundle (`caPath`; not yet the S2S output's, which needs a restart for a new CA) replaced on disk, such as a renewed certificate in a mounted Secret, is used for new connections within a minute, without restarting Collectord; a replacement that cannot be loaded keeps the previous one and logs a warning
+- New: `maxConnAge` in `[output.splunk]` and `[output.otlp]` sets how long the output's connections take requests before Collectord opens new ones, so DNS or a load balancer that balances connections can pick another endpoint for a Collectord instance that would otherwise stay on the one it first reached; unset, connections are not replaced by age, as before, and it does not apply with `ackEnabled = true`
+- Bug fix: Collectord could take too long to stop, and be killed, when its destination did not answer
+- Bug fix: when Splunk HEC answered 503 &quot;Server is busy&quot; after taking part of a batch, the events it had taken were indexed twice
+- Bug fix: events were lost without a warning when the Splunk HEC `url` answered with a redirect to a page that returns 200, such as the sign-in page of an SSO gateway in front of it; the events are now held and retried
+- Bug fix: TLS connections through some firewalls, such as Palo Alto Networks, were reset or timed out
+- Bug fix: `timestampPrecision` of 7 to 9 on the Splunk HEC output sent rounding noise in the last digits of an event's time; it now sends the event's exact digits
+- Bug fix: on a Mac with an M5 Pro or M5 Max, the `temperature` record's `cpu` group left out the twelve Performance cores, which it sent as the `memory` group; they are in `cpu` now, and such a Mac sends no `memory` group
+- Bug fix: a connection from a Mac to its own VPN address (the IPv4 address of a `utun` tunnel, such as Tailscale's) reported the `lo0` interface, though its traffic crossed the tunnel
+- Bug fix: on Homebrew 7, installing or upgrading the cask `outcoldsolutions/tap/collectorformacos` warned that it used a deprecated parameter of `url` (`verified`)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;See your Apple Silicon Macs in Splunk: hardware, power, process and security stats in a metrics index, and the unified log, crash reports, logins and setting changes in an events index. Dashboards for build fleets, VM hosts and laptops, and 42 alert templates. Install one package on each Mac, by hand, with Homebrew or through your MDM.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Monitoring macOS brings your Apple Silicon Macs into Splunk: build and CI fleets, Macs that host virtual machines, and the laptops IT looks after.
+
+Macs are often the one part of an estate that Splunk cannot see. A build farm slows down and nobody can tell whether it is thermals, memory pressure, a full disk or one runaway process. A laptop fleet drifts out of policy, with FileVault off, updates pending or the firewall disabled, and the first sign is an audit. The unified log holds the answers, but it is too large to forward as it is, and most of it is noise.
+
+Monitoring macOS shows what Collectord forwards from each Mac. Collectord runs as a LaunchDaemon and sends hardware, power, process and security stats to a Splunk metrics index, and the unified log, crash reports, launchd services, logins and setting changes to an events index. Log packs choose what to forward from the unified log, and a rate cap and a noise sampler keep its volume in check.
+
+The dashboards start from a Fleet Overview that says which Macs need attention and why: the ones that went silent, run hot, have FileVault off, updates pending or a volume nearly full. From there they drill down to hardware, processes, virtual machines, Xcode and CI, crashes and panics, updates and posture, compliance results, security events and the connections each application makes. Label each group of Macs, such as ci, build-farm or laptops, and every dashboard and alert filters by it.
+
+Alerts come from an Alert Catalog of 42 templates, written for Splunk admins, the platform team, security and application teams. Each team picks the alerts it needs and creates them as its own saved searches, scoped to its own Macs.
+
+Install one signed, notarized package on each Mac by hand, with Homebrew, or through your MDM with a configuration profile. Collectord needs no Full Disk Access and macOS asks the user nothing. It never reads the app in front, per-app usage time, Wi-Fi network names or location, and every source that names people or programs has its own switch.
+
+The app requires Collectord and a license key from Outcold Solutions. Evaluation and developer keys are free: https://www.outcoldsolutions.com/docs/monitoring-macos/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/dc5fa902-e698-11f1-bb14-6e6cca5b51f6.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Outcold Solutions LLC</dc:creator>
+      <pubDate>Tue, 24 Nov 2026 03:55:24 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10093/#v26.10.2</guid>
+    </item>
+    <item>
+      <title>Monitoring Linux - Metrics and Log Forwarding - v26.10.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4768/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- New: the Host page's Kernel tab shows the hardware's temperature and the processor's thermal throttling, and the Alert Catalog has a Host hardware running hot template
+- Bug fix: in a row of single values, a title that wrapped to more lines than its neighbours' pushed its value below theirs
+
+Collectord updates:
+
+- New (beta): `[output.otlp]` sends logs and metrics over OTLP/HTTP or OTLP/gRPC to an OpenTelemetry Collector or a backend that takes OTLP, alone or beside the Splunk output; `continuesFrom = splunk` carries the file and journal positions over when the receiver forwards into the same Splunk, an `[output.splunk::otlp]` section must be renamed, as the OTLP output takes that name, and a release before this output refuses `defaultOutput = otlp`
+- New (beta): `[output.s2s]` sends events and metrics-index records to Splunk indexers over Splunk-to-Splunk (Splunk 9.1 or later), with indexer acknowledgements, TLS, optional compression and indexer discovery; `continuesFrom = splunk` carries the file and journal positions over when S2S replaces HEC for the same Splunk, and an `[output.splunk::s2s]` section must be renamed, as the S2S output takes that name
+- New: with several Splunk HEC `urls`, Collectord moves to the next one every `loadBalanceFrequency` (5 minutes by default), with `ackEnabled = true` as well, so the load spreads across the HEC endpoints again after they restart one by one; `loadBalanceFrequency = 0` moves only after a failure, as before
+- New: on physical machines the host stats report the hottest temperature sensor, how close a sensor is to its limit, and how often the processor throttled for heat (`temperature_max_celsius`, `temperature_margin_celsius`, `thermal_throttle_core_events_per_sec`, `thermal_throttle_package_events_per_sec`); virtual machines have no sensors and report none
+- Updated Go runtime to 1.27.4
+- Updated SQLite Library to 3.54.1
+- New: a client certificate (`clientCertPath`, `clientKeyPath`) or CA bundle (`caPath`; not yet the S2S output's, which needs a restart for a new CA) replaced on disk, such as a renewed certificate in a mounted Secret, is used for new connections within a minute, without restarting Collectord; a replacement that cannot be loaded keeps the previous one and logs a warning
+- New: `maxConnAge` in `[output.splunk]` and `[output.otlp]` sets how long the output's connections take requests before Collectord opens new ones, so DNS or a load balancer that balances connections can pick another endpoint for a Collectord instance that would otherwise stay on the one it first reached; unset, connections are not replaced by age, as before, and it does not apply with `ackEnabled = true`
+- Bug fix: Collectord could take too long to stop, and be killed, when its destination did not answer
+- Bug fix: when Splunk HEC answered 503 &quot;Server is busy&quot; after taking part of a batch, the events it had taken were indexed twice
+- Bug fix: events were lost without a warning when the Splunk HEC `url` answered with a redirect to a page that returns 200, such as the sign-in page of an SSO gateway in front of it; the events are now held and retried
+- Bug fix: TLS connections through some firewalls, such as Palo Alto Networks, were reset or timed out
+- Bug fix: a burst of records for an output other than the pipeline's own, such as the metrics-index copies `indexType = both` sends to `metricsOutput`, could be dropped (`multioutput_dropped_events`) while that output was still taking them
+- Bug fix: `timestampPrecision` of 7 to 9 on the Splunk HEC output sent rounding noise in the last digits of an event's time; it now sends the event's exact digits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;See your Linux servers in Splunk: the systemd journal with each entry&amp;#x27;s unit named, log files, failed units and pending updates, and host, process, network, filesystem and disk stats in an events or a metrics index. Dashboards for hosts, services, inventory and network, and 45 alert templates. Install one package on each host from our signed apt and yum repositories.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Monitoring Linux brings your Linux servers into Splunk: the hosts your services run on, from RHEL and its rebuilds, Debian and Ubuntu to Fedora, Amazon Linux 2023 and SUSE, on amd64 and arm64.
+
+A service fails and systemd restarts it in a loop, and nobody notices. A host slows down, and nobody can tell whether it is CPU, memory pressure, I/O or one runaway process. A filesystem fills up, the connection tracking table fills and the kernel drops new connections, or security updates wait for weeks on a host nobody remembers. The answers sit in each host&amp;#x27;s journal and /proc, one host at a time.
+
+Monitoring Linux shows what Collectord forwards from each host. Collectord runs as a systemd service and sends the journal, the log files under /var/log and your applications&amp;#x27; own log files to a Splunk events index, with the systemd unit of every journal entry and every process named, so a log line or a CPU spike is one search away from its service. It also reports the units in the failed state every minute and the pending package updates every hour. Host, process, network, filesystem and disk stats go to the same events index or to a Splunk metrics index, your choice: the app has a set of dashboards for each, and they look the same.
+
+The dashboards start from Hosts: one row per host with its CPU, memory, load and stall, and the alerts that fired. From there they go to one host in depth, its processes, the fleet&amp;#x27;s inventory and pending updates, the systemd services that failed, restart or were OOM-killed with their logs a click away, the network&amp;#x27;s interfaces, connections and listening ports, filesystems and disk I/O. Give each group of hosts a cluster name, such as prod or staging, and the dashboards and the Alert Catalog filter by it.
+
+Alerts come from an Alert Catalog of 45 templates, written for Splunk admins, the platform team, security and application teams. Each team picks the alerts it needs and creates them as its own saved searches, scoped to its own clusters. For Splunk Enterprise Security, the app maps SSH logins, sudo, host performance, inventory and pending updates to the Common Information Model.
+
+Install the collectorforlinux package on each host from our signed apt and yum repositories, or the tarball on any other distribution, set the HEC URL, token and license key in 002-user.conf, and enable the service. Upgrades keep your configuration. The app goes on your search heads, on Splunk Enterprise 9.2 or later or Splunk Cloud Platform.
+
+The app requires Collectord and a license key from Outcold Solutions. Evaluation and developer keys are free.
+
+Documentation: https://www.outcoldsolutions.com/docs/monitoring-linux/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/da28ed38-e698-11f1-91c4-ca30cb54ef38.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Outcold Solutions LLC</dc:creator>
+      <pubDate>Tue, 24 Nov 2026 03:55:24 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4768/#v26.10.2</guid>
+    </item>
+    <item>
+      <title>Monitoring Docker and Podman - Metrics and Log Forwarding - v26.10.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/3723/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- Bug fix: in a row of single values, a title that wrapped to more lines than its neighbours' pushed its value below theirs
+- The metrics-index Compose Projects, Swarm Services, ECS Services, Container and Top Containers dashboards and the container alert templates read the labels of data sent over `[output.otlp]` through a gateway into Splunk (such as the OpenTelemetry Collector), which stores a container's labels as one value: the Compose, Swarm and ECS pages were empty for it, picking a project or service matched nothing, and the alert templates lost the project and service of a container; the Alert Catalog page offers the update to installed alerts
+
+Collectord updates:
+
+- New (beta): `[output.otlp]` sends logs and metrics over OTLP/HTTP or OTLP/gRPC to an OpenTelemetry Collector or a backend that takes OTLP, alone or beside the Splunk output; `continuesFrom = splunk` carries the file and journal positions over when the receiver forwards into the same Splunk, an `[output.splunk::otlp]` section must be renamed, as the OTLP output takes that name, an annotation or extraction can no longer name a field `k8s_namespace_name`, `k8s_pod_name`, `k8s_pod_uid` or `k8s_container_name`, and a release before this output refuses `defaultOutput = otlp`
+- New (beta): `[output.s2s]` sends events and metrics-index records to Splunk indexers over Splunk-to-Splunk (Splunk 9.1 or later), with indexer acknowledgements, TLS, optional compression and indexer discovery; `continuesFrom = splunk` carries the file and journal positions over when S2S replaces HEC for the same Splunk, and an `[output.splunk::s2s]` section must be renamed, as the S2S output takes that name
+- New: with several Splunk HEC `urls`, Collectord moves to the next one every `loadBalanceFrequency` (5 minutes by default), with `ackEnabled = true` as well, so the load spreads across the HEC endpoints again after they restart one by one; `loadBalanceFrequency = 0` moves only after a failure, as before
+- New: on physical machines the host stats report the hottest temperature sensor, how close a sensor is to its limit, and how often the processor throttled for heat (`temperature_max_celsius`, `temperature_margin_celsius`, `thermal_throttle_core_events_per_sec`, `thermal_throttle_package_events_per_sec`); virtual machines have no sensors and report none
+- A container whose logging driver Collectord doesn't read (`local`, `syslog`, `splunk` and the like) is named in a warning in Collectord's log; its logs were skipped silently before
+- Updated Go runtime to 1.27.4
+- Updated SQLite Library to 3.54.1
+- New: a client certificate (`clientCertPath`, `clientKeyPath`) or CA bundle (`caPath`; not yet the S2S output's, which needs a restart for a new CA) replaced on disk, such as a renewed certificate in a mounted Secret, is used for new connections within a minute, without restarting Collectord; a replacement that cannot be loaded keeps the previous one and logs a warning
+- New: `maxConnAge` in `[output.splunk]` and `[output.otlp]` sets how long the output's connections take requests before Collectord opens new ones, so DNS or a load balancer that balances connections can pick another endpoint for a Collectord instance that would otherwise stay on the one it first reached; unset, connections are not replaced by age, as before, and it does not apply with `ackEnabled = true`
+- Bug fix: a restart of Collectord (a `rollout restart`, an upgrade, `docker restart`) sent about one line of each running container's log again; a stop now sends what the running containers' pipelines hold, apart from a multi-line event a container is still writing, and waits for the acknowledgements, so it can take up to fifteen seconds while the destination is down: give `docker stop` more than its default 10 s with `-t` where that may happen
+- Bug fix: Collectord could take too long to stop, and be killed, when its destination did not answer
+- Bug fix: when Splunk HEC answered 503 &quot;Server is busy&quot; after taking part of a batch, the events it had taken were indexed twice
+- Bug fix: events were lost without a warning when the Splunk HEC `url` answered with a redirect to a page that returns 200, such as the sign-in page of an SSO gateway in front of it; the events are now held and retried
+- Bug fix: TLS connections through some firewalls, such as Palo Alto Networks, were reset or timed out
+- Bug fix: a burst of records for an output other than the pipeline's own, such as the metrics-index copies `indexType = both` sends to `metricsOutput`, could be dropped (`multioutput_dropped_events`) while that output was still taking them
+- Bug fix: an output endpoint, or a proxy or load balancer in front of it, that refuses chunked request bodies answered every batch with HTTP 411; batches now carry a Content-Length
+- Bug fix: `timestampPrecision` of 7 to 9 on the Splunk HEC output sent rounding noise in the last digits of an event's time; it now sends the event's exact digits
+- Bug fix: `collectord verify` reported the POST checks as FAILED for a Splunk output with `compressionLevel = nocompression`, though Collectord delivered to it&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;See your Docker, Compose, Swarm, Podman and Amazon ECS hosts in Splunk: container and host logs and Docker events in an events index, host, container and process stats in the events index or a metrics index. Dashboards that lead to what needs fixing, and 61 alert templates each team scopes to its own clusters. One Collectord container per host.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Monitoring Docker brings the hosts that run your containers into Splunk: Docker hosts and Compose projects, Docker Swarm clusters, Podman hosts, and Amazon ECS container instances.
+
+Containers fail in ways their logs alone don&amp;#x27;t explain. A container restarts in a loop, is OOM killed, or fails its health check. A Swarm service runs fewer tasks than it should, and the reason is in the Swarm&amp;#x27;s services, tasks and nodes, which only a manager can read. The Docker data root fills up with images, writable layers and json-file logs. Some containers run their processes as root or hold Linux capabilities. The answers are spread over every host, in the logs, the cgroups, /proc and the Docker API.
+
+Monitoring Docker shows what Collectord forwards from each host, where it runs as one container. Collectord sends container and host logs, the Docker daemon&amp;#x27;s events, and the containers, images, volumes and Swarm objects it reads from the API to an events index. Host, container, process, network, filesystem and disk stats go to the same events index, to a Splunk metrics index, or to both while you compare. The containers of rootless Podman users are monitored too.
+
+The app opens on an Overview that says whether anything needs attention and where: hosts whose stats went silent, Collectord problems, and containers OOM killed, in a restart loop, unhealthy or exited with a non-zero code. From there it drills down to hosts, containers and processes, Compose projects, Swarm services and nodes, ECS services, privileged containers, the network, filesystems, disk I/O and CPU throttling. Every stats dashboard has a twin that reads the metrics index, and the Configuration page chooses which set the menu shows. Name each cluster, such as prod or staging, and the dashboards and alerts filter by it.
+
+Alerts come from an Alert Catalog of 61 templates, written for Splunk admins, the platform team and application teams. Each team picks the alerts it needs and creates them as its own saved searches, scoped to its own clusters.
+
+Container labels configure one container at a time: its index and Splunk output, field extraction, multi-line events, masking, log files from its volumes, and Prometheus endpoints. Three features, off by default, send fewer events: repeated lines as one counted event, storms of alike lines folded into a summary a minute, and a report of each stream&amp;#x27;s heaviest log patterns.
+
+Install the app on your search heads, create an HTTP Event Collector token, and start Collectord on each host with docker run, Docker Compose, a Swarm stack, Podman, or an Amazon ECS daemon service.
+
+The app requires Collectord and a license key from Outcold Solutions. Evaluation and developer keys are free.
+
+Documentation: https://www.outcoldsolutions.com/docs/monitoring-docker/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d1ec0984-e698-11f1-ab09-22f8933da52d.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Outcold Solutions LLC</dc:creator>
+      <pubDate>Tue, 24 Nov 2026 03:55:23 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/3723/#v26.10.2</guid>
+    </item>
+    <item>
+      <title>Monitoring OpenShift - Metrics and Log Forwarding - v26.10.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/3836/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- New: a GPU (NVIDIA DCGM) dashboard shows every NVIDIA GPU and MIG instance the GPU Operator's dcgm-exporter reports, with the pod using each one, and the CPU, memory and GPU of every pod that holds a GPU side by side
+- Bug fix: in a row of single values, a title that wrapped to more lines than its neighbours' pushed its value below theirs
+- Bug fix: on the events-index control plane dashboards (etcd, API server, scheduler, controller manager, kubelet, CoreDNS), a latency panel could show too many observations and no p95 or p99
+- Bug fix: on the Audit: Resource Mutations dashboard, the Mutations by Tool panel was always empty
+- Bug fix: on the metrics-index control plane dashboards (etcd, API server, scheduler, controller manager), the panels with the CPU and memory of the control plane container were always empty
+- The label pickers and label columns of the metrics-index dashboards list single labels for data sent over `[output.otlp]` through a gateway into Splunk (such as the OpenTelemetry Collector), which stores a set of labels as one value
+
+Collectord updates:
+
+- New (beta): `[output.otlp]` sends logs and metrics over OTLP/HTTP or OTLP/gRPC to an OpenTelemetry Collector or a backend that takes OTLP, alone or beside the Splunk output; `continuesFrom = splunk` carries the file and journal positions over when the receiver forwards into the same Splunk, an `[output.splunk::otlp]` section must be renamed, as the OTLP output takes that name, an annotation or extraction can no longer name a field `k8s_namespace_name`, `k8s_pod_name`, `k8s_pod_uid` or `k8s_container_name`, and a release before this output refuses `defaultOutput = otlp`
+- New (beta): `[output.s2s]` sends events and metrics-index records to Splunk indexers over Splunk-to-Splunk (Splunk 9.1 or later), with indexer acknowledgements, TLS, optional compression and indexer discovery; `continuesFrom = splunk` carries the file and journal positions over when S2S replaces HEC for the same Splunk, and an `[output.splunk::s2s]` section must be renamed, as the S2S output takes that name
+- New: with several Splunk HEC `urls`, Collectord moves to the next one every `loadBalanceFrequency` (5 minutes by default), with `ackEnabled = true` as well, so the load spreads across the HEC endpoints again after they restart one by one; `loadBalanceFrequency = 0` moves only after a failure, as before
+- New: `collectord.daemonset.updateStrategy` in the charts sets how the DaemonSet rolls out, for example `rollingUpdate.maxUnavailable: 10%` to upgrade more than one node at a time
+- New: Collectord scrapes the NVIDIA GPU Operator's dcgm-exporter on every GPU node (`[input.prometheus::dcgm]`, pods labelled `app=nvidia-dcgm-exporter` in the `gpu-operator` namespace, `nvidia-gpu-operator` on OpenShift) with no configuration, and forwards the seven metrics the dashboard reads; a GPU Operator installed in another namespace sets `podNamespace`, and `whitelist` takes more metrics
+- New: on physical machines the host stats report the hottest temperature sensor, how close a sensor is to its limit, and how often the processor throttled for heat (`temperature_max_celsius`, `temperature_margin_celsius`, `thermal_throttle_core_events_per_sec`, `thermal_throttle_package_events_per_sec`); virtual machines have no sensors and report none
+- Security: with the `onvolumedatabase` annotation, Collectord followed links a workload left on its volume, so a pod could have files on the node removed or overwritten
+- Security: a pod that names an `[input.prometheus_auto]` `authorization.&lt;key&gt;` in its `prometheus.&lt;n&gt;-authorizationkey` annotation is sent that key's `Authorization` header, whatever namespace it runs in; the new `authorizationNamespaces.&lt;key&gt; = &lt;namespace&gt;,&lt;namespace&gt;` (`authorizationNamespaces` in the Splunk charts' `prometheusAuto` values) limits a key to the pods of the namespaces it lists, and `collectord verify` warns about a key any pod can ask for
+- The charts pull the image with `image.pullPolicy: IfNotPresent` instead of `Always`
+- Updated Go runtime to 1.27.4
+- Updated SQLite Library to 3.54.1
+- New: a client certificate (`clientCertPath`, `clientKeyPath`) or CA bundle (`caPath`; not yet the S2S output's, which needs a restart for a new CA) replaced on disk, such as a renewed certificate in a mounted Secret, is used for new connections within a minute, without restarting Collectord; a replacement that cannot be loaded keeps the previous one and logs a warning
+- New: `maxConnAge` in `[output.splunk]` and `[output.otlp]` sets how long the output's connections take requests before Collectord opens new ones, so DNS or a load balancer that balances connections can pick another endpoint for a Collectord instance that would otherwise stay on the one it first reached; unset, connections are not replaced by age, as before, and it does not apply with `ackEnabled = true`
+- Bug fix: a restart of Collectord (a `rollout restart`, an upgrade, `docker restart`) sent about one line of each running container's log again; a stop now sends what the running containers' pipelines hold, apart from a multi-line event a container is still writing, and waits for the acknowledgements, so it can take up to fifteen seconds while the destination is down (within the default 30 s termination grace period)
+- Bug fix: Collectord could take too long to stop, and be killed, when its destination did not answer
+- Bug fix: when Splunk HEC answered 503 &quot;Server is busy&quot; after taking part of a batch, the events it had taken were indexed twice
+- Bug fix: events were lost without a warning when the Splunk HEC `url` answered with a redirect to a page that returns 200, such as the sign-in page of an SSO gateway in front of it; the events are now held and retried
+- Bug fix: TLS connections through some firewalls, such as Palo Alto Networks, were reset or timed out
+- Bug fix: a burst of records for an output other than the pipeline's own, such as the metrics-index copies `indexType = both` sends to `metricsOutput`, could be dropped (`multioutput_dropped_events`) while that output was still taking them
+- Bug fix: logs and metrics of a pod owned by another pod (a Spark executor, a CI job pod started by its runner pod) carried the owner's pod name, id and labels; they carry the pod's own now, and the owner's are in `openshift_owner_pod_name`, `openshift_owner_pod_id` and `openshift_owner_pod_labels`
+- Bug fix: in the Helm charts, `excludeFields` written as a map (`{kubernetes_pod_ip: true}`, as the configuration file spells it) rendered `excludeFields.true = true` and the field was still sent; the charts now take a list or a map
+- Bug fix: an output endpoint, or a proxy or load balancer in front of it, that refuses chunked request bodies answered every batch with HTTP 411; batches now carry a Content-Length
+- Bug fix: `timestampPrecision` of 7 to 9 on the Splunk HEC output sent rounding noise in the last digits of an event's time; it now sends the event's exact digits
+- Bug fix: a `SplunkOutput` object without `token` or `tokenFromSecret` sent with the token of `[output.splunk]`, and one that set `url` still took `urls`, `ackUrl` and `ackUrls` from it; an object without its own token is now refused (its workloads fall back to the default output, with a warning), and one with its own `url` sends only there, without indexer acknowledgements, which Collectord logs once where `ackEnabled = true`
+- Bug fix: `collectord verify` reported the POST checks as FAILED for a Splunk output with `compressionLevel = nocompression`, though Collectord delivered to it
+- Bug fix: Prometheus could not scrape Collectord's `/metrics/prometheus` endpoint and reported the target down when an `[input.kubernetes_watch::*]` input watched an API group other than the core one (on OpenShift the shipped `clusterresourcequota` watch does), or one namespace with a `-` in its name: the input's counter had the `.`, `/` or `-` in its name; each is now `_`, as in `openshift_watch_quota_openshift_io_v1_clusterresourcequota__count`
+- Bug fix: a pod whose workload is owned by a cluster-scoped object (on OpenShift the DaemonSets of the DNS and Network operators) was missing that owner's id, labels and annotations, and Collectord asked the API server for the owner, and was answered 404, each time such a pod changed; a 404 for an owner deleted before its pods is now remembered for five minutes instead of asked for again on each change&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;See your OpenShift clusters in Splunk: container logs, the journal, audit logs, events and objects, with node to process stats and control-plane metrics in an events or a metrics index. An Overview that leads to the cause, an Audit menu, and 117 alert templates. Install Collectord with one Helm chart; a Red Hat certified image is available.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Monitoring OpenShift brings your OpenShift clusters into Splunk: for the platform team that runs them, the application teams that deploy to them, and the security team that audits them.
+
+When a release goes wrong on OpenShift, the evidence is spread out: container logs on every node, the journal, events the API server keeps for about three hours, the audit logs of four API and OAuth servers, and the control plane&amp;#x27;s Prometheus endpoints. On a cluster many teams share, each team also needs its own data and its own alerts, and the platform team needs rules that hold for every project.
+
+Monitoring OpenShift shows what Collectord forwards from each cluster. Collectord runs as a DaemonSet on every node, masters included, and one addon pod. It sends container and application logs, the journal, the audit logs, and OpenShift events and objects to an events index, and node, pod, container, process, network and disk stats and the control plane&amp;#x27;s Prometheus metrics to an events index or a Splunk metrics index. Annotations change what it does for one project, workload or pod: an index or a HEC token per team, field extraction, multi-line events, masking and hashing, application log files and Prometheus scrapes. A Configuration resource sets the platform team&amp;#x27;s rules for the whole cluster. New features, off until you turn them on, group repeated lines and fold storms of alike lines, for fewer events and less noise.
+
+The dashboards open on an Overview with one verdict for the fleet, Healthy, Warning, Critical or Unknown, the numbers behind it and a row per cluster, and its tiles and rows drill down to the page that shows the cause. From there they cover nodes down to a single process; crash loops, OOM kills and failing probes, each a click from the pod&amp;#x27;s logs; capacity, quotas and what the Pod specs declare; the API server, etcd and the cluster DNS; pod security posture; and an Audit menu from detections to the timeline of one object, OAuth logins included. The stats dashboards come in two sets that look the same, one for each kind of index.
+
+Alerts come from an Alert Catalog of 117 templates, written for Splunk admins, the platform team, security and application teams. Each team picks the alerts it needs and creates them as its own saved searches, scoped to its clusters and projects.
+
+Install the app on your search heads, then Collectord with one Helm chart or the manifest rendered from it, on OpenShift 4.11 or later. It sends to Splunk Enterprise or Splunk Cloud over the HTTP Event Collector. A Red Hat certified image is available from registry.connect.redhat.com, and FIPS 140 images are published beside the standard ones.
+
+The app requires Collectord and a license key from Outcold Solutions. Evaluation and developer keys are free.
+
+Documentation: https://www.outcoldsolutions.com/docs/monitoring-openshift/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e0b418da-e698-11f1-bb14-6e6cca5b51f6.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Outcold Solutions LLC</dc:creator>
+      <pubDate>Tue, 24 Nov 2026 03:55:22 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/3836/#v26.10.2</guid>
+    </item>
+    <item>
+      <title>Monitoring Kubernetes - Metrics and Log Forwarding - v26.10.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/3743/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* New: a GPU (NVIDIA DCGM) dashboard shows every NVIDIA GPU and MIG instance the GPU Operator's dcgm-exporter reports, with the pod using each one, and the CPU, memory and GPU of every pod that holds a GPU side by side
+* Bug fix: in a row of single values, a title that wrapped to more lines than its neighbours' pushed its value below theirs
+* Bug fix: on the events-index control plane dashboards (etcd, API server, scheduler, controller manager, kubelet, kube-proxy, CoreDNS), a latency panel could show too many observations and no p95 or p99
+* Bug fix: on the Audit: Resource Mutations dashboard, the Mutations by Tool panel was always empty
+* The label pickers and label columns of the metrics-index dashboards list single labels for data sent over `[output.otlp]` through a gateway into Splunk (such as the OpenTelemetry Collector), which stores a set of labels as one value
+
+Collectord updates:
+
+* New (beta): `[output.otlp]` sends logs and metrics over OTLP/HTTP or OTLP/gRPC to an OpenTelemetry Collector or a backend that takes OTLP, alone or beside the Splunk output; `continuesFrom = splunk` carries the file and journal positions over when the receiver forwards into the same Splunk, an `[output.splunk::otlp]` section must be renamed, as the OTLP output takes that name, an annotation or extraction can no longer name a field `k8s_namespace_name`, `k8s_pod_name`, `k8s_pod_uid` or `k8s_container_name`, and a release before this output refuses `defaultOutput = otlp`
+* New (beta): `[output.s2s]` sends events and metrics-index records to Splunk indexers over Splunk-to-Splunk (Splunk 9.1 or later), with indexer acknowledgements, TLS, optional compression and indexer discovery; `continuesFrom = splunk` carries the file and journal positions over when S2S replaces HEC for the same Splunk, and an `[output.splunk::s2s]` section must be renamed, as the S2S output takes that name
+* New: with several Splunk HEC `urls`, Collectord moves to the next one every `loadBalanceFrequency` (5 minutes by default), with `ackEnabled = true` as well, so the load spreads across the HEC endpoints again after they restart one by one; `loadBalanceFrequency = 0` moves only after a failure, as before
+* New: `collectord.daemonset.updateStrategy` in the charts sets how the DaemonSet rolls out, for example `rollingUpdate.maxUnavailable: 10%` to upgrade more than one node at a time
+* New: Collectord scrapes the NVIDIA GPU Operator's dcgm-exporter on every GPU node (`[input.prometheus::dcgm]`, pods labelled `app=nvidia-dcgm-exporter` in the `gpu-operator` namespace, `nvidia-gpu-operator` on OpenShift) with no configuration, and forwards the seven metrics the dashboard reads; a GPU Operator installed in another namespace sets `podNamespace`, and `whitelist` takes more metrics
+* New: on physical machines the host stats report the hottest temperature sensor, how close a sensor is to its limit, and how often the processor throttled for heat (`temperature_max_celsius`, `temperature_margin_celsius`, `thermal_throttle_core_events_per_sec`, `thermal_throttle_package_events_per_sec`); virtual machines have no sensors and report none
+* Security: with the `onvolumedatabase` annotation, Collectord followed links a workload left on its volume, so a pod could have files on the node removed or overwritten
+* Security: a pod that names an `[input.prometheus_auto]` `authorization.&lt;key&gt;` in its `prometheus.&lt;n&gt;-authorizationkey` annotation is sent that key's `Authorization` header, whatever namespace it runs in; the new `authorizationNamespaces.&lt;key&gt; = &lt;namespace&gt;,&lt;namespace&gt;` (`authorizationNamespaces` in the Splunk charts' `prometheusAuto` values) limits a key to the pods of the namespaces it lists, and `collectord verify` warns about a key any pod can ask for
+* The charts pull the image with `image.pullPolicy: IfNotPresent` instead of `Always`
+* Updated Go runtime to 1.27.4
+* Updated SQLite Library to 3.54.1
+* New: a client certificate (`clientCertPath`, `clientKeyPath`) or CA bundle (`caPath`; not yet the S2S output's, which needs a restart for a new CA) replaced on disk, such as a renewed certificate in a mounted Secret, is used for new connections within a minute, without restarting Collectord; a replacement that cannot be loaded keeps the previous one and logs a warning
+* New: `maxConnAge` in `[output.splunk]` and `[output.otlp]` sets how long the output's connections take requests before Collectord opens new ones, so DNS or a load balancer that balances connections can pick another endpoint for a Collectord instance that would otherwise stay on the one it first reached; unset, connections are not replaced by age, as before, and it does not apply with `ackEnabled = true`
+* Bug fix: a restart of Collectord (a `rollout restart`, an upgrade, `docker restart`) sent about one line of each running container's log again; a stop now sends what the running containers' pipelines hold, apart from a multi-line event a container is still writing, and waits for the acknowledgements, so it can take up to fifteen seconds while the destination is down (within Kubernetes' default 30 s termination grace period)
+* Bug fix: Collectord could take too long to stop, and be killed, when its destination did not answer
+* Bug fix: when Splunk HEC answered 503 &quot;Server is busy&quot; after taking part of a batch, the events it had taken were indexed twice
+* Bug fix: events were lost without a warning when the Splunk HEC `url` answered with a redirect to a page that returns 200, such as the sign-in page of an SSO gateway in front of it; the events are now held and retried
+* Bug fix: TLS connections through some firewalls, such as Palo Alto Networks, were reset or timed out
+* Bug fix: a burst of records for an output other than the pipeline's own, such as the metrics-index copies `indexType = both` sends to `metricsOutput`, could be dropped (`multioutput_dropped_events`) while that output was still taking them
+* Bug fix: logs and metrics of a pod owned by another pod (a Spark executor, a CI job pod started by its runner pod) carried the owner's pod name, id and labels; they carry the pod's own now, and the owner's are in `kubernetes_owner_pod_name`, `kubernetes_owner_pod_id` and `kubernetes_owner_pod_labels`
+* Bug fix: in the Helm charts, `excludeFields` written as a map (`{kubernetes_pod_ip: true}`, as the configuration file spells it) rendered `excludeFields.true = true` and the field was still sent; the charts now take a list or a map
+* Bug fix: an output endpoint, or a proxy or load balancer in front of it, that refuses chunked request bodies answered every batch with HTTP 411; batches now carry a Content-Length
+* Bug fix: `timestampPrecision` of 7 to 9 on the Splunk HEC output sent rounding noise in the last digits of an event's time; it now sends the event's exact digits
+* Bug fix: a `SplunkOutput` object without `token` or `tokenFromSecret` sent with the token of `[output.splunk]`, and one that set `url` still took `urls`, `ackUrl` and `ackUrls` from it; an object without its own token is now refused (its workloads fall back to the default output, with a warning), and one with its own `url` sends only there, without indexer acknowledgements, which Collectord logs once where `ackEnabled = true`
+* Bug fix: `collectord verify` reported the POST checks as FAILED for a Splunk output with `compressionLevel = nocompression`, though Collectord delivered to it
+* Bug fix: Prometheus could not scrape Collectord's `/metrics/prometheus` endpoint and reported the target down when an `[input.kubernetes_watch::*]` input watched an API group other than the core one (on OpenShift the shipped `clusterresourcequota` watch does), or one namespace with a `-` in its name: the input's counter had the `.`, `/` or `-` in its name; each is now `_`, as in `openshift_watch_quota_openshift_io_v1_clusterresourcequota__count`
+* Bug fix: a pod whose workload is owned by a cluster-scoped object (on OpenShift the DaemonSets of the DNS and Network operators) was missing that owner's id, labels and annotations, and Collectord asked the API server for the owner, and was answered 404, each time such a pod changed; a 404 for an owner deleted before its pods is now remembered for five minutes instead of asked for again on each change&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;See your Kubernetes clusters in Splunk: container and host logs, events, objects and the API audit log in an events index, and node, pod, container, process and Prometheus metrics in the events index or a metrics index. Dashboards that lead to the cause, and 118 alert templates each team scopes to its clusters and namespaces. Deploy Collectord with Helm or one manifest.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Monitoring Kubernetes brings your Kubernetes clusters into Splunk, for the platform team that runs them, the application teams that deploy to them, and security.
+
+When something breaks in a cluster, the evidence is spread out and short-lived: container logs sit in files on each node until rotation overwrites them, and the API server holds Kubernetes events for about an hour. Dashboards that only show state leave you to work out what is wrong. And when one cluster serves many teams, one fixed set of alerts fires the same way for everyone, while each team&amp;#x27;s data has to stay in its own indexes.
+
+Monitoring Kubernetes shows what Collectord forwards from each cluster. Collectord runs as a DaemonSet on the nodes, control-plane nodes included, and a single addon Deployment, and enriches what it sends with Kubernetes metadata. Container logs, application log files, host logs, and Kubernetes events and objects go to an events index, and so does the API server audit log once you turn it on. The node, pod, container and process stats, and the Prometheus metrics of the control plane and your own pods, go to the same index or to a Splunk metrics index, your choice. Annotations on a namespace or pod send its data to its own index and HEC token, join multi-line stack traces and mask values, and can send repeated lines as one event that counts them, for fewer events and less noise.
+
+The app opens on an Overview with one verdict for all your clusters, the numbers behind it and a row per cluster, and its tiles drill down to the page that shows the cause. From there it covers nodes, pods, containers and processes; the Kubernetes events, where a click on a crash loop or an OOM kill opens that pod&amp;#x27;s logs; capacity, requests and limits; the control plane from the API server to etcd and CoreDNS; pod security posture and network connections; and an Audit menu that reads the API audit log, from detections to the timeline of one object. Every stats dashboard comes in two sets that look the same, one for each kind of index.
+
+Alerts come from an Alert Catalog of 118 templates, written for Splunk admins, the platform team, security and application teams. Each team picks the alerts it needs, scopes them to its clusters and namespaces, and creates them as its own saved searches, such as Kubernetes: Pod crash looping [cluster prod; namespace payments].
+
+Install the app on your search heads, create a HEC token, and deploy Collectord with the Helm chart or one manifest. It works with containerd, CRI-O and Docker on Kubernetes 1.24 and later, managed clusters such as EKS, GKE and AKS included. The app also maps your nodes and the API audit to the Common Information Model for Splunk Enterprise Security.
+
+The app requires Collectord and a license key from Outcold Solutions. Evaluation and developer keys are free.
+
+Documentation: https://www.outcoldsolutions.com/docs/monitoring-kubernetes/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d69fbae8-e698-11f1-ab09-22f8933da52d.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Outcold Solutions LLC</dc:creator>
+      <pubDate>Tue, 24 Nov 2026 03:40:35 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/3743/#v26.10.2</guid>
+    </item>
+    <item>
+      <title>CPU Frequency and Throttle Add-on (cpufreq sysfs + thermal throttle) - v1.0.11 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/10452/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects CPU frequency state from /sys/devices/system/cpu (per-core current/min/max frequency, gover&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects CPU frequency state from /sys/devices/system/cpu (per-core current/min/max frequency, governor) and hardware thermal-throttle counters (package_throttle_count, mperf-based if present). Emits JSON events to index=main (sourcetype throttle:status) and throttle.* metrics to index=metrics (sourcetype throttle:metrics); alarm status when a thermal-throttle counter increases since the previous cycle.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Tue, 24 Nov 2026 03:02:28 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10452/#v1.0.11</guid>
+    </item>
+    <item>
+      <title>Aviatrix Add-on for Splunk - v2.2.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8517/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- New: aviatrix:tunnel:status parsing (gateway, peer, cloud/region, up/down) and event types.
+- L4/L7: policy_mode (enforced/monitor), session_phase, l7_event_class (verdict, inline IPS drop, IDS alert/timeout, TLS check, SYN timeout), signature_id; L7 transport lowercased.
+- IDS: MITRE ATT&amp;CK tactic/technique fields from ET metadata, app, tls_sni.
+- Fix: FQDN deny-rule (blacklist) matches were action=allowed; now blocked via drop_reason.
+- Connector %{...} placeholders nulled in gateway stats, L4 and audit fields; audit dvc recovered from syslog; AVXERR error_code/error_message extracted.
+- Deprecated: legacy FQDN egress logs (aviatrix:firewall:fqdn). Still parsed and CIM-tagged via aviatrix_fqdn, removed from the combined firewall event types. Removal planned for 3.0.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Field extractions, lookups and CIM mapping for Aviatrix Distributed Cloud Firewall, IDS, gateway, tunnel, controller audit and User VPN logs sent to Splunk HEC by the Aviatrix SIEM connector.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Aviatrix Add-on for Splunk normalizes Aviatrix logs for search, Enterprise Security and the Aviatrix Security app.
+
+- CIM Network Traffic (DCF L4 and L7), Intrusion Detection (Suricata), Change (controller audit), Performance (gateways), Network Sessions and Authentication (User VPN).
+- Traffic outcome normalization, including monitor-mode denies (action=allowed, action_cim=blocked, policy_mode=monitor).
+- Suricata EVE support (nested or flattened) with MITRE ATT&amp;amp;CK fields from rule metadata.
+- Cleans up connector placeholders and parses fields the connector drops (rates with units, FQDN drop reasons, controller error codes).
+
+Search-time only; install on search heads (and indexers/heavy forwarders in distributed deployments).&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d7431e56-e7a4-11f1-bbbb-66605a6fdc49.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Chris McHenry</dc:creator>
+      <pubDate>Tue, 24 Nov 2026 02:08:27 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8517/#v2.2.0</guid>
+    </item>
+    <item>
+      <title>Aviatrix Security - v2.2.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8515/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- All seven dashboards rebuilt in Dashboard Studio: responsive grid layout that fills the screen, one dark design system, consistent outcome and severity colors. Requires Splunk 9.0+; tested on 9.4 and 10.6.
+- New &quot;Would block&quot; outcome: denies from monitor-mode rules shown separately from enforced blocks to expose policy rollout gaps.
+- Security Overview: KPI tiles with sparklines and a Notable activity table (scans/sweeps, internet ingress allowed by the DCF default rule, monitor-mode egress, IDS/IPS threats, logging/identity/policy changes, multi-country VPN logins, large VPN transfers, tunnels down).
+- Traffic Analysis: network-to-service-to-outcome flow, scan and sweep suspects. Threat Detection: Suricata plus L7 inline IPS, MITRE ATT&amp;CK tactics, affected hosts and external peers.
+- L7, Gateway Health (silent gateways, ENA allowance, tunnels), Audit Trail (security-relevant changes, AVXERR errors) and VPN (unusual sessions) expanded.
+- New Aviatrix_Traffic data model for fast long time ranges: enable its acceleration in Settings &gt; Data models (ships off).
+- Focused on Distributed Cloud Firewall: legacy FQDN egress events are deprecated and no longer shown.
+- Pair with Aviatrix Add-on for Splunk 2.2.0.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;SOC dashboards for Aviatrix Distributed Cloud Firewall: traffic outcomes (including &amp;quot;would block&amp;quot; monitor-mode denies), ranked notable detections, IDS/IPS threats with MITRE ATT&amp;amp;CK, L7 policy, gateway health, controller audit and User VPN. Built in Dashboard Studio for Splunk 9.0+ and 10.x.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Security analytics for Aviatrix Distributed Cloud Firewall (DCF), built for SOC and SIEM teams. Seven Dashboard Studio dashboards turn DCF, IDS, gateway, controller and User VPN logs into triage-ready views.
+
+Highlights:
+- Security Overview with a ranked Notable activity table: port scans and host sweeps, internet ingress allowed only by the DCF default rule, egress allowed only by monitor mode, IDS/IPS threats, logging/identity/policy changes on the controller, multi-country VPN logins, large VPN transfers and tunnels down.
+- A &amp;quot;Would block&amp;quot; outcome everywhere: denies from monitor-mode rules are shown apart from enforced blocks, so policy rollout gaps are visible before you enforce.
+- Threat Detection combining Suricata IDS with DCF L7 inline IPS, pivoted on the affected workload and the external peer, with MITRE ATT&amp;amp;CK tactics.
+- Fast over long time ranges: the bundled Aviatrix_Traffic data model serves the firewall panels through tstats (turn on its acceleration).
+- Responsive layout that fills the screen on Splunk 9.4 and Splunk 10.
+
+Requires the Aviatrix Add-on for Splunk (TA-aviatrix) 2.2.0 or later.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e9294d2a-e7a4-11f1-909a-9a1cd4626359.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Chris McHenry</dc:creator>
+      <pubDate>Tue, 24 Nov 2026 02:07:21 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8515/#v2.2.0</guid>
     </item>
     <item>
       <title>FTD and ASA Syslog Field Extractions Add-on for Cisco Secure Firewall - v1.1.0 [Version Update]</title>
@@ -155,14 +482,6 @@ The analytic stories and their searches are also available at - https://github.c
       <guid>https://splunkbase.splunk.com/app/10453/#v1.0.11</guid>
     </item>
     <item>
-      <title>Datasource Validator - v1.1.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/9171/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Validates that user-defined data sources grouped under platforms currently return at least one event, recording PASS/FAIL/ERROR/STALE status per source.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Data Source Validator app validates that user-defined data sources are currently returning at least one event in Splunk. Administrators define platforms such as Firewall or EDR, and under each platform create one or more data sources with an SPL search that should return events. A single sequential validation worker executes each data source&amp;#x27;s search on a schedule or on demand using a dedicated service account with minimal privileges. The app records PASS, FAIL, ERROR, or STALE status for each data source, and platform status rolls up from the status of its enabled child data sources. This provides visibility into which integrations have stopped receiving data. The app targets Splunk Cloud Platform and Splunk Enterprise 9.3 and later.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Adam Liquorish</dc:creator>
-      <pubDate>Mon, 23 Nov 2026 19:42:28 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9171/#v1.1.2</guid>
-    </item>
-    <item>
       <title>Attack Path Intelligence App - v2.3.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/9348/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Dashboard hotfix.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Map attack paths to your crown jewels (Crown Jewel → Attack Surface → Attack Vector), prioritize them with a configurable risk score and measure detection coverage by MITRE ATT&amp;amp;CK technique using Splunk ES correlation searches or your own detection inventory. Lookup-driven, with sample data included.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Attack Path Intelligence shows how an attacker could reach your organization&amp;#x27;s most critical assets, and whether your detections would catch them.
@@ -177,14 +496,6 @@ Everything is lookup-driven and configurable: scores, weights, risk thresholds, 
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Gabriel José Biudes Lino</dc:creator>
       <pubDate>Mon, 23 Nov 2026 19:38:55 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/9348/#v2.3.0</guid>
-    </item>
-    <item>
-      <title>CPU Frequency and Throttle Add-on (cpufreq sysfs + thermal throttle) - v1.0.11 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/10452/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects CPU frequency state from /sys/devices/system/cpu (per-core current/min/max frequency, gover&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects CPU frequency state from /sys/devices/system/cpu (per-core current/min/max frequency, governor) and hardware thermal-throttle counters (package_throttle_count, mperf-based if present). Emits JSON events to index=main (sourcetype throttle:status) and throttle.* metrics to index=metrics (sourcetype throttle:metrics); alarm status when a thermal-throttle counter increases since the previous cycle.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Mon, 23 Nov 2026 19:23:06 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10452/#v1.0.11</guid>
     </item>
     <item>
       <title>Systemd Service Health Add-on (failed units) - v1.0.11 [Version Update]</title>
@@ -545,44 +856,6 @@ Splunk customers can access their free SecurityScorecard Complimentary Enterpris
       <guid>https://splunkbase.splunk.com/app/9196/#v1.57.0</guid>
     </item>
     <item>
-      <title>Threat Hunting Essentials - v1.3.183 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/7633/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Free Cyber Threat Hunting App to hunt APT, Threat Actors, Malware tools, exploits, etc.
-
-It is a must-have app, which hunts for presence of advanced persistent threats (APTs), threat actors, state-sponsored attackers, malware, and exploits in your organization&amp;#x27;s assets. All detected malware, exploits, and threat actors are mapped to the MITRE ATT&amp;amp;CK framework, providing deep insight into potential risks.
-
-Threat Hunting Essentials detects a wide range of malware tools used by threat actors, including:
-
-1. Backdoor.
-2. Worms.
-3. Ransomware.
-4. Bots.
-5. Trojan horses.
-6. Keyloggers.
-7. Rootkits.
-8. Spyware.
-9. Fileless malware.
-10. Cryptojacking.
-11. Wiper malware.
-12. Adware.
-14. Viruses
-15. P2P-Worm
-16. Internet Worms
-17. Net-worm
-18. Clickjacking
-19. Cryptominer
-20. Fileless malware
-
-You can easily configure the scan interval in the app’s settings. The real-time scan feature continuously monitors for threats in near real-time, as allowed by Splunk.
-
-Information Use: Your email address is used to improve detection logic based on your feedback. Additionally, we may notify you about app upgrades, updates, or changes to features, user agreements, or the privacy policy.
-
-For Premium Version - Contact sales https://www.avertpoint.com/contactus.html&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/3b31a622-e731-11f1-9e2d-6657d59913ad.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cyber Essentials Avertpoint</dc:creator>
-      <pubDate>Mon, 23 Nov 2026 12:55:43 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/7633/#v1.3.183</guid>
-    </item>
-    <item>
       <title>AbuseIPDB - v3.0.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/5876/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Add the SDK-native Make Request action.
@@ -761,244 +1034,6 @@ The 10x Receiver produces compact events, and it is free on up to 10 nodes (http
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Adam Liquorish</dc:creator>
       <pubDate>Mon, 23 Nov 2026 00:03:00 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/9168/#v1.10.0</guid>
-    </item>
-    <item>
-      <title>Monitoring Linux - Metrics and Log Forwarding - v26.10.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/4768/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- New: the Host page's Kernel tab shows the hardware's temperature and the processor's thermal throttling, and the Alert Catalog has a Host hardware running hot template
-- Bug fix: in a row of single values, a title that wrapped to more lines than its neighbours' pushed its value below theirs
-
-Collectord updates:
-
-- New (beta): `[output.otlp]` sends logs and metrics over OTLP/HTTP or OTLP/gRPC to an OpenTelemetry Collector or a backend that takes OTLP, alone or beside the Splunk output; `continuesFrom = splunk` carries the file and journal positions over when the receiver forwards into the same Splunk, an `[output.splunk::otlp]` section must be renamed, as the OTLP output takes that name, and a release before this output refuses `defaultOutput = otlp`
-- New (beta): `[output.s2s]` sends events and metrics-index records to Splunk indexers over Splunk-to-Splunk (Splunk 9.1 or later), with indexer acknowledgements, TLS, optional compression and indexer discovery; `continuesFrom = splunk` carries the file and journal positions over when S2S replaces HEC for the same Splunk, and an `[output.splunk::s2s]` section must be renamed, as the S2S output takes that name
-- New: with several Splunk HEC `urls`, Collectord moves to the next one every `loadBalanceFrequency` (5 minutes by default), with `ackEnabled = true` as well, so the load spreads across the HEC endpoints again after they restart one by one; `loadBalanceFrequency = 0` moves only after a failure, as before
-- New: on physical machines the host stats report the hottest temperature sensor, how close a sensor is to its limit, and how often the processor throttled for heat (`temperature_max_celsius`, `temperature_margin_celsius`, `thermal_throttle_core_events_per_sec`, `thermal_throttle_package_events_per_sec`); virtual machines have no sensors and report none
-- Updated Go runtime to 1.27.4
-- Updated SQLite Library to 3.54.1
-- New: a client certificate (`clientCertPath`, `clientKeyPath`) or CA bundle (`caPath`; not yet the S2S output's, which needs a restart for a new CA) replaced on disk, such as a renewed certificate in a mounted Secret, is used for new connections within a minute, without restarting Collectord; a replacement that cannot be loaded keeps the previous one and logs a warning
-- New: `maxConnAge` in `[output.splunk]` and `[output.otlp]` sets how long the output's connections take requests before Collectord opens new ones, so DNS or a load balancer that balances connections can pick another endpoint for a Collectord instance that would otherwise stay on the one it first reached; unset, connections are not replaced by age, as before, and it does not apply with `ackEnabled = true`
-- Bug fix: Collectord could take too long to stop, and be killed, when its destination did not answer
-- Bug fix: when Splunk HEC answered 503 &quot;Server is busy&quot; after taking part of a batch, the events it had taken were indexed twice
-- Bug fix: events were lost without a warning when the Splunk HEC `url` answered with a redirect to a page that returns 200, such as the sign-in page of an SSO gateway in front of it; the events are now held and retried
-- Bug fix: TLS connections through some firewalls, such as Palo Alto Networks, were reset or timed out
-- Bug fix: a burst of records for an output other than the pipeline's own, such as the metrics-index copies `indexType = both` sends to `metricsOutput`, could be dropped (`multioutput_dropped_events`) while that output was still taking them
-- Bug fix: `timestampPrecision` of 7 to 9 on the Splunk HEC output sent rounding noise in the last digits of an event's time; it now sends the event's exact digits&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;See your Linux servers in Splunk: the systemd journal with each entry&amp;#x27;s unit named, log files, failed units and pending updates, and host, process, network, filesystem and disk stats in an events or a metrics index. Dashboards for hosts, services, inventory and network, and 45 alert templates. Install one package on each host from our signed apt and yum repositories.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Monitoring Linux brings your Linux servers into Splunk: the hosts your services run on, from RHEL and its rebuilds, Debian and Ubuntu to Fedora, Amazon Linux 2023 and SUSE, on amd64 and arm64.
-
-A service fails and systemd restarts it in a loop, and nobody notices. A host slows down, and nobody can tell whether it is CPU, memory pressure, I/O or one runaway process. A filesystem fills up, the connection tracking table fills and the kernel drops new connections, or security updates wait for weeks on a host nobody remembers. The answers sit in each host&amp;#x27;s journal and /proc, one host at a time.
-
-Monitoring Linux shows what Collectord forwards from each host. Collectord runs as a systemd service and sends the journal, the log files under /var/log and your applications&amp;#x27; own log files to a Splunk events index, with the systemd unit of every journal entry and every process named, so a log line or a CPU spike is one search away from its service. It also reports the units in the failed state every minute and the pending package updates every hour. Host, process, network, filesystem and disk stats go to the same events index or to a Splunk metrics index, your choice: the app has a set of dashboards for each, and they look the same.
-
-The dashboards start from Hosts: one row per host with its CPU, memory, load and stall, and the alerts that fired. From there they go to one host in depth, its processes, the fleet&amp;#x27;s inventory and pending updates, the systemd services that failed, restart or were OOM-killed with their logs a click away, the network&amp;#x27;s interfaces, connections and listening ports, filesystems and disk I/O. Give each group of hosts a cluster name, such as prod or staging, and the dashboards and the Alert Catalog filter by it.
-
-Alerts come from an Alert Catalog of 45 templates, written for Splunk admins, the platform team, security and application teams. Each team picks the alerts it needs and creates them as its own saved searches, scoped to its own clusters. For Splunk Enterprise Security, the app maps SSH logins, sudo, host performance, inventory and pending updates to the Common Information Model.
-
-Install the collectorforlinux package on each host from our signed apt and yum repositories, or the tarball on any other distribution, set the HEC URL, token and license key in 002-user.conf, and enable the service. Upgrades keep your configuration. The app goes on your search heads, on Splunk Enterprise 9.2 or later or Splunk Cloud Platform.
-
-The app requires Collectord and a license key from Outcold Solutions. Evaluation and developer keys are free.
-
-Documentation: https://www.outcoldsolutions.com/docs/monitoring-linux/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/da28ed38-e698-11f1-91c4-ca30cb54ef38.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Outcold Solutions LLC</dc:creator>
-      <pubDate>Sun, 22 Nov 2026 22:49:27 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/4768/#v26.10.2</guid>
-    </item>
-    <item>
-      <title>Monitoring Docker and Podman - Metrics and Log Forwarding - v26.10.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/3723/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- Bug fix: in a row of single values, a title that wrapped to more lines than its neighbours' pushed its value below theirs
-- The metrics-index Compose Projects, Swarm Services, ECS Services, Container and Top Containers dashboards and the container alert templates read the labels of data sent over `[output.otlp]` through a gateway into Splunk (such as the OpenTelemetry Collector), which stores a container's labels as one value: the Compose, Swarm and ECS pages were empty for it, picking a project or service matched nothing, and the alert templates lost the project and service of a container; the Alert Catalog page offers the update to installed alerts
-
-Collectord updates:
-
-- New (beta): `[output.otlp]` sends logs and metrics over OTLP/HTTP or OTLP/gRPC to an OpenTelemetry Collector or a backend that takes OTLP, alone or beside the Splunk output; `continuesFrom = splunk` carries the file and journal positions over when the receiver forwards into the same Splunk, an `[output.splunk::otlp]` section must be renamed, as the OTLP output takes that name, an annotation or extraction can no longer name a field `k8s_namespace_name`, `k8s_pod_name`, `k8s_pod_uid` or `k8s_container_name`, and a release before this output refuses `defaultOutput = otlp`
-- New (beta): `[output.s2s]` sends events and metrics-index records to Splunk indexers over Splunk-to-Splunk (Splunk 9.1 or later), with indexer acknowledgements, TLS, optional compression and indexer discovery; `continuesFrom = splunk` carries the file and journal positions over when S2S replaces HEC for the same Splunk, and an `[output.splunk::s2s]` section must be renamed, as the S2S output takes that name
-- New: with several Splunk HEC `urls`, Collectord moves to the next one every `loadBalanceFrequency` (5 minutes by default), with `ackEnabled = true` as well, so the load spreads across the HEC endpoints again after they restart one by one; `loadBalanceFrequency = 0` moves only after a failure, as before
-- New: on physical machines the host stats report the hottest temperature sensor, how close a sensor is to its limit, and how often the processor throttled for heat (`temperature_max_celsius`, `temperature_margin_celsius`, `thermal_throttle_core_events_per_sec`, `thermal_throttle_package_events_per_sec`); virtual machines have no sensors and report none
-- A container whose logging driver Collectord doesn't read (`local`, `syslog`, `splunk` and the like) is named in a warning in Collectord's log; its logs were skipped silently before
-- Updated Go runtime to 1.27.4
-- Updated SQLite Library to 3.54.1
-- New: a client certificate (`clientCertPath`, `clientKeyPath`) or CA bundle (`caPath`; not yet the S2S output's, which needs a restart for a new CA) replaced on disk, such as a renewed certificate in a mounted Secret, is used for new connections within a minute, without restarting Collectord; a replacement that cannot be loaded keeps the previous one and logs a warning
-- New: `maxConnAge` in `[output.splunk]` and `[output.otlp]` sets how long the output's connections take requests before Collectord opens new ones, so DNS or a load balancer that balances connections can pick another endpoint for a Collectord instance that would otherwise stay on the one it first reached; unset, connections are not replaced by age, as before, and it does not apply with `ackEnabled = true`
-- Bug fix: a restart of Collectord (a `rollout restart`, an upgrade, `docker restart`) sent about one line of each running container's log again; a stop now sends what the running containers' pipelines hold, apart from a multi-line event a container is still writing, and waits for the acknowledgements, so it can take up to fifteen seconds while the destination is down: give `docker stop` more than its default 10 s with `-t` where that may happen
-- Bug fix: Collectord could take too long to stop, and be killed, when its destination did not answer
-- Bug fix: when Splunk HEC answered 503 &quot;Server is busy&quot; after taking part of a batch, the events it had taken were indexed twice
-- Bug fix: events were lost without a warning when the Splunk HEC `url` answered with a redirect to a page that returns 200, such as the sign-in page of an SSO gateway in front of it; the events are now held and retried
-- Bug fix: TLS connections through some firewalls, such as Palo Alto Networks, were reset or timed out
-- Bug fix: a burst of records for an output other than the pipeline's own, such as the metrics-index copies `indexType = both` sends to `metricsOutput`, could be dropped (`multioutput_dropped_events`) while that output was still taking them
-- Bug fix: an output endpoint, or a proxy or load balancer in front of it, that refuses chunked request bodies answered every batch with HTTP 411; batches now carry a Content-Length
-- Bug fix: `timestampPrecision` of 7 to 9 on the Splunk HEC output sent rounding noise in the last digits of an event's time; it now sends the event's exact digits
-- Bug fix: `collectord verify` reported the POST checks as FAILED for a Splunk output with `compressionLevel = nocompression`, though Collectord delivered to it&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;See your Docker, Compose, Swarm, Podman and Amazon ECS hosts in Splunk: container and host logs and Docker events in an events index, host, container and process stats in the events index or a metrics index. Dashboards that lead to what needs fixing, and 61 alert templates each team scopes to its own clusters. One Collectord container per host.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Monitoring Docker brings the hosts that run your containers into Splunk: Docker hosts and Compose projects, Docker Swarm clusters, Podman hosts, and Amazon ECS container instances.
-
-Containers fail in ways their logs alone don&amp;#x27;t explain. A container restarts in a loop, is OOM killed, or fails its health check. A Swarm service runs fewer tasks than it should, and the reason is in the Swarm&amp;#x27;s services, tasks and nodes, which only a manager can read. The Docker data root fills up with images, writable layers and json-file logs. Some containers run their processes as root or hold Linux capabilities. The answers are spread over every host, in the logs, the cgroups, /proc and the Docker API.
-
-Monitoring Docker shows what Collectord forwards from each host, where it runs as one container. Collectord sends container and host logs, the Docker daemon&amp;#x27;s events, and the containers, images, volumes and Swarm objects it reads from the API to an events index. Host, container, process, network, filesystem and disk stats go to the same events index, to a Splunk metrics index, or to both while you compare. The containers of rootless Podman users are monitored too.
-
-The app opens on an Overview that says whether anything needs attention and where: hosts whose stats went silent, Collectord problems, and containers OOM killed, in a restart loop, unhealthy or exited with a non-zero code. From there it drills down to hosts, containers and processes, Compose projects, Swarm services and nodes, ECS services, privileged containers, the network, filesystems, disk I/O and CPU throttling. Every stats dashboard has a twin that reads the metrics index, and the Configuration page chooses which set the menu shows. Name each cluster, such as prod or staging, and the dashboards and alerts filter by it.
-
-Alerts come from an Alert Catalog of 61 templates, written for Splunk admins, the platform team and application teams. Each team picks the alerts it needs and creates them as its own saved searches, scoped to its own clusters.
-
-Container labels configure one container at a time: its index and Splunk output, field extraction, multi-line events, masking, log files from its volumes, and Prometheus endpoints. Three features, off by default, send fewer events: repeated lines as one counted event, storms of alike lines folded into a summary a minute, and a report of each stream&amp;#x27;s heaviest log patterns.
-
-Install the app on your search heads, create an HTTP Event Collector token, and start Collectord on each host with docker run, Docker Compose, a Swarm stack, Podman, or an Amazon ECS daemon service.
-
-The app requires Collectord and a license key from Outcold Solutions. Evaluation and developer keys are free.
-
-Documentation: https://www.outcoldsolutions.com/docs/monitoring-docker/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d1ec0984-e698-11f1-ab09-22f8933da52d.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Outcold Solutions LLC</dc:creator>
-      <pubDate>Sun, 22 Nov 2026 22:49:20 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/3723/#v26.10.2</guid>
-    </item>
-    <item>
-      <title>Monitoring OpenShift - Metrics and Log Forwarding - v26.10.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/3836/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- New: a GPU (NVIDIA DCGM) dashboard shows every NVIDIA GPU and MIG instance the GPU Operator's dcgm-exporter reports, with the pod using each one, and the CPU, memory and GPU of every pod that holds a GPU side by side
-- Bug fix: in a row of single values, a title that wrapped to more lines than its neighbours' pushed its value below theirs
-- Bug fix: on the events-index control plane dashboards (etcd, API server, scheduler, controller manager, kubelet, CoreDNS), a latency panel could show too many observations and no p95 or p99
-- Bug fix: on the Audit: Resource Mutations dashboard, the Mutations by Tool panel was always empty
-- Bug fix: on the metrics-index control plane dashboards (etcd, API server, scheduler, controller manager), the panels with the CPU and memory of the control plane container were always empty
-- The label pickers and label columns of the metrics-index dashboards list single labels for data sent over `[output.otlp]` through a gateway into Splunk (such as the OpenTelemetry Collector), which stores a set of labels as one value
-
-Collectord updates:
-
-- New (beta): `[output.otlp]` sends logs and metrics over OTLP/HTTP or OTLP/gRPC to an OpenTelemetry Collector or a backend that takes OTLP, alone or beside the Splunk output; `continuesFrom = splunk` carries the file and journal positions over when the receiver forwards into the same Splunk, an `[output.splunk::otlp]` section must be renamed, as the OTLP output takes that name, an annotation or extraction can no longer name a field `k8s_namespace_name`, `k8s_pod_name`, `k8s_pod_uid` or `k8s_container_name`, and a release before this output refuses `defaultOutput = otlp`
-- New (beta): `[output.s2s]` sends events and metrics-index records to Splunk indexers over Splunk-to-Splunk (Splunk 9.1 or later), with indexer acknowledgements, TLS, optional compression and indexer discovery; `continuesFrom = splunk` carries the file and journal positions over when S2S replaces HEC for the same Splunk, and an `[output.splunk::s2s]` section must be renamed, as the S2S output takes that name
-- New: with several Splunk HEC `urls`, Collectord moves to the next one every `loadBalanceFrequency` (5 minutes by default), with `ackEnabled = true` as well, so the load spreads across the HEC endpoints again after they restart one by one; `loadBalanceFrequency = 0` moves only after a failure, as before
-- New: `collectord.daemonset.updateStrategy` in the charts sets how the DaemonSet rolls out, for example `rollingUpdate.maxUnavailable: 10%` to upgrade more than one node at a time
-- New: Collectord scrapes the NVIDIA GPU Operator's dcgm-exporter on every GPU node (`[input.prometheus::dcgm]`, pods labelled `app=nvidia-dcgm-exporter` in the `gpu-operator` namespace, `nvidia-gpu-operator` on OpenShift) with no configuration, and forwards the seven metrics the dashboard reads; a GPU Operator installed in another namespace sets `podNamespace`, and `whitelist` takes more metrics
-- New: on physical machines the host stats report the hottest temperature sensor, how close a sensor is to its limit, and how often the processor throttled for heat (`temperature_max_celsius`, `temperature_margin_celsius`, `thermal_throttle_core_events_per_sec`, `thermal_throttle_package_events_per_sec`); virtual machines have no sensors and report none
-- Security: with the `onvolumedatabase` annotation, Collectord followed links a workload left on its volume, so a pod could have files on the node removed or overwritten
-- Security: a pod that names an `[input.prometheus_auto]` `authorization.&lt;key&gt;` in its `prometheus.&lt;n&gt;-authorizationkey` annotation is sent that key's `Authorization` header, whatever namespace it runs in; the new `authorizationNamespaces.&lt;key&gt; = &lt;namespace&gt;,&lt;namespace&gt;` (`authorizationNamespaces` in the Splunk charts' `prometheusAuto` values) limits a key to the pods of the namespaces it lists, and `collectord verify` warns about a key any pod can ask for
-- The charts pull the image with `image.pullPolicy: IfNotPresent` instead of `Always`
-- Updated Go runtime to 1.27.4
-- Updated SQLite Library to 3.54.1
-- New: a client certificate (`clientCertPath`, `clientKeyPath`) or CA bundle (`caPath`; not yet the S2S output's, which needs a restart for a new CA) replaced on disk, such as a renewed certificate in a mounted Secret, is used for new connections within a minute, without restarting Collectord; a replacement that cannot be loaded keeps the previous one and logs a warning
-- New: `maxConnAge` in `[output.splunk]` and `[output.otlp]` sets how long the output's connections take requests before Collectord opens new ones, so DNS or a load balancer that balances connections can pick another endpoint for a Collectord instance that would otherwise stay on the one it first reached; unset, connections are not replaced by age, as before, and it does not apply with `ackEnabled = true`
-- Bug fix: a restart of Collectord (a `rollout restart`, an upgrade, `docker restart`) sent about one line of each running container's log again; a stop now sends what the running containers' pipelines hold, apart from a multi-line event a container is still writing, and waits for the acknowledgements, so it can take up to fifteen seconds while the destination is down (within the default 30 s termination grace period)
-- Bug fix: Collectord could take too long to stop, and be killed, when its destination did not answer
-- Bug fix: when Splunk HEC answered 503 &quot;Server is busy&quot; after taking part of a batch, the events it had taken were indexed twice
-- Bug fix: events were lost without a warning when the Splunk HEC `url` answered with a redirect to a page that returns 200, such as the sign-in page of an SSO gateway in front of it; the events are now held and retried
-- Bug fix: TLS connections through some firewalls, such as Palo Alto Networks, were reset or timed out
-- Bug fix: a burst of records for an output other than the pipeline's own, such as the metrics-index copies `indexType = both` sends to `metricsOutput`, could be dropped (`multioutput_dropped_events`) while that output was still taking them
-- Bug fix: logs and metrics of a pod owned by another pod (a Spark executor, a CI job pod started by its runner pod) carried the owner's pod name, id and labels; they carry the pod's own now, and the owner's are in `openshift_owner_pod_name`, `openshift_owner_pod_id` and `openshift_owner_pod_labels`
-- Bug fix: in the Helm charts, `excludeFields` written as a map (`{kubernetes_pod_ip: true}`, as the configuration file spells it) rendered `excludeFields.true = true` and the field was still sent; the charts now take a list or a map
-- Bug fix: an output endpoint, or a proxy or load balancer in front of it, that refuses chunked request bodies answered every batch with HTTP 411; batches now carry a Content-Length
-- Bug fix: `timestampPrecision` of 7 to 9 on the Splunk HEC output sent rounding noise in the last digits of an event's time; it now sends the event's exact digits
-- Bug fix: a `SplunkOutput` object without `token` or `tokenFromSecret` sent with the token of `[output.splunk]`, and one that set `url` still took `urls`, `ackUrl` and `ackUrls` from it; an object without its own token is now refused (its workloads fall back to the default output, with a warning), and one with its own `url` sends only there, without indexer acknowledgements, which Collectord logs once where `ackEnabled = true`
-- Bug fix: `collectord verify` reported the POST checks as FAILED for a Splunk output with `compressionLevel = nocompression`, though Collectord delivered to it
-- Bug fix: Prometheus could not scrape Collectord's `/metrics/prometheus` endpoint and reported the target down when an `[input.kubernetes_watch::*]` input watched an API group other than the core one (on OpenShift the shipped `clusterresourcequota` watch does), or one namespace with a `-` in its name: the input's counter had the `.`, `/` or `-` in its name; each is now `_`, as in `openshift_watch_quota_openshift_io_v1_clusterresourcequota__count`
-- Bug fix: a pod whose workload is owned by a cluster-scoped object (on OpenShift the DaemonSets of the DNS and Network operators) was missing that owner's id, labels and annotations, and Collectord asked the API server for the owner, and was answered 404, each time such a pod changed; a 404 for an owner deleted before its pods is now remembered for five minutes instead of asked for again on each change&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;See your OpenShift clusters in Splunk: container logs, the journal, audit logs, events and objects, with node to process stats and control-plane metrics in an events or a metrics index. An Overview that leads to the cause, an Audit menu, and 117 alert templates. Install Collectord with one Helm chart; a Red Hat certified image is available.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Monitoring OpenShift brings your OpenShift clusters into Splunk: for the platform team that runs them, the application teams that deploy to them, and the security team that audits them.
-
-When a release goes wrong on OpenShift, the evidence is spread out: container logs on every node, the journal, events the API server keeps for about three hours, the audit logs of four API and OAuth servers, and the control plane&amp;#x27;s Prometheus endpoints. On a cluster many teams share, each team also needs its own data and its own alerts, and the platform team needs rules that hold for every project.
-
-Monitoring OpenShift shows what Collectord forwards from each cluster. Collectord runs as a DaemonSet on every node, masters included, and one addon pod. It sends container and application logs, the journal, the audit logs, and OpenShift events and objects to an events index, and node, pod, container, process, network and disk stats and the control plane&amp;#x27;s Prometheus metrics to an events index or a Splunk metrics index. Annotations change what it does for one project, workload or pod: an index or a HEC token per team, field extraction, multi-line events, masking and hashing, application log files and Prometheus scrapes. A Configuration resource sets the platform team&amp;#x27;s rules for the whole cluster. New features, off until you turn them on, group repeated lines and fold storms of alike lines, for fewer events and less noise.
-
-The dashboards open on an Overview with one verdict for the fleet, Healthy, Warning, Critical or Unknown, the numbers behind it and a row per cluster, and its tiles and rows drill down to the page that shows the cause. From there they cover nodes down to a single process; crash loops, OOM kills and failing probes, each a click from the pod&amp;#x27;s logs; capacity, quotas and what the Pod specs declare; the API server, etcd and the cluster DNS; pod security posture; and an Audit menu from detections to the timeline of one object, OAuth logins included. The stats dashboards come in two sets that look the same, one for each kind of index.
-
-Alerts come from an Alert Catalog of 117 templates, written for Splunk admins, the platform team, security and application teams. Each team picks the alerts it needs and creates them as its own saved searches, scoped to its clusters and projects.
-
-Install the app on your search heads, then Collectord with one Helm chart or the manifest rendered from it, on OpenShift 4.11 or later. It sends to Splunk Enterprise or Splunk Cloud over the HTTP Event Collector. A Red Hat certified image is available from registry.connect.redhat.com, and FIPS 140 images are published beside the standard ones.
-
-The app requires Collectord and a license key from Outcold Solutions. Evaluation and developer keys are free.
-
-Documentation: https://www.outcoldsolutions.com/docs/monitoring-openshift/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e0b418da-e698-11f1-bb14-6e6cca5b51f6.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Outcold Solutions LLC</dc:creator>
-      <pubDate>Sun, 22 Nov 2026 22:49:11 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/3836/#v26.10.2</guid>
-    </item>
-    <item>
-      <title>Monitoring Kubernetes - Metrics and Log Forwarding - v26.10.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/3743/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- New: a GPU (NVIDIA DCGM) dashboard shows every NVIDIA GPU and MIG instance the GPU Operator's dcgm-exporter reports, with the pod using each one, and the CPU, memory and GPU of every pod that holds a GPU side by side
-- Bug fix: in a row of single values, a title that wrapped to more lines than its neighbours' pushed its value below theirs
-- Bug fix: on the events-index control plane dashboards (etcd, API server, scheduler, controller manager, kubelet, kube-proxy, CoreDNS), a latency panel could show too many observations and no p95 or p99
-- Bug fix: on the Audit: Resource Mutations dashboard, the Mutations by Tool panel was always empty
-- The label pickers and label columns of the metrics-index dashboards list single labels for data sent over `[output.otlp]` through a gateway into Splunk (such as the OpenTelemetry Collector), which stores a set of labels as one value
-
-Collectord updates:
-
-- New (beta): `[output.otlp]` sends logs and metrics over OTLP/HTTP or OTLP/gRPC to an OpenTelemetry Collector or a backend that takes OTLP, alone or beside the Splunk output; `continuesFrom = splunk` carries the file and journal positions over when the receiver forwards into the same Splunk, an `[output.splunk::otlp]` section must be renamed, as the OTLP output takes that name, an annotation or extraction can no longer name a field `k8s_namespace_name`, `k8s_pod_name`, `k8s_pod_uid` or `k8s_container_name`, and a release before this output refuses `defaultOutput = otlp`
-- New (beta): `[output.s2s]` sends events and metrics-index records to Splunk indexers over Splunk-to-Splunk (Splunk 9.1 or later), with indexer acknowledgements, TLS, optional compression and indexer discovery; `continuesFrom = splunk` carries the file and journal positions over when S2S replaces HEC for the same Splunk, and an `[output.splunk::s2s]` section must be renamed, as the S2S output takes that name
-- New: with several Splunk HEC `urls`, Collectord moves to the next one every `loadBalanceFrequency` (5 minutes by default), with `ackEnabled = true` as well, so the load spreads across the HEC endpoints again after they restart one by one; `loadBalanceFrequency = 0` moves only after a failure, as before
-- New: `collectord.daemonset.updateStrategy` in the charts sets how the DaemonSet rolls out, for example `rollingUpdate.maxUnavailable: 10%` to upgrade more than one node at a time
-- New: Collectord scrapes the NVIDIA GPU Operator's dcgm-exporter on every GPU node (`[input.prometheus::dcgm]`, pods labelled `app=nvidia-dcgm-exporter` in the `gpu-operator` namespace, `nvidia-gpu-operator` on OpenShift) with no configuration, and forwards the seven metrics the dashboard reads; a GPU Operator installed in another namespace sets `podNamespace`, and `whitelist` takes more metrics
-- New: on physical machines the host stats report the hottest temperature sensor, how close a sensor is to its limit, and how often the processor throttled for heat (`temperature_max_celsius`, `temperature_margin_celsius`, `thermal_throttle_core_events_per_sec`, `thermal_throttle_package_events_per_sec`); virtual machines have no sensors and report none
-- Security: with the `onvolumedatabase` annotation, Collectord followed links a workload left on its volume, so a pod could have files on the node removed or overwritten
-- Security: a pod that names an `[input.prometheus_auto]` `authorization.&lt;key&gt;` in its `prometheus.&lt;n&gt;-authorizationkey` annotation is sent that key's `Authorization` header, whatever namespace it runs in; the new `authorizationNamespaces.&lt;key&gt; = &lt;namespace&gt;,&lt;namespace&gt;` (`authorizationNamespaces` in the Splunk charts' `prometheusAuto` values) limits a key to the pods of the namespaces it lists, and `collectord verify` warns about a key any pod can ask for
-- The charts pull the image with `image.pullPolicy: IfNotPresent` instead of `Always`
-- Updated Go runtime to 1.27.4
-- Updated SQLite Library to 3.54.1
-- New: a client certificate (`clientCertPath`, `clientKeyPath`) or CA bundle (`caPath`; not yet the S2S output's, which needs a restart for a new CA) replaced on disk, such as a renewed certificate in a mounted Secret, is used for new connections within a minute, without restarting Collectord; a replacement that cannot be loaded keeps the previous one and logs a warning
-- New: `maxConnAge` in `[output.splunk]` and `[output.otlp]` sets how long the output's connections take requests before Collectord opens new ones, so DNS or a load balancer that balances connections can pick another endpoint for a Collectord instance that would otherwise stay on the one it first reached; unset, connections are not replaced by age, as before, and it does not apply with `ackEnabled = true`
-- Bug fix: a restart of Collectord (a `rollout restart`, an upgrade, `docker restart`) sent about one line of each running container's log again; a stop now sends what the running containers' pipelines hold, apart from a multi-line event a container is still writing, and waits for the acknowledgements, so it can take up to fifteen seconds while the destination is down (within Kubernetes' default 30 s termination grace period)
-- Bug fix: Collectord could take too long to stop, and be killed, when its destination did not answer
-- Bug fix: when Splunk HEC answered 503 &quot;Server is busy&quot; after taking part of a batch, the events it had taken were indexed twice
-- Bug fix: events were lost without a warning when the Splunk HEC `url` answered with a redirect to a page that returns 200, such as the sign-in page of an SSO gateway in front of it; the events are now held and retried
-- Bug fix: TLS connections through some firewalls, such as Palo Alto Networks, were reset or timed out
-- Bug fix: a burst of records for an output other than the pipeline's own, such as the metrics-index copies `indexType = both` sends to `metricsOutput`, could be dropped (`multioutput_dropped_events`) while that output was still taking them
-- Bug fix: logs and metrics of a pod owned by another pod (a Spark executor, a CI job pod started by its runner pod) carried the owner's pod name, id and labels; they carry the pod's own now, and the owner's are in `kubernetes_owner_pod_name`, `kubernetes_owner_pod_id` and `kubernetes_owner_pod_labels`
-- Bug fix: in the Helm charts, `excludeFields` written as a map (`{kubernetes_pod_ip: true}`, as the configuration file spells it) rendered `excludeFields.true = true` and the field was still sent; the charts now take a list or a map
-- Bug fix: an output endpoint, or a proxy or load balancer in front of it, that refuses chunked request bodies answered every batch with HTTP 411; batches now carry a Content-Length
-- Bug fix: `timestampPrecision` of 7 to 9 on the Splunk HEC output sent rounding noise in the last digits of an event's time; it now sends the event's exact digits
-- Bug fix: a `SplunkOutput` object without `token` or `tokenFromSecret` sent with the token of `[output.splunk]`, and one that set `url` still took `urls`, `ackUrl` and `ackUrls` from it; an object without its own token is now refused (its workloads fall back to the default output, with a warning), and one with its own `url` sends only there, without indexer acknowledgements, which Collectord logs once where `ackEnabled = true`
-- Bug fix: `collectord verify` reported the POST checks as FAILED for a Splunk output with `compressionLevel = nocompression`, though Collectord delivered to it
-- Bug fix: Prometheus could not scrape Collectord's `/metrics/prometheus` endpoint and reported the target down when an `[input.kubernetes_watch::*]` input watched an API group other than the core one (on OpenShift the shipped `clusterresourcequota` watch does), or one namespace with a `-` in its name: the input's counter had the `.`, `/` or `-` in its name; each is now `_`, as in `openshift_watch_quota_openshift_io_v1_clusterresourcequota__count`
-- Bug fix: a pod whose workload is owned by a cluster-scoped object (on OpenShift the DaemonSets of the DNS and Network operators) was missing that owner's id, labels and annotations, and Collectord asked the API server for the owner, and was answered 404, each time such a pod changed; a 404 for an owner deleted before its pods is now remembered for five minutes instead of asked for again on each change&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;See your Kubernetes clusters in Splunk: container and host logs, events, objects and the API audit log in an events index, and node, pod, container, process and Prometheus metrics in the events index or a metrics index. Dashboards that lead to the cause, and 118 alert templates each team scopes to its clusters and namespaces. Deploy Collectord with Helm or one manifest.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Monitoring Kubernetes brings your Kubernetes clusters into Splunk, for the platform team that runs them, the application teams that deploy to them, and security.
-
-When something breaks in a cluster, the evidence is spread out and short-lived: container logs sit in files on each node until rotation overwrites them, and the API server holds Kubernetes events for about an hour. Dashboards that only show state leave you to work out what is wrong. And when one cluster serves many teams, one fixed set of alerts fires the same way for everyone, while each team&amp;#x27;s data has to stay in its own indexes.
-
-Monitoring Kubernetes shows what Collectord forwards from each cluster. Collectord runs as a DaemonSet on the nodes, control-plane nodes included, and a single addon Deployment, and enriches what it sends with Kubernetes metadata. Container logs, application log files, host logs, and Kubernetes events and objects go to an events index, and so does the API server audit log once you turn it on. The node, pod, container and process stats, and the Prometheus metrics of the control plane and your own pods, go to the same index or to a Splunk metrics index, your choice. Annotations on a namespace or pod send its data to its own index and HEC token, join multi-line stack traces and mask values, and can send repeated lines as one event that counts them, for fewer events and less noise.
-
-The app opens on an Overview with one verdict for all your clusters, the numbers behind it and a row per cluster, and its tiles drill down to the page that shows the cause. From there it covers nodes, pods, containers and processes; the Kubernetes events, where a click on a crash loop or an OOM kill opens that pod&amp;#x27;s logs; capacity, requests and limits; the control plane from the API server to etcd and CoreDNS; pod security posture and network connections; and an Audit menu that reads the API audit log, from detections to the timeline of one object. Every stats dashboard comes in two sets that look the same, one for each kind of index.
-
-Alerts come from an Alert Catalog of 118 templates, written for Splunk admins, the platform team, security and application teams. Each team picks the alerts it needs, scopes them to its clusters and namespaces, and creates them as its own saved searches, such as Kubernetes: Pod crash looping [cluster prod; namespace payments].
-
-Install the app on your search heads, create a HEC token, and deploy Collectord with the Helm chart or one manifest. It works with containerd, CRI-O and Docker on Kubernetes 1.24 and later, managed clusters such as EKS, GKE and AKS included. The app also maps your nodes and the API audit to the Common Information Model for Splunk Enterprise Security.
-
-The app requires Collectord and a license key from Outcold Solutions. Evaluation and developer keys are free.
-
-Documentation: https://www.outcoldsolutions.com/docs/monitoring-kubernetes/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d69fbae8-e698-11f1-ab09-22f8933da52d.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Outcold Solutions LLC</dc:creator>
-      <pubDate>Sun, 22 Nov 2026 22:49:02 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/3743/#v26.10.2</guid>
-    </item>
-    <item>
-      <title>Monitoring macOS - Metrics and Log Forwarding - v26.10.2 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/10093/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- Bug fix: in a row of single values, a title that wrapped to more lines than its neighbours' pushed its value below theirs
-
-Collectord updates:
-
-- New (beta): `[output.otlp]` sends logs and metrics over OTLP/HTTP or OTLP/gRPC to an OpenTelemetry Collector or a backend that takes OTLP, alone or beside the Splunk output; `continuesFrom = splunk` carries the file and journal positions over when the receiver forwards into the same Splunk, an `[output.splunk::otlp]` section must be renamed, as the OTLP output takes that name, and a release before this output refuses `defaultOutput = otlp`
-- New (beta): `[output.s2s]` sends events and metrics-index records to Splunk indexers over Splunk-to-Splunk (Splunk 9.1 or later), with indexer acknowledgements, TLS, optional compression and indexer discovery; `continuesFrom = splunk` carries the file and journal positions over when S2S replaces HEC for the same Splunk, and an `[output.splunk::s2s]` section must be renamed, as the S2S output takes that name
-- New: with several Splunk HEC `urls`, Collectord moves to the next one every `loadBalanceFrequency` (5 minutes by default), with `ackEnabled = true` as well, so the load spreads across the HEC endpoints again after they restart one by one; `loadBalanceFrequency = 0` moves only after a failure, as before
-- New: a log pack with `mode = raw` sends every entry its keys select, with no rate cap, pack cap or &quot;seen N times&quot;; while the output falls behind, its entries wait in memory up to `[input.macos_logs] rawQueueSize` (64 MB), then are dropped and counted in `macos_logs_raw_dropped_entries`, which `[input.collectord_metrics]` forwards when it names it
-- New: `--managed-preferences &lt;path&gt;` (or `none`) and `collectord diag --launchd-label`, for a second install under its own prefix and LaunchDaemon label that a configuration profile meant for the package's install should not steer
-- Updated Go runtime to 1.27.4
-- New: a client certificate (`clientCertPath`, `clientKeyPath`) or CA bundle (`caPath`; not yet the S2S output's, which needs a restart for a new CA) replaced on disk, such as a renewed certificate in a mounted Secret, is used for new connections within a minute, without restarting Collectord; a replacement that cannot be loaded keeps the previous one and logs a warning
-- New: `maxConnAge` in `[output.splunk]` and `[output.otlp]` sets how long the output's connections take requests before Collectord opens new ones, so DNS or a load balancer that balances connections can pick another endpoint for a Collectord instance that would otherwise stay on the one it first reached; unset, connections are not replaced by age, as before, and it does not apply with `ackEnabled = true`
-- Bug fix: Collectord could take too long to stop, and be killed, when its destination did not answer
-- Bug fix: when Splunk HEC answered 503 &quot;Server is busy&quot; after taking part of a batch, the events it had taken were indexed twice
-- Bug fix: events were lost without a warning when the Splunk HEC `url` answered with a redirect to a page that returns 200, such as the sign-in page of an SSO gateway in front of it; the events are now held and retried
-- Bug fix: TLS connections through some firewalls, such as Palo Alto Networks, were reset or timed out
-- Bug fix: `timestampPrecision` of 7 to 9 on the Splunk HEC output sent rounding noise in the last digits of an event's time; it now sends the event's exact digits
-- Bug fix: on a Mac with an M5 Pro or M5 Max, the `temperature` record's `cpu` group left out the twelve Performance cores, which it sent as the `memory` group; they are in `cpu` now, and such a Mac sends no `memory` group
-- Bug fix: a connection from a Mac to its own VPN address (the IPv4 address of a `utun` tunnel, such as Tailscale's) reported the `lo0` interface, though its traffic crossed the tunnel
-- Bug fix: on Homebrew 7, installing or upgrading the cask `outcoldsolutions/tap/collectorformacos` warned that it used a deprecated parameter of `url` (`verified`)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;See your Apple Silicon Macs in Splunk: hardware, power, process and security stats in a metrics index, and the unified log, crash reports, logins and setting changes in an events index. Dashboards for build fleets, VM hosts and laptops, and 42 alert templates. Install one package on each Mac, by hand, with Homebrew or through your MDM.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Monitoring macOS brings your Apple Silicon Macs into Splunk: build and CI fleets, Macs that host virtual machines, and the laptops IT looks after.
-
-Macs are often the one part of an estate that Splunk cannot see. A build farm slows down and nobody can tell whether it is thermals, memory pressure, a full disk or one runaway process. A laptop fleet drifts out of policy, with FileVault off, updates pending or the firewall disabled, and the first sign is an audit. The unified log holds the answers, but it is too large to forward as it is, and most of it is noise.
-
-Monitoring macOS shows what Collectord forwards from each Mac. Collectord runs as a LaunchDaemon and sends hardware, power, process and security stats to a Splunk metrics index, and the unified log, crash reports, launchd services, logins and setting changes to an events index. Log packs choose what to forward from the unified log, and a rate cap and a noise sampler keep its volume in check.
-
-The dashboards start from a Fleet Overview that says which Macs need attention and why: the ones that went silent, run hot, have FileVault off, updates pending or a volume nearly full. From there they drill down to hardware, processes, virtual machines, Xcode and CI, crashes and panics, updates and posture, compliance results, security events and the connections each application makes. Label each group of Macs, such as ci, build-farm or laptops, and every dashboard and alert filters by it.
-
-Alerts come from an Alert Catalog of 42 templates, written for Splunk admins, the platform team, security and application teams. Each team picks the alerts it needs and creates them as its own saved searches, scoped to its own Macs.
-
-Install one signed, notarized package on each Mac by hand, with Homebrew, or through your MDM with a configuration profile. Collectord needs no Full Disk Access and macOS asks the user nothing. It never reads the app in front, per-app usage time, Wi-Fi network names or location, and every source that names people or programs has its own switch.
-
-The app requires Collectord and a license key from Outcold Solutions. Evaluation and developer keys are free: https://www.outcoldsolutions.com/docs/monitoring-macos/&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/dc5fa902-e698-11f1-bb14-6e6cca5b51f6.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Outcold Solutions LLC</dc:creator>
-      <pubDate>Sun, 22 Nov 2026 22:48:46 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10093/#v26.10.2</guid>
     </item>
     <item>
       <title>Inputs conf generator - DS addon - v1.1.0 [Version Update]</title>
@@ -1521,15 +1556,6 @@ organization audit-log or Zero Trust Access authentication-log APIs.&lt;/p&gt;&l
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Sat, 21 Nov 2026 00:32:25 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/5788/#v4.1.12</guid>
-    </item>
-    <item>
-      <title>Webex Add-on for Splunk - v1.6.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8365/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Added Service App authentication as a new authorization option for the account.
-* Added near real-time collection for the Detailed Call History input using the Webex CDR Stream API. The input now automatically switches between the CDR Feed API (history) and the CDR Stream API (near real-time) based on how old the data being collected is.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;The Webex Add-on for Splunk collects data from Cisco Webex via its REST APIs and indexes it in Splunk.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Webex Add-on for Splunk collects data from Cisco Webex via its REST APIs and indexes it in Splunk. Inputs include Meeting Qualities, Meeting Summary Reports, Scheduled Meetings, Detailed Call History, Admin Audit Events, Security Audit Events, Contact Center Search, and a configurable Generic endpoint — giving administrators visibility into meeting quality, usage, and security activity for IT operations and compliance.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/7bd37da6-e52c-11f1-9195-f24058031f66.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk Field Solutions</dc:creator>
-      <pubDate>Fri, 20 Nov 2026 22:00:25 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8365/#v1.6.0</guid>
     </item>
     <item>
       <title>Cisco DC Networking - v2.0.10 [Version Update]</title>
@@ -2140,38 +2166,6 @@ Availability: Splunk Cloud customers in AWS and Azure commercial regions, FedRAM
       <guid>https://splunkbase.splunk.com/app/9730/#v0.5.1</guid>
     </item>
     <item>
-      <title>DDA Detection and Defence Atlas App - v3.0.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10425/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;3.0.0
-
-\- New display name &quot;DDA Detection and Defence Atlas App&quot; (Splunkbase naming conventions); the app ID detection_defence_atlas is unchanged, so this is an in-place upgrade.
-
-\- Splunk AppInspect and Splunk Cloud vetting fixes: is_configured \= 0, reload trigger and search head cluster replication for df_settings.conf, python.required on the scripted input, sc_admin added next to admin in default.meta, no interpreter lines in scripts, update check enabled.
-
-\- English README (with the required first-time setup) and LICENSE added; development tests and legacy tools are no longer packaged.
-
-\- Fixed: on Splunk 10.x the Home page showed &quot;across 0 apps&quot; and &quot;0/0 ES detections on&quot;.
-
-\- Fixed: Detection Fidelity pages ignored filters passed in the URL, so links between pages opened unfiltered.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Detection engineering, threat exposure, covert-channel hunting and attack chain operations for Splunk Enterprise Security in one app.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;DDA Detection and Defence Atlas App is a single app for use with Splunk Enterprise and Splunk Enterprise Security that brings detection engineering and active defence into one workflow.
-
-Detection Fidelity inventories every correlation search and scores it with an explicit policy: MITRE ATT&amp;amp;CK and kill chain mapping, security domain, drilldown, SPL cost and run reliability. SPL Advisor reviews each search line by line with a 33-item best-practice pack. Telemetry Readiness shows whether the data each detection needs is arriving, and Operational Health catches failed, skipped, slow or noisy detections.
-
-Threat Exposure Intelligence compares the last 24 hours of Network_Traffic relationships with a 30-day baseline and highlights new, unapproved relationships to critical assets.
-
-Attack Story &amp;amp; Covert Intelligence runs four network hunts (beacon periodicity, outbound volume against baseline, low-and-slow transfer, new external peer) and links them with ES risk on the same system and time bucket.
-
-Advanced Threat Operations ships 17 intermediate findings and 5 ordered chain correlations (disabled by default) with a 35-day baseline memory, segmentation policy checks and a live case queue.
-
-Entity Atlas puts ES risk, findings and relationship novelty for one host, IP address or account on a single timeline.
-
-Every module is evidence first and read only: the app never blocks traffic and never changes firewall or ES settings.
-
-IMPORTANT - first-time setup is required. Detection Fidelity works right after install. Threat Exposure and Advanced Threat Operations need your own environment data in the operator lookups (domain controllers, privileged accounts, network zones, segment policy, critical assets) and a baseline run; until then their rules and panels return nothing. This is expected, not a fault. The Installation tab and the README list every lookup, an example row and what stays empty without it.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/bacb811c-e2b5-11f1-92d4-c29773c36ace.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">mehmet ali canpolat</dc:creator>
-      <pubDate>Wed, 18 Nov 2026 19:57:22 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10425/#v3.0.0</guid>
-    </item>
-    <item>
       <title>SPL Library - v3.8.0 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8837/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Provides a searchable library interface for storing and managing Splunk queries with category filtering, one-click execution, and KV Store persistence.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The SPL Library provides a modern interface for storing, searching, and managing Splunk queries within the Splunk environment. The application features a dark card-based user interface that displays saved queries in an organized, searchable format. Users can perform full-text searches across query titles, descriptions, tags, and SPL content, and apply category filters to narrow results by Security, Network, Application, Database, Performance, or Other classifications. Each query card can be expanded to view the complete SPL code, copied to the clipboard with one click, or executed directly in the Splunk Search app. The application stores all queries in the Splunk KV Store, ensuring compatibility with Splunk Cloud deployments. Query management capabilities include adding, editing, and deleting entries through a modal form interface with tag assignment functionality. The application automatically seeds four example queries on initial deployment and records metadata including author information and creation/modification timestamps for each stored query. The architecture avoids custom REST handlers, external dependencies, and inline JavaScript, relying exclusively on Splunk-provided libraries and standard KV Store mechanisms for data persistence.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e00774b8-e387-11f1-92d4-c29773c36ace.png&quot;&gt;</description>
@@ -2260,66 +2254,6 @@ Works on Splunk Enterprise and Splunk Cloud. Requires a ViewDNS.info API key: ht
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
       <pubDate>Wed, 18 Nov 2026 08:15:46 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8839/#v1.0.5</guid>
-    </item>
-    <item>
-      <title>Dataminr Threat Intelligence for Splunk Enterprise and Splunk Cloud - v3.1.3 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/6520/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Updated several libraries for improved Python 3.13 and Splunk 10.x support&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;From Alerts to Action—Inside Splunk
-
-Embed Dataminr Threat Intelligence (formerly Dataminr Pulse) real-time, actionable intelligence directly into Splunk Enterprise and Splunk Cloud. Transform the earliest external threat signals from over 1.1 million public, deep, and dark web sources into Splunk-native detections, enrichment, and automated response.
-
-Turn Signal Overload into Real-Time, AI-Powered Intelligence
-
-Stay ahead of the threat curve and be the first to see rapidly emerging and evolving threats, vulnerabilities, exploits, ransomware activity, third-party incidents, and more—often hours or days before traditional sources.
-
-Unmatched Coverage, Precision, and Granularity
-
-With Dataminr Pulse for Cyber Risk, security teams gain a critical time advantage to assess risk, mobilize resources, and mitigate impact before it’s too late. Dataminr processes more than 45 terabytes of daily public data, leveraging over 55 proprietary LLMs, thousands of detection models, and 15 years of historic alerting information to power its ever-expanding knowledge graph. And with multimodal fusion AI, GenAI, and Agentic AI deeply embedded into the Dataminr platform, security teams can now:
-
-* Dynamically detect and defend digital assets beyond the perimeter.
-* Unearth hidden threats, minimize noise, and close blind spots with advanced, multimodal processing of text, images, video, and machine signals.
-* Leverage agentic AI-powered Intel Agents to autonomously assemble multimodal adversary context, including threat TTPs, IOCs, CVEs, CVSS/EPSS scores, MITRE ATT&amp;amp;CK mappings, and more.
-* Monitor third-party risk and vendor disruptions while tracking exposure across tiers—continuously, in real-time, and at scale.
-* Proactively prioritize, patch, and preempt fast-breaking vulnerabilities and exploits
-
-Accelerate Splunk Workflows with Actionable Context
-
-* Ingest Dataminr Pulse alerts via API with CIM-aligned fields for correlation.
-* Stay aligned with Splunk CIM, Splunk Enterprise Security Threat Intelligence Framework, ATT&amp;amp;CK, RBA, and SOAR workflows.
-
-Address Your Critical Use Cases with Dataminr
-
-* Cyber Threat Intelligence: Know your adversaries and piece together attack context with crucial details about the threat actor, associated malware, TTPs, and recent targets and exploit activity.
-* Vulnerability Prioritization: See the earliest possible signals of vulnerabilities, active attacks, proof of concept exploitation, threat actor TTPs, and more.
-* Third-Party and Supply Chain Risk: Instantly identify and track fast-breaking supply chain attacks and vendor disruption as they continue to unfold.
-* Digital Risk and Data Leakage: Spot credential dumps, phishing attempts, brand impersonations and other malicious activity involving your digital assets and footprint.
-* Cyber-Physical Risk Convergence: Assess the complete blast radius, and strengthen risk readiness with a coordinated response to converged cyber-physical risk events.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/fb7ac7d4-e2ad-11f1-ad84-76ffe10016da.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Dataminr</dc:creator>
-      <pubDate>Tue, 17 Nov 2026 18:10:09 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/6520/#v3.1.3</guid>
-    </item>
-    <item>
-      <title>CIM Assessment Toolkit (CAT) - v2.14.3 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8962/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**Report accuracy and sourcetype inventory release. No collection or lookup schema changes, so no migration steps.**
-
-* The report's CIM Coverage figure and its Unmapped and Mapped Sourcetypes lists now come from one search, in the same form as the dashboard CIM Coverage KPI. Mapped plus unmapped always equals the total.
-* New Unscoped Sourcetypes list. An unmapped sourcetype with no scope in the sourcetype inventory cannot be assigned to a scope. Scoped CIM Coverage does not count it, but it is now listed on the Unmapped Data tab (with a Scope Unknown count) and in its own section of a scoped report, so it can be mapped, added to the inventory, or excluded.
-* Learned sourcetypes (names Splunk assigned itself, ending in -too_small or a number such as -2) that are not mapped to a data model are left out of CIM Coverage, the Unmapped Data tab, the Unscoped Sourcetypes list, the daily coverage snapshot, and the report. They come from inputs with no sourcetype set and are corrected at the input, not by CIM mapping. New macro cim_learned_sourcetype_filter; set it to where true() to count them again.
-* Remediation Priorities in the report shows one row per data model, dataset, and sourcetype, aggregated across indexes. The dashboard table still shows each index.
-* Sourcetype inventory updated to the November 17, 2026 version: 888 sourcetypes, up from 849. The 39 additions cover Azure, Google Cloud, Citrix NetScaler, Box, Wiz, Snare, Linux host, and Splunk audit sources.
-* Data model corrections in the inventory: web proxy and secure web gateway sourcetypes now point at Web.Web instead of the deprecated Web.Proxy dataset, and the WinEventLog and XmlWinEventLog model lists were reconciled.
-
-**Upgrade**: install over the existing version. The upgrade replaces the shipped cim_sourcetype_inventory.csv. ***If you loaded a custom inventory under that filename, keep a copy and upload it again afterward***. CIM Coverage may change slightly: learned sourcetypes are no longer counted, and sourcetypes added to the inventory move from Unscoped to their scope. Coverage snapshots stored before the upgrade are not restated.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Measure and validate Splunk CIM compliance at the data model and dataset level — with field-mapping quality scoring, unmapped data discovery, prescribed-value validation, remediation priorities, data model testing, TA sourcetype coverage and inventory, and automated reporting.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The CIM Assessment Toolkit (CAT) measures and validates Common Information Model (CIM) compliance across your Splunk data models at the data model + dataset level.
-
-CAT scores field-mapping quality, data quality, and prescribed-value compliance; surfaces unmapped sourcetypes and impact-ranked remediation priorities; monitors data model acceleration health; and generates professional Word-document reports with optional scheduled email delivery.
-
-A new feature is four TA Inventory tables which reveal what TAs cover which sourcetypes for CIM normalization and their versions - essential information for maintaining CIM normalization coverage.
-
-To reduce CIM Assessment Report length, detailed field gaps, mapped &amp;amp; unmapped sourcetypes, and installed Splunk apps lists are attached as CSVs (CIM_Field_Gaps_*, CIM_Mapped_Sourcetypes_*, Splunk_Installed_Apps_*) to the report email.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8d745c5e-e2a9-11f1-ade6-da5314d65fb5.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">James Baxter</dc:creator>
-      <pubDate>Tue, 17 Nov 2026 17:17:19 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8962/#v2.14.3</guid>
     </item>
   </channel>
 </rss>
