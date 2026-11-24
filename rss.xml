@@ -6,50 +6,196 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Mon, 23 Nov 2026 13:53:07 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 24 Nov 2026 01:24:25 +0000</lastBuildDate>
     <item>
-      <title>TA-IPMI - v1.0.6 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/10139/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free server BMC monitoring for Splunk. Streams IPMI sensors (temps, fan RPM, volts, watts), chassis/PSU status, and the System Event Log from ipmitool&amp;#x27;s local interface into events and metrics, with Overview and Metrics dashboards. Passes AppInspect cloud pre-cert. Commercial use requires license.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TA-IPMI is a free, source-available Splunk add-on that brings out-of-band hardware health monitoring to any Splunk host with a server-class BMC. It reads full IPMI telemetry via ipmitool&amp;#x27;s local open interface and indexes it three ways with zero manual configuration:
+      <title>Aviatrix Security - v2.2.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8515/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- All seven dashboards rebuilt in Dashboard Studio: responsive grid layout that fills the screen, one dark design system, consistent outcome and severity colors. Requires Splunk 9.0+; tested on 9.4 and 10.6.
+- New &quot;Would block&quot; outcome: denies from monitor-mode rules shown separately from enforced blocks to expose policy rollout gaps.
+- Security Overview: KPI tiles with sparklines and a Notable activity table (scans/sweeps, internet ingress allowed by the DCF default rule, monitor-mode egress, IDS/IPS threats, logging/identity/policy changes, multi-country VPN logins, large VPN transfers, tunnels down).
+- Traffic Analysis: network-to-service-to-outcome flow, scan and sweep suspects. Threat Detection: Suricata plus L7 inline IPS, MITRE ATT&amp;CK tactics, affected hosts and external peers.
+- L7, Gateway Health (silent gateways, ENA allowance, tunnels), Audit Trail (security-relevant changes, AVXERR errors) and VPN (unusual sessions) expanded.
+- New Aviatrix_Traffic data model for fast long time ranges: enable its acceleration in Settings &gt; Data models (ships off).
+- Focused on Distributed Cloud Firewall: legacy FQDN egress events are deprecated and no longer shown.
+- Pair with Aviatrix Add-on for Splunk 2.2.0.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Security visibility and analytics for Aviatrix Distributed Cloud Firewall. Six pre-built dashboards for traffic analysis, threat detection, policy enforcement, gateway health, and audit trail monitoring. CIM-compliant with Network Traffic, Intrusion Detection, and Change Analysis data models.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Security visibility and analytics for Aviatrix Distributed Cloud Firewall in Splunk. Provides CIM-compliant field extractions and six pre-built dashboards for SIEM/SOC teams monitoring multi-cloud network security.
 
-1. Sensor readings: every SDR sensor (temperatures, fan RPM, voltages such as 12V/3.3V/Vcore/BAT, power draw in watts, plus thresholds), plus chassis and BMC status as rich JSON events (index=main, sourcetype ipmi:status) for fielded search.
-2. The same readings as time-series metrics in index=metrics (sourcetype ipmi:metrics, ipmi.* measure names), so thermal, fan, voltage and power trends survive retention and answer in milliseconds with mstats.
-3. The System Event Log (SEL): each SEL record indexed exactly once as a separate event with sensor, event type, assertion state and raw detail preserved, so BIOS-level crashes, power faults, ECC errors, fan failures and intrusion alerts become searchable Splunk events.
+Dashboards included:
+- Security Overview: Executive security posture with KPIs, threat timeline, top blocked destinations, and gateway block rates
+- Traffic Analysis: L4/L7/FQDN traffic patterns, top sources/destinations, and protocol breakdown
+- Threat Detection: IDS alert severity, Suricata signature analysis, and source/destination correlation
+- Policy Enforcement: L7 policy hits, allow/deny ratios, and domain analysis
+- Gateway Health: CPU, memory, disk, and network throughput monitoring per gateway
+- Audit Trail: Controller API changes, user activity, and success/failure tracking
 
-Why it matters: IPMI/BMC is the only observability layer that survives OS crashes, power loss, and hangs. Overheating servers, dead fans, failing PSUs, dropped redundancy and unexpected reboots happen below the OS where agents and syslog can&amp;#x27;t follow, but the BMC remembers everything. TA-IPMI closes that blind spot in minutes: install it on the host, and its BMC telemetry flows into Splunk with ready-made overview and trend dashboards.
+Supported log types:
+- Aviatrix Cloud Firewall L4 micro-segmentation logs
+- Aviatrix Cloud Firewall L7 TLS/SNI inspection logs
+- Aviatrix Cloud Firewall IDS alerts (EVE JSON)
+- Gateway network and system statistics
+- Cloud Native Security Fabric API audit logs
 
-Licensing: free for personal, evaluation, and non-commercial use. Commercial/production use requires a license from the author: michael@bentleypc.com. Source available at https://github.com/bentleymi/TA-IPMI&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Mon, 23 Nov 2026 13:07:09 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10139/#v1.0.6</guid>
+CIM data models supported: Network Traffic, Intrusion Detection, Change Analysis
+
+Requires the companion TA-aviatrix add-on for field extractions and CIM compliance. Logs are ingested via the Aviatrix SIEM Connector using Splunk HEC (HTTP Event Collector).&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/e9294d2a-e7a4-11f1-909a-9a1cd4626359.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Chris McHenry</dc:creator>
+      <pubDate>Tue, 24 Nov 2026 01:22:01 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8515/#v2.2.0</guid>
     </item>
     <item>
-      <title>TA-Nvidia - v1.0.6 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/10131/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free NVIDIA GPU monitoring for Splunk. Streams complete nvidia-smi telemetry, temperature, utilization, memory, power, clocks, ECC, PCIe, processes, as both JSON events and index=metrics time-series, with two dashboard packs. Passes AppInspect cloud pre-cert. Commercial use requires license.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TA-Nvidia is a free, source-available Splunk add-on that brings enterprise NVIDIA GPU observability to any Splunk instance running on hosts with NVIDIA drivers. It repeatedly captures the COMPLETE nvidia-smi state; temperature, utilization, fan speed, power draw and limits, framebuffer memory, graphics/SM/clocks, ECC errors, PCIe throughput, performance state, compute processes, vGPU, and more and indexes it two ways with zero manual configuration:
-
-1. Full JSON events (sourcetype nvidia:smi) in index=main for deep-dive fielded search, and
-2. Time-series metrics (nvidia.* metric names) in index=metrics via a metric-schema pipeline, enabling fast mstats trends and visualizations.
-
-Two pre-built dashboards ship with the app GPU Overview (per-GPU cards for temp, utilization, memory, power, clock, fan) and GPU Metrics (long-window trended charts via mstats).
-
-Why this matters: GPU-equipped servers are expensive and failure-prone. Overheating, ECC errors, clock throttling, memory exhaustion, and power-limiting silently destroy GPU workload performance (AI/ML training and inference, VDI, HPC, video/transcode). Splunk has no free, turnkey NVIDIA telemetry app, TA-Nvidia closes that gap in about one minute, on any distribution (Tested on datacenter and workstation cards, current driver: 580.x, RTX PRO 6000 Blackwell).
-
-Licensing: free for personal, evaluation, and non-commercial use. Commercial/production use requires a license from the author: michael@bentleypc.com. Source is available on GitHub: https://github.com/bentleymi/TA-Nvidia&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Mon, 23 Nov 2026 13:06:59 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10131/#v1.0.6</guid>
+      <title>Aviatrix Add-on for Splunk - v2.2.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8517/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;- New: aviatrix:tunnel:status parsing (gateway, peer, cloud/region, up/down) and event types.
+- L4/L7: policy_mode (enforced/monitor), session_phase, l7_event_class (verdict, inline IPS drop, IDS alert/timeout, TLS check, SYN timeout), signature_id; L7 transport lowercased.
+- IDS: MITRE ATT&amp;CK tactic/technique fields from ET metadata, app, tls_sni.
+- Fix: FQDN deny-rule (blacklist) matches were action=allowed; now blocked via drop_reason.
+- Connector %{...} placeholders nulled in gateway stats, L4 and audit fields; audit dvc recovered from syslog; AVXERR error_code/error_message extracted.
+- Deprecated: legacy FQDN egress logs (aviatrix:firewall:fqdn). Still parsed and CIM-tagged via aviatrix_fqdn, removed from the combined firewall event types. Removal planned for 3.0.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Field extractions, CIM compliance, and data normalization for Aviatrix Cloud Firewall logs in Splunk.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Technology Add-on for Aviatrix Distributed Cloud Firewall logs. Provides field extractions, CIM-compliant data normalization, and lookup tables for Aviatrix security event data including L4/L7 firewall, FQDN egress filtering, Suricata IDS alerts, gateway telemetry, and controller audit logs. Maps to Network Traffic, Intrusion Detection, and Change Analysis CIM data models. Designed to work alongside the Aviatrix Security app for dashboards and visualizations.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/d7431e56-e7a4-11f1-bbbb-66605a6fdc49.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Chris McHenry</dc:creator>
+      <pubDate>Tue, 24 Nov 2026 01:21:34 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8517/#v2.2.0</guid>
     </item>
     <item>
-      <title>Journald Log-Plane Meta Add-on (disk usage file growth) - v1.0.8 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/10457/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects journald log-plane metadata: journal disk usage (journalctl --disk-usage), journal file cou&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects journald log-plane metadata: journal disk usage (journalctl --disk-usage), journal file count under /var/log/journal, total journal size, age of the oldest journal file, and the journald service state. Emits JSON events to index=main (sourcetype journald:status) and journald.* metrics (disk_kb, size_mb, file_count) to index=metrics (sourcetype journald:metrics) every 300s, with dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Mon, 23 Nov 2026 13:06:50 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10457/#v1.0.8</guid>
+      <title>GenAI Observability for Splunk - v3.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8308/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## RELEASE INFORMATION
+
+**Release version:** 3.0.0
+
+**Release notes:**
+
+Version 3.0.0 is a major release. It is the first big update since the last Splunkbase release (2.0.0). It adds Langfuse-style tracing and evaluation pages, built in plain JavaScript on top of your Splunk data and the app's KV store.
+
+**New pages**
+
+* Traces: search and filter traces by name, user, tag, environment, model, errors or free text. Click a trace to see its nested observation tree, timeline, inputs and outputs, tokens and cost per step.
+* Sessions and Users: every turn of a conversation, and per-user traces, tokens, cost and errors.
+* Scores: score overview, full score list with CSV export, and score configs for consistent human annotation.
+* Datasets: build test sets from production traces or by hand; import CSV, export CSV or JSONL.
+* Prompts: versioned prompt registry with labels (such as production), version diff, and per-version metrics from real traffic. Apps fetch the labelled version with get_prompt() in the genai-telemetry SDK.
+* Agent &amp; Tools dashboard: tool error rate and latency, agent run health, possible tool loops.
+
+**Other changes**
+
+* All navigation is in a left sidebar on every page; Splunk's app bar is hidden. The sidebar can be collapsed to a slim rail (« button or the \[ key).
+* Load demo data button creates realistic sample traces, sessions, scores, prompts and a dataset, so you can try the app without your own data (admin role needed).
+* Time to first token: uses the real ttft_ms value when the SDK sends it.
+* Time-based model pricing: add a dated row to genai_model_pricing_history.csv when a price changes, so past costs stay correct. A nightly search rebuilds the current-price lookup.
+* Four alerts (cost spike, error rate, P95 latency, token budget) with volume floors so they stay quiet until real traffic flows.
+* GenAI_Traces data model gained session, user, trace name, prompt, environment, release, TTFT, tool and agent fields.
+* Light and dark themes; filters and time range are kept in the page URL so views can be bookmarked.
+
+**Upgrade notes**
+
+* Use genai-telemetry 1.3.0 or later for nested traces, sessions, users, inputs/outputs and scores. Older SDK versions still work, but traces are flat.
+* If data model acceleration is on, rebuild it after upgrading.
+* If you edited genai_model_pricing.csv in local/, move your prices into genai_model_pricing_history.csv.
+* If the new menu does not appear, restart Splunk and delete local/data/ui/nav/default.xml if it exists.
+
+**Compatibility (suggested — check before publishing):**
+
+* Splunk Enterprise: 9.x
+* Splunk Cloud: Victoria and Classic (passes AppInspect cloud checks with 0 failures)
+* Platforms: Platform independent
+* CIM: not applicable (app does not map to CIM data models)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Trace, evaluate and improve LLM apps in Splunk: nested traces, sessions, users, scores, datasets and prompt versions, plus cost, latency and error dashboards.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;GenAI Observability for Splunk monitors GenAI and large language model applications by collecting and analyzing trace data for requests, latency, token usage, cost, errors, retrieval-augmented generation retrieval, and agent tool calls. The app ingests trace telemetry into custom indexes and provides trace exploration pages modeled , dashboards for performance and cost management, and a Python SDK for instrumenting applications. It tracks LLM operational metrics across models, workflows, users, and sessions, enabling administrators to identify cost spikes, latency regressions, error patterns, and inefficient prompt or retrieval strategies. The app includes a data model for acceleration at scale, a prompt registry with versioned metrics from production traffic, and scoring workflows for building evaluation datasets. Cost tracking is performed using a historical pricing lookup that administrators maintain and a nightly search that rebuilds current pricing. The included Python SDK provides decorators for instrumenting LLM calls, RAG pipelines, agents, and tools, and supports session tracking, user attribution, and score submission.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0667641a-e6bc-11f1-9238-da4386ecacf8.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">kamal singh bisht</dc:creator>
+      <pubDate>Tue, 24 Nov 2026 00:30:20 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8308/#v3.0.0</guid>
     </item>
     <item>
-      <title>TA-sensors - v1.0.8 [Version Update]</title>
+      <title>FTD and ASA Syslog Field Extractions Add-on for Cisco Secure Firewall - v1.1.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/10286/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* CIM fixes for the Cisco Security Cloud app's `cisco:ftd:syslog`, `cisco:sfw:estreamer` and `cisco:asa` session data: action, src, signature and severity.
+* Six over-broad event types switched off, with two narrower replacements.
+* The 1.0.0 extractions are unchanged.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Search-time field extractions for Cisco Secure Firewall Threat Defense (FTD) and ASA syslog message IDs (sourcetype cisco:asa) that the Splunk Add-on for Cisco ASA and Cisco Security Cloud do not extract: failover, VPN/IKE, NAT, fragments, tunnels, inspection and chassis messages. Not affiliated with Cisco.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Adds search-time field extractions for Cisco Secure Firewall Threat Defense (FTD) and ASA syslog message IDs that neither the Splunk Add-on for Cisco ASA nor the Cisco Security Cloud app extracts. Install it alongside either add-on: it only adds fields, and leaves their parsing, event types, tags and CIM mappings as they are.
+
+- Failover and high availability: unit switching to active/standby, interface monitoring, link status, VPN and WebVPN HA status and progression.
+- VPN: IKEv1 and IKEv2 tunnel events, IPsec terminations, AnyConnect client messages and large packets, WebVPN sessions, UAUTH entries, SAML relay-state failures, VPN filter ACL hits.
+- NAT and traffic: PAT pool exhausted, translation and xlate failures, fragment limits and drops, GRE and IP-in-IP connections, reverse-path-check and protocol denies, IPv6-ICMP denies, DNS drops.
+- Inspection: SIP, DCERPC.
+- System and chassis: FTD Linux and FXOS chassis syslog (process, sudo commands, chassis sign-ins, commands and session ends), configuration backups, interface line protocol, routes added/deleted, telemetry, ASP queue full, trustpoint export failures.
+
+- Every regex accepts both %FTD- and %ASA- prefixes and is anchored on its own message ID, so it runs only on that message.
+- Unique class names (EXTRACT-ftdx_*), so nothing in other add-ons is replaced.
+- Field names follow the Splunk Add-on for Cisco ASA (src_ip, dest_ip, src_port, dest_port, src_interface, dest_interface, transport, user, vendor_action, reason), so its normalization and CIM mapping pick them up.
+- Search-time only: no inputs, no index-time settings, no scripts.
+
+Independent project, not affiliated with or endorsed by Cisco. Cisco, Cisco Secure Firewall and Firepower Threat Defense are trademarks of Cisco Systems, Inc.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/37d9d07a-e79b-11f1-9e2d-6657d59913ad.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Nikhil Chawla</dc:creator>
+      <pubDate>Tue, 24 Nov 2026 00:13:54 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10286/#v1.1.0</guid>
+    </item>
+    <item>
+      <title>Splunk ES Content Update - v6.11.1 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/3449/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;GitHub - [https://github.com/splunk/security_content/releases/tag/v6.11.1](https://github.com/splunk/security_content/releases/tag/v6.11.1)
+
+Release Notes - [https://help.splunk.com/en/splunk-enterprise-security-8/security-content-update/release-notes/6.11/splunk-security-content-release-notes/whats-new](https://help.splunk.com/en/splunk-enterprise-security-8/security-content-update/release-notes/6.11/splunk-security-content-release-notes/whats-new)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk ES Content Update (ESCU) app delivers pre-packaged Security Content. ESCU provides regular Security Content updates to help security practitioners address ongoing time-sensitive threats, attack methods, and other security issues.
+
+Security Content consists of tactics, techniques, and methodologies that help with detection, investigation, and response. Security Content enables security teams to directly operationalize detection searches, investigative searches, and other supporting details. ESCU can generate Notable/Risk Events in Splunk Enterprise Security. Security Content also contains easy-to-read background information and guidance, for key context on motivations and risks associated with attack techniques, as well as pragmatic advice on how to combat those techniques.
+
+The analytic stories and their searches are also available at - https://github.com/splunk/security_content.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8ce4ea9c-e79a-11f1-bbbb-66605a6fdc49.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Tue, 24 Nov 2026 00:09:01 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/3449/#v6.11.1</guid>
+    </item>
+    <item>
+      <title>Linux Storage Pool Integrity Add-on (ZFS / md RAID / btrfs) - v1.0.11 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/10454/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects storage-pool integrity from whatever is present: ZFS (zpool status/get), Linux md RAID (/pr&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects storage-pool integrity from whatever is present: ZFS (zpool status/get), Linux md RAID (/proc/mdstat + mdadm --detail) and btrfs (filesystem usage + device stats). Emits per-pool state (degraded, sync/rescan progress, reserved space, uncorrectable errors) as JSON events to index=main (sourcetype zfspool:status) and numeric zfspool.* metrics to index=metrics (sourcetype zfspool:metrics), with overview and metrics dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Mon, 23 Nov 2026 20:45:23 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10454/#v1.0.11</guid>
+    </item>
+    <item>
+      <title>UPS Health Add-on (NUT / apcupsd) - v1.0.11 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/10453/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects UPS health from Network UPS Tools (upsc) or apcupsd (apcaccess) when a UPS server is reacha&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects UPS health from Network UPS Tools (upsc) or apcupsd (apcaccess) when a UPS server is reachable: device model, online/off-battery status, battery charge, load and input voltage list. Emits JSON events to index=main (sourcetype ups:status) and ups.* metrics (device count, battery charge, on-battery flag) to index=metrics (sourcetype ups:metrics); hosts without a UPS server report &amp;#x27;absent&amp;#x27;.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Mon, 23 Nov 2026 20:31:56 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10453/#v1.0.11</guid>
+    </item>
+    <item>
+      <title>Datasource Validator - v1.1.2 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9171/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Validates that user-defined data sources grouped under platforms currently return at least one event, recording PASS/FAIL/ERROR/STALE status per source.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Data Source Validator app validates that user-defined data sources are currently returning at least one event in Splunk. Administrators define platforms such as Firewall or EDR, and under each platform create one or more data sources with an SPL search that should return events. A single sequential validation worker executes each data source&amp;#x27;s search on a schedule or on demand using a dedicated service account with minimal privileges. The app records PASS, FAIL, ERROR, or STALE status for each data source, and platform status rolls up from the status of its enabled child data sources. This provides visibility into which integrations have stopped receiving data. The app targets Splunk Cloud Platform and Splunk Enterprise 9.3 and later.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Adam Liquorish</dc:creator>
+      <pubDate>Mon, 23 Nov 2026 19:42:28 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9171/#v1.1.2</guid>
+    </item>
+    <item>
+      <title>Attack Path Intelligence App - v2.3.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9348/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Dashboard hotfix.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Map attack paths to your crown jewels (Crown Jewel → Attack Surface → Attack Vector), prioritize them with a configurable risk score and measure detection coverage by MITRE ATT&amp;amp;CK technique using Splunk ES correlation searches or your own detection inventory. Lookup-driven, with sample data included.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Attack Path Intelligence shows how an attacker could reach your organization&amp;#x27;s most critical assets, and whether your detections would catch them.
+
+The app models attack paths as Crown Jewel → Attack Surface → Attack Vector. Each path gets a priority score based on the crown jewel&amp;#x27;s criticality, the jewel-surface relationship, the vector&amp;#x27;s relevance, the surface&amp;#x27;s exposure and the evidence level. The evidence level says whether a vector was observed in logs, confirmed by a vulnerability scanner or only inferred from the architecture.
+
+Every vector is mapped to MITRE ATT&amp;amp;CK techniques, and the app matches those techniques against your detections. You can use Splunk Enterprise Security correlation searches, read through their MITRE annotations, or a detection inventory lookup for rules outside ES. The result is a coverage view per vector, per path and per crown jewel. It also gives you a ranked detection engineering backlog and a list of disabled detections that would increase coverage if enabled.
+
+Optional live panels use the CIM Network_Traffic and Web data models to show real activity against the assets of each attack surface.
+
+Everything is lookup-driven and configurable: scores, weights, risk thresholds, MITRE match weights, data sources and CIM fields. The app ships with sample content for a fictional organization, so you can explore the dashboards before modeling your own environment.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9f33582e-e573-11f1-a266-0a5e568f38a6.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Gabriel José Biudes Lino</dc:creator>
+      <pubDate>Mon, 23 Nov 2026 19:38:55 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9348/#v2.3.0</guid>
+    </item>
+    <item>
+      <title>CPU Frequency and Throttle Add-on (cpufreq sysfs + thermal throttle) - v1.0.11 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/10452/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects CPU frequency state from /sys/devices/system/cpu (per-core current/min/max frequency, gover&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects CPU frequency state from /sys/devices/system/cpu (per-core current/min/max frequency, governor) and hardware thermal-throttle counters (package_throttle_count, mperf-based if present). Emits JSON events to index=main (sourcetype throttle:status) and throttle.* metrics to index=metrics (sourcetype throttle:metrics); alarm status when a thermal-throttle counter increases since the previous cycle.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Mon, 23 Nov 2026 19:23:06 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10452/#v1.0.11</guid>
+    </item>
+    <item>
+      <title>Systemd Service Health Add-on (failed units) - v1.0.11 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/10451/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects systemd service health: total/active/failed unit counts and the list of failed units (with&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects systemd service health: total/active/failed unit counts and the list of failed units (with substate) via systemctl. Emits JSON events to index=main (sourcetype service:status) every 60s and service.* metrics to index=metrics (sourcetype service:metrics) - total, active, failed counts - with alarm status when any unit is in a failed state, plus dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Mon, 23 Nov 2026 19:19:07 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10451/#v1.0.11</guid>
+    </item>
+    <item>
+      <title>TA-sensors - v1.0.10 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/10385/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects Linux hwmon (lm-sensors class) board health - CPU/core temperatures, fans, voltages, NVMe temps, power - from BMC-less hosts with zero dependencies. Stdlib python3 reads /sys/class/hwmon and emits JSON events, mstats-ready sensors.* metrics, and dashboards.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TA-sensors brings hardware health monitoring to the machines IPMI can&amp;#x27;t reach.
 
@@ -68,160 +214,335 @@ TA-sensors is fully standalone, but pairs with TA-IPMI, which covers BMC-equippe
 
 Free and source-available for personal, educational and evaluation use; commercial use requires a paid license from BentleyPC LLC (see LICENSE).&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Mon, 23 Nov 2026 13:06:40 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10385/#v1.0.8</guid>
+      <pubDate>Mon, 23 Nov 2026 19:15:47 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10385/#v1.0.10</guid>
     </item>
     <item>
-      <title>Linux Storage Pool Integrity Add-on (ZFS / md RAID / btrfs) - v1.0.9 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/10454/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects storage-pool integrity from whatever is present: ZFS (zpool status/get), Linux md RAID (/pr&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects storage-pool integrity from whatever is present: ZFS (zpool status/get), Linux md RAID (/proc/mdstat + mdadm --detail) and btrfs (filesystem usage + device stats). Emits per-pool state (degraded, sync/rescan progress, reserved space, uncorrectable errors) as JSON events to index=main (sourcetype zfspool:status) and numeric zfspool.* metrics to index=metrics (sourcetype zfspool:metrics), with overview and metrics dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Mon, 23 Nov 2026 13:06:31 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10454/#v1.0.9</guid>
-    </item>
-    <item>
-      <title>UPS Health Add-on (NUT / apcupsd) - v1.0.9 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/10453/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects UPS health from Network UPS Tools (upsc) or apcupsd (apcaccess) when a UPS server is reacha&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects UPS health from Network UPS Tools (upsc) or apcupsd (apcaccess) when a UPS server is reachable: device model, online/off-battery status, battery charge, load and input voltage list. Emits JSON events to index=main (sourcetype ups:status) and ups.* metrics (device count, battery charge, on-battery flag) to index=metrics (sourcetype ups:metrics); hosts without a UPS server report &amp;#x27;absent&amp;#x27;.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Mon, 23 Nov 2026 13:06:21 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10453/#v1.0.9</guid>
-    </item>
-    <item>
-      <title>CPU Frequency and Throttle Add-on (cpufreq sysfs + thermal throttle) - v1.0.9 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/10452/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects CPU frequency state from /sys/devices/system/cpu (per-core current/min/max frequency, gover&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects CPU frequency state from /sys/devices/system/cpu (per-core current/min/max frequency, governor) and hardware thermal-throttle counters (package_throttle_count, mperf-based if present). Emits JSON events to index=main (sourcetype throttle:status) and throttle.* metrics to index=metrics (sourcetype throttle:metrics); alarm status when a thermal-throttle counter increases since the previous cycle.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Mon, 23 Nov 2026 13:06:12 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10452/#v1.0.9</guid>
-    </item>
-    <item>
-      <title>Systemd Service Health Add-on (failed units) - v1.0.9 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/10451/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects systemd service health: total/active/failed unit counts and the list of failed units (with&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects systemd service health: total/active/failed unit counts and the list of failed units (with substate) via systemctl. Emits JSON events to index=main (sourcetype service:status) every 60s and service.* metrics to index=metrics (sourcetype service:metrics) - total, active, failed counts - with alarm status when any unit is in a failed state, plus dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Mon, 23 Nov 2026 13:06:02 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10451/#v1.0.9</guid>
-    </item>
-    <item>
-      <title>Storage Path Health Add-on (Device-Mapper Multipath / iSCSI) - v1.0.9 [Version Update]</title>
+      <title>Storage Path Health Add-on (Device-Mapper Multipath / iSCSI) - v1.0.11 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/10450/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects storage-path health from device-mapper-multipath (systool -C) and iSCSI sessions (iscsiadm)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects storage-path health from device-mapper-multipath (systool -C) and iSCSI sessions (iscsiadm): per-multipath active/failed path counts and path state, plus iSCSI session counts. Emits JSON events to index=main (sourcetype sanpath:status) and sanpath.* metrics to index=metrics (sourcetype sanpath:metrics). Hosts without multipath report &amp;#x27;absent&amp;#x27; so coverage stays visible.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Mon, 23 Nov 2026 13:05:53 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10450/#v1.0.9</guid>
+      <pubDate>Mon, 23 Nov 2026 19:12:26 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10450/#v1.0.11</guid>
     </item>
     <item>
-      <title>Power and Energy Add-on (powercap RAPL + hwmon power readings) - v1.0.9 [Version Update]</title>
+      <title>Power and Energy Add-on (powercap RAPL + hwmon power readings) - v1.0.11 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/10449/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects power telemetry from /sys/class/powercap (RAPL energy counters in microjoules, package/core&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects power telemetry from /sys/class/powercap (RAPL energy counters in microjoules, package/core domain limits) and, as a fallback, from hwmon power sensors (/sys/class/hwmon power*_input). Emits JSON events to index=main (sourcetype rapl:status) and rapl.* metrics (energy counters, current watts, counts) to index=metrics (sourcetype rapl:metrics), with dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Mon, 23 Nov 2026 13:05:43 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10449/#v1.0.9</guid>
+      <pubDate>Mon, 23 Nov 2026 19:09:08 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10449/#v1.0.11</guid>
     </item>
     <item>
-      <title>Pressure Stall Information Add-on (PSI) - v1.0.9 [Version Update]</title>
+      <title>Pressure Stall Information Add-on (PSI) - v1.0.11 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/10448/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects PSI (pressure stall information) for CPU, memory and IO from /proc/pressure: some/full aver&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects PSI (pressure stall information) for CPU, memory and IO from /proc/pressure: some/full averages over 10s/60s/300s, including per-cgroup v2 pressure files when present. Emits JSON events to index=main (sourcetype psi:status) every 60s and psi_* metrics to index=metrics (sourcetype psi:metrics), with dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Mon, 23 Nov 2026 13:05:34 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10448/#v1.0.9</guid>
+      <pubDate>Mon, 23 Nov 2026 19:05:49 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10448/#v1.0.11</guid>
     </item>
     <item>
-      <title>Patch Compliance Add-on (apt / dnf upgradable packages) - v1.0.9 [Version Update]</title>
+      <title>Patch Compliance Add-on (apt / dnf upgradable packages) - v1.0.11 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/10447/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects patch compliance: upgradable package count (security vs total where distinguishable), days&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects patch compliance: upgradable package count (security vs total where distinguishable), days since the last successful apt/dnf transaction (from package-manager history logs), and the distro release. Emits JSON events to index=main (sourcetype patch:status) and patch.* metrics to index=metrics (sourcetype patch:metrics) hourly, with dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Mon, 23 Nov 2026 13:05:24 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10447/#v1.0.9</guid>
+      <pubDate>Mon, 23 Nov 2026 19:02:31 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10447/#v1.0.11</guid>
     </item>
     <item>
-      <title>Network Link Quality Add-on (carrier speed errors drops) - v1.0.9 [Version Update]</title>
+      <title>TA-Nvidia - v1.0.8 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/10131/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free NVIDIA GPU monitoring for Splunk. Streams complete nvidia-smi telemetry, temperature, utilization, memory, power, clocks, ECC, PCIe, processes, as both JSON events and index=metrics time-series, with two dashboard packs. Passes AppInspect cloud pre-cert. Commercial use requires license.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TA-Nvidia is a free, source-available Splunk add-on that brings enterprise NVIDIA GPU observability to any Splunk instance running on hosts with NVIDIA drivers. It repeatedly captures the COMPLETE nvidia-smi state; temperature, utilization, fan speed, power draw and limits, framebuffer memory, graphics/SM/clocks, ECC errors, PCIe throughput, performance state, compute processes, vGPU, and more and indexes it two ways with zero manual configuration:
+
+1. Full JSON events (sourcetype nvidia:smi) in index=main for deep-dive fielded search, and
+2. Time-series metrics (nvidia.* metric names) in index=metrics via a metric-schema pipeline, enabling fast mstats trends and visualizations.
+
+Two pre-built dashboards ship with the app GPU Overview (per-GPU cards for temp, utilization, memory, power, clock, fan) and GPU Metrics (long-window trended charts via mstats).
+
+Why this matters: GPU-equipped servers are expensive and failure-prone. Overheating, ECC errors, clock throttling, memory exhaustion, and power-limiting silently destroy GPU workload performance (AI/ML training and inference, VDI, HPC, video/transcode). Splunk has no free, turnkey NVIDIA telemetry app, TA-Nvidia closes that gap in about one minute, on any distribution (Tested on datacenter and workstation cards, current driver: 580.x, RTX PRO 6000 Blackwell).
+
+Licensing: free for personal, evaluation, and non-commercial use. Commercial/production use requires a license from the author: michael@bentleypc.com. Source is available on GitHub: https://github.com/bentleymi/TA-Nvidia&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Mon, 23 Nov 2026 18:59:13 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10131/#v1.0.8</guid>
+    </item>
+    <item>
+      <title>CJIS Compliance App - v1.2.0 [New App Release]</title>
+      <link>https://splunkbase.splunk.com/app/10145/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;\# CJIS Compliance App 1.2.0: Release Notes
+
+Covers everything changed since version 1.0.22.
+
+\## Summary (short form for the Splunkbase release notes field)
+
+1.2.0 makes the app safe to trust out of the box and much more useful day to day. Every control now starts as &quot;not assessed&quot; instead of pre-marked. Findings no longer flood or duplicate. A new Setup and Data Readiness page shows what data the app is missing. Nine new dashboards add triage, incident logging, a policy-area scorecard, a gaps list, encryption in transit, network boundary, remote access, vulnerability and patch status, and source investigation. Detections were tightened, and in-app documentation was expanded. Requires the Splunk Common Information Model (CIM) add-on.
+
+\## New dashboards
+
+\*\*Compliance\*\*
+\- \*\*CJIS Policy Area Scorecard:\*\* posture and findings rolled up to the 13 CJIS Security Policy areas (5.1 to 5.13), with a click-through to each area's controls.
+\- \*\*Gaps and Actions:\*\* controls that are not implemented, with owner, due date and days overdue, plus controls whose review is overdue.
+\- \*\*Incident Log:\*\* an append-only record of reportable incidents and whether and when each was reported to the state CJIS Systems Agency (CJIS 5.3, NIST IR-6).
+\- \*\*Evidence Pack:\*\* one page for an auditor: posture summary, every control with status and findings, audit retention against your requirement, weekly snapshots and status history. Export to PDF or CSV.
+\- \*\*Setup and Data Readiness\*\* (first item in the menu): shows, for each CIM data model, whether it is accelerated and has data, which controls have the data they need, which scope lists are still empty, and which indexes are searched.
+
+\*\*Monitoring\*\*
+\- \*\*Encryption in Transit (SC-8 / SC-13):\*\* allowed connections over protocols that do not encrypt traffic, with a &quot;what to fix&quot; recommendation for each, and weak TLS versions when certificate data is present.
+\- \*\*Network Boundary (SC-7):\*\* allowed versus blocked traffic, reachable services, top blocked sources and ports, and firewall changes.
+\- \*\*Remote Access (AC-17):\*\* remote logons, most active remote users, failed logons by source, and users signing in from more than one country.
+\- \*\*Vulnerability and Patch Status (SI-2 / RA-5):\*\* open critical and high vulnerabilities, how long they have been open, and failed or pending updates.
+
+\*\*Investigation\*\*
+\- \*\*Finding Triage (IR-4 / IR-5):\*\* acknowledge, assign, close or mark a finding a false positive, with a note and a full history of who changed what and when.
+\- \*\*Source / IP Investigation:\*\* logons, firewall traffic, intrusion signatures and findings for a single address.
+
+\## Improvements
+
+\*\*Trustworthy defaults\*\*
+\- Every control now ships as \*\*not assessed\*\*. Nothing is pre-marked as implemented.
+\- Control status changes are recorded with who and when. The posture editor requires an owner and accepts an optional due date.
+\- A weekly \*\*Evidence Snapshot\*\* search records each control's status and findings over time (off by default).
+
+\*\*Findings\*\*
+\- Each condition is now \*\*one finding\*\* (for example, one source failing logons) that is updated on each run, with first seen and last seen times. Previously a persistent condition added a new finding every hour.
+\- Triage decisions are stored separately, so re-running a search never undoes them.
+\- Findings are kept for a configurable number of days (default 365).
+
+\*\*Detections\*\*
+\- \*\*Brute force then success:\*\* now checks that the success came after the failures. It replaces the separate Cross-System Correlation search, which duplicated it.
+\- \*\*Privileged group membership (AC-6):\*\* now works with classic Windows event logs, which it previously missed, and covers more groups plus removals.
+\- \*\*File integrity (SI-7):\*\* limited to watched locations (system files, startup and autorun keys, services) and ignores known noise, so it no longer floods. It stays off until you supply Sysmon data and change windows.
+\- \*\*Log source silent (AU-5):\*\* per-source limits, and silent hosts on the CJIS device list.
+\- \*\*Malicious code (SI-3):\*\* uses the CIM Malware data model instead of one vendor's data.
+\- \*\*MFA (IA-2):\*\* uses the CIM Authentication data model.
+\- \*\*Configuration changes (CM-3):\*\* reports changes outside approved change windows.
+\- \*\*New: cleartext protocols (SC-8):\*\* creates findings for high-risk unencrypted protocols such as FTP, Telnet, POP3, IMAP and LDAP without TLS.
+\- \*\*Account exclusions:\*\* machine and Windows system accounts are ignored by default, and you can add your own service accounts in \`cjis_account_exclusions_local.csv\`.
+\- The after-hours window, brute-force threshold and silent-source limit are now settings you can change.
+
+\*\*Dashboards and documentation\*\*
+\- Dashboards no longer show machine-account and logoff noise in the account-change and privileged-logon tables.
+\- Menu names now include their control numbers.
+\- New in-app documentation: Getting Started, Using Finding Triage, Using the Incident Log, Scorecard / Gaps and Actions / Evidence Pack, Monitoring and Investigation Pages, and a Settings Reference.
+
+\## Upgrading from 1.0.x
+
+\- \*\*Findings:\*\* findings written by earlier versions used a different key. After upgrading, old findings remain until they age out and can appear next to new ones. If you want a clean start, you can clear them by running \`| inputlookup cjis_findings | where 1\=0 | outputlookup cjis_findings\`. This deletes all findings.
+\- \*\*Control status:\*\* your existing status records are kept. Only new installs start as &quot;not assessed&quot;.
+\- \*\*Lookup files:\*\* Splunk keeps existing lookup files when an app is upgraded, so new rows in shipped CSVs do not appear on upgrade. Replace the file if you want them.
+\- \*\*New settings (macros):\*\* \`cjis_findings_retention_days\`, \`cjis_required_retention_days\`, \`cjis_review_interval_days\`, \`cjis_bf_threshold\`, \`cjis_silent_default_minutes\`, \`cjis_after_hours_start\`, \`cjis_after_hours_end\`, \`cjis_fim_scope\`, \`cjis_fim_noise\`, \`cjis_remote_access_filter\` and \`cjis_exclude_accounts\`. Defaults are in the Settings Reference.
+
+\## Requirements
+
+\- Splunk Enterprise or Splunk Cloud Platform 9.x or 10.x, on a search head.
+\- The Splunk Common Information Model (CIM) add-on with the data models you use (Authentication, Change, Intrusion_Detection, Network_Traffic, and optionally Malware, Vulnerabilities, Updates and Certificates). Accelerate the models for speed. The Setup and Data Readiness page tells you which are missing.
+
+\## Known limitations
+
+\- The finding triage and incident log pages write to the KV store, so Splunk shows a one-time &quot;risky commands&quot; warning. Review the search and choose Run Query Anyway.
+\- A closed finding stays closed if the same condition happens again. Check its last seen time and reopen it if needed.
+\- SI-7 needs Sysmon file and registry events and real rows in \`change_windows.csv\`.
+\- Status is a self-assessment by your team. The app records and reports it but cannot prove a control is implemented.
+\- Multi-agency scoping is not included in this release.
+\- Protocol detection in Encryption in Transit is by port number, so services on non-standard ports are not classified.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;CJIS Compliance maps the FBI CJIS Security Policy v6.0 to NIST SP 800-53 Rev. 5. It tracks which controls are implemented, monitors security data through CIM, and stores correlation findings for review without Enterprise Security.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;CJIS Compliance maps the FBI CJIS Security Policy v6.0 to NIST SP 800-53 Rev. 5. It is for teams that need to show which CJIS controls are in place, watch the security data those controls depend on, and review correlation findings without Enterprise Security. Posture covers the 13 CJIS policy areas. Each control can be marked implemented, partial, planned, not assessed, or not applicable.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/79c6778c-e6aa-11f1-a266-0a5e568f38a6.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunky Monkey</dc:creator>
+      <pubDate>Mon, 23 Nov 2026 18:57:26 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10145/#v1.2.0</guid>
+    </item>
+    <item>
+      <title>Network Link Quality Add-on (carrier speed errors drops) - v1.0.11 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/10446/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects per-interface link quality from /sys/class/net and /proc/net/dev: carrier/operstate, negoti&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects per-interface link quality from /sys/class/net and /proc/net/dev: carrier/operstate, negotiated speed, MTU, cumulative RX/TX error and drop counters per physical interface (virtual/veth/lo excluded). Emits JSON events to index=main (sourcetype netqual:status) and netqual._* metrics to index=metrics (sourcetype netqual:metrics) at 60s cadence, with dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Mon, 23 Nov 2026 13:05:15 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10446/#v1.0.9</guid>
+      <pubDate>Mon, 23 Nov 2026 18:55:54 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10446/#v1.0.11</guid>
     </item>
     <item>
-      <title>Memory Watchdog Add-on (leak / swap thrash / OOM early warning) - v1.0.9 [Version Update]</title>
+      <title>Memory Watchdog Add-on (leak / swap thrash / OOM early warning) - v1.0.11 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/10444/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects early-warning memory signals from /proc/meminfo, /proc/vmstat and /proc/slabinfo: available&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects early-warning memory signals from /proc/meminfo, /proc/vmstat and /proc/slabinfo: available-memory percentage, swap usage, cumulative swap-in/out counters, cumulative oom_kill counter (with new-OOM detection via a state file), and the top memory-consuming kernel slab caches. Emits JSON events to index=main (sourcetype memwatch:status) and memwatch.* metrics to index=metrics (sourcetype memwatch:metrics) at 300s, with dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Mon, 23 Nov 2026 13:05:05 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10444/#v1.0.9</guid>
+      <pubDate>Mon, 23 Nov 2026 18:52:35 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10444/#v1.0.11</guid>
     </item>
     <item>
-      <title>Kernel Crash-Readiness Add-on (kdump taint oops/panic) - v1.0.9 [Version Update]</title>
+      <title>Kernel Crash-Readiness Add-on (kdump taint oops/panic) - v1.0.11 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/10443/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects kernel crash-readiness and crash signals: kexec crash kernel loaded, kdump service state, k&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects kernel crash-readiness and crash signals: kexec crash kernel loaded, kdump service state, kernel taint state, uptime, and counts of NEW oops/panic/BUG lines in the kernel journal ring since the previous cycle. Emits JSON events to index=main (sourcetype kernel:status) and kernel.* metrics to index=metrics (sourcetype kernel:metrics); alarm status when new oops/panic/BUG lines are detected.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Mon, 23 Nov 2026 13:04:56 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10443/#v1.0.9</guid>
+      <pubDate>Mon, 23 Nov 2026 18:49:16 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10443/#v1.0.11</guid>
     </item>
     <item>
-      <title>Hardware RAID Controller State Add-on (MegaCLI/StorCLI SSAcli) - v1.0.9 [Version Update]</title>
+      <title>Journald Log-Plane Meta Add-on (disk usage file growth) - v1.0.10 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/10457/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects journald log-plane metadata: journal disk usage (journalctl --disk-usage), journal file cou&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects journald log-plane metadata: journal disk usage (journalctl --disk-usage), journal file count under /var/log/journal, total journal size, age of the oldest journal file, and the journald service state. Emits JSON events to index=main (sourcetype journald:status) and journald.* metrics (disk_kb, size_mb, file_count) to index=metrics (sourcetype journald:metrics) every 300s, with dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Mon, 23 Nov 2026 18:45:58 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10457/#v1.0.10</guid>
+    </item>
+    <item>
+      <title>TA-IPMI - v1.0.8 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/10139/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Free server BMC monitoring for Splunk. Streams IPMI sensors (temps, fan RPM, volts, watts), chassis/PSU status, and the System Event Log from ipmitool&amp;#x27;s local interface into events and metrics, with Overview and Metrics dashboards. Passes AppInspect cloud pre-cert. Commercial use requires license.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;TA-IPMI is a free, source-available Splunk add-on that brings out-of-band hardware health monitoring to any Splunk host with a server-class BMC. It reads full IPMI telemetry via ipmitool&amp;#x27;s local open interface and indexes it three ways with zero manual configuration:
+
+1. Sensor readings: every SDR sensor (temperatures, fan RPM, voltages such as 12V/3.3V/Vcore/BAT, power draw in watts, plus thresholds), plus chassis and BMC status as rich JSON events (index=main, sourcetype ipmi:status) for fielded search.
+2. The same readings as time-series metrics in index=metrics (sourcetype ipmi:metrics, ipmi.* measure names), so thermal, fan, voltage and power trends survive retention and answer in milliseconds with mstats.
+3. The System Event Log (SEL): each SEL record indexed exactly once as a separate event with sensor, event type, assertion state and raw detail preserved, so BIOS-level crashes, power faults, ECC errors, fan failures and intrusion alerts become searchable Splunk events.
+
+Why it matters: IPMI/BMC is the only observability layer that survives OS crashes, power loss, and hangs. Overheating servers, dead fans, failing PSUs, dropped redundancy and unexpected reboots happen below the OS where agents and syslog can&amp;#x27;t follow, but the BMC remembers everything. TA-IPMI closes that blind spot in minutes: install it on the host, and its BMC telemetry flows into Splunk with ready-made overview and trend dashboards.
+
+Licensing: free for personal, evaluation, and non-commercial use. Commercial/production use requires a license from the author: michael@bentleypc.com. Source available at https://github.com/bentleymi/TA-IPMI&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Mon, 23 Nov 2026 18:42:39 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10139/#v1.0.8</guid>
+    </item>
+    <item>
+      <title>Hardware RAID Controller State Add-on (MegaCLI/StorCLI SSAcli) - v1.0.11 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/10441/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects hardware RAID controller state from storcli3/storcli (LSI/MegaRAID), ssacli (HP) or MegaCli&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects hardware RAID controller state from storcli3/storcli (LSI/MegaRAID), ssacli (HP) or MegaCli, if a controller is present: controller state, drive counts, failed/rebuilding drives and cache/battery state. Emits JSON events to index=main (sourcetype hwraid:status) and hwraid.* metrics to index=metrics (sourcetype hwraid:metrics). Hosts with no hardware RAID report &amp;#x27;absent&amp;#x27; with a zero controller count, so fleet coverage stays visible.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Mon, 23 Nov 2026 13:04:46 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10441/#v1.0.9</guid>
+      <pubDate>Mon, 23 Nov 2026 18:39:20 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10441/#v1.0.11</guid>
     </item>
     <item>
-      <title>Device Inventory Delta Add-on (PCI/USB change detection) - v1.0.9 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/10439/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects a PCI/USB device inventory signature (count + MD5 of the sorted device list via lspci/lsusb&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects a PCI/USB device inventory signature (count + MD5 of the sorted device list via lspci/lsusb) and reports new or removed devices versus the previous cycle using a local state file. Emits JSON events to index=main (sourcetype devfleet:status) and devfleet.* metrics (device counts, delta count) to index=metrics (sourcetype devfleet:metrics) hourly, with dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Mon, 23 Nov 2026 13:04:37 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10439/#v1.0.9</guid>
-    </item>
-    <item>
-      <title>Security Baseline Add-on (SecureBoot lockdown sshd shadow auditd) - v1.0.9 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/10436/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects a host security baseline from the kernel/filesystem: UEFI SecureBoot state, kernel lockdown&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects a host security baseline from the kernel/filesystem: UEFI SecureBoot state, kernel lockdown mode, SSH root-login and password-auth settings (sshd_config, including sshd.d), password aging policy (/etc/shadow), and auditd service state. Emits JSON events to index=main (sourcetype baseline:status) and baseline.* metrics to index=metrics (sourcetype baseline:metrics) hourly, with dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Mon, 23 Nov 2026 13:04:21 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10436/#v1.0.9</guid>
-    </item>
-    <item>
-      <title>Backup Job Assurance Add-on (restic / borg / b2 / rclone) - v1.0.9 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/10435/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects backup-system health: last snapshot age and count for restic and borg repositories (from a&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects backup-system health: last snapshot age and count for restic and borg repositories (from a config file), and active backup-related systemd timers (restic/borg/b2/rclone/duplicity/timeshift units). Emits JSON events to index=main (sourcetype backup:status) and backup.* metrics to index=metrics (sourcetype backup:metrics) - configured flag, snapshot counts, snapshot age in hours, active timer count - with dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Mon, 23 Nov 2026 13:04:12 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10435/#v1.0.9</guid>
-    </item>
-    <item>
-      <title>Identity Client Add-on (nsswitch SSSD Kerberos) - v1.0.9 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/10433/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects identity-client state: name-service lookup order from /etc/nsswitch.conf, SSSD service stat&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects identity-client state: name-service lookup order from /etc/nsswitch.conf, SSSD service state and configured domains, system Kerberos ticket cache count, and nscd/oddjob presence where installed. Emits JSON events to index=main (sourcetype authid:status) and authid.* metrics to index=metrics (sourcetype authid:metrics); local-auth-only hosts report the baseline without alarms.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Mon, 23 Nov 2026 13:04:02 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10433/#v1.0.9</guid>
-    </item>
-    <item>
-      <title>AMD GPU Telemetry Add-on (/sys/class/drm + /sys/class/kfd) - v1.0.9 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/10431/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects AMD GPU telemetry from /sys/class/drm/cardN/device (VRAM used/total, busy %, temperature vi&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects AMD GPU telemetry from /sys/class/drm/cardN/device (VRAM used/total, busy %, temperature via associated hwmon) and /sys/class/kfd (GPU count, memory info) when AMD GPUs are present. Emits JSON events to index=main (sourcetype amdgpu:status) and amdgpu.* metrics to index=metrics (sourcetype amdgpu:metrics); hosts without AMD GPUs report &amp;#x27;absent&amp;#x27;.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Mon, 23 Nov 2026 13:03:53 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10431/#v1.0.9</guid>
-    </item>
-    <item>
-      <title>Linux Disk SMART and NVMe Health Add-on - v1.0.10 [Version Update]</title>
+      <title>Linux Disk SMART and NVMe Health Add-on - v1.0.12 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/10429/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects disk health from smartctl (SATA/ATA SMART + NVMe) and /sys/class/nvme: health status, power&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects disk health from smartctl (SATA/ATA SMART + NVMe) and /sys/class/nvme: health status, power-on hours, temperature, NVMe wear (percentage used, available spare), media errors and SMART raw counters (reallocated, uncorrected, CRC). Emits per-disk JSON events to index=main (sourcetype disk:status) and numeric disk.. metrics to index=metrics (sourcetype disk:metrics), with overview and metrics dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Mon, 23 Nov 2026 13:03:43 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10429/#v1.0.10</guid>
+      <pubDate>Mon, 23 Nov 2026 18:36:01 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10429/#v1.0.12</guid>
     </item>
     <item>
-      <title>Scheduled Job Heartbeat Add-on (systemd timers cron) - v1.0.9 [Version Update]</title>
+      <title>Device Inventory Delta Add-on (PCI/USB change detection) - v1.0.11 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/10439/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects a PCI/USB device inventory signature (count + MD5 of the sorted device list via lspci/lsusb&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects a PCI/USB device inventory signature (count + MD5 of the sorted device list via lspci/lsusb) and reports new or removed devices versus the previous cycle using a local state file. Emits JSON events to index=main (sourcetype devfleet:status) and devfleet.* metrics (device counts, delta count) to index=metrics (sourcetype devfleet:metrics) hourly, with dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Mon, 23 Nov 2026 18:32:42 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10439/#v1.0.11</guid>
+    </item>
+    <item>
+      <title>Scheduled Job Heartbeat Add-on (systemd timers cron) - v1.0.11 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/10437/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects scheduled-job heartbeat data: all systemd timers (next elapsed, last elapsed, last-run time&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects scheduled-job heartbeat data: all systemd timers (next elapsed, last elapsed, last-run timestamps) via systemctl list-timers, plus a count of cron jobs from /etc/crontab and /etc/cron.d. Emits JSON events to index=main (sourcetype cronbeat:status) and cronbeat.* metrics (timer totals, stale timers, cron job count) to index=metrics (sourcetype cronbeat:metrics), with dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Mon, 23 Nov 2026 13:03:29 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10437/#v1.0.9</guid>
+      <pubDate>Mon, 23 Nov 2026 18:29:23 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10437/#v1.0.11</guid>
+    </item>
+    <item>
+      <title>Security Baseline Add-on (SecureBoot lockdown sshd shadow auditd) - v1.0.11 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/10436/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects a host security baseline from the kernel/filesystem: UEFI SecureBoot state, kernel lockdown&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects a host security baseline from the kernel/filesystem: UEFI SecureBoot state, kernel lockdown mode, SSH root-login and password-auth settings (sshd_config, including sshd.d), password aging policy (/etc/shadow), and auditd service state. Emits JSON events to index=main (sourcetype baseline:status) and baseline.* metrics to index=metrics (sourcetype baseline:metrics) hourly, with dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Mon, 23 Nov 2026 18:26:04 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10436/#v1.0.11</guid>
+    </item>
+    <item>
+      <title>Backup Job Assurance Add-on (restic / borg / b2 / rclone) - v1.0.11 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/10435/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects backup-system health: last snapshot age and count for restic and borg repositories (from a&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects backup-system health: last snapshot age and count for restic and borg repositories (from a config file), and active backup-related systemd timers (restic/borg/b2/rclone/duplicity/timeshift units). Emits JSON events to index=main (sourcetype backup:status) and backup.* metrics to index=metrics (sourcetype backup:metrics) - configured flag, snapshot counts, snapshot age in hours, active timer count - with dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Mon, 23 Nov 2026 18:22:45 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10435/#v1.0.11</guid>
+    </item>
+    <item>
+      <title>Identity Client Add-on (nsswitch SSSD Kerberos) - v1.0.11 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/10433/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects identity-client state: name-service lookup order from /etc/nsswitch.conf, SSSD service stat&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects identity-client state: name-service lookup order from /etc/nsswitch.conf, SSSD service state and configured domains, system Kerberos ticket cache count, and nscd/oddjob presence where installed. Emits JSON events to index=main (sourcetype authid:status) and authid.* metrics to index=metrics (sourcetype authid:metrics); local-auth-only hosts report the baseline without alarms.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Mon, 23 Nov 2026 18:19:26 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10433/#v1.0.11</guid>
+    </item>
+    <item>
+      <title>AMD GPU Telemetry Add-on (/sys/class/drm + /sys/class/kfd) - v1.0.11 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/10431/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects AMD GPU telemetry from /sys/class/drm/cardN/device (VRAM used/total, busy %, temperature vi&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects AMD GPU telemetry from /sys/class/drm/cardN/device (VRAM used/total, busy %, temperature via associated hwmon) and /sys/class/kfd (GPU count, memory info) when AMD GPUs are present. Emits JSON events to index=main (sourcetype amdgpu:status) and amdgpu.* metrics to index=metrics (sourcetype amdgpu:metrics); hosts without AMD GPUs report &amp;#x27;absent&amp;#x27;.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
+      <pubDate>Mon, 23 Nov 2026 18:16:07 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/10431/#v1.0.11</guid>
+    </item>
+    <item>
+      <title>SecurityScorecard App for Splunk - v1.0.5 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/6298/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**SecurityScorecard App for Splunk 1.0.5**
+
+**What's fixed**
+
+* **The Score Trend chart shows your latest scores.** On My Scorecard, if your time range covered more than 10 days, the chart showed the oldest 10 days. It now shows the most recent 10 days, oldest to newest.
+* **Your own company shows up on dashboards again.** With the Portfolio filter set to &quot;All&quot;, your own company's data was left out. It now appears in Issues and Spotlight, in the Company picker and in Worst Performing Companies, listed under portfolio &quot;None&quot;.
+* **Your company no longer appears as one of your own vendors.** CVE Vendor Issues and Ransomware Vendor Issues now leave your company out, as Vendor Scores already did.
+
+**Before you upgrade**
+
+* **Upgrade in place.** Your setup carries over, including your index and company name, so you don't need to uninstall first.
+* **Use it with add-on 2.3.5.** The add-on fix puts scores on the right day. This release fixes how the dashboards read and show that data.
+
+**Compatibility**
+
+* Splunk Enterprise 9.3 through 10.6.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Requires SecurityScorecard Splunk Add-on v2.2 or later.
+
+SecurityScorecard is a security ratings platform that enables enterprises to instantly rate and understand the security risk of companies, non-intrusively and from an outside-in perspective. We use an A-F rating scale. Companies with a C, D or F rating are 5.4 times more likely to be breached or face compliance penalties than companies with an A or B rating. Our platform is used by hundreds of customers for use-cases including vendor risk management, cyber insurance, board reporting, and M&amp;amp;A. Headquartered in New York City, we are funded by top investors like Sequoia Capital, Google Ventures, NGP, Moody’s, Intel, and others. Our vision is to create a new language for companies and their partners to communicate, understand, and improve each other’s security posture.
+
+Check out the details tab for more information!&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/42450ca0-e764-11f1-bdbb-26e7570dc0e4.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Luke Household</dc:creator>
+      <pubDate>Mon, 23 Nov 2026 17:40:08 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/6298/#v1.0.5</guid>
+    </item>
+    <item>
+      <title>SecurityScorecard Add-on for Splunk - v2.3.5 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/4486/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**SecurityScorecard Add-on for Splunk 2.3.5**
+
+**What's fixed**
+
+* **Scores now show on the right day.** Overall and factor scores used to appear one day earlier than their SecurityScorecard date. Every event now uses its SecurityScorecard date, in UTC.
+* **Long issue findings are no longer cut off.** Findings with long evidence lists were truncated at 10,000 characters. They're now stored in full.
+* **The `raw_value` field is extracted in full.** It used to stop at the first apostrophe, for example in a name like &quot;O'Brien.&quot;
+
+**Before you upgrade**
+
+* **Upgrade in place.** Your account, inputs and sync history carry over, so you don't need to uninstall first.
+* **Wait for the current sync to finish.** Upgrade between syncs, not during one.
+* **Keep your existing input.** Creating a new one or renaming it starts a fresh 20-day backfill, which duplicates data you already have.
+
+**What to expect after upgrading**
+
+* **New data is dated correctly from the first sync after the upgrade.** Data collected by earlier versions keeps its old dates. To see older scores by their real date, use the `dateToday` field, or `date` for issues.
+* **Times display in your own time zone.** If you're in the US, a score dated Nov 8 shows as the evening of Nov 7, for example 7:00 PM EST. The `dateToday` field still says Nov 8.
+* **Charts that span the upgrade day** may show one day twice or skip a day, where old and new data meet.
+
+**Compatibility**
+
+* **Supported versions:** Splunk Enterprise 9.3 through 10.6.
+* **Python:** Splunk 10.2 and later run it on Python 3.13. Earlier versions run it on Python 3.9.
+* **Dropped:** Splunk 9.2 is no longer supported.
+
+***&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;SecurityScorecard is the global leader in third party cyber risk management, with more than 12 million companies continuously rated. 
+
+SecurityScorecard’s patented security ratings technology is used by organizations for enterprise risk management, third-party risk management, board reporting, due diligence, cyber insurance underwriting, and regulatory oversight. SecurityScorecard empowers you with confident data to gain unparalleled visibility, quantify and prioritize risk, and collaborate with every team and business partner as the most comprehensive cyber risk platform. 
+
+Splunk customers can access their free SecurityScorecard Complimentary Enterprise License here: https://securityscorecard.com/splunk&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/f7c7725a-e761-11f1-bc2f-ce7e5a858f1f.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Luke Household</dc:creator>
+      <pubDate>Mon, 23 Nov 2026 17:26:53 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/4486/#v2.3.5</guid>
+    </item>
+    <item>
+      <title>Databricks - v2.0.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/7369/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; SOAR&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Migrated the Databricks connector to the Splunk SOAR SDK.
+* The minimum supported Splunk SOAR version is now 7.0.0.
+* Added make request to call Databricks workspace APIs using asset authentication and configurable request options.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;This app supports investigation and data manipulation actions in Databricks&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/a45e0838-e750-11f1-9b24-063803df367b.svg&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
+      <pubDate>Mon, 23 Nov 2026 15:15:08 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/7369/#v2.0.0</guid>
+    </item>
+    <item>
+      <title>Carbon 9 Compliance M-26-14 - v1.57.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/9196/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Provides compliance dashboards, maturity model assessments, and THIRF objective tracking aligned to OMB Memorandum M-26-14 federal logging requirements for federal agencies.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Carbon 9 Defense - Compliance App extends federal logging compliance coverage for OMB Memorandum M-26-14, which governs effective and efficient agency logging and network visibility to defend against evolving cyber threats. The app provides compliance dashboards, maturity model assessments, and Threat Hunting and Incident Response Framework (THIRF) objective tracking aligned to M-26-14 requirements. It operates as a soft companion to Compliance Essentials for Splunk, sharing compatible data structures but requiring no hard dependency. The app uses three KV store collections to track systems inventory, manual attestation scores, and configuration parameters, alongside two CSV lookups that map systems to expected sourcetypes and event hosts to system identifiers. Four saved searches compute Inventory Visibility, Collection Coverage, Asset Snapshots, and merged Maturity Scores, enabling automated tracking of compliance posture over time. The app is intended for Compliance Officers managing federal logging posture, SOC Analysts tracking event log coverage and retention, and Federal IT administrators implementing M-26-14 controls.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/cec7ecca-e74f-11f1-bdbb-26e7570dc0e4.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Christopher Billig</dc:creator>
+      <pubDate>Mon, 23 Nov 2026 15:14:52 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/9196/#v1.57.0</guid>
     </item>
     <item>
       <title>Threat Hunting Essentials - v1.3.183 [Version Update]</title>
@@ -382,26 +703,6 @@ Maintainer: GSS FDSE @ Splunk&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&qu
       <guid>https://splunkbase.splunk.com/app/5945/#v3.0.0</guid>
     </item>
     <item>
-      <title>Quad Miners Network Blackbox Add-on for Splunk - v1.1.2 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10401/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Fixed field extraction regex performance issue that caused searches to hang on Splunk 10.x. Verified on Splunk Enterprise 9.3 and 10.x.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Onboards Quad Miners Network Blackbox (NDR) events sent as CEF syslog. Parses event time and fields, maps them to CIM, and provides search macros used by the Network Blackbox App for Splunk. Install this add-on first.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Quad Miners Network Blackbox Add-on for Splunk onboards events from Network Blackbox, a network detection and response (NDR) platform that captures and stores full packets, reconstructs sessions and files, and detects threats using rules, machine learning, and behavioral baselines.
-
-Network Blackbox sends its events to Splunk as syslog messages in Common Event Format (CEF). This add-on recognizes the event time recorded by Network Blackbox, extracts fields, assigns event types and tags, and maps key fields to the Splunk Common Information Model (CIM). It also includes correlation searches that can be used in Splunk Enterprise Security environments.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/2f2581de-e257-11f1-a0b4-f281c32923c2.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Yujin Kim</dc:creator>
-      <pubDate>Mon, 23 Nov 2026 05:03:53 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10401/#v1.1.2</guid>
-    </item>
-    <item>
-      <title>Quad Miners Network Blackbox App for Splunk - v1.1.2 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10402/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Updated Packet Detail drilldown for Network Blackbox 5.5. The link now opens the NBB packet detail page directly and no longer passes the API token. Log in to the NBB web console in the same browser before clicking an event. Verified on Splunk Enterprise 9.3 and 10.x.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Dashboards for Quad Miners Network Blackbox (NDR): detections, network traffic, sessions, DNS, and system status, with drilldown to packet details in the Network Blackbox web console. Requires the Network Blackbox Add-on for Splunk.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Quad Miners Network Blackbox App for Splunk provides dashboards for events from Network Blackbox, a network detection and response (NDR) platform that captures and stores full packets, reconstructs sessions and files, and detects threats using rules, machine learning, and behavioral baselines.
-
-With this app, security teams can review Network Blackbox detections, network traffic, sessions, DNS activity, and system status in Splunk. From the Packet Detail dashboard, analysts can open the related session directly in the Network Blackbox web console to inspect the original packets.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/37ce61d8-e258-11f1-a21c-92ce80dbc4fb.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Yujin Kim</dc:creator>
-      <pubDate>Mon, 23 Nov 2026 04:59:23 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10402/#v1.1.2</guid>
-    </item>
-    <item>
       <title>Ableversity 4 Splunk Training - v1.0.5 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/9330/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;1.0.5: Course pages now link to their current ableversity.com URLs (Getting Data In, Fields &amp; Extractions, Regular Expressions); Browse All Courses points to the Splunk Fundamentals hub. See CHANGELOG in repo github.com/bentleymi/ableversity&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Install Ableversity today and start learning for free&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Ableversity Splunk Training app delivers a comprehensive curriculum of Splunk training courses directly within the Splunk interface. It provides access to over twelve expert-led courses spanning core Splunk topics including fundamentals, administration, architecture, and development.
@@ -452,14 +753,6 @@ The 10x Receiver produces compact events, and it is free on up to 10 nodes (http
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Tal Weiss</dc:creator>
       <pubDate>Mon, 23 Nov 2026 01:27:14 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/9866/#v1.2.5</guid>
-    </item>
-    <item>
-      <title>Datasource Validator - v1.1.1 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/9171/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Validates that user-defined data sources grouped under platforms currently return at least one event, recording PASS/FAIL/ERROR/STALE status per source.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Data Source Validator app validates that user-defined data sources are currently returning at least one event in Splunk. Administrators define platforms such as Firewall or EDR, and under each platform create one or more data sources with an SPL search that should return events. A single sequential validation worker executes each data source&amp;#x27;s search on a schedule or on demand using a dedicated service account with minimal privileges. The app records PASS, FAIL, ERROR, or STALE status for each data source, and platform status rolls up from the status of its enabled child data sources. This provides visibility into which integrations have stopped receiving data. The app targets Splunk Cloud Platform and Splunk Enterprise 9.3 and later.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Adam Liquorish</dc:creator>
-      <pubDate>Mon, 23 Nov 2026 00:05:17 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9171/#v1.1.1</guid>
     </item>
     <item>
       <title>Graphlens - v1.10.0 [Version Update]</title>
@@ -706,136 +999,6 @@ The app requires Collectord and a license key from Outcold Solutions. Evaluation
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Outcold Solutions LLC</dc:creator>
       <pubDate>Sun, 22 Nov 2026 22:48:46 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/10093/#v26.10.2</guid>
-    </item>
-    <item>
-      <title>GenAI Observability for Splunk - v3.0.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8308/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## RELEASE INFORMATION
-
-**Release version:** 3.0.0
-
-**Release notes:**
-
-Version 3.0.0 is a major release. It is the first big update since the last Splunkbase release (2.0.0). It adds Langfuse-style tracing and evaluation pages, built in plain JavaScript on top of your Splunk data and the app's KV store.
-
-**New pages**
-
-* Traces: search and filter traces by name, user, tag, environment, model, errors or free text. Click a trace to see its nested observation tree, timeline, inputs and outputs, tokens and cost per step.
-* Sessions and Users: every turn of a conversation, and per-user traces, tokens, cost and errors.
-* Scores: score overview, full score list with CSV export, and score configs for consistent human annotation.
-* Datasets: build test sets from production traces or by hand; import CSV, export CSV or JSONL.
-* Prompts: versioned prompt registry with labels (such as production), version diff, and per-version metrics from real traffic. Apps fetch the labelled version with get_prompt() in the genai-telemetry SDK.
-* Agent &amp; Tools dashboard: tool error rate and latency, agent run health, possible tool loops.
-
-**Other changes**
-
-* All navigation is in a left sidebar on every page; Splunk's app bar is hidden. The sidebar can be collapsed to a slim rail (« button or the \[ key).
-* Load demo data button creates realistic sample traces, sessions, scores, prompts and a dataset, so you can try the app without your own data (admin role needed).
-* Time to first token: uses the real ttft_ms value when the SDK sends it.
-* Time-based model pricing: add a dated row to genai_model_pricing_history.csv when a price changes, so past costs stay correct. A nightly search rebuilds the current-price lookup.
-* Four alerts (cost spike, error rate, P95 latency, token budget) with volume floors so they stay quiet until real traffic flows.
-* GenAI_Traces data model gained session, user, trace name, prompt, environment, release, TTFT, tool and agent fields.
-* Light and dark themes; filters and time range are kept in the page URL so views can be bookmarked.
-
-**Upgrade notes**
-
-* Use genai-telemetry 1.3.0 or later for nested traces, sessions, users, inputs/outputs and scores. Older SDK versions still work, but traces are flat.
-* If data model acceleration is on, rebuild it after upgrading.
-* If you edited genai_model_pricing.csv in local/, move your prices into genai_model_pricing_history.csv.
-* If the new menu does not appear, restart Splunk and delete local/data/ui/nav/default.xml if it exists.
-
-**Compatibility (suggested — check before publishing):**
-
-* Splunk Enterprise: 9.x
-* Splunk Cloud: Victoria and Classic (passes AppInspect cloud checks with 0 failures)
-* Platforms: Platform independent
-* CIM: not applicable (app does not map to CIM data models)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Trace, evaluate and improve LLM apps in Splunk: nested traces, sessions, users, scores, datasets and prompt versions, plus cost, latency and error dashboards.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;GenAI Observability for Splunk monitors GenAI and large language model applications by collecting and analyzing trace data for requests, latency, token usage, cost, errors, retrieval-augmented generation retrieval, and agent tool calls. The app ingests trace telemetry into custom indexes and provides trace exploration pages modeled , dashboards for performance and cost management, and a Python SDK for instrumenting applications. It tracks LLM operational metrics across models, workflows, users, and sessions, enabling administrators to identify cost spikes, latency regressions, error patterns, and inefficient prompt or retrieval strategies. The app includes a data model for acceleration at scale, a prompt registry with versioned metrics from production traffic, and scoring workflows for building evaluation datasets. Cost tracking is performed using a historical pricing lookup that administrators maintain and a nightly search that rebuilds current pricing. The included Python SDK provides decorators for instrumenting LLM calls, RAG pipelines, agents, and tools, and supports session tracking, user attribution, and score submission.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/0667641a-e6bc-11f1-9238-da4386ecacf8.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">kamal singh bisht</dc:creator>
-      <pubDate>Sun, 22 Nov 2026 21:59:57 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8308/#v3.0.0</guid>
-    </item>
-    <item>
-      <title>CJIS Compliance App - v1.2.0 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/10145/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;\# CJIS Compliance App 1.2.0: Release Notes
-
-Covers everything changed since version 1.0.22.
-
-\## Summary (short form for the Splunkbase release notes field)
-
-1.2.0 makes the app safe to trust out of the box and much more useful day to day. Every control now starts as &quot;not assessed&quot; instead of pre-marked. Findings no longer flood or duplicate. A new Setup and Data Readiness page shows what data the app is missing. Nine new dashboards add triage, incident logging, a policy-area scorecard, a gaps list, encryption in transit, network boundary, remote access, vulnerability and patch status, and source investigation. Detections were tightened, and in-app documentation was expanded. Requires the Splunk Common Information Model (CIM) add-on.
-
-\## New dashboards
-
-\*\*Compliance\*\*
-\- \*\*CJIS Policy Area Scorecard:\*\* posture and findings rolled up to the 13 CJIS Security Policy areas (5.1 to 5.13), with a click-through to each area's controls.
-\- \*\*Gaps and Actions:\*\* controls that are not implemented, with owner, due date and days overdue, plus controls whose review is overdue.
-\- \*\*Incident Log:\*\* an append-only record of reportable incidents and whether and when each was reported to the state CJIS Systems Agency (CJIS 5.3, NIST IR-6).
-\- \*\*Evidence Pack:\*\* one page for an auditor: posture summary, every control with status and findings, audit retention against your requirement, weekly snapshots and status history. Export to PDF or CSV.
-\- \*\*Setup and Data Readiness\*\* (first item in the menu): shows, for each CIM data model, whether it is accelerated and has data, which controls have the data they need, which scope lists are still empty, and which indexes are searched.
-
-\*\*Monitoring\*\*
-\- \*\*Encryption in Transit (SC-8 / SC-13):\*\* allowed connections over protocols that do not encrypt traffic, with a &quot;what to fix&quot; recommendation for each, and weak TLS versions when certificate data is present.
-\- \*\*Network Boundary (SC-7):\*\* allowed versus blocked traffic, reachable services, top blocked sources and ports, and firewall changes.
-\- \*\*Remote Access (AC-17):\*\* remote logons, most active remote users, failed logons by source, and users signing in from more than one country.
-\- \*\*Vulnerability and Patch Status (SI-2 / RA-5):\*\* open critical and high vulnerabilities, how long they have been open, and failed or pending updates.
-
-\*\*Investigation\*\*
-\- \*\*Finding Triage (IR-4 / IR-5):\*\* acknowledge, assign, close or mark a finding a false positive, with a note and a full history of who changed what and when.
-\- \*\*Source / IP Investigation:\*\* logons, firewall traffic, intrusion signatures and findings for a single address.
-
-\## Improvements
-
-\*\*Trustworthy defaults\*\*
-\- Every control now ships as \*\*not assessed\*\*. Nothing is pre-marked as implemented.
-\- Control status changes are recorded with who and when. The posture editor requires an owner and accepts an optional due date.
-\- A weekly \*\*Evidence Snapshot\*\* search records each control's status and findings over time (off by default).
-
-\*\*Findings\*\*
-\- Each condition is now \*\*one finding\*\* (for example, one source failing logons) that is updated on each run, with first seen and last seen times. Previously a persistent condition added a new finding every hour.
-\- Triage decisions are stored separately, so re-running a search never undoes them.
-\- Findings are kept for a configurable number of days (default 365).
-
-\*\*Detections\*\*
-\- \*\*Brute force then success:\*\* now checks that the success came after the failures. It replaces the separate Cross-System Correlation search, which duplicated it.
-\- \*\*Privileged group membership (AC-6):\*\* now works with classic Windows event logs, which it previously missed, and covers more groups plus removals.
-\- \*\*File integrity (SI-7):\*\* limited to watched locations (system files, startup and autorun keys, services) and ignores known noise, so it no longer floods. It stays off until you supply Sysmon data and change windows.
-\- \*\*Log source silent (AU-5):\*\* per-source limits, and silent hosts on the CJIS device list.
-\- \*\*Malicious code (SI-3):\*\* uses the CIM Malware data model instead of one vendor's data.
-\- \*\*MFA (IA-2):\*\* uses the CIM Authentication data model.
-\- \*\*Configuration changes (CM-3):\*\* reports changes outside approved change windows.
-\- \*\*New: cleartext protocols (SC-8):\*\* creates findings for high-risk unencrypted protocols such as FTP, Telnet, POP3, IMAP and LDAP without TLS.
-\- \*\*Account exclusions:\*\* machine and Windows system accounts are ignored by default, and you can add your own service accounts in \`cjis_account_exclusions_local.csv\`.
-\- The after-hours window, brute-force threshold and silent-source limit are now settings you can change.
-
-\*\*Dashboards and documentation\*\*
-\- Dashboards no longer show machine-account and logoff noise in the account-change and privileged-logon tables.
-\- Menu names now include their control numbers.
-\- New in-app documentation: Getting Started, Using Finding Triage, Using the Incident Log, Scorecard / Gaps and Actions / Evidence Pack, Monitoring and Investigation Pages, and a Settings Reference.
-
-\## Upgrading from 1.0.x
-
-\- \*\*Findings:\*\* findings written by earlier versions used a different key. After upgrading, old findings remain until they age out and can appear next to new ones. If you want a clean start, you can clear them by running \`| inputlookup cjis_findings | where 1\=0 | outputlookup cjis_findings\`. This deletes all findings.
-\- \*\*Control status:\*\* your existing status records are kept. Only new installs start as &quot;not assessed&quot;.
-\- \*\*Lookup files:\*\* Splunk keeps existing lookup files when an app is upgraded, so new rows in shipped CSVs do not appear on upgrade. Replace the file if you want them.
-\- \*\*New settings (macros):\*\* \`cjis_findings_retention_days\`, \`cjis_required_retention_days\`, \`cjis_review_interval_days\`, \`cjis_bf_threshold\`, \`cjis_silent_default_minutes\`, \`cjis_after_hours_start\`, \`cjis_after_hours_end\`, \`cjis_fim_scope\`, \`cjis_fim_noise\`, \`cjis_remote_access_filter\` and \`cjis_exclude_accounts\`. Defaults are in the Settings Reference.
-
-\## Requirements
-
-\- Splunk Enterprise or Splunk Cloud Platform 9.x or 10.x, on a search head.
-\- The Splunk Common Information Model (CIM) add-on with the data models you use (Authentication, Change, Intrusion_Detection, Network_Traffic, and optionally Malware, Vulnerabilities, Updates and Certificates). Accelerate the models for speed. The Setup and Data Readiness page tells you which are missing.
-
-\## Known limitations
-
-\- The finding triage and incident log pages write to the KV store, so Splunk shows a one-time &quot;risky commands&quot; warning. Review the search and choose Run Query Anyway.
-\- A closed finding stays closed if the same condition happens again. Check its last seen time and reopen it if needed.
-\- SI-7 needs Sysmon file and registry events and real rows in \`change_windows.csv\`.
-\- Status is a self-assessment by your team. The app records and reports it but cannot prove a control is implemented.
-\- Multi-agency scoping is not included in this release.
-\- Protocol detection in Encryption in Transit is by port number, so services on non-standard ports are not classified.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;CJIS Compliance maps the FBI CJIS Security Policy v6.0 to NIST SP 800-53 Rev. 5. It tracks which controls are implemented, monitors security data through CIM, and stores correlation findings for review without Enterprise Security.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;CJIS Compliance maps the FBI CJIS Security Policy v6.0 to NIST SP 800-53 Rev. 5. It is for teams that need to show which CJIS controls are in place, watch the security data those controls depend on, and review correlation findings without Enterprise Security. Posture covers the 13 CJIS policy areas. Each control can be marked implemented, partial, planned, not assessed, or not applicable.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/79c6778c-e6aa-11f1-a266-0a5e568f38a6.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunky Monkey</dc:creator>
-      <pubDate>Sun, 22 Nov 2026 19:46:52 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10145/#v1.2.0</guid>
     </item>
     <item>
       <title>Inputs conf generator - DS addon - v1.1.0 [Version Update]</title>
@@ -1242,22 +1405,6 @@ Documentation: https://docs.thedutchdatadifference.nl/adjutant-ai/&lt;/p&gt;&lt;
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Eduard Lekanne</dc:creator>
       <pubDate>Sat, 21 Nov 2026 22:31:04 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8747/#v2.8.3</guid>
-    </item>
-    <item>
-      <title>Attack Path Intelligence App - v2.3.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/9348/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Dashboard hotfix.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Map attack paths to your crown jewels (Crown Jewel → Attack Surface → Attack Vector), prioritize them with a configurable risk score and measure detection coverage by MITRE ATT&amp;amp;CK technique using Splunk ES correlation searches or your own detection inventory. Lookup-driven, with sample data included.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Attack Path Intelligence shows how an attacker could reach your organization&amp;#x27;s most critical assets, and whether your detections would catch them.
-
-The app models attack paths as Crown Jewel → Attack Surface → Attack Vector. Each path gets a priority score based on the crown jewel&amp;#x27;s criticality, the jewel-surface relationship, the vector&amp;#x27;s relevance, the surface&amp;#x27;s exposure and the evidence level. The evidence level says whether a vector was observed in logs, confirmed by a vulnerability scanner or only inferred from the architecture.
-
-Every vector is mapped to MITRE ATT&amp;amp;CK techniques, and the app matches those techniques against your detections. You can use Splunk Enterprise Security correlation searches, read through their MITRE annotations, or a detection inventory lookup for rules outside ES. The result is a coverage view per vector, per path and per crown jewel. It also gives you a ranked detection engineering backlog and a list of disabled detections that would increase coverage if enabled.
-
-Optional live panels use the CIM Network_Traffic and Web data models to show real activity against the assets of each attack surface.
-
-Everything is lookup-driven and configurable: scores, weights, risk thresholds, MITRE match weights, data sources and CIM fields. The app ships with sample content for a fictional organization, so you can explore the dashboards before modeling your own environment.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/9f33582e-e573-11f1-a266-0a5e568f38a6.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Gabriel José Biudes Lino</dc:creator>
-      <pubDate>Sat, 21 Nov 2026 06:23:42 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/9348/#v2.3.0</guid>
     </item>
     <item>
       <title>Cloudflare Audit Logs Addon for Splunk - v1.1.0 [New App Release]</title>
@@ -1983,20 +2130,6 @@ Availability: Splunk Cloud customers in AWS and Azure commercial regions, FedRAM
       <guid>https://splunkbase.splunk.com/app/7245/#v2.4.0</guid>
     </item>
     <item>
-      <title>Splunk ES Content Update - v6.11.0 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/3449/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;GitHub - [https://github.com/splunk/security_content/releases/tag/v6.11.0](https://github.com/splunk/security_content/releases/tag/v6.11.0)
-
-Release Notes - [https://help.splunk.com/en/splunk-enterprise-security-8/security-content-update/release-notes/6.11](https://help.splunk.com/en/splunk-enterprise-security-8/security-content-update/release-notes/6.11)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk ES Content Update (ESCU) app delivers pre-packaged Security Content. ESCU provides regular Security Content updates to help security practitioners address ongoing time-sensitive threats, attack methods, and other security issues.
-
-Security Content consists of tactics, techniques, and methodologies that help with detection, investigation, and response. Security Content enables security teams to directly operationalize detection searches, investigative searches, and other supporting details. ESCU can generate Notable/Risk Events in Splunk Enterprise Security. Security Content also contains easy-to-read background information and guidance, for key context on motivations and risks associated with attack techniques, as well as pragmatic advice on how to combat those techniques.
-
-The analytic stories and their searches are also available at - https://github.com/splunk/security_content.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/6be1ea02-e394-11f1-9e07-f6885aa74af0.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Wed, 18 Nov 2026 21:48:24 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/3449/#v6.11.0</guid>
-    </item>
-    <item>
       <title>Genesys Cloud Add-on for Splunk - v0.5.1 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/9730/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;### Fixed
@@ -2129,42 +2262,6 @@ Works on Splunk Enterprise and Splunk Cloud. Requires a ViewDNS.info API key: ht
       <guid>https://splunkbase.splunk.com/app/8839/#v1.0.5</guid>
     </item>
     <item>
-      <title>Splunk UBA Software Upgrade Package - v5.4.6 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/3462/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;What's new in UBA 5.4.6?
-[https://help.splunk.com/en/security-offerings/splunk-user-behavior-analytics/release-notes/5.4.6/splunk-user-behavior-analytics-release-notes/welcome-to-splunk-uba-5.4.6](https://help.splunk.com/en/security-offerings/splunk-user-behavior-analytics/release-notes/5.4.6/splunk-user-behavior-analytics-release-notes/welcome-to-splunk-uba-5.4.6)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk UBA is a machine learning driven solution that helps organizations find hidden threats and anomalous behavior across users, devices, and applications. Its data science driven approach produces actionable results with risk ratings and supporting evidence, augmenting SOC analysts’ existing techniques. In addition, it provides visual pivot points for hunters to proactively investigate anomalous behavior.
-
-•	Detects insider threats using out-of-the-box purpose-built but extensible unsupervised machine learning (ML) algorithms
-•	Provides context around the threat via ML driven anomaly correlation and visual mapping of stitched anomalies over various phases           of the attack lifecycle
-•	Increases SOC efficiency with rank-ordered threats and supporting evidence
-•	Supports bi-directional integration with Splunk Enterprise for data ingestion and correlation and with Splunk Enterprise Security for  incident scoping, workflow management and automated response
-
-See Details for Product Downloads&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/UBA_logo.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Wed, 18 Nov 2026 07:38:16 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/3462/#v5.4.6</guid>
-    </item>
-    <item>
-      <title>Splunk UBA Software Installation Package - v5.4.6 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/3463/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;What's new in UBA 5.4.6?
-[https://help.splunk.com/en/security-offerings/splunk-user-behavior-analytics/release-notes/5.4.6/splunk-user-behavior-analytics-release-notes/welcome-to-splunk-uba-5.4.6](https://help.splunk.com/en/security-offerings/splunk-user-behavior-analytics/release-notes/5.4.6/splunk-user-behavior-analytics-release-notes/welcome-to-splunk-uba-5.4.6)&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Splunk User Behavior Analytics (UBA) is a machine learning-powered solution that helps organizations find unknown threats and anomalous behavior and solves a wide range of insider threat and external attack detection use cases. It uses unsupervised machine learning algorithms to produce actionable results with risk ratings and supporting evidence that augment security operation center (SOC) analysts’ existing techniques for faster action. Additionally, it provides visual pivot points for security analysts and threat hunters to proactively investigate anomalous behavior.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/UBA_logo.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Wed, 18 Nov 2026 07:37:52 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/3463/#v5.4.6</guid>
-    </item>
-    <item>
-      <title>Splunk Add-on for Check Point Log Exporter - v1.2.1 [New App Release]</title>
-      <link>https://splunkbase.splunk.com/app/5478/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Fixed URL Filtering events with event_action\=Accept and connection metadata to map to CIM action\=allowed.
-* Fixed Anti-Malware event source mapping so missing destination values no longer fall back to the origin field.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Splunk Add-on for Check Point Log Exporter allows a Splunk software administrator to collect data from Checkpoint Log Exporter over Syslog.
-
-This add-on provides the inputs and  CIM-compatible knowledge to use with other Splunk apps such as Splunk Enterprise Security and Splunk App for PCI Compliance&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/82612278-e283-11f1-a21c-92ce80dbc4fb.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Splunk LLC</dc:creator>
-      <pubDate>Wed, 18 Nov 2026 03:01:54 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/5478/#v1.2.1</guid>
-    </item>
-    <item>
       <title>Dataminr Threat Intelligence for Splunk Enterprise and Splunk Cloud - v3.1.3 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/6520/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;* Updated several libraries for improved Python 3.13 and Splunk 10.x support&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;From Alerts to Action—Inside Splunk
@@ -2202,20 +2299,6 @@ Address Your Critical Use Cases with Dataminr
       <guid>https://splunkbase.splunk.com/app/6520/#v3.1.3</guid>
     </item>
     <item>
-      <title>Userful Infinity - v0.1.6 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8450/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;\&gt; Clarifies the Userful server and NAT gateway IP guidance in proxy setup for
-
-\&gt; Infinity 12.10.3. Updates release metadata and installation documentation while
-
-\&gt; retaining the Python 3.9 and Python 3.13 runtime compatibility of release 0.1.5.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;The Userful Infinity app provides a secure, enterprise-grade bridge between Splunk’s data visualization capabilities and the Userful Infinity operational platform. It enables organizations to project real-time Splunk dashboards onto mission-critical video walls and distributed displays without the security risks of exposed credentials or manual login prompts.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The Userful Infinity app provides a secure, enterprise-grade bridge between Splunk’s data visualization capabilities and the Userful Infinity operational platform. It enables organizations to project real-time Splunk dashboards onto mission-critical video walls and distributed displays without the security risks of exposed credentials or manual login prompts.
-
-It provides a secure gateway that enables seamless dashboard embedding into the Userful Infinity platform using SSO header injection and IP-based security.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/81b480b0-e29f-11f1-be38-aa4f2ec72092.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Rubesh kumar</dc:creator>
-      <pubDate>Tue, 17 Nov 2026 18:00:17 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8450/#v0.1.6</guid>
-    </item>
-    <item>
       <title>CIM Assessment Toolkit (CAT) - v2.14.3 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8962/</link>
       <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;**Report accuracy and sourcetype inventory release. No collection or lookup schema changes, so no migration steps.**
@@ -2237,33 +2320,6 @@ To reduce CIM Assessment Report length, detailed field gaps, mapped &amp;amp; un
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">James Baxter</dc:creator>
       <pubDate>Tue, 17 Nov 2026 17:17:19 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/8962/#v2.14.3</guid>
-    </item>
-    <item>
-      <title>Log Continuity Manager for Splunk - v1.2.8 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/8958/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;## Version 1.2.8
-
-* Improved last-event timestamp handling for long-running interruptions.
-* Monitoring targets now retain previously verified event timestamps when no newer event is found inside the bounded search window.
-* Interruptions older than the recent search window remain visible instead of incorrectly becoming `unknown`.
-* Added safer FQDN / short-host alias matching.
-* Multiple targets sharing the same host alias no longer overwrite or discard each other.
-* Each monitoring target retains an independent status record and metadata.
-* New events automatically replace older carried-forward timestamps and continue through the existing recovery workflow.
-* No KV Store schema, SHC, scheduler, notification, or runtime lock behavior changes.
-
-### Known Limitation
-
-Legacy monitoring status records that do not already contain a numeric `last_event_epoch` cannot automatically recover an event that is already outside the recent search window. A new observation or verified one-time correction is required.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Log Continuity Manager provides KV Store-backed log interruption monitoring, recovery tracking, notification workflows, Mass Interruption policies and Dashboard Studio-based operational visibility for Splunk Enterprise environments.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Log Continuity Manager for Splunk helps teams detect, manage and investigate log ingestion interruptions across monitored hosts, indexes, sources and sourcetypes.
-
-The app supports target-based continuity monitoring, interruption detection, recovery tracking, maintenance and redundancy-aware handling, and operational dashboards for monitoring status and history.
-
-Version 1.2.1 adds Mass Interruption monitoring with Host Count and Percentage thresholds, scoped policies for host_index, host_index_source and host_index_sourcetype targets, interruption/reminder/recovery email notifications, notification delivery visibility, KV Store-backed runtime state, and improved Search Head Cluster readiness.
-
-The app is designed for Splunk Enterprise environments where continuous log visibility and rapid identification of ingestion gaps are operationally important.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/4d5cd586-e26f-11f1-83aa-56ebf9eb7092.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Furkan KILINC</dc:creator>
-      <pubDate>Tue, 17 Nov 2026 10:20:40 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/8958/#v1.2.8</guid>
     </item>
   </channel>
 </rss>
