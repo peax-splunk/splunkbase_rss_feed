@@ -6,7 +6,37 @@
     <description>a list of Newly/updated Splunk apps</description>
     <atom:link href="https://peax-splunk.github.io/splunkbase_rss_feed/rss.xml" rel="self"/>
     <language>en-us</language>
-    <lastBuildDate>Fri, 27 Nov 2026 19:44:32 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 28 Nov 2026 02:23:36 +0000</lastBuildDate>
+    <item>
+      <title>CIM Assessment Toolkit (CAT) - v2.15.0 [Version Update]</title>
+      <link>https://splunkbase.splunk.com/app/8962/</link>
+      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Release Notes:&lt;/strong&gt;&lt;br&gt;Custom sourcetype inventory, mapping evidence lookback, and workload validation. One new lookup (header-only seed); no change to the collection or to the existing lookup schemas.
+
+\* **Custom sourcetype inventory**. Company-specific sourcetypes now have their own lookup, cim_sourcetype_inventory_custom, read together with the shipped cim_sourcetype_inventory everywhere CAT uses the inventory. A custom row takes precedence field by field, and a blank custom cell falls through to the shipped value. CAT ships a header-only seed: upload your own file under a new filename, share it at App level, and point the lookup definition at it. Your file and the definition change survive upgrades. Do not add rows to the seed file, because an upgrade replaces it.
+
+\* The cim_sourcetype_inventory_search report now shows the effective inventory (shipped plus custom) with an inventory_source column: shipped, custom, or custom over shipped.
+
+\* Two reports for maintaining the custom inventory (build 2026112702). cim_sourcetype_inventory_custom_search shows your custom inventory exactly as stored, for export. cim_sourcetype_inventory_custom_template returns the sourcetypes that still need a scope (the Unscoped Sourcetypes list, most events first) followed by the rows already in your custom inventory, in the inventory's 10 columns: export it as CSV, fill in the scopes, upload it under a new filename, and point the lookup definition at it.
+
+\* Mapping evidence lookback. A mapped sourcetype that logs only now and then (certain CrowdStrike or GuardDuty alerts, for example) was listed as unmapped whenever the latest daily collection did not see it. A sourcetype now counts as mapped when any CIM data model returned it in a collection of the last 7 days (macro cim_mapped_evidence_lookback, default -7d@d). Analysis Duration is unchanged. The CIM Coverage KPI, the Unmapped Data tab, the daily coverage snapshot, and the report use the same rule.
+
+\* Mapping lost. A sourcetype with earlier mapping evidence is reported as unmapped when today's collection has run, the sourcetype had events in the day that collection covered, and no data model returned it. It appears at the top of Unmapped Sourcetypes with a Last Mapped date, on the dashboard and in the report. Mapped Sourcetypes gains a Last Mapped column.
+
+\* **Workload validation reports**. cim_workload_validation (one row per index and sourcetype, with a status and a finding) and cim_workload_validation_summary (one row per index, with a Pass, Pending, or Review result) validate the CIM mapping of one workload's indexes. Open in Search, replace the index list in the first line, run, and export the results as the validation record. Mapping is judged per index.
+
+\* The note that sourcetypes Splunk named itself (ending in -too_small or a number such as -2) are not listed now displays on the Unmapped Data tab. It was cut off as part of a table description.
+
+**Upgrade**: install over the existing version. CIM Coverage can rise, because infrequent mapped sourcetypes now count as mapped; coverage snapshots stored before the upgrade are not restated. Mapping evidence comes from summary rows written since 2.12.1, so when upgrading from an earlier version, mapped sourcetypes show as unmapped until the first collection after the upgrade (run \`| makeresults | sendalert cim_collect\` or wait for the 00:47 run). The shipped sourcetype inventory is unchanged (November 17, 2026 version, 888 sourcetypes). ***If you added your own rows to the shipped inventory file, move them to a custom inventory file so later upgrades keep them***.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Measure and validate Splunk CIM compliance at the data model and dataset level — with field-mapping quality scoring, unmapped data discovery, prescribed-value validation, remediation priorities, data model testing, TA sourcetype coverage and inventory, and automated reporting.&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;The CIM Assessment Toolkit (CAT) measures and validates Common Information Model (CIM) compliance across your Splunk data models at the data model + dataset level.
+
+CAT scores field-mapping quality, data quality, and prescribed-value compliance; surfaces unmapped sourcetypes and impact-ranked remediation priorities; monitors data model acceleration health; and generates professional Word-document reports with optional scheduled email delivery.
+
+A new feature is four TA Inventory tables which reveal what TAs cover which sourcetypes for CIM normalization and their versions - essential information for maintaining CIM normalization coverage.
+
+To reduce CIM Assessment Report length, detailed field gaps, mapped &amp;amp; unmapped sourcetypes, and installed Splunk apps lists are attached as CSVs (CIM_Field_Gaps_*, CIM_Mapped_Sourcetypes_*, Splunk_Installed_Apps_*) to the report email.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/media/public/icons/8a07d7e8-ea9d-11f1-a274-264289aeb1f7.png&quot;&gt;</description>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">James Baxter</dc:creator>
+      <pubDate>Fri, 27 Nov 2026 20:10:03 +0000</pubDate>
+      <guid>https://splunkbase.splunk.com/app/8962/#v2.15.0</guid>
+    </item>
     <item>
       <title>Log Continuity Manager for Splunk - v1.2.10 [Version Update]</title>
       <link>https://splunkbase.splunk.com/app/8958/</link>
@@ -1510,14 +1540,6 @@ Vyrux is a Splunk app, not a SaaS service. It runs on your search head, respects
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Reginald Molokwu</dc:creator>
       <pubDate>Tue, 24 Nov 2026 16:57:26 +0000</pubDate>
       <guid>https://splunkbase.splunk.com/app/10348/#v1.2.0</guid>
-    </item>
-    <item>
-      <title>Linux Storage Pool Integrity Add-on (ZFS / md RAID / btrfs) - v1.0.11 [Version Update]</title>
-      <link>https://splunkbase.splunk.com/app/10454/</link>
-      <description>&lt;p&gt;&lt;strong&gt;Platform:&lt;/strong&gt; Splunk&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Short Description:&lt;/strong&gt;&lt;br&gt;Collects storage-pool integrity from whatever is present: ZFS (zpool status/get), Linux md RAID (/pr&lt;/p&gt;&lt;br&gt;&lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt;&lt;br&gt;Collects storage-pool integrity from whatever is present: ZFS (zpool status/get), Linux md RAID (/proc/mdstat + mdadm --detail) and btrfs (filesystem usage + device stats). Emits per-pool state (degraded, sync/rescan progress, reserved space, uncorrectable errors) as JSON events to index=main (sourcetype zfspool:status) and numeric zfspool.* metrics to index=metrics (sourcetype zfspool:metrics), with overview and metrics dashboards.&lt;/p&gt;&lt;img height=&quot;36px&quot; width=&quot;36px&quot; src=&quot;https://cdn.splunkbase.splunk.com/static/image/default_icon.png&quot;&gt;</description>
-      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Bentley</dc:creator>
-      <pubDate>Tue, 24 Nov 2026 16:01:54 +0000</pubDate>
-      <guid>https://splunkbase.splunk.com/app/10454/#v1.0.11</guid>
     </item>
     <item>
       <title>Gravityzone Add-on for Splunk - v1.0.3 [Version Update]</title>
